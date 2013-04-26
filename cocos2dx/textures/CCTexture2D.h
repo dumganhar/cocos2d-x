@@ -94,6 +94,26 @@ typedef struct _ccTexParams {
     GLuint    wrapT;
 } ccTexParams;
 
+/**
+Extension used for requesting text with stroke or shadow
+*/
+
+typedef struct _ccTextShadow
+{
+	CCSize m_shadowOffset;
+	float  m_shadowBlur;
+	float  m_shadowOpacity;
+
+} ccTextShadow;
+
+typedef struct _ccTextStroke
+{
+	ccColor3B   m_strokeColor;
+    float       m_strokeSize;
+
+} ccTextStroke;
+
+
 //CLASS INTERFACES:
 
 /** @brief CCTexture2D class.
@@ -138,7 +158,6 @@ public:
     bool initWithString(const char *text,  const char *fontName, float fontSize, const CCSize& dimensions, CCTextAlignment hAlignment, CCVerticalTextAlignment vAlignment);
     /** Initializes a texture from a string with font name and font size */
     bool initWithString(const char *text, const char *fontName, float fontSize);
-    
     /** Initializes a texture from a string with dimensions, alignment, font name and font size shadow and stroke*/
     bool initWithStringShadowStroke(const char *text,
                                     const char *fontName,
@@ -146,13 +165,8 @@ public:
                                     const CCSize& dimensions,
                                     CCTextAlignment hAlignment,
                                     CCVerticalTextAlignment vAlignment,
-                                    bool shadowEnabled,
-                                    CCSize   &shadowOffset,
-                                    float    shadowOpacity,
-                                    float    shadowBlur,
-                                    bool strokeEnabled,
-                                    ccColor3B &  strokeColor,
-                                    float        strokeSize);
+                                    ccTextShadow *pShadowParams,
+                                    ccTextStroke *pStrokeParams);
     
    
     
