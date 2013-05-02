@@ -593,8 +593,7 @@ bool CCTexture2D::initWithStringShadowStroke(const char *text, ccTextDefinition 
     
     #else
     
-    // carloX
-    // not implemented throw exception
+        CCAssert(false, "Currently only supported on iOS and Android!");
     
     #endif
 }
