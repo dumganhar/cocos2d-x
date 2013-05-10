@@ -3,7 +3,7 @@
 echo./*
 echo. * Check VC++ environment...
 echo. */
-echo.
+echo.ddd
 
 if defined VS110COMNTOOLS (
     set VSTOOLS="%VS110COMNTOOLS%"
