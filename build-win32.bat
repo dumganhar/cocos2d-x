@@ -1,7 +1,7 @@
 @echo off
 
 echo./*
-echo. * Check VC++ environment...
+echo. * Check VC++ environment...1111
 echo. */
 echo.
 
