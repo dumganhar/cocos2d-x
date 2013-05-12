@@ -9,7 +9,7 @@ COCOS2DX_ROOT="$DIR"/../..
 mkdir -p $HOME/bin
 
 if [ $TARGET = linux ]; then
-    sh $COCOS2DX_ROOT/install-deps-linux.sh
+    bash $COCOS2DX_ROOT/install-deps-linux.sh
 fi
 
 if [ $TARGET = nacl ]; then

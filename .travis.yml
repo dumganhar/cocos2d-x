@@ -3,7 +3,6 @@ script:
  - ./tools/travis-scripts/run-script.sh
 before_install:
  - ./tools/travis-scripts/before-install.sh
- - source ~/.bashrc
 env:
  global:
   - secure: "XvKfZu6ePLYH6nWwF6YrDMQLCfABOtyzac0JDwgYr7m1f5WH1nYQ7Hgv+pjq\nnJs+A5wdXJ6f6jRvgrgQ1T9UvY0ckR9HIXYmGtg2bd+IjJmDh0gwZMz+OFq4\nQ+Wsj9wxu9LsEAt/CosQvk3r2AoMpIY98a864b0EquZH+zzdzgA="
