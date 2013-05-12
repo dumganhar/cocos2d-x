@@ -22,7 +22,9 @@ fi
 install_android_ndk()
 {
     # Download android ndk
+    echo "Download android ndk ..."
     curl -O http://dl.google.com/android/ndk/android-ndk-r8e-linux-x86_64.tar.bz2
+    echo "decompress android-ndk-r8e-linux-x86_64.tar.bz2 ..."
     tar xjf android-ndk-r8e-linux-x86_64.tar.bz2
     # Move ndk to home folder
     mv android-ndk-r8e $HOME/bin/android-ndk
@@ -36,7 +38,9 @@ fi
 if [ $TARGET = jsb ]; then 
     install_android_ndk
     # Download llvm3.1
+    echo "Download llvm3.1 ..."
     curl -O http://llvm.org/releases/3.1/clang+llvm-3.1-x86_64-linux-ubuntu_12.04.tar.gz
+    echo "decompress android-ndk-r8e-linux-x86_64.tar.bz2 ..."
     tar xzf clang+llvm-3.1-x86_64-linux-ubuntu_12.04.tar.gz
     # Move llvm to home folder
     mv clang+llvm-3.1-x86_64-linux-ubuntu_12.04 $HOME/bin/clang+llvm-3.1
