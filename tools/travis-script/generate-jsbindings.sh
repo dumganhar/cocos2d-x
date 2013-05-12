@@ -32,7 +32,6 @@ GENERATED_WORKTREE="$COCOS2DX_ROOT"/scripting/javascript/bindings/generated
 REMOTE_AUTOGEN_BINDINGS_REPOSITORY="https://github.com/angeltown/cocos2dx-autogen-bindings.git"
 REMOTE_COCOS2DX_REPOSITORY="https://github.com/angeltown/cocos2d-x.git"
 COCOS2DX_PULL_BASE="dumganhar/cocos2d-x:travis"
-export CLANG_ROOT="$HOME/bin/android-ndk/toolchains/llvm-3.1/prebuilt/linux-x86_64"
 
 sudo apt-get --force-yes --yes install python-yaml python-cheetah
 
