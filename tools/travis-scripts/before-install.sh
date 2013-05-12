@@ -20,7 +20,6 @@ if [ $TARGET = nacl ]; then
     wget http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip
     echo "Decompress nacl_sdk.zip" 
     unzip nacl_sdk.zip
-    mv nacl_sdk $HOME
     nacl_sdk/naclsdk update --force pepper_canary
 fi
 
