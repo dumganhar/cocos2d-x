@@ -18,8 +18,7 @@ if [ $TARGET = nacl ]; then
     wget http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip
     unzip nacl_sdk.zip
     nacl_sdk/naclsdk update --force pepper_canary
-    export NACL_SDK_ROOT=$DIR/nacl_sdk/pepper_canary
-    export PATH=$PATH:$NACL_SDK_ROOT/toolchain/linux_x86_newlib/bin
+
 fi
 
 install_android_ndk()
@@ -35,7 +34,6 @@ install_android_ndk()
 
 if [ $TARGET = android ]; then 
     install_android_ndk
-    export $HOME/bin/android-ndk
 fi
 
 if [ $TARGET = jsb ]; then 
@@ -49,5 +47,7 @@ if [ $TARGET = jsb ]; then
     mv clang+llvm-3.1-x86_64-linux-ubuntu_12.04 $HOME/bin/clang+llvm-3.1
 fi
 
-
+export NACL_SDK_ROOT=$DIR/nacl_sdk/pepper_canary
+export PATH=$PATH:$NACL_SDK_ROOT/toolchain/linux_x86_newlib/bin
+export NDK_ROOT=$HOME/bin/android-ndk
 
