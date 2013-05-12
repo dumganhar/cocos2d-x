@@ -1,4 +1,4 @@
-language: cpp
+language: objective-c
 script:
  - cd tools/travis-script
  - ./generate-jsbindings.sh
