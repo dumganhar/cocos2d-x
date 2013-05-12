@@ -1,12 +1,15 @@
 #!/bin/bash
 
+# exit this script if any commmand fails
+set -e
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COCOS2DX_ROOT="$DIR"/../..
 
 mkdir -p $HOME/bin
 
 if [ $TARGET = linux ]; then
-    ./$COCOS2DX_ROOT/install-deps-linux.sh
+    sh $COCOS2DX_ROOT/install-deps-linux.sh
 fi
 
 if [ $TARGET = nacl ]; then
