@@ -26,7 +26,7 @@
 #  * Ensure that hub has an OAuth token to REMOTE_COCOS2DX_REPOSITORY
 #     * see http://defunkt.io/hub/hub.1.html#CONFIGURATION
 
-if [ "$TRAVIS_PULL_REQUEST" != "false" ]
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0
 fi
 
