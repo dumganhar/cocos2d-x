@@ -9,7 +9,22 @@ COCOS2DX_ROOT="$DIR"/../..
 mkdir -p $HOME/bin
 pushd $HOME/bin
 
-if [ $GEN_JSB = "YES" ]; then 
+
+install_android_ndk()
+{
+    # Download android ndk
+    echo "Download android ndk ..."
+    curl -O http://dl.google.com/android/ndk/android-ndk-r8e-linux-x86_64.tar.bz2
+    echo "Decompress android-ndk-r8e-linux-x86_64.tar.bz2 ..."
+    tar xjf android-ndk-r8e-linux-x86_64.tar.bz2
+    # Rename ndk
+    mv android-ndk-r8e android-ndk
+}
+
+if [ $GEN_JSB = "YES" ]; then
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+        exit 0
+    fi
     install_android_ndk
     # Download llvm3.1
     echo "Download llvm3.1 ..."
@@ -33,17 +48,6 @@ if [ $PLATFORM = nacl ]; then
     unzip nacl_sdk.zip
     nacl_sdk/naclsdk update --force pepper_canary
 fi
-
-install_android_ndk()
-{
-    # Download android ndk
-    echo "Download android ndk ..."
-    curl -O http://dl.google.com/android/ndk/android-ndk-r8e-linux-x86_64.tar.bz2
-    echo "Decompress android-ndk-r8e-linux-x86_64.tar.bz2 ..."
-    tar xjf android-ndk-r8e-linux-x86_64.tar.bz2
-    # Rename ndk
-    mv android-ndk-r8e android-ndk
-}
 
 if [ $PLATFORM = android ]; then 
     install_android_ndk
