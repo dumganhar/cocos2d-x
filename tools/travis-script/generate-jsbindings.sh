@@ -73,9 +73,10 @@ git checkout -B master origin/master
 #Set remotes
 git remote add upstream https://${GH_TOKEN}@github.com/angeltown/cocos2dx-autogen-bindings.git 2> /dev/null > /dev/null
 
-# Delete all directories and files except '.git' and 'README'.
+echo "Delete all directories and files except '.git' and 'README'."
 ls -a | grep -E -v ^\[.\]\{1,2\}$ | grep -E -v ^\.git$ | grep -E -v ^README$ | xargs -I{} rm -rf {}
-
+echo "Show files in scripting/javascript/bindings/generated folder."
+ls -a
 popd
 
 # Exit on error
