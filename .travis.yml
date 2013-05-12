@@ -1,6 +1,6 @@
 language: cpp
 script:
- - cd tools/travis-script
+ - cd tools/travis-scripts
  - ./generate-jsbindings.sh
 before_install:
  - curl -O http://dl.google.com/android/ndk/android-ndk-r8e-linux-x86_64.tar.bz2
