@@ -49,6 +49,7 @@ if [ -z "${HUB+aaa}" ]; then
     mkdir -p $HOME/bin
     curl http://defunkt.io/hub/standalone -o $HOME/bin/hub
     HUB="$HOME/bin/hub"
+    chmod +x $HUB
 fi
 
 # Update cocos2d-x repo
