@@ -40,7 +40,6 @@ GENERATED_WORKTREE="$COCOS2DX_ROOT"/scripting/javascript/bindings/generated
 REMOTE_AUTOGEN_BINDINGS_REPOSITORY="https://github.com/angeltown/cocos2dx-autogen-bindings.git"
 REMOTE_COCOS2DX_REPOSITORY="https://github.com/angeltown/cocos2d-x.git"
 COCOS2DX_PULL_BASE="dumganhar/cocos2d-x:travis"
-GH_TOKEN="bf3a33946ba261d77578cda3069e5969d8603353"
 
 sudo apt-get --force-yes --yes install python-yaml python-cheetah
 
@@ -134,18 +133,18 @@ set +e
 git diff --stat --exit-code origin/master
 
 DIFF_RETVAL=$?
-if [ $DIFF_RETVAL -eq 0 ]
-then
-    echo
-    echo "No differences in generated files"
-    echo "Exiting with success."
-    echo
-    exit 0
-else
-    echo
-    echo "Generated files differ from origin/master. Continuing."
-    echo
-fi
+# if [ $DIFF_RETVAL -eq 0 ]
+# then
+#     echo
+#     echo "No differences in generated files"
+#     echo "Exiting with success."
+#     echo
+#     exit 0
+# else
+#     echo
+#     echo "Generated files differ from origin/master. Continuing."
+#     echo
+# fi
 
 # Exit on error
 set -e
