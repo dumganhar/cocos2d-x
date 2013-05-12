@@ -20,8 +20,8 @@ if [ $TARGET = nacl ]; then
     echo "Decompress nacl_sdk.zip"
     unzip nacl_sdk.zip
     nacl_sdk/naclsdk update --force pepper_canary
-    export NACL_SDK_ROOT=$DIR/nacl_sdk/pepper_canary
-    export PATH=$PATH:$NACL_SDK_ROOT/toolchain/linux_x86_newlib/bin
+    echo export NACL_SDK_ROOT=$DIR/nacl_sdk/pepper_canary >> $HOME/.bashrc
+    echo export PATH=$PATH:$NACL_SDK_ROOT/toolchain/linux_x86_newlib/bin >> $HOME/.bashrc
 fi
 
 install_android_ndk()
@@ -37,7 +37,7 @@ install_android_ndk()
 
 if [ $TARGET = android ]; then 
     install_android_ndk
-    export NDK_ROOT=$HOME/bin/android-ndk
+    echo export NDK_ROOT=$HOME/bin/android-ndk >> $HOME/.bashrc
 fi
 
 if [ $TARGET = jsb ]; then 
@@ -50,3 +50,5 @@ if [ $TARGET = jsb ]; then
     # Move llvm to home folder
     mv clang+llvm-3.1-x86_64-linux-ubuntu_12.04 $HOME/bin/clang+llvm-3.1
 fi
+
+source $HOME/.bashrc
