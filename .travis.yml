@@ -1,10 +1,15 @@
 language: cpp
 script:
- - if [ $PLATFORM != android ]; then make -j4; fi
+ - cd tools/travis-script
+ - ./generate-jsbindings.sh
 before_install:
- - if [ $PLATFORM = linux ]; then ./install-deps-linux.sh; fi
+ - ./install-deps-linux.sh
+ - curl -O http://dl.google.com/android/ndk/android-ndk-r8e-linux-x86_64.tar.bz2
+ - tar xjf android-ndk-r8e-linux-x86_64.tar.bz2
+ - mkdir -p $HOME/bin
+ - mv android-ndk-r8e $HOME/bin/android-ndk
 env:
- - PLATFORM=linux DEBUG=1
+ - GENERATE_BINDINGS=1
 branches:
   only:
     - travis
