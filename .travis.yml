@@ -13,8 +13,6 @@ before_install:
 env:
   global:
     - secure: "dunKUReiQMFyg9chXKTZL4qoc5Ele+bPnaJ6M/ltpz9eqpJ4tS5Gt5YwRB/w\nihVH8cBRp+r2iKpNXpZrBxU4OCpWUTTrNOz8EXCq5CmS7Wp7M2Tr7uvDF7eA\n3PHTz1U+cLPDFTkOF98g5qd1AMs9/EyR7HloXpElM14518CtZP4="
-    - GENERATE_BINDINGS=1
-
 branches:
   only:
     - travis
