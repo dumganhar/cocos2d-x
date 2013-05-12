@@ -36,6 +36,7 @@ git config --global user.name "CocosRobot"
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COCOS2DX_ROOT="$DIR"/../..
+TOJS_ROOT=$COCOS2DX_ROOT/tools/tojs
 GENERATED_WORKTREE="$COCOS2DX_ROOT"/scripting/javascript/bindings/generated
 REMOTE_AUTOGEN_BINDINGS_REPOSITORY="https://github.com/angeltown/cocos2dx-autogen-bindings.git"
 REMOTE_COCOS2DX_REPOSITORY="https://github.com/angeltown/cocos2d-x.git"
@@ -81,7 +82,9 @@ popd
 set -e
 
 # 1. Generate JS bindings
-COCOS2DX_ROOT="$COCOS2DX_ROOT" /bin/bash $DIR/../tojs/genbindings.sh
+pushd "$TOJS_ROOT"
+./genbindings.sh
+popd
 
 echo
 echo Bindings generated successfully
