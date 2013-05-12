@@ -12,7 +12,7 @@ before_install:
  - mv clang+llvm-3.1-x86_64-linux-ubuntu_12.04 $HOME/bin/clang+llvm-3.1
 env:
   global:
-    - secure: "dunKUReiQMFyg9chXKTZL4qoc5Ele+bPnaJ6M/ltpz9eqpJ4tS5Gt5YwRB/w\nihVH8cBRp+r2iKpNXpZrBxU4OCpWUTTrNOz8EXCq5CmS7Wp7M2Tr7uvDF7eA\n3PHTz1U+cLPDFTkOF98g5qd1AMs9/EyR7HloXpElM14518CtZP4="
+    - secure: "TxFKQ+mA/wq/KKGhjS3Tic59N4haoutms9rXlzZpZDVR4CknZByiMs/e/aZY\neOWcFtj4VsW7viuBQOtTGGmPAoxln2x1TxMeykXyYAh4y2oYMYZqgP0lkI1t\nRyW7WFtsEJBbcFlCLPTeHdeI9i2hEB0/1WTYs4Xghrc/VgVfDpI="
 branches:
   only:
     - travis
