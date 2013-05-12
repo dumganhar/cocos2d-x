@@ -1,5 +1,8 @@
 language: cpp
 script:
+ - export NACL_SDK_ROOT=$HOME/nacl_sdk/pepper_canary
+ - export PATH=$PATH:$NACL_SDK_ROOT/toolchain/linux_x86_newlib/bin
+ - export NDK_ROOT=$HOME/bin/android-ndk
  - ./tools/travis-scripts/run-script.sh
 before_install:
  - ./tools/travis-scripts/before-install.sh
@@ -12,6 +15,8 @@ env:
   - TARGET=linux DEBUG=1
   - TARGET=nacl DEBUG=1
   - TARGET=android SAMPLE_LANG=Cpp APPNAME=HelloCpp
+  - TARGET=android SAMPLE_LANG=Javascript APPNAME=TestJavascript
+  - TARGET=android SAMPLE_LANG=Lua APPNAME=TestLua
 branches:
   only:
     - travis
