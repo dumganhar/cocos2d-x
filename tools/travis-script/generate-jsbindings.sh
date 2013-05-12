@@ -72,7 +72,7 @@ popd
 set -e
 
 # 1. Generate JS bindings
-COCOS2DX_ROOT="$COCOS2DX_ROOT" /bin/bash ../../../tojs/genbindings.sh
+COCOS2DX_ROOT="$COCOS2DX_ROOT" /bin/bash $DIR/../tojs/genbindings.sh
 
 echo
 echo Bindings generated successfully

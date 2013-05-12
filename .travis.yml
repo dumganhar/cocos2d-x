@@ -3,11 +3,13 @@ script:
  - cd tools/travis-script
  - ./generate-jsbindings.sh
 before_install:
- - ./install-deps-linux.sh
  - curl -O http://dl.google.com/android/ndk/android-ndk-r8e-linux-x86_64.tar.bz2
  - tar xjf android-ndk-r8e-linux-x86_64.tar.bz2
  - mkdir -p $HOME/bin
  - mv android-ndk-r8e $HOME/bin/android-ndk
+ - curl -O http://llvm.org/releases/3.1/clang+llvm-3.1-x86_64-linux-ubuntu_12.04.tar.gz
+ - tar xzf clang+llvm-3.1-x86_64-linux-ubuntu_12.04.tar.gz
+ - mv clang+llvm-3.1-x86_64-linux-ubuntu_12.04 $HOME/bin/clang+llvm-3.1
 env:
  - GENERATE_BINDINGS=1
 branches:
