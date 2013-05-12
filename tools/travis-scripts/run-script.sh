@@ -5,22 +5,22 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COCOS2DX_ROOT="$DIR"/../..
 
-if [ $TARGET = android ]; then 
+if [ $PLATFORM = android ]; then 
     cd $COCOS2DX_ROOT/samples/$SAMPLE_LANG/$APPNAME/proj.android
     ./build_native.sh
 fi
 
-if [ $TARGET = nacl ]; then
+if [ $PLATFORM = nacl ]; then
     cd $COCOS2DX_ROOT
     make -j4
 fi
 
-if [ $TARGET = linux ]; then
+if [ $PLATFORM = linux ]; then
     cd $COCOS2DX_ROOT
     make -j4
 fi
 
-if [ $TARGET = jsb ]; then
+if [ $GEN_JSB = "YES" ]; then 
     cd $COCOS2DX_ROOT/tools/travis-scripts
     ./generate-jsbindings.sh
 fi
