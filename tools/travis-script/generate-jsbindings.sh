@@ -133,18 +133,18 @@ set +e
 git diff --stat --exit-code origin/master
 
 DIFF_RETVAL=$?
-# if [ $DIFF_RETVAL -eq 0 ]
-# then
-#     echo
-#     echo "No differences in generated files"
-#     echo "Exiting with success."
-#     echo
-#     exit 0
-# else
-#     echo
-#     echo "Generated files differ from origin/master. Continuing."
-#     echo
-# fi
+if [ $DIFF_RETVAL -eq 0 ]
+then
+    echo
+    echo "No differences in generated files"
+    echo "Exiting with success."
+    echo
+    exit 0
+else
+    echo
+    echo "Generated files differ from origin/master. Continuing."
+    echo
+fi
 
 # Exit on error
 set -e
