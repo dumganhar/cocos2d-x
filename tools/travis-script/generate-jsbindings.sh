@@ -134,7 +134,7 @@ echo
 # Don't exit on non-zero return value
 set +e
 echo "--------------------"
-echo "Show all remote..."
+echo "Show all remotes..."
 git remote -v
 echo "--------------------"
 git diff --stat --exit-code origin/master
