@@ -1,6 +1,6 @@
 language: cpp
 script:
- - ./tools/travis-scripts/runscript.sh
+ - ./tools/travis-scripts/run-script.sh
 before_install:
  - ./tools/travis-scripts/before-install.sh
 env:
