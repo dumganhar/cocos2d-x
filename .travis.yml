@@ -9,9 +9,9 @@ env:
   - secure: "iEFKwSz4IlQ9EfAL8c/1MwU6Ti1IrNtG0YUi3TWdf6sCMglXaRICSJTCY9Hz\nXLYYvp5lPo5FQsqxpMBhkm2Zpitd4zZq+r62P9e2b4P9svAxapOQdYRh9Cjc\nN3eUyQTslMVPE9zsWIJmQbIlDk18X246Izo353UI7mmJ8WRAoNE="
  matrix:
   - TARGET=jsb
- # - TARGET=linux DEBUG=1
- # - TARGET=nacl DEBUG=1
- # - TARGET=android SAMPLE_LANG=Cpp APPNAME=HelloCpp
+  - TARGET=linux DEBUG=1
+  - TARGET=nacl DEBUG=1
+  - TARGET=android SAMPLE_LANG=Cpp APPNAME=HelloCpp
 branches:
   only:
     - travis
