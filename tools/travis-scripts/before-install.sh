@@ -21,7 +21,7 @@ install_android_ndk()
     mv android-ndk-r8e android-ndk
 }
 
-if [ $GEN_JSB = "YES" ]; then
+if [ $GEN_JSB = YES ]; then
     if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
         exit 0
     fi
