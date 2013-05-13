@@ -55,7 +55,7 @@ sudo apt-get --force-yes --yes install python-yaml python-cheetah
 # Update submodule of auto-gen JSBinding repo.
 pushd "$GENERATED_WORKTREE"
 
-git checkout -B master origin/master
+git checkout -B master
 #Set remotes
 git remote add upstream https://${GH_TOKEN}@github.com/angeltown/cocos2dx-autogen-bindings.git 2> /dev/null > /dev/null
 
@@ -114,7 +114,7 @@ pushd "$GENERATED_WORKTREE"
 git status
 
 echo
-echo Comparing with origin/master ...
+echo Comparing with HEAD ...
 echo
 
 # Don't exit on non-zero return value
