@@ -35,11 +35,11 @@ if [ "$GEN_JSB"x = "YES"x ]; then
     mv clang+llvm-3.1-x86_64-linux-ubuntu_12.04 clang+llvm-3.1
 fi
 
-if [ $PLATFORM = linux ]; then
+if [ "$PLATFORM"x = "linux"x ]; then
     bash $COCOS2DX_ROOT/install-deps-linux.sh
 fi
 
-if [ $PLATFORM = nacl ]; then
+if [ "$PLATFORM"x = "nacl"x ]; then
     sudo apt-get update
     sudo apt-get install libc6:i386
     echo "Download nacl_sdk ..."
@@ -49,7 +49,7 @@ if [ $PLATFORM = nacl ]; then
     nacl_sdk/naclsdk update --force pepper_canary
 fi
 
-if [ $PLATFORM = android ]; then 
+if [ "$PLATFORM"x = "android"x ]; then 
     install_android_ndk
 fi
 
