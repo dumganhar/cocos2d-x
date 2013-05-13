@@ -119,7 +119,7 @@ echo
 
 # Don't exit on non-zero return value
 set +e
-git diff --stat --exit-code origin/master
+git diff --stat --exit-code
 
 DIFF_RETVAL=$?
 if [ $DIFF_RETVAL -eq 0 ]
@@ -131,7 +131,7 @@ then
     exit 0
 else
     echo
-    echo "Generated files differ from origin/master. Continuing."
+    echo "Generated files differ from HEAD. Continuing."
     echo
 fi
 
