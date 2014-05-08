@@ -246,8 +246,6 @@ Label::Label(FontAtlas *atlas /* = nullptr */, TextHAlignment hAlignment /* = Te
 , _labelDimensions(Size::ZERO)
 , _hAlignment(hAlignment)
 , _vAlignment(vAlignment)
-, _currentUTF16String(nullptr)
-, _originalUTF16String(nullptr)
 , _horizontalKernings(nullptr)
 , _fontAtlas(atlas)
 , _isOpacityModifyRGB(false)
@@ -286,9 +284,7 @@ Label::Label(FontAtlas *atlas /* = nullptr */, TextHAlignment hAlignment /* = Te
 }
 
 Label::~Label()
-{   
-    delete [] _currentUTF16String;
-    delete [] _originalUTF16String;
+{
     delete [] _horizontalKernings;
 
     if (_fontAtlas)
@@ -573,7 +569,7 @@ float Label::getScaleX() const
 
 void Label::alignText()
 {
-    if (_fontAtlas == nullptr || _currentUTF16String == nullptr)
+    if (_fontAtlas == nullptr || _currentUTF16String.empty())
     {
         return;
     }
@@ -602,7 +598,7 @@ void Label::alignText()
     if(_labelWidth > 0 || (_currNumLines > 1 && _hAlignment != TextHAlignment::LEFT))
         LabelTextFormatter::alignText(this);
 
-    int strLen = cc_wcslen(_currentUTF16String);
+    int strLen = static_cast<int>(_currentUTF16String.length());
     Rect uvRect;
     Sprite* letterSprite;
     for(const auto &child : _children) {
@@ -632,7 +628,7 @@ void Label::alignText()
     updateColor();
 }
 
-bool Label::computeHorizontalKernings(unsigned short int *stringToRender)
+bool Label::computeHorizontalKernings(const std::u16string& stringToRender)
 {
     if (_horizontalKernings)
     {
@@ -649,30 +645,14 @@ bool Label::computeHorizontalKernings(unsigned short int *stringToRender)
         return true;
 }
 
-bool Label::setOriginalString(unsigned short *stringToSet)
+bool Label::setOriginalString(const std::u16string& stringToSet)
 {
-    if (_originalUTF16String)
-    {
-        delete [] _originalUTF16String;
-    }
-
-    int newStringLenght = cc_wcslen(stringToSet);
-    _originalUTF16String = new unsigned short int [newStringLenght + 1];
-    memset(_originalUTF16String, 0, (newStringLenght + 1) * 2);
-    memcpy(_originalUTF16String, stringToSet, (newStringLenght * 2));
-    _originalUTF16String[newStringLenght] = 0;
-
+    _originalUTF16String = stringToSet;
     return true;
 }
 
-bool Label::setCurrentString(unsigned short *stringToSet)
+bool Label::setCurrentString(const std::u16string& stringToSet)
 {
-    // set the new string
-    if (_currentUTF16String)
-    {
-        delete [] _currentUTF16String;
-    }
-
     _currentUTF16String  = stringToSet;
     computeStringNumLines();
 
@@ -956,9 +936,12 @@ void Label::setFontDefinition(const FontDefinition& textDefinition)
 
 void Label::updateContent()
 {
-    auto utf16String = cc_utf8_to_utf16(_originalUTF8String.c_str());
-    setCurrentString(utf16String);
-    setOriginalString(utf16String);
+    std::u16string utf16String;
+    if (StringUtils::UTF8ToUTF16(_originalUTF8String, utf16String))
+    {
+        setCurrentString(utf16String);
+        setOriginalString(utf16String);
+    }
 
     if (_textSprite)
     {
@@ -1200,15 +1183,15 @@ void Label::computeStringNumLines()
 {
     int quantityOfLines = 1;
 
-    int stringLen = _currentUTF16String ? cc_wcslen(_currentUTF16String) : -1;
-    if (stringLen < 1)
+    if (_currentUTF16String.empty())
     {
-        _currNumLines = stringLen;
+        _currNumLines = 0;
         return;
     }
 
     // count number of lines
-    for (int i = 0; i < stringLen - 1; ++i)
+    size_t stringLen = _currentUTF16String.length();
+    for (size_t i = 0; i < stringLen-1; ++i)
     {
         if (_currentUTF16String[i] == '\n')
         {
@@ -1221,7 +1204,7 @@ void Label::computeStringNumLines()
 
 int Label::getStringLength() const
 {
-    return _currentUTF16String ? cc_wcslen(_currentUTF16String) : (int)_originalUTF8String.length();
+    return _currentUTF16String.length();
 }
 
 // RGBA protocol
@@ -1320,7 +1303,9 @@ void Label::updateColor()
 
 std::string Label::getDescription() const
 {
-    return StringUtils::format("<Label | Tag = %d, Label = '%s'>", _tag, cc_utf16_to_utf8(_currentUTF16String,-1,nullptr,nullptr));
+    std::string utf8str;
+    StringUtils::UTF16ToUTF8(_currentUTF16String, utf8str);
+    return StringUtils::format("<Label | Tag = %d, Label = '%s'>", _tag, utf8str.c_str());
 }
 
 const Size& Label::getContentSize() const
