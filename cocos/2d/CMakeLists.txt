@@ -114,5 +114,7 @@ set(COCOS_2D_SRC
   2d/platform/CCImage.cpp
   2d/ccFPSImages.c
   ../external/edtaa3func/edtaa3func.cpp
+  ../external/ConvertUTF/ConvertUTFWrapper.cpp
+  ../external/ConvertUTF/ConvertUTF.c
 )
 
