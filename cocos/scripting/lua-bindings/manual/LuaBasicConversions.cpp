@@ -59,20 +59,12 @@ void luaval_to_native_err(lua_State* L,const char* msg,tolua_Error* err)
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-extern int lua_isusertype (lua_State* L, int lo, const char* type);
-#ifdef __cplusplus
-}
-#endif
 
 bool luaval_is_usertype(lua_State* L,int lo,const char* type, int def)
 {
-    if (def && lua_gettop(L)<abs(lo))
-        return true;
+    tolua_Error tolua_err;
     
-    if (lua_isnil(L,lo) || lua_isusertype(L,lo,type))
+    if (tolua_isusertype(L,lo,type, def, &tolua_err))
         return true;
     
     return false;
