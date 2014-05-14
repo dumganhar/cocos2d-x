@@ -357,7 +357,6 @@ void object_to_luaval(lua_State* L,const char* type, T* ret)
 {
     if(nullptr != ret)
     {
-      
         cocos2d::Ref* dynObject = dynamic_cast<cocos2d::Ref *>(ret);
 
         if (nullptr != dynObject)
@@ -369,6 +368,7 @@ void object_to_luaval(lua_State* L,const char* type, T* ret)
         else
         {
             tolua_pushusertype(L,(void*)ret,getLuaTypeName(ret, type));
+            tolua_register_gc(L,lua_gettop(L));
         }
     }
     else
