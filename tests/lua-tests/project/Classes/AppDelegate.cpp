@@ -15,6 +15,8 @@ AppDelegate::AppDelegate()
 AppDelegate::~AppDelegate()
 {
     SimpleAudioEngine::end();
+    ScriptEngineManager::destroyInstance();
+    Ref::printLeaks();
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
