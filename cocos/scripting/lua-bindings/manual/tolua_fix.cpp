@@ -57,10 +57,17 @@ TOLUA_API int toluafix_pushusertype_ccobject(lua_State* L,
         lua_rawset(L, -3);                /* refid_type[refid] = type, stack: refid_type */
         lua_pop(L, 1);                                              /* stack: - */
 
+        vPtr->retain();
         //printf("[LUA] push CCObject OK - refid: %d, ptr: %x, type: %s\n", *p_refid, (int)ptr, type);
     }
+    else
+    {
+        // printf("refid has value....\n");
+    }
 
-    tolua_pushusertype_and_addtoroot(L, vPtr, vType);
+    tolua_pushusertype(L, vPtr, vType);
+    
+    tolua_register_gc(L,lua_gettop(L));
     
     return 0;
 }
