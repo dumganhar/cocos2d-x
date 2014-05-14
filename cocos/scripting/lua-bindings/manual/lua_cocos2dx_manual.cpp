@@ -2865,37 +2865,6 @@ tolua_lerror:
 #endif
 }
 
-static int tolua_cocos2dx_UserDefault_getInstance(lua_State* tolua_S)
-{
-    if (nullptr == tolua_S)
-        return 0;
-    
-    int argc = 0;
-    
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-    if (!tolua_isusertable(tolua_S,1,"cc.UserDefault",0,&tolua_err)) goto tolua_lerror;
-#endif
-    
-    argc = lua_gettop(tolua_S) - 1;
-    
-    if(0 == argc)
-    {
-        UserDefault* tolua_ret = (UserDefault*)  UserDefault::getInstance();
-        tolua_pushusertype(tolua_S,(void*)tolua_ret,"cc.UserDefault");
-        return 1;
-    }
-    
-    CCLOG("'getInstance' has wrong number of arguments: %d, was expecting %d\n", argc, 0);
-    return 0;
-    
-#if COCOS2D_DEBUG >= 1
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'getInstance'.",&tolua_err);
-    return 0;
-#endif
-}
-
 static int tolua_cocos2dx_GLProgram_create(lua_State* tolua_S)
 {
     if (nullptr == tolua_S)
@@ -3616,19 +3585,6 @@ static void extendFileUtils(lua_State* tolua_S)
     {
         lua_pushstring(tolua_S,"getStringFromFile");
         lua_pushcfunction(tolua_S,tolua_cocos2dx_FileUtils_getStringFromFile );
-        lua_rawset(tolua_S,-3);
-    }
-    lua_pop(tolua_S, 1);
-}
-
-static void extendUserDefault(lua_State* tolua_S)
-{
-    lua_pushstring(tolua_S, "cc.UserDefault");
-    lua_rawget(tolua_S, LUA_REGISTRYINDEX);
-    if (lua_istable(tolua_S,-1))
-    {
-        lua_pushstring(tolua_S,"getInstance");
-        lua_pushcfunction(tolua_S,tolua_cocos2dx_UserDefault_getInstance );
         lua_rawset(tolua_S,-3);
     }
     lua_pop(tolua_S, 1);
@@ -5399,7 +5355,6 @@ int register_all_cocos2dx_manual(lua_State* tolua_S)
     extendLayerMultiplex(tolua_S);
     extendParticleSystem(tolua_S);
     extendFileUtils(tolua_S);
-    extendUserDefault(tolua_S);
     extendGLProgram(tolua_S);
     extendTexture2D(tolua_S);
     extendSpriteBatchNode(tolua_S);
