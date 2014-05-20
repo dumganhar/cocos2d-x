@@ -17,6 +17,7 @@ Classes/ActionManagerTest/ActionManagerTest.cpp \
 Classes/ActionsEaseTest/ActionsEaseTest.cpp \
 Classes/ActionsProgressTest/ActionsProgressTest.cpp \
 Classes/ActionsTest/ActionsTest.cpp \
+Classes/AssetsManagerTest/AssetsManagerTest.cpp \
 Classes/Box2DTest/Box2dTest.cpp \
 Classes/Box2DTestBed/Box2dView.cpp \
 Classes/Box2DTestBed/GLES-Render.cpp \
@@ -166,6 +167,7 @@ Classes/ShaderTest/ShaderTest.cpp \
 Classes/ShaderTest/ShaderTest2.cpp \
 Classes/SpineTest/SpineTest.cpp \
 Classes/SpriteTest/SpriteTest.cpp \
+Classes/Sprite3DTest/Sprite3DTest.cpp \
 Classes/TextInputTest/TextInputTest.cpp \
 Classes/Texture2dTest/Texture2dTest.cpp \
 Classes/TextureCacheTest/TextureCacheTest.cpp \

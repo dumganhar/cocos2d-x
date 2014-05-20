@@ -34,12 +34,12 @@ Controller g_aTestNames[] = {
     // TESTS MUST BE ORDERED ALPHABETICALLY
     //     violators will be prosecuted
     //
-    { "A new UI", [](){  return new UITestScene(); }},
 	{ "Accelerometer", []() { return new AccelerometerTestScene(); } },
 	{ "ActionManager", [](){return new ActionManagerTestScene(); } },
 	{ "Actions - Basic", [](){ return new ActionsTestScene(); } },
 	{ "Actions - Ease", [](){return new ActionsEaseTestScene();} },
 	{ "Actions - Progress", [](){return new ProgressActionsTestScene(); } },
+	{ "Assets Manager", []() { return new AssetsManagerLoaderScene(); } },
 	{ "Audio - CocosDenshion", []() { return new CocosDenshionTestScene(); } },
 	{ "Box2d - Basic", []() { return new Box2DTestScene(); } },
 	{ "Box2d - TestBed", []() { return new Box2dTestBedScene(); } },
@@ -87,8 +87,10 @@ Controller g_aTestNames[] = {
 	{ "Node: Scene", [](){return new SceneTestScene();} },
 	{ "Node: Spine", []() { return new SpineTestScene(); } },
 	{ "Node: Sprite", [](){return new SpriteTestScene(); } },
+    { "Node: Sprite3D", [](){  return new Sprite3DTestScene(); }},
 	{ "Node: TileMap", [](){return new TileMapTestScene(); } },
 	{ "Node: Text Input", [](){return new TextInputTestScene(); } },
+    { "Node: UI", [](){  return new UITestScene(); }},
     { "Mouse", []() { return new MouseTestScene(); } },
 	{ "MutiTouch", []() { return new MutiTouchTestScene(); } },
 	{ "Performance tests", []() { return new PerformanceTestScene(); } },
