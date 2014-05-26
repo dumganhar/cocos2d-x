@@ -18,7 +18,7 @@ Scene* HelloWorld::scene()
     // return the scene
     return scene;
 }
-
+int poco_main();
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
@@ -72,7 +72,7 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(sprite);
-    
+    poco_main();
     return true;
 }
 
