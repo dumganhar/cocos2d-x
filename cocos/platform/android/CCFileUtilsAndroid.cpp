@@ -360,12 +360,14 @@ string FileUtilsAndroid::getWritablePath() const
     }
 }
 
+#define COCOPLAY_UTILS_CLASS "com/chukong/cocoplay/utils/Utils"
+
 bool FileUtilsAndroid::createDirectories(const std::string& path)
 {
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, "com/chukong/cocosplayer/utils/Utils", "createDirectories", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "createDirectories", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
@@ -383,7 +385,7 @@ bool FileUtilsAndroid::createDirectory(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, "com/chukong/cocosplayer/utils/Utils", "createDirectory", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "createDirectory", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
@@ -401,7 +403,7 @@ bool FileUtilsAndroid::isExist(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, "com/chukong/cocosplayer/utils/Utils", "isExist", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "isExist", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
@@ -419,7 +421,7 @@ bool FileUtilsAndroid::isDirectory(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, "com/chukong/cocosplayer/utils/Utils", "isDirectory", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "isDirectory", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
