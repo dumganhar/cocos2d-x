@@ -4,7 +4,7 @@
 #include "extensions/assets-manager/CCEventAssetsManager.h"
 #include "extensions/assets-manager/CCEventListenerAssetsManager.h"
 
-const char* sceneManifests[] = {"Manifests/AMTestScene1/project.manifest", "Manifests/AMTestScene2/project.manifest", "Manifests/AMTestScene3/project.manifest"};
+const char* sceneManifests[] = {"AMTestScene1/project.manifest", "AMTestScene2/project.manifest", "AMTestScene3/project.manifest"};
 const char* storagePaths[] = {"CppTests/AssetsManagerTest/scene1/", "CppTests/AssetsManagerTest/scene2/", "CppTests/AssetsManagerTest/scene3"};
 const char* backgroundPaths[] = {"Images/background1.jpg", "Images/background2.jpg", "Images/background3.png"};
 
@@ -26,8 +26,11 @@ void AssetsManagerTestLayer::onEnter()
 {
     BaseTest::onEnter();
     _background = Sprite::create(_spritePath);
-    addChild(_background, 1);
-    _background->setPosition( VisibleRect::center() );
+    if (_background)
+    {
+        addChild(_background, 1);
+        _background->setPosition( VisibleRect::center() );
+    }
 }
 
 void AssetsManagerTestLayer::restartCallback(Ref* sender)
@@ -84,6 +87,7 @@ void AssetsManagerLoaderScene::runThisTest()
 {
     int currentId = currentScene;
     std::string manifestPath = sceneManifests[currentId], storagePath = FileUtils::getInstance()->getWritablePath() + storagePaths[currentId];
+    CCLOG("Storage path for this test : %s", storagePath.c_str());
     
     Sprite *sprite = Sprite::create("Images/Icon.png");
     auto layer = Layer::create();
@@ -109,6 +113,7 @@ void AssetsManagerLoaderScene::runThisTest()
     else
     {
         _amListener = cocos2d::extension::EventListenerAssetsManager::create(_am, [currentId, this](EventAssetsManager* event){
+            static int failCount = 0;
             AssetsManagerTestScene *scene;
             switch (event->getEventCode())
             {
@@ -163,13 +168,25 @@ void AssetsManagerLoaderScene::runThisTest()
                 case EventAssetsManager::EventCode::UPDATE_FAILED:
                 {
                     CCLOG("Update failed. %s", event->getMessage().c_str());
-                    auto assets = _am->getFailedAssets();
-                    _am->updateAssets(assets);
+                    
+                    failCount ++;
+                    if (failCount < 5)
+                    {
+                        _am->downloadFailedAssets();
+                    }
+                    else
+                    {
+                        CCLOG("Reach maximum fail count, exit update process");
+                        failCount = 0;
+                        scene = new AssetsManagerTestScene(backgroundPaths[currentId]);
+                        Director::getInstance()->replaceScene(scene);
+                        scene->release();
+                    }
                 }
                     break;
                 case EventAssetsManager::EventCode::ERROR_UPDATING:
                 {
-                    CCLOG("Asset %s : %s.", event->getAssetId().c_str(), event->getMessage().c_str());
+                    CCLOG("Asset %s : %s", event->getAssetId().c_str(), event->getMessage().c_str());
                 }
                     break;
                 case EventAssetsManager::EventCode::ERROR_DECOMPRESS:

@@ -376,22 +376,23 @@ bool AssetsManager::decompress(const std::string &zip)
             unzClose(zipfile);
             return false;
         }
-        
         const std::string fullPath = rootPath + fileName;
-        
-        //There are not directory entry in some case.
-        //So we need to create directory when decompressing file entry
-        if ( !createDirectory(fullPath) )
-        {
-            // Failed to create directory
-            CCLOG("AssetsManager : can not create directory %s", fullPath.c_str());
-            unzClose(zipfile);
-            return false;
-        }
         
         // Check if this entry is a directory or a file.
         const size_t filenameLength = strlen(fileName);
-        if (fileName[filenameLength-1] != '/')
+        if (fileName[filenameLength-1] == '/')
+        {
+            //There are not directory entry in some case.
+            //So we need to create directory when decompressing file entry
+            if ( !createDirectory(fullPath) )
+            {
+                // Failed to create directory
+                CCLOG("AssetsManager : can not create directory %s", fullPath.c_str());
+                unzClose(zipfile);
+                return false;
+            }
+        }
+        else
         {
             // Entry is a file, so extract it.
             // Open current file.
@@ -420,6 +421,7 @@ bool AssetsManager::decompress(const std::string &zip)
                 if (error < 0)
                 {
                     CCLOG("AssetsManager : can not read zip file %s, error code is %d", fileName, error);
+                    fclose(out);
                     unzCloseCurrentFile(zipfile);
                     unzClose(zipfile);
                     return false;
@@ -727,7 +729,7 @@ void AssetsManager::update()
     }
 }
 
-void AssetsManager::updateAssets(const std::unordered_map<std::string, Downloader::DownloadUnit>& assets)
+void AssetsManager::updateAssets(const Downloader::DownloadUnits& assets)
 {
     if (_updateState != State::UPDATING && _localManifest->isLoaded() && _remoteManifest->isLoaded())
     {
@@ -742,9 +744,14 @@ void AssetsManager::updateAssets(const std::unordered_map<std::string, Downloade
     }
 }
 
-const std::unordered_map<std::string, Downloader::DownloadUnit>& AssetsManager::getFailedAssets() const
+const Downloader::DownloadUnits& AssetsManager::getFailedAssets() const
 {
     return _failedUnits;
+}
+
+void AssetsManager::downloadFailedAssets()
+{
+    updateAssets(_failedUnits);
 }
 
 
@@ -896,12 +903,6 @@ void AssetsManager::onSuccess(const std::string &srcUrl, const std::string &stor
         {
             // Remove from failed units list
             _failedUnits.erase(unitIt);
-        }
-
-        if (!_totalEnabled && _updateState == State::UPDATING) {
-            _percent = 100 * (_totalToDownload - _totalWaitToDownload) / _totalToDownload;
-            // Notify progression event
-            dispatchUpdateEvent(EventAssetsManager::EventCode::UPDATE_PROGRESSION, customId);
         }
     }
 }
