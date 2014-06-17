@@ -37,6 +37,7 @@ THE SOFTWARE.
 
 #define  LOG_TAG    "CCFileUtilsAndroid.cpp"
 #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#define  COCOPLAY_UTILS_CLASS "com/chukong/cocoplay/vm/utils/FileUtils"
 
 using namespace std;
 
@@ -359,8 +360,6 @@ string FileUtilsAndroid::getWritablePath() const
         return "";
     }
 }
-
-#define COCOPLAY_UTILS_CLASS "com/chukong/cocoplay/utils/FileUtils"
 
 bool FileUtilsAndroid::createDirectories(const std::string& path)
 {
