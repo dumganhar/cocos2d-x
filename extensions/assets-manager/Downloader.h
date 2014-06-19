@@ -125,6 +125,8 @@ protected:
     };
 
     void prepareDownload(const std::string &srcUrl, const std::string &storagePath, const std::string &customId, bool resumeDownload, FileDescriptor *fDesc, ProgressData *pData);
+    
+    bool prepareHeader(void *curl, const std::string &srcUrl);
 
     void download(const std::string &srcUrl, const std::string &customId, const FileDescriptor &fDesc, const ProgressData &data);
     
@@ -155,6 +157,8 @@ private:
     std::vector<ProgressData *> _progDatas;
     
     FileUtils *_fileUtils;
+    
+    bool _supportResuming;
 };
 
 int downloadProgressFunc(Downloader::ProgressData *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded);

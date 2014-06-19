@@ -36,6 +36,7 @@ NS_CC_EXT_BEGIN
 #define LOW_SPEED_TIME      5L
 #define MAX_REDIRS          2
 #define DEFAULT_TIMEOUT     5
+#define HTTP_CODE_SUPPORT_RESUME    206
 
 #define TEMP_EXT            ".temp"
 
@@ -107,6 +108,7 @@ Downloader::Downloader()
 , _onProgress(nullptr)
 , _onSuccess(nullptr)
 , _connectionTimeout(DEFAULT_TIMEOUT)
+, _supportResuming(false)
 {
     _fileUtils = FileUtils::getInstance();
 }
@@ -213,7 +215,7 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
     
     // Create a file to save file.
     const std::string outFileName = storagePath + TEMP_EXT;
-    if (resumeDownload && _fileUtils->isExist(outFileName))
+    if (_supportResuming && resumeDownload && _fileUtils->isExist(outFileName))
     {
         fDesc->fp = fopen(outFileName.c_str(), "ab");
     }
@@ -227,6 +229,17 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
         err.message = StringUtils::format("Can not create file %s: errno %d", outFileName.c_str(), errno);
         if (this->_onError) this->_onError(err);
     }
+}
+
+bool Downloader::prepareHeader(void *curl, const std::string &srcUrl)
+{
+    curl_easy_setopt(curl, CURLOPT_URL, srcUrl.c_str());
+    curl_easy_setopt(curl, CURLOPT_HEADER, 1);
+    curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
+    if (curl_easy_perform(curl) == CURLE_OK)
+        return true;
+    else
+        return false;
 }
 
 void Downloader::downloadAsync(const std::string &srcUrl, const std::string &storagePath, const std::string &customId/* = ""*/)
@@ -296,7 +309,29 @@ void Downloader::batchDownloadAsync(const DownloadUnits &units, const std::strin
 
 void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string &batchId/* = ""*/)
 {
+    if (units.size() == 0)
+    {
+        return;
+    }
+    // Make sure downloader won't be released
     std::weak_ptr<Downloader> ptr = shared_from_this();
+    
+    // Test server download resuming support with the first unit
+    _supportResuming = false;
+    CURL *header = curl_easy_init();
+    // Make a resume request
+    curl_easy_setopt(header, CURLOPT_RESUME_FROM_LARGE, 0);
+    if (prepareHeader(header, units.begin()->second.srcUrl))
+    {
+        long responseCode;
+        curl_easy_getinfo(header, CURLINFO_RESPONSE_CODE, &responseCode);
+        if (responseCode == HTTP_CODE_SUPPORT_RESUME)
+        {
+            _supportResuming = true;
+        }
+    }
+    curl_easy_cleanup(header);
+    
     int count = 0;
     DownloadUnits group;
     for (auto it = units.cbegin(); it != units.cend(); ++it, ++count)
@@ -326,6 +361,7 @@ void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string
             }
         }
     });
+    _supportResuming = false;
 }
 
 void Downloader::groupBatchDownload(const DownloadUnits &units)
@@ -362,7 +398,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             curl_easy_setopt(curl, CURLOPT_MAXREDIRS, MAX_REDIRS);
             
             // Resuming download support
-            if (unit.resumeDownload)
+            if (_supportResuming && unit.resumeDownload)
             {
                 // Check already downloaded size for current download unit
                 long size = AssetsManager::getFileSize(storagePath + TEMP_EXT);
@@ -457,7 +493,6 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
     for (auto it = _files.begin(); it != _files.end(); ++it)
     {
         FILE *f = (*it)->fp;
-        fflush(f);
         fclose(f);
         auto single = (*it)->curl;
         curl_multi_remove_handle(multi_handle, single);

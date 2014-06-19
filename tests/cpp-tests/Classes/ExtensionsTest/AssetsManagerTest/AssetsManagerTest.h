@@ -5,6 +5,7 @@
 #include "../../testBasic.h"
 #include "../../BaseTest.h"
 #include "extensions/assets-manager/AssetsManager.h"
+#include "ui/UILoadingBar.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -47,7 +48,8 @@ public:
     
 private:
     AssetsManager *_am;
-    Label *_progress;
+    cocos2d::ui::LoadingBar *_loadingBar;
+    cocos2d::ui::LoadingBar *_fileLoadingBar;
     EventListenerAssetsManager* _amListener;
 };
 

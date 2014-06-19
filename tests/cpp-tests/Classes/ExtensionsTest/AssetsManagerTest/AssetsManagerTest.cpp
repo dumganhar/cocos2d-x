@@ -78,7 +78,8 @@ void AssetsManagerTestScene::runThisTest()
 
 int AssetsManagerLoaderScene::currentScene = 0;
 AssetsManagerLoaderScene::AssetsManagerLoaderScene()
-: _progress(nullptr)
+: _loadingBar(nullptr)
+, _fileLoadingBar(nullptr)
 , _amListener(nullptr)
 {
 }
@@ -95,10 +96,13 @@ void AssetsManagerLoaderScene::runThisTest()
     layer->addChild(sprite);
     sprite->setPosition( VisibleRect::center() );
     
-    TTFConfig config("fonts/tahoma.ttf", 30);
-    _progress = Label::createWithTTF(config, "0%", TextHAlignment::CENTER);
-    _progress->setPosition( Vec2(VisibleRect::center().x, VisibleRect::center().y + 50) );
-    layer->addChild(_progress);
+    _loadingBar = cocos2d::ui::LoadingBar::create("cocosui/sliderProgress.png");
+    _loadingBar->setPosition(Vec2(VisibleRect::center().x, VisibleRect::top().y - 40));
+    layer->addChild(_loadingBar);
+    
+    _fileLoadingBar = cocos2d::ui::LoadingBar::create("cocosui/sliderProgress.png");
+    _fileLoadingBar->setPosition(Vec2(VisibleRect::center().x, VisibleRect::top().y - 80));
+    layer->addChild(_fileLoadingBar);
     
     _am = AssetsManager::create(manifestPath, storagePath);
     _am->retain();
@@ -128,23 +132,19 @@ void AssetsManagerLoaderScene::runThisTest()
                 case EventAssetsManager::EventCode::UPDATE_PROGRESSION:
                 {
                     std::string assetId = event->getAssetId();
-                    float percent = event->getPercent();
-                    std::string str;
-                    if (assetId == AssetsManager::VERSION_ID)
+                    if (assetId != AssetsManager::VERSION_ID && assetId != AssetsManager::MANIFEST_ID)
                     {
-                        str = StringUtils::format("Version file: %.2f", percent) + "%";
+                        float percent = event->getPercent();
+                        float percentByFile = event->getPercentByFile();
+                        _loadingBar->setPercent(percent);
+                        _fileLoadingBar->setPercent(percentByFile);
+                        CCLOG("%.2f", percent);
+                        
+                        std::string msg = event->getMessage();
+                        if (msg.size() > 0) {
+                            CCLOG("%s", msg.c_str());
+                        }
                     }
-                    else if (assetId == AssetsManager::MANIFEST_ID)
-                    {
-                        str = StringUtils::format("Manifest file: %.2f", percent) + "%";
-                    }
-                    else
-                    {
-                        str = StringUtils::format("%.2f", percent) + "%";
-                        CCLOG("%.2f Percent", percent);
-                    }
-                    if (this->_progress != nullptr)
-                        this->_progress->setString(str);
                 }
                     break;
                 case EventAssetsManager::EventCode::ERROR_DOWNLOAD_MANIFEST:
