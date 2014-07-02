@@ -25,17 +25,14 @@ THE SOFTWARE.
 package org.cocos2dx.lib;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Locale;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
-import java.lang.Runnable;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.preference.PreferenceManager.OnActivityResultListener;
