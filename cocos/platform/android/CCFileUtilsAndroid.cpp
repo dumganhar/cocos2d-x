@@ -366,7 +366,7 @@ bool FileUtilsAndroid::createDirectories(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "createDirectories", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOSPLAY_UTILS_CLASS, "createDirectories", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
@@ -384,7 +384,7 @@ bool FileUtilsAndroid::createDirectory(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "createDirectory", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOSPLAY_UTILS_CLASS, "createDirectory", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
@@ -402,7 +402,7 @@ bool FileUtilsAndroid::isExist(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "isExist", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOSPLAY_UTILS_CLASS, "isExist", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
@@ -420,7 +420,7 @@ bool FileUtilsAndroid::isDirectory(const std::string& path)
     bool ret = false;
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, COCOPLAY_UTILS_CLASS, "isDirectory", "(Ljava/lang/String;)Z"))
+    if (JniHelper::getStaticMethodInfo(t, COCOSPLAY_UTILS_CLASS, "isDirectory", "(Ljava/lang/String;)Z"))
     {
         jstring stringArg = t.env->NewStringUTF(path.c_str());
         
