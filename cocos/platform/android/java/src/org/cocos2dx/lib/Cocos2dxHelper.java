@@ -25,17 +25,14 @@ THE SOFTWARE.
 package org.cocos2dx.lib;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Locale;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
-import java.lang.Runnable;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.preference.PreferenceManager.OnActivityResultListener;
@@ -76,11 +73,11 @@ public class Cocos2dxHelper {
 	}
 
 	private static boolean sInited = false;
-	public static void init(final Activity activity) {
+	public static void init(final Activity activity, final Cocos2dxHelperListener lis) {
 	    if (!sInited) {
     		final ApplicationInfo applicationInfo = activity.getApplicationInfo();
     		
-            Cocos2dxHelper.sCocos2dxHelperListener = (Cocos2dxHelperListener)activity;
+            Cocos2dxHelper.sCocos2dxHelperListener = lis;
                     
     		Cocos2dxHelper.sPackageName = applicationInfo.packageName;
     		Cocos2dxHelper.sFileDirectory = activity.getFilesDir().getAbsolutePath();
