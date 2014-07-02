@@ -37,7 +37,7 @@ THE SOFTWARE.
 
 #define  LOG_TAG    "CCFileUtilsAndroid.cpp"
 #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
-#define  COCOPLAY_UTILS_CLASS "com/chukong/cocoplay/vm/utils/FileUtils"
+#define  COCOSPLAY_UTILS_CLASS "com/chukong/cocosplay/vm/utils/FileUtils"
 
 using namespace std;
 
