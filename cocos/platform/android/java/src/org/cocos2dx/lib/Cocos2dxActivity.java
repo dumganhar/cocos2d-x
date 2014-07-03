@@ -25,8 +25,6 @@ package org.cocos2dx.lib;
 
 import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 
-import com.chukong.cocoplay.plugin.client.CocoPlayPluginBaseActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -34,12 +32,14 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
-import android.view.ViewGroup;
-import android.util.Log;
-import android.widget.FrameLayout;
 import android.preference.PreferenceManager.OnActivityResultListener;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
-public abstract class Cocos2dxActivity extends CocoPlayPluginBaseActivity implements Cocos2dxHelperListener {
+import com.chukong.cocosplay.client.CocosPlayClientBaseActivity;
+
+public abstract class Cocos2dxActivity extends CocosPlayClientBaseActivity implements Cocos2dxHelperListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================
