@@ -32,14 +32,17 @@ THE SOFTWARE.
 #include "android/asset_manager.h"
 #include "android/asset_manager_jni.h"
 #include "jni/JniHelper.h"
+#include "CocosPlayClient.h"
 
 #include <stdlib.h>
 
 #define  LOG_TAG    "CCFileUtilsAndroid.cpp"
-#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#define  LOGD(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 #define  COCOSPLAY_UTILS_CLASS "com/chukong/cocosplay/vm/utils/FileUtils"
 
 using namespace std;
+
+// #undef COCOSPLAY
 
 NS_CC_BEGIN
 
@@ -79,7 +82,13 @@ FileUtilsAndroid::~FileUtilsAndroid()
 
 bool FileUtilsAndroid::init()
 {
+#ifdef COCOSPLAY
+    cocosplay::init("org/cocos2dx/lua_tests", "AppActivity");
+    _defaultResRootPath = cocosplay::getGameRoot();
+    LOGD("Game root: %s", _defaultResRootPath.c_str());
+#else
     _defaultResRootPath = "assets/";
+#endif
     return FileUtils::init();
 }
 
@@ -90,6 +99,9 @@ bool FileUtilsAndroid::isFileExistInternal(const std::string& strFilePath) const
         return false;
     }
 
+#ifdef COCOSPLAY
+    return cocosplay::fileExists(strFilePath);
+#else
     bool bFound = false;
     
     // Check whether file exists in apk.
@@ -121,6 +133,7 @@ bool FileUtilsAndroid::isFileExistInternal(const std::string& strFilePath) const
         }
     }
     return bFound;
+#endif
 }
 
 bool FileUtilsAndroid::isAbsolutePath(const std::string& strPath) const
@@ -147,6 +160,10 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
     ssize_t size = 0;
     string fullPath = fullPathForFilename(filename);
     
+#ifdef COCOSPLAY
+    cocosplay::updateAssets(fullPath);
+#endif
+
     if (fullPath[0] != '/')
     {
         string relativePath = string();
@@ -236,6 +253,7 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
     }
     else
     {
+        LOGD("File loaded: %s", fullPath.c_str());
         ret.fastSet(data, size);
     }
 

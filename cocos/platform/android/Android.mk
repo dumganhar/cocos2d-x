@@ -20,13 +20,15 @@ jni/Java_org_cocos2dx_lib_Cocos2dxBitmap.cpp \
 jni/Java_org_cocos2dx_lib_Cocos2dxHelper.cpp \
 jni/Java_org_cocos2dx_lib_Cocos2dxRenderer.cpp \
 jni/JniHelper.cpp \
-jni/TouchesJni.cpp
+jni/TouchesJni.cpp \
+../../../../libCocosPlayClient/Classes/CocosPlayClient.cpp
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/.. \
                     $(LOCAL_PATH)/../.. \
+                    $(LOCAL_PATH)/../../../../libCocosPlayClient/Classes
 
 LOCAL_LDLIBS := -lGLESv1_CM \
                 -lGLESv2 \
