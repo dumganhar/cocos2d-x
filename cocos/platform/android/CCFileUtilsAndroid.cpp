@@ -82,13 +82,16 @@ FileUtilsAndroid::~FileUtilsAndroid()
 
 bool FileUtilsAndroid::init()
 {
-#ifdef COCOSPLAY
-    cocosplay::init("org/cocos2dx/lua_tests", "AppActivity");
-    _defaultResRootPath = cocosplay::getGameRoot();
-    LOGD("Game root: %s", _defaultResRootPath.c_str());
-#else
-    _defaultResRootPath = "assets/";
-#endif
+    if (cocosplay::isEnabled())
+    {
+        _defaultResRootPath = cocosplay::getGameRoot();
+        LOGD("Game root: %s", _defaultResRootPath.c_str());
+    }
+    else
+    {
+        _defaultResRootPath = "assets/";
+    }
+
     return FileUtils::init();
 }
 
@@ -99,41 +102,44 @@ bool FileUtilsAndroid::isFileExistInternal(const std::string& strFilePath) const
         return false;
     }
 
-#ifdef COCOSPLAY
-    return cocosplay::fileExists(strFilePath);
-#else
-    bool bFound = false;
-    
-    // Check whether file exists in apk.
-    if (strFilePath[0] != '/')
+    if (cocosplay::isEnabled())
     {
-        const char* s = strFilePath.c_str();
-
-        // Found "assets/" at the beginning of the path and we don't want it
-        if (strFilePath.find(_defaultResRootPath) == 0) s += strlen("assets/");
-
-        if (FileUtilsAndroid::assetmanager) {
-            AAsset* aa = AAssetManager_open(FileUtilsAndroid::assetmanager, s, AASSET_MODE_UNKNOWN);
-            if (aa)
-            {
-                bFound = true;
-                AAsset_close(aa);
-            } else {
-                // CCLOG("[AssetManager] ... in APK %s, found = false!", strFilePath.c_str());
-            }
-        }
+        return cocosplay::fileExists(strFilePath);
     }
     else
     {
-        FILE *fp = fopen(strFilePath.c_str(), "r");
-        if(fp)
+        bool bFound = false;
+        
+        // Check whether file exists in apk.
+        if (strFilePath[0] != '/')
         {
-            bFound = true;
-            fclose(fp);
+            const char* s = strFilePath.c_str();
+
+            // Found "assets/" at the beginning of the path and we don't want it
+            if (strFilePath.find(_defaultResRootPath) == 0) s += strlen("assets/");
+
+            if (FileUtilsAndroid::assetmanager) {
+                AAsset* aa = AAssetManager_open(FileUtilsAndroid::assetmanager, s, AASSET_MODE_UNKNOWN);
+                if (aa)
+                {
+                    bFound = true;
+                    AAsset_close(aa);
+                } else {
+                    // CCLOG("[AssetManager] ... in APK %s, found = false!", strFilePath.c_str());
+                }
+            }
         }
+        else
+        {
+            FILE *fp = fopen(strFilePath.c_str(), "r");
+            if(fp)
+            {
+                bFound = true;
+                fclose(fp);
+            }
+        }
+        return bFound;
     }
-    return bFound;
-#endif
 }
 
 bool FileUtilsAndroid::isAbsolutePath(const std::string& strPath) const
@@ -160,10 +166,11 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
     ssize_t size = 0;
     string fullPath = fullPathForFilename(filename);
     
-#ifdef COCOSPLAY
-    cocosplay::updateAssets(fullPath);
-#endif
-
+    if (cocosplay::isEnabled())
+    {
+        cocosplay::updateAssets(fullPath);
+    }
+    
     if (fullPath[0] != '/')
     {
         string relativePath = string();
