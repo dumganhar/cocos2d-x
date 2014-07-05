@@ -10,11 +10,6 @@ import android.os.Bundle;
 
 public class AppActivity extends Cocos2dxActivity{
 
-    private static String sPackageName = null;
-    private static Activity sProxyActivity = null;
-    
-    
-    
     @Override
     protected void onLoadNativeLibraries() {
 
@@ -30,7 +25,7 @@ public class AppActivity extends Cocos2dxActivity{
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        sProxyActivity = that;
+        CocosPlayClient.init(this);
     }
 
     public Cocos2dxGLSurfaceView onCreateView() {
@@ -40,21 +35,5 @@ public class AppActivity extends Cocos2dxActivity{
         glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
         
         return glSurfaceView;
-    }
-    
-    public static void cocosplay_setPackageName(String packageName) {
-        sPackageName = packageName.replace("/", ".");
-    }
-    
-    public static void cocosplay_updateAssets(String filePath) {
-            CocosPlayClient.updateAssetsAndReturnFullPath(sProxyActivity, sPackageName, filePath);
-    }
-    
-    public static boolean cocosplay_fileExists(String filePath) {
-            return CocosPlayClient.fileExists(sProxyActivity, sPackageName, filePath);
-    }
-    
-    public static String cocosplay_getGameRoot() {
-            return CocosPlayClient.getGameRoot(sProxyActivity, sPackageName);
     }
 }
