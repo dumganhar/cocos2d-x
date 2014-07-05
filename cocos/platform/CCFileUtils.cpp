@@ -876,12 +876,6 @@ std::string FileUtils::getFullPathForDirectoryAndFilename(const std::string& dir
 
 bool FileUtils::isFileExist(const std::string& filename) const
 {
-    // If filename is absolute path, we don't need to consider 'search paths' and 'resolution orders'.
-    if (isAbsolutePath(filename))
-    {
-        return isFileExistInternal(filename);
-    }
-    
     // Already Cached ?
     auto cacheIter = _fullPathCache.find(filename);
     if( cacheIter != _fullPathCache.end() )
@@ -889,6 +883,12 @@ bool FileUtils::isFileExist(const std::string& filename) const
         return true;
     }
     
+    // If filename is absolute path, we don't need to consider 'search paths' and 'resolution orders'.
+    if (isAbsolutePath(filename))
+    {
+        return isFileExistInternal(filename);
+    }
+
     // Get the new file name.
     const std::string newFilename( getNewFilename(filename) );
     
