@@ -25,7 +25,7 @@ public class AppActivity extends Cocos2dxActivity{
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        CocosPlayClient.init(this);
+        CocosPlayClient.init(this, false);
     }
 
     public Cocos2dxGLSurfaceView onCreateView() {

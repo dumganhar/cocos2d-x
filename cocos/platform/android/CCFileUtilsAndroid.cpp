@@ -85,7 +85,7 @@ bool FileUtilsAndroid::init()
     if (cocosplay::isEnabled())
     {
         _defaultResRootPath = cocosplay::getGameRoot();
-        LOGD("Game root: %s", _defaultResRootPath.c_str());
+        LOGD("Game root: %s, isDemo: %d", _defaultResRootPath.c_str(), cocosplay::isDemo());
     }
     else
     {
