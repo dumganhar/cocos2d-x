@@ -17,13 +17,15 @@ public class AppActivity extends Cocos2dxActivity{
 
     @Override
     public String[] getLibraryNames() {
-        // TODO Auto-generated method stub
         return new String[] {"lua_tests"};
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+        if (!CocosPlayClient.isEnabled())
+        {
+            super.onLoadNativeLibraries();
+        }
         super.onCreate(savedInstanceState);
         CocosPlayClient.init(this, false);
     }
