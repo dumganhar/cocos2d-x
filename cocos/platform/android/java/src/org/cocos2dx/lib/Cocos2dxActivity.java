@@ -87,10 +87,10 @@ public abstract class Cocos2dxActivity extends CocosPlayClientBaseActivity imple
 
 		onLoadNativeLibraries();
 
-		sContext = that;
-    	this.mHandler = new Cocos2dxHandler(that);
+		sContext = this;
+    	this.mHandler = new Cocos2dxHandler(this);
     	
-    	Cocos2dxHelper.init(that, this);
+    	Cocos2dxHelper.init(this, this);
     	
     	this.init();
     	if (mVideoHelper == null) {
@@ -164,14 +164,14 @@ public abstract class Cocos2dxActivity extends CocosPlayClientBaseActivity imple
         ViewGroup.LayoutParams framelayout_params =
             new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                        ViewGroup.LayoutParams.MATCH_PARENT);
-        mFrameLayout = new FrameLayout(that);
+        mFrameLayout = new FrameLayout(this);
         mFrameLayout.setLayoutParams(framelayout_params);
 
         // Cocos2dxEditText layout
         ViewGroup.LayoutParams edittext_layout_params =
             new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                        ViewGroup.LayoutParams.WRAP_CONTENT);
-        Cocos2dxEditText edittext = new Cocos2dxEditText(that);
+        Cocos2dxEditText edittext = new Cocos2dxEditText(this);
         edittext.setLayoutParams(edittext_layout_params);
 
         // ...add to FrameLayout
@@ -195,7 +195,7 @@ public abstract class Cocos2dxActivity extends CocosPlayClientBaseActivity imple
 	}
 	
     public Cocos2dxGLSurfaceView onCreateView() {
-    	return new Cocos2dxGLSurfaceView(that);
+    	return new Cocos2dxGLSurfaceView(this);
     }
 
    private final static boolean isAndroidEmulator() {
