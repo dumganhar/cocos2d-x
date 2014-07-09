@@ -82,7 +82,7 @@ FileUtilsAndroid::~FileUtilsAndroid()
 
 bool FileUtilsAndroid::init()
 {
-    if (cocosplay::isEnabled())
+    if (cocosplay::isEnabled() && !cocosplay::isDemo())
     {
         _defaultResRootPath = cocosplay::getGameRoot();
         LOGD("Game root: %s, isDemo: %d", _defaultResRootPath.c_str(), cocosplay::isDemo());
@@ -102,7 +102,7 @@ bool FileUtilsAndroid::isFileExistInternal(const std::string& strFilePath) const
         return false;
     }
 
-    if (cocosplay::isEnabled())
+    if (cocosplay::isEnabled() && !cocosplay::isDemo())
     {
         return cocosplay::fileExists(strFilePath);
     }
@@ -166,7 +166,7 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
     ssize_t size = 0;
     string fullPath = fullPathForFilename(filename);
     
-    if (cocosplay::isEnabled())
+    if (cocosplay::isEnabled() && !cocosplay::isDemo())
     {
         cocosplay::updateAssets(fullPath);
     }
@@ -260,7 +260,10 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
     }
     else
     {
-        LOGD("File loaded: %s", fullPath.c_str());
+        if (cocosplay::isEnabled())
+        {
+            LOGD("File loaded: %s", fullPath.c_str());
+        }
         ret.fastSet(data, size);
     }
 
