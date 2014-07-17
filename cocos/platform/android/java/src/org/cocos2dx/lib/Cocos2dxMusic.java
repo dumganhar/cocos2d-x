@@ -27,6 +27,8 @@ package org.cocos2dx.lib;
 
 import java.io.FileInputStream;
 
+import com.chukong.cocosplay.client.CocosPlayClient;
+
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
@@ -90,6 +92,13 @@ public class Cocos2dxMusic {
 	}
 
 	public void playBackgroundMusic(final String pPath, final boolean isLoop) {
+	    
+	    if (CocosPlayClient.isEnabled())
+	    {
+	        Log.d(TAG, "File loaded: " + pPath);
+	        CocosPlayClient.updateAssetsAndReturnFullPath(pPath);
+	    }
+	    
 		if (this.mCurrentPath == null) {
 			// it is the first time to play background music or end() was called
 			this.mBackgroundMediaPlayer = this.createMediaplayer(pPath);

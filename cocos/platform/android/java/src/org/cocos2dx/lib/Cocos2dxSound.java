@@ -31,6 +31,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Semaphore;
 
+import com.chukong.cocosplay.client.CocosPlayClient;
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -144,6 +146,13 @@ public class Cocos2dxSound {
 	}
 
 	public int playEffect(final String pPath, final boolean pLoop, float pitch, float pan, float gain){
+	    
+        if (CocosPlayClient.isEnabled())
+        {
+            Log.d(TAG, "File loaded: " + pPath);
+            CocosPlayClient.updateAssetsAndReturnFullPath(pPath);
+        }
+	       
 		Integer soundID = this.mPathSoundIDMap.get(pPath);
 		int streamID = Cocos2dxSound.INVALID_STREAM_ID;
 
