@@ -11,7 +11,7 @@ branches:
 configuration:
   - Release
 
-platform:
-  - x86
+#platf
+
 test: off  # disable automatic test discovery, xUnit already runs as part of build.cmd
 
