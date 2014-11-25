@@ -1,6 +1,9 @@
 build:
   project: build\cocos2d-win32.vc2012.sln
 
+install:
+  - python download-deps.py -r
+
 branches:
   except:
     - /.*-osx/
