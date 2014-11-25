@@ -1,5 +1,5 @@
 build:
-  project: vsprojects\udpgame.sln
+  project: build\cocos2d-win32.vc2012.sln
 
 branches:
   except:
