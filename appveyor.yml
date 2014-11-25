@@ -1,2 +1,14 @@
-build_script: build.cmd
+build:
+  project: vsprojects\udpgame.sln
+
+branches:
+  except:
+    - /.*-osx/
+
+configuration:
+  - Release
+
+platform:
+  - x86
 test: off  # disable automatic test discovery, xUnit already runs as part of build.cmd
+
