@@ -36,9 +36,9 @@
 #include "platform/CCPlatformMacros.h"
 #include "platform/CCStdC.h"
 
-struct libwebsocket;
-struct libwebsocket_context;
-struct libwebsocket_protocols;
+struct lws;
+struct lws_context;
+struct lws_protocols;
 
 NS_CC_BEGIN
 
@@ -67,7 +67,8 @@ public:
     {
         Data():bytes(nullptr), len(0), issued(0), isBinary(false){}
         char* bytes;
-        ssize_t len, issued;
+        ssize_t len;
+        ssize_t issued;
         bool isBinary;
     };
 
@@ -143,10 +144,7 @@ private:
     virtual void onSubThreadEnded();
     virtual void onUIThreadReceiveMessage(WsMessage* msg);
 
-
-    friend class WebSocketCallbackWrapper;
-    int onSocketCallback(struct libwebsocket_context *ctx,
-                         struct libwebsocket *wsi,
+    int onSocketCallback(struct lws *wsi,
                          int reason,
                          void *user, void *in, ssize_t len);
 
@@ -156,18 +154,19 @@ private:
     unsigned int _port;
     std::string  _path;
 
-    ssize_t _pendingFrameDataLen;
     ssize_t _currentDataLen;
     char *_currentData;
 
     friend class WsThreadHelper;
+    friend class WebSocketCallbackWrapper;
     WsThreadHelper* _wsHelper;
 
-    struct libwebsocket*         _wsInstance;
-    struct libwebsocket_context* _wsContext;
+    struct lws*         _wsInstance;
+    struct lws_context* _wsContext;
     Delegate* _delegate;
     int _SSLConnection;
-    struct libwebsocket_protocols* _wsProtocols;
+    struct lws_protocols* _wsProtocols;
+    unsigned int _id;
 };
 
 }
