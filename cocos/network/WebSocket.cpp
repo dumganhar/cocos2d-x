@@ -295,10 +295,9 @@ bool WebSocket::init(const Delegate& delegate,
     else
     {
         char* name = new char[20];
-        strcpy(name, "default");
+        strcpy(name, "default-protocol");
         _wsProtocols[0].name = name;
         _wsProtocols[0].callback = WebSocketCallbackWrapper::onSocketCallback;
-        _wsProtocols[0].per_session_data_size = sizeof(unsigned int);
     }
     
     // WebSocket thread needs to be invoked at the end of this method.
