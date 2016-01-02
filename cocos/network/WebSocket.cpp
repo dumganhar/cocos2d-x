@@ -398,8 +398,15 @@ int WebSocket::onSubThreadLoop()
     return 0;
 }
 
+static void sighandler(int sig)
+{
+    LOGD("Websocket: sig=%d got!", sig);
+}
+    
 void WebSocket::onSubThreadStarted()
 {
+    signal(SIGINT, sighandler);
+    
 	struct lws_context_creation_info info;
 	memset(&info, 0, sizeof info);
 	/*
