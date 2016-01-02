@@ -144,9 +144,14 @@ private:
     virtual void onSubThreadEnded();
     virtual void onUIThreadReceiveMessage(WsMessage* msg);
 
-    int onSocketCallback(struct lws *wsi,
-                         int reason,
-                         void *user, void *in, ssize_t len);
+    // The following callback functions are invoked in websocket thread
+    int onSocketCallback(struct lws *wsi, int reason, void *user, void *in, ssize_t len);
+    
+    void onClientWritable();
+    void onClientReceivedData(void* user, void* in, ssize_t len);
+    void onConnectionOpened(void* user);
+    void onConnectionClosing();
+    void onConnectionClosed();
 
 private:
     State        _readyState;
