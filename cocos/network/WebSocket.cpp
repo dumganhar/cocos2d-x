@@ -380,7 +380,20 @@ void WebSocket::onSubThreadLoop()
 {
     if (_wsContext && _readyState != State::CLOSED && _readyState != State::CLOSING)
     {
+        _wsHelper->_subThreadWsMessageQueueMutex.lock();
+        bool isEmpty = _wsHelper->_subThreadWsMessageQueue->empty();
+        _wsHelper->_subThreadWsMessageQueueMutex.unlock();
+        if (!isEmpty)
+        {
+            lws_callback_on_writable(_wsInstance);
+        }
+        
         lws_service(_wsContext, 50);
+    }
+    else
+    {
+        LOGD("Ready state is closing or was closed, code=%d, quit websocket thread!", _readyState);
+        _wsHelper->quitSubThread();
     }
 }
 
@@ -459,6 +472,11 @@ void WebSocket::onClientWritable()
 {
     std::lock_guard<std::mutex> lk(_wsHelper->_subThreadWsMessageQueueMutex);
     
+    if (_wsHelper->_subThreadWsMessageQueue->empty())
+    {
+        return;
+    }
+    
     std::list<WsMessage*>::iterator iter = _wsHelper->_subThreadWsMessageQueue->begin();
     
     ssize_t bytesWrite = 0;
@@ -510,12 +528,15 @@ void WebSocket::onClientWritable()
         if (bytesWrite < 0)
         {
             LOGD("ERROR: msg(%u), lws_write return: %ld\n", subThreadMsg->id, bytesWrite);
+            lws_callback_on_writable(_wsInstance);
         }
         // Do we have another fragments to send?
         else if (remaining > bytesWrite)
         {
             LOGD("msg(%u) append: %ld + %ld = %ld\n", subThreadMsg->id, data->issued, bytesWrite, data->issued + bytesWrite);
             data->issued += bytesWrite;
+            
+            lws_callback_on_writable(_wsInstance);
         }
         // Safely done!
         else
@@ -539,9 +560,6 @@ void WebSocket::onClientWritable()
             LOGD("-----------------------------------------------------------\n");
         }
     }
-    
-    /* get notified as soon as we can write again */
-    lws_callback_on_writable(_wsInstance);
 }
 
 void WebSocket::onClientReceivedData(void* in, ssize_t len)
