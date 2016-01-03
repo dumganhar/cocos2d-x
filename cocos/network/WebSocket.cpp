@@ -528,15 +528,12 @@ void WebSocket::onClientWritable()
         if (bytesWrite < 0)
         {
             LOGD("ERROR: msg(%u), lws_write return: %ld\n", subThreadMsg->id, bytesWrite);
-            lws_callback_on_writable(_wsInstance);
         }
         // Do we have another fragments to send?
         else if (remaining > bytesWrite)
         {
             LOGD("msg(%u) append: %ld + %ld = %ld\n", subThreadMsg->id, data->issued, bytesWrite, data->issued + bytesWrite);
             data->issued += bytesWrite;
-            
-            lws_callback_on_writable(_wsInstance);
         }
         // Safely done!
         else
