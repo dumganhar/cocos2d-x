@@ -40,13 +40,18 @@
 
 #include "libwebsockets.h"
 
-#define WS_WRITE_BUFFER_SIZE (4096 - 3)
+#define WS_BUFFER_SIZE_WRITE (4096)
+#define WS_BUFFER_SIZE_RECEIVE (4096)
 
-#define  LOG_TAG    "Websocket.cpp"
-#ifdef ANDROID
-#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG,__VA_ARGS__)
+#define  LOG_TAG    "WebSocket.cpp"
+#if COCOS2D_DEBUG > 0
+    #ifdef ANDROID
+        #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG,__VA_ARGS__)
+    #else
+        #define  LOGD(...) printf(__VA_ARGS__)
+    #endif
 #else
-#define  LOGD(...) //printf(__VA_ARGS__)
+    #define  LOGD(...)
 #endif
 
 NS_CC_BEGIN
@@ -162,11 +167,10 @@ void WsThreadHelper::wsThreadEntryFunc()
     
     while (!_needQuit)
     {
-        if (_ws->onSubThreadLoop())
-        {
-            break;
-        }
+        _ws->onSubThreadLoop();
     }
+
+    _ws->onSubThreadEnded();
     
     LOGD("Websocket thread exit!\n");
 }
@@ -209,12 +213,12 @@ WebSocket::WebSocket()
     _id = ++id;
     
     // reserve data buffer to avoid allocate memory frequently
-    _receivedData.reserve(4096);
+    _receivedData.reserve(WS_BUFFER_SIZE_RECEIVE);
 }
 
 WebSocket::~WebSocket()
 {
-    close();
+//    close();
     CC_SAFE_DELETE(_wsHelper);
     
     for (int i = 0; _wsProtocols[i].callback != nullptr; ++i)
@@ -266,7 +270,7 @@ bool WebSocket::init(const Delegate& delegate,
     _path = path;
     _SSLConnection = useSSL ? 1 : 0;
     
-    CCLOG("[WebSocket::init] _host: %s, _port: %d, _path: %s", _host.c_str(), _port, _path.c_str());
+    LOGD("[WebSocket::init] _host: %s, _port: %d, _path: %s", _host.c_str(), _port, _path.c_str());
 
     size_t protocolCount = 0;
     if (protocols && protocols->size() > 0)
@@ -313,7 +317,7 @@ void WebSocket::send(const std::string& message)
     {
         // In main thread
         Data* data = new (std::nothrow) Data();
-        data->bytes = (char*)malloc(message.length()+1);
+        data->bytes = (char*)malloc(message.length() + 1);
         strcpy(data->bytes, message.c_str());
         data->len = static_cast<ssize_t>(message.length());
         
@@ -324,11 +328,11 @@ void WebSocket::send(const std::string& message)
     }
     else
     {
-        LOGD("Couldn't send text since websocket was closed!\n");
+        LOGD("Couldn't send message since websocket wasn't opened!\n");
     }
 }
 
-void WebSocket::send(const unsigned char* binaryMsg, unsigned int len)
+void WebSocket::send(const unsigned char* binaryMsg, unsigned int len, bool forceSendAsString/* = false*/)
 {
     if (_readyState == State::OPEN)
     {
@@ -336,7 +340,7 @@ void WebSocket::send(const unsigned char* binaryMsg, unsigned int len)
         Data* data = new (std::nothrow) Data();
         if (len == 0)
         {
-            data->bytes = (char*)malloc(len + 1);
+            data->bytes = (char*)malloc(1);
             data->bytes[0] = '\0';
         }
         else
@@ -347,31 +351,22 @@ void WebSocket::send(const unsigned char* binaryMsg, unsigned int len)
         data->len = len;
         
         WsMessage* msg = new (std::nothrow) WsMessage();
-        msg->what = WS_MSG_TO_SUBTRHEAD_SENDING_BINARY;
+        if (forceSendAsString)
+            msg->what = WS_MSG_TO_SUBTRHEAD_SENDING_STRING;
+        else
+            msg->what = WS_MSG_TO_SUBTRHEAD_SENDING_BINARY;
         msg->obj = data;
         _wsHelper->sendMessageToSubThread(msg);
     }
     else
     {
-        LOGD("Couldn't send text since websocket was closed!\n");
+        LOGD("Couldn't send message since websocket wasn't opened!\n");
     }
 }
 
 void WebSocket::close()
 {
-    if (_readyState == State::CLOSING || _readyState == State::CLOSED)
-    {
-        return;
-    }
-    
-    CCLOG("websocket (%p) connection closed by client", this);
-    _readyState = State::CLOSED;
-
-    _wsHelper->joinSubThread();
-    
-    // onClose callback needs to be invoked at the end of this method
-    // since websocket instance may be deleted in 'onClose'.
-    _delegate->onClose(this);
+    _wsHelper->quitSubThread();
 }
 
 WebSocket::State WebSocket::getReadyState()
@@ -379,22 +374,12 @@ WebSocket::State WebSocket::getReadyState()
     return _readyState;
 }
     
-int WebSocket::onSubThreadLoop()
+void WebSocket::onSubThreadLoop()
 {
-    if (_readyState == State::CLOSED || _readyState == State::CLOSING)
-    {
-        lws_context_destroy(_wsContext);
-        // return 1 to exit the loop.
-        return 1;
-    }
-    
     if (_wsContext && _readyState != State::CLOSED && _readyState != State::CLOSING)
     {
         lws_service(_wsContext, 50);
     }
-    
-    // return 0 to continue the loop.
-    return 0;
 }
 
 static void sighandler(int sig)
@@ -460,6 +445,14 @@ void WebSocket::onSubThreadStarted()
     }
 }
 
+void WebSocket::onSubThreadEnded()
+{
+    if (_wsContext != nullptr)
+    {
+        lws_context_destroy(_wsContext);
+    }
+}
+    
 void WebSocket::onClientWritable()
 {
     std::lock_guard<std::mutex> lk(_wsHelper->_subThreadWsMessageQueueMutex);
@@ -473,7 +466,7 @@ void WebSocket::onClientWritable()
         
         Data* data = (Data*)subThreadMsg->obj;
         
-        const size_t c_bufferSize = WS_WRITE_BUFFER_SIZE;
+        const size_t c_bufferSize = WS_BUFFER_SIZE_WRITE;
         
         size_t remaining = data->len - data->issued;
         size_t n = std::min(remaining, c_bufferSize );
@@ -481,7 +474,8 @@ void WebSocket::onClientWritable()
 //        LOGD("[websocket:send] total: %d, sent: %d, remaining: %d, buffer size: %d", static_cast<int>(data->len), static_cast<int>(data->issued), static_cast<int>(remaining), static_cast<int>(n));
         
         unsigned char buf[LWS_SEND_BUFFER_PRE_PADDING + n + LWS_SEND_BUFFER_POST_PADDING];
-        memcpy((char*)&buf[LWS_SEND_BUFFER_PRE_PADDING], data->bytes + data->issued, n);
+        if (n > 0)
+            memcpy((char*)&buf[LWS_SEND_BUFFER_PRE_PADDING], data->bytes + data->issued, n);
         
         int writeProtocol;
         
@@ -550,9 +544,12 @@ void WebSocket::onClientWritable()
 
 void WebSocket::onClientReceivedData(void* in, ssize_t len)
 {
+    // In websocket thread
+    static int packageIndex = 0;
+    packageIndex++;
     if (in != nullptr && len > 0)
     {
-        LOGD("Receiving data: len=%ld\n", len);
+        LOGD("Receiving data:index:%d, len=%ld\n", packageIndex, len);
         
         unsigned char* inData = (unsigned char*)in;
         _receivedData.insert(_receivedData.end(), inData, inData + len);
@@ -563,33 +560,36 @@ void WebSocket::onClientReceivedData(void* in, ssize_t len)
     }
     
     // If no more data pending, send it to the client thread
-    if (lws_remaining_packet_payload (_wsInstance) == 0 && lws_is_final_fragment(_wsInstance))
+    size_t remainingSize = lws_remaining_packet_payload(_wsInstance);
+    int isFinalFragment = lws_is_final_fragment(_wsInstance);
+//    LOGD("remainingSize: %ld, isFinalFragment: %d\n", remainingSize, isFinalFragment);
+    
+    if (remainingSize == 0 && isFinalFragment)
     {
-        Data data;
-
-        data.isBinary = lws_frame_is_binary(_wsInstance);
+        std::vector<char> frameData = std::move(_receivedData);
         
-        if (!data.isBinary)
-        {
-            // ensure text message end with '\0'
-            _receivedData.push_back(0);
-            data.bytes = (char*)_receivedData.data();
-            data.len = _receivedData.size() - 1;
-        }
-        else
-        {
-            data.bytes = (char*)_receivedData.data();
-            data.len = _receivedData.size();
-        }
-        LOGD("Notify data len %ld to Cocos thread.\n", data.len);
+        // reset capacity of received data buffer
+        _receivedData.reserve(WS_BUFFER_SIZE_RECEIVE);
+        
+        ssize_t frameSize = frameData.size();
+        
+        bool isBinary = lws_frame_is_binary(_wsInstance);
 
-        _wsHelper->sendMessageToUIThread([this, data](){
+        if (!isBinary)
+        {
+            frameData.push_back('\0');
+        }
+        
+        _wsHelper->sendMessageToUIThread([this, frameData, frameSize, isBinary](){
+            // In UI thread
+            LOGD("Notify data len %ld to Cocos thread.\n", frameSize);
+            
+            Data data;
+            data.isBinary = isBinary;
+            data.bytes = (char*)frameData.data();
+            data.len = frameSize;
+            
             _delegate->onMessage(this, data);
-            LOGD("_receivedData size: %ld, capacity: %ld\n", _receivedData.size(), _receivedData.capacity());
-            _receivedData.clear();
-            _receivedData.shrink_to_fit();
-            _receivedData.reserve(4096);
-            LOGD("After clear: _receivedData size: %ld, capacity: %ld\n", _receivedData.size(), _receivedData.capacity());
         });
     }
 }
@@ -620,11 +620,7 @@ void WebSocket::onConnectionError()
     
 void WebSocket::onConnectionClosed()
 {
-    //fixme: the log is not thread safe
     LOGD("%s", "connection closing..\n");
-    
-    _wsHelper->quitSubThread();
-    
     if (_readyState == State::CLOSED)
     {
         LOGD("Websocket %p was closed, no need to close it again!", this);
@@ -633,6 +629,7 @@ void WebSocket::onConnectionClosed()
     
     _readyState = State::CLOSED;
     
+    _wsHelper->quitSubThread();
     _wsHelper->sendMessageToUIThread([this](){
         //Waiting for the subThread safety exit
         _wsHelper->joinSubThread();

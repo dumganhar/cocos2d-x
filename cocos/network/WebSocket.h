@@ -65,10 +65,9 @@ public:
      */
     struct Data
     {
-        Data(): issued(0), isBinary(false){}
+        Data():bytes(nullptr), len(0), issued(0), isBinary(false){}
         char* bytes;
-        ssize_t len;
-        ssize_t issued;
+        ssize_t len, issued;
         bool isBinary;
     };
 
@@ -126,7 +125,7 @@ public:
     /**
      *  @brief Sends binary data to websocket server.
      */
-    void send(const unsigned char* binaryMsg, unsigned int len);
+    void send(const unsigned char* binaryMsg, unsigned int len, bool forceSendAsString = false);
 
     /**
      *  @brief Closes the connection to server.
@@ -140,7 +139,8 @@ public:
 
 private:
     void onSubThreadStarted();
-    int onSubThreadLoop();
+    void onSubThreadLoop();
+    void onSubThreadEnded();
 
     // The following callback functions are invoked in websocket thread
     int onSocketCallback(struct lws *wsi, int reason, void *user, void *in, ssize_t len);
@@ -157,7 +157,7 @@ private:
     unsigned int _port;
     std::string  _path;
 
-    std::vector<unsigned char> _receivedData;
+    std::vector<char> _receivedData;
 
     friend class WsThreadHelper;
     friend class WebSocketCallbackWrapper;
