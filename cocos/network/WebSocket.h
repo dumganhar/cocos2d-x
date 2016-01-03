@@ -125,7 +125,7 @@ public:
     /**
      *  @brief Sends binary data to websocket server.
      */
-    void send(const unsigned char* binaryMsg, unsigned int len, bool forceSendAsString = false);
+    void send(const unsigned char* binaryMsg, unsigned int len);
 
     /**
      *  @brief Closes the connection to server.

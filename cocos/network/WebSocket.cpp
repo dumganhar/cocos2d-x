@@ -320,6 +320,8 @@ void WebSocket::send(const std::string& message)
         // In main thread
         Data* data = new (std::nothrow) Data();
         data->bytes = (char*)malloc(message.length() + 1);
+        // Make sure the last byte is '\0'
+        data->bytes[message.length()] = '\0';
         strcpy(data->bytes, message.c_str());
         data->len = static_cast<ssize_t>(message.length());
         
@@ -334,7 +336,7 @@ void WebSocket::send(const std::string& message)
     }
 }
 
-void WebSocket::send(const unsigned char* binaryMsg, unsigned int len, bool forceSendAsString/* = false*/)
+void WebSocket::send(const unsigned char* binaryMsg, unsigned int len)
 {
     if (_readyState == State::OPEN)
     {
@@ -342,6 +344,7 @@ void WebSocket::send(const unsigned char* binaryMsg, unsigned int len, bool forc
         Data* data = new (std::nothrow) Data();
         if (len == 0)
         {
+            // If data length is zero, allocate 1 byte for safe.
             data->bytes = (char*)malloc(1);
             data->bytes[0] = '\0';
         }
@@ -353,10 +356,7 @@ void WebSocket::send(const unsigned char* binaryMsg, unsigned int len, bool forc
         data->len = len;
         
         WsMessage* msg = new (std::nothrow) WsMessage();
-        if (forceSendAsString)
-            msg->what = WS_MSG_TO_SUBTRHEAD_SENDING_STRING;
-        else
-            msg->what = WS_MSG_TO_SUBTRHEAD_SENDING_BINARY;
+        msg->what = WS_MSG_TO_SUBTRHEAD_SENDING_BINARY;
         msg->obj = data;
         _wsHelper->sendMessageToSubThread(msg);
     }
