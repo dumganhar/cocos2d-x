@@ -40,9 +40,6 @@
 
 #include "libwebsockets.h"
 
-#define WS_BUFFER_SIZE_WRITE (4096)
-#define WS_BUFFER_SIZE_RECEIVE (4096)
-
 #define  LOG_TAG    "WebSocket.cpp"
 #if COCOS2D_DEBUG > 0
     #ifdef ANDROID
@@ -53,6 +50,9 @@
 #else
     #define  LOGD(...)
 #endif
+
+#define WS_BUFFER_SIZE_WRITE      (2048)
+#define WS_BUFFER_SIZE_RECEIVE    (4096)
 
 NS_CC_BEGIN
 
@@ -296,6 +296,7 @@ bool WebSocket::init(const Delegate& delegate,
             strcpy(name, (*iter).c_str());
             _wsProtocols[i].name = name;
             _wsProtocols[i].callback = WebSocketCallbackWrapper::onSocketCallback;
+            _wsProtocols[i].rx_buffer_size = WS_BUFFER_SIZE_WRITE;
         }
     }
     else
@@ -304,6 +305,7 @@ bool WebSocket::init(const Delegate& delegate,
         strcpy(name, "default-protocol");
         _wsProtocols[0].name = name;
         _wsProtocols[0].callback = WebSocketCallbackWrapper::onSocketCallback;
+        _wsProtocols[0].rx_buffer_size = WS_BUFFER_SIZE_WRITE;
     }
     
     // WebSocket thread needs to be invoked at the end of this method.
@@ -488,12 +490,14 @@ void WebSocket::onClientWritable()
         
         const size_t c_bufferSize = WS_BUFFER_SIZE_WRITE;
         
-        size_t remaining = data->len - data->issued;
-        size_t n = std::min(remaining, c_bufferSize );
+        const size_t remaining = data->len - data->issued;
+        const size_t n = std::min(remaining, c_bufferSize );
 
 //        LOGD("[websocket:send] total: %d, sent: %d, remaining: %d, buffer size: %d", static_cast<int>(data->len), static_cast<int>(data->issued), static_cast<int>(remaining), static_cast<int>(n));
         
         unsigned char buf[LWS_SEND_BUFFER_PRE_PADDING + n + LWS_SEND_BUFFER_POST_PADDING];
+        memset(buf, 0, sizeof(buf));
+        
         if (n > 0)
             memcpy((char*)&buf[LWS_SEND_BUFFER_PRE_PADDING], data->bytes + data->issued, n);
         
@@ -525,14 +529,14 @@ void WebSocket::onClientWritable()
         
         // Handle the result of lws_write
         // Buffer overrun?
-        if (bytesWrite < 0)
+        if (bytesWrite < n)
         {
-            LOGD("ERROR: msg(%u), lws_write return: %ld\n", subThreadMsg->id, bytesWrite);
+            LOGD("ERROR: msg(%u), lws_write return: %d, but it should be %d\n", subThreadMsg->id, (int)bytesWrite, (int)n);
         }
         // Do we have another fragments to send?
         else if (remaining > bytesWrite)
         {
-            LOGD("msg(%u) append: %ld + %ld = %ld\n", subThreadMsg->id, data->issued, bytesWrite, data->issued + bytesWrite);
+            LOGD("msg(%u) append: %d + %d = %d\n", subThreadMsg->id, (int)data->issued, (int)bytesWrite, (int)(data->issued + bytesWrite));
             data->issued += bytesWrite;
         }
         // Safely done!
@@ -540,12 +544,12 @@ void WebSocket::onClientWritable()
         {
             if (remaining == bytesWrite)
             {
-                LOGD("msg(%u) append: %ld + %ld = %ld\n", subThreadMsg->id, data->issued, bytesWrite, data->issued + bytesWrite);
+                LOGD("msg(%u) append: %d + %d = %d\n", subThreadMsg->id, (int)data->issued, (int)bytesWrite, (int)(data->issued + bytesWrite));
                 LOGD("msg(%u) was totally sent!\n", subThreadMsg->id);
             }
             else
             {
-                LOGD("ERROR: msg(%u), remaining(%ld) < byteWrite(%ld)\n", subThreadMsg->id, remaining, bytesWrite);
+                LOGD("ERROR: msg(%u), remaining(%d) < byteWrite(%d)\n", subThreadMsg->id, (int)remaining, (int)bytesWrite);
                 LOGD("Drop the msg(%u)\n", subThreadMsg->id);
             }
             
@@ -566,47 +570,49 @@ void WebSocket::onClientReceivedData(void* in, ssize_t len)
     packageIndex++;
     if (in != nullptr && len > 0)
     {
-        LOGD("Receiving data:index:%d, len=%ld\n", packageIndex, len);
+        LOGD("Receiving data:index:%d, len=%d\n", packageIndex, (int)len);
         
         unsigned char* inData = (unsigned char*)in;
         _receivedData.insert(_receivedData.end(), inData, inData + len);
     }
     else
     {
-        LOGD("Emtpy message received!\n");
+        LOGD("Emtpy message received, index=%d!\n", packageIndex);
     }
     
     // If no more data pending, send it to the client thread
     size_t remainingSize = lws_remaining_packet_payload(_wsInstance);
     int isFinalFragment = lws_is_final_fragment(_wsInstance);
-//    LOGD("remainingSize: %ld, isFinalFragment: %d\n", remainingSize, isFinalFragment);
+//    LOGD("remainingSize: %d, isFinalFragment: %d\n", (int)remainingSize, isFinalFragment);
     
     if (remainingSize == 0 && isFinalFragment)
     {
-        std::vector<char> frameData = std::move(_receivedData);
+        std::vector<char>* frameData = new std::vector<char>(std::move(_receivedData));
         
         // reset capacity of received data buffer
         _receivedData.reserve(WS_BUFFER_SIZE_RECEIVE);
         
-        ssize_t frameSize = frameData.size();
+        ssize_t frameSize = frameData->size();
         
         bool isBinary = lws_frame_is_binary(_wsInstance);
 
         if (!isBinary)
         {
-            frameData.push_back('\0');
+            frameData->push_back('\0');
         }
         
         _wsHelper->sendMessageToUIThread([this, frameData, frameSize, isBinary](){
             // In UI thread
-            LOGD("Notify data len %ld to Cocos thread.\n", frameSize);
+            LOGD("Notify data len %d to Cocos thread.\n", (int)frameSize);
             
             Data data;
             data.isBinary = isBinary;
-            data.bytes = (char*)frameData.data();
+            data.bytes = (char*)frameData->data();
             data.len = frameSize;
             
             _delegate->onMessage(this, data);
+            
+            delete frameData;
         });
     }
 }
