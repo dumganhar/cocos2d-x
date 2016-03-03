@@ -35,108 +35,24 @@
 #import "network/HttpAsynConnection-apple.h"
 #include "network/HttpCookie.h"
 #include "base/CCDirector.h"
+#include "base/CCEventDispatcher.h"
+#include "base/CCEventListenerCustom.h"
 #include "platform/CCFileUtils.h"
 
 NS_CC_BEGIN
+
+#define LOGD  printf
 
 namespace network {
     
 static HttpClient *_httpClient = nullptr; // pointer to singleton
 
-static int processTask(HttpClient* client, HttpRequest *request, NSString *requestType, void *stream, long *errorCode, void *headerStream, char *errorBuffer);
-
-// Worker thread
-void HttpClient::networkThread()
-{
-    increaseThreadCount();
-    
-    while (true) @autoreleasepool {
-        
-        HttpRequest *request;
-
-        // step 1: send http request if the requestQueue isn't empty
-        {
-            std::lock_guard<std::mutex> lock(_requestQueueMutex);
-            while (_requestQueue.empty()) {
-                _sleepCondition.wait(_requestQueueMutex);
-            }
-            request = _requestQueue.at(0);
-            _requestQueue.erase(0);
-        }
-
-        if (request == _requestSentinel) {
-            break;
-        }
-        
-        // Create a HttpResponse object, the default setting is http access failed
-        HttpResponse *response = new (std::nothrow) HttpResponse(request);
-        
-        processResponse(response, _responseMessage);
-        
-        // add response packet into queue
-        _responseQueueMutex.lock();
-        _responseQueue.pushBack(response);
-        _responseQueueMutex.unlock();
-        
-        _schedulerMutex.lock();
-        if (nullptr != _scheduler)
-        {
-            _scheduler->performFunctionInCocosThread(CC_CALLBACK_0(HttpClient::dispatchResponseCallbacks, this));
-        }
-        _schedulerMutex.unlock();
-    }
-    
-    // cleanup: if worker thread received quit signal, clean up un-completed request queue
-    _requestQueueMutex.lock();
-    _requestQueue.clear();
-    _requestQueueMutex.unlock();
-    
-    _responseQueueMutex.lock();
-    _responseQueue.clear();
-    _responseQueueMutex.unlock();
-    
-    decreaseThreadCountAndMayDeleteThis();
-}
-
-// Worker thread
-void HttpClient::networkThreadAlone(HttpRequest* request, HttpResponse* response)
-{
-    increaseThreadCount();
-    
-    char responseMessage[RESPONSE_BUFFER_SIZE] = { 0 };
-    processResponse(response, responseMessage);
-    
-    _schedulerMutex.lock();
-    if (nullptr != _scheduler)
-    {
-        _scheduler->performFunctionInCocosThread([this, response, request]{
-            const ccHttpRequestCallback& callback = request->getCallback();
-            Ref* pTarget = request->getTarget();
-            SEL_HttpResponse pSelector = request->getSelector();
-            
-            if (callback != nullptr)
-            {
-                callback(this, response);
-            }
-            else if (pTarget && pSelector)
-            {
-                (pTarget->*pSelector)(this, response);
-            }
-            response->release();
-            // do not release in other thread
-            request->release();
-        });
-    }
-    _schedulerMutex.unlock();
-    decreaseThreadCountAndMayDeleteThis();
-}
-
 //Process Request
-static int processTask(HttpClient* client, HttpRequest* request, NSString* requestType, void* stream, long* responseCode, void* headerStream, char* errorBuffer)
+    static int processTask(HttpClient* client, HttpRequest* request, NSString* requestType, void* stream, long* responseCode, void* headerStream, std::string& outErrorBuffer)
 {
     if (nullptr == client)
     {
-        strcpy(errorBuffer, "client object is invalid");
+        outErrorBuffer = "client object is invalid";
         return 0;
     }
     
@@ -233,7 +149,7 @@ static int processTask(HttpClient* client, HttpRequest* request, NSString* reque
     if (httpAsynConn.connError != nil)
     {
         NSString* errorString = [httpAsynConn.connError localizedDescription];
-        strcpy(errorBuffer, [errorString UTF8String]);
+        outErrorBuffer = [errorString UTF8String];
         return 0;
     }
 
@@ -241,7 +157,7 @@ static int processTask(HttpClient* client, HttpRequest* request, NSString* reque
     if (httpAsynConn.responseError != nil)
     {
         NSString* errorString = [httpAsynConn.responseError localizedDescription];
-        strcpy(errorBuffer, [errorString UTF8String]);
+        outErrorBuffer = [errorString UTF8String];
     }
     
     *responseCode = httpAsynConn.responseCode;
@@ -300,194 +216,9 @@ static int processTask(HttpClient* client, HttpRequest* request, NSString* reque
     
     return 1;
 }
-
-// HttpClient implementation
-HttpClient* HttpClient::getInstance()
-{
-    if (_httpClient == nullptr)
-    {
-        _httpClient = new (std::nothrow) HttpClient();
-    }
-    
-    return _httpClient;
-}
-
-void HttpClient::destroyInstance()
-{
-    if (nullptr == _httpClient)
-    {
-        CCLOG("HttpClient singleton is nullptr");
-        return;
-    }
-    
-    CCLOG("HttpClient::destroyInstance begin");
-    
-    auto thiz = _httpClient;
-    _httpClient = nullptr;
-    
-    thiz->_scheduler->unscheduleAllForTarget(thiz);
-    thiz->_schedulerMutex.lock();
-    thiz->_scheduler = nullptr;
-    thiz->_schedulerMutex.unlock();
-    
-    thiz->_requestQueueMutex.lock();
-    thiz->_requestQueue.pushBack(thiz->_requestSentinel);
-    thiz->_requestQueueMutex.unlock();
-    
-    thiz->_sleepCondition.notify_one();
-    thiz->decreaseThreadCountAndMayDeleteThis();
-    
-    CCLOG("HttpClient::destroyInstance() finished!");
-}
-
-void HttpClient::enableCookies(const char* cookieFile)
-{
-    _cookieFileMutex.lock();
-    if (cookieFile)
-    {
-        _cookieFilename = std::string(cookieFile);
-        _cookieFilename = FileUtils::getInstance()->fullPathForFilename(_cookieFilename);
-    }
-    else
-    {
-        _cookieFilename = (FileUtils::getInstance()->getWritablePath() + "cookieFile.txt");
-    }
-    _cookieFileMutex.unlock();
-    
-    if (nullptr == _cookie)
-    {
-        _cookie = new(std::nothrow)HttpCookie;
-    }
-    _cookie->setCookieFileName(_cookieFilename);
-    _cookie->readFile();
-}
-    
-void HttpClient::setSSLVerification(const std::string& caFile)
-{
-    std::lock_guard<std::mutex> lock(_sslCaFileMutex);
-    _sslCaFilename = caFile;
-}
-
-HttpClient::HttpClient()
-: _timeoutForConnect(30)
-, _timeoutForRead(60)
-, _isInited(false)
-, _threadCount(0)
-, _requestSentinel(new HttpRequest())
-, _cookie(nullptr)
-{
-
-    CCLOG("In the constructor of HttpClient!");
-    memset(_responseMessage, 0, sizeof(char) * RESPONSE_BUFFER_SIZE);
-    _scheduler = Director::getInstance()->getScheduler();
-    increaseThreadCount();
-}
-    
-
-HttpClient::~HttpClient()
-{
-    CC_SAFE_DELETE(_requestSentinel);
-    if (!_cookieFilename.empty() && nullptr != _cookie)
-    {
-        _cookie->writeFile();
-        CC_SAFE_DELETE(_cookie);
-    }
-    CCLOG("HttpClient destructor");
-}
-
-//Lazy create semaphore & mutex & thread
-bool HttpClient::lazyInitThreadSemphore()
-{
-    if (_isInited)
-    {
-        return true;
-    }
-    else
-    {
-        auto t = std::thread(CC_CALLBACK_0(HttpClient::networkThread, this));
-        t.detach();
-        _isInited = true;
-    }
-    
-    return true;
-}
-
-//Add a get task to queue
-void HttpClient::send(HttpRequest* request)
-{    
-    if (false == lazyInitThreadSemphore()) 
-    {
-        return;
-    }
-    
-    if (!request)
-    {
-        return;
-    }
-        
-    request->retain();
-    
-    _requestQueueMutex.lock();
-    _requestQueue.pushBack(request);
-    _requestQueueMutex.unlock();
-    
-    // Notify thread start to work
-    _sleepCondition.notify_one();
-}
-
-void HttpClient::sendImmediate(HttpRequest* request)
-{
-    if(!request)
-    {
-        return;
-    }
-
-    request->retain();
-    // Create a HttpResponse object, the default setting is http access failed
-    HttpResponse *response = new (std::nothrow) HttpResponse(request);
-
-    auto t = std::thread(&HttpClient::networkThreadAlone, this, request, response);
-    t.detach();
-}
-
-// Poll and notify main thread if responses exists in queue
-void HttpClient::dispatchResponseCallbacks()
-{
-    // log("CCHttpClient::dispatchResponseCallbacks is running");
-    //occurs when cocos thread fires but the network thread has already quited
-    HttpResponse* response = nullptr;
-    _responseQueueMutex.lock();
-    if (!_responseQueue.empty())
-    {
-        response = _responseQueue.at(0);
-        _responseQueue.erase(0);
-    }
-    _responseQueueMutex.unlock();
-    
-    if (response)
-    {
-        HttpRequest *request = response->getHttpRequest();
-        const ccHttpRequestCallback& callback = request->getCallback();
-        Ref* pTarget = request->getTarget();
-        SEL_HttpResponse pSelector = request->getSelector();
-
-        if (callback != nullptr)
-        {
-            callback(this, response);
-        }
-        else if (pTarget && pSelector)
-        {
-            (pTarget->*pSelector)(this, response);
-        }
-        
-        response->release();
-        // do not release in other thread
-        request->release();
-    }
-}
     
 // Process Response
-void HttpClient::processResponse(HttpResponse* response, char* responseMessage)
+void HttpClient::processResponse(HttpResponse* response)
 {
     auto request = response->getHttpRequest();
     long responseCode = -1;
@@ -518,13 +249,15 @@ void HttpClient::processResponse(HttpResponse* response, char* responseMessage)
             break;
     }
     
+    std::string errorMessage;
+    
     retValue = processTask(this,
                            request,
                            requestType,
                            response->getResponseData(),
                            &responseCode,
                            response->getResponseHeader(),
-                           responseMessage);
+                           errorMessage);
     
     // write data to HttpResponse
     response->setResponseCode(responseCode);
@@ -536,11 +269,10 @@ void HttpClient::processResponse(HttpResponse* response, char* responseMessage)
     else
     {
         response->setSucceed(false);
-        response->setErrorBuffer(responseMessage);
+        response->setErrorBuffer(errorMessage.c_str());
     }
 }
 
-    
 void HttpClient::increaseThreadCount()
 {
     _threadCountMutex.lock();
@@ -550,19 +282,385 @@ void HttpClient::increaseThreadCount()
 
 void HttpClient::decreaseThreadCountAndMayDeleteThis()
 {
+    LOGD("decreaseThreadCountAndMayDeleteThis begin ...\n");
     bool needDeleteThis = false;
     _threadCountMutex.lock();
     --_threadCount;
     if (0 == _threadCount)
-    {
         needDeleteThis = true;
-    }
-    
+    LOGD("thread count: %d\n", _threadCount);
     _threadCountMutex.unlock();
     if (needDeleteThis)
     {
         delete this;
     }
+    LOGD("decreaseThreadCountAndMayDeleteThis end ...\n");
+}
+
+void HttpClient::handleRequest(HttpRequest* request)
+{
+    LOGD("handleRequest: %d\n", __LINE__);
+    // Create a HttpResponse object, the default setting is http access failed
+    HttpResponse *response = new (std::nothrow) HttpResponse(request);  // request ref = 4
+    processResponse(response);
+    LOGD("handleRequest: %d\n", __LINE__);
+    _notHandledResponseQueueMutex.lock();
+    _notHandledResponseQueue.pushBack(response);
+    _notHandledResponseQueueMutex.unlock();
+    
+    _schedulerMutex.lock();
+    if (_scheduler != nullptr)
+    {
+        std::shared_ptr<bool> isDestroyed = _isDestroyed;
+        
+        _scheduler->performFunctionInCocosThread([isDestroyed, this, response, request]{
+            LOGD("HttpClient::handleRequest response ...\n");
+            
+            _notHandledRequestQueueMutex.lock();
+            _notHandledResponseQueueMutex.lock();
+            
+            if (*isDestroyed)
+            {
+                LOGD("Cocos Thread: HttpClient was destroyed!\n");
+            }
+            else if (!_notHandledRequestQueue.empty() && !_notHandledResponseQueue.empty())
+            {
+                const ccHttpRequestCallback& callback = request->getCallback();
+                Ref* pTarget = request->getTarget();
+                SEL_HttpResponse pSelector = request->getSelector();
+                
+                if (callback != nullptr)
+                {
+                    callback(this, response);
+                }
+                else if (pTarget && pSelector)
+                {
+                    (pTarget->*pSelector)(this, response);
+                }
+            }
+            
+            if (!_notHandledResponseQueue.empty())
+            {
+                _notHandledResponseQueue.eraseObject(response);
+                CC_SAFE_RELEASE(response);    // request ref = 3
+            }
+            
+            if (!_notHandledRequestQueue.empty())
+            {
+                _notHandledRequestQueue.eraseObject(request);  // request ref = 2
+                CC_SAFE_RELEASE(request);     // request ref = 1
+            }
+            
+            _notHandledRequestQueueMutex.unlock();
+            _notHandledResponseQueueMutex.unlock();
+        });
+    }
+    LOGD("handleRequest: %d\n", __LINE__);
+    _schedulerMutex.unlock();
+    LOGD("handleRequest: %d\n", __LINE__);
+}
+
+// Worker thread
+void HttpClient::networkThread()
+{
+    while (true)
+    {
+        HttpRequest* request = nullptr;
+        
+        // step 1: send http request if the requestQueue isn't empty
+        {
+            std::lock_guard<std::mutex> lock(_requestQueueMutex);
+            while (_requestQueue.empty()) {
+                _sleepCondition.wait(_requestQueueMutex);
+            }
+            request = _requestQueue.at(0);
+            
+            _notHandledRequestQueueMutex.lock();
+            _notHandledRequestQueue.pushBack(request); // request ref = 4
+            _notHandledRequestQueueMutex.unlock();
+            
+            _requestQueue.erase(0);  // request ref = 3
+        }
+        
+        if (request == _requestSentinel)
+        {
+            break;
+        }
+        
+        handleRequest(request);
+    }
+
+    // This method has to be invoked at the end of this function
+    decreaseThreadCountAndMayDeleteThis();
+}
+
+// Worker thread
+void HttpClient::networkThreadAlone(HttpRequest* request, unsigned long threadID)
+{
+    handleRequest(request);
+
+    _unusedThreadIDVectorMutex.lock();
+    _unusedThreadIDVector.push_back(threadID);
+    _unusedThreadIDVectorMutex.unlock();
+    
+    // This method has to be invoked at the end of this function
+    decreaseThreadCountAndMayDeleteThis();
+}
+
+void HttpClient::removeUnusedThreadsInMap()
+{
+    bool isEmpty = true;
+    _unusedThreadIDVectorMutex.lock();
+    isEmpty = _unusedThreadIDVector.empty();
+    _unusedThreadIDVectorMutex.unlock();
+    
+    if (isEmpty)
+    {
+        return;
+    }
+    
+    _unusedThreadIDVectorMutex.lock();
+    _networkThreadMapForAloneMutex.lock();
+    
+    for (const auto& unusedThreadID : _unusedThreadIDVector)
+    {
+        auto iter = _networkThreadMapForAlone.find(unusedThreadID);
+        
+        if (iter != _networkThreadMapForAlone.end())
+        {
+            std::thread* t = iter->second;
+            if (t->joinable())
+            {
+                t->join();
+            }
+            _networkThreadMapForAlone.erase(iter->first);
+            delete t;
+        }
+    }
+    
+    _unusedThreadIDVector.clear();
+    
+    _networkThreadMapForAloneMutex.unlock();
+    _unusedThreadIDVectorMutex.unlock();
+}
+    
+// HttpClient implementation
+HttpClient* HttpClient::getInstance()
+{
+    if (_httpClient == nullptr) {
+        _httpClient = new (std::nothrow) HttpClient();
+    }
+    
+    return _httpClient;
+}
+
+void HttpClient::destroyInstance()
+{
+    if (_httpClient == nullptr)
+    {
+        LOGD("HttpClient singleton is NULL\n");
+        return;
+    }
+    
+    LOGD("HttpClient::destroyInstance ...\n");
+    
+    auto thiz = _httpClient;
+    _httpClient = nullptr;
+    
+    thiz->_scheduler->unscheduleAllForTarget(thiz);
+    
+    thiz->_schedulerMutex.lock();
+    thiz->_scheduler = nullptr;
+    thiz->_schedulerMutex.unlock();
+    
+    {
+        std::lock_guard<std::mutex> lock(thiz->_requestQueueMutex);
+        thiz->_requestQueue.insert(0, thiz->_requestSentinel);
+    }
+    thiz->_sleepCondition.notify_one();
+    
+    *thiz->_isDestroyed = true;
+    
+    thiz->joinAllNetworkThreads();
+    thiz->cleanup();
+    
+    thiz->decreaseThreadCountAndMayDeleteThis();
+    LOGD("HttpClient::destroyInstance() finished!\n");
+}
+
+void HttpClient::enableCookies(const char* cookieFile) {
+    if (cookieFile) {
+        _cookieFilename = std::string(cookieFile);
+    }
+    else {
+        _cookieFilename = (FileUtils::getInstance()->getWritablePath() + "cookieFile.txt");
+    }
+}
+
+void HttpClient::setSSLVerification(const std::string& caFile)
+{
+    _sslCaFilename = caFile;
+}
+
+HttpClient::HttpClient()
+: _isInited(false)
+, _threadCount(0)
+, _timeoutForConnect(30)
+, _timeoutForRead(60)
+, _requestSentinel(new HttpRequest())
+, _networkThreadForQueue(nullptr)
+, _isDestroyed(std::make_shared<bool>(false))
+{
+    LOGD("In the constructor of HttpClient!\n");
+    increaseThreadCount();
+    _scheduler = Director::getInstance()->getScheduler();
+    
+    std::shared_ptr<bool> isDestroyed = _isDestroyed;
+    _resetDirectorListener = Director::getInstance()->getEventDispatcher()->addCustomEventListener(Director::EVENT_RESET, [this, isDestroyed](EventCustom*){
+        if (*isDestroyed)
+            return;
+        HttpClient::destroyInstance();
+    });
+}
+
+HttpClient::~HttpClient()
+{
+    LOGD("In the destructor of HttpClient!\n");
+    Director::getInstance()->getEventDispatcher()->removeEventListener(_resetDirectorListener);
+}
+
+//Lazy create semaphore & mutex & thread
+bool HttpClient::lazyInitThreadSemphore()
+{
+    if (_isInited)
+    {
+        return true;
+    }
+    else
+    {
+        increaseThreadCount();
+        _networkThreadForQueue.reset(new std::thread(CC_CALLBACK_0(HttpClient::networkThread, this)));
+        _isInited = true;
+    }
+    
+    return true;
+}
+
+//Add a get task to queue
+void HttpClient::send(HttpRequest* request)
+{
+    if (!lazyInitThreadSemphore())
+    {
+        return;
+    }
+    
+    if (!request)
+    {
+        return;
+    }
+    
+    request->retain();  // request ref = 2
+    
+    _requestQueueMutex.lock();
+    _requestQueue.pushBack(request);  // request ref = 3
+    _requestQueueMutex.unlock();
+    
+    // Notify thread start to work
+    _sleepCondition.notify_one();
+}
+
+void HttpClient::sendImmediate(HttpRequest* request)
+{
+    if(!request)
+    {
+        return;
+    }
+    
+    removeUnusedThreadsInMap();
+    
+    request->retain();   // request ref = 2
+    
+    _notHandledRequestQueueMutex.lock();
+    _notHandledRequestQueue.pushBack(request); // request ref = 3
+    _notHandledRequestQueueMutex.unlock();
+    
+    increaseThreadCount();
+    
+    static unsigned long __aloneThreadID = 0;
+    unsigned long aloneThreadID = __aloneThreadID++;
+    
+    std::thread* aloneThread(new (std::nothrow) std::thread([this, aloneThreadID, request](){
+        LOGD("request ref: %d\n", (int)request->getReferenceCount() );
+        networkThreadAlone(request, aloneThreadID);
+    }));
+    
+    _networkThreadMapForAloneMutex.lock();
+    _networkThreadMapForAlone.insert(std::make_pair(aloneThreadID, aloneThread));
+    _networkThreadMapForAloneMutex.unlock();
+}
+
+void HttpClient::joinAllNetworkThreads()
+{
+    LOGD("joinAllNetworkThreads begin!\n");
+    if (_networkThreadForQueue != nullptr)
+    {
+        if (_networkThreadForQueue->joinable())
+        {
+            _networkThreadForQueue->join();
+        }
+    }
+    
+    LOGD("joinAllNetworkThreads %d...\n", (int)_networkThreadMapForAlone.size());
+
+    _networkThreadMapForAloneMutex.lock();
+    auto copiedThreadMap = _networkThreadMapForAlone;
+    _networkThreadMapForAloneMutex.unlock();
+    
+    for (const auto& e : copiedThreadMap)
+    {
+        LOGD("joinAllNetworkThreads...\n");
+        if (e.second->joinable())
+        {
+            e.second->join();
+        }
+    }
+
+    LOGD("joinAllNetworkThreads end!\n");
+}
+    
+void HttpClient::cleanup()
+{
+    LOGD("cleanup begin!\n");
+    CC_SAFE_RELEASE(_requestSentinel);
+    // cleanup: if worker thread received quit signal, clean up un-completed request queue
+    _requestQueueMutex.lock();
+    _requestQueue.clear();
+    _requestQueueMutex.unlock();
+    
+    // clear not handled requests & responses
+    _notHandledRequestQueueMutex.lock();
+    _notHandledResponseQueueMutex.lock();
+    
+    for (const auto& notHandledRequest : _notHandledRequestQueue)
+    {
+        LOGD("release not handled request ...\n");
+        CC_SAFE_RELEASE(notHandledRequest);
+    }
+    _notHandledRequestQueue.clear();
+    
+    for (const auto& notHandledResponse : _notHandledResponseQueue)
+    {
+        LOGD("release not handled response ...\n");
+        CC_SAFE_RELEASE(notHandledResponse);
+    }
+    _notHandledResponseQueue.clear();
+    
+    _notHandledRequestQueueMutex.unlock();
+    _notHandledResponseQueueMutex.unlock();
+    
+    removeUnusedThreadsInMap();
+    
+    LOGD("cleanup DONE!\n");
 }
     
 void HttpClient::setTimeoutForConnect(int value)

@@ -29,6 +29,7 @@
 
 #include <thread>
 #include <condition_variable>
+#include <unordered_map>
 #include "base/CCVector.h"
 #include "base/CCScheduler.h"
 #include "network/HttpRequest.h"
@@ -41,6 +42,8 @@
  */
 
 NS_CC_BEGIN
+
+class EventListenerCustom;
 
 namespace network {
     
@@ -55,11 +58,6 @@ namespace network {
 class CC_DLL HttpClient
 {
 public:
-	/**
-	* The buffer size of _responseMessage
-	*/
-	static const int RESPONSE_BUFFER_SIZE = 256;
-
     /**
      * Get instance of HttpClient.
      *
@@ -160,14 +158,17 @@ private:
      */
     bool lazyInitThreadSemphore();
     void networkThread();
-    void networkThreadAlone(HttpRequest* request, HttpResponse* response);
-    /** Poll function called from main thread to dispatch callbacks when http requests finished **/
-    void dispatchResponseCallbacks();
-    
-    void processResponse(HttpResponse* response, char* responseMessage);
+    void networkThreadAlone(HttpRequest* request, unsigned long threadID);
+    void joinAllNetworkThreads();
+    void removeUnusedThreadsInMap();
+    void cleanup();
+
+    void handleRequest(HttpRequest* request);
+    void processResponse(HttpResponse* response);
+
     void increaseThreadCount();
     void decreaseThreadCountAndMayDeleteThis();
-    
+
 private:
     bool _isInited;
     
@@ -182,33 +183,44 @@ private:
     
     Scheduler* _scheduler;
     std::mutex _schedulerMutex;
-    
-    Vector<HttpRequest*>  _requestQueue;
+
+
     std::mutex _requestQueueMutex;
-    
-    Vector<HttpResponse*> _responseQueue;
-    std::mutex _responseQueueMutex;
-    
+    Vector<HttpRequest*>  _requestQueue;
+
+    std::mutex _notHandledRequestQueueMutex;
+    Vector<HttpRequest*> _notHandledRequestQueue;
+
+    std::mutex _notHandledResponseQueueMutex;
+    Vector<HttpResponse*> _notHandledResponseQueue;
+
     std::string _cookieFilename;
     std::mutex _cookieFileMutex;
-    
+        
     std::string _sslCaFilename;
     std::mutex _sslCaFileMutex;
-    
     HttpCookie* _cookie;
     
     std::condition_variable_any _sleepCondition;
-    
-	char _responseMessage[RESPONSE_BUFFER_SIZE];
-    
     HttpRequest* _requestSentinel;
+    
+    std::unique_ptr<std::thread> _networkThreadForQueue;
+    
+    std::mutex _networkThreadMapForAloneMutex;
+    std::unordered_map<unsigned long, std::thread*>  _networkThreadMapForAlone;
+    
+    std::mutex _unusedThreadIDVectorMutex;
+    std::vector<unsigned long> _unusedThreadIDVector;
+    
+    std::shared_ptr<bool> _isDestroyed;
+    EventListenerCustom* _resetDirectorListener;
 };
 
-} // namespace network
+// end of Network group
+/// @}
+
+}
 
 NS_CC_END
-
-// end group
-/// @}
 
 #endif //__CCHTTPCLIENT_H__

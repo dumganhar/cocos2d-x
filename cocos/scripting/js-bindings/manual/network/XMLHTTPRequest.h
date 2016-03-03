@@ -31,10 +31,16 @@
 
 #include "jsapi.h"
 #include "jsfriendapi.h"
-#include "network/HttpClient.h"
+
 #include "js_bindings_config.h"
 #include "ScriptingCore.h"
 #include "jsb_helper.h"
+
+namespace cocos2d { namespace network {
+    class HttpClient;
+    class HttpRequest;
+    class HttpResponse;
+}}
 
 class MinXmlHttpRequest : public cocos2d::Ref
 {
@@ -47,13 +53,16 @@ public:
         DOCUMENT,
         JSON
     };
-
+    
     // Ready States (http://www.w3.org/TR/XMLHttpRequest/#interface-xmlhttprequest)
-    static const unsigned short UNSENT = 0;
-    static const unsigned short OPENED = 1;
-    static const unsigned short HEADERS_RECEIVED = 2;
-    static const unsigned short LOADING = 3;
-    static const unsigned short DONE = 4;
+    enum class ReadyState
+    {
+        UNSENT = 0,
+        OPENED = 1,
+        HEADERS_RECEIVED = 2,
+        LOADING = 3,
+        DONE = 4
+    };
 
     MinXmlHttpRequest();
     MinXmlHttpRequest(JSContext *cx);
@@ -92,9 +101,9 @@ public:
 private:
     void _gotHeader(std::string header);
     void _setRequestHeader(const char* field, const char* value);
-    void _setHttpRequestHeader();
-    void _setHttpRequestData(const char *data, size_t len);
-    void _sendRequest(JSContext *cx);
+    void _setHttpRequestHeader(cocos2d::network::HttpRequest* request);
+    void _setHttpRequestData(cocos2d::network::HttpRequest* request, const char *data, size_t len);
+    void _sendRequest(cocos2d::network::HttpRequest* request, JSContext *cx);
     void _notify(JS::HandleObject callback);
     
     std::string                       _url;
@@ -110,14 +119,13 @@ private:
     JS::Heap<JSObject*>               _onloadendCallback;
     JS::Heap<JSObject*>               _ontimeoutCallback;
     JS::Heap<JSObject*>               _onreadystateCallback;
-    int                               _readyState;
+    ReadyState                        _readyState;
     long                              _status;
     std::string                       _statusText;
     ResponseType                      _responseType;
     unsigned long long                _timeout;
     float                             _elapsedTime;
     bool                              _isAsync;
-    cocos2d::network::HttpRequest*    _httpRequest;
     bool                              _isNetwork;
     bool                              _withCredentialsValue;
     bool                              _errorFlag;

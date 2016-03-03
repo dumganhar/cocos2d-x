@@ -27,12 +27,11 @@
 
 
 #include "XMLHTTPRequest.h"
-#include <string>
-#include <algorithm>
+#include "network/HttpClient.h"
 #include "cocos2d_specifics.hpp"
 
-using namespace std;
-
+#include <string>
+#include <algorithm>
 
 //#pragma mark - MinXmlHttpRequest
 
@@ -40,7 +39,7 @@ using namespace std;
  *  @brief Implementation for header retrieving.
  *  @param header 
  */
-void MinXmlHttpRequest::_gotHeader(string header)
+void MinXmlHttpRequest::_gotHeader(std::string header)
 {
     // Get Header and Set StatusText
     // Split String into Tokens
@@ -52,8 +51,8 @@ void MinXmlHttpRequest::_gotHeader(string header)
     if (found_header_field != std::string::npos)
     {
         // Found a header field.
-        string http_field;
-        string http_value;
+        std::string http_field;
+        std::string http_value;
         
         http_field = header.substr(0,found_header_field);
         http_value = header.substr(found_header_field+1, header.length());
@@ -83,9 +82,8 @@ void MinXmlHttpRequest::_gotHeader(string header)
         pch = strtok(cstr," ");
         while (pch != NULL)
         {
-            
-            stringstream ss;
-            string val;
+            std::stringstream ss;
+            std::string val;
             
             ss << pch;
             val = ss.str();
@@ -94,7 +92,7 @@ void MinXmlHttpRequest::_gotHeader(string header)
             // Check for HTTP Header to set statusText
             if (found_http != std::string::npos) {
                 
-                stringstream mystream;
+                std::stringstream mystream;
                 
                 // Get Response Status
                 pch = strtok (NULL, " ");
@@ -121,9 +119,9 @@ void MinXmlHttpRequest::_gotHeader(string header)
  */
 void MinXmlHttpRequest::_setRequestHeader(const char* field, const char* value)
 {
-    stringstream header_s;
-    stringstream value_s;
-    string header;
+    std::stringstream header_s;
+    std::stringstream value_s;
+    std::string header;
     
     auto iter = _requestHeader.find(field);
     
@@ -144,9 +142,15 @@ void MinXmlHttpRequest::_setRequestHeader(const char* field, const char* value)
  * @brief  If headers has been set, pass them to curl.
  * 
  */
-void MinXmlHttpRequest::_setHttpRequestHeader()
+void MinXmlHttpRequest::_setHttpRequestHeader(cocos2d::network::HttpRequest* request)
 {
-    std::vector<string> header;
+    if (request == nullptr)
+    {
+        CCLOGERROR("ERROR: _setHttpRequestHeader: request pointer is null!");
+        return;
+    }
+    
+    std::vector<std::string> header;
 
     for (auto it = _requestHeader.begin(); it != _requestHeader.end(); ++it)
     {
@@ -168,18 +172,18 @@ void MinXmlHttpRequest::_setHttpRequestHeader()
     
     if (!header.empty())
     {
-        _httpRequest->setHeaders(header);
+        request->setHeaders(header);
     }
     
 }
 
-void MinXmlHttpRequest::_setHttpRequestData(const char *data, size_t len)
+void MinXmlHttpRequest::_setHttpRequestData(cocos2d::network::HttpRequest* request, const char *data, size_t len)
 {
-    if (len > 0 &&
+    if (request != nullptr && len > 0 &&
         (_meth.compare("post") == 0 || _meth.compare("POST") == 0 ||
          _meth.compare("put") == 0 || _meth.compare("PUT") == 0))
     {
-        _httpRequest->setRequestData(data, len);
+        request->setRequestData(data, len);
     }
 }
 
@@ -193,7 +197,7 @@ void MinXmlHttpRequest::handle_requestResponse(cocos2d::network::HttpClient *sen
     _elapsedTime = 0;
     _scheduler->unscheduleAllForTarget(this);
     
-    if(_isAborted || _readyState == UNSENT)
+    if(_isAborted || _readyState == ReadyState::UNSENT)
     {
         return;
     }
@@ -245,7 +249,7 @@ void MinXmlHttpRequest::handle_requestResponse(cocos2d::network::HttpClient *sen
     std::vector<char> *buffer = response->getResponseData();
 
     _status = statusCode;
-    _readyState = DONE;
+    _readyState = ReadyState::DONE;
         
     _dataSize = static_cast<uint32_t>(buffer->size());
     CC_SAFE_FREE(_data);
@@ -274,11 +278,15 @@ void MinXmlHttpRequest::handle_requestResponse(cocos2d::network::HttpClient *sen
  * @brief   Send out request and fire callback when done.
  * @param cx    Javascript context
  */
-void MinXmlHttpRequest::_sendRequest(JSContext *cx)
+void MinXmlHttpRequest::_sendRequest(cocos2d::network::HttpRequest* request, JSContext *cx)
 {
-    _httpRequest->setResponseCallback(this, httpresponse_selector(MinXmlHttpRequest::handle_requestResponse));
-    cocos2d::network::HttpClient::getInstance()->sendImmediate(_httpRequest);
-    _httpRequest->release();
+    if (request == nullptr)
+    {
+        CCLOGERROR("ERROR: _sendRequest: request pointer is null!");
+        return;
+    }
+    request->setResponseCallback(CC_CALLBACK_2(MinXmlHttpRequest::handle_requestResponse, this));
+    cocos2d::network::HttpClient::getInstance()->send(request);
 }
 
 MinXmlHttpRequest::MinXmlHttpRequest()
@@ -298,14 +306,13 @@ MinXmlHttpRequest::MinXmlHttpRequest(JSContext *cx)
 , _type()
 , _data(nullptr)
 , _dataSize()
-, _readyState(UNSENT)
+, _readyState(ReadyState::UNSENT)
 , _status(0)
 , _statusText()
 , _responseType()
 , _timeout(0)
 , _elapsedTime(.0)
-, _isAsync()
-, _httpRequest(new cocos2d::network::HttpRequest())
+, _isAsync(true)
 , _isNetwork(true)
 , _withCredentialsValue(true)
 , _errorFlag(false)
@@ -367,12 +374,6 @@ MinXmlHttpRequest::~MinXmlHttpRequest()
         js_remove_object_root(callback);
     }
     
-    if (_httpRequest)
-    {
-        // We don't need to release _httpRequest here since it will be released in the http callback.
-//        _httpRequest->release();
-    }
-
     CC_SAFE_FREE(_data);
     CC_SAFE_RELEASE_NULL(_scheduler);
 }
@@ -583,7 +584,7 @@ JS_BINDED_PROP_SET_IMPL(MinXmlHttpRequest, responseType)
  */
 JS_BINDED_PROP_GET_IMPL(MinXmlHttpRequest, readyState)
 {
-    args.rval().set(INT_TO_JSVAL(_readyState));
+    args.rval().set(INT_TO_JSVAL(static_cast<int>(_readyState)));
     return true;
 }
 
@@ -681,7 +682,7 @@ JS_BINDED_PROP_GET_IMPL(MinXmlHttpRequest, response)
     }
     else
     {
-        if (_readyState != DONE || _errorFlag)
+        if (_readyState != ReadyState::DONE || _errorFlag)
         {
             args.rval().set(JSVAL_NULL);
             return true;
@@ -748,7 +749,6 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, open)
         
         _url = urlstr;
         _meth = method;
-        _readyState = 1;
         _isAsync = async;
         
         if (_url.length() > 5 && _url.compare(_url.length() - 5, 5, ".json") == 0)
@@ -756,23 +756,10 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, open)
             _responseType = ResponseType::JSON;
         }
         
-        
-        {
-            auto requestType =
-              (_meth.compare("get") == 0 || _meth.compare("GET") == 0) ? cocos2d::network::HttpRequest::Type::GET : (
-              (_meth.compare("post") == 0 || _meth.compare("POST") == 0) ? cocos2d::network::HttpRequest::Type::POST : (
-              (_meth.compare("put") == 0 || _meth.compare("PUT") == 0) ? cocos2d::network::HttpRequest::Type::PUT : (
-              (_meth.compare("delete") == 0 || _meth.compare("DELETE") == 0) ? cocos2d::network::HttpRequest::Type::DELETE : (
-                cocos2d::network::HttpRequest::Type::UNKNOWN))));
-
-            _httpRequest->setRequestType(requestType);
-            _httpRequest->setUrl(_url);
-        }
-        
-       printf("[XMLHttpRequest] %s %s\n", _meth.c_str(), _url.c_str());
+        printf("[XMLHttpRequest] %s %s\n", _meth.c_str(), _url.c_str());
         
         _isNetwork = true;
-        _readyState = OPENED;
+        _readyState = ReadyState::OPENED;
         _status = 0;
         _isAborted = false;
         
@@ -790,59 +777,82 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, open)
  */
 JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, send)
 {
+    bool ret = false;
     std::string data;
     
     // Clean up header map. New request, new headers!
     _httpHeader.clear();
-
     _errorFlag = false;
     
-    if (argc == 1)
+    cocos2d::network::HttpRequest* request = new (std::nothrow)cocos2d::network::HttpRequest();
+    
+    cocos2d::network::HttpRequest::Type requestType = cocos2d::network::HttpRequest::Type::UNKNOWN;
+    
+    if (_meth.compare("get") == 0 || _meth.compare("GET") == 0)
+        requestType = cocos2d::network::HttpRequest::Type::GET;
+    else if (_meth.compare("post") == 0 || _meth.compare("POST") == 0)
+        requestType = cocos2d::network::HttpRequest::Type::POST;
+    else if (_meth.compare("put") == 0 || _meth.compare("PUT") == 0)
+        requestType = cocos2d::network::HttpRequest::Type::PUT;
+    else if (_meth.compare("delete") == 0 || _meth.compare("DELETE") == 0)
+        requestType = cocos2d::network::HttpRequest::Type::DELETE;
+
+    request->setRequestType(requestType);
+    request->setUrl(_url);
+    
+    do
     {
-        JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-        if (args.get(0).isString())
+        if (argc == 1)
         {
-            JSStringWrapper strWrap(args.get(0).toString());
-            data = strWrap.get();
-            _setHttpRequestData(data.c_str(), static_cast<size_t>(data.length()));
-        }
-        else if (args.get(0).isObject())
-        {
-            JSObject *obj = args.get(0).toObjectOrNull();
-            if (JS_IsArrayBufferObject(obj))
+            JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+            if (args.get(0).isString())
             {
-                _setHttpRequestData((const char *)JS_GetArrayBufferData(obj), JS_GetArrayBufferByteLength(obj));
+                JSStringWrapper strWrap(args.get(0).toString());
+                data = strWrap.get();
+                _setHttpRequestData(request, data.c_str(), static_cast<size_t>(data.length()));
             }
-            else if (JS_IsArrayBufferViewObject(obj))
+            else if (args.get(0).isObject())
             {
-                _setHttpRequestData((const char *)JS_GetArrayBufferViewData(obj), JS_GetArrayBufferViewByteLength(obj));
+                JSObject *obj = args.get(0).toObjectOrNull();
+                if (JS_IsArrayBufferObject(obj))
+                {
+                    _setHttpRequestData(request, (const char *)JS_GetArrayBufferData(obj), JS_GetArrayBufferByteLength(obj));
+                }
+                else if (JS_IsArrayBufferViewObject(obj))
+                {
+                    _setHttpRequestData(request, (const char *)JS_GetArrayBufferViewData(obj), JS_GetArrayBufferViewByteLength(obj));
+                }
+                else
+                {
+                    break;
+                }
             }
             else
             {
-                return false;
+                break;
             }
         }
-        else
+
+        _setHttpRequestHeader(request);
+        _sendRequest(request, cx);
+        if (_onloadstartCallback)
         {
-            return false;
+            JS::RootedObject callback(cx, _onloadstartCallback);
+            _notify(callback);
         }
-    }
+        
+        //begin schedule for timeout
+        if(_timeout > 0)
+        {
+            _scheduler->scheduleUpdate(this, 0, false);
+        }
+        ret = true;
 
-    _setHttpRequestHeader();
-    _sendRequest(cx);
-    if (_onloadstartCallback)
-    {
-        JS::RootedObject callback(cx, _onloadstartCallback);
-        _notify(callback);
-    }
+    } while (false);
     
-    //begin schedule for timeout
-    if(_timeout > 0)
-    {
-        _scheduler->scheduleUpdate(this, 0, false);
-    }
-
-    return true;
+    CC_SAFE_RELEASE(request);
+    
+    return ret;
 }
 
 void MinXmlHttpRequest::update(float dt)
@@ -856,7 +866,7 @@ void MinXmlHttpRequest::update(float dt)
             _notify(callback);
         }
         _elapsedTime = 0;
-        _readyState = UNSENT;
+        _readyState = ReadyState::UNSENT;
         _scheduler->unscheduleAllForTarget(this);
     }
 }
@@ -874,7 +884,7 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, abort)
     //nothing to do
 
     //3.Change the state to UNSENT.
-    _readyState = UNSENT;
+    _readyState = ReadyState::UNSENT;
     
     if (_onabortCallback)
     {
@@ -892,8 +902,8 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, abort)
 JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, getAllResponseHeaders)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    stringstream responseheaders;
-    string responseheader;
+    std::stringstream responseheaders;
+    std::string responseheader;
     
     for (auto it = _httpHeader.begin(); it != _httpHeader.end(); ++it)
     {
@@ -935,11 +945,11 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, getResponseHeader)
     JSStringWrapper strWrap(header_value);
     data = strWrap.get();
     
-    stringstream streamdata;
+    std::stringstream streamdata;
     
     streamdata << data;
 
-    string value = streamdata.str();
+    std::string value = streamdata.str();
     std::transform(value.begin(), value.end(), value.begin(), ::tolower);
     
     auto iter = _httpHeader.find(value);
