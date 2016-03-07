@@ -37,6 +37,7 @@
 #include "base/CCDirector.h"
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventListenerCustom.h"
+#include "base/CCThreadPool.h"
 #include "platform/CCFileUtils.h"
 
 NS_CC_BEGIN
@@ -273,37 +274,12 @@ void HttpClient::processResponse(HttpResponse* response)
     }
 }
 
-void HttpClient::increaseThreadCount()
-{
-    _threadCountMutex.lock();
-    ++_threadCount;
-    _threadCountMutex.unlock();
-}
-
-void HttpClient::decreaseThreadCountAndMayDeleteThis()
-{
-    LOGD("decreaseThreadCountAndMayDeleteThis begin ...\n");
-    bool needDeleteThis = false;
-    _threadCountMutex.lock();
-    --_threadCount;
-    if (0 == _threadCount)
-        needDeleteThis = true;
-    LOGD("thread count: %d\n", _threadCount);
-    _threadCountMutex.unlock();
-    if (needDeleteThis)
-    {
-        delete this;
-    }
-    LOGD("decreaseThreadCountAndMayDeleteThis end ...\n");
-}
-
 void HttpClient::handleRequest(HttpRequest* request)
 {
-    LOGD("handleRequest: %d\n", __LINE__);
     // Create a HttpResponse object, the default setting is http access failed
     HttpResponse *response = new (std::nothrow) HttpResponse(request);  // request ref = 4
     processResponse(response);
-    LOGD("handleRequest: %d\n", __LINE__);
+
     _notHandledResponseQueueMutex.lock();
     _notHandledResponseQueue.pushBack(response);
     _notHandledResponseQueueMutex.unlock();
@@ -314,7 +290,6 @@ void HttpClient::handleRequest(HttpRequest* request)
         std::shared_ptr<bool> isDestroyed = _isDestroyed;
         
         _scheduler->performFunctionInCocosThread([isDestroyed, this, response, request]{
-            LOGD("HttpClient::handleRequest response ...\n");
             
             _notHandledRequestQueueMutex.lock();
             _notHandledResponseQueueMutex.lock();
@@ -355,93 +330,14 @@ void HttpClient::handleRequest(HttpRequest* request)
             _notHandledResponseQueueMutex.unlock();
         });
     }
-    LOGD("handleRequest: %d\n", __LINE__);
+
     _schedulerMutex.unlock();
-    LOGD("handleRequest: %d\n", __LINE__);
-}
-
-// Worker thread
-void HttpClient::networkThread()
-{
-    while (true)
-    {
-        HttpRequest* request = nullptr;
-        
-        // step 1: send http request if the requestQueue isn't empty
-        {
-            std::lock_guard<std::mutex> lock(_requestQueueMutex);
-            while (_requestQueue.empty()) {
-                _sleepCondition.wait(_requestQueueMutex);
-            }
-            request = _requestQueue.at(0);
-            
-            _notHandledRequestQueueMutex.lock();
-            _notHandledRequestQueue.pushBack(request); // request ref = 4
-            _notHandledRequestQueueMutex.unlock();
-            
-            _requestQueue.erase(0);  // request ref = 3
-        }
-        
-        if (request == _requestSentinel)
-        {
-            break;
-        }
-        
-        handleRequest(request);
-    }
-
-    // This method has to be invoked at the end of this function
-    decreaseThreadCountAndMayDeleteThis();
 }
 
 // Worker thread
 void HttpClient::networkThreadAlone(HttpRequest* request, unsigned long threadID)
 {
     handleRequest(request);
-
-    _unusedThreadIDVectorMutex.lock();
-    _unusedThreadIDVector.push_back(threadID);
-    _unusedThreadIDVectorMutex.unlock();
-    
-    // This method has to be invoked at the end of this function
-    decreaseThreadCountAndMayDeleteThis();
-}
-
-void HttpClient::removeUnusedThreadsInMap()
-{
-    bool isEmpty = true;
-    _unusedThreadIDVectorMutex.lock();
-    isEmpty = _unusedThreadIDVector.empty();
-    _unusedThreadIDVectorMutex.unlock();
-    
-    if (isEmpty)
-    {
-        return;
-    }
-    
-    _unusedThreadIDVectorMutex.lock();
-    _networkThreadMapForAloneMutex.lock();
-    
-    for (const auto& unusedThreadID : _unusedThreadIDVector)
-    {
-        auto iter = _networkThreadMapForAlone.find(unusedThreadID);
-        
-        if (iter != _networkThreadMapForAlone.end())
-        {
-            std::thread* t = iter->second;
-            if (t->joinable())
-            {
-                t->join();
-            }
-            _networkThreadMapForAlone.erase(iter->first);
-            delete t;
-        }
-    }
-    
-    _unusedThreadIDVector.clear();
-    
-    _networkThreadMapForAloneMutex.unlock();
-    _unusedThreadIDVectorMutex.unlock();
 }
     
 // HttpClient implementation
@@ -473,18 +369,10 @@ void HttpClient::destroyInstance()
     thiz->_scheduler = nullptr;
     thiz->_schedulerMutex.unlock();
     
-    {
-        std::lock_guard<std::mutex> lock(thiz->_requestQueueMutex);
-        thiz->_requestQueue.insert(0, thiz->_requestSentinel);
-    }
-    thiz->_sleepCondition.notify_one();
-    
     *thiz->_isDestroyed = true;
     
-    thiz->joinAllNetworkThreads();
     thiz->cleanup();
     
-    thiz->decreaseThreadCountAndMayDeleteThis();
     LOGD("HttpClient::destroyInstance() finished!\n");
 }
 
@@ -503,16 +391,11 @@ void HttpClient::setSSLVerification(const std::string& caFile)
 }
 
 HttpClient::HttpClient()
-: _isInited(false)
-, _threadCount(0)
-, _timeoutForConnect(30)
+: _timeoutForConnect(30)
 , _timeoutForRead(60)
-, _requestSentinel(new HttpRequest())
-, _networkThreadForQueue(nullptr)
 , _isDestroyed(std::make_shared<bool>(false))
 {
     LOGD("In the constructor of HttpClient!\n");
-    increaseThreadCount();
     _scheduler = Director::getInstance()->getScheduler();
     
     std::shared_ptr<bool> isDestroyed = _isDestroyed;
@@ -529,44 +412,10 @@ HttpClient::~HttpClient()
     Director::getInstance()->getEventDispatcher()->removeEventListener(_resetDirectorListener);
 }
 
-//Lazy create semaphore & mutex & thread
-bool HttpClient::lazyInitThreadSemphore()
-{
-    if (_isInited)
-    {
-        return true;
-    }
-    else
-    {
-        increaseThreadCount();
-        _networkThreadForQueue.reset(new std::thread(CC_CALLBACK_0(HttpClient::networkThread, this)));
-        _isInited = true;
-    }
-    
-    return true;
-}
-
 //Add a get task to queue
 void HttpClient::send(HttpRequest* request)
 {
-    if (!lazyInitThreadSemphore())
-    {
-        return;
-    }
-    
-    if (!request)
-    {
-        return;
-    }
-    
-    request->retain();  // request ref = 2
-    
-    _requestQueueMutex.lock();
-    _requestQueue.pushBack(request);  // request ref = 3
-    _requestQueueMutex.unlock();
-    
-    // Notify thread start to work
-    _sleepCondition.notify_one();
+    sendImmediate(request);
 }
 
 void HttpClient::sendImmediate(HttpRequest* request)
@@ -576,67 +425,24 @@ void HttpClient::sendImmediate(HttpRequest* request)
         return;
     }
     
-    removeUnusedThreadsInMap();
-    
     request->retain();   // request ref = 2
     
     _notHandledRequestQueueMutex.lock();
     _notHandledRequestQueue.pushBack(request); // request ref = 3
     _notHandledRequestQueueMutex.unlock();
     
-    increaseThreadCount();
-    
     static unsigned long __aloneThreadID = 0;
     unsigned long aloneThreadID = __aloneThreadID++;
     
-    std::thread* aloneThread(new (std::nothrow) std::thread([this, aloneThreadID, request](){
-        LOGD("request ref: %d\n", (int)request->getReferenceCount() );
+    ThreadPool::getDefaultThreadPool()->pushTask([this, aloneThreadID, request](int id){
         networkThreadAlone(request, aloneThreadID);
-    }));
-    
-    _networkThreadMapForAloneMutex.lock();
-    _networkThreadMapForAlone.insert(std::make_pair(aloneThreadID, aloneThread));
-    _networkThreadMapForAloneMutex.unlock();
-}
-
-void HttpClient::joinAllNetworkThreads()
-{
-    LOGD("joinAllNetworkThreads begin!\n");
-    if (_networkThreadForQueue != nullptr)
-    {
-        if (_networkThreadForQueue->joinable())
-        {
-            _networkThreadForQueue->join();
-        }
-    }
-    
-    LOGD("joinAllNetworkThreads %d...\n", (int)_networkThreadMapForAlone.size());
-
-    _networkThreadMapForAloneMutex.lock();
-    auto copiedThreadMap = _networkThreadMapForAlone;
-    _networkThreadMapForAloneMutex.unlock();
-    
-    for (const auto& e : copiedThreadMap)
-    {
-        LOGD("joinAllNetworkThreads...\n");
-        if (e.second->joinable())
-        {
-            e.second->join();
-        }
-    }
-
-    LOGD("joinAllNetworkThreads end!\n");
+    });
 }
     
 void HttpClient::cleanup()
 {
     LOGD("cleanup begin!\n");
-    CC_SAFE_RELEASE(_requestSentinel);
-    // cleanup: if worker thread received quit signal, clean up un-completed request queue
-    _requestQueueMutex.lock();
-    _requestQueue.clear();
-    _requestQueueMutex.unlock();
-    
+
     // clear not handled requests & responses
     _notHandledRequestQueueMutex.lock();
     _notHandledResponseQueueMutex.lock();

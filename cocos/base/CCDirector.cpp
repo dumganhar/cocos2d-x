@@ -60,6 +60,7 @@ THE SOFTWARE.
 #include "base/CCAutoreleasePool.h"
 #include "base/CCConfiguration.h"
 #include "base/CCAsyncTaskPool.h"
+#include "base/CCThreadPool.h"
 #include "platform/CCApplication.h"
 
 #if CC_ENABLE_SCRIPT_BINDING
@@ -424,7 +425,6 @@ void Director::destroyTextureCache()
 {
     if (_textureCache)
     {
-        _textureCache->waitForQuit();
         CC_SAFE_RELEASE_NULL(_textureCache);
     }
 }
@@ -1039,6 +1039,7 @@ void Director::reset()
     GLProgramStateCache::destroyInstance();
     FileUtils::destroyInstance();
     AsyncTaskPool::destroyInstance();
+    ThreadPool::destroyDefaultThreadPool();
     
     // cocos2d-x specific data structures
     UserDefault::destroyInstance();

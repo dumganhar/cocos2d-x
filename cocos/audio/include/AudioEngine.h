@@ -346,9 +346,6 @@ protected:
     
     static AudioEngineImpl* _audioEngineImpl;
 
-    class AudioEngineThreadPool;
-    static AudioEngineThreadPool* s_threadPool;
-    
     friend class AudioEngineImpl;
 };
 

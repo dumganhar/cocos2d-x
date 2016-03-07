@@ -25,13 +25,13 @@
  ****************************************************************************/
 
 //some utils functions
-function ensureLeftAligned (label) {
+function ensureLeftAlignedArrayBuffer (label) {
     label.anchorX = 0;
     label.anchorY = 1;
     label.textAlign = cc.TEXT_ALIGNMENT_LEFT;
 }
 
-function streamXHREventsToLabel ( xhr, label, textbox, method ) {
+function streamXHREventsToLabelArrayBuffer ( xhr, label, textbox, method ) {
     // Simple events
     ['loadstart', 'abort', 'error', 'load', 'loadend', 'timeout'].forEach(function (eventname) {
         xhr["on" + eventname] = function () {
@@ -87,7 +87,7 @@ var XHRArrayBufferTestLayer = cc.Layer.extend({
 
         statusPostLabel.x = 10;
         statusPostLabel.y = winSize.height - 100;
-        ensureLeftAligned(statusPostLabel);
+        ensureLeftAlignedArrayBuffer(statusPostLabel);
         statusPostLabel.setString("Status: Send Post Request to httpbin.org with ArrayBuffer");
 
 
@@ -98,7 +98,7 @@ var XHRArrayBufferTestLayer = cc.Layer.extend({
         responseLabel.y = winSize.height / 2;
         
         var xhr = cc.loader.getXMLHttpRequest();
-        streamXHREventsToLabel(xhr, statusPostLabel, responseLabel, "POST");
+        streamXHREventsToLabelArrayBuffer(xhr, statusPostLabel, responseLabel, "POST");
 
         xhr.open("POST", "http://httpbin.org/post");
         //set Content-type "text/plain" to post ArrayBuffer or ArrayBufferView

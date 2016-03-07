@@ -191,10 +191,6 @@ public:
     */
     std::string getCachedTextureInfo() const;
 
-    //Wait for texture cache to quit before destroy instance.
-    /**Called by director, please do not called outside.*/
-    void waitForQuit();
-
     /**
      * Get the file path of the texture
      *
@@ -214,30 +210,10 @@ public:
     */
     void renameTextureWithKey(const std::string srcName, const std::string dstName);
 
-
 private:
-    void addImageAsyncCallBack(float dt);
-    void loadImage();
     void parseNinePatchImage(Image* image, Texture2D* texture, const std::string& path);
-public:
 protected:
-    struct AsyncStruct;
     
-    std::thread* _loadingThread;
-
-    std::deque<AsyncStruct*> _asyncStructQueue;
-    std::deque<AsyncStruct*> _requestQueue;
-    std::deque<AsyncStruct*> _responseQueue;
-
-    std::mutex _requestMutex;
-    std::mutex _responseMutex;
-    
-    std::condition_variable _sleepCondition;
-
-    bool _needQuit;
-
-    int _asyncRefCount;
-
     std::unordered_map<std::string, Texture2D*> _textures;
 };
 

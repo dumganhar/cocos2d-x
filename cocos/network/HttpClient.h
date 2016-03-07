@@ -36,6 +36,7 @@
 #include "network/HttpResponse.h"
 #include "network/HttpCookie.h"
 
+
 /**
  * @addtogroup network
  * @{
@@ -44,6 +45,7 @@
 NS_CC_BEGIN
 
 class EventListenerCustom;
+class ThreadPool;
 
 namespace network {
     
@@ -152,41 +154,21 @@ private:
     virtual ~HttpClient();
     bool init(void);
     
-    /**
-     * Init pthread mutex, semaphore, and create new thread for http requests
-     * @return bool
-     */
-    bool lazyInitThreadSemphore();
-    void networkThread();
     void networkThreadAlone(HttpRequest* request, unsigned long threadID);
-    void joinAllNetworkThreads();
-    void removeUnusedThreadsInMap();
     void cleanup();
 
     void handleRequest(HttpRequest* request);
     void processResponse(HttpResponse* response);
 
-    void increaseThreadCount();
-    void decreaseThreadCountAndMayDeleteThis();
-
 private:
-    bool _isInited;
-    
     int _timeoutForConnect;
     std::mutex _timeoutForConnectMutex;
     
     int _timeoutForRead;
     std::mutex _timeoutForReadMutex;
     
-    int  _threadCount;
-    std::mutex _threadCountMutex;
-    
     Scheduler* _scheduler;
     std::mutex _schedulerMutex;
-
-
-    std::mutex _requestQueueMutex;
-    Vector<HttpRequest*>  _requestQueue;
 
     std::mutex _notHandledRequestQueueMutex;
     Vector<HttpRequest*> _notHandledRequestQueue;
@@ -200,17 +182,6 @@ private:
     std::string _sslCaFilename;
     std::mutex _sslCaFileMutex;
     HttpCookie* _cookie;
-    
-    std::condition_variable_any _sleepCondition;
-    HttpRequest* _requestSentinel;
-    
-    std::unique_ptr<std::thread> _networkThreadForQueue;
-    
-    std::mutex _networkThreadMapForAloneMutex;
-    std::unordered_map<unsigned long, std::thread*>  _networkThreadMapForAlone;
-    
-    std::mutex _unusedThreadIDVectorMutex;
-    std::vector<unsigned long> _unusedThreadIDVector;
     
     std::shared_ptr<bool> _isDestroyed;
     EventListenerCustom* _resetDirectorListener;
