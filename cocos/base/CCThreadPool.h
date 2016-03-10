@@ -48,6 +48,16 @@ NS_CC_BEGIN
 class CC_DLL ThreadPool
 {
 public:
+    
+    enum TaskType
+    {
+        TASK_TYPE_DEFAULT = 0,
+        TASK_TYPE_NETWORK,
+        TASK_TYPE_IO,
+        TASK_TYPE_AUDIO,
+        TASK_TYPE_USER = 1000
+    };
+    
     static ThreadPool* getDefaultThreadPool();
     static void destroyDefaultThreadPool();
     
@@ -56,15 +66,26 @@ public:
     // the destructor waits for all the functions in the queue to be finished
     ~ThreadPool();
     
+    /* Pushs a task to thread pool
+     *  @param runnable The callback of the task executed in sub thread
+     *  @param type The task type, it's TASK_TYPE_DEFAULT if this argument isn't assigned
+     */
+    void pushTask(const std::function<void(int)>& runnable, int type = TASK_TYPE_DEFAULT);
+    
+    // Stops all tasks, it will remove all tasks in queue
+    void stopAllTasks();
+    
+    // Stops some tasks by type
+    void stopTasksByType(int type);
+    
+    void joinThread(int tid);
+    
     inline int getMinThreadNum() { return _minThreadNum; };
     inline int getMaxThreadNum() { return _maxThreadNum; };
     
     // number of idle threads
     int getIdleThreadNum();
-    
     inline int getInitedThreadNum() { return _initedThreadNum; };
-
-    void pushTask(const std::function<void(int)>& runnable);
     size_t getTaskNum();
     
     void setShrinkInterval(int seconds);
@@ -84,9 +105,6 @@ private:
     void setThread(int i);
 
     void stretchPool(int count);
-
-    // empty the queue
-    void clearQueue();
     
     std::vector<std::unique_ptr<std::thread>> _threads;
     std::vector<std::shared_ptr<std::atomic<bool>>> _abortFlags;
@@ -130,7 +148,13 @@ private:
         std::mutex mutex;
     };
     
-    ThreadSafeQueue<std::function<void(int tid)> *> _taskQueue;
+    struct Task
+    {
+        int type;
+        std::function<void(int)>* callback;
+    };
+    
+    ThreadSafeQueue<Task> _taskQueue;
     std::atomic<bool> _isDone;
     std::atomic<bool> _isStop;
     std::atomic<int> _idleThreadNum;  // how many threads are waiting

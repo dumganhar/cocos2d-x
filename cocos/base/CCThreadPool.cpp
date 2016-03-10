@@ -209,17 +209,7 @@ void ThreadPool::stretchPool(int count)
     }
 }
 
-// empty the queue
-void ThreadPool::clearQueue()
-{
-    std::function<void(int tid)>* f;
-    while (_taskQueue.pop(f))
-    {
-        delete f; // empty the queue
-    }
-}
-
-void ThreadPool::pushTask(const std::function<void(int)>& runnable)
+void ThreadPool::pushTask(const std::function<void(int)>& runnable, int type/* = TASK_TYPE_DEFAULT*/)
 {
     if (_idleThreadNum > _minThreadNum)
     {
@@ -241,14 +231,72 @@ void ThreadPool::pushTask(const std::function<void(int)>& runnable)
         stretchPool(_stretchStep);
     }
     
-    auto task = new (std::nothrow) std::function<void(int tid)>([runnable](int tid) {
+    auto callback = new (std::nothrow) std::function<void(int)>([runnable](int tid) {
         runnable(tid);
     });
-    _taskQueue.push(task);
+    
+    Task task;
+    task.type = type;
+    task.callback = callback;
+    _taskQueue.push(std::move(task));
     
     {
         std::unique_lock<std::mutex> lock(_mutex);
         _cv.notify_one();
+    }
+}
+
+void ThreadPool::stopAllTasks()
+{
+    Task task;
+    while (_taskQueue.pop(task))
+    {
+        delete task.callback; // empty the queue
+    }
+}
+
+void ThreadPool::stopTasksByType(int type)
+{
+    Task task;
+    
+    std::vector<Task> notStopTasks;
+    notStopTasks.reserve(_taskQueue.size());
+    
+    while (_taskQueue.pop(task))
+    {
+        if (task.type == type)
+        {// Delete the task from queue
+            delete task.callback;
+        }
+        else
+        {// If task type isn't match, push it into a vector, then insert to task queue again
+            notStopTasks.push_back(task);
+        }
+    }
+    
+    if (!notStopTasks.empty())
+    {
+        for (const auto& t : notStopTasks)
+        {
+            _taskQueue.push(t);
+        }
+    }
+}
+
+void ThreadPool::joinThread(int tid)
+{
+    if (tid < 0 || tid >= _threads.size())
+    {
+        LOGD("Invalid thread id %d\n", tid);
+        return;
+    }
+    
+    // wait for the computing threads to finish
+    if (*_initedFlags[tid] && _threads[tid]->joinable())
+    {
+        _threads[tid]->join();
+        *_initedFlags[tid] = false;
+        --_initedThreadNum;
     }
 }
 
@@ -287,51 +335,46 @@ void ThreadPool::stop()
     }
     
     for (int i = 0; i < static_cast<int>(_threads.size()); ++i)
-    {  // wait for the computing threads to finish
-        if (*_initedFlags[i] && _threads[i]->joinable())
-        {
-            _threads[i]->join();
-            *_initedFlags[i] = false;
-            --_initedThreadNum;
-        }
+    {
+        joinThread(i);
     }
     // if there were no threads in the pool but some functors in the queue, the functors are not deleted by the threads
     // therefore delete them here
-    clearQueue();
+    stopAllTasks();
     _threads.clear();
     _abortFlags.clear();
 }
 
-void ThreadPool::setThread(int i)
+void ThreadPool::setThread(int tid)
 {
-    std::shared_ptr<std::atomic<bool>> abort_ptr(_abortFlags[i]); // a copy of the shared ptr to the flag
-    auto f = [this, i, abort_ptr/* a copy of the shared ptr to the abort */]() {
+    std::shared_ptr<std::atomic<bool>> abort_ptr(_abortFlags[tid]); // a copy of the shared ptr to the flag
+    auto f = [this, tid, abort_ptr/* a copy of the shared ptr to the abort */]() {
         std::atomic<bool> & abort = *abort_ptr;
-        std::function<void(int tid)> * cb = nullptr;
-        bool isPop = _taskQueue.pop(cb);
+        Task task;
+        bool isPop = _taskQueue.pop(task);
         while (true)
         {
             while (isPop)
             {  // if there is anything in the queue
-                std::unique_ptr<std::function<void(int tid)>> func(cb); // at return, delete the function even if an exception occurred
-                (*cb)(i);
+                std::unique_ptr<std::function<void(int)>> func(task.callback); // at return, delete the function even if an exception occurred
+                (*task.callback)(tid);
                 if (abort)
                     return;  // the thread is wanted to stop, return even if the queue is not empty yet
                 else
-                    isPop = _taskQueue.pop(cb);
+                    isPop = _taskQueue.pop(task);
             }
             // the queue is empty here, wait for the next command
             std::unique_lock<std::mutex> lock(_mutex);
             ++_idleThreadNum;
-            *_idleFlags[i] = true;
-            _cv.wait(lock, [this, &cb, &isPop, &abort](){ isPop = _taskQueue.pop(cb); return isPop || _isDone || abort; });
-            *_idleFlags[i] = false;
+            *_idleFlags[tid] = true;
+            _cv.wait(lock, [this, &task, &isPop, &abort](){ isPop = _taskQueue.pop(task); return isPop || _isDone || abort; });
+            *_idleFlags[tid] = false;
             --_idleThreadNum;
             if (!isPop)
                 return;  // if the queue is empty and isDone == true or *flag then return
         }
     };
-    _threads[i].reset(new (std::nothrow) std::thread(f)); // compiler may not support std::make_unique()
+    _threads[tid].reset(new (std::nothrow) std::thread(f)); // compiler may not support std::make_unique()
 }
 
 NS_CC_END
