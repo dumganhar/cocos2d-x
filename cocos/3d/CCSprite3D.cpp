@@ -33,6 +33,7 @@
 
 #include "base/CCDirector.h"
 #include "base/CCAsyncTaskPool.h"
+#include "base/CCThreadPool.h"
 #include "2d/CCLight.h"
 #include "2d/CCCamera.h"
 #include "base/ccMacros.h"
@@ -114,11 +115,14 @@ void Sprite3D::createAsync(const std::string& modelPath, const std::string& text
     sprite->_asyncLoadParam.materialdatas = new (std::nothrow) MaterialDatas();
     sprite->_asyncLoadParam.meshdatas = new (std::nothrow) MeshDatas();
     sprite->_asyncLoadParam.nodeDatas = new (std::nothrow) NodeDatas();
-    AsyncTaskPool::getInstance()->enqueue(AsyncTaskPool::TaskType::TASK_IO, CC_CALLBACK_1(Sprite3D::afterAsyncLoad, sprite), (void*)(&sprite->_asyncLoadParam), [sprite]()
-    {
-        sprite->_asyncLoadParam.result = sprite->loadFromFile(sprite->_asyncLoadParam.modlePath, sprite->_asyncLoadParam.nodeDatas, sprite->_asyncLoadParam.meshdatas, sprite->_asyncLoadParam.materialdatas);
-    });
     
+    ThreadPool::getDefaultThreadPool()->pushTask([sprite](int tid){
+        sprite->_asyncLoadParam.result = sprite->loadFromFile(sprite->_asyncLoadParam.modlePath, sprite->_asyncLoadParam.nodeDatas, sprite->_asyncLoadParam.meshdatas, sprite->_asyncLoadParam.materialdatas);
+        
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([sprite](){
+            sprite->afterAsyncLoad((void*)&sprite->_asyncLoadParam);
+        });
+    }, ThreadPool::TASK_TYPE_IO);
 }
 
 void Sprite3D::afterAsyncLoad(void* param)
