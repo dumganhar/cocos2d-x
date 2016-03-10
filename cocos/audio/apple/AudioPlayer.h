@@ -73,7 +73,8 @@ protected:
     float _currTime;
     bool _streamingSource;
     ALuint _bufferIds[3];
-    std::thread _rotateBufferThread;
+
+    std::atomic<int> _threadID;
     std::condition_variable _sleepCondition;
     std::mutex _sleepMutex;
     bool _timeDirty;

@@ -26,11 +26,12 @@
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/ExtendedAudioFile.h>
 
 #include "AudioPlayer.h"
 #include "AudioCache.h"
 #include "platform/CCFileUtils.h"
-#import <AudioToolbox/ExtendedAudioFile.h>
+#include "base/CCThreadPool.h"
 
 using namespace cocos2d;
 using namespace cocos2d::experimental;
@@ -44,6 +45,7 @@ AudioPlayer::AudioPlayer()
 , _currTime(0.0f)
 , _streamingSource(false)
 , _timeDirty(false)
+, _threadID(-1)
 {    
 }
 
@@ -52,9 +54,12 @@ AudioPlayer::~AudioPlayer()
     if (_streamingSource) {
         _beDestroy = true;
         _sleepCondition.notify_one();
-        if (_rotateBufferThread.joinable()) {
-            _rotateBufferThread.join();
+        
+        if (_threadID != -1)
+        {
+            ThreadPool::getDefaultThreadPool()->joinThread(_threadID);
         }
+        
         alDeleteBuffers(3, _bufferIds);
     }
 }
@@ -103,7 +108,7 @@ bool AudioPlayer::play2d(AudioCache* cache)
             }
         }
         else {
-            printf("%s:alGenBuffers error code:%x", __PRETTY_FUNCTION__,alError);
+            printf("%s:alGenBuffers error code:%x\n", __PRETTY_FUNCTION__,alError);
             _removeByAudioEngine = true;
             return false;
         }
@@ -118,7 +123,12 @@ bool AudioPlayer::play2d(AudioCache* cache)
         }
         if (_streamingSource) {
             alSourceQueueBuffers(_alSource, QUEUEBUFFER_NUM, _bufferIds);
-            _rotateBufferThread = std::thread(&AudioPlayer::rotateBufferThread,this, _audioCache->_queBufferFrames * QUEUEBUFFER_NUM + 1);
+            
+            ThreadPool::getDefaultThreadPool()->pushTask([this](int tid){
+                _threadID = tid;
+                rotateBufferThread(_audioCache->_queBufferFrames * QUEUEBUFFER_NUM + 1);
+            }, ThreadPool::TASK_TYPE_AUDIO);
+
         }
         else {
             alSourcei(_alSource, AL_BUFFER, _audioCache->_alBufferId);
@@ -226,6 +236,8 @@ ExitBufferThread:
         ExtAudioFileDispose(extRef);
     }
     free(tmpBuffer);
+    
+    _threadID = -1;
 }
 
 bool AudioPlayer::setLoop(bool loop)

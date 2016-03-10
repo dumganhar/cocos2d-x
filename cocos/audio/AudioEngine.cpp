@@ -443,6 +443,6 @@ void AudioEngine::addTask(const std::function<void()>& task)
     {
         ThreadPool::getDefaultThreadPool()->pushTask([task](int tid){
             task();
-        });
+        }, ThreadPool::TASK_TYPE_AUDIO);
     }
 }

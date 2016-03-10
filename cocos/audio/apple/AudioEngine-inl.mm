@@ -198,7 +198,7 @@ bool AudioEngineImpl::init()
     return ret;
 }
 
-AudioCache* AudioEngineImpl::preload(const std::string& filePath, std::function<void(bool)> callback)
+AudioCache* AudioEngineImpl::preload(const std::string& filePath, const std::function<void(bool)>& callback)
 {
     AudioCache* audioCache = nullptr;
     
