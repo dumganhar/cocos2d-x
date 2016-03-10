@@ -45,7 +45,6 @@ AudioPlayer::AudioPlayer()
 , _currTime(0.0f)
 , _streamingSource(false)
 , _timeDirty(false)
-, _threadID(-1)
 {    
 }
 
@@ -55,10 +54,9 @@ AudioPlayer::~AudioPlayer()
         _beDestroy = true;
         _sleepCondition.notify_one();
         
-        if (_threadID != -1)
-        {
-            ThreadPool::getDefaultThreadPool()->joinThread(_threadID);
-        }
+        // Waiting the switching buffer thread to finish its job.
+        _switchBufferThreadMutex.lock();
+        _switchBufferThreadMutex.unlock();
         
         alDeleteBuffers(3, _bufferIds);
     }
@@ -125,7 +123,6 @@ bool AudioPlayer::play2d(AudioCache* cache)
             alSourceQueueBuffers(_alSource, QUEUEBUFFER_NUM, _bufferIds);
             
             ThreadPool::getDefaultThreadPool()->pushTask([this](int tid){
-                _threadID = tid;
                 rotateBufferThread(_audioCache->_queBufferFrames * QUEUEBUFFER_NUM + 1);
             }, ThreadPool::TASK_TYPE_AUDIO);
 
@@ -151,6 +148,8 @@ bool AudioPlayer::play2d(AudioCache* cache)
 
 void AudioPlayer::rotateBufferThread(int offsetFrame)
 {
+    std::lock_guard<std::mutex> switchBufferLockGuard(_switchBufferThreadMutex);
+    
     ALint sourceState;
     ALint bufferProcessed = 0;
     ExtAudioFileRef extRef = nullptr;
@@ -236,8 +235,6 @@ ExitBufferThread:
         ExtAudioFileDispose(extRef);
     }
     free(tmpBuffer);
-    
-    _threadID = -1;
 }
 
 bool AudioPlayer::setLoop(bool loop)

@@ -74,9 +74,10 @@ protected:
     bool _streamingSource;
     ALuint _bufferIds[3];
 
-    std::atomic<int> _threadID;
     std::condition_variable _sleepCondition;
     std::mutex _sleepMutex;
+    std::mutex _switchBufferThreadMutex;
+    
     bool _timeDirty;
     
     friend class AudioEngineImpl;
