@@ -136,11 +136,15 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
         return;
     }
 
-    ThreadPool::getDefaultThreadPool()->pushTask([this, fullpath, callback](int tid){
+    auto shouldInvokeCallback = std::make_shared<bool>(true);
+    _bindImageMap.insert(std::make_pair(fullpath, shouldInvokeCallback));
+    
+    ThreadPool::getDefaultThreadPool()->pushTask([this, fullpath, callback, shouldInvokeCallback](int tid){
+
         Image* image = new (std::nothrow) Image();
         bool succeed = image->initWithImageFileThreadSafe(fullpath);
         
-        Director::getInstance()->getScheduler()->performFunctionInCocosThread([this, succeed, image, fullpath, callback](){
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([this, succeed, image, fullpath, callback, shouldInvokeCallback](){
             // convert image to texture
             if (succeed)
             {
@@ -156,9 +160,16 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
                 // cache the texture. retain it, since it is added in the map
                 _textures.insert( std::make_pair(fullpath, t) );
                 
-                if (callback)
+                if (*shouldInvokeCallback)
                 {
-                    callback(t);
+                    if (callback)
+                    {
+                        callback(t);
+                    }
+                }
+                else
+                {
+                    CCLOG("image (%s) wasn't unbinded.", fullpath.c_str());
                 }
             }
             else
@@ -173,12 +184,23 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
 
 void TextureCache::unbindImageAsync(const std::string& filename)
 {
-
+    std::string fullpath = FileUtils::getInstance()->fullPathForFilename(filename);
+    
+    auto iter = _bindImageMap.find(fullpath);
+    if (iter != _bindImageMap.end())
+    {
+        *iter->second = false;
+        _bindImageMap.erase(iter);
+    }
 }
 
 void TextureCache::unbindAllImageAsync()
 {
-
+    for (const auto& e : _bindImageMap)
+    {
+        *e.second = false;
+    }
+    _bindImageMap.clear();
 }
 
 Texture2D * TextureCache::addImage(const std::string &path)

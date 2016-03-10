@@ -215,6 +215,8 @@ private:
 protected:
     
     std::unordered_map<std::string, Texture2D*> _textures;
+    // The map for checking whether async task should notify loading finish event to Cocos thread.
+    std::unordered_map<std::string, std::shared_ptr<bool>> _bindImageMap;
 };
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA
