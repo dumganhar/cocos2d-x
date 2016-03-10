@@ -1165,9 +1165,6 @@
 		1A57052E180BD3280088DEC7 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A57052D180BD3280088DEC7 /* libfreetype.a */; };
 		1A5AC3D21C7030A300DA9AB5 /* extension-permessage-deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC3D01C7030A300DA9AB5 /* extension-permessage-deflate.c */; };
 		1A5AC3D31C7030A300DA9AB5 /* extension-permessage-deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5AC3D11C7030A300DA9AB5 /* extension-permessage-deflate.h */; };
-		1A5BD9FD1C883AD200E7B315 /* CCThreadSafeQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5BD9FC1C883AD200E7B315 /* CCThreadSafeQueue.h */; };
-		1A5BD9FE1C883AD200E7B315 /* CCThreadSafeQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5BD9FC1C883AD200E7B315 /* CCThreadSafeQueue.h */; };
-		1A5BD9FF1C883AD200E7B315 /* CCThreadSafeQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5BD9FC1C883AD200E7B315 /* CCThreadSafeQueue.h */; };
 		1A5BDA2B1C895FB100E7B315 /* CCThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDA291C895FB100E7B315 /* CCThreadPool.cpp */; };
 		1A5BDA2C1C895FB100E7B315 /* CCThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDA291C895FB100E7B315 /* CCThreadPool.cpp */; };
 		1A5BDA2D1C895FB100E7B315 /* CCThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDA291C895FB100E7B315 /* CCThreadPool.cpp */; };
@@ -5930,7 +5927,6 @@
 		1A57FFF7180BC5160088DEC7 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; name = CHANGELOG; path = ../CHANGELOG; sourceTree = "<group>"; };
 		1A5AC3D01C7030A300DA9AB5 /* extension-permessage-deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "extension-permessage-deflate.c"; sourceTree = "<group>"; };
 		1A5AC3D11C7030A300DA9AB5 /* extension-permessage-deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "extension-permessage-deflate.h"; sourceTree = "<group>"; };
-		1A5BD9FC1C883AD200E7B315 /* CCThreadSafeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCThreadSafeQueue.h; path = ../base/CCThreadSafeQueue.h; sourceTree = "<group>"; };
 		1A5BDA291C895FB100E7B315 /* CCThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCThreadPool.cpp; path = ../base/CCThreadPool.cpp; sourceTree = "<group>"; };
 		1A5BDA2A1C895FB100E7B315 /* CCThreadPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCThreadPool.h; path = ../base/CCThreadPool.h; sourceTree = "<group>"; };
 		1A8C5948180E930E00EF57C3 /* CCActionFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionFrame.cpp; sourceTree = "<group>"; };
@@ -8108,7 +8104,6 @@
 				50ABBE041925AB6E00A911A9 /* CCScriptSupport.h */,
 				298C75D31C0465D0006BAE63 /* CCStencilStateManager.cpp */,
 				298C75D41C0465D0006BAE63 /* CCStencilStateManager.hpp */,
-				1A5BD9FC1C883AD200E7B315 /* CCThreadSafeQueue.h */,
 				50ABBE051925AB6E00A911A9 /* CCTouch.cpp */,
 				50ABBE061925AB6E00A911A9 /* CCTouch.h */,
 				50ABBE071925AB6E00A911A9 /* ccTypes.cpp */,
@@ -11537,7 +11532,6 @@
 				1AC0269C1914068200FA920D /* ConvertUTF.h in Headers */,
 				15AE1A7119AAD40300C27E9E /* b2Contact.h in Headers */,
 				B6CAB23B1AF9AA1A00B9B856 /* btCompoundCompoundCollisionAlgorithm.h in Headers */,
-				1A5BD9FD1C883AD200E7B315 /* CCThreadSafeQueue.h in Headers */,
 				50ABBED11925AB6F00A911A9 /* TGAlib.h in Headers */,
 				1A57019F180BCB590088DEC7 /* CCFont.h in Headers */,
 				B6CAB20D1AF9AA1A00B9B856 /* btQuantizedBvh.h in Headers */,
@@ -12448,7 +12442,6 @@
 				507B3DA21C31BDD30067B53E /* CCActionCamera.h in Headers */,
 				507B3DA31C31BDD30067B53E /* PolygonBatch.h in Headers */,
 				507B3DA41C31BDD30067B53E /* SpuSampleTaskProcess.h in Headers */,
-				1A5BD9FF1C883AD200E7B315 /* CCThreadSafeQueue.h in Headers */,
 				507B3DA51C31BDD30067B53E /* CCControlLoader.h in Headers */,
 				507B3DA61C31BDD30067B53E /* CCLabelTTFLoader.h in Headers */,
 				507B3DA71C31BDD30067B53E /* CCActionCatmullRom.h in Headers */,
@@ -13490,7 +13483,6 @@
 				1A570068180BC5A10088DEC7 /* CCActionCamera.h in Headers */,
 				B29A7E1E19EE1B7700872B35 /* PolygonBatch.h in Headers */,
 				B6CAB4E61AF9AA1A00B9B856 /* SpuSampleTaskProcess.h in Headers */,
-				1A5BD9FE1C883AD200E7B315 /* CCThreadSafeQueue.h in Headers */,
 				15AE18BC19AAD33D00C27E9E /* CCControlLoader.h in Headers */,
 				15AE18C019AAD33D00C27E9E /* CCLabelTTFLoader.h in Headers */,
 				1A57006C180BC5A10088DEC7 /* CCActionCatmullRom.h in Headers */,
