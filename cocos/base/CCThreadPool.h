@@ -78,8 +78,6 @@ public:
     // Stops some tasks by type
     void stopTasksByType(int type);
     
-    void joinThread(int tid);
-    
     inline int getMinThreadNum() { return _minThreadNum; };
     inline int getMaxThreadNum() { return _maxThreadNum; };
     
@@ -102,7 +100,8 @@ private:
     
     void init();
     void stop();
-    void setThread(int i);
+    void setThread(int tid);
+    void joinThread(int tid);
 
     void stretchPool(int count);
     

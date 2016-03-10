@@ -334,7 +334,7 @@ void ThreadPool::stop()
         _cv.notify_all();  // stop all waiting threads
     }
     
-    for (int i = 0; i < static_cast<int>(_threads.size()); ++i)
+    for (int i = 0, n = static_cast<int>(_threads.size()); i < n; ++i)
     {
         joinThread(i);
     }
