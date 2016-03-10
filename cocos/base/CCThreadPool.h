@@ -61,7 +61,9 @@ public:
     static ThreadPool* getDefaultThreadPool();
     static void destroyDefaultThreadPool();
     
-    ThreadPool(int minNum, int maxNum);
+    static ThreadPool* newCachedThreadPool(int minThreadNum, int maxThreadNum, int shrinkInterval, int shrinkStep, int stretchStep);
+    static ThreadPool* newFixedThreadPool(int threadNum);
+    static ThreadPool* newSingleThreadPool();
     
     // the destructor waits for all the functions in the queue to be finished
     ~ThreadPool();
@@ -69,6 +71,7 @@ public:
     /* Pushs a task to thread pool
      *  @param runnable The callback of the task executed in sub thread
      *  @param type The task type, it's TASK_TYPE_DEFAULT if this argument isn't assigned
+     *  @note This function has to be invoked in cocos thread
      */
     void pushTask(const std::function<void(int)>& runnable, int type = TASK_TYPE_DEFAULT);
     
@@ -85,24 +88,26 @@ public:
     int getIdleThreadNum();
     inline int getInitedThreadNum() { return _initedThreadNum; };
     size_t getTaskNum();
+
+    /* Only avaiable for cached thread pool */
+    bool tryShrinkPool();
     
-    void setShrinkInterval(int seconds);
-    void setShrinkStep(int step);
-    void setStretchStep(int step);
-    
-    bool shrinkPool();
 private:
-    // deleted
-    ThreadPool(const ThreadPool &);// = delete;
-    ThreadPool(ThreadPool &&);// = delete;
-    ThreadPool& operator=(const ThreadPool &);// = delete;
-    ThreadPool& operator=(ThreadPool &&);// = delete;
+    ThreadPool(int minNum, int maxNum);
+    ThreadPool(const ThreadPool&);
+    ThreadPool(ThreadPool&&);
+    ThreadPool& operator=(const ThreadPool&);
+    ThreadPool& operator=(ThreadPool&&);
     
     void init();
     void stop();
     void setThread(int tid);
     void joinThread(int tid);
 
+    void setFixedSize(bool isFixedSize);
+    void setShrinkInterval(int seconds);
+    void setShrinkStep(int step);
+    void setStretchStep(int step);
     void stretchPool(int count);
     
     std::vector<std::unique_ptr<std::thread>> _threads;
@@ -169,6 +174,7 @@ private:
     float _shrinkInterval;
     int _shrinkStep;
     int _stretchStep;
+    bool _isFixedSize;
 };
     
 // end of base group

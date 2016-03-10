@@ -52,7 +52,7 @@ ThreadPool* ThreadPool::getDefaultThreadPool()
 {
     if (__defaultThreadPool == nullptr)
     {
-        __defaultThreadPool = new (std::nothrow) ThreadPool(DEFAULT_THREAD_POOL_MIN_NUM, DEFAULT_THREAD_POOL_MAX_NUM);
+        __defaultThreadPool = newCachedThreadPool(DEFAULT_THREAD_POOL_MIN_NUM, DEFAULT_THREAD_POOL_MAX_NUM, DEFAULT_SHRINK_INTERVAL, DEFAULT_SHRINK_STEP, DEFAULT_STRETCH_STEP);
     }
     
     return __defaultThreadPool;
@@ -62,6 +62,39 @@ void ThreadPool::destroyDefaultThreadPool()
 {
     delete __defaultThreadPool;
     __defaultThreadPool = nullptr;
+}
+
+ThreadPool* ThreadPool::newCachedThreadPool(int minThreadNum, int maxThreadNum, int shrinkInterval, int shrinkStep, int stretchStep)
+{
+    ThreadPool* pool = new (std::nothrow) ThreadPool(minThreadNum, maxThreadNum);
+    if (pool != nullptr)
+    {
+        pool->setFixedSize(false);
+        pool->setShrinkInterval(shrinkInterval);
+        pool->setShrinkStep(shrinkStep);
+        pool->setStretchStep(stretchStep);
+    }
+    return pool;
+}
+
+ThreadPool* ThreadPool::newFixedThreadPool(int threadNum)
+{
+    ThreadPool* pool = new (std::nothrow) ThreadPool(threadNum, threadNum);
+    if (pool != nullptr)
+    {
+        pool->setFixedSize(true);
+    }
+    return pool;
+}
+
+ThreadPool* ThreadPool::newSingleThreadPool()
+{
+    ThreadPool* pool = new (std::nothrow) ThreadPool(1, 1);
+    if (pool != nullptr)
+    {
+        pool->setFixedSize(true);
+    }
+    return pool;
 }
 
 ThreadPool::ThreadPool(int minNum, int maxNum)
@@ -74,6 +107,7 @@ ThreadPool::ThreadPool(int minNum, int maxNum)
 , _shrinkStep(DEFAULT_SHRINK_STEP)
 , _stretchStep(DEFAULT_STRETCH_STEP)
 , _initedThreadNum(0)
+, _isFixedSize(false)
 {
     init();
 }
@@ -119,7 +153,7 @@ void ThreadPool::init()
     }
 }
 
-bool ThreadPool::shrinkPool()
+bool ThreadPool::tryShrinkPool()
 {
     LOGD("shrink pool, _idleThreadNum = %d \n", getIdleThreadNum());
     
@@ -211,24 +245,27 @@ void ThreadPool::stretchPool(int count)
 
 void ThreadPool::pushTask(const std::function<void(int)>& runnable, int type/* = TASK_TYPE_DEFAULT*/)
 {
-    if (_idleThreadNum > _minThreadNum)
+    if (!_isFixedSize)
     {
-        if (_taskQueue.empty())
+        if (_idleThreadNum > _minThreadNum)
         {
-            struct timeval now;
-            gettimeofday(&now, nullptr);
-            
-            float seconds = (now.tv_sec - _lastShrinkTime.tv_sec) + (now.tv_usec - _lastShrinkTime.tv_usec) / 1000000.0f;
-            if (seconds > _shrinkInterval)
+            if (_taskQueue.empty())
             {
-                shrinkPool();
-                _lastShrinkTime = now;
+                struct timeval now;
+                gettimeofday(&now, nullptr);
+                
+                float seconds = (now.tv_sec - _lastShrinkTime.tv_sec) + (now.tv_usec - _lastShrinkTime.tv_usec) / 1000000.0f;
+                if (seconds > _shrinkInterval)
+                {
+                    tryShrinkPool();
+                    _lastShrinkTime = now;
+                }
             }
         }
-    }
-    else if (_idleThreadNum == 0)
-    {
-        stretchPool(_stretchStep);
+        else if (_idleThreadNum == 0)
+        {
+            stretchPool(_stretchStep);
+        }
     }
     
     auto callback = new (std::nothrow) std::function<void(int)>([runnable](int tid) {
@@ -303,6 +340,11 @@ void ThreadPool::joinThread(int tid)
 size_t ThreadPool::getTaskNum()
 {
     return _taskQueue.size();
+}
+
+void ThreadPool::setFixedSize(bool isFixedSize)
+{
+    _isFixedSize = isFixedSize;
 }
 
 void ThreadPool::setShrinkInterval(int seconds)
