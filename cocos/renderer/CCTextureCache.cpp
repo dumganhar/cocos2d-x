@@ -168,7 +168,7 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
             
             CC_SAFE_RELEASE(image);
         });
-    });
+    }, ThreadPool::TASK_TYPE_IO);
 }
 
 void TextureCache::unbindImageAsync(const std::string& filename)

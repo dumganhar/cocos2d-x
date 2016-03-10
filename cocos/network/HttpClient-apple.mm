@@ -49,7 +49,7 @@ namespace network {
 static HttpClient *_httpClient = nullptr; // pointer to singleton
 
 //Process Request
-    static int processTask(HttpClient* client, HttpRequest* request, NSString* requestType, void* stream, long* responseCode, void* headerStream, std::string& outErrorBuffer)
+static int processTask(HttpClient* client, HttpRequest* request, NSString* requestType, void* stream, long* responseCode, void* headerStream, std::string& outErrorBuffer)
 {
     if (nullptr == client)
     {
@@ -434,9 +434,9 @@ void HttpClient::sendImmediate(HttpRequest* request)
     static unsigned long __aloneThreadID = 0;
     unsigned long aloneThreadID = __aloneThreadID++;
     
-    ThreadPool::getDefaultThreadPool()->pushTask([this, aloneThreadID, request](int id){
+    ThreadPool::getDefaultThreadPool()->pushTask([this, aloneThreadID, request](int tid){
         networkThreadAlone(request, aloneThreadID);
-    });
+    }, ThreadPool::TASK_TYPE_NETWORK);
 }
     
 void HttpClient::cleanup()
@@ -463,8 +463,6 @@ void HttpClient::cleanup()
     
     _notHandledRequestQueueMutex.unlock();
     _notHandledResponseQueueMutex.unlock();
-    
-    removeUnusedThreadsInMap();
     
     LOGD("cleanup DONE!\n");
 }
