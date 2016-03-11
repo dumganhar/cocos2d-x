@@ -58,11 +58,32 @@ public:
         TASK_TYPE_USER = 1000
     };
     
+    /*
+     * Gets the default thread pool which is a cached thread pool with default parameters.
+     */
     static ThreadPool* getDefaultThreadPool();
+    
+    /*
+     * Destroys the default thread pool
+     */
     static void destroyDefaultThreadPool();
     
+    /*
+     * Creates a cached thread pool
+     * @note The return value has to be delete while it doesn't needed
+     */
     static ThreadPool* newCachedThreadPool(int minThreadNum, int maxThreadNum, int shrinkInterval, int shrinkStep, int stretchStep);
+    
+    /*
+     * Creates a thread pool with fixed thread count
+     * @note The return value has to be delete while it doesn't needed
+     */
     static ThreadPool* newFixedThreadPool(int threadNum);
+    
+    /*
+     * Creates a thread pool with only one thread in the pool, it could be used to exeute multipy tasks serially in just one thread.
+     * @note The return value has to be delete while it doesn't needed
+     */
     static ThreadPool* newSingleThreadPool();
     
     // the destructor waits for all the functions in the queue to be finished
@@ -81,15 +102,25 @@ public:
     // Stops some tasks by type
     void stopTasksByType(int type);
     
+    // Gets the minimum thread numbers
     inline int getMinThreadNum() { return _minThreadNum; };
+    
+    // Gets the maximum thread numbers
     inline int getMaxThreadNum() { return _maxThreadNum; };
     
-    // number of idle threads
+    // Gets the number of idle threads
     int getIdleThreadNum();
+    
+    // Gets the number of initialized threads
     inline int getInitedThreadNum() { return _initedThreadNum; };
+    
+    // Gets the task number
     size_t getTaskNum();
 
-    /* Only avaiable for cached thread pool */
+    /* 
+     * Trys to shrink pool
+     * @note This method is only avaiable for cached thread pool
+     */
     bool tryShrinkPool();
     
 private:
