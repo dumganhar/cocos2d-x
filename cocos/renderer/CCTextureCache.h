@@ -29,13 +29,9 @@ THE SOFTWARE.
 #define __CCTEXTURE_CACHE_H__
 
 #include <string>
-#include <mutex>
-#include <thread>
-#include <condition_variable>
-#include <queue>
-#include <string>
 #include <unordered_map>
 #include <functional>
+#include <atomic>
 
 #include "base/CCRef.h"
 #include "renderer/CCTexture2D.h"
@@ -216,7 +212,7 @@ protected:
     
     std::unordered_map<std::string, Texture2D*> _textures;
     // The map for checking whether async task should notify loading finish event to Cocos thread.
-    std::unordered_map<std::string, std::shared_ptr<bool>> _bindImageMap;
+    std::unordered_map<std::string, std::shared_ptr<std::atomic<bool>>> _bindImageMap;
 };
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA

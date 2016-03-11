@@ -136,7 +136,7 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
         return;
     }
 
-    auto shouldInvokeCallback = std::make_shared<bool>(true);
+    auto shouldInvokeCallback = std::make_shared<std::atomic<bool>>(true);
     _bindImageMap.insert(std::make_pair(fullpath, shouldInvokeCallback));
     
     ThreadPool::getDefaultThreadPool()->pushTask([this, fullpath, callback, shouldInvokeCallback](int tid){
