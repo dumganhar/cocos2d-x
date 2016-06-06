@@ -121,7 +121,7 @@ std::string ProfilingTimer::getDescription() const
 {
     static char s_desciption[512] = {0};
 
-    sprintf(s_desciption, "%s ::\tavg1: %ldµ,\tavg2: %ldµ,\tmin: %ldµ,\tmax: %ldµ,\ttotal: %.2fs,\tnr calls: %ld", _nameStr.c_str(), _averageTime1, _averageTime2, minTime, maxTime, totalTime/1000000., numberOfCalls);
+    sprintf(s_desciption, "%s ::\tavg1: %ldu,\tavg2: %ldu,\tmin: %ldu,\tmax: %ldu,\ttotal: %.2fs,\tnr calls: %ld\n", _nameStr.c_str(), _averageTime1, _averageTime2, minTime, maxTime, totalTime/1000000., numberOfCalls);
     return s_desciption;
 }
 
