@@ -48,30 +48,64 @@ bool HelloWorld::init()
     auto menu = Menu::create(closeItem, nullptr);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
+//
+//    /////////////////////////////
+//    // 3. add your codes below...
+//
+//    // add a label shows "Hello World"
+//    // create and initialize a label
+//    
+//    auto label = Label::createWithTTF("Hello World", "fonts/arial.ttf", TITLE_FONT_SIZE);
+//    
+//    // position the label on the center of the screen
+//    label->setPosition(origin.x + visibleSize.width/2,
+//                            origin.y + visibleSize.height - label->getContentSize().height);
+//
+//    // add the label as a child to this layer
+//    this->addChild(label, 1);
+//
+//    // add "HelloWorld" splash screen"
+//    auto sprite = Sprite::create("HelloWorld.png");
+//
+//    // position the sprite on the center of the screen
+//    sprite->setPosition(Vec2(visibleSize / 2) + origin);
+//
+//    // add the sprite as a child to this layer
+//    this->addChild(sprite);
     
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
+    auto container = Node::create();
+    container->setContentSize(Size(300, 300));
+    container->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    container->setPosition(Vec2(visibleSize / 2) + origin);
+    addChild(container);
     
-    auto label = Label::createWithTTF("Hello World", "fonts/arial.ttf", TITLE_FONT_SIZE);
+    const int columns = 10;
+    const int rows = 10;
+    const int blockSize = 30;
     
-    // position the label on the center of the screen
-    label->setPosition(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height);
-
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize / 2) + origin);
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite);
+    int padding = 2;
+    
+    for (int y = 0; y < rows; ++y) {
+        for (int x = 0; x < columns; ++x) {
+            auto dn = DrawNode::create();
+            dn->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+            dn->setContentSize(Size(blockSize, blockSize));
+            dn->setPosition(Point(blockSize/2 + blockSize * x, blockSize/2 + blockSize * y));
+            
+            dn->drawSolidRect(Vec2(padding, padding), Vec2(blockSize-padding, blockSize-padding), Color4F::RED);
+            container->addChild(dn);
+            
+            auto sp = Sprite::create("CloseSelected.png");
+            sp->setPosition(Point(blockSize/2, blockSize/2));
+            sp->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+            sp->setScale(blockSize / sp->getContentSize().width, blockSize / sp->getContentSize().height);
+            dn->addChild(sp);
+        }
+    }
+    
+    schedule([](float dt){
+        CC_PROFILER_DISPLAY_TIMERS();
+    }, 5, "display-times");
     
     return true;
 }

@@ -44,6 +44,7 @@
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventListenerCustom.h"
 #include "base/CCEventType.h"
+#include "base/CCProfiling.h"
 #include "2d/CCCamera.h"
 #include "2d/CCScene.h"
 
@@ -769,6 +770,7 @@ void Renderer::drawBatchedTriangles()
     /************** 2: Copy vertices/indices to GL objects *************/
     if (Configuration::getInstance()->supportsShareableVAO())
     {
+        CC_PROFILER_START("binddata_vao");
         //Bind VAO
         GL::bindVAO(_buffersVAO);
         //Set VBO data
@@ -784,23 +786,31 @@ void Renderer::drawBatchedTriangles()
         // FIXME: in order to work as fast as possible, it must "and the exact same size and usage hints it had before."
         //  source: https://www.opengl.org/wiki/Buffer_Object_Streaming#Explicit_multiple_buffering
         // so most probably we won't have any benefit of using it
+        CC_PROFILER_START("glMapBuffer,vertex");
         glBufferData(GL_ARRAY_BUFFER, sizeof(_verts[0]) * _filledVertex, nullptr, GL_STATIC_DRAW);
         void *buf = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
         memcpy(buf, _verts, sizeof(_verts[0]) * _filledVertex);
         glUnmapBuffer(GL_ARRAY_BUFFER);
+        CC_PROFILER_STOP("glMapBuffer,vertex");
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _buffersVBO[1]);
+        
+        CC_PROFILER_START("glBufferData,indices");
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_indices[0]) * _filledIndex, _indices, GL_STATIC_DRAW);
+        CC_PROFILER_STOP("glBufferData,indices");
+        CC_PROFILER_STOP("binddata_vao");
     }
     else
     {
+        CC_PROFILER_START("BindData2");
         // Client Side Arrays
 #define kQuadSize sizeof(_verts[0])
         glBindBuffer(GL_ARRAY_BUFFER, _buffersVBO[0]);
 
+        CC_PROFILER_START("glBufferData,vertex");
         glBufferData(GL_ARRAY_BUFFER, sizeof(_verts[0]) * _filledVertex , _verts, GL_DYNAMIC_DRAW);
+        CC_PROFILER_STOP("glBufferData,vertex");
 
         GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
 
@@ -814,7 +824,10 @@ void Renderer::drawBatchedTriangles()
         glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof(V3F_C4B_T2F, texCoords));
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _buffersVBO[1]);
+        CC_PROFILER_START("glBufferData,indices");
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_indices[0]) * _filledIndex, _indices, GL_STATIC_DRAW);
+        CC_PROFILER_STOP("glBufferData,indices");
+        CC_PROFILER_STOP("BindData2");
     }
 
     /************** 3: Draw *************/
