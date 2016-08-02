@@ -39,7 +39,7 @@ static int autoTestLoopCounts[] = {
 PerformceMathTests::PerformceMathTests()
 {
     ADD_TEST_CASE(PerformanceMathLayer1);
-    ADD_TEST_CASE(PerformanceMathLayer2);
+//    ADD_TEST_CASE(PerformanceMathLayer2);
 }
 
 void PerformanceMathLayer::onEnter()
@@ -61,7 +61,7 @@ void PerformanceMathLayer::onEnter()
     
     auto s = Director::getInstance()->getWinSize();
     
-    MenuItemFont::setFontSize(65);
+    MenuItemFont::setFontSize(100);
     auto decrease = MenuItemFont::create(" - ", CC_CALLBACK_1(PerformanceMathLayer::subLoopCount, this));
     decrease->setColor(Color3B(0,200,20));
     auto increase = MenuItemFont::create(" + ", CC_CALLBACK_1(PerformanceMathLayer::addLoopCount, this));

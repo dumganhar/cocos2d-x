@@ -20,18 +20,18 @@ class RootTests : public TestList
 public:
     RootTests()
     {
-        addTest("Alloc Tests", []() { return new PerformceAllocTests(); });
-        addTest("Node Children Tests", []() { return new PerformceNodeChildrenTests(); });
-        addTest("Particle Tests", []() { return new PerformceParticleTests(); });
-        addTest("Particle3D Tests", []() { return new PerformceParticle3DTests(); });
-        addTest("Sprite Tests", []() { return new PerformceSpriteTests(); });
-        addTest("Texture Tests", []() { return new PerformceTextureTests(); });
-        addTest("Label Tests", []() { return new PerformceLabelTests(); });
-        addTest("EventDispatcher Tests", []() { return new PerformceEventDispatcherTests(); });
-        addTest("Scenario Tests", []() { return new PerformceScenarioTests(); });
-        addTest("Callback Tests", []() { return new PerformceCallbackTests(); });
-        addTest("Math Tests", []() { return new PerformceMathTests(); });
-        addTest("Container Tests", []() { return new PerformceContainerTests(); });
+//        addTest("Alloc Tests", []() { return new PerformceAllocTests(); });
+//        addTest("Node Children Tests", []() { return new PerformceNodeChildrenTests(); });
+//        addTest("Particle Tests", []() { return new PerformceParticleTests(); });
+//        addTest("Particle3D Tests", []() { return new PerformceParticle3DTests(); });
+//        addTest("Sprite Tests", []() { return new PerformceSpriteTests(); });
+//        addTest("Texture Tests", []() { return new PerformceTextureTests(); });
+//        addTest("Label Tests", []() { return new PerformceLabelTests(); });
+//        addTest("EventDispatcher Tests", []() { return new PerformceEventDispatcherTests(); });
+        addTest("CPU Test", []() { return new PerformceMathTests(); });
+        addTest("CPU & GPU Test", []() { return new PerformceScenarioTests(); });
+//        addTest("Callback Tests", []() { return new PerformceCallbackTests(); });
+//        addTest("Container Tests", []() { return new PerformceContainerTests(); });
     }
 };
 
@@ -411,51 +411,51 @@ static void disableCrashCatch()
 
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-static int s_fatal_signals[] = {
-    SIGILL,
-    SIGABRT,
-    SIGBUS,
-    SIGFPE,
-    SIGSEGV,
-    SIGSTKFLT,
-    SIGPIPE,
-};
-#else
-static int s_fatal_signals[] = {
-    SIGABRT,
-    SIGBUS,
-    SIGFPE,
-    SIGILL,
-    SIGSEGV,
-    SIGTRAP,
-    SIGTERM,
-    SIGKILL,
-};
-#endif
+//#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+//static int s_fatal_signals[] = {
+//    SIGILL,
+//    SIGABRT,
+//    SIGBUS,
+//    SIGFPE,
+//    SIGSEGV,
+//    SIGSTKFLT,
+//    SIGPIPE,
+//};
+//#else
+//static int s_fatal_signals[] = {
+//    SIGABRT,
+//    SIGBUS,
+//    SIGFPE,
+//    SIGILL,
+//    SIGSEGV,
+//    SIGTRAP,
+//    SIGTERM,
+//    SIGKILL,
+//};
+//#endif
 
 static void signalHandler(int sig)
 {
     if (s_testController)
     {
-        s_testController->handleCrash();
+//        s_testController->handleCrash();
     }
 }
 
 static void initCrashCatch()
 {
-    for (auto sig : s_fatal_signals)
-    {
-        signal(sig, signalHandler);
-    }
+//    for (auto sig : s_fatal_signals)
+//    {
+//        signal(sig, signalHandler);
+//    }
 }
 
 static void disableCrashCatch()
 {
-    for (auto sig : s_fatal_signals)
-    {
-        signal(sig, SIG_DFL);
-    }
+//    for (auto sig : s_fatal_signals)
+//    {
+//        signal(sig, SIG_DFL);
+//    }
 }
 
 #else

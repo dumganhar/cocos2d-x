@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>vehiclePreviewDragon.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,0},{233,215}}</string>
+                <key>offset</key>
+                <string>{2,15}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{74,51},{233,215}}</string>
+                <key>sourceSize</key>
+                <string>{377,347}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>vehiclePreview03.png</string>
+            <key>size</key>
+            <string>{256,256}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:53b6ab8c2d3bbf36b301e9ff875be2b4:66a576400f5ac187e0a021f260765f93:2616c7a27a876a1034542371217d268b$</string>
+            <key>textureFileName</key>
+            <string>vehiclePreview03.png</string>
+        </dict>
+    </dict>
+</plist>

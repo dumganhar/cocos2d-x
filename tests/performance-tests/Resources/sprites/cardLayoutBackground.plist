@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>cardLayoutBackgroundBackground.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,0},{1024,768}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{1024,768}}</string>
+                <key>sourceSize</key>
+                <string>{1024,768}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>cardLayoutBackground.jpg</string>
+            <key>size</key>
+            <string>{1024,1024}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:0056b9ca8ed364a8473dab05dfaf7e7c:c2b039bc44d0a079f98f46db6347a142:98d6a5a39cc8a64227d0cd3837716bc8$</string>
+            <key>textureFileName</key>
+            <string>cardLayoutBackground.jpg</string>
+        </dict>
+    </dict>
+</plist>

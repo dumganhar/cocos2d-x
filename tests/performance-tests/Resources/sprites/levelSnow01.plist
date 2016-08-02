@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>levelSnowSky.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1,1},{125,125}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{125,125}}</string>
+                <key>sourceSize</key>
+                <string>{125,125}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>levelSnow01.png</string>
+            <key>size</key>
+            <string>{128,128}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:dcc607425fae0cef348fdff711128556:bdec901b3a4dfde1d7b26fba087e084b:5daa330908f5e51a0c01d77c680ab706$</string>
+            <key>textureFileName</key>
+            <string>levelSnow01.png</string>
+        </dict>
+    </dict>
+</plist>

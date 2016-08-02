@@ -18,8 +18,8 @@ public:
     
     virtual void onEnter() override;
     
-    virtual std::string title() const override{ return "Math Performance Test"; }
-    virtual std::string subtitle() const override{ return "PerformanceMathLayer subTitle"; }
+    virtual std::string title() const override{ return "CPU Test"; }
+    virtual std::string subtitle() const override{ return "Add/Sub tasks by +/- button"; }
     
     void addLoopCount(cocos2d::Ref* sender);
     void subLoopCount(cocos2d::Ref* sender);
@@ -47,7 +47,7 @@ public:
     
     virtual void doPerformanceTest(float dt) override;
     
-    virtual std::string subtitle() const override{ return "Mat4 * Mat4"; }
+//    virtual std::string subtitle() const override{ return "Mat4 * Mat4"; }
 private:
 };
 

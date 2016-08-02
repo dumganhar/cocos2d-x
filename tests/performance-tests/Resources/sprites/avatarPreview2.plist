@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>avatarPreviewSambinho.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-0.5,46}</string>
+                <key>spriteSize</key>
+                <string>{134,241}</string>
+                <key>spriteSourceSize</key>
+                <string>{377,377}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{134,241}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>realTextureFileName</key>
+            <string>avatarPreview2.png</string>
+            <key>size</key>
+            <string>{256,256}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:a91eefeca77352937872e911a8127a81:72e8d73271462861a85f1fe42f21e59c:5acd521a01d310d488e64c70c7051844$</string>
+            <key>textureFileName</key>
+            <string>avatarPreview2.png</string>
+        </dict>
+    </dict>
+</plist>

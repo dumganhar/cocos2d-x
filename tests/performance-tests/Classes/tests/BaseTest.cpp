@@ -195,7 +195,7 @@ void TestList::runThisTest()
         });
         autoTestItem->setPosition(Vec2(VisibleRect::left().x + 80, VisibleRect::bottom().y + 100));
 
-        auto menu = Menu::create(closeItem, autoTestItem, nullptr);
+        auto menu = Menu::create(closeItem/*, autoTestItem*/, nullptr);
         menu->setPosition(Vec2::ZERO);
         scene->addChild(menu, 1);
     }

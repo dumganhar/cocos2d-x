@@ -9,6 +9,8 @@ class ScenarioTest : public TestCase
 {
 public:
     CREATE_FUNC(ScenarioTest);
+    
+    virtual ~ScenarioTest();
 
     virtual bool init() override;
     virtual std::string title() const override;
@@ -52,6 +54,9 @@ private:
     cocos2d::Label* _spriteLabel;
     cocos2d::Label* _particleLabel;
     cocos2d::Label* _parsysLabel;
+    cocos2d::Label* _loadingLabel;
+    int _loadingPercent;
+    
     int _particleNumber;
 
     bool       isStating;
@@ -60,6 +65,8 @@ private:
     float      totalStatTime;
     float      minFrameRate;
     float      maxFrameRate;
+    
+    std::shared_ptr<bool>    _isDestroyed;
 };
 
 #endif
