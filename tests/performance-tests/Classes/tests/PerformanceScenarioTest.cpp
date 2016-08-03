@@ -766,7 +766,7 @@ bool ScenarioTest::init()
 
         // Picture
         int picCount = ARRAY_SIZE(__imagesToPreload);
-        int soundCount = 0;//ARRAY_SIZE(__soundToPreload);
+        int soundCount = ARRAY_SIZE(__soundToPreload);
         
         int taskCount = picCount + soundCount;
         std::shared_ptr<int> taskIndex = std::make_shared<int>(0);

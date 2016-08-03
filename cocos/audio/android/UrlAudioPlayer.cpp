@@ -95,6 +95,7 @@ void UrlAudioPlayer::playEventCallback(SLPlayItf caller, SLuint32 playEvent)
     // Note that it's on sub thread, please don't invoke OpenSLES API on sub thread
     if (playEvent == SL_PLAYEVENT_HEADATEND)
     {
+        ALOGV("UrlAudioPlayer (%p) SL_PLAYEVENT_HEADATEND", this);
         std::shared_ptr<bool> isDestroyed = _isDestroyed;
 
         auto func = [this, isDestroyed](){

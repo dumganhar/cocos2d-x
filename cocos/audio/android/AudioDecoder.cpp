@@ -197,6 +197,8 @@ bool AudioDecoder::decodeToPcm()
     SLDataFormat_MIME formatMime = {SL_DATAFORMAT_MIME, nullptr, SL_CONTAINERTYPE_UNSPECIFIED};
     decSource.pFormat = &formatMime;
 
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
+
     if (_url[0] != '/')
     {
         off_t start = 0, length = 0;
@@ -211,7 +213,7 @@ bool AudioDecoder::decodeToPcm()
         {
             relativePath = _url;
         }
-
+        ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
         _assetFd = _fdGetterCallback(relativePath, &start, &length);
 
         if (_assetFd <= 0)
@@ -219,16 +221,16 @@ bool AudioDecoder::decodeToPcm()
             ALOGE("Failed to open file descriptor for '%s'", _url.c_str());
             return false;
         }
-
+        ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
         // configure audio source
         locFd = {SL_DATALOCATOR_ANDROIDFD, _assetFd, start, length};
-
-        decSource.pLocator = &locFd;
+        ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
+        decSource.pLocator = &locFd;ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     }
     else
-    {
+    {ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
         decUri = {SL_DATALOCATOR_URI, (SLchar *) _url.c_str()};
-        decSource.pLocator = &decUri;
+        decSource.pLocator = &decUri;ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     }
 
     /* Setup the data sink */
@@ -246,20 +248,20 @@ bool AudioDecoder::decodeToPcm()
 
     decDest.pLocator = (void *) &decBuffQueue;
     decDest.pFormat = (void *) &pcm;
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /* Create the audio player */
     result = (*_engineItf)->CreateAudioPlayer(_engineItf, &player, &decSource, &decDest,
                                               NUM_EXPLICIT_INTERFACES_FOR_PLAYER, iidArray,
-                                              required);
+                                              required);ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     SL_RETURN_VAL_IF_FAILED(result, false, "CreateAudioPlayer failed");
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     _playObj = player;
     /* Realize the player in synchronous mode. */
-    result = (*player)->Realize(player, SL_BOOLEAN_FALSE);
+    result = (*player)->Realize(player, SL_BOOLEAN_FALSE);ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     SL_RETURN_VAL_IF_FAILED(result, false, "Realize failed");
 
     /* Get the play interface which is implicit */
-    result = (*player)->GetInterface(player, SL_IID_PLAY, (void *) &playItf);
+    result = (*player)->GetInterface(player, SL_IID_PLAY, (void *) &playItf);ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     SL_RETURN_VAL_IF_FAILED(result, false, "GetInterface SL_IID_PLAY failed");
 
     /* Set up the player callback to get events during the decoding */
@@ -272,7 +274,7 @@ bool AudioDecoder::decodeToPcm()
     result = (*playItf)->SetCallbackEventsMask(playItf,
                                                SL_PLAYEVENT_HEADATMARKER |
                                                SL_PLAYEVENT_HEADATNEWPOS | SL_PLAYEVENT_HEADATEND);
-    SL_RETURN_VAL_IF_FAILED(result, false, "SetCallbackEventsMask failed");
+    SL_RETURN_VAL_IF_FAILED(result, false, "SetCallbackEventsMask failed");ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     result = (*playItf)->RegisterCallback(playItf, SLAudioDecoderCallbackProxy::decProgressCallback,
                                           this);
     SL_RETURN_VAL_IF_FAILED(result, false, "RegisterCallback failed");
@@ -291,7 +293,7 @@ bool AudioDecoder::decodeToPcm()
     /* Get the metadata extraction interface which was explicitly requested */
     result = (*player)->GetInterface(player, SL_IID_METADATAEXTRACTION, (void *) &mdExtrItf);
     SL_RETURN_VAL_IF_FAILED(result, false, "GetInterface SL_IID_METADATAEXTRACTION failed");
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /* ------------------------------------------------------ */
     /* Initialize the callback and its context for the decoding buffer queue */
     _decContext.playItf = playItf;
@@ -304,7 +306,7 @@ bool AudioDecoder::decodeToPcm()
                                                   SLAudioDecoderCallbackProxy::decPlayCallback,
                                                   this);
     SL_RETURN_VAL_IF_FAILED(result, false, "decBuffQueueItf RegisterCallback failed");
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /* Enqueue buffers to map the region of memory allocated to store the decoded data */
 //    ALOGV("Enqueueing buffer ");
     for (int i = 0; i < NB_BUFFERS_IN_QUEUE; i++)
@@ -314,9 +316,9 @@ bool AudioDecoder::decodeToPcm()
         SL_RETURN_VAL_IF_FAILED(result, false, "Enqueue failed");
         _decContext.pData += BUFFER_SIZE_IN_BYTES;
     }
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     _decContext.pData = _decContext.pDataBase;
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /* ------------------------------------------------------ */
     /* Initialize the callback for prefetch errors, if we can't open the resource to decode */
     result = (*prefetchItf)->RegisterCallback(prefetchItf,
@@ -332,7 +334,7 @@ bool AudioDecoder::decodeToPcm()
     /*     1/ cause the player to prefetch the data */
     result = (*playItf)->SetPlayState(playItf, SL_PLAYSTATE_PAUSED);
     SL_RETURN_VAL_IF_FAILED(result, false, "SetPlayState SL_PLAYSTATE_PAUSED failed");
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /*     2/ block until data has been prefetched */
     SLuint32 prefetchStatus = SL_PREFETCHSTATUS_UNDERFLOW;
     SLuint32 timeOutIndex = 1000; //cjh time out prefetching after 2s
@@ -349,7 +351,7 @@ bool AudioDecoder::decodeToPcm()
         SL_RETURN_VAL_IF_FAILED(SL_RESULT_CONTENT_NOT_FOUND, false,
                                 "Failure to prefetch data in time");
     }
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /* ------------------------------------------------------ */
     /* Display duration */
     SLmillisecond durationInMsec = SL_TIME_UNKNOWN;
@@ -363,7 +365,7 @@ bool AudioDecoder::decodeToPcm()
     {
         ALOGV("Content duration is %dms", (int)durationInMsec);
     }
-
+    ALOGV("%s, line:%d", __FUNCTION__, __LINE__);
     /* ------------------------------------------------------ */
     /* Display the metadata obtained from the decoder */
     //   This is for test / demonstration purposes only where we discover the key and value sizes
