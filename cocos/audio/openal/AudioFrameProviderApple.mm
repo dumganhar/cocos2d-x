@@ -18,6 +18,15 @@ AudioFrameProviderApple::~AudioFrameProviderApple()
     
 }
 
+bool AudioFrameProviderApple::init(const std::string& url)
+{
+    CFURLRef fileURL = nil;
+    ExtAudioFileRef extRef = nullptr;
+    
+    
+    return false;
+}
+
 int AudioFrameProviderApple::read(AudioFrame* ioFrame)
 {
     return 0;

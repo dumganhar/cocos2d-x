@@ -28,14 +28,14 @@ void AudioPlayerApple::setId(int id)
     
 }
 
-std::string AudioPlayerApple::getUrl()
+std::string AudioPlayerApple::getUrl() const
 {
     return "";
 }
 
-State AudioPlayerApple::getState()
+IAudioPlayer::State AudioPlayerApple::getState() const
 {
-    return State::
+    return IAudioPlayer::State::INVALID;
 }
 
 void AudioPlayerApple::play()

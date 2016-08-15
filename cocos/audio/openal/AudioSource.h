@@ -9,6 +9,9 @@
 #ifndef AudioSource_hpp
 #define AudioSource_hpp
 
+class IAudioPlayer;
+class IAudioFrameProvider;
+
 class AudioSource
 {
 public:

@@ -14,13 +14,15 @@
 class AudioFrameProviderApple : public IAudioFrameProvider
 {
 public:
-    AudioFrameProviderApple();
-    virtual ~AudioFrameProviderApple();
-    
     virtual int read(AudioFrame* ioFrame) override;
     virtual int tell() override;
     virtual int seek(int frameIndex) override;
     virtual int getTotalFrames() override;
+    
+private:
+    AudioFrameProviderApple();
+    virtual ~AudioFrameProviderApple();
+    bool init(const std::string& url);
 };
 
 #endif /* AudioFrameProviderApple_hpp */

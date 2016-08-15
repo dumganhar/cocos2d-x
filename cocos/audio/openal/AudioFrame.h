@@ -12,12 +12,16 @@
 class AudioFrame
 {
 public:
+    AudioFrame(int format, unsigned char* buffer, unsigned int size);
     
+    int getFormat();
+    unsigned char* getBufferPtr();
+    unsigned int getBufferSize();
     
 private:
-    int format;
-    unsigned char* buffer;
-    int size;
+    int _format;
+    unsigned char* _buffer;
+    unsigned int _size;
 };
 
 #endif /* AudioFrame_hpp */

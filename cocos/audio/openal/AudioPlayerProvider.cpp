@@ -18,7 +18,7 @@ AudioPlayerProvider::~AudioPlayerProvider()
     
 }
 
-IAudioPlayerProvider* AudioPlayerProvider::get()
+IAudioPlayer* AudioPlayerProvider::get()
 {
     return nullptr;
 }

@@ -17,41 +17,41 @@ public:
     AudioPlayerApple();
     virtual ~AudioPlayerApple();
     
-    virtual int getId() const;
+    virtual int getId() const override;
     
-    virtual void setId(int id);
+    virtual void setId(int id) override;
     
-    virtual std::string getUrl();
+    virtual std::string getUrl() const override;
     
-    virtual State getState();
+    virtual State getState() const override;
     
-    virtual void play();
+    virtual void play() override;
     
-    virtual void pause();
+    virtual void pause() override;
     
-    virtual void resume();
+    virtual void resume() override;
     
-    virtual void stop();
+    virtual void stop() override;
     
-    virtual void rewind();
+    virtual void rewind() override;
     
-    virtual void setVolume(float volume);
+    virtual void setVolume(float volume) override;
     
-    virtual float getVolume() const;
+    virtual float getVolume() const override;
     
-    virtual void setLoop(bool isLoop);
+    virtual void setLoop(bool isLoop) override;
     
-    virtual bool isLoop() const;
+    virtual bool isLoop() const override;
     
-    virtual float getDuration() const;
+    virtual float getDuration() const override;
     
-    virtual float getPosition() const;
+    virtual float getPosition() const override;
     
-    virtual bool setPosition(float pos);
+    virtual bool setPosition(float pos) override;
     
     // @note: STOPPED event is invoked in main thread
     //        OVER event is invoked in sub thread
-    virtual void setPlayEventCallback(const PlayEventCallback &playEventCallback);
+    virtual void setPlayEventCallback(const PlayEventCallback &playEventCallback) override;
 };
 
 #endif /* AudioPlayer_apple_hpp */

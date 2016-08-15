@@ -14,7 +14,7 @@ class AudioFrame;
 class IAudioFrameProvider
 {
 public:
-    virtual ~IAudioFrameProvier() {};
+    virtual ~IAudioFrameProvider() {};
     
     virtual int read(AudioFrame* ioFrame) = 0;
     virtual int tell() = 0;

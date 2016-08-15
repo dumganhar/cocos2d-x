@@ -9,13 +9,15 @@
 #ifndef AudioPlayerProvider_hpp
 #define AudioPlayerProvider_hpp
 
+class IAudioPlayer;
+
 class AudioPlayerProvider
 {
 public:
     AudioPlayerProvider();
     ~AudioPlayerProvider();
     
-    IAudioPlayerProvider* get();
+    IAudioPlayer* get();
 };
 
 #endif /* AudioPlayerProvider_hpp */
