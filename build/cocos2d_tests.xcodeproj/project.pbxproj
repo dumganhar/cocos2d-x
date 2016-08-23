@@ -227,6 +227,10 @@
 		1A0EE43318CDF799004CD58F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39E18CD9EE50087CE3A /* UIKit.framework */; };
 		1A0EE43418CDF799004CD58F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39C18CD9ED80087CE3A /* AVFoundation.framework */; };
 		1A0EE43518CDF799004CD58F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64832165F3AFD007D4F18 /* Foundation.framework */; };
+		1A30DC711D6C268C00EB300A /* PerformanceAudioEngineTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A30DC6F1D6C267C00EB300A /* PerformanceAudioEngineTest.cpp */; };
+		1A30DC721D6C268E00EB300A /* PerformanceAudioEngineTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A30DC6F1D6C267C00EB300A /* PerformanceAudioEngineTest.cpp */; };
+		1A6485181D6C38F40042F76D /* SoundEffectsFX009 in Resources */ = {isa = PBXBuildFile; fileRef = 1A6485171D6C38F40042F76D /* SoundEffectsFX009 */; };
+		1A6485191D6C38F40042F76D /* SoundEffectsFX009 in Resources */ = {isa = PBXBuildFile; fileRef = 1A6485171D6C38F40042F76D /* SoundEffectsFX009 */; };
 		1A78A5521D1A3C9B00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5531D1A3CE800B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5541D1A3D0F00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
@@ -1899,6 +1903,9 @@
 		1A0EE31418CDF733004CD58F /* lua-empty-test Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lua-empty-test Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0EE41318CDF775004CD58F /* cpp-empty-test iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpp-empty-test iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0EE47E18CDF799004CD58F /* lua-empty-test iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lua-empty-test iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A30DC6F1D6C267C00EB300A /* PerformanceAudioEngineTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceAudioEngineTest.cpp; sourceTree = "<group>"; };
+		1A30DC701D6C267C00EB300A /* PerformanceAudioEngineTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerformanceAudioEngineTest.h; sourceTree = "<group>"; };
+		1A6485171D6C38F40042F76D /* SoundEffectsFX009 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SoundEffectsFX009; path = "../tests/performance-tests/Resources/SoundEffectsFX009"; sourceTree = "<group>"; };
 		1A9F808C177E98A600D9A1CB /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		1ABCA27618CD90A40087CE3A /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		1ABCA28618CD91510087CE3A /* lua-tests Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lua-tests Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5257,6 +5264,7 @@
 		FA94B2201B8EF9A90074B261 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1A6485171D6C38F40042F76D /* SoundEffectsFX009 */,
 				FADE78AB1B9E88420061590D /* Particles */,
 				FADE78AC1B9E88420061590D /* TileMaps */,
 				FADE78881B96C51C0061590D /* Particle3D */,
@@ -5272,17 +5280,14 @@
 		FA94B2371B9045160074B261 /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				FADE79081B9FCD400061590D /* testResource.h */,
-				FA94B2491B9059540074B261 /* VisibleRect.cpp */,
-				FA94B24A1B9059540074B261 /* VisibleRect.h */,
-				FA94B2481B904E290074B261 /* tests.h */,
 				FA94B23C1B90497E0074B261 /* BaseTest.cpp */,
 				FA94B23D1B90497E0074B261 /* BaseTest.h */,
 				FA94B23E1B90497E0074B261 /* controller.cpp */,
 				FA94B23F1B90497E0074B261 /* controller.h */,
-				FA94B2411B90497E0074B261 /* testBasic.h */,
 				FA94B2381B9045160074B261 /* PerformanceAllocTest.cpp */,
 				FA94B2391B9045160074B261 /* PerformanceAllocTest.h */,
+				1A30DC6F1D6C267C00EB300A /* PerformanceAudioEngineTest.cpp */,
+				1A30DC701D6C267C00EB300A /* PerformanceAudioEngineTest.h */,
 				FADE78B11B9EC0290061590D /* PerformanceCallbackTest.cpp */,
 				FADE78B21B9EC0290061590D /* PerformanceCallbackTest.h */,
 				FADE78FB1B9ECB7F0061590D /* PerformanceContainerTest.cpp */,
@@ -5295,16 +5300,21 @@
 				FADE78B61B9EC6160061590D /* PerformanceMathTest.h */,
 				FADE786D1B9451540061590D /* PerformanceNodeChildrenTest.cpp */,
 				FADE786E1B9451540061590D /* PerformanceNodeChildrenTest.h */,
-				FADE78711B9572990061590D /* PerformanceParticleTest.cpp */,
-				FADE78721B9572990061590D /* PerformanceParticleTest.h */,
 				FADE78841B96C4780061590D /* PerformanceParticle3DTest.cpp */,
 				FADE78851B96C4780061590D /* PerformanceParticle3DTest.h */,
+				FADE78711B9572990061590D /* PerformanceParticleTest.cpp */,
+				FADE78721B9572990061590D /* PerformanceParticleTest.h */,
 				FADE78A41B9E86100061590D /* PerformanceScenarioTest.cpp */,
 				FADE78A51B9E86100061590D /* PerformanceScenarioTest.h */,
 				FADE788B1B96D0710061590D /* PerformanceSpriteTest.cpp */,
 				FADE788C1B96D0710061590D /* PerformanceSpriteTest.h */,
 				FADE788F1B9C363D0061590D /* PerformanceTextureTest.cpp */,
 				FADE78901B9C363D0061590D /* PerformanceTextureTest.h */,
+				FA94B2411B90497E0074B261 /* testBasic.h */,
+				FADE79081B9FCD400061590D /* testResource.h */,
+				FA94B2481B904E290074B261 /* tests.h */,
+				FA94B2491B9059540074B261 /* VisibleRect.cpp */,
+				FA94B24A1B9059540074B261 /* VisibleRect.h */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -6462,6 +6472,7 @@
 				FA94B1F11B8EF8250074B261 /* Default.png in Resources */,
 				FA94B1FC1B8EF8250074B261 /* Icon-58.png in Resources */,
 				FA94B2291B8EF9C50074B261 /* CloseSelected.png in Resources */,
+				1A6485191D6C38F40042F76D /* SoundEffectsFX009 in Resources */,
 				FADE788A1B96C51C0061590D /* Particle3D in Resources */,
 				FADE78771B95740D0061590D /* fps_images.png in Resources */,
 			);
@@ -6472,6 +6483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA94B24E1B93EF7B0074B261 /* Images in Resources */,
+				1A6485181D6C38F40042F76D /* SoundEffectsFX009 in Resources */,
 				FA94B2091B8EF8430074B261 /* Info.plist in Resources */,
 				FA94B2261B8EF9C50074B261 /* CloseNormal.png in Resources */,
 				FADE78AD1B9E88420061590D /* Particles in Resources */,
@@ -7329,6 +7341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A30DC721D6C268E00EB300A /* PerformanceAudioEngineTest.cpp in Sources */,
 				FADE78921B9C363D0061590D /* PerformanceTextureTest.cpp in Sources */,
 				FADE78B41B9EC0290061590D /* PerformanceCallbackTest.cpp in Sources */,
 				FA94B2451B90497E0074B261 /* controller.cpp in Sources */,
@@ -7365,6 +7378,7 @@
 				FA94B1CE1B8EF7BB0074B261 /* AppDelegate.cpp in Sources */,
 				FA94B24B1B9059540074B261 /* VisibleRect.cpp in Sources */,
 				FADE78FD1B9ECB7F0061590D /* PerformanceContainerTest.cpp in Sources */,
+				1A30DC711D6C268C00EB300A /* PerformanceAudioEngineTest.cpp in Sources */,
 				FA94B20A1B8EF8430074B261 /* main.cpp in Sources */,
 				FADE78A61B9E86100061590D /* PerformanceScenarioTest.cpp in Sources */,
 				FA94B23A1B9045160074B261 /* PerformanceAllocTest.cpp in Sources */,

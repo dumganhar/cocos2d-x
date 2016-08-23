@@ -21,6 +21,7 @@ public:
     RootTests()
     {
         addTest("Alloc Tests", []() { return new PerformceAllocTests(); });
+        addTest("AudioEngine Tests", []() { return new PerformceAudioEngineTests(); });
         addTest("Node Children Tests", []() { return new PerformceNodeChildrenTests(); });
         addTest("Particle Tests", []() { return new PerformceParticleTests(); });
         addTest("Particle3D Tests", []() { return new PerformceParticle3DTests(); });

@@ -3,6 +3,7 @@
 
 // sort them alphabetically. thanks
 #include "PerformanceAllocTest.h"
+#include "PerformanceAudioEngineTest.h"
 #include "PerformanceNodeChildrenTest.h"
 #include "PerformanceParticleTest.h"
 #include "PerformanceParticle3DTest.h"

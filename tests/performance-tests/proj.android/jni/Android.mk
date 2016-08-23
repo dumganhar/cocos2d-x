@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/tests/BaseTest.cpp \
                    ../../Classes/tests/PerformanceParticle3DTest.cpp \
                    ../../Classes/tests/PerformanceAllocTest.cpp \
+                   ../../Classes/tests/PerformanceAudioEngineTest.cpp \
                    ../../Classes/tests/PerformanceParticleTest.cpp \
                    ../../Classes/tests/PerformanceCallbackTest.cpp \
                    ../../Classes/tests/PerformanceScenarioTest.cpp \
