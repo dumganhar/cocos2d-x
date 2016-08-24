@@ -95,6 +95,7 @@ void PerformceAudioEngineScene::initWithAudioFileCount(unsigned int audioFileCou
     auto s = Director::getInstance()->getWinSize();
     
     _currentAudioCount = audioFileCount;
+    _fileCount = ARRAY_SIZE(__audioFiles);
     
     MenuItemFont::setFontSize(65);
     auto decrease = MenuItemFont::create(" - ", [&](Ref *sender) {
@@ -334,10 +335,11 @@ void AudioEngineOverloadTest::update(float dt)
     _updateCounter++;
     if (_updateCounter % 5 == 0)
     {
+        std::string filePath = grabAudioFilePath();
         
         CC_PROFILER_START(profilerName());
         
-        int audioId = AudioEngine::play2d(__audioFiles[0]);
+        int audioId = AudioEngine::play2d(filePath);
         assert(audioId != -1);
         
         AudioEngine::setFinishCallback(audioId, [=](int id, const std::string& path){
@@ -361,7 +363,7 @@ std::string AudioEngineOverloadTest::subtitle() const
 //
 ////////////////////////////////////////////////////////
 
-std::string AudioEngineOverloadTest1::grabAudioFilePath(int idx)
+std::string AudioEngineOverloadTest1::grabAudioFilePath()
 {
     return __audioFiles[0];
 }
@@ -382,9 +384,16 @@ const char*  AudioEngineOverloadTest1::testName()
 //
 ////////////////////////////////////////////////////////
 
-std::string AudioEngineOverloadTest2::grabAudioFilePath(int idx)
+AudioEngineOverloadTest2::AudioEngineOverloadTest2()
+: _playIndex(0)
 {
-    return __audioFiles[idx % kMaxAudioFileCount];
+    
+}
+
+std::string AudioEngineOverloadTest2::grabAudioFilePath()
+{
+    _playIndex++;
+    return __audioFiles[_playIndex % _fileCount];
 }
 
 std::string AudioEngineOverloadTest2::title() const

@@ -35,6 +35,7 @@ protected:
     
     char _profilerName[256];
     int _currentAudioCount;
+    int _fileCount;
 };
 
 class Play2dAfterPreload : public PerformceAudioEngineScene
@@ -50,7 +51,7 @@ public:
     virtual std::string title() const override;
     virtual std::string subtitle() const override;
     
-private:
+protected:
     bool _isPreloadFinished;
     bool _isPlayOver;
     int _preloadedCount;
@@ -66,7 +67,7 @@ public:
     virtual void update(float dt) override;
     virtual void updateAudioCount() override;
     virtual void initWithAudioFileCount(unsigned int audioFileCount) override;
-    virtual std::string grabAudioFilePath(int idx) = 0;
+    virtual std::string grabAudioFilePath() = 0;
 
 private:
     bool _isPreloadFinished;
@@ -81,7 +82,7 @@ public:
     CREATE_FUNC(AudioEngineOverloadTest1);
     virtual const char* testName() override;
     virtual std::string title() const override;
-    virtual std::string grabAudioFilePath(int idx) override;
+    virtual std::string grabAudioFilePath() override;
     
 private:
 };
@@ -90,9 +91,11 @@ class AudioEngineOverloadTest2 : public AudioEngineOverloadTest
 {
 public:
     CREATE_FUNC(AudioEngineOverloadTest2);
+    AudioEngineOverloadTest2();
     virtual const char* testName() override;
     virtual std::string title() const override;
-    virtual std::string grabAudioFilePath(int idx) override;
+    virtual std::string grabAudioFilePath() override;
     
 private:
+    int _playIndex;
 };
