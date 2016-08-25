@@ -9,19 +9,66 @@
 #ifndef AudioSource_hpp
 #define AudioSource_hpp
 
-class IAudioPlayer;
+#include <string>
+
 class IAudioFrameProvider;
 
 class AudioSource
 {
 public:
-    static AudioSource* create(const std::string& url, bool isStreaming);
+    enum class State
+    {
+        INVALID = 0,
+        INITIALIZED,
+        PLAYING,
+        PAUSED,
+        STOPPED,
+        OVER
+    };
     
-    IAudioPlayer* getAudioPlayer();
-
+    using PlayEventCallback = std::function<void(State)>;
+    
+    AudioSource(const std::string& url, bool isStreaming);
+    ~AudioSource();
+    
+    int getId() const;
+    
+    void setId(int id);
+    
+    std::string getUrl() const;
+    
+    State getState() const;
+    
+    void play();
+    
+    void pause();
+    
+    void resume();
+    
+    void stop();
+    
+    void rewind();
+    
+    void setVolume(float volume);
+    
+    float getVolume() const;
+    
+    void setLoop(bool isLoop);
+    
+    bool isLoop() const;
+    
+    float getDuration() const;
+    
+    float getPosition() const;
+    
+    bool setPosition(float pos);
+    
+    void setPlayEventCallback(const PlayEventCallback &playEventCallback);
+    
 private:
-    IAudioPlayer* _audioPlayer;
     IAudioFrameProvider* _audioFrameProvider;
+    std::string _url;
+    bool _isStreaming;
 };
 
 #endif /* AudioSource_hpp */

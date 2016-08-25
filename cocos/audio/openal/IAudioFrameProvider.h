@@ -9,17 +9,18 @@
 #ifndef IAudioFrameProvider_hpp
 #define IAudioFrameProvider_hpp
 
-class AudioFrame;
+class AudioFrameBuffer;
 
 class IAudioFrameProvider
 {
 public:
     virtual ~IAudioFrameProvider() {};
     
-    virtual int read(AudioFrame* ioFrame) = 0;
-    virtual int tell() = 0;
+    virtual int read(AudioFrameBuffer* ioFrame) = 0;
+    virtual int tell() const = 0;
     virtual int seek(int frameIndex) = 0;
-    virtual int getTotalFrames() = 0;
+    virtual int getTotalFrames() const = 0;
+    virtual int getSampleRate() const = 0;
 };
 
 #endif /* IAudioFrameProvider_hpp */

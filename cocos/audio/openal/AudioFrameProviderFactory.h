@@ -9,19 +9,21 @@
 #ifndef AudioFrameProviderFactory_hpp
 #define AudioFrameProviderFactory_hpp
 
+#include "AudioFrameProviderApple.h"
+
 class IAudioFrameProvider;
 
 class AudioFrameProviderFactory
 {
 public:
-    static AudioFrameProviderFactory* getInstance();
-    static void destroyInstance();
+    static bool registerAudioFrameProvider(const std::string& suffix);
+    static void unregisterAudioFrameProvider(const std::string& suffix);
+    static void unregisterAll();
     
-    bool registerAudioFrameProvider(const std::string& suffix);
-    void unregisterAudioFrameProvider(const std::string& suffix);
+    static IAudioFrameProvider* getAudioProvider(const std::string& suffix);
     
-    IAudioFrameProvider* getAudioProvider(const std::string& suffix);
-    
+private:
+    static AudioFrameProviderApple __provider;;
 };
 
 #endif /* AudioFrameProviderFactory_hpp */
