@@ -1,5 +1,7 @@
 #pragma once
 
+#include "audio/openal/cutils/log.h"
+
 #define QUEUEBUFFER_NUM 3
 #define QUEUEBUFFER_TIME_STEP 0.1
 
@@ -32,3 +34,8 @@ enum class AudioFormat
 {
     PCM_16_BIT,
 };
+
+#define clockNow() std::chrono::high_resolution_clock::now()
+#define intervalInMS(oldTime, newTime) (static_cast<long>(std::chrono::duration_cast<std::chrono::microseconds>((newTime) - (oldTime)).count()) / 1000.f)
+
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))

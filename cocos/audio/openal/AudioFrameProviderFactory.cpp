@@ -7,7 +7,7 @@
 //
 
 #include "AudioFrameProviderFactory.h"
-
+#include "AudioFrameProviderBuffered.h"
 
 namespace  {
     std::unordered_map<std::string, IAudioFrameProvider*> __providerMap;
@@ -34,8 +34,22 @@ void AudioFrameProviderFactory::unregisterAll()
     
 }
 
-IAudioFrameProvider* AudioFrameProviderFactory::getAudioProvider(const std::string& suffix)
+IAudioFrameProvider* AudioFrameProviderFactory::newAudioFrameProvider(const std::string& url)
 {
     //TODO:
-    return &__provider;
+    IAudioFrameProvider* ret = nullptr;
+    auto provider = new AudioFrameProviderApple();
+    if (!provider->open(url))
+    {
+        delete provider;
+        provider = nullptr;
+    }
+    
+    if (provider != nullptr)
+    {
+        // FIXME:
+        ret = new AudioFrameProviderBuffered(url, provider, true);
+    }
+    
+    return ret;
 }

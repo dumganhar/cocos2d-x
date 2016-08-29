@@ -32,6 +32,9 @@
 #include "audio/apple/AudioPlayer.h"
 #include "audio/apple/AudioCache.h"
 #include "platform/CCFileUtils.h"
+#include "cocos/audio/openal/AudioFrameProviderFactory.h"
+#include "cocos/audio/openal/AudioFrameBuffer.h"
+
 #import <AudioToolbox/ExtendedAudioFile.h>
 
 #define VERY_VERY_VERBOSE_LOGGING
@@ -60,6 +63,7 @@ AudioPlayer::AudioPlayer()
 , _timeDirty(false)
 , _isRotateThreadExited(false)
 , _id(++__idIndex)
+, _frameProvider(nullptr)
 {
     memset(_bufferIds, 0, sizeof(_bufferIds));
 }
@@ -72,6 +76,12 @@ AudioPlayer::~AudioPlayer()
     if (_streamingSource)
     {
         alDeleteBuffers(3, _bufferIds);
+    }
+    
+    if (_frameProvider != nullptr)
+    {
+        delete _frameProvider;
+        _frameProvider = nullptr;
     }
 }
 
@@ -236,31 +246,36 @@ bool AudioPlayer::play2d()
 
 void AudioPlayer::rotateBufferThread(int offsetFrame)
 {
-    ALint sourceState;
-    ALint bufferProcessed = 0;
-    ExtAudioFileRef extRef = nullptr;
-    
-    NSString *fileFullPath = [[NSString alloc] initWithCString:_audioCache->_fileFullPath.c_str() encoding:NSUTF8StringEncoding];
-    auto fileURL = (CFURLRef)[[NSURL alloc] initFileURLWithPath:fileFullPath];
-    [fileFullPath release];
-    char* tmpBuffer = (char*)malloc(_audioCache->_queBufferBytes);
-    auto frames = _audioCache->_queBufferFrames;
-    
-    auto error = ExtAudioFileOpenURL(fileURL, &extRef);
-    if(error) {
-        ALOGE("%s: ExtAudioFileOpenURL FAILED, Error = %ld", __PRETTY_FUNCTION__,(long) error);
-        goto ExitBufferThread;
+    if (_frameProvider == nullptr)
+    {
+        _frameProvider = AudioFrameProviderFactory::newAudioFrameProvider(_audioCache->_fileFullPath);
     }
     
-    error = ExtAudioFileSetProperty(extRef, kExtAudioFileProperty_ClientDataFormat, sizeof(_audioCache->_outputFormat), &_audioCache->_outputFormat);
-    AudioBufferList		theDataBuffer;
-    theDataBuffer.mNumberBuffers = 1;
-    theDataBuffer.mBuffers[0].mData = tmpBuffer;
-    theDataBuffer.mBuffers[0].mDataByteSize = _audioCache->_queBufferBytes;
-    theDataBuffer.mBuffers[0].mNumberChannels = _audioCache->_outputFormat.mChannelsPerFrame;
+    ALint sourceState;
+    ALint bufferProcessed = 0;
+//    ExtAudioFileRef extRef = nullptr;
     
+//    NSString *fileFullPath = [[NSString alloc] initWithCString:_audioCache->_fileFullPath.c_str() encoding:NSUTF8StringEncoding];
+//    auto fileURL = (CFURLRef)[[NSURL alloc] initFileURLWithPath:fileFullPath];
+//    [fileFullPath release];
+    unsigned char* tmpBuffer = (unsigned char*)malloc(_audioCache->_queBufferBytes);
+//    auto frames = _audioCache->_queBufferFrames;
+//    
+//    auto error = ExtAudioFileOpenURL(fileURL, &extRef);
+//    if(error) {
+//        ALOGE("%s: ExtAudioFileOpenURL FAILED, Error = %ld", __PRETTY_FUNCTION__,(long) error);
+//        goto ExitBufferThread;
+//    }
+//    
+//    error = ExtAudioFileSetProperty(extRef, kExtAudioFileProperty_ClientDataFormat, sizeof(_audioCache->_outputFormat), &_audioCache->_outputFormat);
+//    AudioBufferList		theDataBuffer;
+//    theDataBuffer.mNumberBuffers = 1;
+//    theDataBuffer.mBuffers[0].mData = tmpBuffer;
+//    theDataBuffer.mBuffers[0].mDataByteSize = _audioCache->_queBufferBytes;
+//    theDataBuffer.mBuffers[0].mNumberChannels = _audioCache->_outputFormat.mChannelsPerFrame;
+//    
     if (offsetFrame != 0) {
-        ExtAudioFileSeek(extRef, offsetFrame);
+        _frameProvider->seek(offsetFrame);
     }
     
     while (!_isDestroyed) {
@@ -271,8 +286,9 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
                 bufferProcessed--;
                 if (_timeDirty) {
                     _timeDirty = false;
-                    offsetFrame = _currTime * _audioCache->_outputFormat.mSampleRate;
-                    ExtAudioFileSeek(extRef, offsetFrame);
+                    offsetFrame = _currTime * _frameProvider->getSampleRate();
+                    
+                    _frameProvider->seek(offsetFrame);
                 }
                 else {
                     _currTime += QUEUEBUFFER_TIME_STEP;
@@ -285,24 +301,31 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
                     }
                 }
                 
-                frames = _audioCache->_queBufferFrames;
-                ExtAudioFileRead(extRef, (UInt32*)&frames, &theDataBuffer);
-                if (frames <= 0) {
-                    if (_loop) {
-                        ExtAudioFileSeek(extRef, 0);
-                        frames = _audioCache->_queBufferFrames;
-                        theDataBuffer.mBuffers[0].mDataByteSize = _audioCache->_queBufferBytes;
-                        ExtAudioFileRead(extRef, (UInt32*)&frames, &theDataBuffer);
-                    } else {
+                bool ended = _frameProvider->tell() == _frameProvider->getTotalFrames();
+                
+                if (ended)
+                {
+                    if (_loop)
+                    {
+                        _frameProvider->seek(0);
+                    }
+                    else
+                    {
                         _isDestroyed = true;
                         break;
                     }
                 }
                 
-                ALuint bid;
-                alSourceUnqueueBuffers(_alSource, 1, &bid);
-                alBufferData(bid, _audioCache->_format, tmpBuffer, frames * _audioCache->_outputFormat.mBytesPerFrame, _audioCache->_sampleRate);
-                alSourceQueueBuffers(_alSource, 1, &bid);
+                AudioFrameBuffer ioFrame;
+                ioFrame.frameCount = _audioCache->_queBufferFrames;
+                ioFrame.raw = tmpBuffer;
+                if (_frameProvider->read(&ioFrame) > 0)
+                {
+                    ALuint bid;
+                    alSourceUnqueueBuffers(_alSource, 1, &bid);
+                    alBufferData(bid, _audioCache->_format, tmpBuffer, ioFrame.frameCount * _frameProvider->getBytesPerFrame(), _frameProvider->getSampleRate());
+                    alSourceQueueBuffers(_alSource, 1, &bid);
+                }
             }
         }
         
@@ -316,11 +339,6 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
     
 ExitBufferThread:
     ALOGV("Exit rotate buffer thread ...");
-    CFRelease(fileURL);
-	// Dispose the ExtAudioFileRef, it is no longer needed
-	if (extRef){
-        ExtAudioFileDispose(extRef);
-    }
     free(tmpBuffer);
     _isRotateThreadExited = true;
 }

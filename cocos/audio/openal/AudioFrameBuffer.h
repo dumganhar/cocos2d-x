@@ -14,7 +14,15 @@ struct AudioFrameBuffer
 {
     int frameCount;
     int sampleRate;
+    int bytesPerFrame;
     unsigned char* raw;
+    
+    AudioFrameBuffer()
+    : frameCount(0)
+    , sampleRate(0)
+    , bytesPerFrame(0)
+    , raw(nullptr)
+    {}
 };
 
 #endif /* AudioFrameBuffer_hpp */

@@ -20,10 +20,11 @@ public:
     static void unregisterAudioFrameProvider(const std::string& suffix);
     static void unregisterAll();
     
-    static IAudioFrameProvider* getAudioProvider(const std::string& suffix);
+    static IAudioFrameProvider* newAudioFrameProvider(const std::string& url);
     
 private:
-    static AudioFrameProviderApple __provider;;
+    AudioFrameProviderFactory() {};
+    ~AudioFrameProviderFactory() {};
 };
 
 #endif /* AudioFrameProviderFactory_hpp */

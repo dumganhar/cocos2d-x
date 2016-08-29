@@ -36,6 +36,10 @@
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
 
+#include "cocos/audio/openal/AudioFrameProviderFactory.h"
+#include "cocos/audio/openal/AudioFrameBuffer.h"
+
+
 #define VERY_VERY_VERBOSE_LOGGING
 #ifdef VERY_VERY_VERBOSE_LOGGING
 #define ALOGVV ALOGV
@@ -89,9 +93,7 @@ AudioCache::AudioCache()
     {
         _queBuffers[i] = nullptr;
         _queBufferSize[i] = 0;
-    }
-    
-    memset(&_outputFormat, 0, sizeof(_outputFormat));
+    }    
 }
 
 AudioCache::~AudioCache()
@@ -149,94 +151,31 @@ void AudioCache::readDataTask(unsigned int selfId)
     _readDataTaskMutex.lock();
     _state = State::LOADING;
     
-    CFURLRef fileURL = nil;
-    ExtAudioFileRef extRef = nullptr;
     
+    IAudioFrameProvider* provider = AudioFrameProviderFactory::newAudioFrameProvider(_fileFullPath);
+
     do
     {
-        if (*_isDestroyed) break;
+        if (provider == nullptr) break;
         
-        AudioStreamBasicDescription		theFileFormat;
-        UInt32 thePropertySize = sizeof(theFileFormat);
-        
-        SInt64 theFileLengthInFrames;
-        SInt64 readInFrames;
-        SInt64 dataSize;
-        SInt64 frames;
-        AudioBufferList theDataBuffer;
-        
-        NSString *fileFullPath = [[NSString alloc] initWithCString:_fileFullPath.c_str() encoding:NSUTF8StringEncoding];
-        fileURL = (CFURLRef)[[NSURL alloc] initFileURLWithPath:fileFullPath];
-        [fileFullPath release];
-        
-        if (*_isDestroyed) break;
-
-        auto error = ExtAudioFileOpenURL(fileURL, &extRef);
-        if (error) {
-            ALOGE("%s: ExtAudioFileOpenURL FAILED, Error = %ld", __PRETTY_FUNCTION__, (long)error);
-            break;
-        }
-        
-        if (*_isDestroyed) break;
-        
-        // Get the audio data format
-        error = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileDataFormat, &thePropertySize, &theFileFormat);
-        if(error)
+        _dataSize = provider->getTotalFrames() * provider->getBytesPerFrame();
+        _sampleRate = provider->getSampleRate();
+        if (provider->getBytesPerFrame() == 2)
         {
-            ALOGE("%s: ExtAudioFileGetProperty(kExtAudioFileProperty_FileDataFormat) FAILED, Error = %ld", __PRETTY_FUNCTION__, (long)error);
-            break;
+            _format = AL_FORMAT_MONO16;
         }
-        
-        if (theFileFormat.mChannelsPerFrame > 2)
+        else if (provider->getBytesPerFrame() == 4)
         {
-            ALOGE("%s: Unsupported Format, channel count is greater than stereo",__PRETTY_FUNCTION__);
-            break;
+            _format = AL_FORMAT_STEREO16;
         }
-        
-        if (*_isDestroyed) break;
-        
-        // Set the client format to 16 bit signed integer (native-endian) data
-        // Maintain the channel count and sample rate of the original source format
-        _outputFormat.mSampleRate = theFileFormat.mSampleRate;
-        _outputFormat.mChannelsPerFrame = theFileFormat.mChannelsPerFrame;
-        
-        _bytesPerFrame = 2 * _outputFormat.mChannelsPerFrame;
-        _outputFormat.mFormatID = kAudioFormatLinearPCM;
-        _outputFormat.mBytesPerPacket = _bytesPerFrame;
-        _outputFormat.mFramesPerPacket = 1;
-        _outputFormat.mBytesPerFrame = _bytesPerFrame;
-        _outputFormat.mBitsPerChannel = 16;
-        _outputFormat.mFormatFlags = kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsSignedInteger;
-        
-        error = ExtAudioFileSetProperty(extRef, kExtAudioFileProperty_ClientDataFormat, sizeof(_outputFormat), &_outputFormat);
-        if(error)
-        {
-            ALOGE("%s: ExtAudioFileSetProperty FAILED, Error = %ld", __PRETTY_FUNCTION__, (long)error);
-            break;
-        }
-        
-        if (*_isDestroyed) break;
-        
-        // Get the total frame count
-        thePropertySize = sizeof(theFileLengthInFrames);
-        error = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileLengthFrames, &thePropertySize, &theFileLengthInFrames);
-        if(error)
-        {
-            ALOGE("%s: ExtAudioFileGetProperty(kExtAudioFileProperty_FileLengthFrames) FAILED, Error = %ld", __PRETTY_FUNCTION__, (long)error);
-            break;
-        }
-        
-        if (*_isDestroyed) break;
-        
-        _dataSize = (ALsizei)(theFileLengthInFrames * _outputFormat.mBytesPerFrame);
-        _format = (_outputFormat.mChannelsPerFrame > 1) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
-        _sampleRate = (ALsizei)_outputFormat.mSampleRate;
-        _duration = 1.0f * theFileLengthInFrames / _outputFormat.mSampleRate;
         
         if (_dataSize <= PCMDATA_CACHEMAXSIZE)
         {
-            _pcmData = (char*)malloc(_dataSize);
+            _pcmData = (unsigned char*)malloc(_dataSize);
+            memset(_pcmData, 0, _dataSize);
+            
             alGenBuffers(1, &_alBufferId);
+            
             auto alError = alGetError();
             if (alError != AL_NO_ERROR) {
                 ALOGE("%s: attaching audio to buffer fail: %x", __PRETTY_FUNCTION__, alError);
@@ -247,63 +186,54 @@ void AudioCache::readDataTask(unsigned int selfId)
             
             alBufferDataStaticProc(_alBufferId, _format, _pcmData, _dataSize, _sampleRate);
             
-            readInFrames = theFileFormat.mSampleRate * QUEUEBUFFER_TIME_STEP * QUEUEBUFFER_NUM;
-            dataSize = _outputFormat.mBytesPerFrame * readInFrames;
-            if (dataSize > _dataSize) {
-                dataSize = _dataSize;
-                readInFrames = theFileLengthInFrames;
+            int readInFrames = provider->getSampleRate() * QUEUEBUFFER_TIME_STEP * QUEUEBUFFER_NUM;
+            bool toReadOnce = false;
+            if (readInFrames > provider->getTotalFrames())
+            {
+                readInFrames = provider->getTotalFrames();
+                toReadOnce = true;
             }
-            theDataBuffer.mNumberBuffers = 1;
-            theDataBuffer.mBuffers[0].mDataByteSize = (UInt32)dataSize;
-            theDataBuffer.mBuffers[0].mNumberChannels = _outputFormat.mChannelsPerFrame;
             
-            theDataBuffer.mBuffers[0].mData = _pcmData;
-            frames = readInFrames;
-            ExtAudioFileRead(extRef, (UInt32*)&frames, &theDataBuffer);
-            
-            if (*_isDestroyed) break;
+            AudioFrameBuffer ioFrame;
+            ioFrame.frameCount = readInFrames;
+            ioFrame.raw = (unsigned char*) _pcmData;
+            provider->read(&ioFrame);
             
             _state = State::READY;
             
-            _bytesOfRead += dataSize;
             invokingPlayCallbacks();
             
-            while (!*_isDestroyed && _bytesOfRead + dataSize < _dataSize) {
-                theDataBuffer.mBuffers[0].mData = _pcmData + _bytesOfRead;
-                frames = readInFrames;
-                ExtAudioFileRead(extRef, (UInt32*)&frames, &theDataBuffer);
-                _bytesOfRead += dataSize; //FIXME: the buffer size of read frames may be fewer than dataSize.
+            if (!toReadOnce)
+            {
+                while (!*_isDestroyed)
+                {
+                    ioFrame.frameCount = readInFrames;
+                    ioFrame.raw = _pcmData + (provider->tell() * provider->getBytesPerFrame());
+                    
+                    if (provider->read(&ioFrame) <= 0)
+                    {
+                        break;
+                    }
+                }
             }
-            
-            dataSize = _dataSize - _bytesOfRead;
-            if (!*_isDestroyed && dataSize > 0) {
-                theDataBuffer.mBuffers[0].mDataByteSize = (UInt32)dataSize;
-                theDataBuffer.mBuffers[0].mData = _pcmData + _bytesOfRead;
-                frames = readInFrames;
-                ExtAudioFileRead(extRef, (UInt32*)&frames, &theDataBuffer);
-            }
-            
-            _bytesOfRead = _dataSize;
         }
         else
         {
-            _queBufferFrames = theFileFormat.mSampleRate * QUEUEBUFFER_TIME_STEP;
+            _queBufferFrames = provider->getSampleRate() * QUEUEBUFFER_TIME_STEP;
             if (_queBufferFrames == 0)
                 break;
             
-            _queBufferBytes = _queBufferFrames * _outputFormat.mBytesPerFrame;
+            _queBufferBytes = _queBufferFrames * provider->getBytesPerFrame();
             
-            theDataBuffer.mNumberBuffers = 1;
-            theDataBuffer.mBuffers[0].mNumberChannels = _outputFormat.mChannelsPerFrame;
+            AudioFrameBuffer ioFrame;
+            
             for (int index = 0; index < QUEUEBUFFER_NUM; ++index) {
                 _queBuffers[index] = (char*)malloc(_queBufferBytes);
                 
-                theDataBuffer.mBuffers[0].mDataByteSize = _queBufferBytes;
-                theDataBuffer.mBuffers[0].mData = _queBuffers[index];
-                frames = _queBufferFrames;
-                ExtAudioFileRead(extRef, (UInt32*)&frames, &theDataBuffer);
-                
-                _queBufferSize[index] = theDataBuffer.mBuffers[0].mDataByteSize;
+                ioFrame.frameCount = _queBufferFrames;
+                ioFrame.raw = (unsigned char*) _queBuffers[index];
+                provider->read(&ioFrame);
+                _queBufferSize[index] = ioFrame.frameCount * provider->getBytesPerFrame();
             }
             
             _state = State::READY;
@@ -311,11 +241,7 @@ void AudioCache::readDataTask(unsigned int selfId)
         
     } while (false);
     
-    if (fileURL != nil)
-        CFRelease(fileURL);
-    
-    if (extRef != nullptr)
-        ExtAudioFileDispose(extRef);
+    delete provider;
     
     //FIXME: Why to invoke play callback first? Should it be after 'load' callback?
     invokingPlayCallbacks();

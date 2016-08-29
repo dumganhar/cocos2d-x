@@ -18,12 +18,13 @@
 
 
 AudioFrameProviderApple::AudioFrameProviderApple()
-: _fileURL(nil)
+: _isOpened(false)
+, _fileURL(nil)
 , _extRef(nullptr)
-, _format(AL_FORMAT_STEREO16)
 , _sampleRate(-1)
 , _totalFrames(0)
 , _currentFrameIndex(0)
+, _bufferList(nullptr)
 {
     memset(&_inFormat, 0, sizeof(AudioStreamBasicDescription));
     memset(&_outFormat, 0, sizeof(AudioStreamBasicDescription));
@@ -31,19 +32,18 @@ AudioFrameProviderApple::AudioFrameProviderApple()
 
 AudioFrameProviderApple::~AudioFrameProviderApple()
 {
-    if (_fileURL != nil)
-    {
-        CFRelease(_fileURL);
-    }
-    
-    if (_extRef != nullptr)
-    {
-        ExtAudioFileDispose(_extRef);
-    }
+    close();
 }
 
-bool AudioFrameProviderApple::init(const std::string& url)
+bool AudioFrameProviderApple::open(const std::string& url)
 {
+    if (_isOpened)
+    {
+        ALOGE("%s was opened!", url.c_str());
+        return false;
+    }
+    
+    _url = url;
     bool ret = false;
     do
     {
@@ -109,14 +109,46 @@ bool AudioFrameProviderApple::init(const std::string& url)
         
         _sampleRate = (ALsizei)_outFormat.mSampleRate;
         
+        _bufferList = new AudioBufferList();
+        _bufferList->mNumberBuffers = 1;
+        _bufferList->mBuffers[0].mNumberChannels = _outFormat.mChannelsPerFrame;
+        
         ret = true;
+        _isOpened = true;
     } while (false);
     
     return ret;
 }
 
+void AudioFrameProviderApple::close()
+{
+    if (_fileURL != nil)
+    {
+        CFRelease(_fileURL);
+        _fileURL = nil;
+    }
+    
+    if (_extRef != nullptr)
+    {
+        ExtAudioFileDispose(_extRef);
+        _extRef = nullptr;
+    }
+    
+    if (_bufferList != nullptr)
+    {
+        delete _bufferList;
+        _bufferList = nullptr;
+    }
+}
+
 int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
 {
+    if (!_isOpened)
+    {
+        ALOGE("not opened!");
+        return -1;
+    }
+    
     if (ioFrame == nullptr)
     {
         ALOGE("%s, ioFrame is null", __PRETTY_FUNCTION__);
@@ -128,7 +160,7 @@ int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
     
     if (remainingFrameCount <= 0)
     {
-        ALOGE("%s, remainingFrameCount is 0", __PRETTY_FUNCTION__);
+        ALOGV("%s, remainingFrameCount is 0", __PRETTY_FUNCTION__);
         return -1;
     }
     
@@ -143,21 +175,19 @@ int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
         toReadFrameCount = remainingFrameCount;
     }
     
+    ALOGV("toReadFrameCount=%d, remainingFrameCount=%d", (int)toReadFrameCount, (int)remainingFrameCount);
+    
     UInt32 currentReadFrameCount = 0;
     UInt32 remainingToReadFrameCount = (UInt32)toReadFrameCount;
     
     do
     {
-        AudioBufferList bufferList;
-        bufferList.mNumberBuffers = 1;
-        
-        bufferList.mBuffers[0].mNumberChannels = _outFormat.mChannelsPerFrame;
-        bufferList.mBuffers[0].mDataByteSize = remainingToReadFrameCount * 2;
-        bufferList.mBuffers[0].mData = (void*)(ioFrame->raw + currentReadFrameCount * 2);
+        _bufferList->mBuffers[0].mDataByteSize = remainingToReadFrameCount * _outFormat.mBytesPerFrame;
+        _bufferList->mBuffers[0].mData = (void*)(ioFrame->raw + currentReadFrameCount * _outFormat.mBytesPerFrame);
         
         UInt32 frameCount = remainingToReadFrameCount;
-        OSStatus status = ExtAudioFileRead(_extRef, &frameCount, &bufferList);
-        
+        OSStatus status = ExtAudioFileRead(_extRef, &frameCount, _bufferList);
+
         if (status)
         {
             ALOGE("%s, ExtAudioFileRead failed!", __PRETTY_FUNCTION__);
@@ -166,11 +196,12 @@ int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
         
         currentReadFrameCount += frameCount;
         remainingToReadFrameCount -= frameCount;
-    
+        ALOGV("read frame: %d, remain: %d", currentReadFrameCount, remainingToReadFrameCount);
     } while (currentReadFrameCount < (UInt32)toReadFrameCount);
     
     _currentFrameIndex += toReadFrameCount;
     ioFrame->frameCount = ((int)toReadFrameCount);
+    ioFrame->bytesPerFrame = _outFormat.mBytesPerFrame;
     
     return (int)toReadFrameCount;
 }
@@ -182,10 +213,17 @@ int AudioFrameProviderApple::tell() const
 
 int AudioFrameProviderApple::seek(int frameIndex)
 {
+    if (!_isOpened)
+    {
+        ALOGE("not opened!");
+        return -1;
+    }
+    
     if (frameIndex >= _totalFrames)
         return -1;
     
     _currentFrameIndex = frameIndex;
+    ExtAudioFileSeek(_extRef, _currentFrameIndex);
     
     return (int)_currentFrameIndex;
 }
@@ -198,4 +236,20 @@ int AudioFrameProviderApple::getTotalFrames() const
 int AudioFrameProviderApple::getSampleRate() const
 {
     return (int)_sampleRate;
+}
+
+int AudioFrameProviderApple::getBytesPerFrame() const
+{
+    if (!_isOpened)
+    {
+        ALOGE("not opened!");
+        return -1;
+    }
+    
+    return _outFormat.mBytesPerFrame;
+}
+
+float AudioFrameProviderApple::getDuration() const
+{
+    return 1.0f * _totalFrames / _sampleRate;
 }

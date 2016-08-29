@@ -103,13 +103,12 @@ protected:
     ALsizei _sampleRate;
     float _duration;
     int _bytesPerFrame;
-    AudioStreamBasicDescription _outputFormat;
     
     /*Cache related stuff;
      * Cache pcm data when sizeInBytes less than PCMDATA_CACHEMAXSIZE
      */
     ALuint _alBufferId;
-    char* _pcmData;
+    unsigned char* _pcmData;
     SInt64 _bytesOfRead;
 
     /*Queue buffer related stuff

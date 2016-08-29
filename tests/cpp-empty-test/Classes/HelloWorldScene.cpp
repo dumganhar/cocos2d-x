@@ -1,8 +1,11 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
 
-USING_NS_CC;
+#include "cocos/audio/include/AudioEngine.h"
+#include "cocos/audio/openal/AudioFrameProviderFactory.h"
 
+USING_NS_CC;
+using namespace cocos2d::experimental;
 
 Scene* HelloWorld::scene()
 {
@@ -78,9 +81,13 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* sender)
 {
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+//    AudioEngine::play2d("fonts/test.mp3");
+//    AudioEngine::play2d("fonts/background.mp3", true);
+//    Director::getInstance()->end();
+//
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//    exit(0);
+//#endif
+    
+    AudioFrameProviderFactory::newAudioFrameProvider("fonts/test.mp3");
 }

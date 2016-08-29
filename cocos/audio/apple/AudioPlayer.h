@@ -34,6 +34,8 @@
 #import <OpenAL/al.h>
 #include "platform/CCPlatformMacros.h"
 
+class IAudioFrameProvider;
+
 NS_CC_BEGIN
 namespace experimental{
 
@@ -83,6 +85,7 @@ protected:
     
     unsigned int _id;
     
+    IAudioFrameProvider* _frameProvider;
     friend class AudioEngineImpl;
 };
 
