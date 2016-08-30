@@ -77,12 +77,6 @@ AudioPlayer::~AudioPlayer()
     {
         alDeleteBuffers(3, _bufferIds);
     }
-    
-    if (_frameProvider != nullptr)
-    {
-        delete _frameProvider;
-        _frameProvider = nullptr;
-    }
 }
 
 void AudioPlayer::destroy()
@@ -248,7 +242,7 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
 {
     if (_frameProvider == nullptr)
     {
-        _frameProvider = AudioFrameProviderFactory::newAudioFrameProvider(_audioCache->_fileFullPath);
+        _frameProvider = AudioFrameProviderFactory::getAudioFrameProvider(_audioCache->_fileFullPath);
     }
     
     ALint sourceState;

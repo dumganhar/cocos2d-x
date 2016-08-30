@@ -152,7 +152,7 @@ void AudioCache::readDataTask(unsigned int selfId)
     _state = State::LOADING;
     
     
-    IAudioFrameProvider* provider = AudioFrameProviderFactory::newAudioFrameProvider(_fileFullPath);
+    auto provider = AudioFrameProviderFactory::getAudioFrameProvider(_fileFullPath);
 
     do
     {
@@ -241,8 +241,7 @@ void AudioCache::readDataTask(unsigned int selfId)
         
     } while (false);
     
-    delete provider;
-    
+
     //FIXME: Why to invoke play callback first? Should it be after 'load' callback?
     invokingPlayCallbacks();
     invokingLoadCallbacks();

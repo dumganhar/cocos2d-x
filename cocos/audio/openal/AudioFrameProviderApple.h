@@ -18,6 +18,9 @@
 class AudioFrameProviderApple : public IAudioFrameProvider
 {
 public:
+    AudioFrameProviderApple();
+    virtual ~AudioFrameProviderApple();
+    
     bool open(const std::string& url);
     void close();
     
@@ -29,10 +32,6 @@ public:
     virtual int getBytesPerFrame() const override;
     virtual float getDuration() const override;
     
-private:
-    AudioFrameProviderApple();
-    virtual ~AudioFrameProviderApple();
-
 private:
     bool _isOpened;
     std::string _url;

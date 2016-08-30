@@ -79,6 +79,8 @@ bool HelloWorld::init()
     return true;
 }
 
+std::shared_ptr<IAudioFrameProvider> provider;
+
 void HelloWorld::menuCloseCallback(Ref* sender)
 {
 //    AudioEngine::play2d("fonts/test.mp3");
@@ -89,5 +91,5 @@ void HelloWorld::menuCloseCallback(Ref* sender)
 //    exit(0);
 //#endif
     
-    AudioFrameProviderFactory::newAudioFrameProvider("fonts/test.mp3");
+    provider = AudioFrameProviderFactory::getAudioFrameProvider("fonts/test.mp3");
 }

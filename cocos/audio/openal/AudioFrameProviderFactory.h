@@ -10,17 +10,16 @@
 #define AudioFrameProviderFactory_hpp
 
 #include "AudioFrameProviderApple.h"
+#include <memory>
+
 
 class IAudioFrameProvider;
 
 class AudioFrameProviderFactory
 {
 public:
-    static bool registerAudioFrameProvider(const std::string& suffix);
-    static void unregisterAudioFrameProvider(const std::string& suffix);
-    static void unregisterAll();
     
-    static IAudioFrameProvider* newAudioFrameProvider(const std::string& url);
+    static std::shared_ptr<IAudioFrameProvider> getAudioFrameProvider(const std::string& url);
     
 private:
     AudioFrameProviderFactory() {};

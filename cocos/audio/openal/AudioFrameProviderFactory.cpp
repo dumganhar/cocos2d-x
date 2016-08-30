@@ -8,48 +8,46 @@
 
 #include "AudioFrameProviderFactory.h"
 #include "AudioFrameProviderBuffered.h"
+#include "ICallerThreadUtils.h"
+#include "cocos2d.h"
 
 namespace  {
-    std::unordered_map<std::string, IAudioFrameProvider*> __providerMap;
 }
 
-bool AudioFrameProviderFactory::registerAudioFrameProvider(const std::string& suffix)
+class CallerThreadUtils : public ICallerThreadUtils
 {
-    auto iter = __providerMap.find(suffix);
-    if (iter == __providerMap.end())
+public:
+    virtual void performFunctionInCallerThread(const std::function<void()>& func)
     {
-        // FIXME:
-        return true;
-    }
-    return false;
-}
-
-void AudioFrameProviderFactory::unregisterAudioFrameProvider(const std::string& suffix)
-{
+        cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread(func);
+    };
     
-}
-
-void AudioFrameProviderFactory::unregisterAll()
-{
+    virtual std::thread::id getCallerThreadId()
+    {
+        return _tid;
+    };
     
-}
+    void setCallerThreadId(std::thread::id tid)
+    {
+        _tid = tid;
+    };
+    
+private:
+    std::thread::id _tid;
+};
 
-IAudioFrameProvider* AudioFrameProviderFactory::newAudioFrameProvider(const std::string& url)
+static CallerThreadUtils __callerThreadUtils;
+
+std::shared_ptr<IAudioFrameProvider> AudioFrameProviderFactory::getAudioFrameProvider(const std::string& url)
 {
     //TODO:
-    IAudioFrameProvider* ret = nullptr;
-    auto provider = new AudioFrameProviderApple();
+    auto provider = std::make_shared<AudioFrameProviderApple>();
     if (!provider->open(url))
     {
-        delete provider;
-        provider = nullptr;
+        return nullptr;
     }
     
-    if (provider != nullptr)
-    {
-        // FIXME:
-        ret = new AudioFrameProviderBuffered(url, provider, true);
-    }
     
-    return ret;
+    
+    return std::make_shared<AudioFrameProviderBuffered>(url, provider, &__callerThreadUtils, true);
 }

@@ -85,7 +85,7 @@ protected:
     
     unsigned int _id;
     
-    IAudioFrameProvider* _frameProvider;
+    std::shared_ptr<IAudioFrameProvider> _frameProvider;
     friend class AudioEngineImpl;
 };
 
