@@ -10,11 +10,11 @@
 #include "AudioBlock.h"
 #include "IAudioFrameProvider.h"
 
+#define DEFAULT_FRAME_COUNT_IN_BLOCK (0.1f * provider->getSampleRate())
+
 AudioCachedInfo::AudioCachedInfo(std::shared_ptr<IAudioFrameProvider> provider)
 : _frameProvider(provider)
-, _blockCountToCache(0)
-, _idleBlockCount(0)
-, _frameCountInBlock(0.1f * provider->getSampleRate())
+, _frameCountInBlock(DEFAULT_FRAME_COUNT_IN_BLOCK)
 , _bufferBase(nullptr)
 , _isAllBlocksCached(false)
 , _blockCount(0)
@@ -48,7 +48,7 @@ bool AudioCachedInfo::init()
     {
         AudioBlock block;
         block.frameIndex = i * _frameCountInBlock;
-        block.raw = _bufferBase + block.frameIndex;
+        block.raw = _bufferBase + block.frameIndex * _frameProvider->getBytesPerFrame();
         block.frameCount = (i == _blockCount-1 && remainder > 0) ? remainder : _frameCountInBlock;
         block.status = AudioBlock::Status::INITIALIZED;
         _cachedBlocks.push_back(block);
@@ -76,6 +76,18 @@ AudioBlockRange AudioCachedInfo::getBlockRange(int frameIndex, int toReadFrameCo
     AudioBlockRange ret;
     ret.blockStart = getBlockIndex(frameIndex);
     ret.blockEnd = getBlockIndex(frameIndex + toReadFrameCount);
+    
+    if (ret.blockStart >= _blockCount)
+    {
+        ret.blockStart = ret.blockEnd = -1;
+        return ret;
+    }
+    
+    if (ret.blockStart >= 0 && ret.blockStart == ret.blockEnd)
+        ++ret.blockEnd;
+    
+    if (ret.blockEnd > _blockCount)
+        ret.blockEnd = _blockCount;
     
     return ret;
 }

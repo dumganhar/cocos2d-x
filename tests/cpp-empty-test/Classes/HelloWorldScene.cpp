@@ -3,6 +3,7 @@
 
 #include "cocos/audio/include/AudioEngine.h"
 #include "cocos/audio/openal/AudioFrameProviderFactory.h"
+#include "cocos/audio/openal/AudioFrameBuffer.h"
 
 USING_NS_CC;
 using namespace cocos2d::experimental;
@@ -84,12 +85,28 @@ std::shared_ptr<IAudioFrameProvider> provider;
 void HelloWorld::menuCloseCallback(Ref* sender)
 {
 //    AudioEngine::play2d("fonts/test.mp3");
-//    AudioEngine::play2d("fonts/background.mp3", true);
+    AudioEngine::play2d("fonts/background.mp3", true);
 //    Director::getInstance()->end();
 //
 //#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 //    exit(0);
 //#endif
     
-    provider = AudioFrameProviderFactory::getAudioFrameProvider("fonts/test.mp3");
+//    provider = AudioFrameProviderFactory::getAudioFrameProvider("fonts/test.mp3");
+////    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//    AudioFrameBuffer ioFrame;
+//    ioFrame.frameCount = 112;
+//    log("read frame count1: %d", provider->read(&ioFrame));
+//    ioFrame.frameCount = 31 * 100;
+//    log("read frame count11: %d", provider->read(&ioFrame));
+//    
+//    scheduleOnce([](float dt){
+//        {
+//        AudioFrameBuffer ioFrame;
+//        ioFrame.frameCount = 1102 * 5;
+//        log("read frame count2: %d", provider->read(&ioFrame));
+//        }
+//    }, 0.01f, "test");
+//    
+    
 }

@@ -52,7 +52,7 @@ unsigned int __idIndex = 0;
 }
 
 #define INVALID_AL_BUFFER_ID 0xFFFFFFFF
-#define PCMDATA_CACHEMAXSIZE 1048576
+#define PCMDATA_CACHEMAXSIZE 1048576 * 1000
 
 typedef ALvoid	AL_APIENTRY	(*alBufferDataStaticProcPtr) (const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq);
 static ALvoid  alBufferDataStaticProc(const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq)
@@ -130,7 +130,7 @@ AudioCache::~AudioCache()
             ALOGW("AudioCache (%p), id=%u, buffer isn't ready, state=%d", this, _id, _state);
         }
         
-        free(_pcmData);
+//        free(_pcmData);
     }
     
     if (_queBufferFrames > 0)
@@ -153,10 +153,13 @@ void AudioCache::readDataTask(unsigned int selfId)
     
     
     auto provider = AudioFrameProviderFactory::getAudioFrameProvider(_fileFullPath);
-
+    
     do
     {
         if (provider == nullptr) break;
+        
+        
+        _pcmData = provider;
         
         _dataSize = provider->getTotalFrames() * provider->getBytesPerFrame();
         _sampleRate = provider->getSampleRate();
@@ -171,8 +174,9 @@ void AudioCache::readDataTask(unsigned int selfId)
         
         if (_dataSize <= PCMDATA_CACHEMAXSIZE)
         {
-            _pcmData = (unsigned char*)malloc(_dataSize);
-            memset(_pcmData, 0, _dataSize);
+//            _pcmData = (unsigned char*)malloc(_dataSize);
+//            memset(_pcmData, 0, _dataSize);
+            
             
             alGenBuffers(1, &_alBufferId);
             
@@ -184,8 +188,6 @@ void AudioCache::readDataTask(unsigned int selfId)
             
             if (*_isDestroyed) break;
             
-            alBufferDataStaticProc(_alBufferId, _format, _pcmData, _dataSize, _sampleRate);
-            
             int readInFrames = provider->getSampleRate() * QUEUEBUFFER_TIME_STEP * QUEUEBUFFER_NUM;
             bool toReadOnce = false;
             if (readInFrames > provider->getTotalFrames())
@@ -196,26 +198,28 @@ void AudioCache::readDataTask(unsigned int selfId)
             
             AudioFrameBuffer ioFrame;
             ioFrame.frameCount = readInFrames;
-            ioFrame.raw = (unsigned char*) _pcmData;
             provider->read(&ioFrame);
             
+            alBufferDataStaticProc(_alBufferId, _format, ioFrame.raw, _dataSize, _sampleRate);
+            
+
             _state = State::READY;
             
             invokingPlayCallbacks();
             
-            if (!toReadOnce)
-            {
-                while (!*_isDestroyed)
-                {
-                    ioFrame.frameCount = readInFrames;
-                    ioFrame.raw = _pcmData + (provider->tell() * provider->getBytesPerFrame());
-                    
-                    if (provider->read(&ioFrame) <= 0)
-                    {
-                        break;
-                    }
-                }
-            }
+//            if (!toReadOnce)
+//            {
+//                while (!*_isDestroyed)
+//                {
+//                    ioFrame.frameCount = readInFrames;
+//                    ioFrame.raw = _pcmData + (provider->tell() * provider->getBytesPerFrame());
+//                    
+//                    if (provider->read(&ioFrame) <= 0)
+//                    {
+//                        break;
+//                    }
+//                }
+//            }
         }
         else
         {

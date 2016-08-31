@@ -30,6 +30,7 @@ AudioFrameProviderBuffered::AudioFrameProviderBuffered(const std::string& url,
 , _currentBlockIndex(0)
 , _cacheInfo(nullptr)
 , _callerThreadUtils(callerThreadUtils)
+, _readFrameIndex(0)
 
 {
     init();
@@ -59,54 +60,69 @@ bool AudioFrameProviderBuffered::init()
 
 int AudioFrameProviderBuffered::read(AudioFrameBuffer* ioFrame)
 {
-    assert(ioFrame->frameCount <= _cacheInfo->_frameCountInBlock);
+//    assert(ioFrame->frameCount <= _cacheInfo->_frameCountInBlock);
     
-    AudioBlockRange range = _cacheInfo->getBlockRange(_frameProvider->tell(), ioFrame->frameCount);
+    int curPos = tell();
+    AudioBlockRange range = _cacheInfo->getBlockRange(curPos, ioFrame->frameCount);
+    
+    if (!range.isValid())
+    {
+        ALOGV("out of range!");
+        ioFrame->raw = nullptr;
+        ioFrame->frameCount = 0;
+        return 0;
+    }
+    
+    int totalFrameCount = 0;
     
     for (int blockIndex = range.blockStart; blockIndex < range.blockEnd; ++blockIndex)
     {
-        switch (_cacheInfo->getBlock(blockIndex).status)
+        auto& block = _cacheInfo->getBlock(blockIndex);
+        totalFrameCount += block.frameCount;
+        
+        switch (block.status)
         {
             case AudioBlock::Status::INITIALIZED:
+                ALOGV("block %d in init status, try read to buffer!", blockIndex);
+                readToBuffer(blockIndex);
                 break;
             case AudioBlock::Status::READING:
+                ALOGV("block %d in reading status, waiting, start ...", blockIndex);
+                // Wait to read finish
+                for(;;)
+                {
+//                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                    if (block.status == AudioBlock::Status::CACHED)
+                        break;
+                }
+                ALOGV("block %d in reading status, waiting, finish!", blockIndex);
                 break;
             case AudioBlock::Status::CACHED:
+                ALOGV("block %d in cached status, great!", blockIndex);
+                // Just skip
                 break;
         }
     }
     
-//    if (_cacheInfo->_idleBlockCount == _cacheInfo->_blockCount)
-//    {
-//        readToBuffer();
-//    }
-//    
-//    ioFrame->raw = _cacheInfo->_bufferBase + _cacheInfo->_currentBlockIndex * _cacheInfo->_frameCountInBlock * _frameProvider->getBytesPerFrame();
-////    ioFrame->frameCount = 
-//    
-//    ++_idleBlockCount;
-//    
-//    readToBufferAsync();
+    ioFrame->raw = _cacheInfo->_bufferBase + curPos * _frameProvider->getBytesPerFrame();
+    ioFrame->bytesPerFrame = _frameProvider->getBytesPerFrame();
+    ioFrame->sampleRate = _frameProvider->getSampleRate();
+    ioFrame->frameCount = (curPos + ioFrame->frameCount) > _frameProvider->getTotalFrames() ? (_frameProvider->getTotalFrames() - curPos) : ioFrame->frameCount;
     
+    seek(curPos + ioFrame->frameCount);
+
     return ioFrame->frameCount;
 }
 
 int AudioFrameProviderBuffered::tell() const
 {
-    return _frameProvider->tell();
+    return _readFrameIndex;
 }
 
 int AudioFrameProviderBuffered::seek(int frameIndex)
 {
-    int ret =  _frameProvider->seek(frameIndex);
-    
-    __threadPool->stopAllTasks();
-    
-    //FIXME:
-//    _idleBlockCount = 0;
-    
-    
-    return ret;
+    _readFrameIndex = frameIndex;
+    return _readFrameIndex;
 }
 
 int AudioFrameProviderBuffered::getTotalFrames() const
@@ -129,20 +145,27 @@ float AudioFrameProviderBuffered::getDuration() const
     return _frameProvider->getDuration();
 }
 
-void AudioFrameProviderBuffered::readToBuffer()
+int AudioFrameProviderBuffered::readToBuffer(int blockIndex)
 {
-//    std::lock_guard<std::mutex> lk(_readMutex);
-// 
-//    if (_idleBlockCount <= 0)
-//        return;
-//    
-//    AudioFrameBuffer ioFrame;
-//    ioFrame.frameCount = _frameCountInBlock * _blockCount;
-//    ioFrame.raw = _bufferBase + _currentBlockIndex * _frameCountInBlock * _frameProvider->getBytesPerFrame();
-//    _frameProvider->read(&ioFrame);
-//    
-//    ++_currentBlockIndex;
-//    --_idleBlockCount;
+    auto& block = _cacheInfo->getBlock(blockIndex);
+    
+    if (block.status == AudioBlock::Status::CACHED)
+    {
+        return block.frameCount;
+    }
+    
+    _frameProvider->seek(block.frameIndex);
+
+    _cacheInfo->_readMutex.lock();
+    
+    AudioFrameBuffer ioFrame;
+    ioFrame.frameCount = _cacheInfo->_frameCountInBlock;
+    ioFrame.raw = block.raw;
+    _frameProvider->read(&ioFrame);
+    block.status = AudioBlock::Status::CACHED;
+    
+    _cacheInfo->_readMutex.unlock();
+    return ioFrame.frameCount;
 }
 
 void AudioFrameProviderBuffered::readToBufferAsync()
@@ -158,37 +181,39 @@ void AudioFrameProviderBuffered::readToBufferAsync()
     
     if (_currentBlockIndex >= _cacheInfo->_blockCount)
     {
-        assert(false);
+        _cacheInfo->_isAllBlocksCached = true;
         return;
     }
     
-    _cacheInfo->getBlock(_currentBlockIndex).status = AudioBlock::Status::READING;
+    auto& block = _cacheInfo->getBlock(_currentBlockIndex);
+    if (block.status != AudioBlock::Status::INITIALIZED)
+    {
+        ++_currentBlockIndex;
+        readToBufferAsync();
+        return;
+    }
+
+    _cacheInfo->_readMutex.lock();
+    block.status = AudioBlock::Status::READING;
+    _cacheInfo->_readMutex.unlock();
     
     __threadPool->pushTask([this](int tid){
-        std::lock_guard<std::mutex> lk(_cacheInfo->_readMutex);
         
-        auto& blockInfo = _cacheInfo->getBlock(_currentBlockIndex);
-        AudioFrameBuffer ioFrame;
-        ioFrame.frameCount = _cacheInfo->_frameCountInBlock;
-        ioFrame.raw = blockInfo.raw;
-        ALOGV("current block index: %d", _currentBlockIndex);
-        _frameProvider->read(&ioFrame);
-        
-        blockInfo.status = AudioBlock::Status::CACHED;
+        readToBuffer(_currentBlockIndex);
         
         ++_currentBlockIndex;
         
         if (_frameProvider->tell() < _frameProvider->getTotalFrames())
         {
+            //FIXME: remove sleep
+//            std::this_thread::sleep_for(std::chrono::microseconds(200));
+            
             _callerThreadUtils->performFunctionInCallerThread([this](){
                 readToBufferAsync();
                 
             });
         }
-        else
-        {
-            
-        }
+
     });
     
     

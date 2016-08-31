@@ -64,6 +64,8 @@ do { \
 #define CHECK_AL_ERROR_DEBUG() 
 #endif
 
+class IAudioFrameProvider;
+
 NS_CC_BEGIN
 namespace experimental{
 
@@ -108,7 +110,7 @@ protected:
      * Cache pcm data when sizeInBytes less than PCMDATA_CACHEMAXSIZE
      */
     ALuint _alBufferId;
-    unsigned char* _pcmData;
+    std::shared_ptr<IAudioFrameProvider> _pcmData;
     SInt64 _bytesOfRead;
 
     /*Queue buffer related stuff

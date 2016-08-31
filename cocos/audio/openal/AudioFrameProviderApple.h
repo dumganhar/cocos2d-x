@@ -48,6 +48,8 @@ private:
     
     AudioBufferList* _bufferList;
     
+    std::mutex _readMutex;
+    
     friend class AudioFrameProviderFactory;
 };
 

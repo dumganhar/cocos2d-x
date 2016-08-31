@@ -38,19 +38,20 @@ public:
     //
     
 private:
-    
-    
 
-    void readToBuffer();
+    int readToBuffer(int blockIndex);
     void readToBufferAsync();
     
 private:
     std::string _url;
     std::shared_ptr<IAudioFrameProvider> _frameProvider;
+    
     bool _isCacheWholeFile;
     AudioCachedInfo* _cacheInfo;
     int _currentBlockIndex;
     ICallerThreadUtils* _callerThreadUtils;
+    
+    int _readFrameIndex;
 };
 
 #endif /* AudioFrameProviderBuffered_hpp */

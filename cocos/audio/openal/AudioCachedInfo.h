@@ -29,8 +29,6 @@ public:
     AudioBlockRange getBlockRange(int frameIndex, int toReadFrameCount) const;
     
 public:
-    int _blockCountToCache;
-    int _idleBlockCount;
     int _frameCountInBlock;
     
     unsigned char* _bufferBase;

@@ -28,6 +28,12 @@ struct AudioBlockRange
 {
     int blockStart;
     int blockEnd;
+    
+    AudioBlockRange()
+    : blockStart(-1)
+    , blockEnd(-1)
+    {};
+    bool isValid() const { return blockStart >= 0 && blockEnd > 0;};
 };
 
 #endif /* AudioBlock_hpp */

@@ -143,6 +143,7 @@ void AudioFrameProviderApple::close()
 
 int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
 {
+    std::lock_guard<std::mutex> lk(_readMutex);
     if (!_isOpened)
     {
         ALOGE("not opened!");
@@ -151,7 +152,7 @@ int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
     
     if (ioFrame == nullptr)
     {
-        ALOGE("%s, ioFrame is null", __PRETTY_FUNCTION__);
+        ALOGE("%s, ioFrame is null", __FUNCTION__);
         return -1;
     }
     
@@ -160,13 +161,13 @@ int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
     
     if (remainingFrameCount <= 0)
     {
-        ALOGV("%s, remainingFrameCount is 0", __PRETTY_FUNCTION__);
+        ALOGV("%s, remainingFrameCount is 0", __FUNCTION__);
         return -1;
     }
     
     if (toReadFrameCount <= 0)
     {
-        ALOGE("%s, toReadFrameCount is 0", __PRETTY_FUNCTION__);
+        ALOGE("%s, toReadFrameCount is 0", __FUNCTION__);
         return -1;
     }
     
@@ -190,13 +191,13 @@ int AudioFrameProviderApple::read(AudioFrameBuffer* ioFrame)
 
         if (status)
         {
-            ALOGE("%s, ExtAudioFileRead failed!", __PRETTY_FUNCTION__);
+            ALOGE("%s, ExtAudioFileRead failed!", __FUNCTION__);
             return -1;
         }
         
         currentReadFrameCount += frameCount;
         remainingToReadFrameCount -= frameCount;
-        ALOGV("read frame: %d, remain: %d", currentReadFrameCount, remainingToReadFrameCount);
+//        ALOGV("read frame: %d, remain: %d", currentReadFrameCount, remainingToReadFrameCount);
     } while (currentReadFrameCount < (UInt32)toReadFrameCount);
     
     _currentFrameIndex += toReadFrameCount;
@@ -213,6 +214,8 @@ int AudioFrameProviderApple::tell() const
 
 int AudioFrameProviderApple::seek(int frameIndex)
 {
+    std::lock_guard<std::mutex> lk(_readMutex);
+    
     if (!_isOpened)
     {
         ALOGE("not opened!");
