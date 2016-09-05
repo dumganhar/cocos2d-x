@@ -324,6 +324,11 @@ void ScenarioTest::onEnter()
         doAutoTest();
         scheduleUpdate();
     }
+    
+    schedule([](float dt){
+        auto& allSystems = ParticleSystem::getAllParticleSystems();
+        log("particlesystem count: %d", (int)allSystems.size());
+    }, 1, "ScenarioTest");
 }
 
 void ScenarioTest::onExit()

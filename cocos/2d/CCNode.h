@@ -127,6 +127,8 @@ public:
      */
     static Node * create();
 
+    static int getTotalNodeCount();
+    
     /**
      * Gets the description string. It makes debugging easier.
      * @return A string
@@ -1991,6 +1993,8 @@ public:
     friend class PhysicsBody;
 #endif
 
+    static int _totalNodeCount;
+    
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Node);
 };

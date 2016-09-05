@@ -251,6 +251,8 @@ public:
      */
     static ParticleSystem* createWithTotalParticles(int numberOfParticles);
     
+    static std::vector<ParticleSystem*>& getAllParticleSystems();
+    
     void addParticles(int count);
     
     void stopSystem();
@@ -971,6 +973,8 @@ protected:
     /** is the emitter paused */
     bool _paused;
 
+    static std::vector<ParticleSystem*> __allInstances;
+    
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(ParticleSystem);
 };
