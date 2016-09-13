@@ -127,7 +127,11 @@ public:
      */
     static Node * create();
 
+private:
+    // Get total node count, it's used by EngineDataManager internally.
     static int getTotalNodeCount();
+    friend class EngineDataManager;
+public:
     
     /**
      * Gets the description string. It makes debugging easier.

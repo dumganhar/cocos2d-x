@@ -119,7 +119,9 @@ public class Cocos2dxEngineDataManager {
             }
         };
 
-        return sManager.init(listener);
+        boolean ret = sManager.init(listener);
+        nativeSetSupportOptimization(ret);
+        return ret;
     }
 
     public static void destroy() {
@@ -185,6 +187,7 @@ public class Cocos2dxEngineDataManager {
     }
 
     // Native methods
+    private native static void nativeSetSupportOptimization(boolean isSupported);
     private native static void nativeOnQueryFps(/*out*/ int[] expectedFps, /*out*/ int[] realFps);
     private native static void nativeOnChangeContinuousFrameLostConfig(int cycle, int maxFrameMissed);
     private native static void nativeOnChangeLowFpsConfig(int cycle, float maxFrameDx);

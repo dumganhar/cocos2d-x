@@ -26,8 +26,14 @@ THE SOFTWARE.
 
 #include <string>
 #include <functional>
+#include <vector>
+
+#include <jni.h>
 
 namespace cocos2d {
+
+class ParticleSystem;
+class EventCustom;
 
 class EngineDataManager
 {
@@ -56,10 +62,22 @@ private:
     static void notifyContinuousFrameLost(int frameLostCycle, int continueFrameLostThreshold, int times);
     static void notifyLowFps(int lowFpsCycle, float lowFpsThreshold, int frames);
 
+    static void calculateGpuLevel();
     static void calculateFrameLost();
-    // static void setContinuousFrameLostConfigChangedListener(const std::function<void(int/*frameLostCycle*/, int/*threshold*/)>& listener);
-    // static void setLowFpsConfigChangedListener(const std::function<void(int/*lowFpsCycle*/, float/*threshold*/)>& listener);
-    // static void setSpecialEffectLevelChangedListener(const std::function<void(int/*level*/)>& listener);
+
+    static void onBeforeSetNextScene(EventCustom* event);
+    static void onAfterSetNextScene(EventCustom* event);
+    static void onAfterVisitScene(EventCustom* event);
+    static void onEnterForeground(EventCustom* event);
+
+// For JNI function use, should be public
+public:
+    static void nativeOnQueryFps(JNIEnv* env, jobject thiz, jintArray arrExpectedFps, jintArray arrRealFps);
+    static void nativeOnChangeContinuousFrameLostConfig(JNIEnv* env, jobject thiz, jint continueFrameLostCycle, jint continueFrameLostThreshold);
+    static void nativeOnChangeLowFpsConfig(JNIEnv* env, jobject thiz, jint lowFpsCycle, jfloat lowFpsThreshold);
+    static void nativeOnChangeExpectedFps(JNIEnv* env, jobject thiz, jint fps);
+    static void nativeOnChangeSpecialEffectLevel(JNIEnv* env, jobject thiz, jint level);
+    static void nativeOnChangeMuteEnabled(JNIEnv* env, jobject thiz, jboolean enabled);
 };
 
 } // namespace cocos2d {

@@ -251,8 +251,10 @@ public:
      */
     static ParticleSystem* createWithTotalParticles(int numberOfParticles);
     
+private:
     static std::vector<ParticleSystem*>& getAllParticleSystems();
-    
+    friend class EngineDataManager;
+public:
     void addParticles(int count);
     
     void stopSystem();

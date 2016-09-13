@@ -27,10 +27,10 @@ THE SOFTWARE.
 #include "base/CCDirector.h"
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventType.h"
+#include "renderer/CCRenderer.h"
 #include "2d/CCParticleSystem.h"
 #include "audio/include/AudioEngine.h"
 
-#include <jni.h>
 #include <android/log.h>
 
 #define LOG_TAG    "Java_org_cocos2dx_lib_Cocos2dxEngineDataManager.cpp"
@@ -38,6 +38,8 @@ THE SOFTWARE.
 #define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 #define JNI_FUNC_PREFIX(func) Java_org_cocos2dx_lib_Cocos2dxEngineDataManager_##func
+#define MAP_INSERT(map, k, v) map.insert(std::make_pair(k, v))
+
 
 using namespace cocos2d;
 
@@ -46,6 +48,7 @@ namespace {
 const char* _className = "org/cocos2dx/lib/Cocos2dxEngineDataManager";
 
 bool _isInitialized = false;
+bool _isSupported = false;
 
 float _defaultAnimationInterval = -1.0f;
 
@@ -55,6 +58,9 @@ float _defaultAnimationInterval = -1.0f;
 
 std::unordered_map<int/*level*/, float/*particlePercent*/> _levelParticleCountMap;
 std::unordered_map<unsigned int /*Ref::_ID*/, int/*particleCount*/> _psIdCountMap;
+
+std::unordered_map<int/*nodeCount*/, int/*cpuLevel*/> _nodeCountCpuLevelMap;
+std::unordered_map<int/*vertexCount*/, int/*gpuLevel*/> _vertexCountGpuLevelMap;
 
 /* last time frame lost cycle was calculated */
 std::chrono::steady_clock::time_point _lastContinuousFrameLostUpdate;
@@ -72,21 +78,80 @@ int _lowFpsCycle = 1000;
 float _lowFpsThreshold = 0.3f;
 int _lowFpsCounter = 0;
 
-void lazyInitLevelParticleCountMap()
+void initLevelParticleCountMap()
 {
     if (_levelParticleCountMap.empty())
     {
-        #define MAP_INSERT(k, v) _levelParticleCountMap.insert(std::make_pair(k, v))
+        #define PARTICLE_COUNT_MAP_INSERT(k, v) MAP_INSERT(_levelParticleCountMap, k, v)
 
-        MAP_INSERT(0, 0.0f);
-        MAP_INSERT(1, 0.2f);
-        MAP_INSERT(2, 0.4f);
-        MAP_INSERT(3, 0.6f);
-        MAP_INSERT(4, 0.8f);
-        MAP_INSERT(5, 1.0f);
+        PARTICLE_COUNT_MAP_INSERT(0, 0.0f);
+        PARTICLE_COUNT_MAP_INSERT(1, 0.2f);
+        PARTICLE_COUNT_MAP_INSERT(2, 0.4f);
+        PARTICLE_COUNT_MAP_INSERT(3, 0.6f);
+        PARTICLE_COUNT_MAP_INSERT(4, 0.8f);
+        PARTICLE_COUNT_MAP_INSERT(5, 1.0f);
 
-        #undef MAP_INSERT
+        #undef PARTICLE_COUNT_MAP_INSERT
     }
+}
+
+void initNodeCountCpuLevelMap()
+{
+    if (_nodeCountCpuLevelMap.empty())
+    {
+        #define NODE_COUNT_MAP_INSERT(k, v) MAP_INSERT(_nodeCountCpuLevelMap, k, v)
+
+        NODE_COUNT_MAP_INSERT(20 , 0);
+        NODE_COUNT_MAP_INSERT(40 , 1);
+        NODE_COUNT_MAP_INSERT(100, 2);
+        NODE_COUNT_MAP_INSERT(150, 3);
+        NODE_COUNT_MAP_INSERT(200, 4);
+        NODE_COUNT_MAP_INSERT(250, 5);
+        NODE_COUNT_MAP_INSERT(300, 6);
+        NODE_COUNT_MAP_INSERT(350, 7);
+        NODE_COUNT_MAP_INSERT(400, 8);
+        NODE_COUNT_MAP_INSERT(500, 9);
+
+        #undef NODE_COUNT_MAP_INSERT
+    }
+}
+
+void initActionCountCpuLevelMap()
+{
+    //TODO:
+}
+
+void initScheduleCountCpuLevelMap()
+{
+    //TODO:
+}
+
+void initVertexCountGpuLevelMap()
+{
+    if (_vertexCountGpuLevelMap.empty())
+    {
+        #define VERTEX_COUNT_MAP_INSERT(k, v) MAP_INSERT(_vertexCountGpuLevelMap, k, v)
+
+        VERTEX_COUNT_MAP_INSERT(100 , 0);
+        VERTEX_COUNT_MAP_INSERT(200 , 1);
+        VERTEX_COUNT_MAP_INSERT(500 , 2);
+        VERTEX_COUNT_MAP_INSERT(750 , 3);
+        VERTEX_COUNT_MAP_INSERT(1000, 4);
+        VERTEX_COUNT_MAP_INSERT(1250, 5);
+        VERTEX_COUNT_MAP_INSERT(1500, 6);
+        VERTEX_COUNT_MAP_INSERT(1750, 7);
+        VERTEX_COUNT_MAP_INSERT(2000, 8);
+        VERTEX_COUNT_MAP_INSERT(2500, 9);
+
+        #undef VERTEX_COUNT_MAP_INSERT
+    }
+}
+
+void resetLastTime()
+{
+    _lastFrameLost100msUpdate = std::chrono::steady_clock::now();
+    _lastContinuousFrameLostUpdate = _lastFrameLost100msUpdate;
+    _lastLowFpsUpdate = _lastFrameLost100msUpdate;
 }
 
 } // namespace {
@@ -156,40 +221,63 @@ void EngineDataManager::calculateFrameLost()
 }
 
 // static
+void EngineDataManager::calculateGpuLevel()
+{
+    auto renderer = Director::getInstance()->getRenderer();
+    renderer->getDrawnVertices();
+}
+
+// static 
+void EngineDataManager::onBeforeSetNextScene(EventCustom* event)
+{
+    log("previous node count: %d", Node::getTotalNodeCount());
+    notifyGameStatus(GameStatus::SCENE_CHANGE, 8, 2);
+}
+
+// static 
+void EngineDataManager::onAfterSetNextScene(EventCustom* event)
+{
+    log("current node count: %d", Node::getTotalNodeCount());
+    notifyGameStatus(GameStatus::IN_SCENE, 9, 8);
+}
+
+// static
+void EngineDataManager::onAfterVisitScene(EventCustom* event)
+{
+    calculateFrameLost();
+    calculateGpuLevel();
+}
+
+// static
+void EngineDataManager::onEnterForeground(EventCustom* event)
+{
+    resetLastTime();
+}
+
+// static
 void EngineDataManager::init()
 {
+    if (!_isSupported)
+        return;
+
     if (_isInitialized)
         return;
 
-    lazyInitLevelParticleCountMap();
-
-    auto dispatcher = Director::getInstance()->getEventDispatcher();
-    dispatcher->addCustomEventListener(Director::EVENT_AFTER_VISIT, [](EventCustom* event){
-        calculateFrameLost();
-    });
-
-    dispatcher->addCustomEventListener(Director::EVENT_BEFORE_SET_NEXT_SCENE, [](EventCustom* event){
-        log("previous node count: %d", Node::getTotalNodeCount());
-        notifyGameStatus(GameStatus::SCENE_CHANGE, 8, 2);
-    });
-
-    dispatcher->addCustomEventListener(Director::EVENT_AFTER_SET_NEXT_SCENE, [](EventCustom* event){
-        notifyGameStatus(GameStatus::IN_SCENE, 9, 8);
-        log("current node count: %d", Node::getTotalNodeCount());
-    });
-
-    auto resetLastTime = [](){
-        _lastFrameLost100msUpdate = std::chrono::steady_clock::now();
-        _lastContinuousFrameLostUpdate = _lastFrameLost100msUpdate;
-        _lastLowFpsUpdate = _lastFrameLost100msUpdate;
-    };
+    initNodeCountCpuLevelMap();
+    initLevelParticleCountMap();
+    initActionCountCpuLevelMap();
+    initScheduleCountCpuLevelMap();
+    initVertexCountGpuLevelMap();
 
     resetLastTime();
 
-    dispatcher->addCustomEventListener(EVENT_COME_TO_FOREGROUND, [resetLastTime](EventCustom* event){
-        resetLastTime();
-    });
+    auto dispatcher = Director::getInstance()->getEventDispatcher();
+    dispatcher->addCustomEventListener(Director::EVENT_AFTER_VISIT, std::bind(onAfterVisitScene, std::placeholders::_1));
+    dispatcher->addCustomEventListener(Director::EVENT_BEFORE_SET_NEXT_SCENE, std::bind(onBeforeSetNextScene, std::placeholders::_1));
+    dispatcher->addCustomEventListener(Director::EVENT_AFTER_SET_NEXT_SCENE, std::bind(onAfterSetNextScene, std::placeholders::_1));
+    dispatcher->addCustomEventListener(EVENT_COME_TO_FOREGROUND, std::bind(onEnterForeground, std::placeholders::_1));
 
+    //FIMXE: have to pass cpuLevel 10 and gpuLevel 10 ?
     notifyGameStatus(GameStatus::START, 10, 10);
     _isInitialized = true;
 }
@@ -197,14 +285,18 @@ void EngineDataManager::init()
 // static 
 void EngineDataManager::destroy()
 {
-
+    if (!_isSupported)
+        return;
 }
 
 // static
 void EngineDataManager::notifyGameStatus(GameStatus type, int cpuLevel, int gpuLevel)
 {
-    cocos2d::JniMethodInfo methodInfo;
-    if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, _className, "notifyGameStatus", "(III)V"))
+    if (!_isSupported)
+        return;
+
+    JniMethodInfo methodInfo;
+    if (JniHelper::getStaticMethodInfo(methodInfo, _className, "notifyGameStatus", "(III)V"))
     {
         methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)type, cpuLevel, gpuLevel);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
@@ -214,8 +306,11 @@ void EngineDataManager::notifyGameStatus(GameStatus type, int cpuLevel, int gpuL
 // static
 void EngineDataManager::notifyContinuousFrameLost(int continueFrameLostCycle, int continueFrameLostThreshold, int times)
 {
-    cocos2d::JniMethodInfo methodInfo;
-    if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, _className, "notifyContinuousFrameLost", "(III)V"))
+    if (!_isSupported)
+        return;
+
+    JniMethodInfo methodInfo;
+    if (JniHelper::getStaticMethodInfo(methodInfo, _className, "notifyContinuousFrameLost", "(III)V"))
     {
         methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, continueFrameLostCycle, continueFrameLostThreshold, times);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
@@ -225,39 +320,22 @@ void EngineDataManager::notifyContinuousFrameLost(int continueFrameLostCycle, in
 // static
 void EngineDataManager::notifyLowFps(int lowFpsCycle, float lowFpsThreshold, int frames)
 {
-    cocos2d::JniMethodInfo methodInfo;
-    if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, _className, "notifyLowFps", "(IFI)V"))
+    if (!_isSupported)
+        return;
+
+    JniMethodInfo methodInfo;
+    if (JniHelper::getStaticMethodInfo(methodInfo, _className, "notifyLowFps", "(IFI)V"))
     {
         methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, lowFpsCycle, lowFpsThreshold, frames);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
 }
 
-// static
-// void EngineDataManager::setContinuousFrameLostConfigChangedListener(const std::function<void(int/*frameLostCycle*/, int/*threshold*/)>& listener)
-// {
-//     // _continuousFrameLostConfigChangedListener = listener;
-// }
-
-// // static
-// void EngineDataManager::setLowFpsConfigChangedListener(const std::function<void(int/*lowFpsCycle*/, float/*threshold*/)>& listener)
-// {
-//     _lowFpsConfigChangedListener = listener;
-// }
-
-// // static
-// void EngineDataManager::setSpecialEffectLevelChangedListener(const std::function<void(int/*level*/)>& listener)
-// {
-//     _specialEffectLevelChangedListener = listener;
-// }
-
-} // namespace cocos2d {
-
-
-extern "C" {
-
-JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnQueryFps)(JNIEnv* env, jobject thiz, jintArray arrExpectedFps, jintArray arrRealFps)
+void EngineDataManager::nativeOnQueryFps(JNIEnv* env, jobject thiz, jintArray arrExpectedFps, jintArray arrRealFps)
 {
+    if (!_isSupported)
+        return;
+
     LOGD("nativeOnQueryFps");
     jsize arrLenExpectedFps = env->GetArrayLength(arrExpectedFps);
     jsize arrLenRealFps = env->GetArrayLength(arrRealFps);
@@ -279,40 +357,32 @@ JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnQueryFps)(JNIEnv* env, jobject th
     }
 }
 
-JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeContinuousFrameLostConfig)(JNIEnv* env, jobject thiz, jint continueFrameLostCycle, jint continueFrameLostThreshold)
+void EngineDataManager::nativeOnChangeContinuousFrameLostConfig(JNIEnv* env, jobject thiz, jint continueFrameLostCycle, jint continueFrameLostThreshold)
 {
+    if (!_isSupported)
+        return;
+
     LOGD("nativeOnChangeContinuousFrameLostConfig, continueFrameLostCycle: %d, continueFrameLostThreshold: %d", continueFrameLostCycle, continueFrameLostThreshold);
 
     _continuousFrameLostCycle = continueFrameLostCycle;
     _continuousFrameLostThreshold = continueFrameLostThreshold;
-
-    // if (_continuousFrameLostConfigChangedListener != nullptr)
-    // {
-    //     _continuousFrameLostConfigChangedListener(continueFrameLostCycle, continueFrameLostThreshold);
-    // }
-    // else
-    // {
-    //     LOGE("_continuousFrameLostConfigChangedListener == nullptr");
-    // }
 }
 
-JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeLowFpsConfig)(JNIEnv* env, jobject thiz, jint lowFpsCycle, jfloat lowFpsThreshold)
+void EngineDataManager::nativeOnChangeLowFpsConfig(JNIEnv* env, jobject thiz, jint lowFpsCycle, jfloat lowFpsThreshold)
 {
+    if (!_isSupported)
+        return;
+
     LOGD("nativeOnChangeLowFpsConfig, lowFpsCycle: %d, lowFpsThreshold: %f", lowFpsCycle, lowFpsThreshold);
     _lowFpsCycle = lowFpsCycle;
     _lowFpsThreshold = lowFpsThreshold;
-    // if (_lowFpsConfigChangedListener != nullptr)
-    // {
-    //     _lowFpsConfigChangedListener(lowFpsCycle, lowFpsThreshold);
-    // }
-    // else
-    // {
-    //     LOGE("_lowFpsConfigChangedListener == nullptr");
-    // }
 }
 
-JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeExpectedFps)(JNIEnv* env, jobject thiz, jint fps)
+void EngineDataManager::nativeOnChangeExpectedFps(JNIEnv* env, jobject thiz, jint fps)
 {
+    if (!_isSupported)
+        return;
+
     LOGD("nativeOnChangeExpectedFps, fps: %d", fps);
     auto director = cocos2d::Director::getInstance();
     if (_defaultAnimationInterval < 0)
@@ -338,17 +408,12 @@ JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeExpectedFps)(JNIEnv* env, j
     }
 }
 
-JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeSpecialEffectLevel)(JNIEnv* env, jobject thiz, jint level)
+void EngineDataManager::nativeOnChangeSpecialEffectLevel(JNIEnv* env, jobject thiz, jint level)
 {
+    if (!_isSupported)
+        return;
+
     LOGD("nativeOnChangeSpecialEffectLevel, level: %d", level);
-    // if (_specialEffectLevelChangedListener != nullptr)
-    // {
-    //     _specialEffectLevelChangedListener(level);
-    // }
-    // else
-    // {
-    //     LOGE("_specialEffectLevelChangedListener == nullptr");
-    // }
 
     if (_levelParticleCountMap.find(level) == _levelParticleCountMap.end())
     {
@@ -356,7 +421,7 @@ JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeSpecialEffectLevel)(JNIEnv*
         return;
     }
 
-    auto& particleSystems = cocos2d::ParticleSystem::getAllParticleSystems();
+    auto& particleSystems = ParticleSystem::getAllParticleSystems();
     if (particleSystems.empty())
     {
         LOGD("There isn't any ParticleSystem instance!");
@@ -400,13 +465,58 @@ JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeSpecialEffectLevel)(JNIEnv*
     }
 }
 
-JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeMuteEnabled)(JNIEnv* env, jobject thiz, jboolean enabled)
+void EngineDataManager::nativeOnChangeMuteEnabled(JNIEnv* env, jobject thiz, jboolean enabled)
 {
+    if (!_isSupported)
+        return;
+
     LOGD("nativeOnChangeMuteEnabled, enabled: %d", enabled);
     if (enabled)
     {
         cocos2d::experimental::AudioEngine::stopAll();
     }
 }
+
+} // namespace cocos2d {
+
+/////////////////////////////
+extern "C" {
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeSetSupportOptimization)(JNIEnv* env, jobject thiz, jboolean isSupported)
+{
+    LOGD("nativeSetSupportOptimization: %d", isSupported);
+    _isSupported = (isSupported == JNI_TRUE);
+}
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnQueryFps)(JNIEnv* env, jobject thiz, jintArray arrExpectedFps, jintArray arrRealFps)
+{
+    EngineDataManager::nativeOnQueryFps(env, thiz, arrExpectedFps, arrRealFps);
+}
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeContinuousFrameLostConfig)(JNIEnv* env, jobject thiz, jint continueFrameLostCycle, jint continueFrameLostThreshold)
+{
+    EngineDataManager::nativeOnChangeContinuousFrameLostConfig(env, thiz, continueFrameLostCycle, continueFrameLostThreshold);
+}
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeLowFpsConfig)(JNIEnv* env, jobject thiz, jint lowFpsCycle, jfloat lowFpsThreshold)
+{
+    EngineDataManager::nativeOnChangeLowFpsConfig(env, thiz, lowFpsCycle, lowFpsThreshold);
+}
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeExpectedFps)(JNIEnv* env, jobject thiz, jint fps)
+{
+    EngineDataManager::nativeOnChangeExpectedFps(env, thiz, fps);
+}
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeSpecialEffectLevel)(JNIEnv* env, jobject thiz, jint level)
+{
+    EngineDataManager::nativeOnChangeSpecialEffectLevel(env, thiz, level);
+}
+
+JNIEXPORT void JNICALL JNI_FUNC_PREFIX(nativeOnChangeMuteEnabled)(JNIEnv* env, jobject thiz, jboolean enabled)
+{
+    EngineDataManager::nativeOnChangeMuteEnabled(env, thiz, enabled);
+}
+/////////////////////////////
 
 } // extern "C" {
