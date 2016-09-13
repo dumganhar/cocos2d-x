@@ -60,7 +60,9 @@ std::unordered_map<int/*level*/, float/*particlePercent*/> _levelParticleCountMa
 std::unordered_map<unsigned int /*Ref::_ID*/, int/*particleCount*/> _psIdCountMap;
 
 std::unordered_map<int/*nodeCount*/, int/*cpuLevel*/> _nodeCountCpuLevelMap;
+std::vector<int> _nodeCountRangeVector;
 std::unordered_map<int/*vertexCount*/, int/*gpuLevel*/> _vertexCountGpuLevelMap;
+std::vector<int> _vertexCountRangeVector;
 
 /* last time frame lost cycle was calculated */
 std::chrono::steady_clock::time_point _lastContinuousFrameLostUpdate;
@@ -77,6 +79,9 @@ int _frameLostCounter = 0;
 int _lowFpsCycle = 1000;
 float _lowFpsThreshold = 0.3f;
 int _lowFpsCounter = 0;
+
+int _oldCpuLevel = 0;
+int _oldGpuLevel = 0;
 
 void initLevelParticleCountMap()
 {
@@ -101,9 +106,9 @@ void initNodeCountCpuLevelMap()
     {
         #define NODE_COUNT_MAP_INSERT(k, v) MAP_INSERT(_nodeCountCpuLevelMap, k, v)
 
-        NODE_COUNT_MAP_INSERT(20 , 0);
-        NODE_COUNT_MAP_INSERT(40 , 1);
-        NODE_COUNT_MAP_INSERT(100, 2);
+        NODE_COUNT_MAP_INSERT(20 , 0); // 0  ~ 19
+        NODE_COUNT_MAP_INSERT(40 , 1); // 20 ~ 39
+        NODE_COUNT_MAP_INSERT(100, 2); // 40 ~ 99
         NODE_COUNT_MAP_INSERT(150, 3);
         NODE_COUNT_MAP_INSERT(200, 4);
         NODE_COUNT_MAP_INSERT(250, 5);
@@ -113,7 +118,27 @@ void initNodeCountCpuLevelMap()
         NODE_COUNT_MAP_INSERT(500, 9);
 
         #undef NODE_COUNT_MAP_INSERT
+
+        _nodeCountRangeVector.reserve(_nodeCountCpuLevelMap.size());
+        for (const auto& e : _nodeCountCpuLevelMap)
+        {
+            _nodeCountRangeVector.push_back(e.first);
+        }
     }
+}
+
+int toCpuLevel(int nodeCount) //, int actionCount, int scheduleCount)
+{
+    auto iter = std::find_if(_nodeCountRangeVector.begin(), _nodeCountRangeVector.end(), [nodeCount](int step) -> bool{
+        return nodeCount < step;
+    });
+
+    if (iter != _nodeCountRangeVector.end())
+    {
+        return _nodeCountCpuLevelMap[*iter];
+    }
+
+    return 0;
 }
 
 void initActionCountCpuLevelMap()
@@ -144,7 +169,27 @@ void initVertexCountGpuLevelMap()
         VERTEX_COUNT_MAP_INSERT(2500, 9);
 
         #undef VERTEX_COUNT_MAP_INSERT
+
+        _vertexCountRangeVector.reserve(_vertexCountGpuLevelMap.size());
+        for (const auto& e : _vertexCountGpuLevelMap)
+        {
+            _vertexCountRangeVector.push_back(e.first);
+        }
     }
+}
+
+int toGpuLevel(int vetexCount)
+{
+    auto iter = std::find_if(_vertexCountRangeVector.begin(), _vertexCountRangeVector.end(), [vetexCount](int step) -> bool{
+        return vetexCount < step;
+    });
+
+    if (iter != _vertexCountRangeVector.end())
+    {
+        return _vertexCountGpuLevelMap[*iter];
+    }
+
+    return 0;
 }
 
 void resetLastTime()
@@ -220,32 +265,58 @@ void EngineDataManager::calculateFrameLost()
     }
 }
 
-// static
-void EngineDataManager::calculateGpuLevel()
-{
-    auto renderer = Director::getInstance()->getRenderer();
-    renderer->getDrawnVertices();
-}
-
 // static 
 void EngineDataManager::onBeforeSetNextScene(EventCustom* event)
 {
     log("previous node count: %d", Node::getTotalNodeCount());
-    notifyGameStatus(GameStatus::SCENE_CHANGE, 8, 2);
+    int cpuLevel = 0;
+    int gpuLevel = 0;
+    getCpuAndGpuLevel(&cpuLevel, &gpuLevel);
+
+    notifyGameStatus(GameStatus::SCENE_CHANGE, cpuLevel, gpuLevel);
 }
 
 // static 
 void EngineDataManager::onAfterSetNextScene(EventCustom* event)
 {
     log("current node count: %d", Node::getTotalNodeCount());
-    notifyGameStatus(GameStatus::IN_SCENE, 9, 8);
+    int cpuLevel = 0;
+    int gpuLevel = 0;
+    getCpuAndGpuLevel(&cpuLevel, &gpuLevel);
+
+    notifyGameStatus(GameStatus::IN_SCENE, cpuLevel, gpuLevel);
 }
 
 // static
 void EngineDataManager::onAfterVisitScene(EventCustom* event)
 {
     calculateFrameLost();
-    calculateGpuLevel();
+
+    // calculate CPU & GPU levels
+    int cpuLevel = 0;
+    int gpuLevel = 0;
+    getCpuAndGpuLevel(&cpuLevel, &gpuLevel);
+
+    if (cpuLevel != _oldCpuLevel || gpuLevel != _oldGpuLevel)
+    {
+        notifyGameStatus(GameStatus::IN_SCENE, cpuLevel, gpuLevel);
+
+        _oldCpuLevel = cpuLevel;
+        _oldGpuLevel = gpuLevel;
+    }
+}
+
+void EngineDataManager::getCpuAndGpuLevel(int* cpuLevel, int* gpuLevel)
+{
+    if (cpuLevel == nullptr || gpuLevel == nullptr)
+        return;
+
+    int totalNodeCount = Node::getTotalNodeCount();
+    *cpuLevel = toCpuLevel(totalNodeCount);
+
+    auto renderer = Director::getInstance()->getRenderer();
+    int vertexCount = renderer->getDrawnVertices();
+    *gpuLevel = toGpuLevel(vertexCount);
 }
 
 // static

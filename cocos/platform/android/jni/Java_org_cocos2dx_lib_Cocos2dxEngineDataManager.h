@@ -62,8 +62,8 @@ private:
     static void notifyContinuousFrameLost(int frameLostCycle, int continueFrameLostThreshold, int times);
     static void notifyLowFps(int lowFpsCycle, float lowFpsThreshold, int frames);
 
-    static void calculateGpuLevel();
     static void calculateFrameLost();
+    static void getCpuAndGpuLevel(int* cpuLevel, int* gpuLevel);
 
     static void onBeforeSetNextScene(EventCustom* event);
     static void onAfterSetNextScene(EventCustom* event);
