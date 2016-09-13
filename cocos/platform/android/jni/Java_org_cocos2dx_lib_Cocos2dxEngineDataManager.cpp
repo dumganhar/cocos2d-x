@@ -52,10 +52,6 @@ bool _isSupported = false;
 
 float _defaultAnimationInterval = -1.0f;
 
-// std::function<void(int, int)> _continuousFrameLostConfigChangedListener = nullptr;
-// std::function<void(int, float)> _lowFpsConfigChangedListener = nullptr;
-// std::function<void(int)> _specialEffectLevelChangedListener = nullptr;
-
 std::unordered_map<int/*level*/, float/*particlePercent*/> _levelParticleCountMap;
 std::unordered_map<unsigned int /*Ref::_ID*/, int/*particleCount*/> _psIdCountMap;
 
@@ -155,16 +151,17 @@ void initVertexCountGpuLevelMap()
             MAP_INSERT(_vertexCountGpuLevelMap, k, v); \
             _vertexCountRangeVector.push_back(k)
 
-        VERTEX_COUNT_MAP_INSERT(100 , 0);
-        VERTEX_COUNT_MAP_INSERT(200 , 1);
-        VERTEX_COUNT_MAP_INSERT(500 , 2);
-        VERTEX_COUNT_MAP_INSERT(750 , 3);
-        VERTEX_COUNT_MAP_INSERT(1000, 4);
-        VERTEX_COUNT_MAP_INSERT(1500, 5);
-        VERTEX_COUNT_MAP_INSERT(2000, 6);
-        VERTEX_COUNT_MAP_INSERT(3000, 7);
-        VERTEX_COUNT_MAP_INSERT(5000, 8);
-        VERTEX_COUNT_MAP_INSERT(10000, 9);
+        // currently, key = drawnBatches * vertexCount
+        VERTEX_COUNT_MAP_INSERT(10000, 0);
+        VERTEX_COUNT_MAP_INSERT(20000, 1);
+        VERTEX_COUNT_MAP_INSERT(30000, 2);
+        VERTEX_COUNT_MAP_INSERT(40000, 3);
+        VERTEX_COUNT_MAP_INSERT(60000, 4);
+        VERTEX_COUNT_MAP_INSERT(80000, 5);
+        VERTEX_COUNT_MAP_INSERT(100000, 6);
+        VERTEX_COUNT_MAP_INSERT(300000, 7);
+        VERTEX_COUNT_MAP_INSERT(400000, 8);
+        VERTEX_COUNT_MAP_INSERT(500000, 9);
 
         #undef VERTEX_COUNT_MAP_INSERT
     }
@@ -308,7 +305,9 @@ void EngineDataManager::getCpuAndGpuLevel(int* cpuLevel, int* gpuLevel)
 
     auto renderer = Director::getInstance()->getRenderer();
     int vertexCount = renderer->getDrawnVertices();
-    *gpuLevel = toGpuLevel(vertexCount);
+    int batched = renderer->getDrawnBatches();
+
+    *gpuLevel = toGpuLevel(vertexCount * batched);
 }
 
 // static
