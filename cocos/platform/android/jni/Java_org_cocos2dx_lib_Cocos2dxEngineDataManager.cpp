@@ -104,26 +104,22 @@ void initNodeCountCpuLevelMap()
 {
     if (_nodeCountCpuLevelMap.empty())
     {
-        #define NODE_COUNT_MAP_INSERT(k, v) MAP_INSERT(_nodeCountCpuLevelMap, k, v)
+        #define NODE_COUNT_MAP_INSERT(k, v) \
+            MAP_INSERT(_nodeCountCpuLevelMap, k, v); \
+            _nodeCountRangeVector.push_back(k)
 
-        NODE_COUNT_MAP_INSERT(20 , 0); // 0  ~ 19
-        NODE_COUNT_MAP_INSERT(40 , 1); // 20 ~ 39
-        NODE_COUNT_MAP_INSERT(100, 2); // 40 ~ 99
-        NODE_COUNT_MAP_INSERT(150, 3);
-        NODE_COUNT_MAP_INSERT(200, 4);
-        NODE_COUNT_MAP_INSERT(250, 5);
-        NODE_COUNT_MAP_INSERT(300, 6);
-        NODE_COUNT_MAP_INSERT(350, 7);
-        NODE_COUNT_MAP_INSERT(400, 8);
-        NODE_COUNT_MAP_INSERT(500, 9);
+        NODE_COUNT_MAP_INSERT(50  , 0);
+        NODE_COUNT_MAP_INSERT(100 , 1);
+        NODE_COUNT_MAP_INSERT(300 , 2);
+        NODE_COUNT_MAP_INSERT(700 , 3);
+        NODE_COUNT_MAP_INSERT(1000, 4);
+        NODE_COUNT_MAP_INSERT(1500, 5);
+        NODE_COUNT_MAP_INSERT(1800, 6);
+        NODE_COUNT_MAP_INSERT(2100, 7);
+        NODE_COUNT_MAP_INSERT(3000, 8);
+        NODE_COUNT_MAP_INSERT(5000, 9);
 
         #undef NODE_COUNT_MAP_INSERT
-
-        _nodeCountRangeVector.reserve(_nodeCountCpuLevelMap.size());
-        for (const auto& e : _nodeCountCpuLevelMap)
-        {
-            _nodeCountRangeVector.push_back(e.first);
-        }
     }
 }
 
@@ -138,7 +134,7 @@ int toCpuLevel(int nodeCount) //, int actionCount, int scheduleCount)
         return _nodeCountCpuLevelMap[*iter];
     }
 
-    return 0;
+    return _nodeCountCpuLevelMap[_nodeCountRangeVector[_nodeCountRangeVector.size()-1]];
 }
 
 void initActionCountCpuLevelMap()
@@ -155,26 +151,22 @@ void initVertexCountGpuLevelMap()
 {
     if (_vertexCountGpuLevelMap.empty())
     {
-        #define VERTEX_COUNT_MAP_INSERT(k, v) MAP_INSERT(_vertexCountGpuLevelMap, k, v)
+        #define VERTEX_COUNT_MAP_INSERT(k, v) \
+            MAP_INSERT(_vertexCountGpuLevelMap, k, v); \
+            _vertexCountRangeVector.push_back(k)
 
         VERTEX_COUNT_MAP_INSERT(100 , 0);
         VERTEX_COUNT_MAP_INSERT(200 , 1);
         VERTEX_COUNT_MAP_INSERT(500 , 2);
         VERTEX_COUNT_MAP_INSERT(750 , 3);
         VERTEX_COUNT_MAP_INSERT(1000, 4);
-        VERTEX_COUNT_MAP_INSERT(1250, 5);
-        VERTEX_COUNT_MAP_INSERT(1500, 6);
-        VERTEX_COUNT_MAP_INSERT(1750, 7);
-        VERTEX_COUNT_MAP_INSERT(2000, 8);
-        VERTEX_COUNT_MAP_INSERT(2500, 9);
+        VERTEX_COUNT_MAP_INSERT(1500, 5);
+        VERTEX_COUNT_MAP_INSERT(2000, 6);
+        VERTEX_COUNT_MAP_INSERT(3000, 7);
+        VERTEX_COUNT_MAP_INSERT(5000, 8);
+        VERTEX_COUNT_MAP_INSERT(10000, 9);
 
         #undef VERTEX_COUNT_MAP_INSERT
-
-        _vertexCountRangeVector.reserve(_vertexCountGpuLevelMap.size());
-        for (const auto& e : _vertexCountGpuLevelMap)
-        {
-            _vertexCountRangeVector.push_back(e.first);
-        }
     }
 }
 
@@ -189,7 +181,7 @@ int toGpuLevel(int vetexCount)
         return _vertexCountGpuLevelMap[*iter];
     }
 
-    return 0;
+    return _vertexCountGpuLevelMap[_vertexCountRangeVector[_vertexCountRangeVector.size()-1]];
 }
 
 void resetLastTime()
