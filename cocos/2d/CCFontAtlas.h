@@ -38,7 +38,6 @@
 
 NS_CC_BEGIN
 
-class Font;
 class Texture2D;
 class EventCustom;
 class EventListenerCustom;
@@ -76,12 +75,7 @@ public:
     virtual void clearCache() = 0;
     //
     
-    inline bool isLetterDefinitionExist(char16_t utf16Char) { return _letterDefinitions.find(utf16Char) != _letterDefinitions.end(); }
-    
     FontLetterDefinition getLetterDefinition(char16_t utf16Char);
-    
-    inline void clearLetterDefinitionMap() { _letterDefinitions.clear(); }
-    inline bool isEmptyOfLetterDefinitionMap() { return _letterDefinitions.empty(); }
     
     const std::unordered_map<ssize_t, Texture2D*>& getTextures() const { return _atlasTextures; }
     Texture2D* getTexture(int slot);
@@ -105,8 +99,6 @@ public:
     */
     void setAliasTexParameters();
     
-    inline bool isAntiAliasingEnabled() { return _antialiasEnabled; }
-
 protected:
     
     /**
@@ -115,6 +107,8 @@ protected:
     FontAtlas();
     
     void setLetterDefinition(char16_t utf16Char, const FontLetterDefinition &letterDefinition) { _letterDefinitions[utf16Char] = letterDefinition; }
+    inline bool isLetterDefinitionExist(char16_t utf16Char) { return _letterDefinitions.find(utf16Char) != _letterDefinitions.end(); }
+    
     void setTexture(Texture2D *texture, int pageIndex);
     
     /** listen the event that renderer was recreated on Android/WP8
@@ -132,7 +126,7 @@ protected:
     std::unordered_map<ssize_t, Texture2D*> _atlasTextures;
     std::unordered_map<char16_t, FontLetterDefinition> _letterDefinitions;
 
-    bool _antialiasEnabled;
+    bool _isAntialiasEnabled;
     
     EventListenerCustom* _rendererRecreatedListener;
     

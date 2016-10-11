@@ -444,6 +444,19 @@ Label::~Label()
     CC_SAFE_RELEASE_NULL(_shadowNode);
 }
 
+//  ETC1 ALPHA supports, for LabelType::BMFONT & LabelType::CHARMAP
+Texture2D* Label::getFirstTexture()
+{
+    Texture2D* texture = nullptr;
+    if (_fontAtlas != nullptr) {
+        auto textures = _fontAtlas->getTextures();
+        if(!textures.empty()) {
+            texture = textures[0];
+        }
+    }
+    return texture;
+}
+
 void Label::reset()
 {
     CC_SAFE_RELEASE_NULL(_textSprite);
@@ -523,20 +536,6 @@ void Label::reset()
     setRotationSkewX(0);        // reverse italics
 }
 
-//  ETC1 ALPHA supports, for LabelType::BMFONT & LabelType::CHARMAP
-static Texture2D* _getTexture(Label* label)
-{
-    auto fontAtlas = label->getFontAtlas();
-    Texture2D* texture = nullptr;
-    if (fontAtlas != nullptr) {
-        auto textures = fontAtlas->getTextures();
-        if(!textures.empty()) {
-            texture = textures.begin()->second;
-        }
-    }
-    return texture;
-}
-
 void Label::updateShaderProgram()
 {
     switch (_currLabelEffect)
@@ -547,9 +546,9 @@ void Label::updateShaderProgram()
         else if (_useA8Shader)
             setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_LABEL_NORMAL));
         else if (_shadowEnabled)
-            setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR, _getTexture(this)));
+            setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR, getFirstTexture()));
         else
-            setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, _getTexture(this)));
+            setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, getFirstTexture()));
 
         break;
     case cocos2d::LabelEffect::OUTLINE: 
@@ -1126,7 +1125,7 @@ void Label::enableShadow(const Color4B& shadowColor /* = Color4B::BLACK */,const
 
     if (_currentLabelType == LabelType::BMFONT || _currentLabelType == LabelType::CHARMAP)
     {
-        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(_shadowEnabled ? GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR : GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, _getTexture(this)));
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(_shadowEnabled ? GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR : GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP, getFirstTexture()));
     }
 }
 

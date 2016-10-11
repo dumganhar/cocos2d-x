@@ -788,7 +788,7 @@ void FontFreeType::updateFontAtlas(const std::u16string& utf16Text)
                     
                     auto tex = new (std::nothrow) Texture2D;
                     
-                    if (isAntiAliasingEnabled())
+                    if (_isAntialiasEnabled)
                     {
                         tex->setAntiAliasTexParameters();
                     }
@@ -941,7 +941,7 @@ void FontFreeType::findNewCharacters(const std::u16string& u16Text, std::unorder
     FT_Encoding charEncoding = _encoding;
     
     //find new characters
-    if (isEmptyOfLetterDefinitionMap())
+    if (_letterDefinitions.empty())
     {
         // fixed #16169: new android project crash in android 5.0.2 device (Nexus 7) when use 3.12.
         // While using clang compiler with gnustl_static on android, the copy assignment operator of `std::u16string`

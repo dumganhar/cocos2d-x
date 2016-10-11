@@ -37,7 +37,7 @@ const char* FontAtlas::CMD_PURGE_FONTATLAS = "__cc_PURGE_FONTATLAS";
 const char* FontAtlas::CMD_RESET_FONTATLAS = "__cc_RESET_FONTATLAS";
 
 FontAtlas::FontAtlas()
-: _antialiasEnabled(true)
+: _isAntialiasEnabled(true)
 , _rendererRecreatedListener(nullptr)
 {
 #if CC_ENABLE_CACHE_TEXTURE_DATA
@@ -115,9 +115,9 @@ Texture2D* FontAtlas::getTexture(int slot)
 
 void FontAtlas::setAliasTexParameters()
 {
-    if (_antialiasEnabled)
+    if (_isAntialiasEnabled)
     {
-        _antialiasEnabled = false;
+        _isAntialiasEnabled = false;
         for (const auto & tex : _atlasTextures)
         {
             tex.second->setAliasTexParameters();
@@ -127,9 +127,9 @@ void FontAtlas::setAliasTexParameters()
 
 void FontAtlas::setAntiAliasTexParameters()
 {
-    if (! _antialiasEnabled)
+    if (!_isAntialiasEnabled)
     {
-        _antialiasEnabled = true;
+        _isAntialiasEnabled = true;
         for (const auto & tex : _atlasTextures)
         {
             tex.second->setAntiAliasTexParameters();
@@ -140,7 +140,7 @@ void FontAtlas::setAntiAliasTexParameters()
 void FontAtlas::purgeTexturesAtlas()
 {
     releaseTextures();
-    clearLetterDefinitionMap();
+    _letterDefinitions.clear();
     
     clearCache();
     

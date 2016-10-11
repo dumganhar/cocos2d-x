@@ -567,8 +567,6 @@ public:
      */
     float getAdditionalKerning() const;
 
-    FontAtlas* getFontAtlas() { return _fontAtlas; }
-
     virtual const BlendFunc& getBlendFunc() const override { return _blendFunc; }
     virtual void setBlendFunc(const BlendFunc &blendFunc) override;
 
@@ -680,7 +678,8 @@ protected:
     int getFirstWordLen(const std::u16string& utf16Text, int startIndex, int textLen);
 
     void reset();
-
+    Texture2D* getFirstTexture();
+    
     FontDefinition _getFontDefinition() const;
 
     virtual void updateColor() override;
