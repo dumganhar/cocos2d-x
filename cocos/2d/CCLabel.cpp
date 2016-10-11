@@ -27,7 +27,6 @@
 
 #include <algorithm>
 
-#include "2d/CCFont.h"
 #include "2d/CCFontAtlasCache.h"
 #include "2d/CCFontAtlas.h"
 #include "2d/CCSprite.h"
@@ -42,7 +41,6 @@
 #include "base/CCEventListenerCustom.h"
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventCustom.h"
-#include "2d/CCFontFNT.h"
 
 NS_CC_BEGIN
 
@@ -602,7 +600,7 @@ void Label::setFontAtlas(FontAtlas* atlas,bool distanceFieldEnabled /* = false *
 
     if (_fontAtlas)
     {
-        _lineHeight = _fontAtlas->getLineHeight();
+        _lineHeight = _fontAtlas->getFontMaxHeight();
         _contentDirty = true;
         _systemFontDirty = false;
     }
@@ -634,11 +632,8 @@ bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& ima
 
     //assign the default fontSize
     if (std::abs(fontSize) < FLT_EPSILON) {
-        FontFNT *bmFont = (FontFNT*)newAtlas->getFont();
-        if (bmFont) {
-            float originalFontSize = bmFont->getOriginalFontSize();
-            _bmFontSize = originalFontSize / CC_CONTENT_SCALE_FACTOR();
-        }
+        float originalFontSize = newAtlas->getFontSize();
+        _bmFontSize = originalFontSize / CC_CONTENT_SCALE_FACTOR();
     }
 
     if(fontSize > 0.0f){
@@ -795,7 +790,7 @@ bool Label::alignText()
 
     bool ret = true;
     do {
-        _fontAtlas->prepareLetterDefinitions(_utf16Text);
+        _fontAtlas->updateFontAtlas(_utf16Text);
         auto& textures = _fontAtlas->getTextures();
         if (textures.size() > static_cast<size_t>(_batchNodes.size()))
         {
@@ -870,7 +865,7 @@ bool Label::computeHorizontalKernings(const std::u16string& stringToRender)
     }
 
     int letterCount = 0;
-    _horizontalKernings = _fontAtlas->getFont()->getHorizontalKerningForTextUTF16(stringToRender, letterCount);
+    _horizontalKernings = _fontAtlas->getHorizontalKerningForTextUTF16(stringToRender, letterCount);
 
     if(!_horizontalKernings)
         return false;

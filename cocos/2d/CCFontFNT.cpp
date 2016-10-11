@@ -637,39 +637,105 @@ void BMFontConfiguration::parseKerningEntry(const char* line)
     HASH_ADD_INT(_kerningDictionary,key, element);
 }
 
-FontFNT * FontFNT::create(const std::string& fntFilePath, const Vec2& imageOffset /* = Vec2::ZERO */)
-{
-    BMFontConfiguration *newConf = FNTConfigLoadFile(fntFilePath);
-    if (!newConf)
-        return nullptr;
-    
-    // add the texture
-    Texture2D *tempTexture = Director::getInstance()->getTextureCache()->addImage(newConf->getAtlasName());
-    if (!tempTexture)
-    {
-        return nullptr;
-    }
-    
-    FontFNT *tempFont =  new FontFNT(newConf,imageOffset);
-    tempFont->setFontSize(newConf->_fontSize);
-    if (!tempFont)
-    {
-        return nullptr;
-    }
-    tempFont->autorelease();
-    return tempFont;
-}
+///////////////////////
 
-FontFNT::FontFNT(BMFontConfiguration *theContfig, const Vec2& imageOffset /* = Vec2::ZERO */)
-:_configuration(theContfig)
-,_imageOffset(CC_POINT_PIXELS_TO_POINTS(imageOffset))
+FontFNT::FontFNT()
+: _configuration(nullptr)
+, _lineHeight(0)
 {
-    _configuration->retain();
+    
 }
 
 FontFNT::~FontFNT()
 {
-    _configuration->release();
+    CC_SAFE_RELEASE(_configuration);
+}
+
+bool FontFNT::initWithFNTConfig(const std::string& fntFilePath, const Vec2& imageOffset /* = Vec2::ZERO */)
+{
+    BMFontConfiguration *newConf = FNTConfigLoadFile(fntFilePath);
+    if (!newConf)
+        return false;
+    
+    // add the texture
+    Texture2D *tempTexture = Director::getInstance()->getTextureCache()->addImage(newConf->getAtlasName());
+    if (!tempTexture)
+        return false;
+    
+    _configuration = newConf;
+    _configuration->retain();
+    
+//cjh    setFontSize(newConf->_fontSize);
+
+    // check that everything is fine with the BMFontCofniguration
+    if (!_configuration->_fontDefDictionary)
+        return false;
+    
+    size_t numGlyphs = _configuration->_characterSet->size();
+    if (numGlyphs == 0)
+        return false;
+    
+    if (_configuration->_commonHeight == 0)
+        return false;
+    
+    // common height
+    int originalFontSize = _configuration->_fontSize;
+    float originalLineHeight = _configuration->_commonHeight;
+    float factor = 1.0f;
+//cjh    if (std::abs(_fontSize - originalFontSize) < FLT_EPSILON) {
+//        factor = 1.0f;
+//    } else {
+//        factor = _fontSize / originalFontSize;
+//    }
+    
+    _lineHeight = originalLineHeight * factor;
+    
+    BMFontDef fontDef;
+    tFontDefHashElement *currentElement, *tmp;
+    
+    // Purge uniform hash
+    HASH_ITER(hh, _configuration->_fontDefDictionary, currentElement, tmp)
+    {
+        
+        FontLetterDefinition tempDefinition;
+        
+        fontDef = currentElement->fontDef;
+        Rect tempRect;
+        
+        tempRect = fontDef.rect;
+        tempRect = CC_RECT_PIXELS_TO_POINTS(tempRect);
+        
+        tempDefinition.offsetX  = fontDef.xOffset;
+        tempDefinition.offsetY  = fontDef.yOffset;
+        
+        tempDefinition.U        = tempRect.origin.x + _imageOffset.x;
+        tempDefinition.V        = tempRect.origin.y + _imageOffset.y;
+        
+        tempDefinition.width    = tempRect.size.width;
+        tempDefinition.height   = tempRect.size.height;
+        
+        //carloX: only one texture supported FOR NOW
+        tempDefinition.textureID = 0;
+        
+        tempDefinition.validDefinition = true;
+        tempDefinition.xAdvance = fontDef.xAdvance;
+        // add the new definition
+        if (65535 < fontDef.charID) {
+            CCLOGWARN("Warning: 65535 < fontDef.charID (%u), ignored", fontDef.charID);
+        } else {
+            setLetterDefinition(fontDef.charID,tempDefinition);
+        }
+    }
+    
+    // add the texture (only one texture for now)
+    tempTexture = Director::getInstance()->getTextureCache()->addImage(_configuration->getAtlasName());
+    if (tempTexture == nullptr)
+        return false;
+    
+    // add the texture
+    setTexture(tempTexture, 0);
+    
+    return true;
 }
 
 void FontFNT::purgeCachedData()
@@ -681,7 +747,7 @@ void FontFNT::purgeCachedData()
     }
 }
 
-int * FontFNT::getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const
+int* FontFNT::getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const
 {
     outNumLetters = static_cast<int>(text.length());
     
@@ -720,96 +786,9 @@ int  FontFNT::getHorizontalKerningForChars(unsigned short firstChar, unsigned sh
     return ret;
 }
 
-void FontFNT::setFontSize(float fontSize)
-{
-    _fontSize = fontSize;
-}
-
-int FontFNT::getOriginalFontSize()const
+float FontFNT::getFontSize() const
 {
     return _configuration->_fontSize;
-}
-
-FontAtlas * FontFNT::createFontAtlas()
-{
-    // check that everything is fine with the BMFontCofniguration
-    if (!_configuration->_fontDefDictionary)
-        return nullptr;
-    
-    size_t numGlyphs = _configuration->_characterSet->size();
-    if (numGlyphs == 0)
-        return nullptr;
-    
-    if (_configuration->_commonHeight == 0)
-        return nullptr;
-    
-    FontAtlas *tempAtlas = new (std::nothrow) FontAtlas(*this);
-    if (tempAtlas == nullptr)
-        return nullptr;
-    
-    // common height
-    int originalFontSize = _configuration->_fontSize;
-    float originalLineHeight = _configuration->_commonHeight;
-    float factor = 0.0f;
-    if (std::abs(_fontSize - originalFontSize) < FLT_EPSILON) {
-        factor = 1.0f;
-    }else {
-        factor = _fontSize / originalFontSize;
-    }
-    
-    tempAtlas->setLineHeight(originalLineHeight * factor);
-    
-    
-    BMFontDef fontDef;
-    tFontDefHashElement *currentElement, *tmp;
-    
-    // Purge uniform hash
-    HASH_ITER(hh, _configuration->_fontDefDictionary, currentElement, tmp)
-    {
-        
-        FontLetterDefinition tempDefinition;
-        
-        fontDef = currentElement->fontDef;
-        Rect tempRect;
-        
-        tempRect = fontDef.rect;
-        tempRect = CC_RECT_PIXELS_TO_POINTS(tempRect);
-        
-        tempDefinition.offsetX  = fontDef.xOffset;
-        tempDefinition.offsetY  = fontDef.yOffset;
-        
-        tempDefinition.U        = tempRect.origin.x + _imageOffset.x;
-        tempDefinition.V        = tempRect.origin.y + _imageOffset.y;
-        
-        tempDefinition.width    = tempRect.size.width;
-        tempDefinition.height   = tempRect.size.height;
-        
-        //carloX: only one texture supported FOR NOW
-        tempDefinition.textureID = 0;
-        
-        tempDefinition.validDefinition = true;
-        tempDefinition.xAdvance = fontDef.xAdvance;
-        // add the new definition
-        if (65535 < fontDef.charID) {
-            CCLOGWARN("Warning: 65535 < fontDef.charID (%u), ignored", fontDef.charID);
-        } else {
-            tempAtlas->addLetterDefinition(fontDef.charID,tempDefinition);
-        }
-    }
-    
-    // add the texture (only one texture for now)
-    
-    Texture2D *tempTexture = Director::getInstance()->getTextureCache()->addImage(_configuration->getAtlasName());
-    if (!tempTexture) {
-        CC_SAFE_RELEASE(tempAtlas);
-        return nullptr;
-    }
-    
-    // add the texture
-    tempAtlas->addTexture(tempTexture, 0);
-    
-    // done
-    return tempAtlas;
 }
 
 void FontFNT::reloadBMFontResource(const std::string& fntFilePath)

@@ -28,40 +28,39 @@
 
 /// @cond DO_NOT_SHOW
 
-#include "2d/CCFont.h"
+#include "2d/CCFontAtlas.h"
 
 NS_CC_BEGIN
 
 class Texture2D;
-class FontCharMap : public Font
+
+class FontCharMap : public FontAtlas
 {  
 public:
-    static FontCharMap * create(const std::string& charMapFile, int itemWidth, int itemHeight, int startCharMap);
-    static FontCharMap * create(Texture2D* texture, int itemWidth, int itemHeight, int startCharMap);
-    static FontCharMap * create(const std::string& plistFile);
     
-    virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;
-    virtual FontAtlas *createFontAtlas() override;
-    
-protected:    
-    FontCharMap(Texture2D* texture,int itemWidth, int itemHeight, int startCharMap)
-        :_texture(texture)
-        ,_mapStartChar(startCharMap)
-        ,_itemWidth(itemWidth)
-        ,_itemHeight(itemHeight)
-    {}
+    FontCharMap();
     /**
      * @js NA
      * @lua NA
      */
     virtual ~FontCharMap();
     
+    bool initWithCharMapConfig(const std::string& charMapFile, int itemWidth, int itemHeight, int startCharMap);
+    bool initWithCharMapConfig(Texture2D* texture, int itemWidth, int itemHeight, int startCharMap);
+    bool initWithCharMapConfig(const std::string& plistFile);
+    
+    // Override Functions
+    virtual void updateFontAtlas(const std::u16string& utf16String) override {}
+    virtual int getFontMaxHeight() const override { return _itemHeight; }
+    virtual float getFontSize() const override { return 0.0f; };
+    virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;
+    virtual void clearCache() override {}
+    
 private:
     Texture2D* _texture;
     int _mapStartChar;
     int _itemWidth;
     int _itemHeight;
-
 };
 
 /// @endcond

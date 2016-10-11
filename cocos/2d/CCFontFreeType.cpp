@@ -31,44 +31,41 @@ THE SOFTWARE.
 #include "base/ccUTF8.h"
 #include "platform/CCFileUtils.h"
 
-NS_CC_BEGIN
 
 
-FT_Library FontFreeType::_FTlibrary;
-bool       FontFreeType::_FTInitialized = false;
-const int  FontFreeType::DistanceMapSpread = 3;
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
+#include <iconv.h>
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#include "platform/android/jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h"
+#endif
 
-const char* FontFreeType::_glyphASCII = "\"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ ";
-const char* FontFreeType::_glyphNEHE = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ";
 
-typedef struct _DataRef
-{
-    Data data;
-    unsigned int referenceCount;
-}DataRef;
-
-static std::unordered_map<std::string, DataRef> s_cacheFontData;
-
-FontFreeType * FontFreeType::create(const std::string &fontName, float fontSize, GlyphCollection glyphs, const char *customGlyphs,bool distanceFieldEnabled /* = false */,int outline /* = 0 */)
-{
-    FontFreeType *tempFont =  new FontFreeType(distanceFieldEnabled,outline);
-
-    if (!tempFont)
-        return nullptr;
+namespace  {
+    const int CacheTextureWidth = 512;
+    const int CacheTextureHeight = 512;
+    const int DistanceMapSpread = 3;
     
-    tempFont->setGlyphCollection(glyphs, customGlyphs);
+    FT_Library _FTlibrary = nullptr;
+    bool _FTInitialized = false;
     
-    if (!tempFont->createFontObject(fontName, fontSize))
+    
+    const char* _glyphASCII = "\"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ ";
+    const char* _glyphNEHE = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ";
+    
+    typedef struct _DataRef
     {
-        delete tempFont;
-        return nullptr;
-    }
-    return tempFont;
+        cocos2d::Data data;
+        unsigned int referenceCount;
+    }DataRef;
+    
+    static std::unordered_map<std::string, DataRef> s_cacheFontData;
 }
+
+NS_CC_BEGIN
 
 bool FontFreeType::initFreeType()
 {
-    if (_FTInitialized == false)
+    if (!_FTInitialized)
     {
         // begin freetype
         if (FT_Init_FreeType( &_FTlibrary ))
@@ -90,57 +87,173 @@ void FontFreeType::shutdownFreeType()
     }
 }
 
-FT_Library FontFreeType::getFTLibrary()
-{
-    initFreeType();
-    return _FTlibrary;
-}
-
-FontFreeType::FontFreeType(bool distanceFieldEnabled /* = false */,int outline /* = 0 */)
+FontFreeType::FontFreeType()
 : _fontRef(nullptr)
 , _stroker(nullptr)
-, _distanceFieldEnabled(distanceFieldEnabled)
+, _fontSize(0.0f)
+, _distanceFieldEnabled(false)
 , _outlineSize(0.0f)
 , _lineHeight(0)
-, _fontAtlas(nullptr)
 , _encoding(FT_ENCODING_UNICODE)
 , _usedGlyphs(GlyphCollection::ASCII)
+, _iconv(nullptr)
+, _currentPage(0)
+, _currentPageOrigX(0)
+, _currentPageOrigY(0)
+, _letterEdgeExtend(2)
+, _letterPadding(0)
+, _currentPageData(nullptr)
+, _fontAscender(0)
+, _currLineHeight(0)
 {
-    if (outline > 0)
-    {
-        _outlineSize = outline * CC_CONTENT_SCALE_FACTOR();
-        FT_Stroker_New(FontFreeType::getFTLibrary(), &_stroker);
-        FT_Stroker_Set(_stroker,
-            (int)(_outlineSize * 64),
-            FT_STROKER_LINECAP_ROUND,
-            FT_STROKER_LINEJOIN_ROUND,
-            0);
-    }
+    initFreeType();
 }
 
-bool FontFreeType::createFontObject(const std::string &fontName, float fontSize)
+FontFreeType::~FontFreeType()
+{
+    if (_FTInitialized)
+    {
+        if (_stroker)
+        {
+            FT_Stroker_Done(_stroker);
+        }
+        if (_fontRef)
+        {
+            FT_Done_Face(_fontRef);
+        }
+    }
+    
+    s_cacheFontData[_fontName].referenceCount -= 1;
+    if (s_cacheFontData[_fontName].referenceCount == 0)
+    {
+        s_cacheFontData.erase(_fontName);
+    }
+    
+#if CC_ENABLE_CACHE_TEXTURE_DATA
+    if (_rendererRecreatedListener)
+    {
+        auto eventDispatcher = Director::getInstance()->getEventDispatcher();
+        eventDispatcher->removeEventListener(_rendererRecreatedListener);
+        _rendererRecreatedListener = nullptr;
+    }
+#endif
+    
+    delete []_currentPageData;
+    
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
+    if (_iconv)
+    {
+        iconv_close(_iconv);
+        _iconv = nullptr;
+    }
+#endif
+}
+
+bool FontFreeType::initWithFontFreeTypeConfig(const std::string &fontName, float fontSize, GlyphCollection glyphs,
+                        const char *customGlyphs, bool distanceFieldEnabled,int outline)
+{
+    _fontName = fontName;
+    _fontSize = fontSize;
+    
+    bool succeed = false;
+    Texture2D* texture = nullptr;
+    
+    do
+    {
+        if (outline > 0)
+        {
+            _outlineSize = outline * CC_CONTENT_SCALE_FACTOR();
+            FT_Stroker_New(_FTlibrary, &_stroker);
+            FT_Stroker_Set(_stroker,
+                           (int)(_outlineSize * 64),
+                           FT_STROKER_LINECAP_ROUND,
+                           FT_STROKER_LINEJOIN_ROUND,
+                           0);
+        }
+        
+        setGlyphCollection(glyphs, customGlyphs);
+        
+        if (!createFontObject())
+        {
+            break;
+        }
+        
+        _fontAscender = getFontAscender();
+        
+        if (isDistanceFieldEnabled())
+        {
+            _letterPadding += 2 * DistanceMapSpread;
+        }
+        
+        _currentPageDataSize = CacheTextureWidth * CacheTextureHeight;
+        auto outlineSize = getOutlineSize();
+        if (outlineSize > 0)
+        {
+            _lineHeight += 2 * outlineSize;
+            _currentPageDataSize *= 2;
+        }
+
+        auto pixelFormat = _outlineSize > 0 ? Texture2D::PixelFormat::AI88 : Texture2D::PixelFormat::A8;
+        
+        texture = new (std::nothrow) Texture2D();
+        if (texture == nullptr)
+            break;
+        
+        _currentPageData = new (std::nothrow) unsigned char[_currentPageDataSize];
+        memset(_currentPageData, 0, _currentPageDataSize);
+        
+        if (!texture->initWithData(_currentPageData, _currentPageDataSize, pixelFormat,
+                                   CacheTextureWidth, CacheTextureHeight, Size(CacheTextureWidth,CacheTextureHeight) ))
+        {
+            break;
+        }
+        
+        setTexture(texture, 0);
+        texture->release();
+        
+        if (_usedGlyphs != GlyphCollection::DYNAMIC)
+        {
+            std::u16string utf16;
+            if (StringUtils::UTF8ToUTF16(getGlyphCollection(), utf16))
+            {
+                updateFontAtlas(utf16);
+            }
+        }
+        
+        succeed = true;
+        
+    } while(false);
+    
+    if (!succeed)
+    {
+        CC_SAFE_RELEASE_NULL(texture);
+    }
+    
+    return true;
+}
+
+bool FontFreeType::createFontObject()
 {
     FT_Face face;
     // save font name locally
-    _fontName = fontName;
-
-    auto it = s_cacheFontData.find(fontName);
+    
+    auto it = s_cacheFontData.find(_fontName);
     if (it != s_cacheFontData.end())
     {
         (*it).second.referenceCount += 1;
     }
     else
     {
-        s_cacheFontData[fontName].referenceCount = 1;
-        s_cacheFontData[fontName].data = FileUtils::getInstance()->getDataFromFile(fontName);    
+        s_cacheFontData[_fontName].referenceCount = 1;
+        s_cacheFontData[_fontName].data = FileUtils::getInstance()->getDataFromFile(_fontName);
 
-        if (s_cacheFontData[fontName].data.isNull())
+        if (s_cacheFontData[_fontName].data.isNull())
         {
             return false;
         }
     }
 
-    if (FT_New_Memory_Face(getFTLibrary(), s_cacheFontData[fontName].data.getBytes(), s_cacheFontData[fontName].data.getSize(), 0, &face ))
+    if (FT_New_Memory_Face(_FTlibrary, s_cacheFontData[_fontName].data.getBytes(), s_cacheFontData[_fontName].data.getSize(), 0, &face ))
         return false;
 
     if (FT_Select_Charmap(face, FT_ENCODING_UNICODE))
@@ -169,7 +282,7 @@ bool FontFreeType::createFontObject(const std::string &fontName, float fontSize)
 
     // set the requested font size
     int dpi = 72;
-    int fontSizePoints = (int)(64.f * fontSize * CC_CONTENT_SCALE_FACTOR());
+    int fontSizePoints = (int)(64.f * _fontSize * CC_CONTENT_SCALE_FACTOR());
     if (FT_Set_Char_Size(face, fontSizePoints, fontSizePoints, dpi, dpi))
         return false;
     
@@ -179,46 +292,6 @@ bool FontFreeType::createFontObject(const std::string &fontName, float fontSize)
     
     // done and good
     return true;
-}
-
-FontFreeType::~FontFreeType()
-{
-    if (_FTInitialized)
-    {
-        if (_stroker)
-        {
-            FT_Stroker_Done(_stroker);
-        }
-        if (_fontRef)
-        {
-            FT_Done_Face(_fontRef);
-        }
-    }
-
-    s_cacheFontData[_fontName].referenceCount -= 1;
-    if (s_cacheFontData[_fontName].referenceCount == 0)
-    {
-        s_cacheFontData.erase(_fontName);
-    }
-}
-
-FontAtlas * FontFreeType::createFontAtlas()
-{
-    if (_fontAtlas == nullptr)
-    {
-        _fontAtlas = new (std::nothrow) FontAtlas(*this);
-        if (_fontAtlas && _usedGlyphs != GlyphCollection::DYNAMIC)
-        {
-            std::u16string utf16;
-            if (StringUtils::UTF8ToUTF16(getGlyphCollection(), utf16))
-            {
-                _fontAtlas->prepareLetterDefinitions(utf16);
-            }
-        }
-        this->autorelease();
-    }
-    
-    return _fontAtlas;
 }
 
 int * FontFreeType::getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const
@@ -452,7 +525,7 @@ unsigned char * FontFreeType::getGlyphBitmapWithOutline(unsigned short theChar, 
 
 unsigned char * makeDistanceMap( unsigned char *img, long width, long height)
 {
-    long pixelAmount = (width + 2 * FontFreeType::DistanceMapSpread) * (height + 2 * FontFreeType::DistanceMapSpread);
+    long pixelAmount = (width + 2 * DistanceMapSpread) * (height + 2 * DistanceMapSpread);
 
     short * xdist = (short *)  malloc( pixelAmount * sizeof(short) );
     short * ydist = (short *)  malloc( pixelAmount * sizeof(short) );
@@ -464,17 +537,17 @@ unsigned char * makeDistanceMap( unsigned char *img, long width, long height)
     long i,j;
 
     // Convert img into double (data) rescale image levels between 0 and 1
-    long outWidth = width + 2 * FontFreeType::DistanceMapSpread;
+    long outWidth = width + 2 * DistanceMapSpread;
     for (i = 0; i < width; ++i)
     {
         for (j = 0; j < height; ++j)
         {
-            data[j * outWidth + FontFreeType::DistanceMapSpread + i] = img[j * width + i] / 255.0;
+            data[j * outWidth + DistanceMapSpread + i] = img[j * width + i] / 255.0;
         }
     }
 
-    width += 2 * FontFreeType::DistanceMapSpread;
-    height += 2 * FontFreeType::DistanceMapSpread;
+    width += 2 * DistanceMapSpread;
+    height += 2 * DistanceMapSpread;
 
     // Transform background (outside contour, in areas of 0's)   
     computegradient( data, (int)width, (int)height, gx, gy);
@@ -557,7 +630,7 @@ void FontFreeType::renderCharAt(unsigned char *dest,int posX, int posY, unsigned
                 dest[index + 2] = out[index2 + 2];*/
 
                 //Single channel 8-bit output 
-                dest[iX + ( iY * FontAtlas::CacheTextureWidth )] = distanceMap[bitmap_y + x];
+                dest[iX + ( iY * CacheTextureWidth )] = distanceMap[bitmap_y + x];
 
                 iX += 1;
             }
@@ -577,9 +650,9 @@ void FontFreeType::renderCharAt(unsigned char *dest,int posX, int posY, unsigned
             for (int x = 0; x < bitmapWidth; ++x)
             {
                 tempChar = bitmap[(bitmap_y + x) * 2];
-                dest[(iX + ( iY * FontAtlas::CacheTextureWidth ) ) * 2] = tempChar;
+                dest[(iX + ( iY * CacheTextureWidth ) ) * 2] = tempChar;
                 tempChar = bitmap[(bitmap_y + x) * 2 + 1];
-                dest[(iX + ( iY * FontAtlas::CacheTextureWidth ) ) * 2 + 1] = tempChar;
+                dest[(iX + ( iY * CacheTextureWidth ) ) * 2 + 1] = tempChar;
 
                 iX += 1;
             }
@@ -600,7 +673,7 @@ void FontFreeType::renderCharAt(unsigned char *dest,int posX, int posY, unsigned
                 unsigned char cTemp = bitmap[bitmap_y + x];
 
                 // the final pixel
-                dest[(iX + ( iY * FontAtlas::CacheTextureWidth ) )] = cTemp;
+                dest[(iX + ( iY * CacheTextureWidth ) )] = cTemp;
 
                 iX += 1;
             }
@@ -652,6 +725,273 @@ void FontFreeType::releaseFont(const std::string &fontName)
             item = s_cacheFontData.erase(item);
         else
             item++;
+    }
+}
+
+void FontFreeType::updateFontAtlas(const std::u16string& utf16Text)
+{
+    std::unordered_map<unsigned short, unsigned short> codeMapOfNewChar;
+    findNewCharacters(utf16Text, codeMapOfNewChar);
+    if (codeMapOfNewChar.empty())
+    {
+        return;
+    }
+    
+    int adjustForDistanceMap = _letterPadding / 2;
+    int adjustForExtend = _letterEdgeExtend / 2;
+    long bitmapWidth;
+    long bitmapHeight;
+    int glyphHeight;
+    Rect tempRect;
+    FontLetterDefinition tempDef;
+    
+    auto scaleFactor = CC_CONTENT_SCALE_FACTOR();
+    auto  pixelFormat = getOutlineSize() > 0 ? Texture2D::PixelFormat::AI88 : Texture2D::PixelFormat::A8;
+    
+    float startY = _currentPageOrigY;
+    
+    for (auto&& it : codeMapOfNewChar)
+    {
+        auto bitmap = getGlyphBitmap(it.second, bitmapWidth, bitmapHeight, tempRect, tempDef.xAdvance);
+        if (bitmap && bitmapWidth > 0 && bitmapHeight > 0)
+        {
+            tempDef.validDefinition = true;
+            tempDef.width = tempRect.size.width + _letterPadding + _letterEdgeExtend;
+            tempDef.height = tempRect.size.height + _letterPadding + _letterEdgeExtend;
+            tempDef.offsetX = tempRect.origin.x + adjustForDistanceMap + adjustForExtend;
+            tempDef.offsetY = _fontAscender + tempRect.origin.y - adjustForDistanceMap - adjustForExtend;
+            
+            if (_currentPageOrigX + tempDef.width > CacheTextureWidth)
+            {
+                _currentPageOrigY += _currLineHeight;
+                _currLineHeight = 0;
+                _currentPageOrigX = 0;
+                if (_currentPageOrigY + _lineHeight + _letterPadding + _letterEdgeExtend >= CacheTextureHeight)
+                {
+                    unsigned char *data = nullptr;
+                    if (pixelFormat == Texture2D::PixelFormat::AI88)
+                    {
+                        data = _currentPageData + CacheTextureWidth * (int)startY * 2;
+                    }
+                    else
+                    {
+                        data = _currentPageData + CacheTextureWidth * (int)startY;
+                    }
+                    
+                    _atlasTextures[_currentPage]->updateWithData(data, 0, startY, CacheTextureWidth, CacheTextureHeight - startY);
+                    
+                    startY = 0.0f;
+                    
+                    _currentPageOrigY = 0;
+                    memset(_currentPageData, 0, _currentPageDataSize);
+                    _currentPage++;
+                    
+                    auto tex = new (std::nothrow) Texture2D;
+                    
+                    if (isAntiAliasingEnabled())
+                    {
+                        tex->setAntiAliasTexParameters();
+                    }
+                    else
+                    {
+                        tex->setAliasTexParameters();
+                    }
+                    
+                    tex->initWithData(_currentPageData, _currentPageDataSize,
+                                      pixelFormat, CacheTextureWidth, CacheTextureHeight, Size(CacheTextureWidth, CacheTextureHeight));
+                    
+                    
+                    setTexture(tex, _currentPage);
+                    
+                    tex->release();
+                }
+            }
+            glyphHeight = static_cast<int>(bitmapHeight) + _letterPadding + _letterEdgeExtend;
+            if (glyphHeight > _currLineHeight)
+            {
+                _currLineHeight = glyphHeight;
+            }
+            
+            renderCharAt(_currentPageData, _currentPageOrigX + adjustForExtend, _currentPageOrigY + adjustForExtend, bitmap, bitmapWidth, bitmapHeight);
+            
+            tempDef.U = _currentPageOrigX;
+            tempDef.V = _currentPageOrigY;
+            tempDef.textureID = _currentPage;
+            _currentPageOrigX += tempDef.width + 1;
+            // take from pixels to points
+            tempDef.width = tempDef.width / scaleFactor;
+            tempDef.height = tempDef.height / scaleFactor;
+            tempDef.U = tempDef.U / scaleFactor;
+            tempDef.V = tempDef.V / scaleFactor;
+        }
+        else{
+            if (tempDef.xAdvance)
+                tempDef.validDefinition = true;
+            else
+                tempDef.validDefinition = false;
+            
+            tempDef.width = 0;
+            tempDef.height = 0;
+            tempDef.U = 0;
+            tempDef.V = 0;
+            tempDef.offsetX = 0;
+            tempDef.offsetY = 0;
+            tempDef.textureID = 0;
+            _currentPageOrigX += 1;
+        }
+        
+        setLetterDefinition(it.first, tempDef);
+    }
+    
+    unsigned char *data = nullptr;
+    if (pixelFormat == Texture2D::PixelFormat::AI88)
+    {
+        data = _currentPageData + CacheTextureWidth * (int)startY * 2;
+    }
+    else
+    {
+        data = _currentPageData + CacheTextureWidth * (int)startY;
+    }
+    
+    _atlasTextures[_currentPage]->updateWithData(data, 0, startY, CacheTextureWidth, _currentPageOrigY - startY + _currLineHeight);
+}
+
+void FontFreeType::reset()
+{
+    _currLineHeight = 0;
+    _currentPage = 0;
+    _currentPageOrigX = 0;
+    _currentPageOrigY = 0;
+}
+
+void FontFreeType::clearCache()
+{
+    reset();
+}
+
+void FontFreeType::conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap)
+{
+    size_t strLen = u16Text.length();
+    auto gb2312StrSize = strLen * 2;
+    auto gb2312Text = new (std::nothrow) char[gb2312StrSize];
+    memset(gb2312Text, 0, gb2312StrSize);
+    
+    switch (_encoding)
+    {
+        case FT_ENCODING_GB2312:
+        {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT
+            WideCharToMultiByte(936, NULL, (LPCWCH)u16Text.c_str(), strLen, (LPSTR)gb2312Text, gb2312StrSize, NULL, NULL);
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+            conversionEncodingJNI((char*)u16Text.c_str(), gb2312StrSize, "UTF-16LE", gb2312Text, "GB2312");
+#else
+            if (_iconv == nullptr)
+            {
+                _iconv = iconv_open("gb2312", "utf-16le");
+            }
+            
+            if (_iconv == (iconv_t)-1)
+            {
+                CCLOG("conversion from utf16 to gb2312 not available");
+            }
+            else
+            {
+                char* pin = (char*)u16Text.c_str();
+                char* pout = gb2312Text;
+                size_t inLen = strLen * 2;
+                size_t outLen = gb2312StrSize;
+                
+                iconv(_iconv, (char**)&pin, &inLen, &pout, &outLen);
+            }
+#endif
+        }
+            break;
+        default:
+            CCLOG("Unsupported encoding:%d", _encoding);
+            break;
+    }
+    
+    unsigned short gb2312Code = 0;
+    unsigned char* dst = (unsigned char*)&gb2312Code;
+    unsigned short u16Code;
+    for (size_t index = 0, gbIndex = 0; index < strLen; ++index)
+    {
+        u16Code = u16Text[index];
+        if (u16Code < 256)
+        {
+            charCodeMap[u16Code] = u16Code;
+            gbIndex += 1;
+        }
+        else
+        {
+            dst[0] = gb2312Text[gbIndex + 1];
+            dst[1] = gb2312Text[gbIndex];
+            charCodeMap[u16Code] = gb2312Code;
+            
+            gbIndex += 2;
+        }
+    }
+    
+    delete[] gb2312Text;
+}
+
+void FontFreeType::findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap)
+{
+    std::u16string newChars;
+    FT_Encoding charEncoding = _encoding;
+    
+    //find new characters
+    if (isEmptyOfLetterDefinitionMap())
+    {
+        // fixed #16169: new android project crash in android 5.0.2 device (Nexus 7) when use 3.12.
+        // While using clang compiler with gnustl_static on android, the copy assignment operator of `std::u16string`
+        // will affect the memory validity, it means after `newChars` is destroyed, the memory of `u16Text` holds
+        // will be a dead region. `u16text` represents the variable in `Label::_utf16Text`, when somewhere
+        // allocates memory by `malloc, realloc, new, new[]`, the generated memory address may be the same
+        // as `Label::_utf16Text` holds. If doing a `memset` or other memory operations, the orignal `Label::_utf16Text`
+        // will be in an unknown state. Meanwhile, a bunch lots of logic which depends on `Label::_utf16Text`
+        // will be broken.
+        
+        // newChars = u16Text;
+        
+        // Using `append` method is a workaround for this issue. So please be carefuly while using the assignment operator
+        // of `std::u16string`.
+        newChars.append(u16Text);
+    }
+    else
+    {
+        auto length = u16Text.length();
+        newChars.reserve(length);
+        for (size_t i = 0; i < length; ++i)
+        {
+            if (!isLetterDefinitionExist(u16Text[i]))
+            {
+                newChars.push_back(u16Text[i]);
+            }
+        }
+    }
+    
+    if (!newChars.empty())
+    {
+        switch (charEncoding)
+        {
+            case FT_ENCODING_UNICODE:
+            {
+                for (auto u16Code : newChars)
+                {
+                    charCodeMap[u16Code] = u16Code;
+                }
+                break;
+            }
+            case FT_ENCODING_GB2312:
+            {
+                conversionU16TOGB2312(newChars, charCodeMap);
+                break;
+            }
+            default:
+                CCLOG("FontAtlas::findNewCharacters: Unsupported encoding:%d", charEncoding);
+                break;
+        }
     }
 }
 

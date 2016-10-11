@@ -92,7 +92,9 @@ int Label::getFirstWordLen(const std::u16string& utf16Text, int startIndex, int 
     for (int index = startIndex + 1; index < textLen; ++index)
     {
         character = utf16Text[index];
-        if (_fontAtlas->getLetterDefinitionForChar(character, letterDef) == false)
+        letterDef = _fontAtlas->getLetterDefinition(character);
+        
+        if (!letterDef.validDefinition)
         {
             break;
         }
@@ -120,10 +122,8 @@ int Label::getFirstWordLen(const std::u16string& utf16Text, int startIndex, int 
 
 void Label::updateBMFontScale()
 {
-    auto font = _fontAtlas->getFont();
     if (_currentLabelType == LabelType::BMFONT) {
-        FontFNT *bmFont = (FontFNT*)font;
-        float originalFontSize = bmFont->getOriginalFontSize();
+        float originalFontSize = _fontAtlas->getFontSize();
         _bmfontScale = _bmFontSize * CC_CONTENT_SCALE_FACTOR() / originalFontSize;
     }else{
         _bmfontScale = 1.0f;
@@ -186,7 +186,10 @@ bool Label::multilineTextWrap(const std::function<int(const std::u16string&, int
                 recordPlaceholderInfo(letterIndex, character);
                 continue;
             }
-            if (_fontAtlas->getLetterDefinitionForChar(character, letterDef) == false)
+            
+            letterDef = _fontAtlas->getLetterDefinition(character);
+            
+            if (!letterDef.validDefinition)
             {
                 recordPlaceholderInfo(letterIndex, character);
                 CCLOG("LabelTextFormatter error:can't find letter definition in font file for letter: %c", character);

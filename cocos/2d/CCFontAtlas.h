@@ -34,6 +34,7 @@
 #include "platform/CCPlatformMacros.h"
 #include "base/CCRef.h"
 #include "platform/CCStdC.h" // ssize_t on windows
+#include "renderer/CCTexture2D.h"
 
 NS_CC_BEGIN
 
@@ -41,7 +42,6 @@ class Font;
 class Texture2D;
 class EventCustom;
 class EventListenerCustom;
-class FontFreeType;
 
 struct FontLetterDefinition
 {
@@ -59,64 +59,69 @@ struct FontLetterDefinition
 class CC_DLL FontAtlas : public Ref
 {
 public:
-    static const int CacheTextureWidth;
-    static const int CacheTextureHeight;
     static const char* CMD_PURGE_FONTATLAS;
     static const char* CMD_RESET_FONTATLAS;
-    /**
-     * @js ctor
-     */
-    FontAtlas(Font &theFont);
+    
     /**
      * @js NA
      * @lua NA
      */
     virtual ~FontAtlas();
     
-    void addLetterDefinition(char16_t utf16Char, const FontLetterDefinition &letterDefinition);
-    bool getLetterDefinitionForChar(char16_t utf16Char, FontLetterDefinition &letterDefinition);
+    // Abstract methods
+    virtual void updateFontAtlas(const std::u16string& utf16String) = 0;
+    virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const = 0;
+    virtual int getFontMaxHeight() const = 0;
+    virtual float getFontSize() const = 0;
+    virtual void clearCache() = 0;
+    //
     
-    bool prepareLetterDefinitions(const std::u16string& utf16String);
-
+    inline bool isLetterDefinitionExist(char16_t utf16Char) { return _letterDefinitions.find(utf16Char) != _letterDefinitions.end(); }
+    
+    FontLetterDefinition getLetterDefinition(char16_t utf16Char);
+    
+    inline void clearLetterDefinitionMap() { _letterDefinitions.clear(); }
+    inline bool isEmptyOfLetterDefinitionMap() { return _letterDefinitions.empty(); }
+    
     const std::unordered_map<ssize_t, Texture2D*>& getTextures() const { return _atlasTextures; }
-    void  addTexture(Texture2D *texture, int slot);
-    float getLineHeight() const { return _lineHeight; }
-    void  setLineHeight(float newHeight);
-    
     Texture2D* getTexture(int slot);
-    const Font* getFont() const { return _font; }
-
-    /** listen the event that renderer was recreated on Android/WP8
-     It only has effect on Android and WP8.
-     */
-    void listenRendererRecreated(EventCustom *event);
+    
+    void releaseTextures();
     
     /** Removes textures atlas.
      It will purge the textures atlas and if multiple texture exist in the FontAtlas.
      */
     void purgeTexturesAtlas();
+    
+    /** sets font texture parameters:
+    - GL_TEXTURE_MIN_FILTER = GL_LINEAR
+    - GL_TEXTURE_MAG_FILTER = GL_LINEAR
+    */
+    void setAntiAliasTexParameters();
 
     /** sets font texture parameters:
-     - GL_TEXTURE_MIN_FILTER = GL_LINEAR
-     - GL_TEXTURE_MAG_FILTER = GL_LINEAR
-     */
-     void setAntiAliasTexParameters();
-
-     /** sets font texture parameters:
-     - GL_TEXTURE_MIN_FILTER = GL_NEAREST
-     - GL_TEXTURE_MAG_FILTER = GL_NEAREST
-     */
-     void setAliasTexParameters();
+    - GL_TEXTURE_MIN_FILTER = GL_NEAREST
+    - GL_TEXTURE_MAG_FILTER = GL_NEAREST
+    */
+    void setAliasTexParameters();
+    
+    inline bool isAntiAliasingEnabled() { return _antialiasEnabled; }
 
 protected:
-    void reset();
     
-    void releaseTextures();
-
-    void findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);
-
-    void conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);
-
+    /**
+     * @js ctor
+     */
+    FontAtlas();
+    
+    void setLetterDefinition(char16_t utf16Char, const FontLetterDefinition &letterDefinition) { _letterDefinitions[utf16Char] = letterDefinition; }
+    void setTexture(Texture2D *texture, int pageIndex);
+    
+    /** listen the event that renderer was recreated on Android/WP8
+     It only has effect on Android and WP8.
+     */
+    void listenRendererRecreated(EventCustom *event);
+    
     /**
      * Scale each font letter by scaleFactor.
      *
@@ -126,25 +131,11 @@ protected:
 
     std::unordered_map<ssize_t, Texture2D*> _atlasTextures;
     std::unordered_map<char16_t, FontLetterDefinition> _letterDefinitions;
-    float _lineHeight;
-    Font* _font;
-    FontFreeType* _fontFreeType;
-    void* _iconv;
 
-    // Dynamic GlyphCollection related stuff
-    int _currentPage;
-    unsigned char *_currentPageData;
-    int _currentPageDataSize;
-    float _currentPageOrigX;
-    float _currentPageOrigY;
-    int _letterPadding;
-    int _letterEdgeExtend;
-
-    int _fontAscender;
-    EventListenerCustom* _rendererRecreatedListener;
     bool _antialiasEnabled;
-    int _currLineHeight;
-
+    
+    EventListenerCustom* _rendererRecreatedListener;
+    
     friend class Label;
 };
 

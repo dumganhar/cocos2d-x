@@ -28,38 +28,36 @@
 
 /// @cond DO_NOT_SHOW
 
-#include "2d/CCFont.h"
+#include "2d/CCFontAtlas.h"
 
 NS_CC_BEGIN
 
 class BMFontConfiguration;
 
-class CC_DLL FontFNT : public Font
+class CC_DLL FontFNT : public FontAtlas
 {
-    
 public:
-    
-    static FontFNT * create(const std::string& fntFilePath, const Vec2& imageOffset = Vec2::ZERO);
     /** Purges the cached data.
-    Removes from memory the cached configurations and the atlas name dictionary.
-    */
+     Removes from memory the cached configurations and the atlas name dictionary.
+     */
     static void purgeCachedData();
-    virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;
-    virtual FontAtlas *createFontAtlas() override;
-    void setFontSize(float fontSize);
-    int getOriginalFontSize()const;
-
     static void reloadBMFontResource(const std::string& fntFilePath);
-
-protected:
     
-    FontFNT(BMFontConfiguration *theContfig, const Vec2& imageOffset = Vec2::ZERO);
+    FontFNT();
     /**
      * @js NA
      * @lua NA
      */
     virtual ~FontFNT();
     
+    bool initWithFNTConfig(const std::string& fntFilePath, const Vec2& imageOffset = Vec2::ZERO);
+    
+    // Override Functions
+    virtual void updateFontAtlas(const std::u16string& utf16String) override {}
+    virtual int getFontMaxHeight() const override { return _lineHeight; }
+    virtual float getFontSize() const override;
+    virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;
+    virtual void clearCache() override {}
 private:
     
     int  getHorizontalKerningForChars(unsigned short firstChar, unsigned short secondChar) const;
@@ -67,7 +65,8 @@ private:
     BMFontConfiguration * _configuration;
     Vec2                   _imageOffset;
     //User defined font size
-    float  _fontSize;
+//cjh    float  _fontSize;
+    int _lineHeight;
 };
 
 /// @endcond
