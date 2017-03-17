@@ -28,15 +28,106 @@ THE SOFTWARE.
 
 #include "platform/CCApplication.h"
 #include "base/CCDirector.h"
+#include "base/CCConsole.h"
+#include "base/ccUTF8.h"
 #include <algorithm>
 #include "platform/CCFileUtils.h"
 #include <shellapi.h>
 #include <WinVer.h>
+
+#ifndef STATUS_SUCCESS
+#define STATUS_SUCCESS                          ((NTSTATUS)0x00000000L) // ntsubauth
+#endif
+
+#ifndef STATUS_TIMER_RESOLUTION_NOT_SET
+#define STATUS_TIMER_RESOLUTION_NOT_SET  ((NTSTATUS)0xC0000245L)
+#endif
 /**
 @brief    This function change the PVRFrame show/hide setting in register.
 @param  bEnable If true show the PVRFrame window, otherwise hide.
 */
 static void PVRFrameEnableControlWindow(bool bEnable);
+
+typedef NTSTATUS(NTAPI* pSetTimerResolution)(ULONG RequestedResolution, BOOLEAN Set, PULONG ActualResolution);
+typedef NTSTATUS(NTAPI* pQueryTimerResolution)(PULONG MinimumResolution, PULONG MaximumResolution, PULONG CurrentResolution);
+
+static BOOL setTimerMaxResolutionOrReset(BOOL reset)
+{
+    BOOL ret = FALSE;
+    NTSTATUS status;
+    pSetTimerResolution setFunction;
+    pQueryTimerResolution queryFunction;
+    ULONG minResolution, maxResolution, actualResolution;
+    const HINSTANCE hLibrary = LoadLibraryA("NTDLL.dll");
+    do
+    {
+        if (hLibrary == NULL)
+        {
+            CCLOGWARN("Failed to load NTDLL.dll (%d)", GetLastError());
+            break;
+        }
+
+        queryFunction = (pQueryTimerResolution)GetProcAddress(hLibrary, "NtQueryTimerResolution");
+        if (queryFunction == NULL)
+        {
+            CCLOG("NtQueryTimerResolution is null (%d)", GetLastError());
+            break;
+        }
+
+        status = queryFunction(&minResolution, &maxResolution, &actualResolution);
+        CCLOG("Win32 Timer Resolution:\n\tMinimum Value:\t%u\n\tMaximum Value:\t%u\n\tActual Value:\t%u\n\n", minResolution, maxResolution, actualResolution);
+
+        if (status != STATUS_SUCCESS)
+        {
+            CCLOGWARN("QueryTimerResolution failed, (%d)", GetLastError());
+            break;
+        }
+        setFunction = (pSetTimerResolution)GetProcAddress(hLibrary, "NtSetTimerResolution");
+        if (setFunction == NULL)
+        {
+            CCLOGWARN("NtSetTimerResolution is null (%d)", GetLastError());
+            break;
+        }
+
+        if (!reset)
+        {
+            CCLOG("Setting Timer Resolution to the maximum value (%d)...", maxResolution);
+            status = setFunction(maxResolution, TRUE, &actualResolution);
+        }
+        else
+        {
+            CCLOG("Reset Timer Resolution to default value!");
+            status = setFunction(maxResolution, FALSE, &actualResolution);
+        }
+
+        if (status == STATUS_SUCCESS)
+        {
+            CCLOG("Success! (Current resolution: %d)", actualResolution);
+            ret = TRUE;
+        }
+        else
+        {
+            CCLOGWARN("Failed, Return Value: %d (Error Code: %d)", status, GetLastError());
+        }
+    } while (false);
+
+    if (hLibrary != NULL)
+    {
+        FreeLibrary(hLibrary);
+    }
+
+    return ret;
+}
+
+static BOOL setTimerMaxResolution()
+{
+    return setTimerMaxResolutionOrReset(FALSE);
+}
+
+static BOOL resetTimerResolution()
+{
+    return setTimerMaxResolutionOrReset(TRUE);
+}
 
 NS_CC_BEGIN
 
@@ -59,9 +150,13 @@ Application::~Application()
     sm_pSharedApplication = nullptr;
 }
 
+static  LARGE_INTEGER __freq;
+static long __tickPerMS = 0;
+
 int Application::run()
 {
     PVRFrameEnableControlWindow(false);
+    BOOL isSetResolutionSuccess = setTimerMaxResolution();
 
     // Main message loop:
     LARGE_INTEGER nLast;
@@ -83,19 +178,30 @@ int Application::run()
     // Retain glview to avoid glview being released in the while loop
     glview->retain();
 
+    LONGLONG interval = 0LL;
+    LONG waitMS = 0L;
     while(!glview->windowShouldClose())
     {
         QueryPerformanceCounter(&nNow);
-        if (nNow.QuadPart - nLast.QuadPart > _animationInterval.QuadPart)
+        interval = nNow.QuadPart - nLast.QuadPart;
+        if (interval >= _animationInterval.QuadPart)
         {
             nLast.QuadPart = nNow.QuadPart - (nNow.QuadPart % _animationInterval.QuadPart);
-            
+            LARGE_INTEGER oldTime;
+            LARGE_INTEGER newTime;
+            QueryPerformanceCounter(&oldTime);
             director->mainLoop();
+            QueryPerformanceCounter(&newTime);
+            long long interval = 1000000LL * (newTime.QuadPart - oldTime.QuadPart) / __freq.QuadPart;
+            if (interval > 10000)
+                log("mainloop wastes: %lld us", interval);
             glview->pollEvents();
         }
         else
         {
-            Sleep(1);
+            waitMS = ((_animationInterval.QuadPart - interval) * 1000LL / __freq.QuadPart) - 1;
+            if (waitMS > 0)
+                Sleep(waitMS);
         }
     }
 
@@ -107,6 +213,11 @@ int Application::run()
         director = nullptr;
     }
     glview->release();
+
+    if (isSetResolutionSuccess)
+    {
+        resetTimerResolution();
+    }
     return 0;
 }
 
@@ -114,6 +225,8 @@ void Application::setAnimationInterval(float interval)
 {
     LARGE_INTEGER nFreq;
     QueryPerformanceFrequency(&nFreq);
+    __freq = nFreq;
+    __tickPerMS = __freq.QuadPart / 1000;
     _animationInterval.QuadPart = (LONGLONG)(interval * nFreq.QuadPart);
 }
 
