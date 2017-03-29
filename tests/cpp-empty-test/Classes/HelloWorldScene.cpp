@@ -456,9 +456,10 @@ void HelloWorld::SDKFPSSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::List
 {
     if (type == ui::ListView::EventType::ON_SELECTED_ITEM_END)
     {
+        auto listView = static_cast<ui::ListView*>(sender);
+
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
         int fps = 0;
-        auto listView = static_cast<ui::ListView*>(sender);
         switch (listView->getCurSelectedIndex()) {
             case 0:
                 fps = 25;

@@ -1455,7 +1455,7 @@ void Director::startAnimation()
     startAnimation(SetIntervalReason::BY_ENGINE);
 }
 
-void DisplayLinkDirector::startAnimation(SetIntervalReason reason)
+void Director::startAnimation(SetIntervalReason reason)
 {
     _lastUpdate = std::chrono::steady_clock::now();
 
@@ -1500,7 +1500,7 @@ void Director::setAnimationInterval(float interval)
     setAnimationInterval(interval, SetIntervalReason::BY_GAME);
 }
 
-void DisplayLinkDirector::setAnimationInterval(float interval, SetIntervalReason reason)
+void Director::setAnimationInterval(float interval, SetIntervalReason reason)
 {
     _animationInterval = interval;
     if (! _invalid)
