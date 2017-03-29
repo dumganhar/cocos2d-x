@@ -2,7 +2,7 @@
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
-Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2013-2017 Chukong Technologies Inc.
  
 http://www.cocos2d-x.org
 
@@ -73,14 +73,12 @@ ExtraAction* ExtraAction::reverse() const
     return ExtraAction::create();
 }
 
-void ExtraAction::update(float time)
+void ExtraAction::update(float /*time*/)
 {
-    CC_UNUSED_PARAM(time);
 }
 
-void ExtraAction::step(float dt)
+void ExtraAction::step(float /*dt*/)
 {
-    CC_UNUSED_PARAM(dt);
 }
 
 //
@@ -119,7 +117,8 @@ bool ActionInterval::sendUpdateEventToScript(float dt, Action *actionObject)
 
 bool ActionInterval::isDone() const
 {
-    return _elapsed >= _duration;
+    // fix #14936 _duration is not 0, but _elapsed is 0.
+    return (_elapsed + FLT_EPSILON) >= _duration;
 }
 
 void ActionInterval::step(float dt)
@@ -144,9 +143,8 @@ void ActionInterval::step(float dt)
     this->update(updateDt);
 }
 
-void ActionInterval::setAmplitudeRate(float amp)
+void ActionInterval::setAmplitudeRate(float /*amp*/)
 {
-    CC_UNUSED_PARAM(amp);
     // Abstract class needs implementation
     CCASSERT(0, "Subclass should implement this method!");
 }
@@ -329,7 +327,8 @@ void Sequence::startWithTarget(Node *target)
         return;
     }
     if (_duration > FLT_EPSILON)
-        _split = _actions[0]->getDuration() / _duration;
+        // fix #14936 - FLT_EPSILON (instant action) / very fast duration (0.001) leads to worng split, that leads to call instant action few times
+        _split = _actions[0]->getDuration() > FLT_EPSILON ? _actions[0]->getDuration() / _duration : 0;
     
     ActionInterval::startWithTarget(target);
     _last = -1;
@@ -1460,6 +1459,129 @@ SkewBy* SkewBy::reverse() const
     return SkewBy::create(_duration, -_skewX, -_skewY);
 }
 
+ResizeTo* ResizeTo::create(float duration, const cocos2d::Size& final_size)
+{
+    ResizeTo *ret = new (std::nothrow) ResizeTo();
+    
+    if (ret)
+    {
+        if (ret->initWithDuration(duration, final_size))
+        {
+            ret->autorelease();
+        } 
+        else
+        {
+            delete ret;
+            ret = nullptr;
+        }
+    }
+    
+    return ret;
+}
+
+ResizeTo* ResizeTo::clone(void) const
+{
+    // no copy constructor
+    ResizeTo* a = new (std::nothrow) ResizeTo();
+    a->initWithDuration(_duration, _finalSize);
+    a->autorelease();
+
+    return a;
+}
+
+void ResizeTo::startWithTarget(cocos2d::Node* target)
+{
+    ActionInterval::startWithTarget(target);
+    _initialSize = target->getContentSize();
+    _sizeDelta = _finalSize - _initialSize;
+}
+
+void ResizeTo::update(float time)
+{
+    if (_target)
+    {
+        auto new_size = _initialSize + (_sizeDelta * time);
+        _target->setContentSize(new_size);
+    }
+}
+
+bool ResizeTo::initWithDuration(float duration, const cocos2d::Size& final_size)
+{
+    if (cocos2d::ActionInterval::initWithDuration(duration))
+    {
+        _finalSize = final_size;
+        return true;
+    }
+
+    return false;
+}
+
+//
+// ResizeBy
+//
+
+ResizeBy* ResizeBy::create(float duration, const cocos2d::Size& deltaSize)
+{
+    ResizeBy *ret = new (std::nothrow) ResizeBy();
+    
+    if (ret)
+    {
+        if (ret->initWithDuration(duration, deltaSize))
+        {
+            ret->autorelease();
+        } 
+        else
+        {
+              delete ret;
+              ret = nullptr;
+        }
+    }
+    
+    return ret;
+}
+
+ResizeBy* ResizeBy::clone() const
+{
+    // no copy constructor
+    auto a = new (std::nothrow) ResizeBy();
+    a->initWithDuration(_duration, _sizeDelta);
+    a->autorelease();
+    return a;
+}
+
+void ResizeBy::startWithTarget(Node *target)
+{
+    ActionInterval::startWithTarget(target);
+    _previousSize = _startSize = target->getContentSize();
+}
+
+ResizeBy* ResizeBy::reverse() const
+{
+    cocos2d::Size newSize(-_sizeDelta.width, -_sizeDelta.height);
+    return ResizeBy::create(_duration, newSize);
+}
+
+void ResizeBy::update(float t)
+{
+    if (_target)
+    {
+        _target->setContentSize(_startSize + (_sizeDelta * t));
+    }
+}
+
+bool ResizeBy::initWithDuration(float duration, const cocos2d::Size& deltaSize)
+{
+    bool ret = false;
+    
+    if (ActionInterval::initWithDuration(duration))
+    {
+        _sizeDelta = deltaSize;
+        ret = true;
+    }
+    
+    return ret;
+}
+
 //
 // JumpBy
 //
@@ -2297,9 +2419,8 @@ DelayTime* DelayTime::clone() const
     return DelayTime::create(_duration);
 }
 
-void DelayTime::update(float time)
+void DelayTime::update(float /*time*/)
 {
-    CC_UNUSED_PARAM(time);
     return;
 }
 
@@ -2572,7 +2693,7 @@ Animate* Animate::reverse() const
    
     if (!oldArray.empty())
     {
-        for (auto iter = oldArray.crbegin(); iter != oldArray.crend(); ++iter)
+        for (auto iter = oldArray.crbegin(), iterCrend = oldArray.crend(); iter != iterCrend; ++iter)
         {
             AnimationFrame* animFrame = *iter;
             if (!animFrame)

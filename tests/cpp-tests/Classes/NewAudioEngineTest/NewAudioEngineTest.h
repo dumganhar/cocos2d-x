@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014 Chukong Technologies Inc.
+ Copyright (c) 2014-2017 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -201,12 +201,56 @@ public:
     virtual std::string subtitle() const override;
 };
 
+class AudioSmallFile2Test : public AudioEngineTestDemo
+{
+public:
+    CREATE_FUNC(AudioSmallFile2Test);
+
+    virtual void onEnter() override;
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
+
+class AudioSmallFile3Test : public AudioEngineTestDemo
+{
+public:
+    CREATE_FUNC(AudioSmallFile3Test);
+
+    virtual void onEnter() override;
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
+
 class AudioPauseResumeAfterPlay : public AudioEngineTestDemo
 {
 public:
     CREATE_FUNC(AudioPauseResumeAfterPlay);
     
-    virtual bool init() override;
+    virtual void onEnter() override;
+    
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
+
+class AudioIssue16938Test : public AudioEngineTestDemo
+{
+public:
+    CREATE_FUNC(AudioIssue16938Test);
+
+    virtual void onEnter() override;
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
+
+class AudioPreloadSameFileMultipleTimes : public AudioEngineTestDemo
+{
+public:
+    CREATE_FUNC(AudioPreloadSameFileMultipleTimes);
+    
+    virtual void onEnter() override;
     
     virtual std::string title() const override;
     virtual std::string subtitle() const override;
@@ -225,6 +269,23 @@ public:
     
 private:
     std::vector<std::string> _oldSearchPaths;
+};
+
+class AudioPlayInFinishedCB : public AudioEngineTestDemo
+{
+public:
+    CREATE_FUNC(AudioPlayInFinishedCB);
+
+    virtual void onEnter() override;
+    virtual void onExit() override;
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+
+private:
+    void doPlay(const std::string& filename);
+    void playMusic(const std::string& filename);
+    std::list<std::string> _playList;
 };
 
 #endif /* defined(__NEWAUDIOENGINE_TEST_H_) */

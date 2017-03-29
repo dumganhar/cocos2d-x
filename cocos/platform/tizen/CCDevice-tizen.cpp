@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014 Chukong Technologies Inc.
+ Copyright (c) 2014-2017 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -348,9 +348,8 @@ void Device::setKeepScreenOn(bool value)
 {
 }
 
-void Device::vibrate(float duration)
+void Device::vibrate(float /*duration*/)
 {
-    CC_UNUSED_PARAM(duration);
 }
 
 NS_CC_END

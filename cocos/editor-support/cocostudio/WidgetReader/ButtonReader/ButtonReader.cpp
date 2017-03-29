@@ -102,7 +102,7 @@ namespace cocostudio
             else if (key == P_NormalData){
                 
                 stExpCocoNode *backGroundChildren = stChildArray[i].GetChildArray(cocoLoader);
-                std::string resType = backGroundChildren[2].GetValue(cocoLoader);;
+                std::string resType = backGroundChildren[2].GetValue(cocoLoader);
                 
                 Widget::TextureResType imageFileNameType = (Widget::TextureResType)valueToInt(resType);
                 
@@ -114,7 +114,7 @@ namespace cocostudio
             else if (key == P_PressedData){
                 
                 stExpCocoNode *backGroundChildren = stChildArray[i].GetChildArray(cocoLoader);
-                std::string resType = backGroundChildren[2].GetValue(cocoLoader);;
+                std::string resType = backGroundChildren[2].GetValue(cocoLoader);
                 
                 Widget::TextureResType imageFileNameType = (Widget::TextureResType)valueToInt(resType);
                 
@@ -126,7 +126,7 @@ namespace cocostudio
             else if (key == P_DisabledData){
                 
                 stExpCocoNode *backGroundChildren = stChildArray[i].GetChildArray(cocoLoader);
-                std::string resType = backGroundChildren[2].GetValue(cocoLoader);;
+                std::string resType = backGroundChildren[2].GetValue(cocoLoader);
                 
                 Widget::TextureResType imageFileNameType = (Widget::TextureResType)valueToInt(resType);
                 
@@ -434,7 +434,7 @@ namespace cocostudio
                     }
                     else if (name == "Type")
                     {
-                        disabledResourceType = getResourceType(value);;
+                        disabledResourceType = getResourceType(value);
                     }
                     else if (name == "Plist")
                     {
@@ -633,6 +633,7 @@ namespace cocostudio
                                                               builder->CreateString(fontResourcePlistFile),
                                                               fontResourceResourceType),
                                            builder->CreateString(text),
+                                           isLocalized,
                                            builder->CreateString(fontName),
                                            fontSize,
                                            &f_textColor,
@@ -647,8 +648,7 @@ namespace cocostudio
                                            &f_shadowColor,
                                            shadowOffset.width,
                                            shadowOffset.height,
-                                           shadowBlurRadius,
-                                           isLocalized);
+                                           shadowBlurRadius);
         
         return *(Offset<Table>*)(&options);
     }

@@ -113,9 +113,9 @@ SimulatorWin *SimulatorWin::getInstance()
 }
 
 SimulatorWin::SimulatorWin()
-    : _app(nullptr)
-    , _hwnd(NULL)
+    : _hwnd(NULL)
     , _hwndConsole(NULL)
+    , _app(nullptr)
     , _writeDebugLogFile(nullptr)
 {
 }
@@ -168,7 +168,7 @@ void SimulatorWin::openNewPlayerWithProjectConfig(const ProjectConfig &config)
     STARTUPINFO si = {0};
     si.cb = sizeof(STARTUPINFO);
 
-#define MAX_COMMAND 1024 // lenth of commandLine is always beyond MAX_PATH
+#define MAX_COMMAND 1024 // length of commandLine is always beyond MAX_PATH
 
     WCHAR command[MAX_COMMAND];
     memset(command, 0, sizeof(command));

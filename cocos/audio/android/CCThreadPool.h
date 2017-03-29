@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2016 Chukong Technologies Inc.
+ Copyright (c) 2016-2017 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -36,7 +36,6 @@
 #include <condition_variable>
 #include <vector>
 #include <atomic>
-#include <mutex>
 
 namespace cocos2d { namespace experimental {
 

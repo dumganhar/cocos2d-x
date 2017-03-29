@@ -1,6 +1,6 @@
 /****************************************************************************
  Copyright (c) 2010-2012 cocos2d-x.org
- Copyright (c) 2013-2014 Chukong Technologies Inc.
+ Copyright (c) 2013-2017 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -93,6 +93,11 @@ static CGSize _calculateShrinkedSizeForString(NSAttributedString **str, id font,
                actualSize.size.height > constrainSize.height) {
             fontSize = fontSize - 1;
 
+            if(fontSize < 0) {
+                actualSize = CGRectMake(0, 0, 0, 0);
+                break;
+            }
+
             NSMutableAttributedString *mutableString = [[*str mutableCopy] autorelease];
             *str = __attributedStringWithFontSize(mutableString, fontSize);
 
@@ -122,6 +127,10 @@ static CGSize _calculateShrinkedSizeForString(NSAttributedString **str, id font,
         while (actualSize.size.height > constrainSize.height ||
                actualSize.size.width > constrainSize.width) {
             fontSize = fontSize - 1;
+            if(fontSize < 0) {
+                actualSize = CGRectMake(0, 0, 0, 0);
+                break;
+            }
             
             NSMutableAttributedString *mutableString = [[*str mutableCopy] autorelease];
             *str = __attributedStringWithFontSize(mutableString, fontSize);
@@ -586,11 +595,18 @@ void Device::setKeepScreenOn(bool value)
  */
 void Device::vibrate(float duration)
 {
-    // See https://developer.apple.com/library/ios/documentation/AudioToolbox/Reference/SystemSoundServicesReference/index.html#//apple_ref/c/econst/kSystemSoundID_Vibrate
-    CC_UNUSED_PARAM(duration);
-
-    // automatically vibrates for approximately 0.4 seconds
-    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    // See http://stackoverflow.com/questions/4724980/making-the-iphone-vibrate
+    // should vibrate no matter it is silient or not
+    if([[UIDevice currentDevice].model isEqualToString:@"iPhone"])
+    {
+        AudioServicesPlaySystemSound (1352); //works ALWAYS as of this post
+    }
+    else
+    {
+        // Not an iPhone, so doesn't have vibrate
+        // play the less annoying tick noise or one of your own
+        AudioServicesPlayAlertSound (kSystemSoundID_Vibrate);
+    }
 }
 
 NS_CC_END

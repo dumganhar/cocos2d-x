@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2013-2014 Chukong Technologies Inc.
+Copyright (c) 2013-2017 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -765,10 +765,7 @@ public:
      *                  otherwise, it will return a widget or a layout.
      * @deprecated use `getCurrentFocusedWidget` instead.
      */
-    CC_DEPRECATED_ATTRIBUTE Widget* getCurrentFocusedWidget(bool isWidget){
-        CC_UNUSED_PARAM(isWidget);
-        return getCurrentFocusedWidget();
-    }
+    CC_DEPRECATED_ATTRIBUTE Widget* getCurrentFocusedWidget(bool isWidget);
 
     /**
      * Return a current focused widget in your UI scene.
@@ -882,13 +879,13 @@ protected:
      *@since v3.4
      */
     
-    GLProgramState* getNormalGLProgramState()const;
+    GLProgramState* getNormalGLProgramState(Texture2D* texture)const;
     
     /**
      * Get a disabled state GLProgramState
      *@since v3.4
      */
-    GLProgramState* getGrayGLProgramState()const;
+    GLProgramState* getGrayGLProgramState(Texture2D* texture)const;
      
     
     //call back function called when size changed.
@@ -923,8 +920,11 @@ protected:
     void updateContentSizeWithTextureSize(const Size& size);
     
     bool isAncestorsEnabled();
-    Widget* getAncensterWidget(Node* node);
+    Widget* getAncestorWidget(Node* node);
     bool isAncestorsVisible(Node* node);
+
+    /** @deprecated Use getAncestorWidget instead. */
+    CC_DEPRECATED_ATTRIBUTE Widget* getAncensterWidget(Node* node);
 
     void cleanupWidget();
     LayoutComponent* getOrCreateLayoutComponent();

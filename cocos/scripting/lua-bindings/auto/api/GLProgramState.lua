@@ -62,12 +62,12 @@
 -- @return Node#Node ret (return value: cc.Node)
         
 --------------------------------
--- @overload self, int, long, vec4_table         
--- @overload self, string, long, vec4_table         
+-- @overload self, int, int, vec4_table         
+-- @overload self, string, int, vec4_table         
 -- @function [parent=#GLProgramState] setUniformVec4v
 -- @param self
 -- @param #string uniformName
--- @param #long size
+-- @param #int size
 -- @param #vec4_table pointer
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
 
@@ -113,12 +113,12 @@
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
         
 --------------------------------
--- @overload self, int, long, vec2_table         
--- @overload self, string, long, vec2_table         
+-- @overload self, int, int, vec2_table         
+-- @overload self, string, int, vec2_table         
 -- @function [parent=#GLProgramState] setUniformVec2v
 -- @param self
 -- @param #string uniformName
--- @param #long size
+-- @param #int size
 -- @param #vec2_table pointer
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
 
@@ -126,7 +126,7 @@
 -- Get the number of user defined uniform count.
 -- @function [parent=#GLProgramState] getUniformCount 
 -- @param self
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 -- Apply attributes.<br>
@@ -150,12 +150,12 @@
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
         
 --------------------------------
--- @overload self, int, long, float         
--- @overload self, string, long, float         
+-- @overload self, int, int, float         
+-- @overload self, string, int, float         
 -- @function [parent=#GLProgramState] setUniformFloatv
 -- @param self
 -- @param #string uniformName
--- @param #long size
+-- @param #int size
 -- @param #float pointer
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
 
@@ -166,14 +166,12 @@
 -- @return GLProgram#GLProgram ret (return value: cc.GLProgram)
         
 --------------------------------
--- @overload self, string, unsigned int         
--- @overload self, string, cc.Texture2D         
 -- @overload self, int, cc.Texture2D         
--- @overload self, int, unsigned int         
+-- @overload self, string, cc.Texture2D         
 -- @function [parent=#GLProgramState] setUniformTexture
 -- @param self
--- @param #int uniformLocation
--- @param #unsigned int textureId
+-- @param #string uniformName
+-- @param #cc.Texture2D texture
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
 
 --------------------------------
@@ -201,12 +199,12 @@
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
 
 --------------------------------
--- @overload self, int, long, vec3_table         
--- @overload self, string, long, vec3_table         
+-- @overload self, int, int, vec3_table         
+-- @overload self, string, int, vec3_table         
 -- @function [parent=#GLProgramState] setUniformVec3v
 -- @param self
 -- @param #string uniformName
--- @param #long size
+-- @param #int size
 -- @param #vec3_table pointer
 -- @return GLProgramState#GLProgramState self (return value: cc.GLProgramState)
 
@@ -214,7 +212,7 @@
 -- Get the number of vertex attributes.
 -- @function [parent=#GLProgramState] getVertexAttribCount 
 -- @param self
--- @return long#long ret (return value: long)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 --  returns a new instance of GLProgramState for a given GLProgram 

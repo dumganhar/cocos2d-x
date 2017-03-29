@@ -1,5 +1,5 @@
 #/****************************************************************************
-# Copyright (c) 2015 Chukong Technologies Inc.
+# Copyright (c) 2015-2017 Chukong Technologies Inc.
 #
 # http://www.cocos2d-x.org
 #
@@ -44,6 +44,7 @@ set(COCOS_PLATFORM_SPECIFIC_SRC
   platform/apple/CCLock-apple.cpp
   platform/apple/CCFileUtils-apple.mm
   platform/apple/CCThread-apple.mm
+  platform/apple/CCDevice-apple.mm
   platform/desktop/CCGLViewImpl-desktop.cpp
 )
 
