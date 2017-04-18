@@ -20,7 +20,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_ui_LayoutParameter_class;
+const JSClass  *jsb_cocos2d_ui_LayoutParameter_class;
 JSObject *jsb_cocos2d_ui_LayoutParameter_prototype;
 
 bool js_cocos2dx_ui_LayoutParameter_clone(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -155,11 +155,13 @@ void js_register_cocos2dx_ui_LayoutParameter(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_LayoutParameter_class = {
+    static const JSClass cls = {
         "LayoutParameter",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_LayoutParameter_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -197,7 +199,7 @@ void js_register_cocos2dx_ui_LayoutParameter(JSContext *cx, JS::HandleObject glo
     jsb_register_class<cocos2d::ui::LayoutParameter>(cx, jsb_cocos2d_ui_LayoutParameter_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_ui_LinearLayoutParameter_class;
+const JSClass  *jsb_cocos2d_ui_LinearLayoutParameter_class;
 JSObject *jsb_cocos2d_ui_LinearLayoutParameter_prototype;
 
 bool js_cocos2dx_ui_LinearLayoutParameter_setGravity(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -282,11 +284,13 @@ void js_register_cocos2dx_ui_LinearLayoutParameter(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_LinearLayoutParameter_class = {
+    static const JSClass cls = {
         "LinearLayoutParameter",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_LinearLayoutParameter_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -323,7 +327,7 @@ void js_register_cocos2dx_ui_LinearLayoutParameter(JSContext *cx, JS::HandleObje
     jsb_register_class<cocos2d::ui::LinearLayoutParameter>(cx, jsb_cocos2d_ui_LinearLayoutParameter_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_ui_RelativeLayoutParameter_class;
+const JSClass  *jsb_cocos2d_ui_RelativeLayoutParameter_class;
 JSObject *jsb_cocos2d_ui_RelativeLayoutParameter_prototype;
 
 bool js_cocos2dx_ui_RelativeLayoutParameter_setAlign(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -484,11 +488,13 @@ void js_register_cocos2dx_ui_RelativeLayoutParameter(JSContext *cx, JS::HandleOb
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RelativeLayoutParameter_class = {
+    static const JSClass cls = {
         "RelativeLayoutParameter",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RelativeLayoutParameter_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -529,7 +535,7 @@ void js_register_cocos2dx_ui_RelativeLayoutParameter(JSContext *cx, JS::HandleOb
     jsb_register_class<cocos2d::ui::RelativeLayoutParameter>(cx, jsb_cocos2d_ui_RelativeLayoutParameter_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_ui_Widget_class;
+const JSClass  *jsb_cocos2d_ui_Widget_class;
 JSObject *jsb_cocos2d_ui_Widget_prototype;
 
 bool js_cocos2dx_ui_Widget_setLayoutComponentEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2160,11 +2166,13 @@ void js_register_cocos2dx_ui_Widget(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Widget_class = {
+    static const JSClass cls = {
         "Widget",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Widget_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2272,7 +2280,7 @@ void js_register_cocos2dx_ui_Widget(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.Widget.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_Layout_class;
+const JSClass  *jsb_cocos2d_ui_Layout_class;
 JSObject *jsb_cocos2d_ui_Layout_prototype;
 
 bool js_cocos2dx_ui_Layout_setBackGroundColorVector(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2996,11 +3004,13 @@ void js_register_cocos2dx_ui_Layout(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Layout_class = {
+    static const JSClass cls = {
         "Layout",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Layout_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -3071,7 +3081,7 @@ void js_register_cocos2dx_ui_Layout(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.Layout.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_Button_class;
+const JSClass  *jsb_cocos2d_ui_Button_class;
 JSObject *jsb_cocos2d_ui_Button_prototype;
 
 bool js_cocos2dx_ui_Button_getNormalTextureSize(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4102,11 +4112,13 @@ void js_register_cocos2dx_ui_Button(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Button_class = {
+    static const JSClass cls = {
         "Button",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Button_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4182,7 +4194,7 @@ void js_register_cocos2dx_ui_Button(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.Button.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_AbstractCheckButton_class;
+const JSClass  *jsb_cocos2d_ui_AbstractCheckButton_class;
 JSObject *jsb_cocos2d_ui_AbstractCheckButton_prototype;
 
 bool js_cocos2dx_ui_AbstractCheckButton_getCrossDisabledFile(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4720,11 +4732,13 @@ void js_register_cocos2dx_ui_AbstractCheckButton(JSContext *cx, JS::HandleObject
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_AbstractCheckButton_class = {
+    static const JSClass cls = {
         "AbstractCheckButton",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_AbstractCheckButton_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4777,7 +4791,7 @@ void js_register_cocos2dx_ui_AbstractCheckButton(JSContext *cx, JS::HandleObject
     jsb_register_class<cocos2d::ui::AbstractCheckButton>(cx, jsb_cocos2d_ui_AbstractCheckButton_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_ui_CheckBox_class;
+const JSClass  *jsb_cocos2d_ui_CheckBox_class;
 JSObject *jsb_cocos2d_ui_CheckBox_prototype;
 
 bool js_cocos2dx_ui_CheckBox_addEventListener(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4993,11 +5007,13 @@ void js_register_cocos2dx_ui_CheckBox(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_CheckBox_class = {
+    static const JSClass cls = {
         "CheckBox",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_CheckBox_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -5035,7 +5051,7 @@ void js_register_cocos2dx_ui_CheckBox(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.CheckBox.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RadioButton_class;
+const JSClass  *jsb_cocos2d_ui_RadioButton_class;
 JSObject *jsb_cocos2d_ui_RadioButton_prototype;
 
 bool js_cocos2dx_ui_RadioButton_addEventListener(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5251,11 +5267,13 @@ void js_register_cocos2dx_ui_RadioButton(JSContext *cx, JS::HandleObject global)
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RadioButton_class = {
+    static const JSClass cls = {
         "RadioButton",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RadioButton_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -5293,7 +5311,7 @@ void js_register_cocos2dx_ui_RadioButton(JSContext *cx, JS::HandleObject global)
     anonEvaluate(cx, global, "(function () { ccui.RadioButton.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RadioButtonGroup_class;
+const JSClass  *jsb_cocos2d_ui_RadioButtonGroup_class;
 JSObject *jsb_cocos2d_ui_RadioButtonGroup_prototype;
 
 bool js_cocos2dx_ui_RadioButtonGroup_removeRadioButton(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5662,11 +5680,13 @@ void js_register_cocos2dx_ui_RadioButtonGroup(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RadioButtonGroup_class = {
+    static const JSClass cls = {
         "RadioButtonGroup",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RadioButtonGroup_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -5714,7 +5734,7 @@ void js_register_cocos2dx_ui_RadioButtonGroup(JSContext *cx, JS::HandleObject gl
     anonEvaluate(cx, global, "(function () { ccui.RadioButtonGroup.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_ImageView_class;
+const JSClass  *jsb_cocos2d_ui_ImageView_class;
 JSObject *jsb_cocos2d_ui_ImageView_prototype;
 
 bool js_cocos2dx_ui_ImageView_loadTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5995,11 +6015,13 @@ void js_register_cocos2dx_ui_ImageView(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_ImageView_class = {
+    static const JSClass cls = {
         "ImageView",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_ImageView_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6044,7 +6066,7 @@ void js_register_cocos2dx_ui_ImageView(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.ImageView.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_Text_class;
+const JSClass  *jsb_cocos2d_ui_Text_class;
 JSObject *jsb_cocos2d_ui_Text_prototype;
 
 bool js_cocos2dx_ui_Text_enableShadow(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6800,11 +6822,13 @@ void js_register_cocos2dx_ui_Text(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Text_class = {
+    static const JSClass cls = {
         "Text",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Text_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6873,7 +6897,7 @@ void js_register_cocos2dx_ui_Text(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.Text.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_TextAtlas_class;
+const JSClass  *jsb_cocos2d_ui_TextAtlas_class;
 JSObject *jsb_cocos2d_ui_TextAtlas_prototype;
 
 bool js_cocos2dx_ui_TextAtlas_getStringLength(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7087,11 +7111,13 @@ void js_register_cocos2dx_ui_TextAtlas(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_TextAtlas_class = {
+    static const JSClass cls = {
         "TextAtlas",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_TextAtlas_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7134,7 +7160,7 @@ void js_register_cocos2dx_ui_TextAtlas(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.TextAtlas.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_LoadingBar_class;
+const JSClass  *jsb_cocos2d_ui_LoadingBar_class;
 JSObject *jsb_cocos2d_ui_LoadingBar_prototype;
 
 bool js_cocos2dx_ui_LoadingBar_setPercent(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7479,11 +7505,13 @@ void js_register_cocos2dx_ui_LoadingBar(JSContext *cx, JS::HandleObject global) 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_LoadingBar_class = {
+    static const JSClass cls = {
         "LoadingBar",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_LoadingBar_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7530,7 +7558,7 @@ void js_register_cocos2dx_ui_LoadingBar(JSContext *cx, JS::HandleObject global) 
     anonEvaluate(cx, global, "(function () { ccui.LoadingBar.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_ScrollView_class;
+const JSClass  *jsb_cocos2d_ui_ScrollView_class;
 JSObject *jsb_cocos2d_ui_ScrollView_prototype;
 
 bool js_cocos2dx_ui_ScrollView_scrollToTop(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8664,11 +8692,13 @@ void js_register_cocos2dx_ui_ScrollView(JSContext *cx, JS::HandleObject global) 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_ScrollView_class = {
+    static const JSClass cls = {
         "ScrollView",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_ScrollView_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8759,7 +8789,7 @@ void js_register_cocos2dx_ui_ScrollView(JSContext *cx, JS::HandleObject global) 
     anonEvaluate(cx, global, "(function () { ccui.ScrollView.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_ListView_class;
+const JSClass  *jsb_cocos2d_ui_ListView_class;
 JSObject *jsb_cocos2d_ui_ListView_prototype;
 
 bool js_cocos2dx_ui_ListView_setGravity(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9582,11 +9612,13 @@ void js_register_cocos2dx_ui_ListView(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_ListView_class = {
+    static const JSClass cls = {
         "ListView",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_ListView_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9656,7 +9688,7 @@ void js_register_cocos2dx_ui_ListView(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.ListView.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_Slider_class;
+const JSClass  *jsb_cocos2d_ui_Slider_class;
 JSObject *jsb_cocos2d_ui_Slider_prototype;
 
 bool js_cocos2dx_ui_Slider_setPercent(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -10444,11 +10476,13 @@ void js_register_cocos2dx_ui_Slider(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Slider_class = {
+    static const JSClass cls = {
         "Slider",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Slider_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -10514,7 +10548,7 @@ void js_register_cocos2dx_ui_Slider(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.Slider.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_UICCTextField_class;
+const JSClass  *jsb_cocos2d_ui_UICCTextField_class;
 JSObject *jsb_cocos2d_ui_UICCTextField_prototype;
 
 bool js_cocos2dx_ui_UICCTextField_onTextFieldAttachWithIME(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -11091,11 +11125,13 @@ void js_register_cocos2dx_ui_UICCTextField(JSContext *cx, JS::HandleObject globa
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_UICCTextField_class = {
+    static const JSClass cls = {
         "UICCTextField",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_UICCTextField_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -11155,7 +11191,7 @@ void js_register_cocos2dx_ui_UICCTextField(JSContext *cx, JS::HandleObject globa
     jsb_register_class<cocos2d::ui::UICCTextField>(cx, jsb_cocos2d_ui_UICCTextField_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_ui_TextField_class;
+const JSClass  *jsb_cocos2d_ui_TextField_class;
 JSObject *jsb_cocos2d_ui_TextField_prototype;
 
 bool js_cocos2dx_ui_TextField_setAttachWithIME(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -12152,11 +12188,13 @@ void js_register_cocos2dx_ui_TextField(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_TextField_class = {
+    static const JSClass cls = {
         "TextField",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_TextField_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -12238,7 +12276,7 @@ void js_register_cocos2dx_ui_TextField(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.TextField.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_TextBMFont_class;
+const JSClass  *jsb_cocos2d_ui_TextBMFont_class;
 JSObject *jsb_cocos2d_ui_TextBMFont_prototype;
 
 bool js_cocos2dx_ui_TextBMFont_getStringLength(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -12435,11 +12473,13 @@ void js_register_cocos2dx_ui_TextBMFont(JSContext *cx, JS::HandleObject global) 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_TextBMFont_class = {
+    static const JSClass cls = {
         "TextBMFont",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_TextBMFont_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -12482,7 +12522,7 @@ void js_register_cocos2dx_ui_TextBMFont(JSContext *cx, JS::HandleObject global) 
     anonEvaluate(cx, global, "(function () { ccui.TextBMFont.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_PageView_class;
+const JSClass  *jsb_cocos2d_ui_PageView_class;
 JSObject *jsb_cocos2d_ui_PageView_prototype;
 
 bool js_cocos2dx_ui_PageView_setIndicatorSpaceBetweenIndexNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -13144,11 +13184,13 @@ void js_register_cocos2dx_ui_PageView(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_PageView_class = {
+    static const JSClass cls = {
         "PageView",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_PageView_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -13211,7 +13253,7 @@ void js_register_cocos2dx_ui_PageView(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.PageView.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_Helper_class;
+const JSClass  *jsb_cocos2d_ui_Helper_class;
 JSObject *jsb_cocos2d_ui_Helper_prototype;
 
 bool js_cocos2dx_ui_Helper_getSubStringOfUTF8String(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -13435,11 +13477,13 @@ void js_register_cocos2dx_ui_Helper(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Helper_class = {
+    static const JSClass cls = {
         "Helper",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Helper_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -13480,7 +13524,7 @@ void js_register_cocos2dx_ui_Helper(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocos2d::ui::Helper>(cx, jsb_cocos2d_ui_Helper_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_ui_RichElement_class;
+const JSClass  *jsb_cocos2d_ui_RichElement_class;
 JSObject *jsb_cocos2d_ui_RichElement_prototype;
 
 bool js_cocos2dx_ui_RichElement_equalType(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -13592,11 +13636,13 @@ void js_register_cocos2dx_ui_RichElement(JSContext *cx, JS::HandleObject global)
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RichElement_class = {
+    static const JSClass cls = {
         "RichElement",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RichElement_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -13632,7 +13678,7 @@ void js_register_cocos2dx_ui_RichElement(JSContext *cx, JS::HandleObject global)
     anonEvaluate(cx, global, "(function () { ccui.RichElement.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RichElementText_class;
+const JSClass  *jsb_cocos2d_ui_RichElementText_class;
 JSObject *jsb_cocos2d_ui_RichElementText_prototype;
 
 bool js_cocos2dx_ui_RichElementText_init(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -14169,11 +14215,13 @@ void js_register_cocos2dx_ui_RichElementText(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RichElementText_class = {
+    static const JSClass cls = {
         "RichElementText",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RichElementText_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -14211,7 +14259,7 @@ void js_register_cocos2dx_ui_RichElementText(JSContext *cx, JS::HandleObject glo
     anonEvaluate(cx, global, "(function () { ccui.RichElementText.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RichElementImage_class;
+const JSClass  *jsb_cocos2d_ui_RichElementImage_class;
 JSObject *jsb_cocos2d_ui_RichElementImage_prototype;
 
 bool js_cocos2dx_ui_RichElementImage_setHeight(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -14407,11 +14455,13 @@ void js_register_cocos2dx_ui_RichElementImage(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RichElementImage_class = {
+    static const JSClass cls = {
         "RichElementImage",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RichElementImage_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -14452,7 +14502,7 @@ void js_register_cocos2dx_ui_RichElementImage(JSContext *cx, JS::HandleObject gl
     anonEvaluate(cx, global, "(function () { ccui.RichElementImage.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RichElementCustomNode_class;
+const JSClass  *jsb_cocos2d_ui_RichElementCustomNode_class;
 JSObject *jsb_cocos2d_ui_RichElementCustomNode_prototype;
 
 bool js_cocos2dx_ui_RichElementCustomNode_init(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -14567,11 +14617,13 @@ void js_register_cocos2dx_ui_RichElementCustomNode(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RichElementCustomNode_class = {
+    static const JSClass cls = {
         "RichElementCustomNode",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RichElementCustomNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -14609,7 +14661,7 @@ void js_register_cocos2dx_ui_RichElementCustomNode(JSContext *cx, JS::HandleObje
     anonEvaluate(cx, global, "(function () { ccui.RichElementCustomNode.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RichElementNewLine_class;
+const JSClass  *jsb_cocos2d_ui_RichElementNewLine_class;
 JSObject *jsb_cocos2d_ui_RichElementNewLine_prototype;
 
 bool js_cocos2dx_ui_RichElementNewLine_create(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -14678,11 +14730,13 @@ void js_register_cocos2dx_ui_RichElementNewLine(JSContext *cx, JS::HandleObject 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RichElementNewLine_class = {
+    static const JSClass cls = {
         "RichElementNewLine",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RichElementNewLine_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -14719,7 +14773,7 @@ void js_register_cocos2dx_ui_RichElementNewLine(JSContext *cx, JS::HandleObject 
     anonEvaluate(cx, global, "(function () { ccui.RichElementNewLine.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RichText_class;
+const JSClass  *jsb_cocos2d_ui_RichText_class;
 JSObject *jsb_cocos2d_ui_RichText_prototype;
 
 bool js_cocos2dx_ui_RichText_insertElement(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -15828,11 +15882,13 @@ void js_register_cocos2dx_ui_RichText(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RichText_class = {
+    static const JSClass cls = {
         "RichText",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RichText_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -15914,7 +15970,7 @@ void js_register_cocos2dx_ui_RichText(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.RichText.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_HBox_class;
+const JSClass  *jsb_cocos2d_ui_HBox_class;
 JSObject *jsb_cocos2d_ui_HBox_prototype;
 
 bool js_cocos2dx_ui_HBox_initWithSize(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -16020,11 +16076,13 @@ void js_register_cocos2dx_ui_HBox(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_HBox_class = {
+    static const JSClass cls = {
         "HBox",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_HBox_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -16062,7 +16120,7 @@ void js_register_cocos2dx_ui_HBox(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.HBox.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_VBox_class;
+const JSClass  *jsb_cocos2d_ui_VBox_class;
 JSObject *jsb_cocos2d_ui_VBox_prototype;
 
 bool js_cocos2dx_ui_VBox_initWithSize(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -16168,11 +16226,13 @@ void js_register_cocos2dx_ui_VBox(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_VBox_class = {
+    static const JSClass cls = {
         "VBox",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_VBox_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -16210,7 +16270,7 @@ void js_register_cocos2dx_ui_VBox(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.VBox.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_RelativeBox_class;
+const JSClass  *jsb_cocos2d_ui_RelativeBox_class;
 JSObject *jsb_cocos2d_ui_RelativeBox_prototype;
 
 bool js_cocos2dx_ui_RelativeBox_initWithSize(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -16316,11 +16376,13 @@ void js_register_cocos2dx_ui_RelativeBox(JSContext *cx, JS::HandleObject global)
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_RelativeBox_class = {
+    static const JSClass cls = {
         "RelativeBox",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_RelativeBox_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -16358,7 +16420,7 @@ void js_register_cocos2dx_ui_RelativeBox(JSContext *cx, JS::HandleObject global)
     anonEvaluate(cx, global, "(function () { ccui.RelativeBox.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_Scale9Sprite_class;
+const JSClass  *jsb_cocos2d_ui_Scale9Sprite_class;
 JSObject *jsb_cocos2d_ui_Scale9Sprite_prototype;
 
 bool js_cocos2dx_ui_Scale9Sprite_updateWithSprite(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -17379,11 +17441,13 @@ void js_register_cocos2dx_ui_Scale9Sprite(JSContext *cx, JS::HandleObject global
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_Scale9Sprite_class = {
+    static const JSClass cls = {
         "Scale9Sprite",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_Scale9Sprite_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -17451,7 +17515,7 @@ void js_register_cocos2dx_ui_Scale9Sprite(JSContext *cx, JS::HandleObject global
     anonEvaluate(cx, global, "(function () { ccui.Scale9Sprite.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_EditBox_class;
+const JSClass  *jsb_cocos2d_ui_EditBox_class;
 JSObject *jsb_cocos2d_ui_EditBox_prototype;
 
 bool js_cocos2dx_ui_EditBox_getFontSize(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -18304,11 +18368,13 @@ void js_register_cocos2dx_ui_EditBox(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_EditBox_class = {
+    static const JSClass cls = {
         "EditBox",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_EditBox_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -18374,7 +18440,7 @@ void js_register_cocos2dx_ui_EditBox(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.EditBox.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_LayoutComponent_class;
+const JSClass  *jsb_cocos2d_ui_LayoutComponent_class;
 JSObject *jsb_cocos2d_ui_LayoutComponent_prototype;
 
 bool js_cocos2dx_ui_LayoutComponent_setStretchWidthEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -19396,11 +19462,13 @@ void js_register_cocos2dx_ui_LayoutComponent(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_LayoutComponent_class = {
+    static const JSClass cls = {
         "LayoutComponent",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_LayoutComponent_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -19487,7 +19555,7 @@ void js_register_cocos2dx_ui_LayoutComponent(JSContext *cx, JS::HandleObject glo
     anonEvaluate(cx, global, "(function () { ccui.LayoutComponent.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_TabHeader_class;
+const JSClass  *jsb_cocos2d_ui_TabHeader_class;
 JSObject *jsb_cocos2d_ui_TabHeader_prototype;
 
 bool js_cocos2dx_ui_TabHeader_getIndexInTabControl(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -19830,11 +19898,13 @@ void js_register_cocos2dx_ui_TabHeader(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_TabHeader_class = {
+    static const JSClass cls = {
         "TabHeader",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_TabHeader_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -19880,7 +19950,7 @@ void js_register_cocos2dx_ui_TabHeader(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { ccui.TabHeader.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_TabControl_class;
+const JSClass  *jsb_cocos2d_ui_TabControl_class;
 JSObject *jsb_cocos2d_ui_TabControl_prototype;
 
 bool js_cocos2dx_ui_TabControl_setHeaderWidth(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -20366,11 +20436,13 @@ void js_register_cocos2dx_ui_TabControl(JSContext *cx, JS::HandleObject global) 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_TabControl_class = {
+    static const JSClass cls = {
         "TabControl",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_TabControl_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -20425,7 +20497,7 @@ void js_register_cocos2dx_ui_TabControl(JSContext *cx, JS::HandleObject global) 
     anonEvaluate(cx, global, "(function () { ccui.TabControl.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_ui_ScrollViewBar_class;
+const JSClass  *jsb_cocos2d_ui_ScrollViewBar_class;
 JSObject *jsb_cocos2d_ui_ScrollViewBar_prototype;
 
 bool js_cocos2dx_ui_ScrollViewBar_setAutoHideEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -20699,11 +20771,13 @@ void js_register_cocos2dx_ui_ScrollViewBar(JSContext *cx, JS::HandleObject globa
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ui_ScrollViewBar_class = {
+    static const JSClass cls = {
         "ScrollViewBar",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ui_ScrollViewBar_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

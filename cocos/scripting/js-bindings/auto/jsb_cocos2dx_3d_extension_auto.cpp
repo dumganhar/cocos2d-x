@@ -19,7 +19,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_ParticleSystem3D_class;
+const JSClass  *jsb_cocos2d_ParticleSystem3D_class;
 JSObject *jsb_cocos2d_ParticleSystem3D_prototype;
 
 bool js_cocos2dx_3d_extension_ParticleSystem3D_resumeParticleSystem(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -325,11 +325,13 @@ void js_register_cocos2dx_3d_extension_ParticleSystem3D(JSContext *cx, JS::Handl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_ParticleSystem3D_class = {
+    static const JSClass cls = {
         "ParticleSystem3D",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_ParticleSystem3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -376,7 +378,7 @@ void js_register_cocos2dx_3d_extension_ParticleSystem3D(JSContext *cx, JS::Handl
     jsb_register_class<cocos2d::ParticleSystem3D>(cx, jsb_cocos2d_ParticleSystem3D_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_PUParticleSystem3D_class;
+const JSClass  *jsb_cocos2d_PUParticleSystem3D_class;
 JSObject *jsb_cocos2d_PUParticleSystem3D_prototype;
 
 bool js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePath(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1124,11 +1126,13 @@ void js_register_cocos2dx_3d_extension_PUParticleSystem3D(JSContext *cx, JS::Han
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_PUParticleSystem3D_class = {
+    static const JSClass cls = {
         "PUParticleSystem3D",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_PUParticleSystem3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

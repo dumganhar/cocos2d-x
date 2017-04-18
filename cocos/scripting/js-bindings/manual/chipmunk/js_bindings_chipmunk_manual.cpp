@@ -60,9 +60,9 @@ bool JSPROXY_CCPhysicsSprite_isDirty(JSContext *cx, uint32_t argc, JS::Value *vp
     TEST_NATIVE_OBJECT(cx, real)
 
     if (real->isDirty()) {
-        args.rval().set(JSVAL_TRUE);
+        args.rval().set(JS::TrueValue());
     }
-    else args.rval().set(JSVAL_FALSE);
+    else args.rval().set(JS::FalseValue());
     return true;
 }
 
@@ -78,7 +78,7 @@ bool JSPROXY_CCPhysicsSprite_getCPBody(JSContext *cx, uint32_t argc, JS::Value *
 
     ret_val = real->getCPBody();
     JS::RootedObject bodyProto(cx, JSB_cpBody_object);
-    JS::Value ret_JS::Value = c_class_to_jsval( cx, ret_val, bodyProto, JSB_cpBody_class, "cpBody" );
+    JS::Value ret_jsval = c_class_to_jsval( cx, ret_val, bodyProto, JSB_cpBody_class, "cpBody" );
     args.rval().set(ret_jsval);
 
     return true;
@@ -141,7 +141,7 @@ bool JSPROXY_CCPhysicsSprite_setIgnoreBodyRotation_(JSContext *cx, uint32_t argc
  */
 //#pragma mark - PhysicsDebugNode
 
-JSClass* JSB_CCPhysicsDebugNode_class = NULL;
+const JSClass* JSB_CCPhysicsDebugNode_class = NULL;
 JSObject* JSB_CCPhysicsDebugNode_object = NULL;
 extern JSObject *js_cocos2dx_CCDrawNode_prototype;
 
@@ -203,7 +203,7 @@ bool JSB_CCPhysicsDebugNode_space(JSContext *cx, uint32_t argc, JS::Value *vp) {
     JSB_PRECONDITION2( argc == 0, cx, false, "Invalid number of arguments" );
     cpSpace* ret_val;
     ret_val = real->getSpace();
-    JS::Value ret_JS::Value = opaque_to_jsval( cx, ret_val );
+    JS::Value ret_jsval = opaque_to_jsval( cx, ret_val );
     args.rval().set(ret_jsval);
 
     return true;
@@ -225,18 +225,24 @@ bool JSB_CCPhysicsDebugNode_constructor(JSContext *cx, uint32_t argc, JS::Value 
     return true;
 }
 
-void JSB_CCPhysicsDebugNode_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
+void JSB_CCPhysicsDebugNode_createClass(JSContext *cx, JS::HandleObject globalObj)
 {
-    JSB_CCPhysicsDebugNode_class = (JSClass *)calloc(1, sizeof(JSClass));
-    JSB_CCPhysicsDebugNode_class->name = name;
-    JSB_CCPhysicsDebugNode_class->addProperty = JS_PropertyStub;
-    JSB_CCPhysicsDebugNode_class->delProperty = JS_DeletePropertyStub;
-    JSB_CCPhysicsDebugNode_class->getProperty = JS_PropertyStub;
-    JSB_CCPhysicsDebugNode_class->setProperty = JS_StrictPropertyStub;
-    JSB_CCPhysicsDebugNode_class->enumerate = JS_EnumerateStub;
-    JSB_CCPhysicsDebugNode_class->resolve = JS_ResolveStub;
-    JSB_CCPhysicsDebugNode_class->convert = JS_ConvertStub;
-    JSB_CCPhysicsDebugNode_class->flags = 0;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "PhysicsDebugNode",
+        0,
+        &classOps
+    };
+
+    JSB_CCPhysicsDebugNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -441,7 +447,7 @@ void register_CCPhysicsSprite(JSContext *cx, JS::HandleObject obj) {
 void register_CCPhysicsDebugNode(JSContext *cx, JS::HandleObject obj) {
     JS::RootedObject ccObj(cx);
     get_or_create_js_obj(cx, obj, "cc", &ccObj);
-    JSB_CCPhysicsDebugNode_createClass(cx, ccObj, "PhysicsDebugNode");
+    JSB_CCPhysicsDebugNode_createClass(cx, ccObj);
 }
 
 bool jsval_to_cpBB( JSContext *cx, JS::Value vp, cpBB *ret )
@@ -770,7 +776,7 @@ JS::Value cpPointQueryInfo_to_jsval(JSContext *cx, cpPointQueryInfo pointQueryIn
     if (!jsobj)
     {
         JS::RootedObject shapeProto(cx, JSB_cpShape_object);
-        jsobj = JS_NewObject(cx, JSB_cpShape_class, shapeProto, JS::NullPtr());
+        jsobj = JS_NewObject(cx, JSB_cpShape_class, shapeProto, nullptr);
         jsb_set_jsobject_for_proxy(jsobj, (void*)pointQueryInfo.shape);
         jsb_set_c_proxy_for_jsobject(jsobj, (void*)pointQueryInfo.shape, JSB_C_FLAG_DO_NOT_CALL_FREE);
     }
@@ -804,7 +810,7 @@ JS::Value cpSegmentQueryInfo_to_jsval(JSContext *cx, cpSegmentQueryInfo segmentQ
     if (!jsobj)
     {
         JS::RootedObject shapeProto(cx, JSB_cpShape_object);
-        jsobj = JS_NewObject(cx, JSB_cpShape_class, shapeProto, JS::NullPtr());
+        jsobj = JS_NewObject(cx, JSB_cpShape_class, shapeProto, nullptr);
         jsb_set_jsobject_for_proxy(jsobj, (void*)segmentQueryInfo.shape);
         jsb_set_c_proxy_for_jsobject(jsobj, (void*)segmentQueryInfo.shape, JSB_C_FLAG_DO_NOT_CALL_FREE);
     }
@@ -1614,7 +1620,7 @@ void JSB_cpSpace_pointQuery_func(cpShape *shape, cpVect point, cpFloat distance,
         argv[3] = cpVect_to_jsval(cx, gradient);
 
         JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-        JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::fromMarkedLocation(4, argv), &rval);
+        JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::fromMarkedLocation(4, argv), &rval);
     }
 }
 
@@ -1668,7 +1674,7 @@ bool JSB_cpSpace_pointQuery(JSContext *cx, uint32_t argc, JS::Value *vp)
 //        argv[2] = cpVect_to_jsval(cx, point);
 //
 //        JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-//        JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::fromMarkedLocation(3, argv), &rval);
+//        JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::fromMarkedLocation(3, argv), &rval);
 //
 //    }
 //}
@@ -1724,7 +1730,7 @@ void JSB_cpSpace_segmentQuery_func(cpShape *shape, cpVect point, cpVect normal, 
         argv[3] = JS::DoubleValue(alpha);
 
         JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-        JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::fromMarkedLocation(4, argv), &rval);
+        JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::fromMarkedLocation(4, argv), &rval);
 
     }
 }
@@ -1779,7 +1785,7 @@ void JSB_cpSpace_bbQuery_func(cpShape *shape, void *data)
         argv[0] = JS::ObjectValue(*jsCpObject);
 
         JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-        JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::fromMarkedLocation(1, argv), &rval);
+        JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::fromMarkedLocation(1, argv), &rval);
     }
 }
 
@@ -1829,7 +1835,7 @@ void JSB_cpSpace_each_func(T* cpObject, void *data)
         JS::RootedValue rval(cx);
         JS::Value argv = JS::ObjectValue(*jsCpObject);
 
-        JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::fromMarkedLocation(1, &argv), &rval);
+        JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::fromMarkedLocation(1, &argv), &rval);
 
     }
 }
@@ -1908,7 +1914,7 @@ void JSB_cpBody_each_func(cpBody *body, T* cpObject, void *data)
         JS::RootedValue rval(cx);
         JS::Value argv = JS::ObjectValue(*jsCpObject);
 
-        JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::fromMarkedLocation(1, &argv), &rval);
+        JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::fromMarkedLocation(1, &argv), &rval);
         
     }
 }
@@ -2039,7 +2045,7 @@ void __JSB_PostStep_callback(cpSpace *space, void *key, __PostStep_data *data)
     JS::RootedValue rval(cx);
 
     JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-    JS_CallFunctionValue(cx, JS::NullPtr(), func, JS::HandleValueArray::empty(), &rval);
+    JS_CallFunctionValue(cx, nullptr, func, JS::HandleValueArray::empty(), &rval);
 
     free(data);
 }
@@ -2190,7 +2196,7 @@ bool JSB_cpBody_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JSB_PRECONDITION2(argc==2, cx, false, "Invalid number of arguments");
     JS::RootedObject bodyProto(cx, JSB_cpBody_object);
-    JSObject *jsobj = JS_NewObject(cx, JSB_cpBody_class, bodyProto, JS::NullPtr());
+    JSObject *jsobj = JS_NewObject(cx, JSB_cpBody_class, bodyProto, nullptr);
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
     double m = 0; double i = 0;
@@ -2397,7 +2403,7 @@ bool JSB_cpBase_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JSB_PRECONDITION2( argc==1, cx, false, "Invalid arguments. Expecting 1");
     JS::RootedObject baseProto(cx, JSB_cpBase_object);
-    JSObject *jsobj = JS_NewObject(cx, JSB_cpBase_class, baseProto, JS::NullPtr());
+    JSObject *jsobj = JS_NewObject(cx, JSB_cpBase_class, baseProto, nullptr);
 
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2492,7 +2498,7 @@ void JSB_cpBase_createClass(JSContext *cx, JS::HandleObject globalObj, const cha
         JS_FS_END
     };
 
-    JSB_cpBase_object = JS_InitClass(cx, globalObj, JS::NullPtr(), JSB_cpBase_class, JSB_cpBase_constructor,0,properties,funcs,NULL,st_funcs);
+    JSB_cpBase_object = JS_InitClass(cx, globalObj, nullptr, JSB_cpBase_class, JSB_cpBase_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 // Chipmunk v7.0: Arguments: cpBody*, int, const cpVect *, cpTransform, cpFloat
@@ -2504,7 +2510,7 @@ bool JSB_cpPolyShape_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JSB_PRECONDITION2(argc==4 || argc==3, cx, false, "Invalid number of arguments");
     JS::RootedObject polyShapeProto(cx, JSB_cpPolyShape_object);
-    JSObject *jsobj = JS_NewObject(cx, JSB_cpPolyShape_class, polyShapeProto, JS::NullPtr());
+    JSObject *jsobj = JS_NewObject(cx, JSB_cpPolyShape_class, polyShapeProto, nullptr);
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
     cpBody* body = nullptr; cpVect *verts = nullptr;
@@ -2579,7 +2585,7 @@ bool JSB_cpPolyShape_getVerts(JSContext *cx, uint32_t argc, JS::Value *vp)
 //        if(!jsobj)
 //        {
 //            JS::RootedObject splittingPlaneProto(cx, JSB_cpSplittingPlane_object);
-//            jsobj = JS_NewObject(cx, JSB_cpSplittingPlane_class, splittingPlaneProto, JS::NullPtr());
+//            jsobj = JS_NewObject(cx, JSB_cpSplittingPlane_class, splittingPlaneProto, nullptr);
 //            jsb_set_jsobject_for_proxy(jsobj, plane);
 //            jsb_set_c_proxy_for_jsobject(jsobj, plane, JSB_C_FLAG_DO_NOT_CALL_FREE);
 //        }

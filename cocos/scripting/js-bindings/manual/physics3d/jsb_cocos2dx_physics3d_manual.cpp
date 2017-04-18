@@ -284,7 +284,7 @@ bool jsb_cocos2d_Physics3DObject_setCollisionCallback(JSContext *cx, uint32_t ar
             bool ok = func->invoke(1, &jsci, &rval);
             if (!ok && JS_IsExceptionPending(cx))
             {
-                JS_ReportPendingException(cx);
+//cjh                JS_ReportPendingException(cx);
             }
         };
         arg0 = lambda;
@@ -415,9 +415,7 @@ bool jsval_to_Physics3DWorld_HitResult(JSContext *cx, JS::HandleValue v, cocos2d
 
 JS::Value Physics3DWorld_HitResult_to_jsval(JSContext *cx, const cocos2d::Physics3DWorld::HitResult& v)
 {
-    JS::RootedObject proto(cx);
-    JS::RootedObject parent(cx);
-    JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr, proto, parent));
+    JS::RootedObject tmp(cx, JS_NewPlainObject(cx));
     if (!tmp) return JS::NullValue();
     JS::RootedValue hitPosition(cx, vector3_to_jsval(cx, v.hitPosition));
     JS::RootedValue hitNormal(cx, vector3_to_jsval(cx, v.hitNormal));
@@ -464,7 +462,7 @@ bool js_cocos2dx_physics3d_Physics3DWorld_rayCast(JSContext *cx, uint32_t argc, 
         }
         else
         {
-            args.rval().set(JSVAL_FALSE);
+            args.rval().set(JS::FalseValue());
         }
         return true;
     }
@@ -492,15 +490,15 @@ void register_all_cocos2dx_physics3d_manual(JSContext *cx, JS::HandleObject glob
     JS_DefineFunction(cx, tmpObj, "createMesh", js_cocos2dx_physics3d_Physics3dShape_createMesh, 2, JSPROP_READONLY | JSPROP_PERMANENT);
     JS_DefineFunction(cx, tmpObj, "createHeightfield", js_cocos2dx_physics3d_Physics3dShape_createHeightfield, 8, JSPROP_READONLY | JSPROP_PERMANENT);
 
-    tmpObj.set(jsb_cocos2d_Physics3DShape_prototype);
-    JS_DefineFunction(cx, tmpObj, "initMesh", js_cocos2dx_physics3d_Physics3dShape_initMesh, 2, JSPROP_READONLY | JSPROP_PERMANENT);
-    JS_DefineFunction(cx, tmpObj, "initHeightfield", js_cocos2dx_physics3d_Physics3dShape_initHeightfield, 8, JSPROP_READONLY | JSPROP_PERMANENT);
-
-    tmpObj.set(jsb_cocos2d_Physics3DObject_prototype);
-    JS_DefineFunction(cx, tmpObj, "setCollisionCallback", jsb_cocos2d_Physics3DObject_setCollisionCallback, 2, JSPROP_READONLY | JSPROP_PERMANENT);
-    
-    tmpObj.set(jsb_cocos2d_Physics3DWorld_prototype);
-    JS_DefineFunction(cx, tmpObj, "rayCast", js_cocos2dx_physics3d_Physics3DWorld_rayCast, 2, JSPROP_READONLY | JSPROP_PERMANENT);
+//cjh    tmpObj.set(jsb_cocos2d_Physics3DShape_prototype);
+//    JS_DefineFunction(cx, tmpObj, "initMesh", js_cocos2dx_physics3d_Physics3dShape_initMesh, 2, JSPROP_READONLY | JSPROP_PERMANENT);
+//    JS_DefineFunction(cx, tmpObj, "initHeightfield", js_cocos2dx_physics3d_Physics3dShape_initHeightfield, 8, JSPROP_READONLY | JSPROP_PERMANENT);
+//
+//    tmpObj.set(jsb_cocos2d_Physics3DObject_prototype);
+//    JS_DefineFunction(cx, tmpObj, "setCollisionCallback", jsb_cocos2d_Physics3DObject_setCollisionCallback, 2, JSPROP_READONLY | JSPROP_PERMANENT);
+//    
+//    tmpObj.set(jsb_cocos2d_Physics3DWorld_prototype);
+//    JS_DefineFunction(cx, tmpObj, "rayCast", js_cocos2dx_physics3d_Physics3DWorld_rayCast, 2, JSPROP_READONLY | JSPROP_PERMANENT);
 }
 
 #endif //CC_USE_3D_PHYSICS && CC_ENABLE_BULLET_INTEGRATION

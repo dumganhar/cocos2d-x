@@ -21,7 +21,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_Animation3D_class;
+const JSClass  *jsb_cocos2d_Animation3D_class;
 JSObject *jsb_cocos2d_Animation3D_prototype;
 
 bool js_cocos2dx_3d_Animation3D_initWithFile(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -133,16 +133,22 @@ bool js_cocos2dx_3d_Animation3D_constructor(JSContext *cx, uint32_t argc, JS::Va
 
 
 void js_register_cocos2dx_3d_Animation3D(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Animation3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Animation3D_class->name = "Animation3D";
-    jsb_cocos2d_Animation3D_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Animation3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Animation3D_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Animation3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Animation3D_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Animation3D_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Animation3D_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Animation3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Animation3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Animation3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -160,7 +166,7 @@ void js_register_cocos2dx_3d_Animation3D(JSContext *cx, JS::HandleObject global)
 
     jsb_cocos2d_Animation3D_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocos2d_Animation3D_class,
         js_cocos2dx_3d_Animation3D_constructor, 0, // constructor
         properties,
@@ -174,10 +180,10 @@ void js_register_cocos2dx_3d_Animation3D(JSContext *cx, JS::HandleObject global)
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocos2d::Animation3D>(cx, jsb_cocos2d_Animation3D_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::Animation3D>(cx, jsb_cocos2d_Animation3D_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_Animate3D_class;
+const JSClass  *jsb_cocos2d_Animate3D_class;
 JSObject *jsb_cocos2d_Animate3D_prototype;
 
 bool js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -638,16 +644,22 @@ bool js_cocos2dx_3d_Animate3D_constructor(JSContext *cx, uint32_t argc, JS::Valu
 extern JSObject *jsb_cocos2d_ActionInterval_prototype;
 
 void js_register_cocos2dx_3d_Animate3D(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Animate3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Animate3D_class->name = "Animate3D";
-    jsb_cocos2d_Animate3D_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Animate3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Animate3D_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Animate3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Animate3D_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Animate3D_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Animate3D_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Animate3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Animate3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Animate3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -697,7 +709,7 @@ void js_register_cocos2dx_3d_Animate3D(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocos2d::Animate3D>(cx, jsb_cocos2d_Animate3D_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_TextureCube_class;
+const JSClass  *jsb_cocos2d_TextureCube_class;
 JSObject *jsb_cocos2d_TextureCube_prototype;
 
 bool js_cocos2dx_3d_TextureCube_reloadTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -767,16 +779,22 @@ bool js_cocos2dx_3d_TextureCube_constructor(JSContext *cx, uint32_t argc, JS::Va
 extern JSObject *jsb_cocos2d_Texture2D_prototype;
 
 void js_register_cocos2dx_3d_TextureCube(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_TextureCube_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_TextureCube_class->name = "TextureCube";
-    jsb_cocos2d_TextureCube_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_TextureCube_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_TextureCube_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_TextureCube_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_TextureCube_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_TextureCube_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_TextureCube_class->convert = JS_ConvertStub;
-    jsb_cocos2d_TextureCube_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "TextureCube",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_TextureCube_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -812,7 +830,7 @@ void js_register_cocos2dx_3d_TextureCube(JSContext *cx, JS::HandleObject global)
     jsb_register_class<cocos2d::TextureCube>(cx, jsb_cocos2d_TextureCube_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_AttachNode_class;
+const JSClass  *jsb_cocos2d_AttachNode_class;
 JSObject *jsb_cocos2d_AttachNode_prototype;
 
 bool js_cocos2dx_3d_AttachNode_create(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -862,16 +880,22 @@ bool js_cocos2dx_3d_AttachNode_constructor(JSContext *cx, uint32_t argc, JS::Val
 extern JSObject *jsb_cocos2d_Node_prototype;
 
 void js_register_cocos2dx_3d_AttachNode(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_AttachNode_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_AttachNode_class->name = "AttachNode";
-    jsb_cocos2d_AttachNode_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_AttachNode_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_AttachNode_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_AttachNode_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_AttachNode_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_AttachNode_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_AttachNode_class->convert = JS_ConvertStub;
-    jsb_cocos2d_AttachNode_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "AttachNode",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_AttachNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -906,7 +930,7 @@ void js_register_cocos2dx_3d_AttachNode(JSContext *cx, JS::HandleObject global) 
     jsb_register_class<cocos2d::AttachNode>(cx, jsb_cocos2d_AttachNode_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_BillBoard_class;
+const JSClass  *jsb_cocos2d_BillBoard_class;
 JSObject *jsb_cocos2d_BillBoard_prototype;
 
 bool js_cocos2dx_3d_BillBoard_getMode(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1130,16 +1154,22 @@ bool js_cocos2dx_3d_BillBoard_constructor(JSContext *cx, uint32_t argc, JS::Valu
 extern JSObject *jsb_cocos2d_Sprite_prototype;
 
 void js_register_cocos2dx_3d_BillBoard(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_BillBoard_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_BillBoard_class->name = "BillBoard";
-    jsb_cocos2d_BillBoard_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_BillBoard_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_BillBoard_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_BillBoard_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_BillBoard_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_BillBoard_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_BillBoard_class->convert = JS_ConvertStub;
-    jsb_cocos2d_BillBoard_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "BillBoard",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_BillBoard_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1177,7 +1207,7 @@ void js_register_cocos2dx_3d_BillBoard(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocos2d::BillBoard>(cx, jsb_cocos2d_BillBoard_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_Mesh_class;
+const JSClass  *jsb_cocos2d_Mesh_class;
 JSObject *jsb_cocos2d_Mesh_prototype;
 
 bool js_cocos2dx_3d_Mesh_getSkin(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1696,16 +1726,22 @@ bool js_cocos2dx_3d_Mesh_constructor(JSContext *cx, uint32_t argc, JS::Value *vp
 
 
 void js_register_cocos2dx_3d_Mesh(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Mesh_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Mesh_class->name = "Mesh";
-    jsb_cocos2d_Mesh_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Mesh_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Mesh_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Mesh_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Mesh_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Mesh_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Mesh_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Mesh_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Mesh",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Mesh_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1743,7 +1779,7 @@ void js_register_cocos2dx_3d_Mesh(JSContext *cx, JS::HandleObject global) {
 
     jsb_cocos2d_Mesh_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocos2d_Mesh_class,
         js_cocos2dx_3d_Mesh_constructor, 0, // constructor
         properties,
@@ -1757,10 +1793,10 @@ void js_register_cocos2dx_3d_Mesh(JSContext *cx, JS::HandleObject global) {
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocos2d::Mesh>(cx, jsb_cocos2d_Mesh_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::Mesh>(cx, jsb_cocos2d_Mesh_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_Skeleton3D_class;
+const JSClass  *jsb_cocos2d_Skeleton3D_class;
 JSObject *jsb_cocos2d_Skeleton3D_prototype;
 
 bool js_cocos2dx_3d_Skeleton3D_removeAllBones(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1985,16 +2021,22 @@ bool js_cocos2dx_3d_Skeleton3D_constructor(JSContext *cx, uint32_t argc, JS::Val
 
 
 void js_register_cocos2dx_3d_Skeleton3D(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Skeleton3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Skeleton3D_class->name = "Skeleton3D";
-    jsb_cocos2d_Skeleton3D_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Skeleton3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Skeleton3D_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Skeleton3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Skeleton3D_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Skeleton3D_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Skeleton3D_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Skeleton3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Skeleton3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Skeleton3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2017,7 +2059,7 @@ void js_register_cocos2dx_3d_Skeleton3D(JSContext *cx, JS::HandleObject global) 
 
     jsb_cocos2d_Skeleton3D_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocos2d_Skeleton3D_class,
         js_cocos2dx_3d_Skeleton3D_constructor, 0, // constructor
         properties,
@@ -2031,10 +2073,10 @@ void js_register_cocos2dx_3d_Skeleton3D(JSContext *cx, JS::HandleObject global) 
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocos2d::Skeleton3D>(cx, jsb_cocos2d_Skeleton3D_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::Skeleton3D>(cx, jsb_cocos2d_Skeleton3D_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_Skybox_class;
+const JSClass  *jsb_cocos2d_Skybox_class;
 JSObject *jsb_cocos2d_Skybox_prototype;
 
 bool js_cocos2dx_3d_Skybox_reload(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2186,16 +2228,22 @@ bool js_cocos2dx_3d_Skybox_constructor(JSContext *cx, uint32_t argc, JS::Value *
 extern JSObject *jsb_cocos2d_Node_prototype;
 
 void js_register_cocos2dx_3d_Skybox(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Skybox_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Skybox_class->name = "Skybox";
-    jsb_cocos2d_Skybox_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Skybox_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Skybox_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Skybox_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Skybox_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Skybox_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Skybox_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Skybox_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Skybox",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Skybox_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2233,7 +2281,7 @@ void js_register_cocos2dx_3d_Skybox(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocos2d::Skybox>(cx, jsb_cocos2d_Skybox_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_Sprite3D_class;
+const JSClass  *jsb_cocos2d_Sprite3D_class;
 JSObject *jsb_cocos2d_Sprite3D_prototype;
 
 bool js_cocos2dx_3d_Sprite3D_setCullFaceEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -3134,16 +3182,22 @@ extern JSObject *jsb_cocos2d_Node_prototype;
 
     
 void js_register_cocos2dx_3d_Sprite3D(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Sprite3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Sprite3D_class->name = "Sprite3D";
-    jsb_cocos2d_Sprite3D_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Sprite3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Sprite3D_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Sprite3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Sprite3D_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Sprite3D_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Sprite3D_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Sprite3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Sprite3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Sprite3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -3213,7 +3267,7 @@ void js_register_cocos2dx_3d_Sprite3D(JSContext *cx, JS::HandleObject global) {
     anonEvaluate(cx, global, "(function () { jsb.Sprite3D.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_Sprite3DCache_class;
+const JSClass  *jsb_cocos2d_Sprite3DCache_class;
 JSObject *jsb_cocos2d_Sprite3DCache_prototype;
 
 bool js_cocos2dx_3d_Sprite3DCache_removeSprite3DData(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -3285,16 +3339,22 @@ bool js_cocos2dx_3d_Sprite3DCache_getInstance(JSContext *cx, uint32_t argc, JS::
 
 
 void js_register_cocos2dx_3d_Sprite3DCache(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Sprite3DCache_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Sprite3DCache_class->name = "Sprite3DCache";
-    jsb_cocos2d_Sprite3DCache_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Sprite3DCache_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Sprite3DCache_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Sprite3DCache_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Sprite3DCache_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Sprite3DCache_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Sprite3DCache_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Sprite3DCache_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Sprite3DCache",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Sprite3DCache_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -3314,7 +3374,7 @@ void js_register_cocos2dx_3d_Sprite3DCache(JSContext *cx, JS::HandleObject globa
 
     jsb_cocos2d_Sprite3DCache_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocos2d_Sprite3DCache_class,
         empty_constructor, 0,
         properties,
@@ -3328,10 +3388,10 @@ void js_register_cocos2dx_3d_Sprite3DCache(JSContext *cx, JS::HandleObject globa
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::FalseHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocos2d::Sprite3DCache>(cx, jsb_cocos2d_Sprite3DCache_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::Sprite3DCache>(cx, jsb_cocos2d_Sprite3DCache_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_Terrain_class;
+const JSClass  *jsb_cocos2d_Terrain_class;
 JSObject *jsb_cocos2d_Terrain_prototype;
 
 bool js_cocos2dx_3d_Terrain_initHeightMap(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -3928,16 +3988,22 @@ bool js_cocos2dx_3d_Terrain_constructor(JSContext *cx, uint32_t argc, JS::Value 
 extern JSObject *jsb_cocos2d_Node_prototype;
 
 void js_register_cocos2dx_3d_Terrain(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Terrain_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Terrain_class->name = "Terrain";
-    jsb_cocos2d_Terrain_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Terrain_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Terrain_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Terrain_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Terrain_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Terrain_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Terrain_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Terrain_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Terrain",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Terrain_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -3992,7 +4058,7 @@ void js_register_cocos2dx_3d_Terrain(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocos2d::Terrain>(cx, jsb_cocos2d_Terrain_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_Bundle3D_class;
+const JSClass  *jsb_cocos2d_Bundle3D_class;
 JSObject *jsb_cocos2d_Bundle3D_prototype;
 
 bool js_cocos2dx_3d_Bundle3D_load(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4286,17 +4352,22 @@ void js_cocos2d_Bundle3D_finalize(JSFreeOp *fop, JSObject *obj) {
     }
 }
 void js_register_cocos2dx_3d_Bundle3D(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_Bundle3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_Bundle3D_class->name = "Bundle3D";
-    jsb_cocos2d_Bundle3D_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_Bundle3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_Bundle3D_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_Bundle3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_Bundle3D_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_Bundle3D_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_Bundle3D_class->convert = JS_ConvertStub;
-    jsb_cocos2d_Bundle3D_class->finalize = js_cocos2d_Bundle3D_finalize;
-    jsb_cocos2d_Bundle3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        js_cocos2d_Bundle3D_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Bundle3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_Bundle3D_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4322,7 +4393,7 @@ void js_register_cocos2dx_3d_Bundle3D(JSContext *cx, JS::HandleObject global) {
 
     jsb_cocos2d_Bundle3D_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocos2d_Bundle3D_class,
         js_cocos2dx_3d_Bundle3D_constructor, 0, // constructor
         properties,
@@ -4336,7 +4407,7 @@ void js_register_cocos2dx_3d_Bundle3D(JSContext *cx, JS::HandleObject global) {
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::FalseHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocos2d::Bundle3D>(cx, jsb_cocos2d_Bundle3D_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::Bundle3D>(cx, jsb_cocos2d_Bundle3D_class, proto, nullptr);
 }
 
 void register_all_cocos2dx_3d(JSContext* cx, JS::HandleObject obj) {

@@ -20,7 +20,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_network_Downloader_class;
+const JSClass  *jsb_cocos2d_network_Downloader_class;
 JSObject *jsb_cocos2d_network_Downloader_prototype;
 
 bool js_cocos2dx_network_Downloader_setOnTaskError(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -272,11 +272,13 @@ void js_register_cocos2dx_network_Downloader(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_network_Downloader_class = {
+    static const JSClass cls = {
         "Downloader",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_network_Downloader_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

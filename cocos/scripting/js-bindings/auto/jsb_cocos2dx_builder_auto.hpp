@@ -5,7 +5,7 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
-extern JSClass  *jsb_cocosbuilder_CCBAnimationManager_class;
+extern const JSClass  *jsb_cocosbuilder_CCBAnimationManager_class;
 extern JSObject *jsb_cocosbuilder_CCBAnimationManager_prototype;
 
 bool js_cocos2dx_builder_CCBAnimationManager_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -51,7 +51,7 @@ bool js_cocos2dx_builder_CCBAnimationManager_debug(JSContext *cx, uint32_t argc,
 bool js_cocos2dx_builder_CCBAnimationManager_getDocumentControllerName(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_builder_CCBAnimationManager_CCBAnimationManager(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocosbuilder_CCBReader_class;
+extern const JSClass  *jsb_cocosbuilder_CCBReader_class;
 extern JSObject *jsb_cocosbuilder_CCBReader_prototype;
 
 bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);

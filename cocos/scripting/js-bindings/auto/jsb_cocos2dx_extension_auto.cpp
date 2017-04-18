@@ -19,7 +19,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_extension_Control_class;
+const JSClass  *jsb_cocos2d_extension_Control_class;
 JSObject *jsb_cocos2d_extension_Control_prototype;
 
 bool js_cocos2dx_extension_Control_setEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -312,11 +312,13 @@ void js_register_cocos2dx_extension_Control(JSContext *cx, JS::HandleObject glob
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_Control_class = {
+    static const JSClass cls = {
         "Control",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_Control_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -363,7 +365,7 @@ void js_register_cocos2dx_extension_Control(JSContext *cx, JS::HandleObject glob
     jsb_register_class<cocos2d::extension::Control>(cx, jsb_cocos2d_extension_Control_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_extension_ControlButton_class;
+const JSClass  *jsb_cocos2d_extension_ControlButton_class;
 JSObject *jsb_cocos2d_extension_ControlButton_prototype;
 
 bool js_cocos2dx_extension_ControlButton_isPushed(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1431,11 +1433,13 @@ void js_register_cocos2dx_extension_ControlButton(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlButton_class = {
+    static const JSClass cls = {
         "ControlButton",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlButton_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1510,7 +1514,7 @@ void js_register_cocos2dx_extension_ControlButton(JSContext *cx, JS::HandleObjec
     anonEvaluate(cx, global, "(function () { cc.ControlButton.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_ControlHuePicker_class;
+const JSClass  *jsb_cocos2d_extension_ControlHuePicker_class;
 JSObject *jsb_cocos2d_extension_ControlHuePicker_prototype;
 
 bool js_cocos2dx_extension_ControlHuePicker_initWithTargetAndPos(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1797,11 +1801,13 @@ void js_register_cocos2dx_extension_ControlHuePicker(JSContext *cx, JS::HandleOb
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlHuePicker_class = {
+    static const JSClass cls = {
         "ControlHuePicker",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlHuePicker_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1846,7 +1852,7 @@ void js_register_cocos2dx_extension_ControlHuePicker(JSContext *cx, JS::HandleOb
     jsb_register_class<cocos2d::extension::ControlHuePicker>(cx, jsb_cocos2d_extension_ControlHuePicker_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_extension_ControlSaturationBrightnessPicker_class;
+const JSClass  *jsb_cocos2d_extension_ControlSaturationBrightnessPicker_class;
 JSObject *jsb_cocos2d_extension_ControlSaturationBrightnessPicker_prototype;
 
 bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getShadow(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2081,11 +2087,13 @@ void js_register_cocos2dx_extension_ControlSaturationBrightnessPicker(JSContext 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlSaturationBrightnessPicker_class = {
+    static const JSClass cls = {
         "ControlSaturationBrightnessPicker",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlSaturationBrightnessPicker_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2128,7 +2136,7 @@ void js_register_cocos2dx_extension_ControlSaturationBrightnessPicker(JSContext 
     jsb_register_class<cocos2d::extension::ControlSaturationBrightnessPicker>(cx, jsb_cocos2d_extension_ControlSaturationBrightnessPicker_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_extension_ControlColourPicker_class;
+const JSClass  *jsb_cocos2d_extension_ControlColourPicker_class;
 JSObject *jsb_cocos2d_extension_ControlColourPicker_prototype;
 
 bool js_cocos2dx_extension_ControlColourPicker_hueSliderValueChanged(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2399,11 +2407,13 @@ void js_register_cocos2dx_extension_ControlColourPicker(JSContext *cx, JS::Handl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlColourPicker_class = {
+    static const JSClass cls = {
         "ControlColourPicker",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlColourPicker_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2448,7 +2458,7 @@ void js_register_cocos2dx_extension_ControlColourPicker(JSContext *cx, JS::Handl
     anonEvaluate(cx, global, "(function () { cc.ControlColourPicker.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_ControlPotentiometer_class;
+const JSClass  *jsb_cocos2d_extension_ControlPotentiometer_class;
 JSObject *jsb_cocos2d_extension_ControlPotentiometer_prototype;
 
 bool js_cocos2dx_extension_ControlPotentiometer_setPreviousLocation(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2931,11 +2941,13 @@ void js_register_cocos2dx_extension_ControlPotentiometer(JSContext *cx, JS::Hand
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlPotentiometer_class = {
+    static const JSClass cls = {
         "ControlPotentiometer",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlPotentiometer_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2990,7 +3002,7 @@ void js_register_cocos2dx_extension_ControlPotentiometer(JSContext *cx, JS::Hand
     anonEvaluate(cx, global, "(function () { cc.ControlPotentiometer.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_ControlSlider_class;
+const JSClass  *jsb_cocos2d_extension_ControlSlider_class;
 JSObject *jsb_cocos2d_extension_ControlSlider_prototype;
 
 bool js_cocos2dx_extension_ControlSlider_setBackgroundSprite(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -3728,11 +3740,13 @@ void js_register_cocos2dx_extension_ControlSlider(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlSlider_class = {
+    static const JSClass cls = {
         "ControlSlider",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlSlider_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -3789,7 +3803,7 @@ void js_register_cocos2dx_extension_ControlSlider(JSContext *cx, JS::HandleObjec
     anonEvaluate(cx, global, "(function () { cc.ControlSlider.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_ControlStepper_class;
+const JSClass  *jsb_cocos2d_extension_ControlStepper_class;
 JSObject *jsb_cocos2d_extension_ControlStepper_prototype;
 
 bool js_cocos2dx_extension_ControlStepper_getMinusSprite(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4322,11 +4336,13 @@ void js_register_cocos2dx_extension_ControlStepper(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlStepper_class = {
+    static const JSClass cls = {
         "ControlStepper",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlStepper_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4383,7 +4399,7 @@ void js_register_cocos2dx_extension_ControlStepper(JSContext *cx, JS::HandleObje
     anonEvaluate(cx, global, "(function () { cc.ControlStepper.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_ControlSwitch_class;
+const JSClass  *jsb_cocos2d_extension_ControlSwitch_class;
 JSObject *jsb_cocos2d_extension_ControlSwitch_prototype;
 
 bool js_cocos2dx_extension_ControlSwitch_setOn(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4820,11 +4836,13 @@ void js_register_cocos2dx_extension_ControlSwitch(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ControlSwitch_class = {
+    static const JSClass cls = {
         "ControlSwitch",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ControlSwitch_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4866,7 +4884,7 @@ void js_register_cocos2dx_extension_ControlSwitch(JSContext *cx, JS::HandleObjec
     anonEvaluate(cx, global, "(function () { cc.ControlSwitch.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_ScrollView_class;
+const JSClass  *jsb_cocos2d_extension_ScrollView_class;
 JSObject *jsb_cocos2d_extension_ScrollView_prototype;
 
 bool js_cocos2dx_extension_ScrollView_isClippingToBounds(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5651,11 +5669,13 @@ void js_register_cocos2dx_extension_ScrollView(JSContext *cx, JS::HandleObject g
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_ScrollView_class = {
+    static const JSClass cls = {
         "ScrollView",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_ScrollView_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -5724,7 +5744,7 @@ void js_register_cocos2dx_extension_ScrollView(JSContext *cx, JS::HandleObject g
     anonEvaluate(cx, global, "(function () { cc.ScrollView.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_TableViewCell_class;
+const JSClass  *jsb_cocos2d_extension_TableViewCell_class;
 JSObject *jsb_cocos2d_extension_TableViewCell_prototype;
 
 bool js_cocos2dx_extension_TableViewCell_reset(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5839,11 +5859,13 @@ void js_register_cocos2dx_extension_TableViewCell(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_TableViewCell_class = {
+    static const JSClass cls = {
         "TableViewCell",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_TableViewCell_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -5883,7 +5905,7 @@ void js_register_cocos2dx_extension_TableViewCell(JSContext *cx, JS::HandleObjec
     anonEvaluate(cx, global, "(function () { cc.TableViewCell.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_TableView_class;
+const JSClass  *jsb_cocos2d_extension_TableView_class;
 JSObject *jsb_cocos2d_extension_TableView_prototype;
 
 bool js_cocos2dx_extension_TableView_updateCellAtIndex(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6195,11 +6217,13 @@ void js_register_cocos2dx_extension_TableView(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_TableView_class = {
+    static const JSClass cls = {
         "TableView",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_TableView_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6245,7 +6269,7 @@ void js_register_cocos2dx_extension_TableView(JSContext *cx, JS::HandleObject gl
     anonEvaluate(cx, global, "(function () { cc.TableView.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocos2d_extension_EventAssetsManagerEx_class;
+const JSClass  *jsb_cocos2d_extension_EventAssetsManagerEx_class;
 JSObject *jsb_cocos2d_extension_EventAssetsManagerEx_prototype;
 
 bool js_cocos2dx_extension_EventAssetsManagerEx_getAssetsManagerEx(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6440,11 +6464,13 @@ void js_register_cocos2dx_extension_EventAssetsManagerEx(JSContext *cx, JS::Hand
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_EventAssetsManagerEx_class = {
+    static const JSClass cls = {
         "EventAssetsManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_EventAssetsManagerEx_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6484,7 +6510,7 @@ void js_register_cocos2dx_extension_EventAssetsManagerEx(JSContext *cx, JS::Hand
     jsb_register_class<cocos2d::extension::EventAssetsManagerEx>(cx, jsb_cocos2d_extension_EventAssetsManagerEx_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocos2d_extension_Manifest_class;
+const JSClass  *jsb_cocos2d_extension_Manifest_class;
 JSObject *jsb_cocos2d_extension_Manifest_prototype;
 
 bool js_cocos2dx_extension_Manifest_getManifestFileUrl(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6624,11 +6650,13 @@ void js_register_cocos2dx_extension_Manifest(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_Manifest_class = {
+    static const JSClass cls = {
         "Manifest",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_Manifest_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6666,7 +6694,7 @@ void js_register_cocos2dx_extension_Manifest(JSContext *cx, JS::HandleObject glo
     jsb_register_class<cocos2d::extension::Manifest>(cx, jsb_cocos2d_extension_Manifest_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_extension_AssetsManagerEx_class;
+const JSClass  *jsb_cocos2d_extension_AssetsManagerEx_class;
 JSObject *jsb_cocos2d_extension_AssetsManagerEx_prototype;
 
 bool js_cocos2dx_extension_AssetsManagerEx_getState(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6984,11 +7012,13 @@ void js_register_cocos2dx_extension_AssetsManagerEx(JSContext *cx, JS::HandleObj
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_AssetsManagerEx_class = {
+    static const JSClass cls = {
         "AssetsManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_AssetsManagerEx_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7033,7 +7063,7 @@ void js_register_cocos2dx_extension_AssetsManagerEx(JSContext *cx, JS::HandleObj
     jsb_register_class<cocos2d::extension::AssetsManagerEx>(cx, jsb_cocos2d_extension_AssetsManagerEx_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_extension_EventListenerAssetsManagerEx_class;
+const JSClass  *jsb_cocos2d_extension_EventListenerAssetsManagerEx_class;
 JSObject *jsb_cocos2d_extension_EventListenerAssetsManagerEx_prototype;
 
 bool js_cocos2dx_extension_EventListenerAssetsManagerEx_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7065,11 +7095,13 @@ void js_register_cocos2dx_extension_EventListenerAssetsManagerEx(JSContext *cx, 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_extension_EventListenerAssetsManagerEx_class = {
+    static const JSClass cls = {
         "EventListenerAssetsManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_extension_EventListenerAssetsManagerEx_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

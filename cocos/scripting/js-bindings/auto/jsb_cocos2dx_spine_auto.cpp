@@ -19,7 +19,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_spine_SkeletonRenderer_class;
+const JSClass  *jsb_spine_SkeletonRenderer_class;
 JSObject *jsb_spine_SkeletonRenderer_prototype;
 
 bool js_cocos2dx_spine_SkeletonRenderer_setTimeScale(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -842,11 +842,13 @@ void js_register_cocos2dx_spine_SkeletonRenderer(JSContext *cx, JS::HandleObject
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_spine_SkeletonRenderer_class = {
+    static const JSClass cls = {
         "Skeleton",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_spine_SkeletonRenderer_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -901,7 +903,7 @@ void js_register_cocos2dx_spine_SkeletonRenderer(JSContext *cx, JS::HandleObject
     jsb_register_class<spine::SkeletonRenderer>(cx, jsb_spine_SkeletonRenderer_class, proto, parent_proto);
 }
 
-JSClass  *jsb_spine_SkeletonAnimation_class;
+const JSClass  *jsb_spine_SkeletonAnimation_class;
 JSObject *jsb_spine_SkeletonAnimation_prototype;
 
 bool js_cocos2dx_spine_SkeletonAnimation_setTrackCompleteListener(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1829,11 +1831,13 @@ void js_register_cocos2dx_spine_SkeletonAnimation(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_spine_SkeletonAnimation_class = {
+    static const JSClass cls = {
         "SkeletonAnimation",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_spine_SkeletonAnimation_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

@@ -5,7 +5,7 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
-extern JSClass  *jsb_cocos2d_ParticleSystem3D_class;
+extern const JSClass  *jsb_cocos2d_ParticleSystem3D_class;
 extern JSObject *jsb_cocos2d_ParticleSystem3D_prototype;
 
 bool js_cocos2dx_3d_extension_ParticleSystem3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -29,7 +29,7 @@ bool js_cocos2dx_3d_extension_ParticleSystem3D_stopParticleSystem(JSContext *cx,
 bool js_cocos2dx_3d_extension_ParticleSystem3D_setKeepLocal(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_extension_ParticleSystem3D_ParticleSystem3D(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_PUParticleSystem3D_class;
+extern const JSClass  *jsb_cocos2d_PUParticleSystem3D_class;
 extern JSObject *jsb_cocos2d_PUParticleSystem3D_prototype;
 
 bool js_cocos2dx_3d_extension_PUParticleSystem3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);

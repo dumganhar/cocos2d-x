@@ -742,7 +742,9 @@ JS_BINDED_PROP_GET_IMPL(MinXmlHttpRequest, response)
         else if (_responseType == ResponseType::ARRAY_BUFFER)
         {
             JSObject* tmp = JS_NewArrayBuffer(cx, _dataSize);
-            uint8_t* tmpData = JS_GetArrayBufferData(tmp);
+            JS::AutoCheckCannotGC nogc;
+            bool sharedDummy = false;
+            uint8_t* tmpData = JS_GetArrayBufferData(tmp, &sharedDummy, nogc);
             memcpy((void*)tmpData, (const void*)_data, _dataSize);
             JS::Value outVal = JS::ObjectValue(*tmp);
 
@@ -842,13 +844,15 @@ JS_BINDED_FUNC_IMPL(MinXmlHttpRequest, send)
         else if (args.get(0).isObject())
         {
             JSObject *obj = args.get(0).toObjectOrNull();
+            JS::AutoCheckCannotGC nogc;
+            bool sharedDummy = false;
             if (JS_IsArrayBufferObject(obj))
             {
-                _setHttpRequestData((const char *)JS_GetArrayBufferData(obj), JS_GetArrayBufferByteLength(obj));
+                _setHttpRequestData((const char *)JS_GetArrayBufferData(obj, &sharedDummy, nogc), JS_GetArrayBufferByteLength(obj));
             }
             else if (JS_IsArrayBufferViewObject(obj))
             {
-                _setHttpRequestData((const char *)JS_GetArrayBufferViewData(obj), JS_GetArrayBufferViewByteLength(obj));
+                _setHttpRequestData((const char *)JS_GetArrayBufferViewData(obj, &sharedDummy, nogc), JS_GetArrayBufferViewByteLength(obj));
             }
             else
             {
@@ -1055,7 +1059,7 @@ void MinXmlHttpRequest::_notify(JS::HandleObject callback, JS::HandleValueArray 
             //JS_IsExceptionPending(cx) && JS_ReportPendingException(cx);
             JS::RootedValue callbackVal(_cx, JS::ObjectValue(*callback));
             JS::RootedValue out(_cx);
-            JS_CallFunctionValue(_cx, JS::NullPtr(), callbackVal, args, &out);
+            JS_CallFunctionValue(_cx, nullptr, callbackVal, args, &out);
         }
 
     }
@@ -1068,11 +1072,19 @@ void MinXmlHttpRequest::_notify(JS::HandleObject callback, JS::HandleValueArray 
  */
 void MinXmlHttpRequest::_js_register(JSContext *cx, JS::HandleObject global)
 {
-    JSClass jsclass = {
-        "XMLHttpRequest", JSCLASS_HAS_PRIVATE, JS_PropertyStub,
-        JS_DeletePropertyStub, JS_PropertyStub, JS_StrictPropertyStub,
-        JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub,
-        basic_object_finalize
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        basic_object_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "XMLHttpRequest",
+        JSCLASS_HAS_PRIVATE,
+        &classOps
     };
 
     MinXmlHttpRequest::js_class = jsclass;
@@ -1110,6 +1122,6 @@ void MinXmlHttpRequest::_js_register(JSContext *cx, JS::HandleObject global)
     };
 
     MinXmlHttpRequest::js_parent = nullptr;
-    MinXmlHttpRequest::js_proto = JS_InitClass(cx, global, JS::NullPtr(), &MinXmlHttpRequest::js_class , MinXmlHttpRequest::_js_constructor, 0, props, funcs, nullptr, nullptr);
+    MinXmlHttpRequest::js_proto = JS_InitClass(cx, global, nullptr, &MinXmlHttpRequest::js_class , MinXmlHttpRequest::_js_constructor, 0, props, funcs, nullptr, nullptr);
 
 }

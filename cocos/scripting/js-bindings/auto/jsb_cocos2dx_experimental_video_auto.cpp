@@ -20,7 +20,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_experimental_ui_VideoPlayer_class;
+const JSClass  *jsb_cocos2d_experimental_ui_VideoPlayer_class;
 JSObject *jsb_cocos2d_experimental_ui_VideoPlayer_prototype;
 
 bool js_cocos2dx_experimental_video_VideoPlayer_getFileName(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -309,11 +309,13 @@ void js_register_cocos2dx_experimental_video_VideoPlayer(JSContext *cx, JS::Hand
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_experimental_ui_VideoPlayer_class = {
+    static const JSClass cls = {
         "VideoPlayer",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_experimental_ui_VideoPlayer_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

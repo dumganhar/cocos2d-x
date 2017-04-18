@@ -319,7 +319,7 @@ void JavaScriptObjCBridge::_js_register(JSContext *cx, JS::HandleObject global)
     };
     
     JavaScriptObjCBridge::js_parent = NULL;
-    JavaScriptObjCBridge::js_proto = JS_InitClass(cx, global, JS::NullPtr(), &JavaScriptObjCBridge::js_class , JavaScriptObjCBridge::_js_constructor, 0, props, funcs, NULL, NULL);
+    JavaScriptObjCBridge::js_proto = JS_InitClass(cx, global, nullptr, &JavaScriptObjCBridge::js_class , JavaScriptObjCBridge::_js_constructor, 0, props, funcs, NULL, NULL);
 }
 
 

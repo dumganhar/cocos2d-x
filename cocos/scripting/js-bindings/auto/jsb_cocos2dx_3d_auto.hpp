@@ -5,7 +5,7 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
-extern JSClass  *jsb_cocos2d_Animation3D_class;
+extern const JSClass  *jsb_cocos2d_Animation3D_class;
 extern JSObject *jsb_cocos2d_Animation3D_prototype;
 
 bool js_cocos2dx_3d_Animation3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -18,7 +18,7 @@ bool js_cocos2dx_3d_Animation3D_getBoneCurveByName(JSContext *cx, uint32_t argc,
 bool js_cocos2dx_3d_Animation3D_getDuration(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Animation3D_Animation3D(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Animate3D_class;
+extern const JSClass  *jsb_cocos2d_Animate3D_class;
 extern JSObject *jsb_cocos2d_Animate3D_prototype;
 
 bool js_cocos2dx_3d_Animate3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -43,7 +43,7 @@ bool js_cocos2dx_3d_Animate3D_createWithFrames(JSContext *cx, uint32_t argc, JS:
 bool js_cocos2dx_3d_Animate3D_setTransitionTime(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Animate3D_Animate3D(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_TextureCube_class;
+extern const JSClass  *jsb_cocos2d_TextureCube_class;
 extern JSObject *jsb_cocos2d_TextureCube_prototype;
 
 bool js_cocos2dx_3d_TextureCube_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -54,7 +54,7 @@ bool js_cocos2dx_3d_TextureCube_reloadTexture(JSContext *cx, uint32_t argc, JS::
 bool js_cocos2dx_3d_TextureCube_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_TextureCube_TextureCube(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_AttachNode_class;
+extern const JSClass  *jsb_cocos2d_AttachNode_class;
 extern JSObject *jsb_cocos2d_AttachNode_prototype;
 
 bool js_cocos2dx_3d_AttachNode_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -64,7 +64,7 @@ void register_all_cocos2dx_3d(JSContext* cx, JS::HandleObject obj);
 bool js_cocos2dx_3d_AttachNode_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_AttachNode_AttachNode(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_BillBoard_class;
+extern const JSClass  *jsb_cocos2d_BillBoard_class;
 extern JSObject *jsb_cocos2d_BillBoard_prototype;
 
 bool js_cocos2dx_3d_BillBoard_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -77,7 +77,7 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, JS::Value *vp
 bool js_cocos2dx_3d_BillBoard_createWithTexture(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_BillBoard_BillBoard(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Mesh_class;
+extern const JSClass  *jsb_cocos2d_Mesh_class;
 extern JSObject *jsb_cocos2d_Mesh_prototype;
 
 bool js_cocos2dx_3d_Mesh_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -110,7 +110,7 @@ bool js_cocos2dx_3d_Mesh_setGLProgramState(JSContext *cx, uint32_t argc, JS::Val
 bool js_cocos2dx_3d_Mesh_setVisible(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Mesh_Mesh(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Skeleton3D_class;
+extern const JSClass  *jsb_cocos2d_Skeleton3D_class;
 extern JSObject *jsb_cocos2d_Skeleton3D_prototype;
 
 bool js_cocos2dx_3d_Skeleton3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -128,7 +128,7 @@ bool js_cocos2dx_3d_Skeleton3D_getBoneIndex(JSContext *cx, uint32_t argc, JS::Va
 bool js_cocos2dx_3d_Skeleton3D_getBoneCount(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Skeleton3D_Skeleton3D(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Skybox_class;
+extern const JSClass  *jsb_cocos2d_Skybox_class;
 extern JSObject *jsb_cocos2d_Skybox_prototype;
 
 bool js_cocos2dx_3d_Skybox_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -141,7 +141,7 @@ bool js_cocos2dx_3d_Skybox_setTexture(JSContext *cx, uint32_t argc, JS::Value *v
 bool js_cocos2dx_3d_Skybox_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Skybox_Skybox(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Sprite3D_class;
+extern const JSClass  *jsb_cocos2d_Sprite3D_class;
 extern JSObject *jsb_cocos2d_Sprite3D_prototype;
 
 bool js_cocos2dx_3d_Sprite3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -184,7 +184,7 @@ bool js_cocos2dx_3d_Sprite3D_getMeshByName(JSContext *cx, uint32_t argc, JS::Val
 bool js_cocos2dx_3d_Sprite3D_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Sprite3D_Sprite3D(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Sprite3DCache_class;
+extern const JSClass  *jsb_cocos2d_Sprite3DCache_class;
 extern JSObject *jsb_cocos2d_Sprite3DCache_prototype;
 
 bool js_cocos2dx_3d_Sprite3DCache_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -196,7 +196,7 @@ bool js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData(JSContext *cx, uint32_t 
 bool js_cocos2dx_3d_Sprite3DCache_destroyInstance(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Sprite3DCache_getInstance(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Terrain_class;
+extern const JSClass  *jsb_cocos2d_Terrain_class;
 extern JSObject *jsb_cocos2d_Terrain_prototype;
 
 bool js_cocos2dx_3d_Terrain_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -228,7 +228,7 @@ bool js_cocos2dx_3d_Terrain_getMinHeight(JSContext *cx, uint32_t argc, JS::Value
 bool js_cocos2dx_3d_Terrain_getMaxHeight(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_3d_Terrain_Terrain(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_Bundle3D_class;
+extern const JSClass  *jsb_cocos2d_Bundle3D_class;
 extern JSObject *jsb_cocos2d_Bundle3D_prototype;
 
 bool js_cocos2dx_3d_Bundle3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);

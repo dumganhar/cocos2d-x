@@ -583,7 +583,7 @@ bool jsb_set_reserved_slot(JSObject *obj, uint32_t idx, JS::Value value);
 bool jsb_get_reserved_slot(JSObject *obj, uint32_t idx, JS::Value& ret);
 
 template <class T>
-js_type_class_t *jsb_register_class(JSContext *cx, JSClass *jsClass, JS::HandleObject proto, JS::HandleObject parentProto)
+js_type_class_t *jsb_register_class(JSContext *cx, const JSClass *jsClass, JS::HandleObject proto, JS::HandleObject parentProto)
 {
     js_type_class_t *p = nullptr;
     std::string typeName = TypeTest<T>::s_name();

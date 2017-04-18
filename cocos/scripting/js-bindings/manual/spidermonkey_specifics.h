@@ -71,7 +71,7 @@ private:
 };
 
 typedef struct js_type_class {
-    JSClass *jsclass;
+    const JSClass *jsclass;
     ScriptingRootHolder proto;
     ScriptingRootHolder parentProto;
 } js_type_class_t;

@@ -169,7 +169,7 @@ bool js_cocos2dx_SocketIO_connect(JSContext* cx, uint32_t argc, jsval* vp)
                 {
                     //previous connection not found, create a new one
                     JS::RootedObject proto(cx, js_cocos2dx_socketio_prototype);
-                    JS::RootedObject obj(cx, JS_NewObject(cx, js_cocos2dx_socketio_class, proto, JS::NullPtr()));
+                    JS::RootedObject obj(cx, JS_NewObject(cx, js_cocos2dx_socketio_class, proto, nullptr));
                     p = jsb_new_proxy(ret, obj);
                     JS::RootedObject jsdelegate(cx, p->obj);
                     siodelegate->setJSDelegate(jsdelegate);
@@ -407,7 +407,7 @@ void register_jsb_socketio(JSContext *cx, JS::HandleObject global)
 
     js_cocos2dx_socketio_prototype = JS_InitClass(
                                                 cx, global,
-                                                JS::NullPtr(),
+                                                nullptr,
                                                 js_cocos2dx_socketio_class,
                                                 js_cocos2dx_SocketIO_constructor, 0, // constructor
                                                 nullptr,

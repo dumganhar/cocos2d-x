@@ -849,26 +849,27 @@ bool js_set_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
 
         cocos2d::Map<std::string, cocostudio::MovementData*> dict;
 
-        JS::RootedObject it(cx, JS_NewPropertyIterator(cx, tmp));
-        while (true)
+        JS::Rooted<JS::IdVector> ids(cx, JS::IdVector(cx));
+        if (!JS_Enumerate(cx, tmp, &ids))
+            return false;
+
+        bool ok = false;
+        uint32_t length = (uint32_t)ids.length();
+        for (uint32_t i = 0; i < length; i++)
         {
-            JS::RootedId idp(cx);
-            JS::RootedValue key(cx);
-            if (! JS_NextProperty(cx, it, idp.address()) || ! JS_IdToValue(cx, idp, &key)) {
-                CCLOGERROR("js_set_AnimationData_movementDataDic : Error processing arguments.");
-                return false; // error
-            }
-            if (key == JS::UndefinedValue()) {
-                break; // end of iteration
-            }
-            if (!key.isString()) {
+            if (!JSID_IS_STRING(ids[i])) {
                 continue; // ignore integer properties
             }
 
-            JSStringWrapper keyWrapper(key.toString(), cx);
+            JS::RootedString key(cx, JSID_TO_STRING(ids[i]));
+            if (!ok) {
+                return false;
+            }
+
+            JSStringWrapper keyWrapper(key, cx);
 
             JS::RootedValue value(cx);
-            JS_GetPropertyById(cx, tmp, idp, &value);
+            JS_GetPropertyById(cx, tmp, ids[i], &value);
             cocostudio::MovementData* movementData;
             bool ok = true;
             do {

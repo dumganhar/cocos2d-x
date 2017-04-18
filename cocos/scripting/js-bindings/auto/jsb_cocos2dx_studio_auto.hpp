@@ -5,7 +5,7 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
-extern JSClass  *jsb_cocostudio_ActionObject_class;
+extern const JSClass  *jsb_cocostudio_ActionObject_class;
 extern JSObject *jsb_cocostudio_ActionObject_prototype;
 
 bool js_cocos2dx_studio_ActionObject_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -32,7 +32,7 @@ bool js_cocos2dx_studio_ActionObject_setLoop(JSContext *cx, uint32_t argc, JS::V
 bool js_cocos2dx_studio_ActionObject_simulationActionUpdate(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ActionObject_ActionObject(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ActionManagerEx_class;
+extern const JSClass  *jsb_cocostudio_ActionManagerEx_class;
 extern JSObject *jsb_cocostudio_ActionManagerEx_prototype;
 
 bool js_cocos2dx_studio_ActionManagerEx_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -48,7 +48,7 @@ bool js_cocos2dx_studio_ActionManagerEx_releaseActions(JSContext *cx, uint32_t a
 bool js_cocos2dx_studio_ActionManagerEx_destroyInstance(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ActionManagerEx_getInstance(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_BaseData_class;
+extern const JSClass  *jsb_cocostudio_BaseData_class;
 extern JSObject *jsb_cocostudio_BaseData_prototype;
 
 bool js_cocos2dx_studio_BaseData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -60,7 +60,7 @@ bool js_cocos2dx_studio_BaseData_setColor(JSContext *cx, uint32_t argc, JS::Valu
 bool js_cocos2dx_studio_BaseData_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_BaseData_BaseData(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_MovementData_class;
+extern const JSClass  *jsb_cocostudio_MovementData_class;
 extern JSObject *jsb_cocostudio_MovementData_prototype;
 
 bool js_cocos2dx_studio_MovementData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -72,7 +72,7 @@ bool js_cocos2dx_studio_MovementData_addMovementBoneData(JSContext *cx, uint32_t
 bool js_cocos2dx_studio_MovementData_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_MovementData_MovementData(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_AnimationData_class;
+extern const JSClass  *jsb_cocostudio_AnimationData_class;
 extern JSObject *jsb_cocostudio_AnimationData_prototype;
 
 bool js_cocos2dx_studio_AnimationData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -85,7 +85,7 @@ bool js_cocos2dx_studio_AnimationData_addMovement(JSContext *cx, uint32_t argc, 
 bool js_cocos2dx_studio_AnimationData_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_AnimationData_AnimationData(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ContourData_class;
+extern const JSClass  *jsb_cocostudio_ContourData_class;
 extern JSObject *jsb_cocostudio_ContourData_prototype;
 
 bool js_cocos2dx_studio_ContourData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -97,7 +97,7 @@ bool js_cocos2dx_studio_ContourData_addVertex(JSContext *cx, uint32_t argc, JS::
 bool js_cocos2dx_studio_ContourData_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ContourData_ContourData(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_TextureData_class;
+extern const JSClass  *jsb_cocostudio_TextureData_class;
 extern JSObject *jsb_cocostudio_TextureData_prototype;
 
 bool js_cocos2dx_studio_TextureData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -110,7 +110,7 @@ bool js_cocos2dx_studio_TextureData_addContourData(JSContext *cx, uint32_t argc,
 bool js_cocos2dx_studio_TextureData_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_TextureData_TextureData(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ProcessBase_class;
+extern const JSClass  *jsb_cocostudio_ProcessBase_class;
 extern JSObject *jsb_cocostudio_ProcessBase_prototype;
 
 bool js_cocos2dx_studio_ProcessBase_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -135,7 +135,7 @@ bool js_cocos2dx_studio_ProcessBase_setProcessScale(JSContext *cx, uint32_t argc
 bool js_cocos2dx_studio_ProcessBase_setIsPlaying(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ProcessBase_ProcessBase(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_Tween_class;
+extern const JSClass  *jsb_cocostudio_Tween_class;
 extern JSObject *jsb_cocostudio_Tween_prototype;
 
 bool js_cocos2dx_studio_Tween_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -151,7 +151,7 @@ bool js_cocos2dx_studio_Tween_setAnimation(JSContext *cx, uint32_t argc, JS::Val
 bool js_cocos2dx_studio_Tween_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_Tween_Tween(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ColliderFilter_class;
+extern const JSClass  *jsb_cocostudio_ColliderFilter_class;
 extern JSObject *jsb_cocostudio_ColliderFilter_prototype;
 
 bool js_cocos2dx_studio_ColliderFilter_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -159,7 +159,7 @@ void js_cocos2dx_studio_ColliderFilter_finalize(JSContext *cx, JSObject *obj);
 void js_register_cocos2dx_studio_ColliderFilter(JSContext *cx, JS::HandleObject global);
 void register_all_cocos2dx_studio(JSContext* cx, JS::HandleObject obj);
 
-extern JSClass  *jsb_cocostudio_ColliderBody_class;
+extern const JSClass  *jsb_cocostudio_ColliderBody_class;
 extern JSObject *jsb_cocostudio_ColliderBody_prototype;
 
 bool js_cocos2dx_studio_ColliderBody_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -167,7 +167,7 @@ void js_cocos2dx_studio_ColliderBody_finalize(JSContext *cx, JSObject *obj);
 void js_register_cocos2dx_studio_ColliderBody(JSContext *cx, JS::HandleObject global);
 void register_all_cocos2dx_studio(JSContext* cx, JS::HandleObject obj);
 
-extern JSClass  *jsb_cocostudio_ColliderDetector_class;
+extern const JSClass  *jsb_cocostudio_ColliderDetector_class;
 extern JSObject *jsb_cocostudio_ColliderDetector_prototype;
 
 bool js_cocos2dx_studio_ColliderDetector_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -184,7 +184,7 @@ bool js_cocos2dx_studio_ColliderDetector_setActive(JSContext *cx, uint32_t argc,
 bool js_cocos2dx_studio_ColliderDetector_setBone(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ColliderDetector_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_DecorativeDisplay_class;
+extern const JSClass  *jsb_cocostudio_DecorativeDisplay_class;
 extern JSObject *jsb_cocostudio_DecorativeDisplay_prototype;
 
 bool js_cocos2dx_studio_DecorativeDisplay_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -200,7 +200,7 @@ bool js_cocos2dx_studio_DecorativeDisplay_getDisplayData(JSContext *cx, uint32_t
 bool js_cocos2dx_studio_DecorativeDisplay_setColliderDetector(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_DecorativeDisplay_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_DisplayManager_class;
+extern const JSClass  *jsb_cocostudio_DisplayManager_class;
 extern JSObject *jsb_cocostudio_DisplayManager_prototype;
 
 bool js_cocos2dx_studio_DisplayManager_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -232,7 +232,7 @@ bool js_cocos2dx_studio_DisplayManager_setVisible(JSContext *cx, uint32_t argc, 
 bool js_cocos2dx_studio_DisplayManager_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_DisplayManager_DisplayManager(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_Bone_class;
+extern const JSClass  *jsb_cocostudio_Bone_class;
 extern JSObject *jsb_cocostudio_Bone_prototype;
 
 bool js_cocos2dx_studio_Bone_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -274,7 +274,7 @@ bool js_cocos2dx_studio_Bone_getArmature(JSContext *cx, uint32_t argc, JS::Value
 bool js_cocos2dx_studio_Bone_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_Bone_Bone(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_BatchNode_class;
+extern const JSClass  *jsb_cocostudio_BatchNode_class;
 extern JSObject *jsb_cocostudio_BatchNode_prototype;
 
 bool js_cocos2dx_studio_BatchNode_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -283,7 +283,7 @@ void js_register_cocos2dx_studio_BatchNode(JSContext *cx, JS::HandleObject globa
 void register_all_cocos2dx_studio(JSContext* cx, JS::HandleObject obj);
 bool js_cocos2dx_studio_BatchNode_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ArmatureAnimation_class;
+extern const JSClass  *jsb_cocostudio_ArmatureAnimation_class;
 extern JSObject *jsb_cocostudio_ArmatureAnimation_prototype;
 
 bool js_cocos2dx_studio_ArmatureAnimation_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -306,7 +306,7 @@ bool js_cocos2dx_studio_ArmatureAnimation_getCurrentMovementID(JSContext *cx, ui
 bool js_cocos2dx_studio_ArmatureAnimation_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ArmatureAnimation_ArmatureAnimation(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ArmatureDataManager_class;
+extern const JSClass  *jsb_cocostudio_ArmatureDataManager_class;
 extern JSObject *jsb_cocostudio_ArmatureDataManager_prototype;
 
 bool js_cocos2dx_studio_ArmatureDataManager_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -332,7 +332,7 @@ bool js_cocos2dx_studio_ArmatureDataManager_addSpriteFrameFromFile(JSContext *cx
 bool js_cocos2dx_studio_ArmatureDataManager_destroyInstance(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ArmatureDataManager_getInstance(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_Armature_class;
+extern const JSClass  *jsb_cocostudio_Armature_class;
 extern JSObject *jsb_cocostudio_Armature_prototype;
 
 bool js_cocos2dx_studio_Armature_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -365,7 +365,7 @@ bool js_cocos2dx_studio_Armature_getBoneDic(JSContext *cx, uint32_t argc, JS::Va
 bool js_cocos2dx_studio_Armature_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_Armature_Armature(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_Skin_class;
+extern const JSClass  *jsb_cocostudio_Skin_class;
 extern JSObject *jsb_cocostudio_Skin_prototype;
 
 bool js_cocos2dx_studio_Skin_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -381,7 +381,7 @@ bool js_cocos2dx_studio_Skin_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 bool js_cocos2dx_studio_Skin_createWithSpriteFrameName(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_Skin_Skin(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ComAttribute_class;
+extern const JSClass  *jsb_cocostudio_ComAttribute_class;
 extern JSObject *jsb_cocostudio_ComAttribute_prototype;
 
 bool js_cocos2dx_studio_ComAttribute_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -400,7 +400,7 @@ bool js_cocos2dx_studio_ComAttribute_setBool(JSContext *cx, uint32_t argc, JS::V
 bool js_cocos2dx_studio_ComAttribute_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ComAttribute_ComAttribute(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ComAudio_class;
+extern const JSClass  *jsb_cocostudio_ComAudio_class;
 extern JSObject *jsb_cocostudio_ComAudio_prototype;
 
 bool js_cocos2dx_studio_ComAudio_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -438,7 +438,7 @@ bool js_cocos2dx_studio_ComAudio_resumeEffect(JSContext *cx, uint32_t argc, JS::
 bool js_cocos2dx_studio_ComAudio_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ComAudio_ComAudio(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_InputDelegate_class;
+extern const JSClass  *jsb_cocostudio_InputDelegate_class;
 extern JSObject *jsb_cocostudio_InputDelegate_prototype;
 
 bool js_cocos2dx_studio_InputDelegate_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -456,7 +456,7 @@ bool js_cocos2dx_studio_InputDelegate_getTouchPriority(JSContext *cx, uint32_t a
 bool js_cocos2dx_studio_InputDelegate_setTouchEnabled(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_InputDelegate_setTouchMode(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ComController_class;
+extern const JSClass  *jsb_cocostudio_ComController_class;
 extern JSObject *jsb_cocostudio_ComController_prototype;
 
 bool js_cocos2dx_studio_ComController_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -466,7 +466,7 @@ void register_all_cocos2dx_studio(JSContext* cx, JS::HandleObject obj);
 bool js_cocos2dx_studio_ComController_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ComController_ComController(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ComRender_class;
+extern const JSClass  *jsb_cocostudio_ComRender_class;
 extern JSObject *jsb_cocostudio_ComRender_prototype;
 
 bool js_cocos2dx_studio_ComRender_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -478,7 +478,7 @@ bool js_cocos2dx_studio_ComRender_getNode(JSContext *cx, uint32_t argc, JS::Valu
 bool js_cocos2dx_studio_ComRender_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ComRender_ComRender(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_Frame_class;
+extern const JSClass  *jsb_cocostudio_timeline_Frame_class;
 extern JSObject *jsb_cocostudio_timeline_Frame_prototype;
 
 bool js_cocos2dx_studio_Frame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -499,7 +499,7 @@ bool js_cocos2dx_studio_Frame_setTween(JSContext *cx, uint32_t argc, JS::Value *
 bool js_cocos2dx_studio_Frame_getTimeline(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_Frame_getNode(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_VisibleFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_VisibleFrame_class;
 extern JSObject *jsb_cocostudio_timeline_VisibleFrame_prototype;
 
 bool js_cocos2dx_studio_VisibleFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -511,7 +511,7 @@ bool js_cocos2dx_studio_VisibleFrame_setVisible(JSContext *cx, uint32_t argc, JS
 bool js_cocos2dx_studio_VisibleFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_VisibleFrame_VisibleFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_TextureFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_TextureFrame_class;
 extern JSObject *jsb_cocostudio_timeline_TextureFrame_prototype;
 
 bool js_cocos2dx_studio_TextureFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -523,7 +523,7 @@ bool js_cocos2dx_studio_TextureFrame_setTextureName(JSContext *cx, uint32_t argc
 bool js_cocos2dx_studio_TextureFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_TextureFrame_TextureFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_RotationFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_RotationFrame_class;
 extern JSObject *jsb_cocostudio_timeline_RotationFrame_prototype;
 
 bool js_cocos2dx_studio_RotationFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -535,7 +535,7 @@ bool js_cocos2dx_studio_RotationFrame_getRotation(JSContext *cx, uint32_t argc, 
 bool js_cocos2dx_studio_RotationFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_RotationFrame_RotationFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_SkewFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_SkewFrame_class;
 extern JSObject *jsb_cocostudio_timeline_SkewFrame_prototype;
 
 bool js_cocos2dx_studio_SkewFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -549,7 +549,7 @@ bool js_cocos2dx_studio_SkewFrame_getSkewX(JSContext *cx, uint32_t argc, JS::Val
 bool js_cocos2dx_studio_SkewFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_SkewFrame_SkewFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_RotationSkewFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_RotationSkewFrame_class;
 extern JSObject *jsb_cocostudio_timeline_RotationSkewFrame_prototype;
 
 bool js_cocos2dx_studio_RotationSkewFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -559,7 +559,7 @@ void register_all_cocos2dx_studio(JSContext* cx, JS::HandleObject obj);
 bool js_cocos2dx_studio_RotationSkewFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_RotationSkewFrame_RotationSkewFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_PositionFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_PositionFrame_class;
 extern JSObject *jsb_cocostudio_timeline_PositionFrame_prototype;
 
 bool js_cocos2dx_studio_PositionFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -575,7 +575,7 @@ bool js_cocos2dx_studio_PositionFrame_getPosition(JSContext *cx, uint32_t argc, 
 bool js_cocos2dx_studio_PositionFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_PositionFrame_PositionFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_ScaleFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_ScaleFrame_class;
 extern JSObject *jsb_cocostudio_timeline_ScaleFrame_prototype;
 
 bool js_cocos2dx_studio_ScaleFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -590,7 +590,7 @@ bool js_cocos2dx_studio_ScaleFrame_setScale(JSContext *cx, uint32_t argc, JS::Va
 bool js_cocos2dx_studio_ScaleFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ScaleFrame_ScaleFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_AnchorPointFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_AnchorPointFrame_class;
 extern JSObject *jsb_cocostudio_timeline_AnchorPointFrame_prototype;
 
 bool js_cocos2dx_studio_AnchorPointFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -602,7 +602,7 @@ bool js_cocos2dx_studio_AnchorPointFrame_getAnchorPoint(JSContext *cx, uint32_t 
 bool js_cocos2dx_studio_AnchorPointFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_AnchorPointFrame_AnchorPointFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_InnerActionFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_InnerActionFrame_class;
 extern JSObject *jsb_cocostudio_timeline_InnerActionFrame_prototype;
 
 bool js_cocos2dx_studio_InnerActionFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -622,7 +622,7 @@ bool js_cocos2dx_studio_InnerActionFrame_setAnimationName(JSContext *cx, uint32_
 bool js_cocos2dx_studio_InnerActionFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_InnerActionFrame_InnerActionFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_ColorFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_ColorFrame_class;
 extern JSObject *jsb_cocostudio_timeline_ColorFrame_prototype;
 
 bool js_cocos2dx_studio_ColorFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -634,7 +634,7 @@ bool js_cocos2dx_studio_ColorFrame_setColor(JSContext *cx, uint32_t argc, JS::Va
 bool js_cocos2dx_studio_ColorFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ColorFrame_ColorFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_AlphaFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_AlphaFrame_class;
 extern JSObject *jsb_cocostudio_timeline_AlphaFrame_prototype;
 
 bool js_cocos2dx_studio_AlphaFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -646,7 +646,7 @@ bool js_cocos2dx_studio_AlphaFrame_setAlpha(JSContext *cx, uint32_t argc, JS::Va
 bool js_cocos2dx_studio_AlphaFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_AlphaFrame_AlphaFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_EventFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_EventFrame_class;
 extern JSObject *jsb_cocostudio_timeline_EventFrame_prototype;
 
 bool js_cocos2dx_studio_EventFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -659,7 +659,7 @@ bool js_cocos2dx_studio_EventFrame_getEvent(JSContext *cx, uint32_t argc, JS::Va
 bool js_cocos2dx_studio_EventFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_EventFrame_EventFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_ZOrderFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_ZOrderFrame_class;
 extern JSObject *jsb_cocostudio_timeline_ZOrderFrame_prototype;
 
 bool js_cocos2dx_studio_ZOrderFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -671,7 +671,7 @@ bool js_cocos2dx_studio_ZOrderFrame_setZOrder(JSContext *cx, uint32_t argc, JS::
 bool js_cocos2dx_studio_ZOrderFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ZOrderFrame_ZOrderFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_BlendFuncFrame_class;
+extern const JSClass  *jsb_cocostudio_timeline_BlendFuncFrame_class;
 extern JSObject *jsb_cocostudio_timeline_BlendFuncFrame_prototype;
 
 bool js_cocos2dx_studio_BlendFuncFrame_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -683,7 +683,7 @@ bool js_cocos2dx_studio_BlendFuncFrame_setBlendFunc(JSContext *cx, uint32_t argc
 bool js_cocos2dx_studio_BlendFuncFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_BlendFuncFrame_BlendFuncFrame(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_Timeline_class;
+extern const JSClass  *jsb_cocostudio_timeline_Timeline_class;
 extern JSObject *jsb_cocostudio_timeline_Timeline_prototype;
 
 bool js_cocos2dx_studio_Timeline_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -706,7 +706,7 @@ bool js_cocos2dx_studio_Timeline_stepToFrame(JSContext *cx, uint32_t argc, JS::V
 bool js_cocos2dx_studio_Timeline_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_Timeline_Timeline(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_ActionTimelineData_class;
+extern const JSClass  *jsb_cocostudio_timeline_ActionTimelineData_class;
 extern JSObject *jsb_cocostudio_timeline_ActionTimelineData_prototype;
 
 bool js_cocos2dx_studio_ActionTimelineData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -719,7 +719,7 @@ bool js_cocos2dx_studio_ActionTimelineData_getActionTag(JSContext *cx, uint32_t 
 bool js_cocos2dx_studio_ActionTimelineData_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ActionTimelineData_ActionTimelineData(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_ActionTimeline_class;
+extern const JSClass  *jsb_cocostudio_timeline_ActionTimeline_class;
 extern JSObject *jsb_cocostudio_timeline_ActionTimeline_prototype;
 
 bool js_cocos2dx_studio_ActionTimeline_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -761,7 +761,7 @@ bool js_cocos2dx_studio_ActionTimeline_removeFrameEndCallFunc(JSContext *cx, uin
 bool js_cocos2dx_studio_ActionTimeline_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_ActionTimeline_ActionTimeline(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_BoneNode_class;
+extern const JSClass  *jsb_cocostudio_timeline_BoneNode_class;
 extern JSObject *jsb_cocostudio_timeline_BoneNode_prototype;
 
 bool js_cocos2dx_studio_BoneNode_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -790,7 +790,7 @@ bool js_cocos2dx_studio_BoneNode_getDebugDrawColor(JSContext *cx, uint32_t argc,
 bool js_cocos2dx_studio_BoneNode_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_BoneNode_BoneNode(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_timeline_SkeletonNode_class;
+extern const JSClass  *jsb_cocostudio_timeline_SkeletonNode_class;
 extern JSObject *jsb_cocostudio_timeline_SkeletonNode_prototype;
 
 bool js_cocos2dx_studio_SkeletonNode_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -804,7 +804,7 @@ bool js_cocos2dx_studio_SkeletonNode_getAllSubBonesMap(JSContext *cx, uint32_t a
 bool js_cocos2dx_studio_SkeletonNode_create(JSContext *cx, uint32_t argc, JS::Value *vp);
 bool js_cocos2dx_studio_SkeletonNode_SkeletonNode(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocostudio_ComExtensionData_class;
+extern const JSClass  *jsb_cocostudio_ComExtensionData_class;
 extern JSObject *jsb_cocostudio_ComExtensionData_prototype;
 
 bool js_cocos2dx_studio_ComExtensionData_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);

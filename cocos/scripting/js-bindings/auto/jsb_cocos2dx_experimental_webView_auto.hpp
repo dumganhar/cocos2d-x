@@ -6,7 +6,7 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
-extern JSClass  *jsb_cocos2d_experimental_ui_WebView_class;
+extern const JSClass  *jsb_cocos2d_experimental_ui_WebView_class;
 extern JSObject *jsb_cocos2d_experimental_ui_WebView_prototype;
 
 bool js_cocos2dx_experimental_webView_WebView_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);

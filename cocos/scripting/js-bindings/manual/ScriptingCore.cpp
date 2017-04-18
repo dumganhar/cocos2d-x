@@ -619,17 +619,16 @@ void ScriptingCore::createGlobalContext() {
         _jsInited = true;
     }
 
-    _rt = JS_NewRuntime(32L * 1024L * 1024L);
-    JS_SetGCParameter(_rt, JSGCParamKey::JSGC_MAX_BYTES, 0xffffffff);
-    JS_SetGCParameter(_rt, JSGCParamKey::JSGC_MODE, JSGC_MODE_COMPARTMENT);
-
-    JS_SetTrustedPrincipals(_rt, &shellTrustedPrincipals);
-    JS_SetSecurityCallbacks(_rt, &securityCallbacks);
-    JS_SetNativeStackQuota(_rt, JSB_MAX_STACK_QUOTA);
-
     _cx = JS_NewContext(32 * 1024);
 
-    JS::ContextOptionsRef(cx).setBaseline(enableBaseline)
+    JS_SetGCParameter(_cx, JSGCParamKey::JSGC_MAX_BYTES, 0xffffffff);
+    JS_SetGCParameter(_cx, JSGCParamKey::JSGC_MODE, JSGC_MODE_COMPARTMENT);
+
+    JS_SetTrustedPrincipals(_cx, &shellTrustedPrincipals);
+    JS_SetSecurityCallbacks(_cx, &securityCallbacks);
+    JS_SetNativeStackQuota(_cx, JSB_MAX_STACK_QUOTA);
+
+    JS::ContextOptionsRef(_cx).setBaseline(enableBaseline)
     .setIon(true)
     .setAsmJS(true)
     .setWasm(true)
@@ -1181,8 +1180,7 @@ bool ScriptingCore::executeScript(JSContext *cx, uint32_t argc, JS::Value *vp)
 
 bool ScriptingCore::forceGC(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
-    JSRuntime *rt = JS_GetRuntime(cx);
-    JS_GC(rt);
+    JS_GC(cx);
     return true;
 }
 
@@ -1768,10 +1766,10 @@ bool ScriptingCore::isObjectValid(JSContext *cx, uint32_t argc, JS::Value *vp)
         JS::RootedObject tmpObj(cx, args.get(0).toObjectOrNull());
         js_proxy_t *proxy = jsb_get_js_proxy(tmpObj);
         if (proxy && proxy->ptr) {
-            args.rval().set(JSVAL_TRUE);
+            args.rval().set(JS::TrueValue());
         }
         else {
-            args.rval().set(JSVAL_FALSE);
+            args.rval().set(JS::FalseValue());
         }
         return true;
     }
@@ -1825,8 +1823,8 @@ void ScriptingCore::garbageCollect()
     // twice: yep, call it twice since this is a generational GC
     // and we want to collect as much as possible when this is being called
     // from replaceScene().
-    JS_GC(runtime);
-    JS_GC(runtime);
+    JS_GC(_cx);
+    JS_GC(_cx);
 #endif
 }
 

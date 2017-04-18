@@ -357,7 +357,7 @@ void js_register_spine_TrackEntry(JSContext *cx, JS::HandleObject global)
         JS_PS_END
     };
     
-    jsb_spine_TrackEntry_prototype = JS_InitClass(cx, global, JS::NullPtr(), jsb_spine_TrackEntry_class, nullptr, 0, properties, nullptr, nullptr, nullptr);
+    jsb_spine_TrackEntry_prototype = JS_InitClass(cx, global, nullptr, jsb_spine_TrackEntry_class, nullptr, 0, properties, nullptr, nullptr, nullptr);
 }
 
 JS::Value sptrackentry_to_jsval(JSContext* cx, spTrackEntry& v)
@@ -372,7 +372,7 @@ JS::Value sptrackentry_to_jsval(JSContext* cx, spTrackEntry& v)
     else
     {
         JS::RootedObject proto(cx, jsb_spine_TrackEntry_prototype);
-        entry.set(JS_NewObject(cx, jsb_spine_TrackEntry_class, proto, JS::NullPtr()));
+        entry.set(JS_NewObject(cx, jsb_spine_TrackEntry_class, proto, nullptr));
     }
     
     JS::RootedValue entryVal(cx, JS::ObjectValue(*entry));

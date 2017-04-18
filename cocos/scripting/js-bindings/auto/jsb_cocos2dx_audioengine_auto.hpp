@@ -6,7 +6,7 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
-extern JSClass  *jsb_cocos2d_experimental_AudioProfile_class;
+extern const JSClass  *jsb_cocos2d_experimental_AudioProfile_class;
 extern JSObject *jsb_cocos2d_experimental_AudioProfile_prototype;
 
 bool js_cocos2dx_audioengine_AudioProfile_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);
@@ -15,7 +15,7 @@ void js_register_cocos2dx_audioengine_AudioProfile(JSContext *cx, JS::HandleObje
 void register_all_cocos2dx_audioengine(JSContext* cx, JS::HandleObject obj);
 bool js_cocos2dx_audioengine_AudioProfile_AudioProfile(JSContext *cx, uint32_t argc, JS::Value *vp);
 
-extern JSClass  *jsb_cocos2d_experimental_AudioEngine_class;
+extern const JSClass  *jsb_cocos2d_experimental_AudioEngine_class;
 extern JSObject *jsb_cocos2d_experimental_AudioEngine_prototype;
 
 bool js_cocos2dx_audioengine_AudioEngine_constructor(JSContext *cx, uint32_t argc, JS::Value *vp);

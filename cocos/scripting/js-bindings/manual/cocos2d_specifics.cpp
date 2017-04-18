@@ -575,12 +575,12 @@ void js_add_FinalizeHook(JSContext *cx, JS::HandleObject target, bool isRef)
     if (isRef)
     {
         JS::RootedObject proto(cx, jsb_RefFinalizeHook_prototype);
-        hook = JS_NewObject(cx, jsb_RefFinalizeHook_class, proto, JS::NullPtr());
+        hook = JS_NewObject(cx, jsb_RefFinalizeHook_class, proto, nullptr);
     }
     else
     {
         JS::RootedObject proto(cx, jsb_ObjFinalizeHook_prototype);
-        hook = JS_NewObject(cx, jsb_ObjFinalizeHook_class, proto, JS::NullPtr());
+        hook = JS_NewObject(cx, jsb_ObjFinalizeHook_class, proto, nullptr);
     }
     jsb_register_finalize_hook(hook.get(), target.get());
     JS::RootedValue hookVal(cx, JS::ObjectValue(*hook));
@@ -5710,7 +5710,7 @@ void js_register_cocos2dx_PolygonInfo(JSContext *cx, JS::HandleObject global)
 
     jsb_cocos2d_PolygonInfo_prototype = JS_InitClass(
                                                      cx, global,
-                                                     JS::NullPtr(), // parent proto
+                                                     nullptr, // parent proto
                                                      jsb_cocos2d_PolygonInfo_class,
                                                      js_cocos2dx_PolygonInfo_constructor, 0, // constructor
                                                      properties,
@@ -5720,7 +5720,7 @@ void js_register_cocos2dx_PolygonInfo(JSContext *cx, JS::HandleObject global)
 
     // add the proto and JSClass to the type->js info hash table
     JS::RootedObject proto(cx, jsb_cocos2d_PolygonInfo_prototype);
-    jsb_register_class<cocos2d::PolygonInfo>(cx, jsb_cocos2d_PolygonInfo_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::PolygonInfo>(cx, jsb_cocos2d_PolygonInfo_class, proto, nullptr);
 }
 
 JSClass  *jsb_cocos2d_AutoPolygon_class;
@@ -5862,7 +5862,7 @@ void js_register_cocos2dx_AutoPolygon(JSContext *cx, JS::HandleObject global) {
 
     jsb_cocos2d_AutoPolygon_prototype = JS_InitClass(
                                                      cx, global,
-                                                     JS::NullPtr(), // parent proto
+                                                     nullptr, // parent proto
                                                      jsb_cocos2d_AutoPolygon_class,
                                                      js_cocos2dx_AutoPolygon_constructor, 0, // constructor
                                                      properties,
@@ -5872,7 +5872,7 @@ void js_register_cocos2dx_AutoPolygon(JSContext *cx, JS::HandleObject global) {
 
     // add the proto and JSClass to the type->js info hash table
     JS::RootedObject proto(cx, jsb_cocos2d_AutoPolygon_prototype);
-    jsb_register_class<cocos2d::AutoPolygon>(cx, jsb_cocos2d_AutoPolygon_class, proto, JS::NullPtr());
+    jsb_register_class<cocos2d::AutoPolygon>(cx, jsb_cocos2d_AutoPolygon_class, proto, nullptr);
 }
 
 // ComponentJS controls the native js proxy itself, must be bound manually
@@ -5938,7 +5938,7 @@ static bool jsb_RefFinalizeHook_constructor(JSContext *cx, uint32_t argc, JS::Va
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     // Create new object
     JS::RootedObject proto(cx, jsb_RefFinalizeHook_prototype);
-    JS::RootedObject obj(cx, JS_NewObject(cx, jsb_RefFinalizeHook_class, proto, JS::NullPtr()));
+    JS::RootedObject obj(cx, JS_NewObject(cx, jsb_RefFinalizeHook_class, proto, nullptr));
     // Register arguments[0] as owner
     if (!args.get(0).isNullOrUndefined())
     {
@@ -5999,7 +5999,7 @@ static bool jsb_ObjFinalizeHook_constructor(JSContext *cx, uint32_t argc, JS::Va
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     // Create new object
     JS::RootedObject proto(cx, jsb_ObjFinalizeHook_prototype);
-    JS::RootedObject obj(cx, JS_NewObject(cx, jsb_ObjFinalizeHook_class, proto, JS::NullPtr()));
+    JS::RootedObject obj(cx, JS_NewObject(cx, jsb_ObjFinalizeHook_class, proto, nullptr));
     // Register arguments[0] as owner
     if (!args.get(0).isNullOrUndefined())
     {
@@ -6049,7 +6049,7 @@ void jsb_register_RefFinalizeHook(JSContext *cx, JS::HandleObject global) {
     jsb_RefFinalizeHook_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
 
     jsb_RefFinalizeHook_prototype = JS_InitClass(cx, global,
-                                              JS::NullPtr(), // parent proto
+                                              nullptr, // parent proto
                                               jsb_RefFinalizeHook_class,
                                               jsb_RefFinalizeHook_constructor, 0, // constructor
                                               NULL, NULL, NULL, NULL);
@@ -6068,7 +6068,7 @@ void jsb_register_ObjFinalizeHook(JSContext *cx, JS::HandleObject global) {
     jsb_ObjFinalizeHook_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
     
     jsb_ObjFinalizeHook_prototype = JS_InitClass(cx, global,
-                                              JS::NullPtr(), // parent proto
+                                              nullptr, // parent proto
                                               jsb_ObjFinalizeHook_class,
                                               jsb_ObjFinalizeHook_constructor, 0, // constructor
                                               NULL, NULL, NULL, NULL);
@@ -6084,10 +6084,10 @@ void register_cocos2dx_js_core(JSContext* cx, JS::HandleObject global)
     get_or_create_js_obj(cx, global, "jsb", &jsbObj);
 
 #if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-    JS::RootedValue trueVal(cx, JSVAL_TRUE);
+    JS::RootedValue trueVal(cx, JS::TrueValue());
     JS_SetProperty(cx, jsbObj, "ENABLE_GC_FOR_NATIVE_OBJECTS", trueVal);
 #else
-    JS::RootedValue falseVal(cx, JSVAL_FALSE);
+    JS::RootedValue falseVal(cx, JS::FalseValue());
     JS_SetProperty(cx, jsbObj, "ENABLE_GC_FOR_NATIVE_OBJECTS", falseVal);
 #endif
 

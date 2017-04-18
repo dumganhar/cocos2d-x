@@ -542,7 +542,7 @@ bool JSB_cpGrooveJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==5, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpGrooveJoint_proto(cx, JSB_cpGrooveJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpGrooveJoint_class, cpGrooveJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpGrooveJoint_class, cpGrooveJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -748,7 +748,7 @@ bool JSB_cpSimpleMotor_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==3, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSimpleMotor_proto(cx, JSB_cpSimpleMotor_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSimpleMotor_class, cpSimpleMotor_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSimpleMotor_class, cpSimpleMotor_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -866,7 +866,7 @@ bool JSB_cpPivotJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==3, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpPivotJoint_proto(cx, JSB_cpPivotJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpPivotJoint_class, cpPivotJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpPivotJoint_class, cpPivotJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1027,7 +1027,7 @@ bool JSB_cpPinJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpPinJoint_proto(cx, JSB_cpPinJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpPinJoint_class, cpPinJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpPinJoint_class, cpPinJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1232,7 +1232,7 @@ bool JSB_cpSlideJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==6, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSlideJoint_proto(cx, JSB_cpSlideJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSlideJoint_class, cpSlideJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSlideJoint_class, cpSlideJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1482,7 +1482,7 @@ bool JSB_cpGearJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpGearJoint_proto(cx, JSB_cpGearJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpGearJoint_class, cpGearJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpGearJoint_class, cpGearJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1644,7 +1644,7 @@ bool JSB_cpDampedRotarySpring_constructor(JSContext *cx, uint32_t argc, JS::Valu
 {
 	JSB_PRECONDITION2(argc==5, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpDampedRotarySpring_proto(cx, JSB_cpDampedRotarySpring_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpDampedRotarySpring_class, cpDampedRotarySpring_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpDampedRotarySpring_class, cpDampedRotarySpring_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1850,7 +1850,7 @@ bool JSB_cpDampedSpring_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==7, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpDampedSpring_proto(cx, JSB_cpDampedSpring_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpDampedSpring_class, cpDampedSpring_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpDampedSpring_class, cpDampedSpring_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -2144,7 +2144,7 @@ bool JSB_cpRatchetJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpRatchetJoint_proto(cx, JSB_cpRatchetJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpRatchetJoint_class, cpRatchetJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpRatchetJoint_class, cpRatchetJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -2349,7 +2349,7 @@ bool JSB_cpRotaryLimitJoint_constructor(JSContext *cx, uint32_t argc, JS::Value 
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpRotaryLimitJoint_proto(cx, JSB_cpRotaryLimitJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpRotaryLimitJoint_class, cpRotaryLimitJoint_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpRotaryLimitJoint_class, cpRotaryLimitJoint_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -3106,7 +3106,7 @@ bool JSB_cpSpace_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==0, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSpace_proto(cx, JSB_cpSpace_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSpace_class, cpSpace_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSpace_class, cpSpace_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);	void* 	ret_val = cpSpaceNew( );
 
 	jsb_set_jsobject_for_proxy(jsobj, ret_val);
@@ -5365,7 +5365,7 @@ bool JSB_cpCircleShape_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==3, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpCircleShape_proto(cx, JSB_cpCircleShape_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpCircleShape_class, cpCircleShape_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpCircleShape_class, cpCircleShape_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -5478,7 +5478,7 @@ bool JSB_cpSegmentShape_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSegmentShape_proto(cx, JSB_cpSegmentShape_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSegmentShape_class, cpSegmentShape_proto, JS::NullPtr()));
+	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSegmentShape_class, cpSegmentShape_proto, nullptr));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;

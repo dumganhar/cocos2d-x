@@ -20,7 +20,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocos2d_experimental_AudioProfile_class;
+const JSClass  *jsb_cocos2d_experimental_AudioProfile_class;
 JSObject *jsb_cocos2d_experimental_AudioProfile_prototype;
 
 bool js_cocos2dx_audioengine_AudioProfile_get_name(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -157,11 +157,13 @@ void js_register_cocos2dx_audioengine_AudioProfile(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_experimental_AudioProfile_class = {
+    static const JSClass cls = {
         "AudioProfile",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_experimental_AudioProfile_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PSGS("name", js_cocos2dx_audioengine_AudioProfile_get_name, js_cocos2dx_audioengine_AudioProfile_set_name, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -195,7 +197,7 @@ void js_register_cocos2dx_audioengine_AudioProfile(JSContext *cx, JS::HandleObje
     jsb_register_class<cocos2d::experimental::AudioProfile>(cx, jsb_cocos2d_experimental_AudioProfile_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_experimental_AudioEngine_class;
+const JSClass  *jsb_cocos2d_experimental_AudioEngine_class;
 JSObject *jsb_cocos2d_experimental_AudioEngine_prototype;
 
 bool js_cocos2dx_audioengine_AudioEngine_lazyInit(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -759,11 +761,13 @@ void js_register_cocos2dx_audioengine_AudioEngine(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocos2d_experimental_AudioEngine_class = {
+    static const JSClass cls = {
         "AudioEngine",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocos2d_experimental_AudioEngine_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

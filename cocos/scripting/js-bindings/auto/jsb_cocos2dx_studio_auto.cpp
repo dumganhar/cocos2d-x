@@ -20,7 +20,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocostudio_ActionObject_class;
+const JSClass  *jsb_cocostudio_ActionObject_class;
 JSObject *jsb_cocostudio_ActionObject_prototype;
 
 bool js_cocos2dx_studio_ActionObject_setCurrentTime(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -448,11 +448,13 @@ void js_register_cocos2dx_studio_ActionObject(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ActionObject_class = {
+    static const JSClass cls = {
         "ActionObject",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ActionObject_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -501,7 +503,7 @@ void js_register_cocos2dx_studio_ActionObject(JSContext *cx, JS::HandleObject gl
     jsb_register_class<cocostudio::ActionObject>(cx, jsb_cocostudio_ActionObject_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_ActionManagerEx_class;
+const JSClass  *jsb_cocostudio_ActionManagerEx_class;
 JSObject *jsb_cocostudio_ActionManagerEx_prototype;
 
 bool js_cocos2dx_studio_ActionManagerEx_stopActionByName(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -740,11 +742,13 @@ void js_register_cocos2dx_studio_ActionManagerEx(JSContext *cx, JS::HandleObject
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ActionManagerEx_class = {
+    static const JSClass cls = {
         "ActionManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ActionManagerEx_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -785,7 +789,7 @@ void js_register_cocos2dx_studio_ActionManagerEx(JSContext *cx, JS::HandleObject
     jsb_register_class<cocostudio::ActionManagerEx>(cx, jsb_cocostudio_ActionManagerEx_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_BaseData_class;
+const JSClass  *jsb_cocostudio_BaseData_class;
 JSObject *jsb_cocostudio_BaseData_prototype;
 
 bool js_cocos2dx_studio_BaseData_getColor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -868,11 +872,13 @@ void js_register_cocos2dx_studio_BaseData(JSContext *cx, JS::HandleObject global
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_BaseData_class = {
+    static const JSClass cls = {
         "BaseData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_BaseData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -908,7 +914,7 @@ void js_register_cocos2dx_studio_BaseData(JSContext *cx, JS::HandleObject global
     jsb_register_class<cocostudio::BaseData>(cx, jsb_cocostudio_BaseData_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_MovementData_class;
+const JSClass  *jsb_cocostudio_MovementData_class;
 JSObject *jsb_cocostudio_MovementData_prototype;
 
 bool js_cocos2dx_studio_MovementData_getMovementBoneData(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1007,11 +1013,13 @@ void js_register_cocos2dx_studio_MovementData(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_MovementData_class = {
+    static const JSClass cls = {
         "MovementData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_MovementData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1047,7 +1055,7 @@ void js_register_cocos2dx_studio_MovementData(JSContext *cx, JS::HandleObject gl
     jsb_register_class<cocostudio::MovementData>(cx, jsb_cocostudio_MovementData_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_AnimationData_class;
+const JSClass  *jsb_cocostudio_AnimationData_class;
 JSObject *jsb_cocostudio_AnimationData_prototype;
 
 bool js_cocos2dx_studio_AnimationData_getMovement(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1164,11 +1172,13 @@ void js_register_cocos2dx_studio_AnimationData(JSContext *cx, JS::HandleObject g
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_AnimationData_class = {
+    static const JSClass cls = {
         "AnimationData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_AnimationData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1205,7 +1215,7 @@ void js_register_cocos2dx_studio_AnimationData(JSContext *cx, JS::HandleObject g
     jsb_register_class<cocostudio::AnimationData>(cx, jsb_cocostudio_AnimationData_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_ContourData_class;
+const JSClass  *jsb_cocostudio_ContourData_class;
 JSObject *jsb_cocostudio_ContourData_prototype;
 
 bool js_cocos2dx_studio_ContourData_init(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1288,11 +1298,13 @@ void js_register_cocos2dx_studio_ContourData(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ContourData_class = {
+    static const JSClass cls = {
         "ContourData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ContourData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1328,7 +1340,7 @@ void js_register_cocos2dx_studio_ContourData(JSContext *cx, JS::HandleObject glo
     jsb_register_class<cocostudio::ContourData>(cx, jsb_cocostudio_ContourData_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_TextureData_class;
+const JSClass  *jsb_cocostudio_TextureData_class;
 JSObject *jsb_cocostudio_TextureData_prototype;
 
 bool js_cocos2dx_studio_TextureData_getContourData(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1445,11 +1457,13 @@ void js_register_cocos2dx_studio_TextureData(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_TextureData_class = {
+    static const JSClass cls = {
         "TextureData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_TextureData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1486,7 +1500,7 @@ void js_register_cocos2dx_studio_TextureData(JSContext *cx, JS::HandleObject glo
     jsb_register_class<cocostudio::TextureData>(cx, jsb_cocostudio_TextureData_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_ProcessBase_class;
+const JSClass  *jsb_cocostudio_ProcessBase_class;
 JSObject *jsb_cocostudio_ProcessBase_prototype;
 
 bool js_cocos2dx_studio_ProcessBase_play(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1816,11 +1830,13 @@ void js_register_cocos2dx_studio_ProcessBase(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ProcessBase_class = {
+    static const JSClass cls = {
         "ProcessBase",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ProcessBase_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1867,7 +1883,7 @@ void js_register_cocos2dx_studio_ProcessBase(JSContext *cx, JS::HandleObject glo
     jsb_register_class<cocostudio::ProcessBase>(cx, jsb_cocostudio_ProcessBase_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_Tween_class;
+const JSClass  *jsb_cocostudio_Tween_class;
 JSObject *jsb_cocostudio_Tween_prototype;
 
 bool js_cocos2dx_studio_Tween_getAnimation(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2082,11 +2098,13 @@ void js_register_cocos2dx_studio_Tween(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_Tween_class = {
+    static const JSClass cls = {
         "Tween",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_Tween_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2127,7 +2145,7 @@ void js_register_cocos2dx_studio_Tween(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocostudio::Tween>(cx, jsb_cocostudio_Tween_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_ColliderFilter_class;
+const JSClass  *jsb_cocostudio_ColliderFilter_class;
 JSObject *jsb_cocostudio_ColliderFilter_prototype;
 
 
@@ -2141,11 +2159,13 @@ void js_register_cocos2dx_studio_ColliderFilter(JSContext *cx, JS::HandleObject 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ColliderFilter_class = {
+    static const JSClass cls = {
         "ColliderFilter",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ColliderFilter_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2176,7 +2196,7 @@ void js_register_cocos2dx_studio_ColliderFilter(JSContext *cx, JS::HandleObject 
     jsb_register_class<cocostudio::ColliderFilter>(cx, jsb_cocostudio_ColliderFilter_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_ColliderBody_class;
+const JSClass  *jsb_cocostudio_ColliderBody_class;
 JSObject *jsb_cocostudio_ColliderBody_prototype;
 
 
@@ -2190,11 +2210,13 @@ void js_register_cocos2dx_studio_ColliderBody(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ColliderBody_class = {
+    static const JSClass cls = {
         "ColliderBody",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ColliderBody_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2225,7 +2247,7 @@ void js_register_cocos2dx_studio_ColliderBody(JSContext *cx, JS::HandleObject gl
     jsb_register_class<cocostudio::ColliderBody>(cx, jsb_cocostudio_ColliderBody_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_ColliderDetector_class;
+const JSClass  *jsb_cocostudio_ColliderDetector_class;
 JSObject *jsb_cocostudio_ColliderDetector_prototype;
 
 bool js_cocos2dx_studio_ColliderDetector_getBone(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2472,11 +2494,13 @@ void js_register_cocos2dx_studio_ColliderDetector(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ColliderDetector_class = {
+    static const JSClass cls = {
         "ColliderDetector",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ColliderDetector_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2518,7 +2542,7 @@ void js_register_cocos2dx_studio_ColliderDetector(JSContext *cx, JS::HandleObjec
     jsb_register_class<cocostudio::ColliderDetector>(cx, jsb_cocostudio_ColliderDetector_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_DecorativeDisplay_class;
+const JSClass  *jsb_cocostudio_DecorativeDisplay_class;
 JSObject *jsb_cocostudio_DecorativeDisplay_prototype;
 
 bool js_cocos2dx_studio_DecorativeDisplay_getColliderDetector(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -2715,11 +2739,13 @@ void js_register_cocos2dx_studio_DecorativeDisplay(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_DecorativeDisplay_class = {
+    static const JSClass cls = {
         "DecorativeDisplay",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_DecorativeDisplay_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2760,7 +2786,7 @@ void js_register_cocos2dx_studio_DecorativeDisplay(JSContext *cx, JS::HandleObje
     jsb_register_class<cocostudio::DecorativeDisplay>(cx, jsb_cocostudio_DecorativeDisplay_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_DisplayManager_class;
+const JSClass  *jsb_cocostudio_DisplayManager_class;
 JSObject *jsb_cocostudio_DisplayManager_prototype;
 
 bool js_cocos2dx_studio_DisplayManager_getCurrentDecorativeDisplay(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -3340,11 +3366,13 @@ void js_register_cocos2dx_studio_DisplayManager(JSContext *cx, JS::HandleObject 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_DisplayManager_class = {
+    static const JSClass cls = {
         "DisplayManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_DisplayManager_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -3400,7 +3428,7 @@ void js_register_cocos2dx_studio_DisplayManager(JSContext *cx, JS::HandleObject 
     jsb_register_class<cocostudio::DisplayManager>(cx, jsb_cocostudio_DisplayManager_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_Bone_class;
+const JSClass  *jsb_cocostudio_Bone_class;
 JSObject *jsb_cocostudio_Bone_prototype;
 
 bool js_cocos2dx_studio_Bone_isTransformDirty(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4200,11 +4228,13 @@ void js_register_cocos2dx_studio_Bone(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_Bone_class = {
+    static const JSClass cls = {
         "Bone",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_Bone_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4271,7 +4301,7 @@ void js_register_cocos2dx_studio_Bone(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocostudio::Bone>(cx, jsb_cocostudio_Bone_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_BatchNode_class;
+const JSClass  *jsb_cocostudio_BatchNode_class;
 JSObject *jsb_cocostudio_BatchNode_prototype;
 
 bool js_cocos2dx_studio_BatchNode_create(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4302,11 +4332,13 @@ void js_register_cocos2dx_studio_BatchNode(JSContext *cx, JS::HandleObject globa
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_BatchNode_class = {
+    static const JSClass cls = {
         "BatchNode",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_BatchNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4341,7 +4373,7 @@ void js_register_cocos2dx_studio_BatchNode(JSContext *cx, JS::HandleObject globa
     jsb_register_class<cocostudio::BatchNode>(cx, jsb_cocostudio_BatchNode_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_ArmatureAnimation_class;
+const JSClass  *jsb_cocostudio_ArmatureAnimation_class;
 JSObject *jsb_cocostudio_ArmatureAnimation_prototype;
 
 bool js_cocos2dx_studio_ArmatureAnimation_getSpeedScale(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -4762,11 +4794,13 @@ void js_register_cocos2dx_studio_ArmatureAnimation(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ArmatureAnimation_class = {
+    static const JSClass cls = {
         "ArmatureAnimation",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ArmatureAnimation_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -4814,7 +4848,7 @@ void js_register_cocos2dx_studio_ArmatureAnimation(JSContext *cx, JS::HandleObje
     jsb_register_class<cocostudio::ArmatureAnimation>(cx, jsb_cocostudio_ArmatureAnimation_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_ArmatureDataManager_class;
+const JSClass  *jsb_cocostudio_ArmatureDataManager_class;
 JSObject *jsb_cocostudio_ArmatureDataManager_prototype;
 
 bool js_cocos2dx_studio_ArmatureDataManager_getAnimationDatas(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5311,11 +5345,13 @@ void js_register_cocos2dx_studio_ArmatureDataManager(JSContext *cx, JS::HandleOb
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ArmatureDataManager_class = {
+    static const JSClass cls = {
         "ArmatureDataManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ArmatureDataManager_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -5366,7 +5402,7 @@ void js_register_cocos2dx_studio_ArmatureDataManager(JSContext *cx, JS::HandleOb
     jsb_register_class<cocostudio::ArmatureDataManager>(cx, jsb_cocostudio_ArmatureDataManager_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_Armature_class;
+const JSClass  *jsb_cocostudio_Armature_class;
 JSObject *jsb_cocostudio_Armature_prototype;
 
 bool js_cocos2dx_studio_Armature_getBone(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6037,11 +6073,13 @@ void js_register_cocos2dx_studio_Armature(JSContext *cx, JS::HandleObject global
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_Armature_class = {
+    static const JSClass cls = {
         "Armature",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_Armature_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6101,7 +6139,7 @@ void js_register_cocos2dx_studio_Armature(JSContext *cx, JS::HandleObject global
     anonEvaluate(cx, global, "(function () { ccs.Armature.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocostudio_Skin_class;
+const JSClass  *jsb_cocostudio_Skin_class;
 JSObject *jsb_cocostudio_Skin_prototype;
 
 bool js_cocos2dx_studio_Skin_getBone(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6292,11 +6330,13 @@ void js_register_cocos2dx_studio_Skin(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_Skin_class = {
+    static const JSClass cls = {
         "Skin",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_Skin_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6337,7 +6377,7 @@ void js_register_cocos2dx_studio_Skin(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocostudio::Skin>(cx, jsb_cocostudio_Skin_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_ComAttribute_class;
+const JSClass  *jsb_cocostudio_ComAttribute_class;
 JSObject *jsb_cocostudio_ComAttribute_prototype;
 
 bool js_cocos2dx_studio_ComAttribute_getFloat(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -6630,11 +6670,13 @@ void js_register_cocos2dx_studio_ComAttribute(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ComAttribute_class = {
+    static const JSClass cls = {
         "ComAttribute",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ComAttribute_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -6678,7 +6720,7 @@ void js_register_cocos2dx_studio_ComAttribute(JSContext *cx, JS::HandleObject gl
     jsb_register_class<cocostudio::ComAttribute>(cx, jsb_cocostudio_ComAttribute_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_ComAudio_class;
+const JSClass  *jsb_cocostudio_ComAudio_class;
 JSObject *jsb_cocostudio_ComAudio_prototype;
 
 bool js_cocos2dx_studio_ComAudio_stopAllEffects(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7307,11 +7349,13 @@ void js_register_cocos2dx_studio_ComAudio(JSContext *cx, JS::HandleObject global
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ComAudio_class = {
+    static const JSClass cls = {
         "ComAudio",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ComAudio_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7374,7 +7418,7 @@ void js_register_cocos2dx_studio_ComAudio(JSContext *cx, JS::HandleObject global
     jsb_register_class<cocostudio::ComAudio>(cx, jsb_cocostudio_ComAudio_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_InputDelegate_class;
+const JSClass  *jsb_cocostudio_InputDelegate_class;
 JSObject *jsb_cocostudio_InputDelegate_prototype;
 
 bool js_cocos2dx_studio_InputDelegate_isAccelerometerEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7578,11 +7622,13 @@ void js_register_cocos2dx_studio_InputDelegate(JSContext *cx, JS::HandleObject g
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_InputDelegate_class = {
+    static const JSClass cls = {
         "InputDelegate",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_InputDelegate_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7623,7 +7669,7 @@ void js_register_cocos2dx_studio_InputDelegate(JSContext *cx, JS::HandleObject g
     jsb_register_class<cocostudio::InputDelegate>(cx, jsb_cocostudio_InputDelegate_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_ComController_class;
+const JSClass  *jsb_cocostudio_ComController_class;
 JSObject *jsb_cocostudio_ComController_prototype;
 
 bool js_cocos2dx_studio_ComController_create(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7684,11 +7730,13 @@ void js_register_cocos2dx_studio_ComController(JSContext *cx, JS::HandleObject g
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ComController_class = {
+    static const JSClass cls = {
         "ComController",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ComController_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7725,7 +7773,7 @@ void js_register_cocos2dx_studio_ComController(JSContext *cx, JS::HandleObject g
     anonEvaluate(cx, global, "(function () { ccs.ComController.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocostudio_ComRender_class;
+const JSClass  *jsb_cocostudio_ComRender_class;
 JSObject *jsb_cocostudio_ComRender_prototype;
 
 bool js_cocos2dx_studio_ComRender_setNode(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -7896,11 +7944,13 @@ void js_register_cocos2dx_studio_ComRender(JSContext *cx, JS::HandleObject globa
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ComRender_class = {
+    static const JSClass cls = {
         "ComRender",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ComRender_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -7937,7 +7987,7 @@ void js_register_cocos2dx_studio_ComRender(JSContext *cx, JS::HandleObject globa
     jsb_register_class<cocostudio::ComRender>(cx, jsb_cocostudio_ComRender_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_Frame_class;
+const JSClass  *jsb_cocostudio_timeline_Frame_class;
 JSObject *jsb_cocostudio_timeline_Frame_prototype;
 
 bool js_cocos2dx_studio_Frame_clone(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8225,11 +8275,13 @@ void js_register_cocos2dx_studio_Frame(JSContext *cx, JS::HandleObject global) {
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_Frame_class = {
+    static const JSClass cls = {
         "Frame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_Frame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8273,7 +8325,7 @@ void js_register_cocos2dx_studio_Frame(JSContext *cx, JS::HandleObject global) {
     jsb_register_class<cocostudio::timeline::Frame>(cx, jsb_cocostudio_timeline_Frame_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_timeline_VisibleFrame_class;
+const JSClass  *jsb_cocostudio_timeline_VisibleFrame_class;
 JSObject *jsb_cocostudio_timeline_VisibleFrame_prototype;
 
 bool js_cocos2dx_studio_VisibleFrame_isVisible(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8358,11 +8410,13 @@ void js_register_cocos2dx_studio_VisibleFrame(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_VisibleFrame_class = {
+    static const JSClass cls = {
         "VisibleFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_VisibleFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8399,7 +8453,7 @@ void js_register_cocos2dx_studio_VisibleFrame(JSContext *cx, JS::HandleObject gl
     jsb_register_class<cocostudio::timeline::VisibleFrame>(cx, jsb_cocostudio_timeline_VisibleFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_TextureFrame_class;
+const JSClass  *jsb_cocostudio_timeline_TextureFrame_class;
 JSObject *jsb_cocostudio_timeline_TextureFrame_prototype;
 
 bool js_cocos2dx_studio_TextureFrame_getTextureName(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8484,11 +8538,13 @@ void js_register_cocos2dx_studio_TextureFrame(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_TextureFrame_class = {
+    static const JSClass cls = {
         "TextureFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_TextureFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8525,7 +8581,7 @@ void js_register_cocos2dx_studio_TextureFrame(JSContext *cx, JS::HandleObject gl
     jsb_register_class<cocostudio::timeline::TextureFrame>(cx, jsb_cocostudio_timeline_TextureFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_RotationFrame_class;
+const JSClass  *jsb_cocostudio_timeline_RotationFrame_class;
 JSObject *jsb_cocostudio_timeline_RotationFrame_prototype;
 
 bool js_cocos2dx_studio_RotationFrame_setRotation(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8610,11 +8666,13 @@ void js_register_cocos2dx_studio_RotationFrame(JSContext *cx, JS::HandleObject g
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_RotationFrame_class = {
+    static const JSClass cls = {
         "RotationFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_RotationFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8651,7 +8709,7 @@ void js_register_cocos2dx_studio_RotationFrame(JSContext *cx, JS::HandleObject g
     jsb_register_class<cocostudio::timeline::RotationFrame>(cx, jsb_cocostudio_timeline_RotationFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_SkewFrame_class;
+const JSClass  *jsb_cocostudio_timeline_SkewFrame_class;
 JSObject *jsb_cocostudio_timeline_SkewFrame_prototype;
 
 bool js_cocos2dx_studio_SkewFrame_getSkewY(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8774,11 +8832,13 @@ void js_register_cocos2dx_studio_SkewFrame(JSContext *cx, JS::HandleObject globa
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_SkewFrame_class = {
+    static const JSClass cls = {
         "SkewFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_SkewFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8817,7 +8877,7 @@ void js_register_cocos2dx_studio_SkewFrame(JSContext *cx, JS::HandleObject globa
     jsb_register_class<cocostudio::timeline::SkewFrame>(cx, jsb_cocostudio_timeline_SkewFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_RotationSkewFrame_class;
+const JSClass  *jsb_cocostudio_timeline_RotationSkewFrame_class;
 JSObject *jsb_cocostudio_timeline_RotationSkewFrame_prototype;
 
 bool js_cocos2dx_studio_RotationSkewFrame_create(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -8864,11 +8924,13 @@ void js_register_cocos2dx_studio_RotationSkewFrame(JSContext *cx, JS::HandleObje
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_RotationSkewFrame_class = {
+    static const JSClass cls = {
         "RotationSkewFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_RotationSkewFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -8903,7 +8965,7 @@ void js_register_cocos2dx_studio_RotationSkewFrame(JSContext *cx, JS::HandleObje
     jsb_register_class<cocostudio::timeline::RotationSkewFrame>(cx, jsb_cocostudio_timeline_RotationSkewFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_PositionFrame_class;
+const JSClass  *jsb_cocostudio_timeline_PositionFrame_class;
 JSObject *jsb_cocostudio_timeline_PositionFrame_prototype;
 
 bool js_cocos2dx_studio_PositionFrame_getX(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9064,11 +9126,13 @@ void js_register_cocos2dx_studio_PositionFrame(JSContext *cx, JS::HandleObject g
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_PositionFrame_class = {
+    static const JSClass cls = {
         "PositionFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_PositionFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9109,7 +9173,7 @@ void js_register_cocos2dx_studio_PositionFrame(JSContext *cx, JS::HandleObject g
     jsb_register_class<cocostudio::timeline::PositionFrame>(cx, jsb_cocostudio_timeline_PositionFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_ScaleFrame_class;
+const JSClass  *jsb_cocostudio_timeline_ScaleFrame_class;
 JSObject *jsb_cocostudio_timeline_ScaleFrame_prototype;
 
 bool js_cocos2dx_studio_ScaleFrame_setScaleY(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9252,11 +9316,13 @@ void js_register_cocos2dx_studio_ScaleFrame(JSContext *cx, JS::HandleObject glob
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_ScaleFrame_class = {
+    static const JSClass cls = {
         "ScaleFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_ScaleFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9296,7 +9362,7 @@ void js_register_cocos2dx_studio_ScaleFrame(JSContext *cx, JS::HandleObject glob
     jsb_register_class<cocostudio::timeline::ScaleFrame>(cx, jsb_cocostudio_timeline_ScaleFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_AnchorPointFrame_class;
+const JSClass  *jsb_cocostudio_timeline_AnchorPointFrame_class;
 JSObject *jsb_cocostudio_timeline_AnchorPointFrame_prototype;
 
 bool js_cocos2dx_studio_AnchorPointFrame_setAnchorPoint(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9381,11 +9447,13 @@ void js_register_cocos2dx_studio_AnchorPointFrame(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_AnchorPointFrame_class = {
+    static const JSClass cls = {
         "AnchorPointFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_AnchorPointFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9422,7 +9490,7 @@ void js_register_cocos2dx_studio_AnchorPointFrame(JSContext *cx, JS::HandleObjec
     jsb_register_class<cocostudio::timeline::AnchorPointFrame>(cx, jsb_cocostudio_timeline_AnchorPointFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_InnerActionFrame_class;
+const JSClass  *jsb_cocostudio_timeline_InnerActionFrame_class;
 JSObject *jsb_cocostudio_timeline_InnerActionFrame_prototype;
 
 bool js_cocos2dx_studio_InnerActionFrame_getEndFrameIndex(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9661,11 +9729,13 @@ void js_register_cocos2dx_studio_InnerActionFrame(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_InnerActionFrame_class = {
+    static const JSClass cls = {
         "InnerActionFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_InnerActionFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9710,7 +9780,7 @@ void js_register_cocos2dx_studio_InnerActionFrame(JSContext *cx, JS::HandleObjec
     jsb_register_class<cocostudio::timeline::InnerActionFrame>(cx, jsb_cocostudio_timeline_InnerActionFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_ColorFrame_class;
+const JSClass  *jsb_cocostudio_timeline_ColorFrame_class;
 JSObject *jsb_cocostudio_timeline_ColorFrame_prototype;
 
 bool js_cocos2dx_studio_ColorFrame_getColor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9795,11 +9865,13 @@ void js_register_cocos2dx_studio_ColorFrame(JSContext *cx, JS::HandleObject glob
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_ColorFrame_class = {
+    static const JSClass cls = {
         "ColorFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_ColorFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9836,7 +9908,7 @@ void js_register_cocos2dx_studio_ColorFrame(JSContext *cx, JS::HandleObject glob
     jsb_register_class<cocostudio::timeline::ColorFrame>(cx, jsb_cocostudio_timeline_ColorFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_AlphaFrame_class;
+const JSClass  *jsb_cocostudio_timeline_AlphaFrame_class;
 JSObject *jsb_cocostudio_timeline_AlphaFrame_prototype;
 
 bool js_cocos2dx_studio_AlphaFrame_getAlpha(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -9921,11 +9993,13 @@ void js_register_cocos2dx_studio_AlphaFrame(JSContext *cx, JS::HandleObject glob
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_AlphaFrame_class = {
+    static const JSClass cls = {
         "AlphaFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_AlphaFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -9962,7 +10036,7 @@ void js_register_cocos2dx_studio_AlphaFrame(JSContext *cx, JS::HandleObject glob
     jsb_register_class<cocostudio::timeline::AlphaFrame>(cx, jsb_cocostudio_timeline_AlphaFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_EventFrame_class;
+const JSClass  *jsb_cocostudio_timeline_EventFrame_class;
 JSObject *jsb_cocostudio_timeline_EventFrame_prototype;
 
 bool js_cocos2dx_studio_EventFrame_setEvent(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -10063,11 +10137,13 @@ void js_register_cocos2dx_studio_EventFrame(JSContext *cx, JS::HandleObject glob
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_EventFrame_class = {
+    static const JSClass cls = {
         "EventFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_EventFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -10105,7 +10181,7 @@ void js_register_cocos2dx_studio_EventFrame(JSContext *cx, JS::HandleObject glob
     jsb_register_class<cocostudio::timeline::EventFrame>(cx, jsb_cocostudio_timeline_EventFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_ZOrderFrame_class;
+const JSClass  *jsb_cocostudio_timeline_ZOrderFrame_class;
 JSObject *jsb_cocostudio_timeline_ZOrderFrame_prototype;
 
 bool js_cocos2dx_studio_ZOrderFrame_getZOrder(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -10190,11 +10266,13 @@ void js_register_cocos2dx_studio_ZOrderFrame(JSContext *cx, JS::HandleObject glo
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_ZOrderFrame_class = {
+    static const JSClass cls = {
         "ZOrderFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_ZOrderFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -10231,7 +10309,7 @@ void js_register_cocos2dx_studio_ZOrderFrame(JSContext *cx, JS::HandleObject glo
     jsb_register_class<cocostudio::timeline::ZOrderFrame>(cx, jsb_cocostudio_timeline_ZOrderFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_BlendFuncFrame_class;
+const JSClass  *jsb_cocostudio_timeline_BlendFuncFrame_class;
 JSObject *jsb_cocostudio_timeline_BlendFuncFrame_prototype;
 
 bool js_cocos2dx_studio_BlendFuncFrame_getBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -10316,11 +10394,13 @@ void js_register_cocos2dx_studio_BlendFuncFrame(JSContext *cx, JS::HandleObject 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_BlendFuncFrame_class = {
+    static const JSClass cls = {
         "BlendFuncFrame",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_BlendFuncFrame_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -10357,7 +10437,7 @@ void js_register_cocos2dx_studio_BlendFuncFrame(JSContext *cx, JS::HandleObject 
     jsb_register_class<cocostudio::timeline::BlendFuncFrame>(cx, jsb_cocostudio_timeline_BlendFuncFrame_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_Timeline_class;
+const JSClass  *jsb_cocostudio_timeline_Timeline_class;
 JSObject *jsb_cocostudio_timeline_Timeline_prototype;
 
 bool js_cocos2dx_studio_Timeline_clone(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -10706,11 +10786,13 @@ void js_register_cocos2dx_studio_Timeline(JSContext *cx, JS::HandleObject global
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_Timeline_class = {
+    static const JSClass cls = {
         "Timeline",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_Timeline_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -10757,7 +10839,7 @@ void js_register_cocos2dx_studio_Timeline(JSContext *cx, JS::HandleObject global
     jsb_register_class<cocostudio::timeline::Timeline>(cx, jsb_cocostudio_timeline_Timeline_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_timeline_ActionTimelineData_class;
+const JSClass  *jsb_cocostudio_timeline_ActionTimelineData_class;
 JSObject *jsb_cocostudio_timeline_ActionTimelineData_prototype;
 
 bool js_cocos2dx_studio_ActionTimelineData_setActionTag(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -10866,11 +10948,13 @@ void js_register_cocos2dx_studio_ActionTimelineData(JSContext *cx, JS::HandleObj
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_ActionTimelineData_class = {
+    static const JSClass cls = {
         "ActionTimelineData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_ActionTimelineData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -10907,7 +10991,7 @@ void js_register_cocos2dx_studio_ActionTimelineData(JSContext *cx, JS::HandleObj
     jsb_register_class<cocostudio::timeline::ActionTimelineData>(cx, jsb_cocostudio_timeline_ActionTimelineData_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocostudio_timeline_ActionTimeline_class;
+const JSClass  *jsb_cocostudio_timeline_ActionTimeline_class;
 JSObject *jsb_cocostudio_timeline_ActionTimeline_prototype;
 
 bool js_cocos2dx_studio_ActionTimeline_setFrameEventCallFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -11723,11 +11807,13 @@ void js_register_cocos2dx_studio_ActionTimeline(JSContext *cx, JS::HandleObject 
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_ActionTimeline_class = {
+    static const JSClass cls = {
         "ActionTimeline",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_ActionTimeline_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -11794,7 +11880,7 @@ void js_register_cocos2dx_studio_ActionTimeline(JSContext *cx, JS::HandleObject 
     jsb_register_class<cocostudio::timeline::ActionTimeline>(cx, jsb_cocostudio_timeline_ActionTimeline_class, proto, parent_proto);
 }
 
-JSClass  *jsb_cocostudio_timeline_BoneNode_class;
+const JSClass  *jsb_cocostudio_timeline_BoneNode_class;
 JSObject *jsb_cocostudio_timeline_BoneNode_prototype;
 
 bool js_cocos2dx_studio_BoneNode_getDebugDrawWidth(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -12336,11 +12422,13 @@ void js_register_cocos2dx_studio_BoneNode(JSContext *cx, JS::HandleObject global
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_BoneNode_class = {
+    static const JSClass cls = {
         "BoneNode",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_BoneNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -12396,7 +12484,7 @@ void js_register_cocos2dx_studio_BoneNode(JSContext *cx, JS::HandleObject global
     anonEvaluate(cx, global, "(function () { ccs.BoneNode.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocostudio_timeline_SkeletonNode_class;
+const JSClass  *jsb_cocostudio_timeline_SkeletonNode_class;
 JSObject *jsb_cocostudio_timeline_SkeletonNode_prototype;
 
 bool js_cocos2dx_studio_SkeletonNode_getBoneNode(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -12559,11 +12647,13 @@ void js_register_cocos2dx_studio_SkeletonNode(JSContext *cx, JS::HandleObject gl
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_timeline_SkeletonNode_class = {
+    static const JSClass cls = {
         "SkeletonNode",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_timeline_SkeletonNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -12604,7 +12694,7 @@ void js_register_cocos2dx_studio_SkeletonNode(JSContext *cx, JS::HandleObject gl
     anonEvaluate(cx, global, "(function () { ccs.SkeletonNode.extend = cc.Class.extend; })()");
 }
 
-JSClass  *jsb_cocostudio_ComExtensionData_class;
+const JSClass  *jsb_cocostudio_ComExtensionData_class;
 JSObject *jsb_cocostudio_ComExtensionData_prototype;
 
 bool js_cocos2dx_studio_ComExtensionData_setActionTag(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -12727,11 +12817,13 @@ void js_register_cocos2dx_studio_ComExtensionData(JSContext *cx, JS::HandleObjec
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocostudio_ComExtensionData_class = {
+    static const JSClass cls = {
         "ComExtensionData",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocostudio_ComExtensionData_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END

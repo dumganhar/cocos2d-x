@@ -19,7 +19,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     args.rval().setBoolean(true);
     return true;
 }
-JSClass  *jsb_cocosbuilder_CCBAnimationManager_class;
+const JSClass  *jsb_cocosbuilder_CCBAnimationManager_class;
 JSObject *jsb_cocosbuilder_CCBAnimationManager_prototype;
 
 bool js_cocos2dx_builder_CCBAnimationManager_moveAnimationsFromNode(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -901,11 +901,13 @@ void js_register_cocos2dx_builder_CCBAnimationManager(JSContext *cx, JS::HandleO
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocosbuilder_CCBAnimationManager_class = {
+    static const JSClass cls = {
         "BuilderAnimationManager",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocosbuilder_CCBAnimationManager_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -973,7 +975,7 @@ void js_register_cocos2dx_builder_CCBAnimationManager(JSContext *cx, JS::HandleO
     jsb_register_class<cocosbuilder::CCBAnimationManager>(cx, jsb_cocosbuilder_CCBAnimationManager_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocosbuilder_CCBReader_class;
+const JSClass  *jsb_cocosbuilder_CCBReader_class;
 JSObject *jsb_cocosbuilder_CCBReader_prototype;
 
 bool js_cocos2dx_builder_CCBReader_getAnimationManager(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -1492,11 +1494,13 @@ void js_register_cocos2dx_builder_CCBReader(JSContext *cx, JS::HandleObject glob
         JS_GlobalObjectTraceHook
     };
 
-    static const JSClass jsb_cocosbuilder_CCBReader_class = {
+    static const JSClass cls = {
         "_Reader",
         JSCLASS_HAS_RESERVED_SLOTS(2),
         &classOps
     };
+
+    jsb_cocosbuilder_CCBReader_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
