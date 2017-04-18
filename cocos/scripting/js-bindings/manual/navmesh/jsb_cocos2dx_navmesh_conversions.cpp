@@ -78,19 +78,19 @@ bool jsval_to_NavMeshAgentParam(JSContext *cx, JS::HandleValue v, cocos2d::NavMe
     return true;
 }
 
-jsval offMeshLinkData_to_jsval(JSContext* cx, const cocos2d::OffMeshLinkData& v)
+JS::Value offMeshLinkData_to_jsval(JSContext* cx, const cocos2d::OffMeshLinkData& v)
 {
     JS::RootedObject proto(cx);
     JS::RootedObject parent(cx);
     JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, proto, parent));
-    if (!tmp) return JSVAL_NULL;
+    if (!tmp) return JS::NullValue();
     JS::RootedValue jsstartPos(cx, vector3_to_jsval(cx, v.startPosition));
     JS::RootedValue jsendPos(cx, vector3_to_jsval(cx, v.endPosition));
     bool ok = JS_DefineProperty(cx, tmp, "startPosition", jsstartPos, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
     JS_DefineProperty(cx, tmp, "endPosition", jsendPos, JSPROP_ENUMERATE | JSPROP_PERMANENT);
     if (ok) {
-        return OBJECT_TO_JSVAL(tmp);
+        return JS::ObjectValue(*tmp);
     }
-    return JSVAL_NULL;
+    return JS::NullValue();
 }
 #endif //#if CC_USE_NAVMESH

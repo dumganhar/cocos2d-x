@@ -45,12 +45,12 @@ void JSArmatureWrapper::movementCallbackFunc(cocostudio::Armature *armature, coc
     if (!callback.isNullOrUndefined())
     {
         int movementEventType = (int)movementType;
-        jsval movementVal = INT_TO_JSVAL(movementEventType);
+        JS::Value movementVal = JS::Int32Value(movementEventType);
 
-        jsval idVal = std_string_to_jsval(cx, movementID);
+        JS::Value idVal = std_string_to_jsval(cx, movementID);
 
-        jsval valArr[3];
-        valArr[0] = OBJECT_TO_JSVAL(jsarmature);
+        JS::Value valArr[3];
+        valArr[0] = JS::ObjectValue(*jsarmature);
         valArr[1] = movementVal;
         valArr[2] = idVal;
 
@@ -68,7 +68,7 @@ void JSArmatureWrapper::addArmatureFileInfoAsyncCallbackFunc(float percent)
     JS::RootedValue retval(cx);
     if (!callback.isNullOrUndefined())
     {
-        jsval percentVal = DOUBLE_TO_JSVAL(percent);
+        JS::Value percentVal = JS::DoubleValue(percent);
 
         JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
 
@@ -88,12 +88,12 @@ void JSArmatureWrapper::frameCallbackFunc(cocostudio::Bone *bone, const std::str
     JS::RootedValue retval(cx);
     if (!callback.isNullOrUndefined())
     {
-        jsval nameVal = std_string_to_jsval(cx, evt);
-        jsval originIndexVal = INT_TO_JSVAL(originFrameIndex);
-        jsval currentIndexVal = INT_TO_JSVAL(currentFrameIndex);
+        JS::Value nameVal = std_string_to_jsval(cx, evt);
+        JS::Value originIndexVal = JS::Int32Value(originFrameIndex);
+        JS::Value currentIndexVal = JS::Int32Value(currentFrameIndex);
 
-        jsval valArr[4];
-        valArr[0] = OBJECT_TO_JSVAL(jsbone);
+        JS::Value valArr[4];
+        valArr[0] = JS::ObjectValue(*jsbone);
         valArr[1] = nameVal;
         valArr[2] = originIndexVal;
         valArr[3] = currentIndexVal;
@@ -102,7 +102,7 @@ void JSArmatureWrapper::frameCallbackFunc(cocostudio::Bone *bone, const std::str
     }
 }
 
-static bool js_cocos2dx_ArmatureAnimation_setMovementEventCallFunc(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_ArmatureAnimation_setMovementEventCallFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -145,11 +145,11 @@ static bool js_cocos2dx_ArmatureAnimation_setMovementEventCallFunc(JSContext *cx
             return true;
         }
     }
-    JS_ReportError(cx, "Invalid number of arguments");
+    JS_ReportErrorUTF8(cx, "Invalid number of arguments");
     return false;
 }
 
-static bool js_cocos2dx_ArmatureAnimation_setFrameEventCallFunc(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_ArmatureAnimation_setFrameEventCallFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -193,11 +193,11 @@ static bool js_cocos2dx_ArmatureAnimation_setFrameEventCallFunc(JSContext *cx, u
         }
     }
 
-    JS_ReportError(cx, "Invalid number of arguments");
+    JS_ReportErrorUTF8(cx, "Invalid number of arguments");
     return false;
 }
 
-static bool jsb_Animation_addArmatureFileInfoAsyncCallFunc(JSContext *cx, uint32_t argc, jsval *vp)
+static bool jsb_Animation_addArmatureFileInfoAsyncCallFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -240,11 +240,11 @@ static bool jsb_Animation_addArmatureFileInfoAsyncCallFunc(JSContext *cx, uint32
 
         return true;
     }
-    JS_ReportError(cx, "Invalid number of arguments");
+    JS_ReportErrorUTF8(cx, "Invalid number of arguments");
     return false;
 }
 
-static bool js_cocos2dx_studio_ActionManagerEx_initWithDictionaryEx(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_studio_ActionManagerEx_initWithDictionaryEx(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -282,11 +282,11 @@ static bool js_cocos2dx_studio_ActionManagerEx_initWithDictionaryEx(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_studio_ActionManagerEx_initWithDictionaryEx : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_studio_ActionManagerEx_initWithDictionaryEx : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
 
-bool js_cocos2dx_studio_ColliderBody_getCalculatedVertexList(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_studio_ColliderBody_getCalculatedVertexList(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -296,33 +296,33 @@ bool js_cocos2dx_studio_ColliderBody_getCalculatedVertexList(JSContext *cx, uint
     if (argc == 0) {
         const std::vector<cocos2d::Point>& ret = cobj->getCalculatedVertexList();
         JS::RootedObject jsretArr(cx, JS_NewArrayObject(cx, 0));
-        jsval jsret;
+        JS::Value jsret;
         //CCObject* obj;
         int i = 0;
         JS::RootedObject tmp(cx);
         for(const auto& point : ret)
         {
-            tmp = JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr());
+            tmp = JS_NewObject(cx, nullptr);
             if (!tmp) break;
             bool ok = JS_DefineProperty(cx, tmp, "x", point.x, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
                 JS_DefineProperty(cx, tmp, "y", point.y, JSPROP_ENUMERATE | JSPROP_PERMANENT);
-            JS::RootedValue jsTmp(cx, OBJECT_TO_JSVAL(tmp));
+            JS::RootedValue jsTmp(cx, JS::ObjectValue(*tmp));
             if(!ok || !JS_SetElement(cx, jsretArr, i, jsTmp))
             {
                 break;
             }
             ++i;
         }
-        jsret = OBJECT_TO_JSVAL(jsretArr);
+        jsret = JS::ObjectValue(*jsretArr);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 
-static bool js_cocos2dx_studio_Frame_setEasingParams(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_studio_Frame_setEasingParams(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -334,7 +334,9 @@ static bool js_cocos2dx_studio_Frame_setEasingParams(JSContext *cx, uint32_t arg
         JS::RootedObject jsobj(cx);
         bool ok = args.get(0).isObject() && JS_ValueToObject( cx, args.get(0), &jsobj );
         JSB_PRECONDITION3( ok, cx, false, "Error converting value to object");
-        JSB_PRECONDITION3( jsobj && JS_IsArrayObject( cx, jsobj),  cx, false, "argument must be an array");
+        bool isArray = false;
+        JS_IsArrayObject( cx, jsobj, &isArray);
+        JSB_PRECONDITION3( jsobj && isArray,  cx, false, "argument must be an array");
 
         std::vector<float> arg0;
         uint32_t length = 0;
@@ -361,11 +363,11 @@ static bool js_cocos2dx_studio_Frame_setEasingParams(JSContext *cx, uint32_t arg
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 
-static bool js_cocos2dx_studio_Frame_getEasingParams(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_studio_Frame_getEasingParams(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -384,11 +386,11 @@ static bool js_cocos2dx_studio_Frame_getEasingParams(JSContext *cx, uint32_t arg
         }
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_studio_Frame_getEasingParams : Error processing arguments");
 
-        args.rval().set(OBJECT_TO_JSVAL(jsobj));
+        args.rval().set(JS::ObjectValue(*jsobj));
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 
@@ -397,9 +399,9 @@ static bool js_cocos2dx_studio_Frame_getEasingParams(JSContext *cx, uint32_t arg
 bool js_get_BaseData_x(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->x);
+        JS::Value ret = JS::DoubleValue(cobj->x);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -407,7 +409,7 @@ bool js_get_BaseData_x(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS:
         CCLOGERROR("js_get_BaseData_x : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_x : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_x : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_x(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -416,16 +418,16 @@ bool js_set_BaseData_x(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
         cobj->x = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_x : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_x : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_y(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->y);
+        JS::Value ret = JS::DoubleValue(cobj->y);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -433,7 +435,7 @@ bool js_get_BaseData_y(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS:
         CCLOGERROR("js_get_BaseData_y : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_y : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_y : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_y(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -442,16 +444,16 @@ bool js_set_BaseData_y(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
         cobj->y = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_y : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_y : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_zOrder(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->zOrder);
+        JS::Value ret = JS::Int32Value(cobj->zOrder);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -459,7 +461,7 @@ bool js_get_BaseData_zOrder(JSContext *cx, JS::HandleObject obj, JS::HandleId id
         CCLOGERROR("js_get_BaseData_zOrder : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_zOrder : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_zOrder : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_zOrder(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -468,16 +470,16 @@ bool js_set_BaseData_zOrder(JSContext *cx, JS::HandleObject obj, JS::HandleId id
         cobj->y = (int)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_zOrder : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_zOrder : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_skewX(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->skewX);
+        JS::Value ret = JS::DoubleValue(cobj->skewX);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -485,7 +487,7 @@ bool js_get_BaseData_skewX(JSContext *cx, JS::HandleObject obj, JS::HandleId id,
         CCLOGERROR("js_get_BaseData_skewX : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_skewX : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_skewX : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_skewX(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -494,16 +496,16 @@ bool js_set_BaseData_skewX(JSContext *cx, JS::HandleObject obj, JS::HandleId id,
         cobj->skewX = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_skewX : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_skewX : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_skewY(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->skewY);
+        JS::Value ret = JS::DoubleValue(cobj->skewY);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -511,7 +513,7 @@ bool js_get_BaseData_skewY(JSContext *cx, JS::HandleObject obj, JS::HandleId id,
         CCLOGERROR("js_get_BaseData_skewY : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_skewY : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_skewY : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_skewY(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -520,16 +522,16 @@ bool js_set_BaseData_skewY(JSContext *cx, JS::HandleObject obj, JS::HandleId id,
         cobj->skewY = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_skewY : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_skewY : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_scaleX(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->scaleX);
+        JS::Value ret = JS::DoubleValue(cobj->scaleX);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -537,7 +539,7 @@ bool js_get_BaseData_scaleX(JSContext *cx, JS::HandleObject obj, JS::HandleId id
         CCLOGERROR("js_get_BaseData_scaleX : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_scaleX : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_scaleX : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_scaleX(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -546,16 +548,16 @@ bool js_set_BaseData_scaleX(JSContext *cx, JS::HandleObject obj, JS::HandleId id
         cobj->scaleX = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_scaleX : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_scaleX : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_scaleY(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->scaleY);
+        JS::Value ret = JS::DoubleValue(cobj->scaleY);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -563,7 +565,7 @@ bool js_get_BaseData_scaleY(JSContext *cx, JS::HandleObject obj, JS::HandleId id
         CCLOGERROR("js_get_BaseData_scaleY : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_scaleY : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_scaleY : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_scaleY(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -572,16 +574,16 @@ bool js_set_BaseData_scaleY(JSContext *cx, JS::HandleObject obj, JS::HandleId id
         cobj->scaleY = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_scaleY : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_scaleY : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_tweenRotate(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->tweenRotate);
+        JS::Value ret = JS::DoubleValue(cobj->tweenRotate);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -589,7 +591,7 @@ bool js_get_BaseData_tweenRotate(JSContext *cx, JS::HandleObject obj, JS::Handle
         CCLOGERROR("js_get_BaseData_tweenRotate : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_tweenRotate : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_tweenRotate : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_tweenRotate(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -598,16 +600,16 @@ bool js_set_BaseData_tweenRotate(JSContext *cx, JS::HandleObject obj, JS::Handle
         cobj->tweenRotate = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_tweenRotate : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_tweenRotate : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_isUseColorInfo(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = BOOLEAN_TO_JSVAL(cobj->isUseColorInfo);
+        JS::Value ret = JS::BooleanValue(cobj->isUseColorInfo);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -615,7 +617,7 @@ bool js_get_BaseData_isUseColorInfo(JSContext *cx, JS::HandleObject obj, JS::Han
         CCLOGERROR("js_get_BaseData_isUseColorInfo : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_isUseColorInfo : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_isUseColorInfo : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_isUseColorInfo(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -624,16 +626,16 @@ bool js_set_BaseData_isUseColorInfo(JSContext *cx, JS::HandleObject obj, JS::Han
         cobj->isUseColorInfo = vp.get().toBoolean();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_isUseColorInfo : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_isUseColorInfo : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_a(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->a);
+        JS::Value ret = JS::Int32Value(cobj->a);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -641,7 +643,7 @@ bool js_get_BaseData_a(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS:
         CCLOGERROR("js_get_BaseData_a : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_a : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_a : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_a(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -650,16 +652,16 @@ bool js_set_BaseData_a(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
         cobj->a = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_a : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_a : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_r(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->r);
+        JS::Value ret = JS::Int32Value(cobj->r);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -667,7 +669,7 @@ bool js_get_BaseData_r(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS:
         CCLOGERROR("js_get_BaseData_r : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_r : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_r : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_r(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -676,16 +678,16 @@ bool js_set_BaseData_r(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
         cobj->r = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_r : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_r : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_g(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->g);
+        JS::Value ret = JS::Int32Value(cobj->g);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -693,7 +695,7 @@ bool js_get_BaseData_g(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS:
         CCLOGERROR("js_get_BaseData_g : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_g : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_g : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_g(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -702,16 +704,16 @@ bool js_set_BaseData_g(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
         cobj->g = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_g : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_g : Invalid native object.");
     return false;
 }
 
 bool js_get_BaseData_b(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::BaseData* cobj = (cocostudio::BaseData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->b);
+        JS::Value ret = JS::Int32Value(cobj->b);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -719,7 +721,7 @@ bool js_get_BaseData_b(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS:
         CCLOGERROR("js_get_BaseData_b : Fail to retrieve property from BaseData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_BaseData_b : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_BaseData_b : Invalid native object.");
     return false;
 }
 bool js_set_BaseData_b(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -728,7 +730,7 @@ bool js_set_BaseData_b(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
         cobj->b = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_BaseData_b : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_BaseData_b : Invalid native object.");
     return false;
 }
 
@@ -737,9 +739,9 @@ bool js_set_BaseData_b(JSContext *cx, JS::HandleObject obj, JS::HandleId id, boo
 bool js_get_AnimationData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::AnimationData* cobj = (cocostudio::AnimationData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = std_string_to_jsval(cx, cobj->name);
+        JS::Value ret = std_string_to_jsval(cx, cobj->name);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -747,7 +749,7 @@ bool js_get_AnimationData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId
         CCLOGERROR("js_get_AnimationData_name : Fail to retrieve property name of AnimationData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_AnimationData_name : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_AnimationData_name : Invalid native object.");
     return false;
 }
 bool js_set_AnimationData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -760,16 +762,16 @@ bool js_set_AnimationData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId
         cobj->name = name;
         return true;
     }
-    JS_ReportError(cx, "js_set_AnimationData_name : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_AnimationData_name : Invalid native object.");
     return false;
 }
 
 bool js_get_AnimationData_movementNames(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::AnimationData* cobj = (cocostudio::AnimationData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = std_vector_string_to_jsval(cx, cobj->movementNames);
+        JS::Value ret = std_vector_string_to_jsval(cx, cobj->movementNames);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -777,7 +779,7 @@ bool js_get_AnimationData_movementNames(JSContext *cx, JS::HandleObject obj, JS:
         CCLOGERROR("js_get_AnimationData_movementNames : Fail to retrieve property movementNames of AnimationData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_AnimationData_movementNames : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_AnimationData_movementNames : Invalid native object.");
     return false;
 }
 bool js_set_AnimationData_movementNames(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -791,7 +793,7 @@ bool js_set_AnimationData_movementNames(JSContext *cx, JS::HandleObject obj, JS:
         cobj->movementNames = movementNames;
         return true;
     }
-    JS_ReportError(cx, "js_set_AnimationData_movementNames : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_AnimationData_movementNames : Invalid native object.");
     return false;
 }
 
@@ -799,7 +801,7 @@ bool js_get_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
     cocostudio::AnimationData* cobj = (cocostudio::AnimationData*)JS_GetPrivate(obj);
     if (cobj) {
         cocos2d::Map<std::string, cocostudio::MovementData*> dic = cobj->movementDataDic;
-        JS::RootedObject jsRet(cx, JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));
+        JS::RootedObject jsRet(cx, JS_NewObject(cx, nullptr));
 
         for (auto iter = dic.begin(); iter != dic.end(); ++iter)
         {
@@ -810,7 +812,7 @@ bool js_get_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
             do {
                 if (movementData) {
                     JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocostudio::MovementData>(cx, movementData));
-                    dictElement = OBJECT_TO_JSVAL(jsobj);
+                    dictElement = JS::ObjectValue(*jsobj);
                 } else {
                     CCLOGERROR("js_get_AnimationData_movementDataDic : Fail to retrieve property movementDataDic of AnimationData.");
                     return false;
@@ -822,9 +824,9 @@ bool js_get_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
                 JS_SetProperty(cx, jsRet, key.c_str(), dictElement);
             }
         }
-        jsval ret = OBJECT_TO_JSVAL(jsRet);
+        JS::Value ret = JS::ObjectValue(*jsRet);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -832,7 +834,7 @@ bool js_get_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
         CCLOGERROR("js_get_AnimationData_movementDataDic : Fail to retrieve property movementDataDic of AnimationData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_AnimationData_movementDataDic : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_AnimationData_movementDataDic : Invalid native object.");
     return false;
 }
 bool js_set_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -856,7 +858,7 @@ bool js_set_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
                 CCLOGERROR("js_set_AnimationData_movementDataDic : Error processing arguments.");
                 return false; // error
             }
-            if (key == JSVAL_VOID) {
+            if (key == JS::UndefinedValue()) {
                 break; // end of iteration
             }
             if (!key.isString()) {
@@ -884,7 +886,7 @@ bool js_set_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
         cobj->movementDataDic = dict;
         return true;
     }
-    JS_ReportError(cx, "js_set_AnimationData_movementDataDic : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_AnimationData_movementDataDic : Invalid native object.");
     return false;
 }
 
@@ -893,9 +895,9 @@ bool js_set_AnimationData_movementDataDic(JSContext *cx, JS::HandleObject obj, J
 bool js_get_MovementData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = std_string_to_jsval(cx, cobj->name);
+        JS::Value ret = std_string_to_jsval(cx, cobj->name);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -903,7 +905,7 @@ bool js_get_MovementData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId 
         CCLOGERROR("js_get_MovementData_name : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_name : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_name : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -916,16 +918,16 @@ bool js_set_MovementData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId 
         cobj->name = name;
         return true;
     }
-    JS_ReportError(cx, "js_set_MovementData_name : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_MovementData_name : Invalid native object.");
     return false;
 }
 
 bool js_get_MovementData_duration(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->duration);
+        JS::Value ret = JS::Int32Value(cobj->duration);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -933,7 +935,7 @@ bool js_get_MovementData_duration(JSContext *cx, JS::HandleObject obj, JS::Handl
         CCLOGERROR("js_get_MovementData_duration : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_duration : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_duration : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_duration(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -942,16 +944,16 @@ bool js_set_MovementData_duration(JSContext *cx, JS::HandleObject obj, JS::Handl
         cobj->duration = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_MovementData_duration : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_MovementData_duration : Invalid native object.");
     return false;
 }
 
 bool js_get_MovementData_scale(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->scale);
+        JS::Value ret = JS::DoubleValue(cobj->scale);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -959,7 +961,7 @@ bool js_get_MovementData_scale(JSContext *cx, JS::HandleObject obj, JS::HandleId
         CCLOGERROR("js_get_MovementData_scale : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_scale : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_scale : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_scale(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -968,16 +970,16 @@ bool js_set_MovementData_scale(JSContext *cx, JS::HandleObject obj, JS::HandleId
         cobj->scale = (float)vp.get().toDouble();
         return true;
     }
-    JS_ReportError(cx, "js_set_MovementData_scale : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_MovementData_scale : Invalid native object.");
     return false;
 }
 
 bool js_get_MovementData_durationTo(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->durationTo);
+        JS::Value ret = JS::Int32Value(cobj->durationTo);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -985,7 +987,7 @@ bool js_get_MovementData_durationTo(JSContext *cx, JS::HandleObject obj, JS::Han
         CCLOGERROR("js_get_MovementData_durationTo : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_durationTo : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_durationTo : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_durationTo(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -994,16 +996,16 @@ bool js_set_MovementData_durationTo(JSContext *cx, JS::HandleObject obj, JS::Han
         cobj->durationTo = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_MovementData_durationTo : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_MovementData_durationTo : Invalid native object.");
     return false;
 }
 
 bool js_get_MovementData_durationTween(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->durationTween);
+        JS::Value ret = JS::Int32Value(cobj->durationTween);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1011,7 +1013,7 @@ bool js_get_MovementData_durationTween(JSContext *cx, JS::HandleObject obj, JS::
         CCLOGERROR("js_get_MovementData_durationTween : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_durationTween : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_durationTween : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_durationTween(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -1020,16 +1022,16 @@ bool js_set_MovementData_durationTween(JSContext *cx, JS::HandleObject obj, JS::
         cobj->durationTween = vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_MovementData_durationTween : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_MovementData_durationTween : Invalid native object.");
     return false;
 }
 
 bool js_get_MovementData_loop(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = BOOLEAN_TO_JSVAL(cobj->loop);
+        JS::Value ret = JS::BooleanValue(cobj->loop);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1037,7 +1039,7 @@ bool js_get_MovementData_loop(JSContext *cx, JS::HandleObject obj, JS::HandleId 
         CCLOGERROR("js_get_MovementData_loop : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_loop : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_loop : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_loop(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -1046,16 +1048,16 @@ bool js_set_MovementData_loop(JSContext *cx, JS::HandleObject obj, JS::HandleId 
         cobj->loop = vp.get().toBoolean();
         return true;
     }
-    JS_ReportError(cx, "js_get_MovementData_loop : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_loop : Invalid native object.");
     return false;
 }
 
 bool js_get_MovementData_tweenEasing(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp) {
     cocostudio::MovementData* cobj = (cocostudio::MovementData*)JS_GetPrivate(obj);
     if (cobj) {
-        jsval ret = INT_TO_JSVAL(cobj->tweenEasing);
+        JS::Value ret = JS::Int32Value(cobj->tweenEasing);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1063,7 +1065,7 @@ bool js_get_MovementData_tweenEasing(JSContext *cx, JS::HandleObject obj, JS::Ha
         CCLOGERROR("js_get_MovementData_tweenEasing : Fail to retrieve property from MovementData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_MovementData_tweenEasing : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_MovementData_tweenEasing : Invalid native object.");
     return false;
 }
 bool js_set_MovementData_tweenEasing(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp) {
@@ -1072,7 +1074,7 @@ bool js_set_MovementData_tweenEasing(JSContext *cx, JS::HandleObject obj, JS::Ha
         cobj->tweenEasing = (cocos2d::tweenfunc::TweenType)vp.get().toInt32();
         return true;
     }
-    JS_ReportError(cx, "js_set_MovementData_tweenEasing : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_MovementData_tweenEasing : Invalid native object.");
     return false;
 }
 
@@ -1086,7 +1088,7 @@ bool js_get_ContourData_vertexList(JSContext *cx, JS::HandleObject obj, JS::Hand
     if (cobj) {
         const std::vector<cocos2d::Vec2>& ret = cobj->vertexList;
         JS::RootedObject jsretArr(cx, JS_NewArrayObject(cx, 0));
-        jsval jsret;
+        JS::Value jsret;
         //CCObject* obj;
         int i = 0;
         for(const auto& vec2 : ret)
@@ -1099,8 +1101,8 @@ bool js_get_ContourData_vertexList(JSContext *cx, JS::HandleObject obj, JS::Hand
             }
             ++i;
         }
-        jsret = OBJECT_TO_JSVAL(jsretArr);
-        if (jsret != JSVAL_NULL)
+        jsret = JS::ObjectValue(*jsretArr);
+        if (jsret != JS::NullValue())
         {
             vp.set(jsret);
             return true;
@@ -1108,7 +1110,7 @@ bool js_get_ContourData_vertexList(JSContext *cx, JS::HandleObject obj, JS::Hand
         CCLOGERROR("js_get_ContourData_vertexList : Fail to retrieve property from ContourData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_ContourData_vertexList : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_ContourData_vertexList : Invalid native object.");
     return false;
 }
 bool js_set_ContourData_vertexList(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1119,7 +1121,9 @@ bool js_set_ContourData_vertexList(JSContext *cx, JS::HandleObject obj, JS::Hand
     if (cobj) {
         JS::RootedObject jsListObj(cx);
         jsListObj = vp.get().toObjectOrNull();
-        JSB_PRECONDITION3(jsListObj && JS_IsArrayObject(cx, jsListObj),  cx, false, "Object must be an array");
+        bool isArray = false;
+        JS_IsArrayObject( cx, jsListObj, &isArray);
+        JSB_PRECONDITION3(jsListObj && isArray,  cx, false, "Object must be an array");
 
         std::vector<cocos2d::Vec2> list;
         uint32_t len = 0;
@@ -1143,7 +1147,7 @@ bool js_set_ContourData_vertexList(JSContext *cx, JS::HandleObject obj, JS::Hand
         cobj->vertexList = list;
         return true;
     }
-    JS_ReportError(cx, "js_set_ContourData_vertexList : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_ContourData_vertexList : Invalid native object.");
     return false;
 }
 
@@ -1157,22 +1161,22 @@ bool js_get_TextureData_contourDataList(JSContext *cx, JS::HandleObject obj, JS:
     if (cobj) {
         const cocos2d::Vector<cocostudio::ContourData *>& ret = cobj->contourDataList;
         JS::RootedObject jsretArr(cx, JS_NewArrayObject(cx, 0));
-        jsval jsret;
+        JS::Value jsret;
         //CCObject* obj;
         int i = 0;
         for(const auto& contourData : ret)
         {
             JS::RootedValue arrElement(cx);
             JS::RootedObject contourObj(cx, js_get_or_create_jsobject<cocostudio::ContourData>(cx, contourData));
-            arrElement = OBJECT_TO_JSVAL(contourObj);
+            arrElement = JS::ObjectValue(*contourObj);
 
             if (!JS_SetElement(cx, jsretArr, i, arrElement)) {
                 break;
             }
             ++i;
         }
-        jsret = OBJECT_TO_JSVAL(jsretArr);
-        if (jsret != JSVAL_NULL)
+        jsret = JS::ObjectValue(*jsretArr);
+        if (jsret != JS::NullValue())
         {
             vp.set(jsret);
             return true;
@@ -1180,7 +1184,7 @@ bool js_get_TextureData_contourDataList(JSContext *cx, JS::HandleObject obj, JS:
         CCLOGERROR("js_get_TextureData_contourDataList : Fail to retrieve property from TextureData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_TextureData_contourDataList : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_TextureData_contourDataList : Invalid native object.");
     return false;
 }
 bool js_set_TextureData_contourDataList(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1191,7 +1195,9 @@ bool js_set_TextureData_contourDataList(JSContext *cx, JS::HandleObject obj, JS:
     if (cobj) {
         JS::RootedObject jsListObj(cx);
         jsListObj = vp.get().toObjectOrNull();
-        JSB_PRECONDITION3(jsListObj && JS_IsArrayObject(cx, jsListObj),  cx, false, "Object must be an array");
+        bool isArray = false;
+        JS_IsArrayObject( cx, jsListObj, &isArray);
+        JSB_PRECONDITION3(jsListObj && isArray,  cx, false, "Object must be an array");
 
         cocos2d::Vector<cocostudio::ContourData *> list;
         uint32_t len = 0;
@@ -1221,7 +1227,7 @@ bool js_set_TextureData_contourDataList(JSContext *cx, JS::HandleObject obj, JS:
         cobj->contourDataList = list;
         return true;
     }
-    JS_ReportError(cx, "js_set_TextureData_contourDataList : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_TextureData_contourDataList : Invalid native object.");
     return false;
 }
 
@@ -1234,12 +1240,12 @@ bool js_get_TextureData_width(JSContext *cx, JS::HandleObject obj, JS::HandleId 
     //struct jsb_c_proxy_s *proxy = jsb_get_c_proxy_for_jsobject(obj);
     //cocostudio::TextureData* cobj = (cocostudio::TextureData*)proxy->handle;
 
-    //jsval argv;
+    //JS::Value argv;
     //cocostudio::TextureData* cobj = (cocostudio::TextureData*)JS_GetInstancePrivate(cx, obj.get(), jsb_cocostudio_TextureData_class, &argv);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->width);
+        JS::Value ret = JS::DoubleValue(cobj->width);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1247,7 +1253,7 @@ bool js_get_TextureData_width(JSContext *cx, JS::HandleObject obj, JS::HandleId 
         CCLOGERROR("js_get_TextureData_width : Fail to retrieve property from TextureData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_TextureData_width : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_TextureData_width : Invalid native object.");
     return false;
 }
 bool js_set_TextureData_width(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1259,7 +1265,7 @@ bool js_set_TextureData_width(JSContext *cx, JS::HandleObject obj, JS::HandleId 
         cobj->width = (float)(vp.get().toNumber());
         return true;
     }
-    JS_ReportError(cx, "js_set_TextureData_width : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_TextureData_width : Invalid native object.");
     return false;
 }
 
@@ -1269,9 +1275,9 @@ bool js_get_TextureData_height(JSContext *cx, JS::HandleObject obj, JS::HandleId
     js_proxy_t *proxy = jsb_get_js_proxy(jsobj);
     cocostudio::TextureData* cobj = (cocostudio::TextureData*)(proxy ? proxy->ptr : NULL);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->height);
+        JS::Value ret = JS::DoubleValue(cobj->height);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1279,7 +1285,7 @@ bool js_get_TextureData_height(JSContext *cx, JS::HandleObject obj, JS::HandleId
         CCLOGERROR("js_get_TextureData_height : Fail to retrieve property from TextureData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_TextureData_height : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_TextureData_height : Invalid native object.");
     return false;
 }
 bool js_set_TextureData_height(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1291,7 +1297,7 @@ bool js_set_TextureData_height(JSContext *cx, JS::HandleObject obj, JS::HandleId
         cobj->height = (float)vp.get().toNumber();
         return true;
     }
-    JS_ReportError(cx, "js_set_TextureData_height : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_TextureData_height : Invalid native object.");
     return false;
 }
 
@@ -1301,9 +1307,9 @@ bool js_get_TextureData_pivotX(JSContext *cx, JS::HandleObject obj, JS::HandleId
     js_proxy_t *proxy = jsb_get_js_proxy(jsobj);
     cocostudio::TextureData* cobj = (cocostudio::TextureData*)(proxy ? proxy->ptr : NULL);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->pivotX);
+        JS::Value ret = JS::DoubleValue(cobj->pivotX);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1311,7 +1317,7 @@ bool js_get_TextureData_pivotX(JSContext *cx, JS::HandleObject obj, JS::HandleId
         CCLOGERROR("js_get_TextureData_pivotX : Fail to retrieve property from TextureData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_TextureData_pivotX : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_TextureData_pivotX : Invalid native object.");
     return false;
 }
 bool js_set_TextureData_pivotX(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1323,7 +1329,7 @@ bool js_set_TextureData_pivotX(JSContext *cx, JS::HandleObject obj, JS::HandleId
         cobj->pivotX = (float)vp.get().toNumber();
         return true;
     }
-    JS_ReportError(cx, "js_set_TextureData_pivotX : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_TextureData_pivotX : Invalid native object.");
     return false;
 }
 
@@ -1333,9 +1339,9 @@ bool js_get_TextureData_pivotY(JSContext *cx, JS::HandleObject obj, JS::HandleId
     js_proxy_t *proxy = jsb_get_js_proxy(jsobj);
     cocostudio::TextureData* cobj = (cocostudio::TextureData*)(proxy ? proxy->ptr : NULL);
     if (cobj) {
-        jsval ret = DOUBLE_TO_JSVAL(cobj->pivotY);
+        JS::Value ret = JS::DoubleValue(cobj->pivotY);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1343,7 +1349,7 @@ bool js_get_TextureData_pivotY(JSContext *cx, JS::HandleObject obj, JS::HandleId
         CCLOGERROR("js_get_TextureData_pivotY : Fail to retrieve property from TextureData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_TextureData_pivotY : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_TextureData_pivotY : Invalid native object.");
     return false;
 }
 bool js_set_TextureData_pivotY(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1355,7 +1361,7 @@ bool js_set_TextureData_pivotY(JSContext *cx, JS::HandleObject obj, JS::HandleId
         cobj->pivotY = (float)vp.get().toNumber();
         return true;
     }
-    JS_ReportError(cx, "js_set_TextureData_pivotY : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_TextureData_pivotY : Invalid native object.");
     return false;
 }
 
@@ -1365,9 +1371,9 @@ bool js_get_TextureData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId i
     js_proxy_t *proxy = jsb_get_js_proxy(jsobj);
     cocostudio::TextureData* cobj = (cocostudio::TextureData*)(proxy ? proxy->ptr : NULL);
     if (cobj) {
-        jsval ret = std_string_to_jsval(cx, cobj->name);
+        JS::Value ret = std_string_to_jsval(cx, cobj->name);
 
-        if (ret != JSVAL_NULL)
+        if (ret != JS::NullValue())
         {
             vp.set(ret);
             return true;
@@ -1375,7 +1381,7 @@ bool js_get_TextureData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId i
         CCLOGERROR("js_get_TextureData_name : Fail to retrieve property name of TextureData.");
         return false;
     }
-    JS_ReportError(cx, "js_get_TextureData_name : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_get_TextureData_name : Invalid native object.");
     return false;
 }
 bool js_set_TextureData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId id, bool strict, JS::MutableHandleValue vp)
@@ -1391,7 +1397,7 @@ bool js_set_TextureData_name(JSContext *cx, JS::HandleObject obj, JS::HandleId i
         cobj->name = name;
         return true;
     }
-    JS_ReportError(cx, "js_set_TextureData_name : Invalid native object.");
+    JS_ReportErrorUTF8(cx, "js_set_TextureData_name : Invalid native object.");
     return false;
 }
 

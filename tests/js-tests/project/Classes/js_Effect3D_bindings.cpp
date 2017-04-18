@@ -402,7 +402,7 @@ void EffectSprite3D::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &tran
 
 // js bindings
 
-static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     args.rval().setBoolean(true);
@@ -412,7 +412,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
 JSClass  *jsb_Effect3DOutline_class;
 JSObject *jsb_Effect3DOutline_prototype;
 
-bool js_cocos2dx_Effect3DOutline_setOutlineWidth(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Effect3DOutline_setOutlineWidth(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -432,7 +432,7 @@ bool js_cocos2dx_Effect3DOutline_setOutlineWidth(JSContext *cx, uint32_t argc, j
     JS_ReportError(cx, "js_cocos2dx_Effect3DOutline_setOutlineWidth : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_Effect3DOutline_setOutlineColor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Effect3DOutline_setOutlineColor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -452,16 +452,16 @@ bool js_cocos2dx_Effect3DOutline_setOutlineColor(JSContext *cx, uint32_t argc, j
     JS_ReportError(cx, "js_cocos2dx_Effect3DOutline_setOutlineColor : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_Effect3DOutline_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Effect3DOutline_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
         Effect3DOutline* ret = Effect3DOutline::create();
-        jsval jsret = JSVAL_NULL;
+        JS::Value jsret = JSVAL_NULL;
         do {
             if (ret) {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<Effect3DOutline>(cx, ret));
-                jsret = OBJECT_TO_JSVAL(jsobj);
+                jsret = JS::ObjectValue(jsobj);
             } else {
                 jsret = JSVAL_NULL;
             }
@@ -476,7 +476,7 @@ bool js_cocos2dx_Effect3DOutline_create(JSContext *cx, uint32_t argc, jsval *vp)
 
 JSObject *jsb_Effect3D_prototype;
 
-bool jsb_Effect3DOutline_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool jsb_Effect3DOutline_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -540,7 +540,7 @@ void js_register_cocos2dx_Effect3DOutline(JSContext *cx, JS::HandleObject global
 JSClass  *jsb_EffectSprite3D_class;
 JSObject *jsb_EffectSprite3D_prototype;
 
-bool js_cocos2dx_EffectSprite3D_setEffect3D(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_EffectSprite3D_setEffect3D(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -567,7 +567,7 @@ bool js_cocos2dx_EffectSprite3D_setEffect3D(JSContext *cx, uint32_t argc, jsval 
     JS_ReportError(cx, "js_cocos2dx_EffectSprite3D_setEffect3D : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_EffectSprite3D_addEffect(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_EffectSprite3D_addEffect(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -596,7 +596,7 @@ bool js_cocos2dx_EffectSprite3D_addEffect(JSContext *cx, uint32_t argc, jsval *v
     JS_ReportError(cx, "js_cocos2dx_EffectSprite3D_addEffect : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -607,7 +607,7 @@ bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint3
         ok &= jsval_to_std_string(cx, args.get(1), &arg1);
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture : Error processing arguments");
         EffectSprite3D* ret = EffectSprite3D::createFromObjFileAndTexture(arg0, arg1);
-        jsval jsret = JSVAL_NULL;
+        JS::Value jsret = JSVAL_NULL;
         do {
             if (ret) {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<EffectSprite3D>(cx, ret));
@@ -623,7 +623,7 @@ bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint3
     return false;
 }
 
-bool js_cocos2dx_EffectSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_EffectSprite3D_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -632,7 +632,7 @@ bool js_cocos2dx_EffectSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
         ok &= jsval_to_std_string(cx, args.get(0), &arg0);
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_EffectSprite3D_create : Error processing arguments");
         EffectSprite3D* ret = EffectSprite3D::create(arg0);
-        jsval jsret = JSVAL_NULL;
+        JS::Value jsret = JSVAL_NULL;
         do {
             if (ret) {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<EffectSprite3D>(cx, ret));
@@ -651,7 +651,7 @@ bool js_cocos2dx_EffectSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
 
 extern JSObject *jsb_cocos2d_Sprite3D_prototype;
 
-bool jsb_EffectSprite3D_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool jsb_EffectSprite3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;

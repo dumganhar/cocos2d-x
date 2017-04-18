@@ -28,6 +28,7 @@
 
 #include "jsapi.h"
 #include "jsfriendapi.h"
+#include "js/Conversions.h"
 
 #include "ui/CocosGUI.h"
 #include "scripting/js-bindings/manual/js_bindings_config.h"
@@ -210,7 +211,7 @@ public:
      * @param vp        @~english The arguments.
      * @return @~english Return true if successfully invoked, otherwise return false.
      */
-    bool executeFunctionWithOwner(jsval owner, const char *name, uint32_t argc, jsval *vp);
+    bool executeFunctionWithOwner(JS::Value owner, const char *name, uint32_t argc, JS::Value *vp);
     
     /**
      * @brief @~english Execute a js function with a JavaScript caller, function name, arguments count, arguments and a return value.
@@ -221,7 +222,7 @@ public:
      * @param retVal    @~english The js object to save the return value.
      * @return @~english Return true if successfully invoked, otherwise return false.
      */
-    bool executeFunctionWithOwner(jsval owner, const char *name, uint32_t argc, jsval *vp, JS::MutableHandleValue retVal);
+    bool executeFunctionWithOwner(JS::Value owner, const char *name, uint32_t argc, JS::Value *vp, JS::MutableHandleValue retVal);
     
     /**
      * @brief @~english Execute a js function with a JavaScript caller, function name, arguments array.
@@ -231,7 +232,7 @@ public:
      * @param args      @~english The arguments array.
      * @return @~english Return true if successfully invoked, otherwise return false.
      */
-    bool executeFunctionWithOwner(jsval owner, const char *name, const JS::HandleValueArray& args);
+    bool executeFunctionWithOwner(JS::Value owner, const char *name, const JS::HandleValueArray& args);
     
     /**
      * @brief @~english Execute a js function with a JavaScript caller, function name, arguments array and a return value.
@@ -242,7 +243,7 @@ public:
      * @param retVal    @~english The js object to save the return value.
      * @return @~english Return true if successfully invoked, otherwise return false.
      */
-    bool executeFunctionWithOwner(jsval owner, const char *name, const JS::HandleValueArray& args, JS::MutableHandleValue retVal);
+    bool executeFunctionWithOwner(JS::Value owner, const char *name, const JS::HandleValueArray& args, JS::MutableHandleValue retVal);
     
     /**
      * @brief @~english Execute a js function with a js this object and the js function object.
@@ -264,7 +265,7 @@ public:
     /**@~english
      * Evaluate the specified js code string
      * @param string    @~english The string with the javascript code to be evaluated
-     * @param outVal    @~english The jsval that will hold the return value of the evaluation.
+     * @param outVal    @~english The JS::Value that will hold the return value of the evaluation.
      * @param filename  @~english The filename
      * @param cx        @~english The js context
      * @param global    @~english The js global object
@@ -275,7 +276,7 @@ public:
     /**@~english
      * Evaluate the specified js code string
      * @param string    @~english The string with the javascript code to be evaluated
-     * @param outVal    @~english The jsval that will hold the return value of the evaluation.
+     * @param outVal    @~english The JS::Value that will hold the return value of the evaluation.
      * @return @~english Return true if successfully invoked, otherwise return false.
      */
     bool evalString(const char *string, JS::MutableHandleValue outVal);
@@ -443,7 +444,7 @@ public:
      * @param vp @~english The arguments
      * @return @~english Return true if succeed, otherwise return false.
      */
-    static bool log(JSContext *cx, uint32_t argc, jsval *vp);
+    static bool log(JSContext *cx, uint32_t argc, JS::Value *vp);
     
     /**@~english
      * Sets a js value to the targeted js object's reserved slot, which is not exposed to script environment.
@@ -452,7 +453,7 @@ public:
      * @param value @~english The js value to set to the slot
      * @return @~english Return true if succeed, otherwise return false.
      */
-    bool setReservedSpot(uint32_t i, JSObject *obj, jsval value);
+    bool setReservedSpot(uint32_t i, JSObject *obj, JS::Value value);
     
     /**@~english
      * Runs a script from script environment, it should be invoked from script environment
@@ -462,7 +463,7 @@ public:
      * @param vp @~english The arguments
      * @return @~english Return true if succeed, otherwise return false.
      */
-    static bool executeScript(JSContext *cx, uint32_t argc, jsval *vp);
+    static bool executeScript(JSContext *cx, uint32_t argc, JS::Value *vp);
     /**@~english
      * Forces a cycle of garbage collection, it should be invoked from script environment
      * Bound to `__jsc__.garbageCollect` and `window.garbageCollect`
@@ -470,7 +471,7 @@ public:
      * @param argc @~english The arguments count
      * @param vp @~english The arguments
      */
-    static bool forceGC(JSContext *cx, uint32_t argc, jsval *vp);
+    static bool forceGC(JSContext *cx, uint32_t argc, JS::Value *vp);
     /**@~english
      * Dump all named rooted objects, it should be invoked from script environment
      * Bound to `__jsc__.dumpRoot`
@@ -478,7 +479,7 @@ public:
      * @param argc @~english The arguments count
      * @param vp @~english The arguments
      */
-    static bool dumpRoot(JSContext *cx, uint32_t argc, jsval *vp);
+    static bool dumpRoot(JSContext *cx, uint32_t argc, JS::Value *vp);
     /**@~english
      * Check whether a js object's C++ proxy is still valid, it should be invoked from script environment
      * Bound to `window.__isObjectValid`
@@ -486,7 +487,7 @@ public:
      * @param argc @~english The arguments count
      * @param vp @~english The arguments
      */
-    static bool isObjectValid(JSContext *cx, uint32_t argc, jsval *vp);
+    static bool isObjectValid(JSContext *cx, uint32_t argc, JS::Value *vp);
     
     /**@~english
      * Log a string to the debug environment.
@@ -578,8 +579,8 @@ public:
 
 JSObject* NewGlobalObject(JSContext* cx, bool debug = false);
 
-bool jsb_set_reserved_slot(JSObject *obj, uint32_t idx, jsval value);
-bool jsb_get_reserved_slot(JSObject *obj, uint32_t idx, jsval& ret);
+bool jsb_set_reserved_slot(JSObject *obj, uint32_t idx, JS::Value value);
+bool jsb_get_reserved_slot(JSObject *obj, uint32_t idx, JS::Value& ret);
 
 template <class T>
 js_type_class_t *jsb_register_class(JSContext *cx, JSClass *jsClass, JS::HandleObject proto, JS::HandleObject parentProto)

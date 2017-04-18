@@ -53,8 +53,8 @@ public:
         js_proxy_t * p = jsb_get_native_proxy(view);
         if (!p) return;
 
-        jsval arg = OBJECT_TO_JSVAL(p->obj);
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(_JSDelegate), "scrollViewDidScroll", 1, &arg);
+        JS::Value arg = JS::ObjectValue(*p->obj);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*_JSDelegate), "scrollViewDidScroll", 1, &arg);
     }
 
     virtual void scrollViewDidZoom(ScrollView* view) override
@@ -62,8 +62,8 @@ public:
         js_proxy_t * p = jsb_get_native_proxy(view);
         if (!p) return;
 
-        jsval arg = OBJECT_TO_JSVAL(p->obj);
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(_JSDelegate), "scrollViewDidZoom", 1, &arg);
+        JS::Value arg = JS::ObjectValue(*p->obj);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*_JSDelegate), "scrollViewDidZoom", 1, &arg);
     }
 
     void setJSDelegate(JS::HandleObject pJSDelegate)
@@ -74,7 +74,7 @@ private:
     JS::Heap<JSObject*> _JSDelegate;
 };
 
-static bool js_cocos2dx_CCScrollView_setDelegate(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCScrollView_setDelegate(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -99,7 +99,7 @@ static bool js_cocos2dx_CCScrollView_setDelegate(JSContext *cx, uint32_t argc, j
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 
@@ -158,8 +158,8 @@ private:
         js_proxy_t * p = jsb_get_native_proxy(view);
         if (!p) return;
 
-        jsval arg = OBJECT_TO_JSVAL(p->obj);
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(_JSDelegate), jsFunctionName.c_str(), 1, &arg);
+        JS::Value arg = JS::ObjectValue(*p->obj);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*_JSDelegate), jsFunctionName.c_str(), 1, &arg);
     }
 
     void callJSDelegate(TableView* table, TableViewCell* cell, std::string jsFunctionName)
@@ -170,17 +170,17 @@ private:
         js_proxy_t * pCellProxy = jsb_get_native_proxy(cell);
         if (!pCellProxy) return;
 
-        jsval args[2];
-        args[0] = OBJECT_TO_JSVAL(p->obj);
-        args[1] = OBJECT_TO_JSVAL(pCellProxy->obj);
+        JS::Value args[2];
+        args[0] = JS::ObjectValue(*p->obj);
+        args[1] = JS::ObjectValue(*pCellProxy->obj);
 
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(_JSDelegate), jsFunctionName.c_str(), 2, args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*_JSDelegate), jsFunctionName.c_str(), 2, args);
     }
 
     JS::Heap<JSObject*> _JSDelegate;
 };
 
-static bool js_cocos2dx_CCTableView_setDelegate(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCTableView_setDelegate(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -214,7 +214,7 @@ static bool js_cocos2dx_CCTableView_setDelegate(JSContext *cx, uint32_t argc, js
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 
@@ -298,7 +298,7 @@ private:
 
         bool hasAction;
         JS::RootedValue temp_retval(cx);
-        jsval dataVal = OBJECT_TO_JSVAL(p->obj);
+        JS::Value dataVal = JS::ObjectValue(*p->obj);
 
         JS::RootedObject obj(cx, _JSTableViewDataSource);
         JSAutoCompartment ac(cx, obj);
@@ -309,7 +309,7 @@ private:
             {
                 return false;
             }
-            if(temp_retval == JSVAL_VOID)
+            if(temp_retval == JS::UndefinedValue())
             {
                 return false;
             }
@@ -329,8 +329,8 @@ private:
         JSContext* cx = ScriptingCore::getInstance()->getGlobalContext();
         bool hasAction;
         JS::RootedValue temp_retval(cx);
-        jsval dataVal[2];
-        dataVal[0] = OBJECT_TO_JSVAL(p->obj);
+        JS::Value dataVal[2];
+        dataVal[0] = JS::ObjectValue(*p->obj);
         dataVal[1] = ssize_to_jsval(cx,idx);
 
         JS::RootedObject obj(cx, _JSTableViewDataSource);
@@ -343,7 +343,7 @@ private:
                 return false;
             }
 
-            if(temp_retval == JSVAL_VOID)
+            if(temp_retval == JS::UndefinedValue())
             {
                 return false;
             }
@@ -359,7 +359,7 @@ private:
     JS::Heap<JSObject*> _JSTableViewDataSource;
 };
 
-static bool js_cocos2dx_CCTableView_setDataSource(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCTableView_setDataSource(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -392,11 +392,11 @@ static bool js_cocos2dx_CCTableView_setDataSource(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
-static bool js_cocos2dx_CCTableView_create(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCTableView_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -415,18 +415,18 @@ static bool js_cocos2dx_CCTableView_create(JSContext *cx, uint32_t argc, jsval *
 
         ret->setDataSource(pNativeSource);
 
-        jsval jsret;
+        JS::Value jsret;
         do {
             if (ret)
             {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::extension::TableView>(cx, ret));
-                jsret = OBJECT_TO_JSVAL(jsobj);
+                jsret = JS::ObjectValue(*jsobj);
 
                 JS_SetProperty(cx, jsobj, "_dataSource", args.get(0));
             }
             else
             {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             }
         } while (0);
 
@@ -461,11 +461,11 @@ static bool js_cocos2dx_CCTableView_create(JSContext *cx, uint32_t argc, jsval *
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
-static bool js_cocos2dx_CCTableView_init(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCTableView_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -516,7 +516,7 @@ static bool js_cocos2dx_CCTableView_init(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
@@ -562,10 +562,10 @@ public:
 
         JSContext* cx = ScriptingCore::getInstance()->getGlobalContext();
 
-        jsval dataVal[2];
-        dataVal[0] = OBJECT_TO_JSVAL(p->obj);
+        JS::Value dataVal[2];
+        dataVal[0] = JS::ObjectValue(*p->obj);
         int arg1 = (int)event;
-        dataVal[1] = INT_TO_JSVAL(arg1);
+        dataVal[1] = JS::Int32Value(arg1);
         JS::RootedValue jsRet(cx);
 
         _callback->invoke(2, dataVal, &jsRet);
@@ -596,7 +596,7 @@ public:
 
 std::multimap<JSObject*, JSB_ControlButtonTarget*> JSB_ControlButtonTarget::_jsNativeTargetMap;
 
-static bool js_cocos2dx_CCControl_addTargetWithActionForControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCControl_addTargetWithActionForControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -653,11 +653,11 @@ static bool js_cocos2dx_CCControl_addTargetWithActionForControlEvents(JSContext 
 
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
 
-static bool js_cocos2dx_CCControl_removeTargetWithActionForControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_CCControl_removeTargetWithActionForControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -694,11 +694,11 @@ static bool js_cocos2dx_CCControl_removeTargetWithActionForControlEvents(JSConte
 
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
 
-bool js_cocos2dx_extension_EventListenerAssetsManagerEx_init(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_extension_EventListenerAssetsManagerEx_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -725,13 +725,13 @@ bool js_cocos2dx_extension_EventListenerAssetsManagerEx_init(JSContext *cx, uint
                 std::shared_ptr<JSFunctionWrapper> func(new JSFunctionWrapper(cx, jstarget, args.get(1), args.thisv()));
                 auto lambda = [=](cocos2d::extension::EventAssetsManagerEx* larg0) -> void {
                     JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-                    jsval largv[1];
+                    JS::Value largv[1];
                     do {
                         if (larg0) {
                             js_type_class_t* typeClass = js_get_type_from_native<cocos2d::extension::EventAssetsManagerEx>(larg0);
-                            largv[0] = OBJECT_TO_JSVAL(jsb_get_or_create_weak_jsobject(cx, larg0, typeClass, "cocos2d::extension::EventAssetsManagerEx"));
+                            largv[0] = JS::ObjectValue(*jsb_get_or_create_weak_jsobject(cx, larg0, typeClass, "cocos2d::extension::EventAssetsManagerEx"));
                         } else {
-                            largv[0] = JSVAL_NULL;
+                            largv[0] = JS::NullValue();
                         }
                     } while (0);
                     JS::RootedValue rval(cx);
@@ -750,16 +750,16 @@ bool js_cocos2dx_extension_EventListenerAssetsManagerEx_init(JSContext *cx, uint
             ;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_extension_EventListenerAssetsManagerEx_init : Error processing arguments");
         bool ret = cobj->init(arg0, arg1);
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        JS::Value jsret = JS::NullValue();
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_extension_EventListenerAssetsManagerEx_init : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_extension_EventListenerAssetsManagerEx_init : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_extension_EventListenerAssetsManagerEx_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_extension_EventListenerAssetsManagerEx_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -784,13 +784,13 @@ bool js_cocos2dx_extension_EventListenerAssetsManagerEx_create(JSContext *cx, ui
                 wrapper = func.get();
                 auto lambda = [=](cocos2d::extension::EventAssetsManagerEx* larg0) -> void {
                     JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-                    jsval largv[1];
+                    JS::Value largv[1];
                     do {
                         if (larg0) {
                             js_type_class_t* typeClass = js_get_type_from_native<cocos2d::extension::EventAssetsManagerEx>(larg0);
-                            largv[0] = OBJECT_TO_JSVAL(jsb_get_or_create_weak_jsobject(cx, larg0, typeClass, "cocos2d::extension::EventAssetsManagerEx"));
+                            largv[0] = JS::ObjectValue(*jsb_get_or_create_weak_jsobject(cx, larg0, typeClass, "cocos2d::extension::EventAssetsManagerEx"));
                         } else {
-                            largv[0] = JSVAL_NULL;
+                            largv[0] = JS::NullValue();
                         }
                     } while (0);
                     JS::RootedValue rval(cx);
@@ -812,7 +812,7 @@ bool js_cocos2dx_extension_EventListenerAssetsManagerEx_create(JSContext *cx, ui
         JS::RootedValue jsret(cx);
         if (ret) {
             JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::extension::EventListenerAssetsManagerEx>(cx, ret));
-            jsret = OBJECT_TO_JSVAL(jsobj);
+            jsret = JS::ObjectValue(*jsobj);
             if (wrapper)
             {
                 wrapper->setOwner(cx, jsret);
@@ -823,7 +823,7 @@ bool js_cocos2dx_extension_EventListenerAssetsManagerEx_create(JSContext *cx, ui
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_extension_EventListenerAssetsManagerEx_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_extension_EventListenerAssetsManagerEx_create : wrong number of arguments");
     return false;
 }
 
@@ -834,12 +834,12 @@ __JSDownloaderDelegator::__JSDownloaderDelegator(JSContext *cx, JS::HandleObject
     _obj = obj;
     _jsCallback = callback;
 
-    JS::RootedValue target(cx, OBJECT_TO_JSVAL(obj));
+    JS::RootedValue target(cx, JS::ObjectValue(*obj));
     if (!target.isNullOrUndefined())
     {
         js_add_object_root(target);
     }
-    target.set(OBJECT_TO_JSVAL(callback));
+    target.set(JS::ObjectValue(*callback));
     if (!target.isNullOrUndefined())
     {
         js_add_object_root(target);
@@ -848,12 +848,12 @@ __JSDownloaderDelegator::__JSDownloaderDelegator(JSContext *cx, JS::HandleObject
 
 __JSDownloaderDelegator::~__JSDownloaderDelegator()
 {
-    JS::RootedValue target(_cx, OBJECT_TO_JSVAL(_obj));
+    JS::RootedValue target(_cx, JS::ObjectValue(*_obj));
     if (!target.isNullOrUndefined())
     {
         js_remove_object_root(target);
     }
-    target.set(OBJECT_TO_JSVAL(_jsCallback));
+    target.set(JS::ObjectValue(*_jsCallback));
     if (!target.isNullOrUndefined())
     {
         js_remove_object_root(target);
@@ -935,12 +935,12 @@ void __JSDownloaderDelegator::onError()
 {
     Director::getInstance()->getScheduler()->performFunctionInCocosThread([this]
     {
-        JS::RootedValue callback(_cx, OBJECT_TO_JSVAL(_jsCallback));
+        JS::RootedValue callback(_cx, JS::ObjectValue(*_jsCallback));
         if (!callback.isNull()) {
             JS::RootedObject global(_cx, ScriptingCore::getInstance()->getGlobalObject());
             JSAutoCompartment ac(_cx, global);
 
-            jsval succeed = BOOLEAN_TO_JSVAL(false);
+            JS::Value succeed = JS::BooleanValue(false);
             JS::RootedValue retval(_cx);
             JS_CallFunctionValue(_cx, global, callback, JS::HandleValueArray::fromMarkedLocation(1, &succeed), &retval);
         }
@@ -956,20 +956,20 @@ void __JSDownloaderDelegator::onSuccess(Texture2D *tex)
         JS::RootedObject global(_cx, ScriptingCore::getInstance()->getGlobalObject());
         JSAutoCompartment ac(_cx, global);
 
-        jsval valArr[2];
+        JS::Value valArr[2];
         if (tex)
         {
-            valArr[0] = BOOLEAN_TO_JSVAL(true);
+            valArr[0] = JS::BooleanValue(true);
             JS::RootedObject jsobj(_cx, js_get_or_create_jsobject<Texture2D>(_cx, tex));
-            valArr[1] = OBJECT_TO_JSVAL(jsobj);
+            valArr[1] = JS::ObjectValue(*jsobj);
         }
         else
         {
-            valArr[0] = BOOLEAN_TO_JSVAL(false);
-            valArr[1] = JSVAL_NULL;
+            valArr[0] = JS::BooleanValue(false);
+            valArr[1] = JS::NullValue();
         }
 
-        JS::RootedValue callback(_cx, OBJECT_TO_JSVAL(_jsCallback));
+        JS::RootedValue callback(_cx, JS::ObjectValue(*_jsCallback));
         if (!callback.isNull())
         {
             JS::RootedValue retval(_cx);
@@ -980,7 +980,7 @@ void __JSDownloaderDelegator::onSuccess(Texture2D *tex)
 }
 
 // jsb.loadRemoteImg(url, function(succeed, result) {})
-bool js_load_remote_image(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_load_remote_image(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -998,18 +998,18 @@ bool js_load_remote_image(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_load_remote_image : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_load_remote_image : wrong number of arguments");
     return false;
 }
 
 using namespace std::chrono;
 
-bool js_performance_now(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_performance_now(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	auto now = steady_clock::now();
 	auto micro = duration_cast<microseconds>(now - ScriptingCore::getInstance()->getEngineStartTime()).count();
-	args.rval().set(DOUBLE_TO_JSVAL((double)micro * 0.001));
+	args.rval().set(JS::DoubleValue((double)micro * 0.001));
 	return true;
 }
 

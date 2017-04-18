@@ -286,14 +286,14 @@ bool JavascriptJavaBridge::CallInfo::getMethodInfo(void)
 
 JS::Value JavascriptJavaBridge::convertReturnValue(JSContext *cx, ReturnValue retValue, ValueType type)
 {
-	JS::Value ret = JSVAL_NULL;
+	JS::Value ret = JS::NullValue();
 
 	switch (type)
 	{
 		case TypeInteger:
-			return INT_TO_JSVAL(retValue.intValue);
+			return JS::Int32Value(retValue.intValue);
 		case TypeFloat:
-			return DOUBLE_TO_JSVAL((double)retValue.floatValue);
+			return JS::DoubleValue((double)retValue.floatValue);
 		case TypeBoolean:
 			return BOOLEAN_TO_JSVAL(retValue.boolValue);
 		case TypeString:
@@ -329,7 +329,7 @@ JS_BINDED_CONSTRUCTOR_IMPL(JavascriptJavaBridge)
     
     if (obj) {
         JS_SetPrivate(obj, jsj);
-        out = OBJECT_TO_JSVAL(obj);
+        out = JS::ObjectValue(*obj);
     }
 
     args.rval().set(out);
@@ -369,7 +369,7 @@ JS_BINDED_FUNC_IMPL(JavascriptJavaBridge, callStaticMethod)
             bool success = call.execute();
             int errorCode = call.getErrorCode();
             if(errorCode < 0)
-                JS_ReportError(cx, "js_cocos2dx_JSJavaBridge : call result code: %d", errorCode);
+                JS_ReportErrorUTF8(cx, "js_cocos2dx_JSJavaBridge : call result code: %d", errorCode);
             argv.rval().set(convertReturnValue(cx, call.getReturnValue(), call.getReturnValueType()));
             return success;	
         }
@@ -414,13 +414,13 @@ JS_BINDED_FUNC_IMPL(JavascriptJavaBridge, callStaticMethod)
             if (args) delete []args;
             int errorCode = call.getErrorCode();
             if(errorCode < 0)
-                JS_ReportError(cx, "js_cocos2dx_JSJavaBridge : call result code: %d", errorCode);
+                JS_ReportErrorUTF8(cx, "js_cocos2dx_JSJavaBridge : call result code: %d", errorCode);
             argv.rval().set(convertReturnValue(cx, call.getReturnValue(), call.getReturnValueType()));
             return success;
         }
                 
     }else{
-    	JS_ReportError(cx, "js_cocos2dx_JSJavaBridge : wrong number of arguments: %d, was expecting more than 3", argc);	
+    	JS_ReportErrorUTF8(cx, "js_cocos2dx_JSJavaBridge : wrong number of arguments: %d, was expecting more than 3", argc);	
     }
     
     return false;

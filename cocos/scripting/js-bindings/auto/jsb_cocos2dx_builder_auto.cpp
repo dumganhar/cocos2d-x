@@ -3,17 +3,17 @@
 #include "editor-support/cocosbuilder/CocosBuilder.h"
 
 template<class T>
-static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+static bool dummy_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
-    JS_ReportError(cx, "Constructor for the requested class is not available, please refer to the API reference.");
+    JS_ReportErrorUTF8(cx, "Constructor for the requested class is not available, please refer to the API reference.");
     return false;
 }
 
-static bool empty_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
+static bool empty_constructor(JSContext *cx, uint32_t argc, JS::Value *vp) {
     return false;
 }
 
-static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     args.rval().setBoolean(true);
@@ -22,7 +22,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
 JSClass  *jsb_cocosbuilder_CCBAnimationManager_class;
 JSObject *jsb_cocosbuilder_CCBAnimationManager_prototype;
 
-bool js_cocos2dx_builder_CCBAnimationManager_moveAnimationsFromNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_moveAnimationsFromNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -57,10 +57,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_moveAnimationsFromNode(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_moveAnimationsFromNode : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_moveAnimationsFromNode : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setAutoPlaySequenceId(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setAutoPlaySequenceId(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -77,10 +77,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setAutoPlaySequenceId(JSContext *cx
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setAutoPlaySequenceId : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setAutoPlaySequenceId : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNames(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNames(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -95,10 +95,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNames(JSContext 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNames : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNames : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_actionForSoundChannel(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_actionForSoundChannel(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -121,18 +121,18 @@ bool js_cocos2dx_builder_CCBAnimationManager_actionForSoundChannel(JSContext *cx
         cocos2d::Sequence* ret = cobj->actionForSoundChannel(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sequence>(cx, (cocos2d::Sequence*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sequence>(cx, (cocos2d::Sequence*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_actionForSoundChannel : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_actionForSoundChannel : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setBaseValue(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setBaseValue(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -161,10 +161,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setBaseValue(JSContext *cx, uint32_
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setBaseValue : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setBaseValue : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNodes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -179,10 +179,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNodes(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getLastCompletedSequenceName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getLastCompletedSequenceName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -197,10 +197,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getLastCompletedSequenceName(JSCont
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getLastCompletedSequenceName : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getLastCompletedSequenceName : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setRootNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setRootNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -225,10 +225,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setRootNode(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setRootNode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setRootNode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamedTweenDuration(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamedTweenDuration(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -247,10 +247,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamedTweenD
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamedTweenDuration : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamedTweenDuration : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -267,10 +267,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletName(JSContext *cx
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getRootContainerSize(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getRootContainerSize(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -285,10 +285,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getRootContainerSize(JSContext *cx,
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getRootContainerSize : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getRootContainerSize : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setDocumentControllerName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setDocumentControllerName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -305,10 +305,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setDocumentControllerName(JSContext
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setDocumentControllerName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setDocumentControllerName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setObject(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setObject(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -345,10 +345,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setObject(JSContext *cx, uint32_t a
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setObject : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setObject : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getContainerSize(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getContainerSize(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -375,10 +375,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getContainerSize(JSContext *cx, uin
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getContainerSize : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getContainerSize : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_actionForCallbackChannel(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_actionForCallbackChannel(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -401,18 +401,18 @@ bool js_cocos2dx_builder_CCBAnimationManager_actionForCallbackChannel(JSContext 
         cocos2d::Sequence* ret = cobj->actionForCallbackChannel(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sequence>(cx, (cocos2d::Sequence*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sequence>(cx, (cocos2d::Sequence*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_actionForCallbackChannel : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_actionForCallbackChannel : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNames(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNames(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -427,10 +427,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNames(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNames : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentOutletNames : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -447,10 +447,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackControlEvents(JS
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_init(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -460,15 +460,15 @@ bool js_cocos2dx_builder_CCBAnimationManager_init(JSContext *cx, uint32_t argc, 
     if (argc == 0) {
         bool ret = cobj->init();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_init : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_init : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getKeyframeCallbacks(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getKeyframeCallbacks(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -483,10 +483,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getKeyframeCallbacks(JSContext *cx,
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getKeyframeCallbacks : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getKeyframeCallbacks : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -501,10 +501,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackControlEvents(JS
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setRootContainerSize(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setRootContainerSize(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -521,10 +521,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setRootContainerSize(JSContext *cx,
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setRootContainerSize : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setRootContainerSize : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceIdTweenDuration(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceIdTweenDuration(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -543,10 +543,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceIdTweenDura
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceIdTweenDuration : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceIdTweenDuration : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getRunningSequenceName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getRunningSequenceName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -561,10 +561,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getRunningSequenceName(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getRunningSequenceName : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getRunningSequenceName : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getAutoPlaySequenceId(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getAutoPlaySequenceId(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -579,10 +579,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getAutoPlaySequenceId(JSContext *cx
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getAutoPlaySequenceId : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getAutoPlaySequenceId : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -599,10 +599,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackName(JSContext *
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getRootNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getRootNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -613,18 +613,18 @@ bool js_cocos2dx_builder_CCBAnimationManager_getRootNode(JSContext *cx, uint32_t
         cocos2d::Node* ret = cobj->getRootNode();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Node>(cx, (cocos2d::Node*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Node>(cx, (cocos2d::Node*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getRootNode : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getRootNode : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -649,10 +649,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletNode(JSContext *cx
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletNode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentOutletNode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setDelegate(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setDelegate(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -677,10 +677,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setDelegate(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setDelegate : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setDelegate : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getSequenceDuration(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getSequenceDuration(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -694,15 +694,15 @@ bool js_cocos2dx_builder_CCBAnimationManager_getSequenceDuration(JSContext *cx, 
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_builder_CCBAnimationManager_getSequenceDuration : Error processing arguments");
         double ret = cobj->getSequenceDuration(arg0);
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getSequenceDuration : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getSequenceDuration : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -727,10 +727,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackNode(JSContext *
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackNode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_addDocumentCallbackNode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamed(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamed(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -747,10 +747,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamed(JSCon
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamed : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_runAnimationsForSequenceNamed : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getSequenceId(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getSequenceId(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -769,10 +769,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getSequenceId(JSContext *cx, uint32
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getSequenceId : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getSequenceId : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setCallFunc(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setCallFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -799,10 +799,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setCallFunc(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setCallFunc : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setCallFunc : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNodes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -817,10 +817,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNodes(JSContext 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentCallbackNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_setSequences(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_setSequences(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -837,10 +837,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_setSequences(JSContext *cx, uint32_
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_setSequences : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_setSequences : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_debug(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_debug(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -853,10 +853,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_debug(JSContext *cx, uint32_t argc,
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_debug : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_debug : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_getDocumentControllerName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_getDocumentControllerName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -871,10 +871,10 @@ bool js_cocos2dx_builder_CCBAnimationManager_getDocumentControllerName(JSContext
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentControllerName : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBAnimationManager_getDocumentControllerName : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBAnimationManager_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBAnimationManager_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -884,24 +884,28 @@ bool js_cocos2dx_builder_CCBAnimationManager_constructor(JSContext *cx, uint32_t
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocosbuilder::CCBAnimationManager"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
 
 void js_register_cocos2dx_builder_CCBAnimationManager(JSContext *cx, JS::HandleObject global) {
-    jsb_cocosbuilder_CCBAnimationManager_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocosbuilder_CCBAnimationManager_class->name = "BuilderAnimationManager";
-    jsb_cocosbuilder_CCBAnimationManager_class->addProperty = JS_PropertyStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->getProperty = JS_PropertyStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->enumerate = JS_EnumerateStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->resolve = JS_ResolveStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->convert = JS_ConvertStub;
-    jsb_cocosbuilder_CCBAnimationManager_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsb_cocosbuilder_CCBAnimationManager_class = {
+        "BuilderAnimationManager",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -952,7 +956,7 @@ void js_register_cocos2dx_builder_CCBAnimationManager(JSContext *cx, JS::HandleO
 
     jsb_cocosbuilder_CCBAnimationManager_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocosbuilder_CCBAnimationManager_class,
         js_cocos2dx_builder_CCBAnimationManager_constructor, 0, // constructor
         properties,
@@ -966,13 +970,13 @@ void js_register_cocos2dx_builder_CCBAnimationManager(JSContext *cx, JS::HandleO
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocosbuilder::CCBAnimationManager>(cx, jsb_cocosbuilder_CCBAnimationManager_class, proto, JS::NullPtr());
+    jsb_register_class<cocosbuilder::CCBAnimationManager>(cx, jsb_cocosbuilder_CCBAnimationManager_class, proto, nullptr);
 }
 
 JSClass  *jsb_cocosbuilder_CCBReader_class;
 JSObject *jsb_cocosbuilder_CCBReader_prototype;
 
-bool js_cocos2dx_builder_CCBReader_getAnimationManager(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getAnimationManager(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -983,18 +987,18 @@ bool js_cocos2dx_builder_CCBReader_getAnimationManager(JSContext *cx, uint32_t a
         cocosbuilder::CCBAnimationManager* ret = cobj->getAnimationManager();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocosbuilder::CCBAnimationManager>(cx, (cocosbuilder::CCBAnimationManager*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocosbuilder::CCBAnimationManager>(cx, (cocosbuilder::CCBAnimationManager*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getAnimationManager : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getAnimationManager : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_setAnimationManager(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_setAnimationManager(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1019,10 +1023,10 @@ bool js_cocos2dx_builder_CCBReader_setAnimationManager(JSContext *cx, uint32_t a
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_setAnimationManager : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_setAnimationManager : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_addOwnerOutletName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_addOwnerOutletName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1039,10 +1043,10 @@ bool js_cocos2dx_builder_CCBReader_addOwnerOutletName(JSContext *cx, uint32_t ar
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_addOwnerOutletName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_addOwnerOutletName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getOwnerCallbackNames(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getOwnerCallbackNames(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1057,10 +1061,10 @@ bool js_cocos2dx_builder_CCBReader_getOwnerCallbackNames(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getOwnerCallbackNames : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getOwnerCallbackNames : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_addDocumentCallbackControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_addDocumentCallbackControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1077,10 +1081,10 @@ bool js_cocos2dx_builder_CCBReader_addDocumentCallbackControlEvents(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_addDocumentCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_addDocumentCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_setCCBRootPath(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_setCCBRootPath(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1097,10 +1101,10 @@ bool js_cocos2dx_builder_CCBReader_setCCBRootPath(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_setCCBRootPath : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_setCCBRootPath : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_addOwnerOutletNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_addOwnerOutletNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1125,10 +1129,10 @@ bool js_cocos2dx_builder_CCBReader_addOwnerOutletNode(JSContext *cx, uint32_t ar
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_addOwnerOutletNode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_addOwnerOutletNode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1143,10 +1147,10 @@ bool js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1168,15 +1172,15 @@ bool js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq(JSContext *cx, uint3
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq : Error processing arguments");
         bool ret = cobj->readSoundKeyframesForSeq(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getCCBRootPath(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getCCBRootPath(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1191,10 +1195,10 @@ bool js_cocos2dx_builder_CCBReader_getCCBRootPath(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getCCBRootPath : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getCCBRootPath : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1209,10 +1213,10 @@ bool js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents(JSContext *cx, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getOwnerOutletNodes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getOwnerOutletNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1227,10 +1231,10 @@ bool js_cocos2dx_builder_CCBReader_getOwnerOutletNodes(JSContext *cx, uint32_t a
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getOwnerOutletNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getOwnerOutletNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_readUTF8(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_readUTF8(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1245,10 +1249,10 @@ bool js_cocos2dx_builder_CCBReader_readUTF8(JSContext *cx, uint32_t argc, jsval 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_readUTF8 : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_readUTF8 : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_addOwnerCallbackControlEvents(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_addOwnerCallbackControlEvents(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1265,10 +1269,10 @@ bool js_cocos2dx_builder_CCBReader_addOwnerCallbackControlEvents(JSContext *cx, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_addOwnerCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_addOwnerCallbackControlEvents : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getOwnerOutletNames(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getOwnerOutletNames(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1283,10 +1287,10 @@ bool js_cocos2dx_builder_CCBReader_getOwnerOutletNames(JSContext *cx, uint32_t a
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getOwnerOutletNames : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getOwnerOutletNames : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_readCallbackKeyframesForSeq(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_readCallbackKeyframesForSeq(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1308,15 +1312,15 @@ bool js_cocos2dx_builder_CCBReader_readCallbackKeyframesForSeq(JSContext *cx, ui
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_builder_CCBReader_readCallbackKeyframesForSeq : Error processing arguments");
         bool ret = cobj->readCallbackKeyframesForSeq(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_readCallbackKeyframesForSeq : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_readCallbackKeyframesForSeq : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getAnimationManagersForNodes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getAnimationManagersForNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1331,10 +1335,10 @@ bool js_cocos2dx_builder_CCBReader_getAnimationManagersForNodes(JSContext *cx, u
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getAnimationManagersForNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getAnimationManagersForNodes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_getNodesWithAnimationManagers(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_getNodesWithAnimationManagers(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1349,10 +1353,10 @@ bool js_cocos2dx_builder_CCBReader_getNodesWithAnimationManagers(JSContext *cx, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_getNodesWithAnimationManagers : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_getNodesWithAnimationManagers : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_builder_CCBReader_setResolutionScale(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_setResolutionScale(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1364,11 +1368,11 @@ bool js_cocos2dx_builder_CCBReader_setResolutionScale(JSContext *cx, uint32_t ar
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_setResolutionScale : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_setResolutionScale : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocosbuilder::CCBReader* cobj = nullptr;
@@ -1392,8 +1396,7 @@ bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, jsv
 
             js_type_class_t *typeClass = js_get_type_from_native<cocosbuilder::CCBReader>(cobj);
             JS::RootedObject proto(cx, typeClass->proto.ref());
-            JS::RootedObject parent(cx, typeClass->parentProto.ref());
-            obj = JS_NewObject(cx, typeClass->jsclass, proto, parent);
+            obj = JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto);
             js_proxy_t* p = jsb_new_proxy(cobj, obj);
             jsb_ref_init(cx, &p->obj, cobj, "cocosbuilder::CCBReader");
         }
@@ -1449,8 +1452,7 @@ bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, jsv
 
             js_type_class_t *typeClass = js_get_type_from_native<cocosbuilder::CCBReader>(cobj);
             JS::RootedObject proto(cx, typeClass->proto.ref());
-            JS::RootedObject parent(cx, typeClass->parentProto.ref());
-            obj = JS_NewObject(cx, typeClass->jsclass, proto, parent);
+            obj = JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto);
             js_proxy_t* p = jsb_new_proxy(cobj, obj);
             jsb_ref_init(cx, &p->obj, cobj, "cocosbuilder::CCBReader");
         }
@@ -1462,8 +1464,7 @@ bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, jsv
 
             js_type_class_t *typeClass = js_get_type_from_native<cocosbuilder::CCBReader>(cobj);
             JS::RootedObject proto(cx, typeClass->proto.ref());
-            JS::RootedObject parent(cx, typeClass->parentProto.ref());
-            obj = JS_NewObject(cx, typeClass->jsclass, proto, parent);
+            obj = JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto);
             js_proxy_t* p = jsb_new_proxy(cobj, obj);
             jsb_ref_init(cx, &p->obj, cobj, "cocosbuilder::CCBReader");
         }
@@ -1471,27 +1472,31 @@ bool js_cocos2dx_builder_CCBReader_constructor(JSContext *cx, uint32_t argc, jsv
 
     if (cobj) {
         if (JS_HasProperty(cx, obj, "_ctor", &ok) && ok)
-                ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(obj), "_ctor", args);
+                ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*obj), "_ctor", args);
 
-        args.rval().set(OBJECT_TO_JSVAL(obj));
+        args.rval().set(JS::ObjectValue(*obj));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_builder_CCBReader_constructor : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_builder_CCBReader_constructor : wrong number of arguments");
     return false;
 }
 
 
 void js_register_cocos2dx_builder_CCBReader(JSContext *cx, JS::HandleObject global) {
-    jsb_cocosbuilder_CCBReader_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocosbuilder_CCBReader_class->name = "_Reader";
-    jsb_cocosbuilder_CCBReader_class->addProperty = JS_PropertyStub;
-    jsb_cocosbuilder_CCBReader_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocosbuilder_CCBReader_class->getProperty = JS_PropertyStub;
-    jsb_cocosbuilder_CCBReader_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocosbuilder_CCBReader_class->enumerate = JS_EnumerateStub;
-    jsb_cocosbuilder_CCBReader_class->resolve = JS_ResolveStub;
-    jsb_cocosbuilder_CCBReader_class->convert = JS_ConvertStub;
-    jsb_cocosbuilder_CCBReader_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsb_cocosbuilder_CCBReader_class = {
+        "_Reader",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -1526,7 +1531,7 @@ void js_register_cocos2dx_builder_CCBReader(JSContext *cx, JS::HandleObject glob
 
     jsb_cocosbuilder_CCBReader_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(),
+        nullptr,
         jsb_cocosbuilder_CCBReader_class,
         js_cocos2dx_builder_CCBReader_constructor, 0, // constructor
         properties,
@@ -1540,7 +1545,7 @@ void js_register_cocos2dx_builder_CCBReader(JSContext *cx, JS::HandleObject glob
     JS_SetProperty(cx, proto, "__nativeObj", JS::TrueHandleValue);
     JS_SetProperty(cx, proto, "__is_ref", JS::TrueHandleValue);
     // add the proto and JSClass to the type->js info hash table
-    jsb_register_class<cocosbuilder::CCBReader>(cx, jsb_cocosbuilder_CCBReader_class, proto, JS::NullPtr());
+    jsb_register_class<cocosbuilder::CCBReader>(cx, jsb_cocosbuilder_CCBReader_class, proto, nullptr);
 }
 
 void register_all_cocos2dx_builder(JSContext* cx, JS::HandleObject obj) {

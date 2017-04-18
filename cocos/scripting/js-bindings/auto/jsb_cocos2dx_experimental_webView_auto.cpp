@@ -4,17 +4,17 @@
 #include "ui/UIWebView.h"
 
 template<class T>
-static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+static bool dummy_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
-    JS_ReportError(cx, "Constructor for the requested class is not available, please refer to the API reference.");
+    JS_ReportErrorUTF8(cx, "Constructor for the requested class is not available, please refer to the API reference.");
     return false;
 }
 
-static bool empty_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
+static bool empty_constructor(JSContext *cx, uint32_t argc, JS::Value *vp) {
     return false;
 }
 
-static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     args.rval().setBoolean(true);
@@ -23,7 +23,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
 JSClass  *jsb_cocos2d_experimental_ui_WebView_class;
 JSObject *jsb_cocos2d_experimental_ui_WebView_prototype;
 
-bool js_cocos2dx_experimental_webView_WebView_canGoBack(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_canGoBack(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -33,15 +33,15 @@ bool js_cocos2dx_experimental_webView_WebView_canGoBack(JSContext *cx, uint32_t 
     if (argc == 0) {
         bool ret = cobj->canGoBack();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_canGoBack : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_canGoBack : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_loadHTMLString(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_loadHTMLString(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -68,10 +68,10 @@ bool js_cocos2dx_experimental_webView_WebView_loadHTMLString(JSContext *cx, uint
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_loadHTMLString : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_loadHTMLString : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_goForward(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_goForward(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -84,10 +84,10 @@ bool js_cocos2dx_experimental_webView_WebView_goForward(JSContext *cx, uint32_t 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_goForward : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_goForward : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_goBack(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_goBack(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -100,10 +100,10 @@ bool js_cocos2dx_experimental_webView_WebView_goBack(JSContext *cx, uint32_t arg
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_goBack : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_goBack : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_setScalesPageToFit(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_setScalesPageToFit(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -120,10 +120,10 @@ bool js_cocos2dx_experimental_webView_WebView_setScalesPageToFit(JSContext *cx, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_setScalesPageToFit : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_setScalesPageToFit : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_getOnDidFailLoading(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_getOnDidFailLoading(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -138,10 +138,10 @@ bool js_cocos2dx_experimental_webView_WebView_getOnDidFailLoading(JSContext *cx,
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_getOnDidFailLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_getOnDidFailLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_loadFile(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_loadFile(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -158,10 +158,10 @@ bool js_cocos2dx_experimental_webView_WebView_loadFile(JSContext *cx, uint32_t a
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_loadFile : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_loadFile : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_loadURL(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_loadURL(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocos2d::experimental::ui::WebView* cobj = nullptr;
@@ -196,10 +196,10 @@ bool js_cocos2dx_experimental_webView_WebView_loadURL(JSContext *cx, uint32_t ar
         }
     } while(0);
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_loadURL : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_loadURL : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_setBounces(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_setBounces(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -216,10 +216,10 @@ bool js_cocos2dx_experimental_webView_WebView_setBounces(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_setBounces : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_setBounces : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_evaluateJS(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_evaluateJS(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -236,10 +236,10 @@ bool js_cocos2dx_experimental_webView_WebView_evaluateJS(JSContext *cx, uint32_t
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_evaluateJS : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_evaluateJS : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_getOnJSCallback(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_getOnJSCallback(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -254,10 +254,10 @@ bool js_cocos2dx_experimental_webView_WebView_getOnJSCallback(JSContext *cx, uin
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_getOnJSCallback : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_getOnJSCallback : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_canGoForward(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_canGoForward(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -267,15 +267,15 @@ bool js_cocos2dx_experimental_webView_WebView_canGoForward(JSContext *cx, uint32
     if (argc == 0) {
         bool ret = cobj->canGoForward();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_canGoForward : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_canGoForward : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_getOnShouldStartLoading(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_getOnShouldStartLoading(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -290,10 +290,10 @@ bool js_cocos2dx_experimental_webView_WebView_getOnShouldStartLoading(JSContext 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_getOnShouldStartLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_getOnShouldStartLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_stopLoading(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_stopLoading(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -306,10 +306,10 @@ bool js_cocos2dx_experimental_webView_WebView_stopLoading(JSContext *cx, uint32_
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_stopLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_stopLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_reload(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_reload(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -322,10 +322,10 @@ bool js_cocos2dx_experimental_webView_WebView_reload(JSContext *cx, uint32_t arg
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_reload : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_reload : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_setJavascriptInterfaceScheme(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_setJavascriptInterfaceScheme(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -342,10 +342,10 @@ bool js_cocos2dx_experimental_webView_WebView_setJavascriptInterfaceScheme(JSCon
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_setJavascriptInterfaceScheme : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_setJavascriptInterfaceScheme : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_getOnDidFinishLoading(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_getOnDidFinishLoading(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -360,10 +360,10 @@ bool js_cocos2dx_experimental_webView_WebView_getOnDidFinishLoading(JSContext *c
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_getOnDidFinishLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_getOnDidFinishLoading : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_webView_WebView_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
@@ -371,14 +371,14 @@ bool js_cocos2dx_experimental_webView_WebView_create(JSContext *cx, uint32_t arg
         auto ret = cocos2d::experimental::ui::WebView::create();
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::experimental::ui::WebView>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::experimental::ui::WebView"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_experimental_webView_WebView_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_experimental_webView_WebView_create : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_experimental_webView_WebView_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_experimental_webView_WebView_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -388,9 +388,9 @@ bool js_cocos2dx_experimental_webView_WebView_constructor(JSContext *cx, uint32_
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::experimental::ui::WebView"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -398,16 +398,20 @@ bool js_cocos2dx_experimental_webView_WebView_constructor(JSContext *cx, uint32_
 extern JSObject *jsb_cocos2d_ui_Widget_prototype;
 
 void js_register_cocos2dx_experimental_webView_WebView(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_experimental_ui_WebView_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_experimental_ui_WebView_class->name = "WebView";
-    jsb_cocos2d_experimental_ui_WebView_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_experimental_ui_WebView_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_experimental_ui_WebView_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_experimental_ui_WebView_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_experimental_ui_WebView_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_experimental_ui_WebView_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_experimental_ui_WebView_class->convert = JS_ConvertStub;
-    jsb_cocos2d_experimental_ui_WebView_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsb_cocos2d_experimental_ui_WebView_class = {
+        "WebView",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
 
     static JSPropertySpec properties[] = {
         JS_PS_END

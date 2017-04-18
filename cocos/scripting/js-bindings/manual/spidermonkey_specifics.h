@@ -94,7 +94,7 @@ public:
 
 #define TEST_NATIVE_OBJECT(cx, native_obj) \
 if (!native_obj) { \
-    JS_ReportError(cx, "Invalid Native Object"); \
+    JS_ReportErrorUTF8(cx, "Invalid Native Object"); \
     return false; \
 }
 

@@ -35,7 +35,7 @@ namespace cocos2d
 }
 
 bool jsval_to_NavMeshAgentParam(JSContext *cx, JS::HandleValue v, cocos2d::NavMeshAgentParam* ret);
-jsval offMeshLinkData_to_jsval(JSContext* cx, const cocos2d::OffMeshLinkData& v);
+JS::Value offMeshLinkData_to_jsval(JSContext* cx, const cocos2d::OffMeshLinkData& v);
 
 #endif /* defined(__cocos2d_js_bindings__jsb_cocos2dx_navmesh_conversions__) */
 #endif //#if CC_USE_NAVMESH

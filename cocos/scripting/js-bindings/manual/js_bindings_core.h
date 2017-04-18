@@ -68,7 +68,7 @@ extern "C" {
     
     
     // needed for callbacks. It does nothing.
-    bool JSB_do_nothing(JSContext *cx, uint32_t argc, jsval *vp);
+    bool JSB_do_nothing(JSContext *cx, uint32_t argc, JS::Value *vp);
 
 #ifdef __cplusplus
 }

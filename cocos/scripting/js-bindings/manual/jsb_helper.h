@@ -44,33 +44,33 @@ JSObject* klass::js_proto = NULL; \
 JSObject* klass::js_parent = NULL; \
 
 #define JS_BINDED_FUNC(klass, name) \
-bool name(JSContext *cx, unsigned argc, jsval *vp)
+bool name(JSContext *cx, unsigned argc, JS::Value *vp)
 
 #define JS_BINDED_CONSTRUCTOR(klass) \
-static bool _js_constructor(JSContext *cx, unsigned argc, jsval *vp)
+static bool _js_constructor(JSContext *cx, unsigned argc, JS::Value *vp)
 
 #define JS_BINDED_CONSTRUCTOR_IMPL(klass) \
-bool klass::_js_constructor(JSContext *cx, unsigned argc, jsval *vp)
+bool klass::_js_constructor(JSContext *cx, unsigned argc, JS::Value *vp)
 
 #define JS_BINDED_FUNC_IMPL(klass, name) \
-static bool klass##_func_##name(JSContext *cx, unsigned argc, jsval *vp) { \
+static bool klass##_func_##name(JSContext *cx, unsigned argc, JS::Value *vp) { \
 JS::CallArgs args = JS::CallArgsFromVp(argc, vp); \
 JS::RootedObject thisObj(cx, args.thisv().toObjectOrNull()); \
 klass* obj = (klass*)JS_GetPrivate(thisObj); \
 if (obj) { \
 return obj->name(cx, argc, vp); \
 } \
-JS_ReportError(cx, "Invalid object call for function %s", #name); \
+JS_ReportErrorUTF8(cx, "Invalid object call for function %s", #name); \
 return false; \
 } \
-bool klass::name(JSContext *cx, unsigned argc, jsval *vp)
+bool klass::name(JSContext *cx, unsigned argc, JS::Value *vp)
 
 #define JS_WRAP_OBJECT_IN_VAL(klass, cobj, out) \
 do { \
 JSObject *obj = JS_NewObject(cx, &klass::js_class, klass::js_proto, klass::js_parent); \
 if (obj) { \
 JS_SetPrivate(obj, cobj); \
-out = OBJECT_TO_JSVAL(obj); \
+out = JS::ObjectValue(*obj); \
 } \
 } while(0) \
 
@@ -81,14 +81,14 @@ JS_FN(#name, klass##_func_##name, 0, JSPROP_ENUMERATE | JSPROP_PERMANENT)
 bool _js_get_##propName(JSContext *cx, const JS::CallArgs& args)
 
 #define JS_BINDED_PROP_GET_IMPL(klass, propName) \
-static bool _js_get_##klass##_##propName(JSContext *cx, unsigned argc, jsval *vp) { \
+static bool _js_get_##klass##_##propName(JSContext *cx, unsigned argc, JS::Value *vp) { \
 JS::CallArgs args = JS::CallArgsFromVp(argc, vp); \
 JS::RootedObject obj(cx, args.thisv().toObjectOrNull()); \
 klass* cobj = (klass*)JS_GetPrivate(obj); \
 if (cobj) { \
 return cobj->_js_get_##propName(cx, args); \
 } \
-JS_ReportError(cx, "Invalid getter call for property %s", #propName); \
+JS_ReportErrorUTF8(cx, "Invalid getter call for property %s", #propName); \
 return false; \
 } \
 bool klass::_js_get_##propName(JSContext *cx, const JS::CallArgs& args)
@@ -97,14 +97,14 @@ bool klass::_js_get_##propName(JSContext *cx, const JS::CallArgs& args)
 bool _js_set_##propName(JSContext *cx, const JS::CallArgs& args)
 
 #define JS_BINDED_PROP_SET_IMPL(klass, propName) \
-static bool _js_set_##klass##_##propName(JSContext *cx, unsigned argc, jsval *vp) { \
+static bool _js_set_##klass##_##propName(JSContext *cx, unsigned argc, JS::Value *vp) { \
 JS::CallArgs args = JS::CallArgsFromVp(argc, vp); \
 JS::RootedObject obj(cx, args.thisv().toObjectOrNull()); \
 klass* cobj = (klass*)JS_GetPrivate(obj); \
 if (cobj) { \
 return cobj->_js_set_##propName(cx, args); \
 } \
-JS_ReportError(cx, "Invalid setter call for property %s", #propName); \
+JS_ReportErrorUTF8(cx, "Invalid setter call for property %s", #propName); \
 return false; \
 } \
 bool klass::_js_set_##propName(JSContext *cx, const JS::CallArgs& args)
@@ -122,16 +122,16 @@ JS_PSGS(#propName, _js_get_##klass##_##propName, _js_set_##klass##_##propName, J
 #define JS_CREATE_UINT_WRAPPED(valOut, propName, val) \
 do { \
 JSObject* jsobj = JS_NewObject(cx, NULL, NULL, NULL); \
-jsval propVal = UINT_TO_JSVAL(val); \
+JS::Value propVal = UJS::Int32Value(val); \
 JS_SetProperty(cx, jsobj, "__" propName, &propVal); \
-valOut = OBJECT_TO_JSVAL(jsobj); \
+valOut = JS::ObjectValue(*jsobj); \
 } while(0)
 
 #define JS_GET_UINT_WRAPPED(inVal, propName, out) \
 do { \
 if (inVal.isObject()) {\
 JSObject* jsobj = JSVAL_TO_OBJECT(inVal); \
-jsval outVal; \
+JS::Value outVal; \
 JS_GetProperty(cx, jsobj, "__" propName, &outVal); \
 JS_ValueToECMAUint32(cx, outVal, &out); \
 } else { \

@@ -5,17 +5,17 @@
 #include "scripting/js-bindings/manual/3d/jsb_cocos2dx_3d_manual.h"
 
 template<class T>
-static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+static bool dummy_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
-    JS_ReportError(cx, "Constructor for the requested class is not available, please refer to the API reference.");
+    JS_ReportErrorUTF8(cx, "Constructor for the requested class is not available, please refer to the API reference.");
     return false;
 }
 
-static bool empty_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
+static bool empty_constructor(JSContext *cx, uint32_t argc, JS::Value *vp) {
     return false;
 }
 
-static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     args.rval().setBoolean(true);
@@ -24,7 +24,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
 JSClass  *jsb_cocos2d_Animation3D_class;
 JSObject *jsb_cocos2d_Animation3D_prototype;
 
-bool js_cocos2dx_3d_Animation3D_initWithFile(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animation3D_initWithFile(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -40,15 +40,15 @@ bool js_cocos2dx_3d_Animation3D_initWithFile(JSContext *cx, uint32_t argc, jsval
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Animation3D_initWithFile : Error processing arguments");
         bool ret = cobj->initWithFile(arg0, arg1);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animation3D_initWithFile : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animation3D_initWithFile : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Animation3D_init(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animation3D_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -63,15 +63,15 @@ bool js_cocos2dx_3d_Animation3D_init(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Animation3D_init : Error processing arguments");
         bool ret = cobj->init(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animation3D_init : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animation3D_init : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Animation3D_getBoneCurveByName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animation3D_getBoneCurveByName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -86,18 +86,18 @@ bool js_cocos2dx_3d_Animation3D_getBoneCurveByName(JSContext *cx, uint32_t argc,
         cocos2d::Animation3D::Curve* ret = cobj->getBoneCurveByName(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Animation3D::Curve>(cx, (cocos2d::Animation3D::Curve*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Animation3D::Curve>(cx, (cocos2d::Animation3D::Curve*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animation3D_getBoneCurveByName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animation3D_getBoneCurveByName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Animation3D_getDuration(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animation3D_getDuration(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -107,15 +107,15 @@ bool js_cocos2dx_3d_Animation3D_getDuration(JSContext *cx, uint32_t argc, jsval 
     if (argc == 0) {
         double ret = cobj->getDuration();
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animation3D_getDuration : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animation3D_getDuration : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Animation3D_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animation3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -125,9 +125,9 @@ bool js_cocos2dx_3d_Animation3D_constructor(JSContext *cx, uint32_t argc, jsval 
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Animation3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -180,7 +180,7 @@ void js_register_cocos2dx_3d_Animation3D(JSContext *cx, JS::HandleObject global)
 JSClass  *jsb_cocos2d_Animate3D_class;
 JSObject *jsb_cocos2d_Animate3D_prototype;
 
-bool js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -199,10 +199,10 @@ bool js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_getSpeed(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_getSpeed(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -212,15 +212,15 @@ bool js_cocos2dx_3d_Animate3D_getSpeed(JSContext *cx, uint32_t argc, jsval *vp)
     if (argc == 0) {
         double ret = cobj->getSpeed();
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_getSpeed : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_getSpeed : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_setQuality(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_setQuality(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -237,10 +237,10 @@ bool js_cocos2dx_3d_Animate3D_setQuality(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_setQuality : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_setQuality : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_setWeight(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_setWeight(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -257,10 +257,10 @@ bool js_cocos2dx_3d_Animate3D_setWeight(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_setWeight : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_setWeight : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_removeFromMap(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_removeFromMap(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -273,10 +273,10 @@ bool js_cocos2dx_3d_Animate3D_removeFromMap(JSContext *cx, uint32_t argc, jsval 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_removeFromMap : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_removeFromMap : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_initWithFrames(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_initWithFrames(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -304,15 +304,15 @@ bool js_cocos2dx_3d_Animate3D_initWithFrames(JSContext *cx, uint32_t argc, jsval
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Animate3D_initWithFrames : Error processing arguments");
         bool ret = cobj->initWithFrames(arg0, arg1, arg2, arg3);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_initWithFrames : wrong number of arguments: %d, was expecting %d", argc, 4);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_initWithFrames : wrong number of arguments: %d, was expecting %d", argc, 4);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_getOriginInterval(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_getOriginInterval(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -322,15 +322,15 @@ bool js_cocos2dx_3d_Animate3D_getOriginInterval(JSContext *cx, uint32_t argc, js
     if (argc == 0) {
         double ret = cobj->getOriginInterval();
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_getOriginInterval : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_getOriginInterval : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_setSpeed(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_setSpeed(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -347,10 +347,10 @@ bool js_cocos2dx_3d_Animate3D_setSpeed(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_setSpeed : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_setSpeed : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_init(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocos2d::Animate3D* cobj = nullptr;
@@ -381,8 +381,8 @@ bool js_cocos2dx_3d_Animate3D_init(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= JS::ToNumber( cx, args.get(2), &arg2) && !std::isnan(arg2);
             if (!ok) { ok = true; break; }
             bool ret = cobj->init(arg0, arg1, arg2);
-            jsval jsret = JSVAL_NULL;
-            jsret = BOOLEAN_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::BooleanValue(ret);
             args.rval().set(jsret);
             return true;
         }
@@ -402,17 +402,17 @@ bool js_cocos2dx_3d_Animate3D_init(JSContext *cx, uint32_t argc, jsval *vp)
             } while (0);
             if (!ok) { ok = true; break; }
             bool ret = cobj->init(arg0);
-            jsval jsret = JSVAL_NULL;
-            jsret = BOOLEAN_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::BooleanValue(ret);
             args.rval().set(jsret);
             return true;
         }
     } while(0);
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_init : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_init : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_setOriginInterval(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_setOriginInterval(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -429,10 +429,10 @@ bool js_cocos2dx_3d_Animate3D_setOriginInterval(JSContext *cx, uint32_t argc, js
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_setOriginInterval : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_setOriginInterval : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_getWeight(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_getWeight(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -442,15 +442,15 @@ bool js_cocos2dx_3d_Animate3D_getWeight(JSContext *cx, uint32_t argc, jsval *vp)
     if (argc == 0) {
         double ret = cobj->getWeight();
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_getWeight : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_getWeight : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_getQuality(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_getQuality(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -465,10 +465,10 @@ bool js_cocos2dx_3d_Animate3D_getQuality(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_getQuality : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_getQuality : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -493,11 +493,11 @@ bool js_cocos2dx_3d_Animate3D_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= JS::ToNumber( cx, args.get(2), &arg2) && !std::isnan(arg2);
             if (!ok) { ok = true; break; }
             cocos2d::Animate3D* ret = cocos2d::Animate3D::create(arg0, arg1, arg2);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Animate3D>(cx, (cocos2d::Animate3D*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Animate3D>(cx, (cocos2d::Animate3D*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -518,35 +518,35 @@ bool js_cocos2dx_3d_Animate3D_create(JSContext *cx, uint32_t argc, jsval *vp)
             } while (0);
             if (!ok) { ok = true; break; }
             cocos2d::Animate3D* ret = cocos2d::Animate3D::create(arg0);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Animate3D>(cx, (cocos2d::Animate3D*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Animate3D>(cx, (cocos2d::Animate3D*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
         }
     } while (0);
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_create : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Animate3D_getTransitionTime(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_getTransitionTime(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
 
         double ret = cocos2d::Animate3D::getTransitionTime();
-        jsval jsret = JSVAL_NULL;
-        jsret = DOUBLE_TO_JSVAL(ret);
+        JS::Value jsret = JS::NullValue();
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_getTransitionTime : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_getTransitionTime : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Animate3D_createWithFrames(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_createWithFrames(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -570,7 +570,7 @@ bool js_cocos2dx_3d_Animate3D_createWithFrames(JSContext *cx, uint32_t argc, jsv
         auto ret = cocos2d::Animate3D::createWithFrames(arg0, arg1, arg2);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::Animate3D>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::Animate3D"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
     if (argc == 4) {
@@ -595,14 +595,14 @@ bool js_cocos2dx_3d_Animate3D_createWithFrames(JSContext *cx, uint32_t argc, jsv
         auto ret = cocos2d::Animate3D::createWithFrames(arg0, arg1, arg2, arg3);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::Animate3D>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::Animate3D"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_createWithFrames : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_createWithFrames : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Animate3D_setTransitionTime(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_setTransitionTime(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -614,11 +614,11 @@ bool js_cocos2dx_3d_Animate3D_setTransitionTime(JSContext *cx, uint32_t argc, js
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Animate3D_setTransitionTime : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animate3D_setTransitionTime : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Animate3D_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animate3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -628,9 +628,9 @@ bool js_cocos2dx_3d_Animate3D_constructor(JSContext *cx, uint32_t argc, jsval *v
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Animate3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -700,7 +700,7 @@ void js_register_cocos2dx_3d_Animate3D(JSContext *cx, JS::HandleObject global) {
 JSClass  *jsb_cocos2d_TextureCube_class;
 JSObject *jsb_cocos2d_TextureCube_prototype;
 
-bool js_cocos2dx_3d_TextureCube_reloadTexture(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_TextureCube_reloadTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -710,15 +710,15 @@ bool js_cocos2dx_3d_TextureCube_reloadTexture(JSContext *cx, uint32_t argc, jsva
     if (argc == 0) {
         bool ret = cobj->reloadTexture();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_TextureCube_reloadTexture : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_TextureCube_reloadTexture : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_TextureCube_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_TextureCube_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -740,14 +740,14 @@ bool js_cocos2dx_3d_TextureCube_create(JSContext *cx, uint32_t argc, jsval *vp)
         auto ret = cocos2d::TextureCube::create(arg0, arg1, arg2, arg3, arg4, arg5);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::TextureCube>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::TextureCube"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_TextureCube_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_TextureCube_create : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_TextureCube_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_TextureCube_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -757,9 +757,9 @@ bool js_cocos2dx_3d_TextureCube_constructor(JSContext *cx, uint32_t argc, jsval 
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::TextureCube"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -815,7 +815,7 @@ void js_register_cocos2dx_3d_TextureCube(JSContext *cx, JS::HandleObject global)
 JSClass  *jsb_cocos2d_AttachNode_class;
 JSObject *jsb_cocos2d_AttachNode_prototype;
 
-bool js_cocos2dx_3d_AttachNode_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_AttachNode_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -835,14 +835,14 @@ bool js_cocos2dx_3d_AttachNode_create(JSContext *cx, uint32_t argc, jsval *vp)
         auto ret = cocos2d::AttachNode::create(arg0);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::AttachNode>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::AttachNode"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_AttachNode_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_AttachNode_create : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_AttachNode_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_AttachNode_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -852,9 +852,9 @@ bool js_cocos2dx_3d_AttachNode_constructor(JSContext *cx, uint32_t argc, jsval *
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::AttachNode"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -909,7 +909,7 @@ void js_register_cocos2dx_3d_AttachNode(JSContext *cx, JS::HandleObject global) 
 JSClass  *jsb_cocos2d_BillBoard_class;
 JSObject *jsb_cocos2d_BillBoard_prototype;
 
-bool js_cocos2dx_3d_BillBoard_getMode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_BillBoard_getMode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -924,10 +924,10 @@ bool js_cocos2dx_3d_BillBoard_getMode(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_BillBoard_getMode : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_BillBoard_getMode : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_BillBoard_setMode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_BillBoard_setMode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -944,10 +944,10 @@ bool js_cocos2dx_3d_BillBoard_setMode(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_BillBoard_setMode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_BillBoard_setMode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -958,11 +958,11 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_std_string(cx, args.get(0), &arg0);
             if (!ok) { ok = true; break; }
             cocos2d::BillBoard* ret = cocos2d::BillBoard::create(arg0);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -977,11 +977,11 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_int32(cx, args.get(1), (int32_t *)&arg1);
             if (!ok) { ok = true; break; }
             cocos2d::BillBoard* ret = cocos2d::BillBoard::create(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -991,11 +991,11 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
     do {
         if (argc == 0) {
             cocos2d::BillBoard* ret = cocos2d::BillBoard::create();
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -1007,11 +1007,11 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
             if (!ok) { ok = true; break; }
             cocos2d::BillBoard* ret = cocos2d::BillBoard::create(arg0);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -1027,11 +1027,11 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_ccrect(cx, args.get(1), &arg1);
             if (!ok) { ok = true; break; }
             cocos2d::BillBoard* ret = cocos2d::BillBoard::create(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -1049,20 +1049,20 @@ bool js_cocos2dx_3d_BillBoard_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_int32(cx, args.get(2), (int32_t *)&arg2);
             if (!ok) { ok = true; break; }
             cocos2d::BillBoard* ret = cocos2d::BillBoard::create(arg0, arg1, arg2);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::BillBoard>(cx, (cocos2d::BillBoard*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
         }
     } while (0);
-    JS_ReportError(cx, "js_cocos2dx_3d_BillBoard_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_BillBoard_create : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_BillBoard_createWithTexture(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_BillBoard_createWithTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1082,7 +1082,7 @@ bool js_cocos2dx_3d_BillBoard_createWithTexture(JSContext *cx, uint32_t argc, js
         auto ret = cocos2d::BillBoard::createWithTexture(arg0);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::BillBoard>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::BillBoard"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
     if (argc == 2) {
@@ -1103,14 +1103,14 @@ bool js_cocos2dx_3d_BillBoard_createWithTexture(JSContext *cx, uint32_t argc, js
         auto ret = cocos2d::BillBoard::createWithTexture(arg0, arg1);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::BillBoard>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_create_jsobject(cx, ret, typeClass, "cocos2d::BillBoard"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_BillBoard_createWithTexture : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_BillBoard_createWithTexture : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_BillBoard_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_BillBoard_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1120,9 +1120,9 @@ bool js_cocos2dx_3d_BillBoard_constructor(JSContext *cx, uint32_t argc, jsval *v
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::BillBoard"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -1180,7 +1180,7 @@ void js_register_cocos2dx_3d_BillBoard(JSContext *cx, JS::HandleObject global) {
 JSClass  *jsb_cocos2d_Mesh_class;
 JSObject *jsb_cocos2d_Mesh_prototype;
 
-bool js_cocos2dx_3d_Mesh_getSkin(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getSkin(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1191,18 +1191,18 @@ bool js_cocos2dx_3d_Mesh_getSkin(JSContext *cx, uint32_t argc, jsval *vp)
         cocos2d::MeshSkin* ret = cobj->getSkin();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::MeshSkin>(cx, (cocos2d::MeshSkin*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::MeshSkin>(cx, (cocos2d::MeshSkin*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getSkin : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getSkin : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getMaterial(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getMaterial(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1213,18 +1213,18 @@ bool js_cocos2dx_3d_Mesh_getMaterial(JSContext *cx, uint32_t argc, jsval *vp)
         cocos2d::Material* ret = cobj->getMaterial();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Material>(cx, (cocos2d::Material*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Material>(cx, (cocos2d::Material*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getMaterial : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getMaterial : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getVertexSizeInBytes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getVertexSizeInBytes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1239,10 +1239,10 @@ bool js_cocos2dx_3d_Mesh_getVertexSizeInBytes(JSContext *cx, uint32_t argc, jsva
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getVertexSizeInBytes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getVertexSizeInBytes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setMaterial(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setMaterial(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1267,10 +1267,10 @@ bool js_cocos2dx_3d_Mesh_setMaterial(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setMaterial : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setMaterial : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1285,10 +1285,10 @@ bool js_cocos2dx_3d_Mesh_getName(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getName : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getName : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getIndexFormat(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getIndexFormat(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1303,10 +1303,10 @@ bool js_cocos2dx_3d_Mesh_getIndexFormat(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getIndexFormat : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getIndexFormat : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getGLProgramState(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getGLProgramState(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1317,18 +1317,18 @@ bool js_cocos2dx_3d_Mesh_getGLProgramState(JSContext *cx, uint32_t argc, jsval *
         cocos2d::GLProgramState* ret = cobj->getGLProgramState();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::GLProgramState>(cx, (cocos2d::GLProgramState*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::GLProgramState>(cx, (cocos2d::GLProgramState*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getGLProgramState : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getGLProgramState : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getVertexBuffer(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getVertexBuffer(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1343,10 +1343,10 @@ bool js_cocos2dx_3d_Mesh_getVertexBuffer(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getVertexBuffer : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getVertexBuffer : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_calculateAABB(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_calculateAABB(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1359,10 +1359,10 @@ bool js_cocos2dx_3d_Mesh_calculateAABB(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_calculateAABB : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_calculateAABB : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_hasVertexAttrib(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_hasVertexAttrib(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1376,15 +1376,15 @@ bool js_cocos2dx_3d_Mesh_hasVertexAttrib(JSContext *cx, uint32_t argc, jsval *vp
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Mesh_hasVertexAttrib : Error processing arguments");
         bool ret = cobj->hasVertexAttrib(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_hasVertexAttrib : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_hasVertexAttrib : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getBlendFunc(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1399,10 +1399,10 @@ bool js_cocos2dx_3d_Mesh_getBlendFunc(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getMeshIndexData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getMeshIndexData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1413,18 +1413,18 @@ bool js_cocos2dx_3d_Mesh_getMeshIndexData(JSContext *cx, uint32_t argc, jsval *v
         cocos2d::MeshIndexData* ret = cobj->getMeshIndexData();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::MeshIndexData>(cx, (cocos2d::MeshIndexData*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::MeshIndexData>(cx, (cocos2d::MeshIndexData*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getMeshIndexData : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getMeshIndexData : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1441,10 +1441,10 @@ bool js_cocos2dx_3d_Mesh_setName(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getIndexCount(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getIndexCount(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1459,10 +1459,10 @@ bool js_cocos2dx_3d_Mesh_getIndexCount(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getIndexCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getIndexCount : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setMeshIndexData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setMeshIndexData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1487,10 +1487,10 @@ bool js_cocos2dx_3d_Mesh_setMeshIndexData(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setMeshIndexData : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setMeshIndexData : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getMeshVertexAttribCount(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getMeshVertexAttribCount(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1505,10 +1505,10 @@ bool js_cocos2dx_3d_Mesh_getMeshVertexAttribCount(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getMeshVertexAttribCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getMeshVertexAttribCount : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setBlendFunc(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1525,10 +1525,10 @@ bool js_cocos2dx_3d_Mesh_setBlendFunc(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setForce2DQueue(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setForce2DQueue(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1545,10 +1545,10 @@ bool js_cocos2dx_3d_Mesh_setForce2DQueue(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setForce2DQueue : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setForce2DQueue : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getPrimitiveType(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getPrimitiveType(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1563,10 +1563,10 @@ bool js_cocos2dx_3d_Mesh_getPrimitiveType(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getPrimitiveType : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getPrimitiveType : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setSkin(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setSkin(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1591,10 +1591,10 @@ bool js_cocos2dx_3d_Mesh_setSkin(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setSkin : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setSkin : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_isVisible(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_isVisible(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1604,15 +1604,15 @@ bool js_cocos2dx_3d_Mesh_isVisible(JSContext *cx, uint32_t argc, jsval *vp)
     if (argc == 0) {
         bool ret = cobj->isVisible();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_isVisible : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_isVisible : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_getIndexBuffer(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_getIndexBuffer(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1627,10 +1627,10 @@ bool js_cocos2dx_3d_Mesh_getIndexBuffer(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getIndexBuffer : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getIndexBuffer : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setGLProgramState(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setGLProgramState(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1655,10 +1655,10 @@ bool js_cocos2dx_3d_Mesh_setGLProgramState(JSContext *cx, uint32_t argc, jsval *
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setGLProgramState : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setGLProgramState : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_setVisible(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_setVisible(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1675,10 +1675,10 @@ bool js_cocos2dx_3d_Mesh_setVisible(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_setVisible : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_setVisible : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Mesh_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Mesh_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1688,9 +1688,9 @@ bool js_cocos2dx_3d_Mesh_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Mesh"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -1763,7 +1763,7 @@ void js_register_cocos2dx_3d_Mesh(JSContext *cx, JS::HandleObject global) {
 JSClass  *jsb_cocos2d_Skeleton3D_class;
 JSObject *jsb_cocos2d_Skeleton3D_prototype;
 
-bool js_cocos2dx_3d_Skeleton3D_removeAllBones(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_removeAllBones(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1776,10 +1776,10 @@ bool js_cocos2dx_3d_Skeleton3D_removeAllBones(JSContext *cx, uint32_t argc, jsva
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_removeAllBones : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_removeAllBones : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_addBone(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_addBone(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1804,10 +1804,10 @@ bool js_cocos2dx_3d_Skeleton3D_addBone(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_addBone : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_addBone : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_getBoneByName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_getBoneByName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1822,18 +1822,18 @@ bool js_cocos2dx_3d_Skeleton3D_getBoneByName(JSContext *cx, uint32_t argc, jsval
         cocos2d::Bone3D* ret = cobj->getBoneByName(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Bone3D>(cx, (cocos2d::Bone3D*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Bone3D>(cx, (cocos2d::Bone3D*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_getBoneByName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_getBoneByName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_getRootBone(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_getRootBone(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1848,18 +1848,18 @@ bool js_cocos2dx_3d_Skeleton3D_getRootBone(JSContext *cx, uint32_t argc, jsval *
         cocos2d::Bone3D* ret = cobj->getRootBone(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Bone3D>(cx, (cocos2d::Bone3D*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Bone3D>(cx, (cocos2d::Bone3D*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_getRootBone : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_getRootBone : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_updateBoneMatrix(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_updateBoneMatrix(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1872,10 +1872,10 @@ bool js_cocos2dx_3d_Skeleton3D_updateBoneMatrix(JSContext *cx, uint32_t argc, js
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_updateBoneMatrix : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_updateBoneMatrix : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_getBoneByIndex(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_getBoneByIndex(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1890,18 +1890,18 @@ bool js_cocos2dx_3d_Skeleton3D_getBoneByIndex(JSContext *cx, uint32_t argc, jsva
         cocos2d::Bone3D* ret = cobj->getBoneByIndex(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Bone3D>(cx, (cocos2d::Bone3D*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Bone3D>(cx, (cocos2d::Bone3D*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_getBoneByIndex : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_getBoneByIndex : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_getRootCount(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_getRootCount(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1916,10 +1916,10 @@ bool js_cocos2dx_3d_Skeleton3D_getRootCount(JSContext *cx, uint32_t argc, jsval 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_getRootCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_getRootCount : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_getBoneIndex(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_getBoneIndex(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1946,10 +1946,10 @@ bool js_cocos2dx_3d_Skeleton3D_getBoneIndex(JSContext *cx, uint32_t argc, jsval 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_getBoneIndex : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_getBoneIndex : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_getBoneCount(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_getBoneCount(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -1964,10 +1964,10 @@ bool js_cocos2dx_3d_Skeleton3D_getBoneCount(JSContext *cx, uint32_t argc, jsval 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skeleton3D_getBoneCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skeleton3D_getBoneCount : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Skeleton3D_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skeleton3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -1977,9 +1977,9 @@ bool js_cocos2dx_3d_Skeleton3D_constructor(JSContext *cx, uint32_t argc, jsval *
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Skeleton3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -2037,7 +2037,7 @@ void js_register_cocos2dx_3d_Skeleton3D(JSContext *cx, JS::HandleObject global) 
 JSClass  *jsb_cocos2d_Skybox_class;
 JSObject *jsb_cocos2d_Skybox_prototype;
 
-bool js_cocos2dx_3d_Skybox_reload(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skybox_reload(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2050,10 +2050,10 @@ bool js_cocos2dx_3d_Skybox_reload(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skybox_reload : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skybox_reload : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Skybox_init(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skybox_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2077,15 +2077,15 @@ bool js_cocos2dx_3d_Skybox_init(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Skybox_init : Error processing arguments");
         bool ret = cobj->init(arg0, arg1, arg2, arg3, arg4, arg5);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skybox_init : wrong number of arguments: %d, was expecting %d", argc, 6);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skybox_init : wrong number of arguments: %d, was expecting %d", argc, 6);
     return false;
 }
-bool js_cocos2dx_3d_Skybox_setTexture(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skybox_setTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2110,10 +2110,10 @@ bool js_cocos2dx_3d_Skybox_setTexture(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Skybox_setTexture : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skybox_setTexture : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Skybox_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skybox_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2139,11 +2139,11 @@ bool js_cocos2dx_3d_Skybox_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_std_string(cx, args.get(5), &arg5);
             if (!ok) { ok = true; break; }
             cocos2d::Skybox* ret = cocos2d::Skybox::create(arg0, arg1, arg2, arg3, arg4, arg5);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Skybox>(cx, (cocos2d::Skybox*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Skybox>(cx, (cocos2d::Skybox*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -2153,20 +2153,20 @@ bool js_cocos2dx_3d_Skybox_create(JSContext *cx, uint32_t argc, jsval *vp)
     do {
         if (argc == 0) {
             cocos2d::Skybox* ret = cocos2d::Skybox::create();
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Skybox>(cx, (cocos2d::Skybox*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Skybox>(cx, (cocos2d::Skybox*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
         }
     } while (0);
-    JS_ReportError(cx, "js_cocos2dx_3d_Skybox_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Skybox_create : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Skybox_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Skybox_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2176,9 +2176,9 @@ bool js_cocos2dx_3d_Skybox_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Skybox"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -2236,7 +2236,7 @@ void js_register_cocos2dx_3d_Skybox(JSContext *cx, JS::HandleObject global) {
 JSClass  *jsb_cocos2d_Sprite3D_class;
 JSObject *jsb_cocos2d_Sprite3D_prototype;
 
-bool js_cocos2dx_3d_Sprite3D_setCullFaceEnabled(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setCullFaceEnabled(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2253,10 +2253,10 @@ bool js_cocos2dx_3d_Sprite3D_setCullFaceEnabled(JSContext *cx, uint32_t argc, js
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setCullFaceEnabled : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setCullFaceEnabled : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setTexture(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocos2d::Sprite3D* cobj = nullptr;
@@ -2297,10 +2297,10 @@ bool js_cocos2dx_3d_Sprite3D_setTexture(JSContext *cx, uint32_t argc, jsval *vp)
         }
     } while(0);
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setTexture : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setTexture : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getLightMask(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getLightMask(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2315,10 +2315,10 @@ bool js_cocos2dx_3d_Sprite3D_getLightMask(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getLightMask : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getLightMask : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_createAttachSprite3DNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_createAttachSprite3DNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2339,10 +2339,10 @@ bool js_cocos2dx_3d_Sprite3D_createAttachSprite3DNode(JSContext *cx, uint32_t ar
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_createAttachSprite3DNode : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_createAttachSprite3DNode : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_loadFromFile(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_loadFromFile(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2365,15 +2365,15 @@ bool js_cocos2dx_3d_Sprite3D_loadFromFile(JSContext *cx, uint32_t argc, jsval *v
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Sprite3D_loadFromFile : Error processing arguments");
         bool ret = cobj->loadFromFile(arg0, arg1, arg2, arg3);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_loadFromFile : wrong number of arguments: %d, was expecting %d", argc, 4);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_loadFromFile : wrong number of arguments: %d, was expecting %d", argc, 4);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMaterial(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMaterial(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2388,18 +2388,18 @@ bool js_cocos2dx_3d_Sprite3D_getMaterial(JSContext *cx, uint32_t argc, jsval *vp
         cocos2d::Material* ret = cobj->getMaterial(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Material>(cx, (cocos2d::Material*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Material>(cx, (cocos2d::Material*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMaterial : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMaterial : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setCullFace(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setCullFace(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2416,10 +2416,10 @@ bool js_cocos2dx_3d_Sprite3D_setCullFace(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setCullFace : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setCullFace : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMeshes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMeshes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2434,10 +2434,10 @@ bool js_cocos2dx_3d_Sprite3D_getMeshes(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMeshes : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMeshes : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_addMesh(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_addMesh(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2462,10 +2462,10 @@ bool js_cocos2dx_3d_Sprite3D_addMesh(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_addMesh : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_addMesh : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_removeAllAttachNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_removeAllAttachNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2478,10 +2478,10 @@ bool js_cocos2dx_3d_Sprite3D_removeAllAttachNode(JSContext *cx, uint32_t argc, j
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_removeAllAttachNode : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_removeAllAttachNode : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setMaterial(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setMaterial(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocos2d::Sprite3D* cobj = nullptr;
@@ -2533,10 +2533,10 @@ bool js_cocos2dx_3d_Sprite3D_setMaterial(JSContext *cx, uint32_t argc, jsval *vp
         }
     } while(0);
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setMaterial : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setMaterial : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMesh(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMesh(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2547,18 +2547,18 @@ bool js_cocos2dx_3d_Sprite3D_getMesh(JSContext *cx, uint32_t argc, jsval *vp)
         cocos2d::Mesh* ret = cobj->getMesh();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Mesh>(cx, (cocos2d::Mesh*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Mesh>(cx, (cocos2d::Mesh*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMesh : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMesh : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_createSprite3DNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_createSprite3DNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2580,18 +2580,18 @@ bool js_cocos2dx_3d_Sprite3D_createSprite3DNode(JSContext *cx, uint32_t argc, js
         cocos2d::Sprite3D* ret = cobj->createSprite3DNode(arg0, arg1, arg2);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_createSprite3DNode : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_createSprite3DNode : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMeshCount(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMeshCount(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2606,10 +2606,10 @@ bool js_cocos2dx_3d_Sprite3D_getMeshCount(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMeshCount : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMeshCount : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_onAABBDirty(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_onAABBDirty(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2622,10 +2622,10 @@ bool js_cocos2dx_3d_Sprite3D_onAABBDirty(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_onAABBDirty : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_onAABBDirty : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMeshByIndex(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMeshByIndex(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2640,18 +2640,18 @@ bool js_cocos2dx_3d_Sprite3D_getMeshByIndex(JSContext *cx, uint32_t argc, jsval 
         cocos2d::Mesh* ret = cobj->getMeshByIndex(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Mesh>(cx, (cocos2d::Mesh*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Mesh>(cx, (cocos2d::Mesh*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMeshByIndex : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMeshByIndex : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_createNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_createNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2684,10 +2684,10 @@ bool js_cocos2dx_3d_Sprite3D_createNode(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_createNode : wrong number of arguments: %d, was expecting %d", argc, 4);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_createNode : wrong number of arguments: %d, was expecting %d", argc, 4);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_isForceDepthWrite(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_isForceDepthWrite(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2697,15 +2697,15 @@ bool js_cocos2dx_3d_Sprite3D_isForceDepthWrite(JSContext *cx, uint32_t argc, jsv
     if (argc == 0) {
         bool ret = cobj->isForceDepthWrite();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_isForceDepthWrite : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_isForceDepthWrite : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getBlendFunc(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2720,10 +2720,10 @@ bool js_cocos2dx_3d_Sprite3D_getBlendFunc(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMeshIndexData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMeshIndexData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2738,18 +2738,18 @@ bool js_cocos2dx_3d_Sprite3D_getMeshIndexData(JSContext *cx, uint32_t argc, jsva
         cocos2d::MeshIndexData* ret = cobj->getMeshIndexData(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::MeshIndexData>(cx, (cocos2d::MeshIndexData*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::MeshIndexData>(cx, (cocos2d::MeshIndexData*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMeshIndexData : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMeshIndexData : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setLightMask(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setLightMask(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2766,10 +2766,10 @@ bool js_cocos2dx_3d_Sprite3D_setLightMask(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setLightMask : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setLightMask : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_afterAsyncLoad(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_afterAsyncLoad(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2787,10 +2787,10 @@ bool js_cocos2dx_3d_Sprite3D_afterAsyncLoad(JSContext *cx, uint32_t argc, jsval 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_afterAsyncLoad : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_afterAsyncLoad : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_loadFromCache(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_loadFromCache(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2804,15 +2804,15 @@ bool js_cocos2dx_3d_Sprite3D_loadFromCache(JSContext *cx, uint32_t argc, jsval *
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Sprite3D_loadFromCache : Error processing arguments");
         bool ret = cobj->loadFromCache(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_loadFromCache : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_loadFromCache : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_initFrom(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_initFrom(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2833,15 +2833,15 @@ bool js_cocos2dx_3d_Sprite3D_initFrom(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Sprite3D_initFrom : Error processing arguments");
         bool ret = cobj->initFrom(arg0, arg1, arg2);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_initFrom : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_initFrom : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getAttachNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getAttachNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2856,18 +2856,18 @@ bool js_cocos2dx_3d_Sprite3D_getAttachNode(JSContext *cx, uint32_t argc, jsval *
         cocos2d::AttachNode* ret = cobj->getAttachNode(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::AttachNode>(cx, (cocos2d::AttachNode*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::AttachNode>(cx, (cocos2d::AttachNode*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getAttachNode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getAttachNode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_initWithFile(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_initWithFile(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2881,15 +2881,15 @@ bool js_cocos2dx_3d_Sprite3D_initWithFile(JSContext *cx, uint32_t argc, jsval *v
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Sprite3D_initWithFile : Error processing arguments");
         bool ret = cobj->initWithFile(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_initWithFile : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_initWithFile : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setBlendFunc(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2906,10 +2906,10 @@ bool js_cocos2dx_3d_Sprite3D_setBlendFunc(JSContext *cx, uint32_t argc, jsval *v
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setForce2DQueue(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setForce2DQueue(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2926,10 +2926,10 @@ bool js_cocos2dx_3d_Sprite3D_setForce2DQueue(JSContext *cx, uint32_t argc, jsval
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setForce2DQueue : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setForce2DQueue : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_genMaterial(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_genMaterial(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2951,10 +2951,10 @@ bool js_cocos2dx_3d_Sprite3D_genMaterial(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_genMaterial : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_genMaterial : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_removeAttachNode(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_removeAttachNode(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2971,10 +2971,10 @@ bool js_cocos2dx_3d_Sprite3D_removeAttachNode(JSContext *cx, uint32_t argc, jsva
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_removeAttachNode : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_removeAttachNode : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getSkeleton(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getSkeleton(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -2985,18 +2985,18 @@ bool js_cocos2dx_3d_Sprite3D_getSkeleton(JSContext *cx, uint32_t argc, jsval *vp
         cocos2d::Skeleton3D* ret = cobj->getSkeleton();
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Skeleton3D>(cx, (cocos2d::Skeleton3D*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Skeleton3D>(cx, (cocos2d::Skeleton3D*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getSkeleton : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getSkeleton : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_setForceDepthWrite(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_setForceDepthWrite(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3013,10 +3013,10 @@ bool js_cocos2dx_3d_Sprite3D_setForceDepthWrite(JSContext *cx, uint32_t argc, js
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_setForceDepthWrite : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_setForceDepthWrite : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_getMeshByName(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_getMeshByName(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3031,18 +3031,18 @@ bool js_cocos2dx_3d_Sprite3D_getMeshByName(JSContext *cx, uint32_t argc, jsval *
         cocos2d::Mesh* ret = cobj->getMeshByName(arg0);
         JS::RootedValue jsret(cx);
         if (ret) {
-            jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Mesh>(cx, (cocos2d::Mesh*)ret));
+            jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Mesh>(cx, (cocos2d::Mesh*)ret));
         } else {
-            jsret = JSVAL_NULL;
+            jsret = JS::NullValue();
         };
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_getMeshByName : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_getMeshByName : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3053,11 +3053,11 @@ bool js_cocos2dx_3d_Sprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_std_string(cx, args.get(0), &arg0);
             if (!ok) { ok = true; break; }
             cocos2d::Sprite3D* ret = cocos2d::Sprite3D::create(arg0);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -3067,11 +3067,11 @@ bool js_cocos2dx_3d_Sprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
     do {
         if (argc == 0) {
             cocos2d::Sprite3D* ret = cocos2d::Sprite3D::create();
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
@@ -3087,20 +3087,20 @@ bool js_cocos2dx_3d_Sprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_std_string(cx, args.get(1), &arg1);
             if (!ok) { ok = true; break; }
             cocos2d::Sprite3D* ret = cocos2d::Sprite3D::create(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             if (ret) {
-                jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
+                jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sprite3D>(cx, (cocos2d::Sprite3D*)ret));
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             };
             args.rval().set(jsret);
             return true;
         }
     } while (0);
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3D_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3D_create : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Sprite3D_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3110,12 +3110,12 @@ bool js_cocos2dx_3d_Sprite3D_constructor(JSContext *cx, uint32_t argc, jsval *vp
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Sprite3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
-static bool js_cocos2dx_3d_Sprite3D_ctor(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_3d_Sprite3D_ctor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3124,7 +3124,7 @@ static bool js_cocos2dx_3d_Sprite3D_ctor(JSContext *cx, uint32_t argc, jsval *vp
     jsb_ref_init(cx, &p->obj, nobj, "cocos2d::Sprite3D");
     bool isFound = false;
     if (JS_HasProperty(cx, obj, "_ctor", &isFound) && isFound)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(obj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*obj), "_ctor", args);
     args.rval().setUndefined();
     return true;
 }
@@ -3216,7 +3216,7 @@ void js_register_cocos2dx_3d_Sprite3D(JSContext *cx, JS::HandleObject global) {
 JSClass  *jsb_cocos2d_Sprite3DCache_class;
 JSObject *jsb_cocos2d_Sprite3DCache_prototype;
 
-bool js_cocos2dx_3d_Sprite3DCache_removeSprite3DData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3DCache_removeSprite3DData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3233,10 +3233,10 @@ bool js_cocos2dx_3d_Sprite3DCache_removeSprite3DData(JSContext *cx, uint32_t arg
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3DCache_removeSprite3DData : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3DCache_removeSprite3DData : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3249,10 +3249,10 @@ bool js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData(JSContext *cx, uint32_t 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Sprite3DCache_destroyInstance(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3DCache_destroyInstance(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
@@ -3260,26 +3260,26 @@ bool js_cocos2dx_3d_Sprite3DCache_destroyInstance(JSContext *cx, uint32_t argc, 
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3DCache_destroyInstance : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3DCache_destroyInstance : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Sprite3DCache_getInstance(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Sprite3DCache_getInstance(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
 
         cocos2d::Sprite3DCache* ret = cocos2d::Sprite3DCache::getInstance();
-        jsval jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         if (ret) {
-        jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Sprite3DCache>(cx, (cocos2d::Sprite3DCache*)ret));
+        jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Sprite3DCache>(cx, (cocos2d::Sprite3DCache*)ret));
     } else {
-        jsret = JSVAL_NULL;
+        jsret = JS::NullValue();
     };
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Sprite3DCache_getInstance : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Sprite3DCache_getInstance : wrong number of arguments");
     return false;
 }
 
@@ -3334,7 +3334,7 @@ void js_register_cocos2dx_3d_Sprite3DCache(JSContext *cx, JS::HandleObject globa
 JSClass  *jsb_cocos2d_Terrain_class;
 JSObject *jsb_cocos2d_Terrain_prototype;
 
-bool js_cocos2dx_3d_Terrain_initHeightMap(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_initHeightMap(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3348,15 +3348,15 @@ bool js_cocos2dx_3d_Terrain_initHeightMap(JSContext *cx, uint32_t argc, jsval *v
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Terrain_initHeightMap : Error processing arguments");
         bool ret = cobj->initHeightMap(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_initHeightMap : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_initHeightMap : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setMaxDetailMapAmount(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setMaxDetailMapAmount(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3373,10 +3373,10 @@ bool js_cocos2dx_3d_Terrain_setMaxDetailMapAmount(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setMaxDetailMapAmount : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setMaxDetailMapAmount : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setDrawWire(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setDrawWire(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3393,10 +3393,10 @@ bool js_cocos2dx_3d_Terrain_setDrawWire(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setDrawWire : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setDrawWire : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setDetailMap(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setDetailMap(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3416,10 +3416,10 @@ bool js_cocos2dx_3d_Terrain_setDetailMap(JSContext *cx, uint32_t argc, jsval *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setDetailMap : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setDetailMap : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_resetHeightMap(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_resetHeightMap(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3436,10 +3436,10 @@ bool js_cocos2dx_3d_Terrain_resetHeightMap(JSContext *cx, uint32_t argc, jsval *
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_resetHeightMap : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_resetHeightMap : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setLightDir(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setLightDir(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3456,10 +3456,10 @@ bool js_cocos2dx_3d_Terrain_setLightDir(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setLightDir : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setLightDir : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setAlphaMap(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setAlphaMap(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3484,10 +3484,10 @@ bool js_cocos2dx_3d_Terrain_setAlphaMap(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setAlphaMap : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setAlphaMap : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setSkirtHeightRatio(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setSkirtHeightRatio(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3504,10 +3504,10 @@ bool js_cocos2dx_3d_Terrain_setSkirtHeightRatio(JSContext *cx, uint32_t argc, js
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setSkirtHeightRatio : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setSkirtHeightRatio : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_convertToTerrainSpace(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_convertToTerrainSpace(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3526,10 +3526,10 @@ bool js_cocos2dx_3d_Terrain_convertToTerrainSpace(JSContext *cx, uint32_t argc, 
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_convertToTerrainSpace : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_convertToTerrainSpace : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_initTextures(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_initTextures(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3539,15 +3539,15 @@ bool js_cocos2dx_3d_Terrain_initTextures(JSContext *cx, uint32_t argc, jsval *vp
     if (argc == 0) {
         bool ret = cobj->initTextures();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_initTextures : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_initTextures : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_initProperties(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_initProperties(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3557,15 +3557,15 @@ bool js_cocos2dx_3d_Terrain_initProperties(JSContext *cx, uint32_t argc, jsval *
     if (argc == 0) {
         bool ret = cobj->initProperties();
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_initProperties : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_initProperties : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getHeight(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getHeight(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocos2d::Terrain* cobj = nullptr;
@@ -3582,8 +3582,8 @@ bool js_cocos2dx_3d_Terrain_getHeight(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= jsval_to_vector2(cx, args.get(0), &arg0);
             if (!ok) { ok = true; break; }
             double ret = cobj->getHeight(arg0);
-            jsval jsret = JSVAL_NULL;
-            jsret = DOUBLE_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::DoubleValue(ret);
             args.rval().set(jsret);
             return true;
         }
@@ -3606,8 +3606,8 @@ bool js_cocos2dx_3d_Terrain_getHeight(JSContext *cx, uint32_t argc, jsval *vp)
             } while (0);
             if (!ok) { ok = true; break; }
             double ret = cobj->getHeight(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
-            jsret = DOUBLE_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::DoubleValue(ret);
             args.rval().set(jsret);
             return true;
         }
@@ -3622,8 +3622,8 @@ bool js_cocos2dx_3d_Terrain_getHeight(JSContext *cx, uint32_t argc, jsval *vp)
             ok &= JS::ToNumber( cx, args.get(1), &arg1) && !std::isnan(arg1);
             if (!ok) { ok = true; break; }
             double ret = cobj->getHeight(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
-            jsret = DOUBLE_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::DoubleValue(ret);
             args.rval().set(jsret);
             return true;
         }
@@ -3649,17 +3649,17 @@ bool js_cocos2dx_3d_Terrain_getHeight(JSContext *cx, uint32_t argc, jsval *vp)
             } while (0);
             if (!ok) { ok = true; break; }
             double ret = cobj->getHeight(arg0, arg1, arg2);
-            jsval jsret = JSVAL_NULL;
-            jsret = DOUBLE_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::DoubleValue(ret);
             args.rval().set(jsret);
             return true;
         }
     } while(0);
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getHeight : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getHeight : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Terrain_initWithTerrainData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_initWithTerrainData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3675,15 +3675,15 @@ bool js_cocos2dx_3d_Terrain_initWithTerrainData(JSContext *cx, uint32_t argc, js
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Terrain_initWithTerrainData : Error processing arguments");
         bool ret = cobj->initWithTerrainData(arg0, arg1);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_initWithTerrainData : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_initWithTerrainData : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setLODDistance(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setLODDistance(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3704,10 +3704,10 @@ bool js_cocos2dx_3d_Terrain_setLODDistance(JSContext *cx, uint32_t argc, jsval *
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setLODDistance : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setLODDistance : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getTerrainSize(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getTerrainSize(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3722,10 +3722,10 @@ bool js_cocos2dx_3d_Terrain_getTerrainSize(JSContext *cx, uint32_t argc, jsval *
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getTerrainSize : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getTerrainSize : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getIntersectionPoint(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getIntersectionPoint(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     bool ok = true;
     cocos2d::Terrain* cobj = nullptr;
@@ -3745,8 +3745,8 @@ bool js_cocos2dx_3d_Terrain_getIntersectionPoint(JSContext *cx, uint32_t argc, j
             ok &= jsval_to_vector3(cx, args.get(1), &arg1);
             if (!ok) { ok = true; break; }
             bool ret = cobj->getIntersectionPoint(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
-            jsret = BOOLEAN_TO_JSVAL(ret);
+            JS::Value jsret = JS::NullValue();
+            jsret = JS::BooleanValue(ret);
             args.rval().set(jsret);
             return true;
         }
@@ -3758,17 +3758,17 @@ bool js_cocos2dx_3d_Terrain_getIntersectionPoint(JSContext *cx, uint32_t argc, j
             ok &= jsval_to_ray(cx, args.get(0), &arg0);
             if (!ok) { ok = true; break; }
             cocos2d::Vec3 ret = cobj->getIntersectionPoint(arg0);
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             jsret = vector3_to_jsval(cx, ret);
             args.rval().set(jsret);
             return true;
         }
     } while(0);
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getIntersectionPoint : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getIntersectionPoint : wrong number of arguments");
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getNormal(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getNormal(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3789,10 +3789,10 @@ bool js_cocos2dx_3d_Terrain_getNormal(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getNormal : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getNormal : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_reload(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_reload(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3805,10 +3805,10 @@ bool js_cocos2dx_3d_Terrain_reload(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_reload : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_reload : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getImageHeight(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getImageHeight(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3824,15 +3824,15 @@ bool js_cocos2dx_3d_Terrain_getImageHeight(JSContext *cx, uint32_t argc, jsval *
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Terrain_getImageHeight : Error processing arguments");
         double ret = cobj->getImageHeight(arg0, arg1);
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getImageHeight : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getImageHeight : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setLightMap(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setLightMap(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3849,10 +3849,10 @@ bool js_cocos2dx_3d_Terrain_setLightMap(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setLightMap : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setLightMap : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_setIsEnableFrustumCull(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_setIsEnableFrustumCull(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3869,10 +3869,10 @@ bool js_cocos2dx_3d_Terrain_setIsEnableFrustumCull(JSContext *cx, uint32_t argc,
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_setIsEnableFrustumCull : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_setIsEnableFrustumCull : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getMinHeight(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getMinHeight(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3882,15 +3882,15 @@ bool js_cocos2dx_3d_Terrain_getMinHeight(JSContext *cx, uint32_t argc, jsval *vp
     if (argc == 0) {
         double ret = cobj->getMinHeight();
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getMinHeight : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getMinHeight : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_getMaxHeight(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_getMaxHeight(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -3900,15 +3900,15 @@ bool js_cocos2dx_3d_Terrain_getMaxHeight(JSContext *cx, uint32_t argc, jsval *vp
     if (argc == 0) {
         double ret = cobj->getMaxHeight();
         JS::RootedValue jsret(cx);
-        jsret = DOUBLE_TO_JSVAL(ret);
+        jsret = JS::DoubleValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Terrain_getMaxHeight : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Terrain_getMaxHeight : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Terrain_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Terrain_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -3918,9 +3918,9 @@ bool js_cocos2dx_3d_Terrain_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::Terrain"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -3995,7 +3995,7 @@ void js_register_cocos2dx_3d_Terrain(JSContext *cx, JS::HandleObject global) {
 JSClass  *jsb_cocos2d_Bundle3D_class;
 JSObject *jsb_cocos2d_Bundle3D_prototype;
 
-bool js_cocos2dx_3d_Bundle3D_load(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_load(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4009,15 +4009,15 @@ bool js_cocos2dx_3d_Bundle3D_load(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_load : Error processing arguments");
         bool ret = cobj->load(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_load : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_load : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_loadSkinData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_loadSkinData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4034,15 +4034,15 @@ bool js_cocos2dx_3d_Bundle3D_loadSkinData(JSContext *cx, uint32_t argc, jsval *v
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadSkinData : Error processing arguments");
         bool ret = cobj->loadSkinData(arg0, arg1);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_loadSkinData : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_loadSkinData : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_clear(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_clear(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -4055,10 +4055,10 @@ bool js_cocos2dx_3d_Bundle3D_clear(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_clear : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_clear : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_loadMaterials(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_loadMaterials(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4073,15 +4073,15 @@ bool js_cocos2dx_3d_Bundle3D_loadMaterials(JSContext *cx, uint32_t argc, jsval *
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadMaterials : Error processing arguments");
         bool ret = cobj->loadMaterials(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_loadMaterials : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_loadMaterials : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_loadMeshDatas(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_loadMeshDatas(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4096,15 +4096,15 @@ bool js_cocos2dx_3d_Bundle3D_loadMeshDatas(JSContext *cx, uint32_t argc, jsval *
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadMeshDatas : Error processing arguments");
         bool ret = cobj->loadMeshDatas(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_loadMeshDatas : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_loadMeshDatas : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_loadNodes(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_loadNodes(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4119,15 +4119,15 @@ bool js_cocos2dx_3d_Bundle3D_loadNodes(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadNodes : Error processing arguments");
         bool ret = cobj->loadNodes(arg0);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_loadNodes : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_loadNodes : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_loadAnimationData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_loadAnimationData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4144,34 +4144,34 @@ bool js_cocos2dx_3d_Bundle3D_loadAnimationData(JSContext *cx, uint32_t argc, jsv
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadAnimationData : Error processing arguments");
         bool ret = cobj->loadAnimationData(arg0, arg1);
         JS::RootedValue jsret(cx);
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_loadAnimationData : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_loadAnimationData : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
-bool js_cocos2dx_3d_Bundle3D_createBundle(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_createBundle(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
 
         cocos2d::Bundle3D* ret = cocos2d::Bundle3D::createBundle();
-        jsval jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         if (ret) {
-        jsret = OBJECT_TO_JSVAL(js_get_or_create_jsobject<cocos2d::Bundle3D>(cx, (cocos2d::Bundle3D*)ret));
+        jsret = JS::ObjectValue(*js_get_or_create_jsobject<cocos2d::Bundle3D>(cx, (cocos2d::Bundle3D*)ret));
     } else {
-        jsret = JSVAL_NULL;
+        jsret = JS::NullValue();
     };
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_createBundle : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_createBundle : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Bundle3D_destroyBundle(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_destroyBundle(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4191,11 +4191,11 @@ bool js_cocos2dx_3d_Bundle3D_destroyBundle(JSContext *cx, uint32_t argc, jsval *
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_destroyBundle : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_destroyBundle : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Bundle3D_loadObj(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_loadObj(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4214,8 +4214,8 @@ bool js_cocos2dx_3d_Bundle3D_loadObj(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadObj : Error processing arguments");
 
         bool ret = cocos2d::Bundle3D::loadObj(arg0, arg1, arg2, arg3);
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        JS::Value jsret = JS::NullValue();
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
@@ -4236,16 +4236,16 @@ bool js_cocos2dx_3d_Bundle3D_loadObj(JSContext *cx, uint32_t argc, jsval *vp)
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Bundle3D_loadObj : Error processing arguments");
 
         bool ret = cocos2d::Bundle3D::loadObj(arg0, arg1, arg2, arg3, arg4);
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        JS::Value jsret = JS::NullValue();
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Bundle3D_loadObj : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Bundle3D_loadObj : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_3d_Bundle3D_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Bundle3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -4255,9 +4255,9 @@ bool js_cocos2dx_3d_Bundle3D_constructor(JSContext *cx, uint32_t argc, jsval *vp
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_create_weak_jsobject(cx, cobj, typeClass, "cocos2d::Bundle3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 

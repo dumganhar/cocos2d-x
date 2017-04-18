@@ -85,10 +85,10 @@ public:
 
         JSContext* cx = ScriptingCore::getInstance()->getGlobalContext();
 
-        jsval args;
+        JS::Value args;
         if(data == "")
         {
-            args = JSVAL_NULL;
+            args = JS::NullValue();
         } else
         {
             args = std_string_to_jsval(cx, data);
@@ -132,9 +132,9 @@ void js_cocos2dx_SocketIO_finalize(JSFreeOp *fop, JSObject *obj)
     CCLOG("jsbindings: finalizing JS object %p (SocketIO)", obj);
 }
 
-bool js_cocos2dx_SocketIO_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_SocketIO_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
-    JS_ReportError(cx, "SocketIO isn't meant to be instantiated, use SocketIO.connect() instead");
+    JS_ReportErrorUTF8(cx, "SocketIO isn't meant to be instantiated, use SocketIO.connect() instead");
     return false;
 }
 
@@ -158,7 +158,7 @@ bool js_cocos2dx_SocketIO_connect(JSContext* cx, uint32_t argc, jsval* vp)
         CCLOG("Calling native SocketIO.connect method");
         SIOClient* ret = SocketIO::connect(url, *siodelegate);
         
-        jsval jsret;
+        JS::Value jsret;
         do
         {
             if (ret)
@@ -174,18 +174,18 @@ bool js_cocos2dx_SocketIO_connect(JSContext* cx, uint32_t argc, jsval* vp)
                     JS::RootedObject jsdelegate(cx, p->obj);
                     siodelegate->setJSDelegate(jsdelegate);
                 }
-                jsret = OBJECT_TO_JSVAL(p->obj);
+                jsret = JS::ObjectValue(*p->obj);
             }
             else
             {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             }
         } while(0);
 
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "JSB SocketIO.connect: Wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "JSB SocketIO.connect: Wrong number of arguments");
     return false;
 }
 
@@ -215,7 +215,7 @@ bool js_cocos2dx_SocketIO_send(JSContext* cx, uint32_t argc, jsval* vp)
         return true;
 
     }
-    JS_ReportError(cx, "Wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "Wrong number of arguments");
     return false;
 }
 
@@ -249,7 +249,7 @@ bool js_cocos2dx_SocketIO_emit(JSContext* cx, uint32_t argc, jsval* vp)
         cobj->emit(eventName, payload);
         return true;
     }
-    JS_ReportError(cx, "JSB SocketIO.emit: Wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "JSB SocketIO.emit: Wrong number of arguments");
     return false;
 }
 
@@ -270,7 +270,7 @@ bool js_cocos2dx_SocketIO_disconnect(JSContext* cx, uint32_t argc, jsval* vp)
         return true;
     }
 
-    JS_ReportError(cx, "JSB SocketIO.disconnect: Wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "JSB SocketIO.disconnect: Wrong number of arguments");
     return false;
 }
 
@@ -288,7 +288,7 @@ bool js_cocos2dx_SocketIO_close(JSContext* cx, uint32_t argc, jsval* vp)
         return true;
     }
 
-    JS_ReportError(cx, "JSB SocketIO.close: Wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "JSB SocketIO.close: Wrong number of arguments");
     return false;
 }
 
@@ -310,7 +310,7 @@ static bool _js_set_SIOClient_tag(JSContext* cx, uint32_t argc, jsval* vp)
         return true;
     } else
     {
-        JS_ReportError(cx, "Error: SocketIO instance is invalid.");
+        JS_ReportErrorUTF8(cx, "Error: SocketIO instance is invalid.");
         return false;
     }
 }
@@ -330,7 +330,7 @@ static bool _js_get_SIOClient_tag(JSContext* cx, uint32_t argc, jsval* vp)
         return true;
     } else
     {
-        JS_ReportError(cx, "Error: SocketIO instance is invalid.");
+        JS_ReportErrorUTF8(cx, "Error: SocketIO instance is invalid.");
         return false;
     }
 }
@@ -361,11 +361,11 @@ bool js_cocos2dx_SocketIO_on(JSContext* cx, uint32_t argc, jsval* vp)
 
         ((JSB_SocketIODelegate *)cobj->getDelegate())->addEvent(eventName, callback);
 
-        args.rval().set(OBJECT_TO_JSVAL(proxy->obj));
+        args.rval().set(JS::ObjectValue(*proxy->obj));
         JS_SetReservedSlot(proxy->obj, 0, args.get(1));
         return true;
     }
-    JS_ReportError(cx, "JSB SocketIO.close: Wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "JSB SocketIO.close: Wrong number of arguments");
     return false;
 }
 

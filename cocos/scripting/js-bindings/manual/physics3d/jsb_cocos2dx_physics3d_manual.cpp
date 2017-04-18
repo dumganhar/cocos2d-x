@@ -69,7 +69,7 @@ bool jsval_to_physics3DRigidBodyDes(JSContext* cx, JS::HandleValue v, Physics3DR
     return true;
 }
 
-bool js_cocos2dx_PhysicsSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_PhysicsSprite3D_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -83,7 +83,7 @@ bool js_cocos2dx_PhysicsSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
         cocos2d::PhysicsSprite3D* ret = cocos2d::PhysicsSprite3D::create(arg0, &arg1);
         
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::PhysicsSprite3D>(cx, ret));
-        jsval jsret = OBJECT_TO_JSVAL(jsobj);
+        JS::Value jsret = JS::ObjectValue(*jsobj);
 
         args.rval().set(jsret);
         return true;
@@ -100,7 +100,7 @@ bool js_cocos2dx_PhysicsSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
         cocos2d::PhysicsSprite3D* ret = cocos2d::PhysicsSprite3D::create(arg0, &arg1, arg2);
         
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::PhysicsSprite3D>(cx, ret));
-        jsval jsret = OBJECT_TO_JSVAL(jsobj);
+        JS::Value jsret = JS::ObjectValue(*jsobj);
 
         args.rval().set(jsret);
         return true;
@@ -119,16 +119,16 @@ bool js_cocos2dx_PhysicsSprite3D_create(JSContext *cx, uint32_t argc, jsval *vp)
         cocos2d::PhysicsSprite3D* ret = cocos2d::PhysicsSprite3D::create(arg0, &arg1, arg2, arg3);
         
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::PhysicsSprite3D>(cx, ret));
-        jsval jsret = OBJECT_TO_JSVAL(jsobj);
+        JS::Value jsret = JS::ObjectValue(*jsobj);
 
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_PhysicsSprite3D_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_PhysicsSprite3D_create : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_physics3d_Physics3DRigidBody_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_physics3d_Physics3DRigidBody_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if (argc == 1)
     {
@@ -140,12 +140,12 @@ bool js_cocos2dx_physics3d_Physics3DRigidBody_create(JSContext *cx, uint32_t arg
         cocos2d::Physics3DRigidBody* ret = cocos2d::Physics3DRigidBody::create(&arg0);
         
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::Physics3DRigidBody>(cx, ret));
-        jsval jsret = OBJECT_TO_JSVAL(jsobj);
+        JS::Value jsret = JS::ObjectValue(*jsobj);
 
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3DRigidBody_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3DRigidBody_create : wrong number of arguments");
     return false;
 }
 
@@ -169,7 +169,7 @@ std::vector<Vec3> jsval_to_std_vector_vec3(JSContext* cx, JS::HandleValue v)
     return ret;
 }
 
-bool js_cocos2dx_physics3d_Physics3dShape_initMesh(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_physics3d_Physics3dShape_initMesh(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if (argc == 2)
     {
@@ -187,16 +187,16 @@ bool js_cocos2dx_physics3d_Physics3dShape_initMesh(JSContext *cx, uint32_t argc,
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_physics3d_Physics3DShape_initMesh : Error processing arguments");
 
         bool ret = cobj->initMesh(&arg0[0], arg1);
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        JS::Value jsret = JS::NullValue();
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3DShape_initMesh : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3DShape_initMesh : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_physics3d_Physics3dShape_createMesh(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_physics3d_Physics3dShape_createMesh(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if(argc == 2)
     {
@@ -210,18 +210,18 @@ bool js_cocos2dx_physics3d_Physics3dShape_createMesh(JSContext *cx, uint32_t arg
         
         Physics3DShape* ret = Physics3DShape::createMesh(&arg0[0], arg1);
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::Physics3DShape>(cx, ret));
-        jsval jsret = OBJECT_TO_JSVAL(jsobj);
+        JS::Value jsret = JS::ObjectValue(*jsobj);
 
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3dShape_createMesh : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3dShape_createMesh : wrong number of arguments");
     return false;
 }
 
-jsval physics3d_collisionPoint_to_jsval(JSContext*cx, const Physics3DCollisionInfo::CollisionPoint& point)
+JS::Value physics3d_collisionPoint_to_jsval(JSContext*cx, const Physics3DCollisionInfo::CollisionPoint& point)
 {
-    JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));
+    JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr));
 
     JS::RootedValue prop(cx, vector3_to_jsval(cx, point.localPositionOnA));
     JS_DefineProperty(cx, tmp, "localPositionOnA", prop, JSPROP_ENUMERATE | JSPROP_PERMANENT);
@@ -234,19 +234,19 @@ jsval physics3d_collisionPoint_to_jsval(JSContext*cx, const Physics3DCollisionIn
     prop.set(vector3_to_jsval(cx, point.worldNormalOnB));
     JS_DefineProperty(cx, tmp, "worldNormalOnB", prop, JSPROP_ENUMERATE | JSPROP_PERMANENT);
 
-    return OBJECT_TO_JSVAL(tmp);
+    return JS::ObjectValue(*tmp);
 }
 
-jsval physics3d_collisioninfo_to_jsval(JSContext* cx, const Physics3DCollisionInfo& ci)
+JS::Value physics3d_collisioninfo_to_jsval(JSContext* cx, const Physics3DCollisionInfo& ci)
 {
-    JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));
+    JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr));
     
     JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::Physics3DObject>(cx, ci.objA));
-    JS::RootedValue prop(cx, OBJECT_TO_JSVAL(jsobj));
+    JS::RootedValue prop(cx, JS::ObjectValue(*jsobj));
     JS_DefineProperty(cx, tmp, "objA", prop, JSPROP_ENUMERATE | JSPROP_PERMANENT);
 
     jsobj.set(js_get_or_create_jsobject<cocos2d::Physics3DObject>(cx, ci.objB));
-    prop.set(OBJECT_TO_JSVAL(jsobj));
+    prop.set(JS::ObjectValue(*jsobj));
     JS_DefineProperty(cx, tmp, "objB", prop, JSPROP_ENUMERATE | JSPROP_PERMANENT);
 
     JS::RootedObject jsarr(cx, JS_NewArrayObject(cx, ci.collisionPointList.size()));
@@ -256,13 +256,13 @@ jsval physics3d_collisioninfo_to_jsval(JSContext* cx, const Physics3DCollisionIn
         JS::RootedValue element(cx, physics3d_collisionPoint_to_jsval(cx, *iter));
         JS_SetElement(cx, jsarr, i++, element);
     }
-    prop.set(OBJECT_TO_JSVAL(jsarr));
+    prop.set(JS::ObjectValue(*jsarr));
     JS_DefineProperty(cx, tmp, "collisionPointList", prop, JSPROP_ENUMERATE | JSPROP_PERMANENT);
 
-    return OBJECT_TO_JSVAL(tmp);
+    return JS::ObjectValue(*tmp);
 }
 
-bool jsb_cocos2d_Physics3DObject_setCollisionCallback(JSContext *cx, uint32_t argc, jsval *vp)
+bool jsb_cocos2d_Physics3DObject_setCollisionCallback(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if(argc == 2)
     {
@@ -279,7 +279,7 @@ bool jsb_cocos2d_Physics3DObject_setCollisionCallback(JSContext *cx, uint32_t ar
         auto lambda = [=](const Physics3DCollisionInfo &ci) -> void {
             JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
 
-            jsval jsci = physics3d_collisioninfo_to_jsval(cx, ci);
+            JS::Value jsci = physics3d_collisioninfo_to_jsval(cx, ci);
             JS::RootedValue rval(cx);
             bool ok = func->invoke(1, &jsci, &rval);
             if (!ok && JS_IsExceptionPending(cx))
@@ -293,11 +293,11 @@ bool jsb_cocos2d_Physics3DObject_setCollisionCallback(JSContext *cx, uint32_t ar
         args.rval().setUndefined();
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3dShape_createMesh : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3dShape_createMesh : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_physics3d_Physics3dShape_initHeightfield(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_physics3d_Physics3dShape_initHeightfield(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if (argc == 8 || argc == 9)
     {
@@ -336,16 +336,16 @@ bool js_cocos2dx_physics3d_Physics3dShape_initHeightfield(JSContext *cx, uint32_
         else if (argc == 9)
             ret = cobj->initHeightfield(arg0, arg1, &arg2[0], arg3, arg4, arg5, arg6, arg7, arg8);
 
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
+        JS::Value jsret = JS::NullValue();
+        jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3DShape_initHeightfield : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3DShape_initHeightfield : wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_physics3d_Physics3dShape_createHeightfield(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_physics3d_Physics3dShape_createHeightfield(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if (argc == 8 || argc == 9)
     {
@@ -379,12 +379,12 @@ bool js_cocos2dx_physics3d_Physics3dShape_createHeightfield(JSContext *cx, uint3
             ret = cocos2d::Physics3DShape::createHeightfield(arg0, arg1, &arg2[0], arg3, arg4, arg5, arg6, arg7, arg8);
         
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::Physics3DShape>(cx, ret));
-        jsval jsret = OBJECT_TO_JSVAL(jsobj);
+        JS::Value jsret = JS::ObjectValue(*jsobj);
 
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3DShape_createHeightfield : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3DShape_createHeightfield : wrong number of arguments");
     return false;
 }
 
@@ -413,12 +413,12 @@ bool jsval_to_Physics3DWorld_HitResult(JSContext *cx, JS::HandleValue v, cocos2d
     return true;
 }
 
-jsval Physics3DWorld_HitResult_to_jsval(JSContext *cx, const cocos2d::Physics3DWorld::HitResult& v)
+JS::Value Physics3DWorld_HitResult_to_jsval(JSContext *cx, const cocos2d::Physics3DWorld::HitResult& v)
 {
     JS::RootedObject proto(cx);
     JS::RootedObject parent(cx);
     JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr, proto, parent));
-    if (!tmp) return JSVAL_NULL;
+    if (!tmp) return JS::NullValue();
     JS::RootedValue hitPosition(cx, vector3_to_jsval(cx, v.hitPosition));
     JS::RootedValue hitNormal(cx, vector3_to_jsval(cx, v.hitNormal));
     JS::RootedValue hitobject(cx);
@@ -426,7 +426,7 @@ jsval Physics3DWorld_HitResult_to_jsval(JSContext *cx, const cocos2d::Physics3DW
     if (v.hitObj)
     {
         JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::Physics3DObject>(cx, v.hitObj));
-        hitobject.set(OBJECT_TO_JSVAL(jsobj));
+        hitobject.set(JS::ObjectValue(*jsobj));
     }
     
     bool ok = JS_DefineProperty(cx, tmp, "hitPosition", hitPosition, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
@@ -434,12 +434,12 @@ jsval Physics3DWorld_HitResult_to_jsval(JSContext *cx, const cocos2d::Physics3DW
     JS_DefineProperty(cx, tmp, "hitObj", hitobject, JSPROP_ENUMERATE | JSPROP_PERMANENT);
     
     if (ok) {
-        return OBJECT_TO_JSVAL(tmp);
+        return JS::ObjectValue(*tmp);
     }
-    return JSVAL_NULL;
+    return JS::NullValue();
 }
 
-bool js_cocos2dx_physics3d_Physics3DWorld_rayCast(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_physics3d_Physics3DWorld_rayCast(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -458,7 +458,7 @@ bool js_cocos2dx_physics3d_Physics3DWorld_rayCast(JSContext *cx, uint32_t argc, 
         
         if (succeed)
         {
-            jsval jsret = JSVAL_NULL;
+            JS::Value jsret = JS::NullValue();
             jsret = Physics3DWorld_HitResult_to_jsval(cx, ret);
             args.rval().set(jsret);
         }
@@ -469,7 +469,7 @@ bool js_cocos2dx_physics3d_Physics3DWorld_rayCast(JSContext *cx, uint32_t argc, 
         return true;
     }
     
-    JS_ReportError(cx, "js_cocos2dx_physics3d_Physics3DWorld_rayCast : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_physics3d_Physics3DWorld_rayCast : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
 

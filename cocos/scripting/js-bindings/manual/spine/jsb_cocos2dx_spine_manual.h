@@ -29,17 +29,17 @@
 
 void register_all_cocos2dx_spine_manual(JSContext* cx, JS::HandleObject global);
 
-extern jsval speventdata_to_jsval(JSContext* cx, spEventData& v);
-extern jsval spevent_to_jsval(JSContext* cx, spEvent& v);
-extern jsval spbonedata_to_jsval(JSContext* cx, const spBoneData* v);
-extern jsval spbone_to_jsval(JSContext* cx, spBone& v);
-extern jsval spskeleton_to_jsval(JSContext* cx, spSkeleton& v);
-extern jsval spattachment_to_jsval(JSContext* cx, spAttachment& v);
-extern jsval spslotdata_to_jsval(JSContext* cx, spSlotData& v);
-extern jsval spslot_to_jsval(JSContext* cx, spSlot& v);
-extern jsval sptimeline_to_jsval(JSContext* cx, spTimeline& v);
-extern jsval spanimationstate_to_jsval(JSContext* cx, spAnimationState& v);
-extern jsval spanimation_to_jsval(JSContext* cx, spAnimation& v);
-extern jsval sptrackentry_to_jsval(JSContext* cx, spTrackEntry& v);
+extern JS::Value speventdata_to_jsval(JSContext* cx, spEventData& v);
+extern JS::Value spevent_to_jsval(JSContext* cx, spEvent& v);
+extern JS::Value spbonedata_to_jsval(JSContext* cx, const spBoneData* v);
+extern JS::Value spbone_to_jsval(JSContext* cx, spBone& v);
+extern JS::Value spskeleton_to_jsval(JSContext* cx, spSkeleton& v);
+extern JS::Value spattachment_to_jsval(JSContext* cx, spAttachment& v);
+extern JS::Value spslotdata_to_jsval(JSContext* cx, spSlotData& v);
+extern JS::Value spslot_to_jsval(JSContext* cx, spSlot& v);
+extern JS::Value sptimeline_to_jsval(JSContext* cx, spTimeline& v);
+extern JS::Value spanimationstate_to_jsval(JSContext* cx, spAnimationState& v);
+extern JS::Value spanimation_to_jsval(JSContext* cx, spAnimation& v);
+extern JS::Value sptrackentry_to_jsval(JSContext* cx, spTrackEntry& v);
 
 #endif /* defined(__jsb_cocos2dx_spine_manual__) */

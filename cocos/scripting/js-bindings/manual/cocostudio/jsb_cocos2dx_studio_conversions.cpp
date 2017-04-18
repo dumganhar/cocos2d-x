@@ -25,18 +25,18 @@
 #include "scripting/js-bindings/manual/cocos2d_specifics.hpp"
 #include "editor-support/cocostudio/CocoStudio.h"
 
-jsval animationInfo_to_jsval(JSContext* cx, const cocostudio::timeline::AnimationInfo& v)
+JS::Value animationInfo_to_jsval(JSContext* cx, const cocostudio::timeline::AnimationInfo& v)
 {
-    JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));
-    if (!tmp) return JSVAL_NULL;
+    JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr));
+    if (!tmp) return JS::NullValue();
     JS::RootedValue jsname(cx, std_string_to_jsval(cx, v.name));
     bool ok = JS_DefineProperty(cx, tmp, "name", jsname, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
     JS_DefineProperty(cx, tmp, "startIndex", v.startIndex, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
     JS_DefineProperty(cx, tmp, "endIndex", v.endIndex, JSPROP_ENUMERATE | JSPROP_PERMANENT);
     if (ok) {
-        return OBJECT_TO_JSVAL(tmp);
+        return JS::ObjectValue(*tmp);
     }
-    return JSVAL_NULL;
+    return JS::NullValue();
 }
 
 bool jsval_to_animationInfo(JSContext* cx, JS::HandleValue vp, cocostudio::timeline::AnimationInfo* ret)

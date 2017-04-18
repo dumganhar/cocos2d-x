@@ -33,7 +33,7 @@ class CCBScriptCallbackProxy:  public cocos2d::Layer
 , public cocosbuilder::CCBMemberVariableAssigner {
     
     std::string callBackProp;
-    jsval owner;
+    JS::Value owner;
 
 public:
 
@@ -56,8 +56,8 @@ public:
     void menuItemCallback(Ref *pSender);
     void controlCallback(Ref *pSender, cocos2d::extension::Control::EventType event);
     void setCallbackProperty(const char *prop);
-    void setJSOwner(jsval ownr);
-    jsval getJSOwner();
+    void setJSOwner(JS::Value ownr);
+    JS::Value getJSOwner();
 };
 
 
@@ -70,7 +70,7 @@ protected:
 };
 
 void register_CCBuilderReader(JSContext *cx, JS::HandleObject global);
-bool js_CocosBuilder_Run(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_CocosBuilder_Run(JSContext *cx, uint32_t argc, JS::Value *vp);
 
 #endif /* __JS_BINDINGS_CCBREADER_H__ */
 

@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "navmesh/CCNavMesh.h"
 #include "scripting/js-bindings/manual/js_manual_conversions.h"
 
-static bool jsb_cocos2dx_navmesh_NavMeshAgent_move(JSContext *cx, uint32_t argc, jsval *vp)
+static bool jsb_cocos2dx_navmesh_NavMeshAgent_move(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -58,21 +58,21 @@ static bool jsb_cocos2dx_navmesh_NavMeshAgent_move(JSContext *cx, uint32_t argc,
 		std::shared_ptr<JSFunctionWrapper> func(new JSFunctionWrapper(cx, obj, args.get(1)));
 
 		cobj->move(arg0, [=](cocos2d::NavMeshAgent *agent, float totalTimeAfterMove)->void{
-            jsval arg[2];
+            JS::Value arg[2];
             JS::RootedObject jsobj(cx, js_get_or_create_jsobject<cocos2d::NavMeshAgent>(cx, agent));
-            arg[0] = OBJECT_TO_JSVAL(jsobj);
-			arg[1] = DOUBLE_TO_JSVAL((double)totalTimeAfterMove);
+            arg[0] = JS::ObjectValue(*jsobj);
+			arg[1] = JS::DoubleValue((double)totalTimeAfterMove);
 			JS::RootedValue rval(cx);
 
 			bool invokeOk = func->invoke(2, arg, &rval);
 			if (!invokeOk && JS_IsExceptionPending(cx)) {
-				JS_ReportPendingException(cx);
+//cjh				JS_ReportPendingException(cx);
 			}
 		});
 		return true;
 	}
     
-    JS_ReportError(cx, "jsb_cocos2dx_navmesh_NavMeshAgent_move : wrong number of arguments: %d, was expecting %d or %d", argc, 1, 2);
+    JS_ReportErrorUTF8(cx, "jsb_cocos2dx_navmesh_NavMeshAgent_move : wrong number of arguments: %d, was expecting %d or %d", argc, 1, 2);
     return false;
 }
 

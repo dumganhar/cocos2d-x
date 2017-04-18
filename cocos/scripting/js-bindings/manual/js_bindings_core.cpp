@@ -159,7 +159,7 @@ void jsb_set_c_proxy_for_jsobject( JSObject *jsobj, void *handle, unsigned long 
 
 //#pragma mark Do Nothing - Callbacks
 
-bool JSB_do_nothing(JSContext *cx, uint32_t argc, jsval *vp)
+bool JSB_do_nothing(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     args.rval().setUndefined();

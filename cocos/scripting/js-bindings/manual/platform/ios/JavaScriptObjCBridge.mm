@@ -36,16 +36,16 @@ JavaScriptObjCBridge::CallInfo::~CallInfo(void)
 }
 JS::Value JavaScriptObjCBridge::convertReturnValue(JSContext *cx, ReturnValue retValue, ValueType type)
 {
-    JS::Value ret = JSVAL_NULL;
+    JS::Value ret = JS::NullValue();
     
     switch (type)
     {
         case TypeInteger:
-            return INT_TO_JSVAL(retValue.intValue);
+            return JS::Int32Value(retValue.intValue);
         case TypeFloat:
-            return DOUBLE_TO_JSVAL((double)retValue.floatValue);
+            return JS::DoubleValue((double)retValue.floatValue);
         case TypeBoolean:
-            return BOOLEAN_TO_JSVAL(retValue.boolValue);
+            return JS::BooleanValue(retValue.boolValue);
         case TypeString:
             return c_string_to_jsval(cx, retValue.stringValue->c_str(),retValue.stringValue->size());
         default:
@@ -55,7 +55,7 @@ JS::Value JavaScriptObjCBridge::convertReturnValue(JSContext *cx, ReturnValue re
     return ret;
 }
 
-bool JavaScriptObjCBridge::CallInfo::execute(JSContext *cx,jsval *argv,unsigned argc)
+bool JavaScriptObjCBridge::CallInfo::execute(JSContext *cx,JS::Value *argv,unsigned argc)
 {
     
     NSString * className =[NSString stringWithCString: m_className.c_str() encoding:NSUTF8StringEncoding];
@@ -64,7 +64,7 @@ bool JavaScriptObjCBridge::CallInfo::execute(JSContext *cx,jsval *argv,unsigned 
     bool ok = true;
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
     for(int i = 2;i<argc;i++){
-        jsval arg = argv[i];
+        JS::Value arg = argv[i];
         NSString *key = [NSString stringWithFormat:@"argument%d" ,i-2];
 
         if(arg.isObject() || arg.isObject()){
@@ -235,7 +235,7 @@ JS_BINDED_CONSTRUCTOR_IMPL(JavaScriptObjCBridge)
     JavaScriptObjCBridge* jsj = new (std::nothrow) JavaScriptObjCBridge();
     
     js_proxy_t *p;
-    jsval out;
+    JS::Value out;
     
     JS::RootedObject proto(cx, JavaScriptObjCBridge::js_proto);
     JS::RootedObject parentProto(cx, JavaScriptObjCBridge::js_parent);
@@ -243,7 +243,7 @@ JS_BINDED_CONSTRUCTOR_IMPL(JavaScriptObjCBridge)
     
     if (obj) {
         JS_SetPrivate(obj, jsj);
-        out = OBJECT_TO_JSVAL(obj);
+        out = JS::ObjectValue(*obj);
     }
     
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -281,7 +281,7 @@ JS_BINDED_FUNC_IMPL(JavaScriptObjCBridge, callStaticMethod){
         CallInfo call(arg0.get(),arg1.get());
         bool ok = call.execute(cx,args.array(),argc);
         if(!ok){
-            JS_ReportError(cx, "js_cocos2dx_JSObjCBridge : call result code: %d", call.getErrorCode());
+            JS_ReportErrorUTF8(cx, "js_cocos2dx_JSObjCBridge : call result code: %d", call.getErrorCode());
             return false;
         }
         args.rval().set(convertReturnValue(cx, call.getReturnValue(), call.getReturnValueType()));
@@ -290,7 +290,7 @@ JS_BINDED_FUNC_IMPL(JavaScriptObjCBridge, callStaticMethod){
     return false;
 }
 
-static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     args.rval().setBoolean(true);

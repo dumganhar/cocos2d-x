@@ -48,7 +48,7 @@ public:
         js_remove_object_root(value);
     }
 
-    jsval get(){
+    JS::Value get(){
         return _data;
     }
 private:
@@ -56,7 +56,7 @@ private:
     JS::Heap<JS::Value> _data;
 };
 
-static bool js_cocos2dx_Sprite3D_createAsync(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_cocos2dx_Sprite3D_createAsync(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if(argc == 4 || argc == 5)
@@ -71,8 +71,8 @@ static bool js_cocos2dx_Sprite3D_createAsync(JSContext *cx, uint32_t argc, jsval
         std::shared_ptr<JSFunctionWrapper> func(new JSFunctionWrapper(cx, target, fval));
         auto lambda = [=](Sprite3D* larg0, void* larg1) -> void{
             JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-            jsval largv[2];
-            largv[0] = OBJECT_TO_JSVAL(js_get_or_create_jsobject<Sprite3D>(cx, larg0));
+            JS::Value largv[2];
+            largv[0] = JS::ObjectValue(*js_get_or_create_jsobject<Sprite3D>(cx, larg0));
             JSB_HeapValueWrapper* v = (JSB_HeapValueWrapper*)larg1;
             JS::RootedValue dataVal(cx, v->get());
             largv[1] = dataVal;
@@ -100,11 +100,11 @@ static bool js_cocos2dx_Sprite3D_createAsync(JSContext *cx, uint32_t argc, jsval
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_Sprite3D_getAABB(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Sprite3D_getAABB(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -115,7 +115,7 @@ bool js_cocos2dx_Sprite3D_getAABB(JSContext *cx, uint32_t argc, jsval *vp)
     {
         cocos2d::AABB aabb = cobj->getAABB();
 
-        JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr, JS::NullPtr(), JS::NullPtr()));
+        JS::RootedObject tmp(cx, JS_NewObject(cx, nullptr));
         JS::RootedValue min(cx, vector3_to_jsval(cx, aabb._min));
         JS::RootedValue max(cx, vector3_to_jsval(cx, aabb._max));
 
@@ -124,14 +124,14 @@ bool js_cocos2dx_Sprite3D_getAABB(JSContext *cx, uint32_t argc, jsval *vp)
 
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Sprite3D_setCullFaceEnabled : Error processing arguments");
 
-        args.rval().set(OBJECT_TO_JSVAL(tmp));
+        args.rval().set(JS::ObjectValue(*tmp));
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_Mesh_getMeshVertexAttribute(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Mesh_getMeshVertexAttribute(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -144,17 +144,17 @@ bool js_cocos2dx_Mesh_getMeshVertexAttribute(JSContext *cx, uint32_t argc, jsval
         ok &= jsval_to_int32(cx, args.get(0), (int32_t *)&arg0);
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_Mesh_getMeshVertexAttribute : Error processing arguments");
         const cocos2d::MeshVertexAttrib ret = cobj->getMeshVertexAttribute(arg0);
-        jsval jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         jsret = meshVertexAttrib_to_jsval(cx, ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_3d_Mesh_getMeshVertexAttribute : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Mesh_getMeshVertexAttribute : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 
-bool js_cocos2dx_CCTextureCube_setTexParameters(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_CCTextureCube_setTexParameters(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -183,7 +183,7 @@ bool js_cocos2dx_CCTextureCube_setTexParameters(JSContext *cx, uint32_t argc, js
         return true;
     }
 
-    JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 4);
+    JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 4);
     return false;
 }
 
@@ -265,7 +265,7 @@ bool jsval_to_TerrainData(JSContext* cx, JS::HandleValue v, Terrain::TerrainData
     return true;
 }
 
-bool js_cocos2dx_Terrain_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Terrain_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if(argc == 1 || argc == 2)
@@ -288,14 +288,14 @@ bool js_cocos2dx_Terrain_create(JSContext *cx, uint32_t argc, jsval *vp)
             ret = Terrain::create(arg0, arg1);
         }
 
-        args.rval().set(OBJECT_TO_JSVAL(js_get_or_create_jsobject<Terrain>(cx, ret)));
+        args.rval().set(JS::ObjectValue(*js_get_or_create_jsobject<Terrain>(cx, ret)));
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
-jsval std_vector_vec3_to_jsval(JSContext* cx, const std::vector<cocos2d::Vec3>& triangles)
+JS::Value std_vector_vec3_to_jsval(JSContext* cx, const std::vector<cocos2d::Vec3>& triangles)
 {
     JS::RootedObject jsarr(cx, JS_NewArrayObject(cx, triangles.size()));
 
@@ -307,10 +307,10 @@ jsval std_vector_vec3_to_jsval(JSContext* cx, const std::vector<cocos2d::Vec3>& 
         ++i;
     }
 
-    return OBJECT_TO_JSVAL(jsarr);
+    return JS::ObjectValue(*jsarr);
 }
 
-bool js_cocos2dx_Bundle3D_getTrianglesList(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Bundle3D_getTrianglesList(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if(argc == 1)
     {
@@ -326,11 +326,11 @@ bool js_cocos2dx_Bundle3D_getTrianglesList(JSContext *cx, uint32_t argc, jsval *
         args.rval().set(ret);
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
-bool js_cocos2dx_Terrain_getHeightData(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_Terrain_getHeightData(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     if(argc == 0)
     {
@@ -345,7 +345,7 @@ bool js_cocos2dx_Terrain_getHeightData(JSContext *cx, uint32_t argc, jsval *vp)
         args.rval().set(std_vector_float_to_jsval(cx, data));
         return true;
     }
-    JS_ReportError(cx, "wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "wrong number of arguments");
     return false;
 }
 
@@ -353,7 +353,7 @@ bool js_cocos2dx_Terrain_getHeightData(JSContext *cx, uint32_t argc, jsval *vp)
 // get_or_create_jsobject instead of create_jsobject
 // since Animation3D::create() might return an existing copy
 // since it caches them
-bool js_cocos2dx_3d_Animation3D_create(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_cocos2dx_3d_Animation3D_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -365,7 +365,7 @@ bool js_cocos2dx_3d_Animation3D_create(JSContext *cx, uint32_t argc, jsval *vp)
         auto ret = cocos2d::Animation3D::create(arg0);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::Animation3D>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_get_or_create_jsobject(cx, ret, typeClass, "cocos2d::Animation3D"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
     if (argc == 2) {
@@ -378,10 +378,10 @@ bool js_cocos2dx_3d_Animation3D_create(JSContext *cx, uint32_t argc, jsval *vp)
         auto ret = cocos2d::Animation3D::create(arg0, arg1);
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::Animation3D>(ret);
         JS::RootedObject jsret(cx, jsb_ref_autoreleased_get_or_create_jsobject(cx, ret, typeClass, "cocos2d::Animation3D"));
-        args.rval().set(OBJECT_TO_JSVAL(jsret));
+        args.rval().set(JS::ObjectValue(*jsret));
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_3d_Animation3D_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_3d_Animation3D_create : wrong number of arguments");
     return false;
 }
 
