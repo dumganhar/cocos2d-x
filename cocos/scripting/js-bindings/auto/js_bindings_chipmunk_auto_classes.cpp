@@ -18,7 +18,7 @@
  */
 #pragma mark - cpConstraint
 
-JSClass* JSB_cpConstraint_class = NULL;
+const JSClass* JSB_cpConstraint_class = NULL;
 JSObject* JSB_cpConstraint_object = NULL;
 
 // Constructor
@@ -76,7 +76,8 @@ bool JSB_cpConstraint_getBodyA(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 	ret_val = cpConstraintGetBodyA((cpConstraint*)arg0  );
 
-	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
+    JS::RootedObject cpBodyObj(cx,JSB_cpBody_object);
+	args.rval().set(c_class_to_jsval( cx, ret_val, cpBodyObj, JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -94,7 +95,8 @@ bool JSB_cpConstraint_getBodyB(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 	ret_val = cpConstraintGetBodyB((cpConstraint*)arg0  );
 
-	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
+    JS::RootedObject cpBodyObj(cx,JSB_cpBody_object);
+	args.rval().set(c_class_to_jsval( cx, ret_val, cpBodyObj, JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -481,17 +483,22 @@ bool JSB_cpConstraint_setMaxForce(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpConstraint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpConstraint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpConstraint_class->name = name;
-	JSB_cpConstraint_class->addProperty = JS_PropertyStub;
-	JSB_cpConstraint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpConstraint_class->getProperty = JS_PropertyStub;
-	JSB_cpConstraint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpConstraint_class->enumerate = JS_EnumerateStub;
-	JSB_cpConstraint_class->resolve = JS_ResolveStub;
-	JSB_cpConstraint_class->convert = JS_ConvertStub;
-	JSB_cpConstraint_class->finalize = JSB_cpConstraint_finalize;
-	JSB_cpConstraint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpConstraint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpConstraint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -534,7 +541,7 @@ void JSB_cpConstraint_createClass(JSContext *cx, JS::HandleObject globalObj, con
  */
 #pragma mark - cpGrooveJoint
 
-JSClass* JSB_cpGrooveJoint_class = NULL;
+const JSClass* JSB_cpGrooveJoint_class = NULL;
 JSObject* JSB_cpGrooveJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpVect, cpVect, cpVect
 // Constructor
@@ -542,7 +549,7 @@ bool JSB_cpGrooveJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==5, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpGrooveJoint_proto(cx, JSB_cpGrooveJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpGrooveJoint_class, cpGrooveJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpGrooveJoint_class, cpGrooveJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -704,17 +711,22 @@ bool JSB_cpGrooveJoint_setGrooveB(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpGrooveJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpGrooveJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpGrooveJoint_class->name = name;
-	JSB_cpGrooveJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpGrooveJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpGrooveJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpGrooveJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpGrooveJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpGrooveJoint_class->resolve = JS_ResolveStub;
-	JSB_cpGrooveJoint_class->convert = JS_ConvertStub;
-	JSB_cpGrooveJoint_class->finalize = JSB_cpGrooveJoint_finalize;
-	JSB_cpGrooveJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpGrooveJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpGrooveJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -740,7 +752,7 @@ void JSB_cpGrooveJoint_createClass(JSContext *cx, JS::HandleObject globalObj, co
  */
 #pragma mark - cpSimpleMotor
 
-JSClass* JSB_cpSimpleMotor_class = NULL;
+const JSClass* JSB_cpSimpleMotor_class = NULL;
 JSObject* JSB_cpSimpleMotor_object = NULL;
 // Arguments: cpBody*, cpBody*, cpFloat
 // Constructor
@@ -748,7 +760,7 @@ bool JSB_cpSimpleMotor_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==3, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSimpleMotor_proto(cx, JSB_cpSimpleMotor_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSimpleMotor_class, cpSimpleMotor_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpSimpleMotor_class, cpSimpleMotor_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -826,17 +838,22 @@ bool JSB_cpSimpleMotor_setRate(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpSimpleMotor_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpSimpleMotor_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpSimpleMotor_class->name = name;
-	JSB_cpSimpleMotor_class->addProperty = JS_PropertyStub;
-	JSB_cpSimpleMotor_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpSimpleMotor_class->getProperty = JS_PropertyStub;
-	JSB_cpSimpleMotor_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpSimpleMotor_class->enumerate = JS_EnumerateStub;
-	JSB_cpSimpleMotor_class->resolve = JS_ResolveStub;
-	JSB_cpSimpleMotor_class->convert = JS_ConvertStub;
-	JSB_cpSimpleMotor_class->finalize = JSB_cpSimpleMotor_finalize;
-	JSB_cpSimpleMotor_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpSimpleMotor_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpSimpleMotor_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -858,7 +875,7 @@ void JSB_cpSimpleMotor_createClass(JSContext *cx, JS::HandleObject globalObj, co
  */
 #pragma mark - cpPivotJoint
 
-JSClass* JSB_cpPivotJoint_class = NULL;
+const JSClass* JSB_cpPivotJoint_class = NULL;
 JSObject* JSB_cpPivotJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpVect
 // Constructor
@@ -866,7 +883,7 @@ bool JSB_cpPivotJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==3, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpPivotJoint_proto(cx, JSB_cpPivotJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpPivotJoint_class, cpPivotJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpPivotJoint_class, cpPivotJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -985,17 +1002,22 @@ bool JSB_cpPivotJoint_setAnchorB(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpPivotJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpPivotJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpPivotJoint_class->name = name;
-	JSB_cpPivotJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpPivotJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpPivotJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpPivotJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpPivotJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpPivotJoint_class->resolve = JS_ResolveStub;
-	JSB_cpPivotJoint_class->convert = JS_ConvertStub;
-	JSB_cpPivotJoint_class->finalize = JSB_cpPivotJoint_finalize;
-	JSB_cpPivotJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpPivotJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpPivotJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -1019,7 +1041,7 @@ void JSB_cpPivotJoint_createClass(JSContext *cx, JS::HandleObject globalObj, con
  */
 #pragma mark - cpPinJoint
 
-JSClass* JSB_cpPinJoint_class = NULL;
+const JSClass* JSB_cpPinJoint_class = NULL;
 JSObject* JSB_cpPinJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpVect, cpVect
 // Constructor
@@ -1027,7 +1049,7 @@ bool JSB_cpPinJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpPinJoint_proto(cx, JSB_cpPinJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpPinJoint_class, cpPinJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpPinJoint_class, cpPinJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1188,17 +1210,22 @@ bool JSB_cpPinJoint_setDist(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpPinJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpPinJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpPinJoint_class->name = name;
-	JSB_cpPinJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpPinJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpPinJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpPinJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpPinJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpPinJoint_class->resolve = JS_ResolveStub;
-	JSB_cpPinJoint_class->convert = JS_ConvertStub;
-	JSB_cpPinJoint_class->finalize = JSB_cpPinJoint_finalize;
-	JSB_cpPinJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpPinJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpPinJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -1224,7 +1251,7 @@ void JSB_cpPinJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const
  */
 #pragma mark - cpSlideJoint
 
-JSClass* JSB_cpSlideJoint_class = NULL;
+const JSClass* JSB_cpSlideJoint_class = NULL;
 JSObject* JSB_cpSlideJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpVect, cpVect, cpFloat, cpFloat
 // Constructor
@@ -1232,7 +1259,7 @@ bool JSB_cpSlideJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==6, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSlideJoint_proto(cx, JSB_cpSlideJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSlideJoint_class, cpSlideJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpSlideJoint_class, cpSlideJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1436,17 +1463,22 @@ bool JSB_cpSlideJoint_setMin(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpSlideJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpSlideJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpSlideJoint_class->name = name;
-	JSB_cpSlideJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpSlideJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpSlideJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpSlideJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpSlideJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpSlideJoint_class->resolve = JS_ResolveStub;
-	JSB_cpSlideJoint_class->convert = JS_ConvertStub;
-	JSB_cpSlideJoint_class->finalize = JSB_cpSlideJoint_finalize;
-	JSB_cpSlideJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpSlideJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpSlideJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -1474,7 +1506,7 @@ void JSB_cpSlideJoint_createClass(JSContext *cx, JS::HandleObject globalObj, con
  */
 #pragma mark - cpGearJoint
 
-JSClass* JSB_cpGearJoint_class = NULL;
+const JSClass* JSB_cpGearJoint_class = NULL;
 JSObject* JSB_cpGearJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpFloat, cpFloat
 // Constructor
@@ -1482,7 +1514,7 @@ bool JSB_cpGearJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpGearJoint_proto(cx, JSB_cpGearJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpGearJoint_class, cpGearJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpGearJoint_class, cpGearJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1602,17 +1634,22 @@ bool JSB_cpGearJoint_setRatio(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpGearJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpGearJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpGearJoint_class->name = name;
-	JSB_cpGearJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpGearJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpGearJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpGearJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpGearJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpGearJoint_class->resolve = JS_ResolveStub;
-	JSB_cpGearJoint_class->convert = JS_ConvertStub;
-	JSB_cpGearJoint_class->finalize = JSB_cpGearJoint_finalize;
-	JSB_cpGearJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpGearJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpGearJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -1636,7 +1673,7 @@ void JSB_cpGearJoint_createClass(JSContext *cx, JS::HandleObject globalObj, cons
  */
 #pragma mark - cpDampedRotarySpring
 
-JSClass* JSB_cpDampedRotarySpring_class = NULL;
+const JSClass* JSB_cpDampedRotarySpring_class = NULL;
 JSObject* JSB_cpDampedRotarySpring_object = NULL;
 // Arguments: cpBody*, cpBody*, cpFloat, cpFloat, cpFloat
 // Constructor
@@ -1644,7 +1681,7 @@ bool JSB_cpDampedRotarySpring_constructor(JSContext *cx, uint32_t argc, JS::Valu
 {
 	JSB_PRECONDITION2(argc==5, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpDampedRotarySpring_proto(cx, JSB_cpDampedRotarySpring_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpDampedRotarySpring_class, cpDampedRotarySpring_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpDampedRotarySpring_class, cpDampedRotarySpring_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -1806,17 +1843,22 @@ bool JSB_cpDampedRotarySpring_setStiffness(JSContext *cx, uint32_t argc, JS::Val
 
 void JSB_cpDampedRotarySpring_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpDampedRotarySpring_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpDampedRotarySpring_class->name = name;
-	JSB_cpDampedRotarySpring_class->addProperty = JS_PropertyStub;
-	JSB_cpDampedRotarySpring_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpDampedRotarySpring_class->getProperty = JS_PropertyStub;
-	JSB_cpDampedRotarySpring_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpDampedRotarySpring_class->enumerate = JS_EnumerateStub;
-	JSB_cpDampedRotarySpring_class->resolve = JS_ResolveStub;
-	JSB_cpDampedRotarySpring_class->convert = JS_ConvertStub;
-	JSB_cpDampedRotarySpring_class->finalize = JSB_cpDampedRotarySpring_finalize;
-	JSB_cpDampedRotarySpring_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpDampedRotarySpring_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpDampedRotarySpring_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -1842,7 +1884,7 @@ void JSB_cpDampedRotarySpring_createClass(JSContext *cx, JS::HandleObject global
  */
 #pragma mark - cpDampedSpring
 
-JSClass* JSB_cpDampedSpring_class = NULL;
+const JSClass* JSB_cpDampedSpring_class = NULL;
 JSObject* JSB_cpDampedSpring_object = NULL;
 // Arguments: cpBody*, cpBody*, cpVect, cpVect, cpFloat, cpFloat, cpFloat
 // Constructor
@@ -1850,7 +1892,7 @@ bool JSB_cpDampedSpring_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==7, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpDampedSpring_proto(cx, JSB_cpDampedSpring_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpDampedSpring_class, cpDampedSpring_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpDampedSpring_class, cpDampedSpring_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -2096,17 +2138,22 @@ bool JSB_cpDampedSpring_setStiffness(JSContext *cx, uint32_t argc, JS::Value *vp
 
 void JSB_cpDampedSpring_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpDampedSpring_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpDampedSpring_class->name = name;
-	JSB_cpDampedSpring_class->addProperty = JS_PropertyStub;
-	JSB_cpDampedSpring_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpDampedSpring_class->getProperty = JS_PropertyStub;
-	JSB_cpDampedSpring_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpDampedSpring_class->enumerate = JS_EnumerateStub;
-	JSB_cpDampedSpring_class->resolve = JS_ResolveStub;
-	JSB_cpDampedSpring_class->convert = JS_ConvertStub;
-	JSB_cpDampedSpring_class->finalize = JSB_cpDampedSpring_finalize;
-	JSB_cpDampedSpring_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpDampedSpring_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpDampedSpring_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -2136,7 +2183,7 @@ void JSB_cpDampedSpring_createClass(JSContext *cx, JS::HandleObject globalObj, c
  */
 #pragma mark - cpRatchetJoint
 
-JSClass* JSB_cpRatchetJoint_class = NULL;
+const JSClass* JSB_cpRatchetJoint_class = NULL;
 JSObject* JSB_cpRatchetJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpFloat, cpFloat
 // Constructor
@@ -2144,7 +2191,7 @@ bool JSB_cpRatchetJoint_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpRatchetJoint_proto(cx, JSB_cpRatchetJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpRatchetJoint_class, cpRatchetJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpRatchetJoint_class, cpRatchetJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -2305,17 +2352,22 @@ bool JSB_cpRatchetJoint_setRatchet(JSContext *cx, uint32_t argc, JS::Value *vp) 
 
 void JSB_cpRatchetJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpRatchetJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpRatchetJoint_class->name = name;
-	JSB_cpRatchetJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpRatchetJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpRatchetJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpRatchetJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpRatchetJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpRatchetJoint_class->resolve = JS_ResolveStub;
-	JSB_cpRatchetJoint_class->convert = JS_ConvertStub;
-	JSB_cpRatchetJoint_class->finalize = JSB_cpRatchetJoint_finalize;
-	JSB_cpRatchetJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpRatchetJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpRatchetJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -2341,7 +2393,7 @@ void JSB_cpRatchetJoint_createClass(JSContext *cx, JS::HandleObject globalObj, c
  */
 #pragma mark - cpRotaryLimitJoint
 
-JSClass* JSB_cpRotaryLimitJoint_class = NULL;
+const JSClass* JSB_cpRotaryLimitJoint_class = NULL;
 JSObject* JSB_cpRotaryLimitJoint_object = NULL;
 // Arguments: cpBody*, cpBody*, cpFloat, cpFloat
 // Constructor
@@ -2349,7 +2401,7 @@ bool JSB_cpRotaryLimitJoint_constructor(JSContext *cx, uint32_t argc, JS::Value 
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpRotaryLimitJoint_proto(cx, JSB_cpRotaryLimitJoint_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpRotaryLimitJoint_class, cpRotaryLimitJoint_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpRotaryLimitJoint_class, cpRotaryLimitJoint_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -2469,17 +2521,22 @@ bool JSB_cpRotaryLimitJoint_setMin(JSContext *cx, uint32_t argc, JS::Value *vp) 
 
 void JSB_cpRotaryLimitJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpRotaryLimitJoint_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpRotaryLimitJoint_class->name = name;
-	JSB_cpRotaryLimitJoint_class->addProperty = JS_PropertyStub;
-	JSB_cpRotaryLimitJoint_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpRotaryLimitJoint_class->getProperty = JS_PropertyStub;
-	JSB_cpRotaryLimitJoint_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpRotaryLimitJoint_class->enumerate = JS_EnumerateStub;
-	JSB_cpRotaryLimitJoint_class->resolve = JS_ResolveStub;
-	JSB_cpRotaryLimitJoint_class->convert = JS_ConvertStub;
-	JSB_cpRotaryLimitJoint_class->finalize = JSB_cpRotaryLimitJoint_finalize;
-	JSB_cpRotaryLimitJoint_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpRotaryLimitJoint_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpRotaryLimitJoint_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -2503,7 +2560,7 @@ void JSB_cpRotaryLimitJoint_createClass(JSContext *cx, JS::HandleObject globalOb
  */
 #pragma mark - cpArbiter
 
-JSClass* JSB_cpArbiter_class = NULL;
+const JSClass* JSB_cpArbiter_class = NULL;
 JSObject* JSB_cpArbiter_object = NULL;
 
 // Constructor
@@ -3042,17 +3099,22 @@ bool JSB_cpArbiter_totalKE(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpArbiter_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpArbiter_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpArbiter_class->name = name;
-	JSB_cpArbiter_class->addProperty = JS_PropertyStub;
-	JSB_cpArbiter_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpArbiter_class->getProperty = JS_PropertyStub;
-	JSB_cpArbiter_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpArbiter_class->enumerate = JS_EnumerateStub;
-	JSB_cpArbiter_class->resolve = JS_ResolveStub;
-	JSB_cpArbiter_class->convert = JS_ConvertStub;
-	JSB_cpArbiter_class->finalize = JSB_cpArbiter_finalize;
-	JSB_cpArbiter_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpArbiter_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpArbiter_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -3098,7 +3160,7 @@ void JSB_cpArbiter_createClass(JSContext *cx, JS::HandleObject globalObj, const 
  */
 #pragma mark - cpSpace
 
-JSClass* JSB_cpSpace_class = NULL;
+const JSClass* JSB_cpSpace_class = NULL;
 JSObject* JSB_cpSpace_object = NULL;
 // Arguments: 
 // Constructor
@@ -3106,7 +3168,7 @@ bool JSB_cpSpace_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==0, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSpace_proto(cx, JSB_cpSpace_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSpace_class, cpSpace_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpSpace_class, cpSpace_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);	void* 	ret_val = cpSpaceNew( );
 
 	jsb_set_jsobject_for_proxy(jsobj, ret_val);
@@ -3236,7 +3298,7 @@ bool JSB_cpSpace_getCollisionPersistence(JSContext *cx, uint32_t argc, JS::Value
 
 	ret_val = cpSpaceGetCollisionPersistence((cpSpace*)arg0  );
 
-	args.rval().set(UJS::Int32Value((uint32_t)ret_val));
+	args.rval().set(JS::Int32Value((uint32_t)ret_val));
 
 	return true;
 }
@@ -3717,17 +3779,22 @@ bool JSB_cpSpace_useSpatialHash(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpSpace_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpSpace_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpSpace_class->name = name;
-	JSB_cpSpace_class->addProperty = JS_PropertyStub;
-	JSB_cpSpace_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpSpace_class->getProperty = JS_PropertyStub;
-	JSB_cpSpace_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpSpace_class->enumerate = JS_EnumerateStub;
-	JSB_cpSpace_class->resolve = JS_ResolveStub;
-	JSB_cpSpace_class->convert = JS_ConvertStub;
-	JSB_cpSpace_class->finalize = JSB_cpSpace_finalize;
-	JSB_cpSpace_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpSpace_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpSpace_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -3787,7 +3854,7 @@ void JSB_cpSpace_createClass(JSContext *cx, JS::HandleObject globalObj, const ch
  */
 #pragma mark - cpBody
 
-JSClass* JSB_cpBody_class = NULL;
+const JSClass* JSB_cpBody_class = NULL;
 JSObject* JSB_cpBody_object = NULL;
 
 // Destructor
@@ -4652,17 +4719,22 @@ bool JSB_cpBody_worldToLocal(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpBody_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpBody_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpBody_class->name = name;
-	JSB_cpBody_class->addProperty = JS_PropertyStub;
-	JSB_cpBody_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpBody_class->getProperty = JS_PropertyStub;
-	JSB_cpBody_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpBody_class->enumerate = JS_EnumerateStub;
-	JSB_cpBody_class->resolve = JS_ResolveStub;
-	JSB_cpBody_class->convert = JS_ConvertStub;
-	JSB_cpBody_class->finalize = JSB_cpBody_finalize;
-	JSB_cpBody_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpBody_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpBody_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -4725,7 +4797,7 @@ void JSB_cpBody_createClass(JSContext *cx, JS::HandleObject globalObj, const cha
  */
 #pragma mark - cpShape
 
-JSClass* JSB_cpShape_class = NULL;
+const JSClass* JSB_cpShape_class = NULL;
 JSObject* JSB_cpShape_object = NULL;
 
 // Constructor
@@ -5298,17 +5370,22 @@ bool JSB_cpShape_update(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpShape_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpShape_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpShape_class->name = name;
-	JSB_cpShape_class->addProperty = JS_PropertyStub;
-	JSB_cpShape_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpShape_class->getProperty = JS_PropertyStub;
-	JSB_cpShape_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpShape_class->enumerate = JS_EnumerateStub;
-	JSB_cpShape_class->resolve = JS_ResolveStub;
-	JSB_cpShape_class->convert = JS_ConvertStub;
-	JSB_cpShape_class->finalize = JSB_cpShape_finalize;
-	JSB_cpShape_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpShape_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpShape_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -5357,7 +5434,7 @@ void JSB_cpShape_createClass(JSContext *cx, JS::HandleObject globalObj, const ch
  */
 #pragma mark - cpCircleShape
 
-JSClass* JSB_cpCircleShape_class = NULL;
+const JSClass* JSB_cpCircleShape_class = NULL;
 JSObject* JSB_cpCircleShape_object = NULL;
 // Arguments: cpBody*, cpFloat, cpVect
 // Constructor
@@ -5365,7 +5442,7 @@ bool JSB_cpCircleShape_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==3, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpCircleShape_proto(cx, JSB_cpCircleShape_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpCircleShape_class, cpCircleShape_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpCircleShape_class, cpCircleShape_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -5438,17 +5515,22 @@ bool JSB_cpCircleShape_getRadius(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpCircleShape_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpCircleShape_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpCircleShape_class->name = name;
-	JSB_cpCircleShape_class->addProperty = JS_PropertyStub;
-	JSB_cpCircleShape_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpCircleShape_class->getProperty = JS_PropertyStub;
-	JSB_cpCircleShape_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpCircleShape_class->enumerate = JS_EnumerateStub;
-	JSB_cpCircleShape_class->resolve = JS_ResolveStub;
-	JSB_cpCircleShape_class->convert = JS_ConvertStub;
-	JSB_cpCircleShape_class->finalize = JSB_cpCircleShape_finalize;
-	JSB_cpCircleShape_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpCircleShape_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpCircleShape_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -5470,7 +5552,7 @@ void JSB_cpCircleShape_createClass(JSContext *cx, JS::HandleObject globalObj, co
  */
 #pragma mark - cpSegmentShape
 
-JSClass* JSB_cpSegmentShape_class = NULL;
+const JSClass* JSB_cpSegmentShape_class = NULL;
 JSObject* JSB_cpSegmentShape_object = NULL;
 // Arguments: cpBody*, cpVect, cpVect, cpFloat
 // Constructor
@@ -5478,7 +5560,7 @@ bool JSB_cpSegmentShape_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
 	JSB_PRECONDITION2(argc==4, cx, false, "Invalid number of arguments");
 	JS::RootedObject cpSegmentShape_proto(cx, JSB_cpSegmentShape_object);
-	JS::RootedObject jsobj(cx, JS_NewObject(cx, JSB_cpSegmentShape_class, cpSegmentShape_proto, nullptr));
+	JS::RootedObject jsobj(cx, JS_NewObjectWithGivenProto(cx, JSB_cpSegmentShape_class, cpSegmentShape_proto));
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	int arg_idx=0; // #002
 	bool ok = true;
@@ -5612,17 +5694,22 @@ bool JSB_cpSegmentShape_setNeighbors(JSContext *cx, uint32_t argc, JS::Value *vp
 
 void JSB_cpSegmentShape_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpSegmentShape_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpSegmentShape_class->name = name;
-	JSB_cpSegmentShape_class->addProperty = JS_PropertyStub;
-	JSB_cpSegmentShape_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpSegmentShape_class->getProperty = JS_PropertyStub;
-	JSB_cpSegmentShape_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpSegmentShape_class->enumerate = JS_EnumerateStub;
-	JSB_cpSegmentShape_class->resolve = JS_ResolveStub;
-	JSB_cpSegmentShape_class->convert = JS_ConvertStub;
-	JSB_cpSegmentShape_class->finalize = JSB_cpSegmentShape_finalize;
-	JSB_cpSegmentShape_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpSegmentShape_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpSegmentShape_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
@@ -5647,7 +5734,7 @@ void JSB_cpSegmentShape_createClass(JSContext *cx, JS::HandleObject globalObj, c
  */
 #pragma mark - cpPolyShape
 
-JSClass* JSB_cpPolyShape_class = NULL;
+const JSClass* JSB_cpPolyShape_class = NULL;
 JSObject* JSB_cpPolyShape_object = NULL;
 
 // Destructor
@@ -5728,17 +5815,22 @@ bool JSB_cpPolyShape_getVert(JSContext *cx, uint32_t argc, JS::Value *vp) {
 
 void JSB_cpPolyShape_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-	JSB_cpPolyShape_class = (JSClass *)calloc(1, sizeof(JSClass));
-	JSB_cpPolyShape_class->name = name;
-	JSB_cpPolyShape_class->addProperty = JS_PropertyStub;
-	JSB_cpPolyShape_class->delProperty = JS_DeletePropertyStub;
-	JSB_cpPolyShape_class->getProperty = JS_PropertyStub;
-	JSB_cpPolyShape_class->setProperty = JS_StrictPropertyStub;
-	JSB_cpPolyShape_class->enumerate = JS_EnumerateStub;
-	JSB_cpPolyShape_class->resolve = JS_ResolveStub;
-	JSB_cpPolyShape_class->convert = JS_ConvertStub;
-	JSB_cpPolyShape_class->finalize = JSB_cpPolyShape_finalize;
-	JSB_cpPolyShape_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpPolyShape_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        name,
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpPolyShape_class = &jsclass;
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}

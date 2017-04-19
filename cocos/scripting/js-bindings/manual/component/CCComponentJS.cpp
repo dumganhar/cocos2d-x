@@ -71,8 +71,7 @@ ComponentJS::ComponentJS(const std::string& scriptFileName)
         js_type_class_t *typeClass = js_get_type_from_native<cocos2d::ComponentJS>(this);
         JS::RootedObject proto(cx, protoValue.toObjectOrNull());
         JS::RootedObject parent(cx, typeClass->proto.ref());
-        jsObj->construct(cx);
-        JS::RootedObject obj(cx, JS_NewObject(cx, theClass, proto, parent));
+        JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, theClass, proto));
         jsObj->ref() = obj;
         
         // Unbind current proxy binding
@@ -95,7 +94,7 @@ ComponentJS::ComponentJS(const std::string& scriptFileName)
 ComponentJS::~ComponentJS()
 {
     mozilla::Maybe<JS::PersistentRootedObject>* jsObj = static_cast<mozilla::Maybe<JS::PersistentRootedObject>*>(_jsObj);
-    if (jsObj && !jsObj->empty())
+    if (jsObj && !jsObj->isNothing())
     {
         // Remove proxy
         js_proxy_t* proxy = jsb_get_js_proxy(jsObj->ref());
@@ -112,7 +111,7 @@ ComponentJS::~ComponentJS()
 void* ComponentJS::getScriptObject() const
 {
     mozilla::Maybe<JS::PersistentRootedObject>* jsObj = static_cast<mozilla::Maybe<JS::PersistentRootedObject>*>(_jsObj);
-    if (jsObj && !jsObj->empty())
+    if (jsObj && !jsObj->isNothing())
     {
         return jsObj->ref().get();
     }

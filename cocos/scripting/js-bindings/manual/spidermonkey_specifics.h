@@ -25,6 +25,7 @@
 
 #include "jsapi.h"
 #include "jsfriendapi.h"
+#include "js/Conversions.h"
 #include "mozilla/Maybe.h"
 #include <unordered_map>
 

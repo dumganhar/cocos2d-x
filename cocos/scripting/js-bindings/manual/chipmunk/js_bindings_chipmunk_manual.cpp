@@ -47,7 +47,7 @@ static bool dummy_constructor(JSContext *cx, uint32_t argc, JS::Value *vp) {
  */
 #pragma mark - PhysicsSprite
 
-JSClass* JSPROXY_CCPhysicsSprite_class = NULL;
+const JSClass* JSPROXY_CCPhysicsSprite_class = NULL;
 JSObject* JSPROXY_CCPhysicsSprite_object = NULL;
 
 // Arguments:
@@ -390,16 +390,22 @@ static bool JSPROXY_CCPhysicsSprite_ctor(JSContext *cx, uint32_t argc, JS::Value
 
 void JSPROXY_CCPhysicsSprite_createClass(JSContext *cx, JS::HandleObject globalObj)
 {
-    JSPROXY_CCPhysicsSprite_class = (JSClass *)calloc(1, sizeof(JSClass));
-    JSPROXY_CCPhysicsSprite_class->name = "PhysicsSprite";
-    JSPROXY_CCPhysicsSprite_class->addProperty = JS_PropertyStub;
-    JSPROXY_CCPhysicsSprite_class->delProperty = JS_DeletePropertyStub;
-    JSPROXY_CCPhysicsSprite_class->getProperty = JS_PropertyStub;
-    JSPROXY_CCPhysicsSprite_class->setProperty = JS_StrictPropertyStub;
-    JSPROXY_CCPhysicsSprite_class->enumerate = JS_EnumerateStub;
-    JSPROXY_CCPhysicsSprite_class->resolve = JS_ResolveStub;
-    JSPROXY_CCPhysicsSprite_class->convert = JS_ConvertStub;
-    JSPROXY_CCPhysicsSprite_class->flags = 0;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "PhysicsSprite",
+        0,
+        &classOps
+    };
+
+    JSPROXY_CCPhysicsSprite_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -486,7 +492,7 @@ bool jsval_to_cpBB( JSContext *cx, JS::Value vp, cpBB *ret )
 
 JS::Value cpBB_to_jsval(JSContext *cx, cpBB bb )
 {
-    JS::RootedObject object(cx, JS_NewObject(cx, nullptr));
+    JS::RootedObject object(cx, JS_NewPlainObject(cx));
     if (!object)
         return JS::UndefinedValue();
 
@@ -587,7 +593,9 @@ bool jsval_to_cpVect( JSContext *cx, JS::Value vp, cpVect *ret )
 
     JSB_PRECONDITION( JS_GetTypedArrayByteLength( tmp_arg, cx ) == sizeof(cpVect), "Invalid length");
 
-    *ret = *(cpVect*)JS_GetArrayBufferViewData( tmp_arg, cx );
+    JS::AutoCheckCannotGC nogc;
+    bool sharedDummy = false;
+    *ret = *(cpVect*)JS_GetArrayBufferViewData( tmp_arg, cx, &sharedDummy, nogc);
 
     return true;
 #endif // #! JSB_COMPATIBLE_WITH_COCOS2D_HTML5_BASIC_TYPES
@@ -599,7 +607,7 @@ JS::Value cpVect_to_jsval( JSContext *cx, cpVect p)
 
 #ifdef JSB_COMPATIBLE_WITH_COCOS2D_HTML5_BASIC_TYPES
 
-    JS::RootedObject object(cx, JS_NewObject(cx, nullptr));
+    JS::RootedObject object(cx, JS_NewPlainObject(cx));
     if (!object)
         return JS::UndefinedValue();
 
@@ -617,7 +625,9 @@ JS::Value cpVect_to_jsval( JSContext *cx, cpVect p)
     JSObject *typedArray = JS_NewFloat32Array( cx, 2 );
 #endif
 
-    cpVect *buffer = (cpVect*)JS_GetArrayBufferViewData(typedArray, cx );
+    JS::AutoCheckCannotGC nogc;
+    bool sharedDummy = false;
+    cpVect *buffer = (cpVect*)JS_GetArrayBufferViewData(typedArray, cx, &sharedDummy, nogc);
     *buffer = p;
     return JS::ObjectValue(*typedArray);
 #endif // ! JSB_COMPATIBLE_WITH_COCOS2D_HTML5_BASIC_TYPES
@@ -670,7 +680,7 @@ JS::Value cpShapeFilter_to_jsval( JSContext *cx, cpShapeFilter filter)
 
 #ifdef JSB_COMPATIBLE_WITH_COCOS2D_HTML5_BASIC_TYPES
 
-    JS::RootedObject object(cx, JS_NewObject(cx, nullptr));
+    JS::RootedObject object(cx, JS_NewPlainObject(cx));
     if (!object)
         return JS::UndefinedValue();
 
@@ -745,7 +755,7 @@ JS::Value cpTransform_to_jsval( JSContext *cx, cpTransform transform)
 
 #ifdef JSB_COMPATIBLE_WITH_COCOS2D_HTML5_BASIC_TYPES
 
-    JS::RootedObject object(cx, JS_NewObject(cx, nullptr));
+    JS::RootedObject object(cx, JS_NewPlainObject(cx));
     if (!object)
         return JS::UndefinedValue();
 
@@ -766,7 +776,7 @@ JS::Value cpTransform_to_jsval( JSContext *cx, cpTransform transform)
 
 JS::Value cpPointQueryInfo_to_jsval(JSContext *cx, cpPointQueryInfo pointQueryInfo)
 {
-    JS::RootedObject object(cx, JS_NewObject(cx, nullptr));
+    JS::RootedObject object(cx, JS_NewPlainObject(cx));
     if (!object)
         return JS::UndefinedValue();
 
@@ -776,7 +786,7 @@ JS::Value cpPointQueryInfo_to_jsval(JSContext *cx, cpPointQueryInfo pointQueryIn
     if (!jsobj)
     {
         JS::RootedObject shapeProto(cx, JSB_cpShape_object);
-        jsobj = JS_NewObject(cx, JSB_cpShape_class, shapeProto, nullptr);
+        jsobj = JS_NewObjectWithGivenProto(cx, JSB_cpShape_class, shapeProto);
         jsb_set_jsobject_for_proxy(jsobj, (void*)pointQueryInfo.shape);
         jsb_set_c_proxy_for_jsobject(jsobj, (void*)pointQueryInfo.shape, JSB_C_FLAG_DO_NOT_CALL_FREE);
     }
@@ -800,7 +810,7 @@ JS::Value cpPointQueryInfo_to_jsval(JSContext *cx, cpPointQueryInfo pointQueryIn
 
 JS::Value cpSegmentQueryInfo_to_jsval(JSContext *cx, cpSegmentQueryInfo segmentQueryInfo)
 {
-    JS::RootedObject object(cx, JS_NewObject(cx, nullptr));
+    JS::RootedObject object(cx, JS_NewPlainObject(cx));
     if (!object)
         return JS::UndefinedValue();
 
@@ -810,7 +820,7 @@ JS::Value cpSegmentQueryInfo_to_jsval(JSContext *cx, cpSegmentQueryInfo segmentQ
     if (!jsobj)
     {
         JS::RootedObject shapeProto(cx, JSB_cpShape_object);
-        jsobj = JS_NewObject(cx, JSB_cpShape_class, shapeProto, nullptr);
+        jsobj = JS_NewObjectWithGivenProto(cx, JSB_cpShape_class, shapeProto);
         jsb_set_jsobject_for_proxy(jsobj, (void*)segmentQueryInfo.shape);
         jsb_set_c_proxy_for_jsobject(jsobj, (void*)segmentQueryInfo.shape, JSB_C_FLAG_DO_NOT_CALL_FREE);
     }
@@ -1189,7 +1199,7 @@ bool JSB_cpSpaceAddCollisionHandler(JSContext *cx, uint32_t argc, JS::Value *vp)
 
     // args
     cpSpace *space = nullptr;
-    jsval* argvp = args.array();
+    JS::Value* argvp = args.array();
     JS::RootedValue jsarg(cx, *argvp++);
     bool ok = jsval_to_opaque(cx, jsarg, (void**)&space);
     JSB_PRECONDITION(ok, "Error parsing arguments");
@@ -1306,7 +1316,7 @@ bool JSB_cpSpaceRemoveCollisionHandler(JSContext *cx, uint32_t argc, JS::Value *
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 
     cpSpace* space = nullptr;
-    jsval* argvp = args.array();
+    JS::Value* argvp = args.array();
     JS::RootedValue jsarg(cx, *argvp++);
     bool ok = jsval_to_opaque( cx, jsarg, (void**)&space);
 
@@ -1349,7 +1359,7 @@ bool JSB_cpSpace_addBody(JSContext *cx, uint32_t argc, JS::Value *vp) {
     cpSpaceAddBody((cpSpace*)arg0 , (cpBody*)arg1  );
 
     // Root it:
-    JS::AddNamedObjectRoot(cx, &retproxy->jsobj, "cpBody");
+//cjh    JS::AddNamedObjectRoot(cx, &retproxy->jsobj, "cpBody");
 
     // addBody returns the same object that was added, so return it without conversions
     args.rval().set(retval);
@@ -1375,7 +1385,7 @@ bool JSB_cpSpace_addConstraint(JSContext *cx, uint32_t argc, JS::Value *vp) {
     cpSpaceAddConstraint((cpSpace*)arg0 , (cpConstraint*)arg1  );
 
     // Root it:
-    JS::AddNamedObjectRoot(cx, &retproxy->jsobj, "cpConstraint");
+//cjh    JS::AddNamedObjectRoot(cx, &retproxy->jsobj, "cpConstraint");
 
     // addConstraint returns the same object that was added, so return it without conversions
     args.rval().set(retval);
@@ -1401,7 +1411,7 @@ bool JSB_cpSpace_addShape(JSContext *cx, uint32_t argc, JS::Value *vp) {
     cpSpaceAddShape((cpSpace*)arg0 , (cpShape*)arg1  );
 
     // Root it:
-    JS::AddNamedObjectRoot(cx, &retproxy->jsobj, "cpShape");
+//cjh    JS::AddNamedObjectRoot(cx, &retproxy->jsobj, "cpShape");
 
     // addShape returns the same object that was added, so return it without conversions
     args.rval().set(retval);
@@ -1454,7 +1464,7 @@ bool JSB_cpSpace_removeBody(JSContext *cx, uint32_t argc, JS::Value *vp) {
     JSB_PRECONDITION(ok, "Error processing arguments");
 
     cpSpaceRemoveBody((cpSpace*)arg0, (cpBody*)arg1);
-    JS::RemoveObjectRoot(cx, &retproxy->jsobj);
+//cjh    JS::RemoveObjectRoot(cx, &retproxy->jsobj);
 
     args.rval().setUndefined();
     return true;
@@ -1476,7 +1486,7 @@ bool JSB_cpSpace_removeConstraint(JSContext *cx, uint32_t argc, JS::Value *vp) {
     JSB_PRECONDITION(ok, "Error processing arguments");
 
     cpSpaceRemoveConstraint((cpSpace*)arg0 , (cpConstraint*)arg1  );
-    JS::RemoveObjectRoot(cx, &retproxy->jsobj);
+//cjh    JS::RemoveObjectRoot(cx, &retproxy->jsobj);
 
     args.rval().setUndefined();
     return true;
@@ -1498,7 +1508,7 @@ bool JSB_cpSpace_removeShape(JSContext *cx, uint32_t argc, JS::Value *vp) {
     JSB_PRECONDITION(ok, "Error processing arguments");
 
     cpSpaceRemoveShape((cpSpace*)arg0 , (cpShape*)arg1  );
-    JS::RemoveObjectRoot(cx, &retproxy->jsobj);
+//cjh    JS::RemoveObjectRoot(cx, &retproxy->jsobj);
 
     args.rval().setUndefined();
     return true;
@@ -1599,7 +1609,7 @@ bool JSB_cpSpace_pointQueryNearest(JSContext *cx, uint32_t argc, JS::Value *vp){
 struct JSB_cp_each_UserData
 {
     JSContext *cx;
-    jsval* func;
+    JS::Value* func;
 };
 
 // FIXME: Chipmunk v7.0: different arguments
@@ -2196,7 +2206,7 @@ bool JSB_cpBody_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JSB_PRECONDITION2(argc==2, cx, false, "Invalid number of arguments");
     JS::RootedObject bodyProto(cx, JSB_cpBody_object);
-    JSObject *jsobj = JS_NewObject(cx, JSB_cpBody_class, bodyProto, nullptr);
+    JSObject *jsobj = JS_NewObjectWithGivenProto(cx, JSB_cpBody_class, bodyProto);
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
     double m = 0; double i = 0;
@@ -2285,7 +2295,7 @@ bool JSB_cpBodySetUserData(JSContext *cx, uint32_t argc, JS::Value *vp)
 
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     cpBody *body = nullptr;
-    jsval* argvp = args.array();
+    JS::Value* argvp = args.array();
     JS::RootedValue jsarg(cx, *argvp++);
     bool ok = jsval_to_opaque(cx, jsarg, (void**) &body);
     JSB_PRECONDITION(ok, "Error parsing arguments");
@@ -2396,14 +2406,14 @@ bool JSB_cpRecenterPoly(JSContext *cx, uint32_t argc, JS::Value *vp)
  * Chipmunk Base Object
  */
 
-JSClass* JSB_cpBase_class = NULL;
+const JSClass* JSB_cpBase_class = NULL;
 JSObject* JSB_cpBase_object = NULL;
 // Constructor
 bool JSB_cpBase_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JSB_PRECONDITION2( argc==1, cx, false, "Invalid arguments. Expecting 1");
     JS::RootedObject baseProto(cx, JSB_cpBase_object);
-    JSObject *jsobj = JS_NewObject(cx, JSB_cpBase_class, baseProto, nullptr);
+    JSObject *jsobj = JS_NewObjectWithGivenProto(cx, JSB_cpBase_class, baseProto);
 
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
@@ -2474,17 +2484,22 @@ bool JSB_cpBase_setHandle(JSContext *cx, uint32_t argc, JS::Value *vp)
 
 void JSB_cpBase_createClass(JSContext *cx, JS::HandleObject globalObj, const char* name )
 {
-    JSB_cpBase_class = (JSClass *)calloc(1, sizeof(JSClass));
-    JSB_cpBase_class->name = name;
-    JSB_cpBase_class->addProperty = JS_PropertyStub;
-    JSB_cpBase_class->delProperty = JS_DeletePropertyStub;
-    JSB_cpBase_class->getProperty = JS_PropertyStub;
-    JSB_cpBase_class->setProperty = JS_StrictPropertyStub;
-    JSB_cpBase_class->enumerate = JS_EnumerateStub;
-    JSB_cpBase_class->resolve = JS_ResolveStub;
-    JSB_cpBase_class->convert = JS_ConvertStub;
-    JSB_cpBase_class->finalize = JSB_cpBase_finalize;
-    JSB_cpBase_class->flags = JSCLASS_HAS_PRIVATE;
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        JSB_cpBase_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "Base",
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JSB_cpBase_class = &cls;
 
     static JSPropertySpec properties[] = {
         JS_PS_END
@@ -2510,7 +2525,7 @@ bool JSB_cpPolyShape_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 {
     JSB_PRECONDITION2(argc==4 || argc==3, cx, false, "Invalid number of arguments");
     JS::RootedObject polyShapeProto(cx, JSB_cpPolyShape_object);
-    JSObject *jsobj = JS_NewObject(cx, JSB_cpPolyShape_class, polyShapeProto, nullptr);
+    JSObject *jsobj = JS_NewObjectWithGivenProto(cx, JSB_cpPolyShape_class, polyShapeProto);
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
     cpBody* body = nullptr; cpVect *verts = nullptr;
@@ -2585,7 +2600,7 @@ bool JSB_cpPolyShape_getVerts(JSContext *cx, uint32_t argc, JS::Value *vp)
 //        if(!jsobj)
 //        {
 //            JS::RootedObject splittingPlaneProto(cx, JSB_cpSplittingPlane_object);
-//            jsobj = JS_NewObject(cx, JSB_cpSplittingPlane_class, splittingPlaneProto, nullptr);
+//            jsobj = JS_NewObjectWithGivenProto(cx, JSB_cpSplittingPlane_class, splittingPlaneProto);
 //            jsb_set_jsobject_for_proxy(jsobj, plane);
 //            jsb_set_c_proxy_for_jsobject(jsobj, plane, JSB_C_FLAG_DO_NOT_CALL_FREE);
 //        }
@@ -2618,7 +2633,7 @@ static void unroot_jsobject_from_handle(void *handle)
 
         // HACK context from global
         JSContext *cx = ScriptingCore::getInstance()->getGlobalContext();
-        JS::RemoveObjectRoot(cx, &proxy->jsobj);
+//cjh        JS::RemoveObjectRoot(cx, &proxy->jsobj);
     }
 
 }

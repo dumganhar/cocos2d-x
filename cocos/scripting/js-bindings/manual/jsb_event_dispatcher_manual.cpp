@@ -188,7 +188,7 @@ bool js_EventListenerAcceleration_create(JSContext *cx, uint32_t argc, JS::Value
                     JS::RootedValue rval(cx);
                     bool succeed = func->invoke(2, &largv[0], &rval);
                     if (!succeed && JS_IsExceptionPending(cx)) {
-                        JS_ReportPendingException(cx);
+                        //cjh JS_ReportPendingException(cx);
                     }
                 };
                 arg0 = lambda;
@@ -260,7 +260,7 @@ bool js_EventListenerCustom_create(JSContext *cx, uint32_t argc, JS::Value *vp)
                     JS::RootedValue rval(cx);
                     bool succeed = func->invoke(JS::HandleValueArray::fromMarkedLocation(1, largv), &rval);
                     if (!succeed && JS_IsExceptionPending(cx)) {
-                        JS_ReportPendingException(cx);
+                        //cjh JS_ReportPendingException(cx);
                     }
                 };
                 arg1 = lambda;
@@ -315,7 +315,7 @@ bool js_EventDispatcher_addCustomEventListener(JSContext *cx, uint32_t argc, JS:
                     JS::RootedValue rval(cx);
                     bool succeed = func->invoke(JS::HandleValueArray::fromMarkedLocation(1, largv), &rval);
                     if (!succeed && JS_IsExceptionPending(cx)) {
-                        JS_ReportPendingException(cx);
+                        //cjh JS_ReportPendingException(cx);
                     }
                 };
                 arg1 = lambda;

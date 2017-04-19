@@ -575,12 +575,12 @@ void js_add_FinalizeHook(JSContext *cx, JS::HandleObject target, bool isRef)
     if (isRef)
     {
         JS::RootedObject proto(cx, jsb_RefFinalizeHook_prototype);
-        hook = JS_NewObject(cx, jsb_RefFinalizeHook_class, proto, nullptr);
+        hook = JS_NewObjectWithGivenProto(cx, jsb_RefFinalizeHook_class, proto);
     }
     else
     {
         JS::RootedObject proto(cx, jsb_ObjFinalizeHook_prototype);
-        hook = JS_NewObject(cx, jsb_ObjFinalizeHook_class, proto, nullptr);
+        hook = JS_NewObjectWithGivenProto(cx, jsb_ObjFinalizeHook_class, proto);
     }
     jsb_register_finalize_hook(hook.get(), target.get());
     JS::RootedValue hookVal(cx, JS::ObjectValue(*hook));
@@ -591,7 +591,8 @@ JS::Value anonEvaluate(JSContext *cx, JS::HandleObject thisObj, const char* stri
 {
     JS::RootedValue out(cx);
     //JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
-    if (JS_EvaluateScript(cx, thisObj, string, (unsigned int)strlen(string), "(string)", 1, &out) == true) {
+    JS::CompileOptions opts(cx);
+    if (JS::Evaluate(cx, opts, string, strlen(string), &out)) {
         return out.get();
     }
     return JS::UndefinedValue();
@@ -2062,7 +2063,7 @@ bool js_CCScheduler_schedule(JSContext *cx, uint32_t argc, JS::Value *vp)
                 JS::RootedValue rval(cx);
                 bool invokeOk = func->invoke(1, &largv[0], &rval);
                 if (!invokeOk && JS_IsExceptionPending(cx)) {
-                    JS_ReportPendingException(cx);
+//cjh                    JS_ReportPendingException(cx);
                 }
             };
             callback = lambda;
@@ -2284,8 +2285,7 @@ bool js_cocos2dx_CCScheduler_isTargetPaused(JSContext *cx, uint32_t argc, JS::Va
 }
 
 bool js_forceGC(JSContext *cx, uint32_t argc, JS::Value *vp) {
-    JSRuntime *rt = JS_GetRuntime(cx);
-    JS_GC(rt);
+    JS_GC(cx);
     return true;
 }
 
@@ -2637,7 +2637,9 @@ bool js_cocos2dx_CCTMXLayer_getTiles(JSContext *cx, uint32_t argc, JS::Value *vp
             JS_ReportErrorUTF8(cx, "Can't allocate enough memory.");
             return false;
         }
-        uint32_t* bufdata = (uint32_t*)JS_GetArrayBufferViewData(array);
+        JS::AutoCheckCannotGC nogc;
+        bool sharedDummy = false;
+        uint32_t* bufdata = (uint32_t*)JS_GetArrayBufferViewData(array, &sharedDummy, nogc);
         memcpy(bufdata, ret, count*sizeof(int32_t));
 
         args.rval().set(JS::ObjectValue(*array));
@@ -4160,7 +4162,7 @@ bool js_cocos2dx_CCTMXLayer_getTileFlagsAt(JSContext *cx, uint32_t argc, JS::Val
         JSB_PRECONDITION2(ok, cx, false, "Error processing arguments");
         cobj->getTileGIDAt(arg0, &flags);
 
-        args.rval().set(UJS::Int32Value((uint32_t)flags));
+        args.rval().set(JS::Int32Value((uint32_t)flags));
         return true;
     }
     JS_ReportErrorUTF8(cx, "wrong number of arguments: %d, was expecting %d", argc, 2);
@@ -4293,7 +4295,9 @@ bool js_cocos2dx_CCFileUtils_getDataFromFile(JSContext *cx, uint32_t argc, JS::V
                 if (nullptr == array)
                     break;
 
-                uint8_t* bufdata = (uint8_t*)JS_GetArrayBufferViewData(array);
+                JS::AutoCheckCannotGC nogc;
+                bool sharedDummy = false;
+                uint8_t* bufdata = (uint8_t*)JS_GetArrayBufferViewData(array, &sharedDummy, nogc);
                 memcpy(bufdata, data.getBytes(), size*sizeof(uint8_t));
 
                 args.rval().set(JS::ObjectValue(*array));
@@ -4325,7 +4329,9 @@ bool js_cocos2dx_CCFileUtils_writeDataToFile(JSContext *cx, uint32_t argc, JS::V
         JSObject &obj0 = args.get(0).toObject();
         if( JS_IsUint8Array(&obj0) ) {
             uint32_t len = JS_GetArrayBufferViewByteLength(&obj0);
-            uint8_t* bufdata = (uint8_t*)JS_GetArrayBufferViewData(&obj0);
+            JS::AutoCheckCannotGC nogc;
+            bool sharedDummy = false;
+            uint8_t* bufdata = (uint8_t*)JS_GetArrayBufferViewData(&obj0, &sharedDummy, nogc);
             arg0.copy(bufdata, len);
         } else {
             ok = false;
@@ -4481,7 +4487,7 @@ bool js_cocos2dx_CCGLProgram_getProgram(JSContext *cx, uint32_t argc, JS::Value 
     JSB_PRECONDITION2( cobj, cx, false, "Invalid Native Object");
     if (argc == 0) {
         GLuint ret = cobj->getProgram();
-        args.rval().set(UJS::Int32Value((uint32_t)ret));
+        args.rval().set(JS::Int32Value((uint32_t)ret));
         return true;
     }
 
@@ -4965,7 +4971,7 @@ bool js_cocos2dx_RenderTexture_saveToFile(JSContext *cx, uint32_t argc, JS::Valu
                     JS::RootedValue rval(cx);
                     bool invokeOk = func->invoke(2, largv, &rval);
                     if (!invokeOk && JS_IsExceptionPending(cx)) {
-                        JS_ReportPendingException(cx);
+//cjh                        JS_ReportPendingException(cx);
                     }
                 };
                 arg3 = lambda;
@@ -5036,7 +5042,7 @@ bool js_cocos2dx_RenderTexture_saveToFile(JSContext *cx, uint32_t argc, JS::Valu
                     JS::RootedValue rval(cx);
                     bool invokeOk = func->invoke(2, largv, &rval);
                     if (!invokeOk && JS_IsExceptionPending(cx)) {
-                        JS_ReportPendingException(cx);
+//cjh                        JS_ReportPendingException(cx);
                     }
                 };
                 arg2 = lambda;
@@ -5198,7 +5204,7 @@ bool js_cocos2dx_ClippingNode_init(JSContext *cx, uint32_t argc, JS::Value *vp)
 
 // EventKeyboard class bindings, need manual bind for transform key codes
 
-JSClass  *jsb_cocos2d_EventKeyboard_class;
+const JSClass  *jsb_cocos2d_EventKeyboard_class;
 JSObject *jsb_cocos2d_EventKeyboard_prototype;
 
 bool js_cocos2dx_EventKeyboard_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5237,16 +5243,22 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
 }
 
 void js_register_cocos2dx_EventKeyboard(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_EventKeyboard_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_EventKeyboard_class->name = "EventKeyboard";
-    jsb_cocos2d_EventKeyboard_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_EventKeyboard_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_EventKeyboard_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_EventKeyboard_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_EventKeyboard_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_EventKeyboard_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_EventKeyboard_class->convert = JS_ConvertStub;
-    jsb_cocos2d_EventKeyboard_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "EventKeyboard",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_EventKeyboard_class = &jsclass;
 
     static JSPropertySpec properties[] = {
         JS_PSG("__nativeObj", js_is_native_obj, JSPROP_ENUMERATE | JSPROP_PERMANENT),
@@ -5497,7 +5509,7 @@ bool js_cocos2dx_Scene_getNavMesh(JSContext *cx, uint32_t argc, JS::Value *vp)
 }
 #endif //CC_USE_NAVMESH
 
-JSClass  *jsb_cocos2d_PolygonInfo_class;
+const JSClass  *jsb_cocos2d_PolygonInfo_class;
 JSObject *jsb_cocos2d_PolygonInfo_prototype;
 
 bool js_cocos2dx_PolygonInfo_getArea(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5559,7 +5571,7 @@ bool js_cocos2dx_PolygonInfo_getVertCount(JSContext *cx, uint32_t argc, JS::Valu
 }
 
 // PolygonInfo.rect
-bool js_get_PolygonInfo_rect(JSContext* cx, uint32_t argc, jsval* vp)
+bool js_get_PolygonInfo_rect(JSContext* cx, uint32_t argc, JS::Value* vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -5580,7 +5592,7 @@ bool js_get_PolygonInfo_rect(JSContext* cx, uint32_t argc, jsval* vp)
     JS_ReportErrorUTF8(cx, "js_get_PolygonInfo_rect : Invalid native object.");
     return false;
 }
-bool js_set_PolygonInfo_rect(JSContext* cx, uint32_t argc, jsval* vp)
+bool js_set_PolygonInfo_rect(JSContext* cx, uint32_t argc, JS::Value* vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -5599,7 +5611,7 @@ bool js_set_PolygonInfo_rect(JSContext* cx, uint32_t argc, jsval* vp)
 }
 
 // PolygonInfo.filename
-bool js_get_PolygonInfo_filename(JSContext* cx, uint32_t argc, jsval* vp)
+bool js_get_PolygonInfo_filename(JSContext* cx, uint32_t argc, JS::Value* vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -5620,7 +5632,7 @@ bool js_get_PolygonInfo_filename(JSContext* cx, uint32_t argc, jsval* vp)
     JS_ReportErrorUTF8(cx, "js_get_PolygonInfo_filename : Invalid native object.");
     return false;
 }
-bool js_set_PolygonInfo_filename(JSContext* cx, uint32_t argc, jsval* vp)
+bool js_set_PolygonInfo_filename(JSContext* cx, uint32_t argc, JS::Value* vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
@@ -5652,7 +5664,7 @@ bool js_cocos2dx_PolygonInfo_constructor(JSContext *cx, uint32_t argc, JS::Value
     CCASSERT(typeClass, "The value is null.");
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject obj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     args.rval().set(JS::ObjectValue(*obj));
     // link the native object with the javascript object
     jsb_new_proxy(cobj, obj);
@@ -5677,17 +5689,22 @@ void js_cocos2d_PolygonInfo_finalize(JSFreeOp *fop, JSObject *obj) {
 
 void js_register_cocos2dx_PolygonInfo(JSContext *cx, JS::HandleObject global)
 {
-    jsb_cocos2d_PolygonInfo_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_PolygonInfo_class->name = "PolygonInfo";
-    jsb_cocos2d_PolygonInfo_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_PolygonInfo_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_PolygonInfo_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_PolygonInfo_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_PolygonInfo_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_PolygonInfo_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_PolygonInfo_class->convert = JS_ConvertStub;
-    jsb_cocos2d_PolygonInfo_class->finalize = js_cocos2d_PolygonInfo_finalize;
-    jsb_cocos2d_PolygonInfo_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        js_cocos2d_PolygonInfo_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "PolygonInfo",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_PolygonInfo_class = &jsclass;
 
     static JSPropertySpec properties[] =
     {
@@ -5723,7 +5740,7 @@ void js_register_cocos2dx_PolygonInfo(JSContext *cx, JS::HandleObject global)
     jsb_register_class<cocos2d::PolygonInfo>(cx, jsb_cocos2d_PolygonInfo_class, proto, nullptr);
 }
 
-JSClass  *jsb_cocos2d_AutoPolygon_class;
+const JSClass  *jsb_cocos2d_AutoPolygon_class;
 JSObject *jsb_cocos2d_AutoPolygon_prototype;
 
 bool js_cocos2dx_AutoPolygon_generatePolygon(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5811,7 +5828,7 @@ bool js_cocos2dx_AutoPolygon_constructor(JSContext *cx, uint32_t argc, JS::Value
     CCASSERT(typeClass, "The value is null.");
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject obj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     args.rval().set(JS::ObjectValue(*obj));
     // link the native object with the javascript object
     jsb_new_proxy(cobj, obj);
@@ -5834,17 +5851,22 @@ void js_cocos2d_AutoPolygon_finalize(JSFreeOp *fop, JSObject *obj) {
 }
 
 void js_register_cocos2dx_AutoPolygon(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_AutoPolygon_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_AutoPolygon_class->name = "AutoPolygon";
-    jsb_cocos2d_AutoPolygon_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_AutoPolygon_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_AutoPolygon_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_AutoPolygon_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_AutoPolygon_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_AutoPolygon_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_AutoPolygon_class->convert = JS_ConvertStub;
-    jsb_cocos2d_AutoPolygon_class->finalize = js_cocos2d_AutoPolygon_finalize;
-    jsb_cocos2d_AutoPolygon_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        js_cocos2d_AutoPolygon_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "AutoPolygon",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_AutoPolygon_class = &jsclass;
 
     static JSPropertySpec properties[] = {
         JS_PSG("__nativeObj", js_is_native_obj, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -5928,9 +5950,9 @@ bool js_cocos2dx_ComponentJS_getScriptObject(JSContext *cx, uint32_t argc, JS::V
     return false;
 }
 
-JSClass  *jsb_RefFinalizeHook_class;
+const JSClass  *jsb_RefFinalizeHook_class;
 JSObject *jsb_RefFinalizeHook_prototype;
-JSClass  *jsb_ObjFinalizeHook_class;
+const JSClass  *jsb_ObjFinalizeHook_class;
 JSObject *jsb_ObjFinalizeHook_prototype;
 
 static bool jsb_RefFinalizeHook_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -5938,7 +5960,7 @@ static bool jsb_RefFinalizeHook_constructor(JSContext *cx, uint32_t argc, JS::Va
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     // Create new object
     JS::RootedObject proto(cx, jsb_RefFinalizeHook_prototype);
-    JS::RootedObject obj(cx, JS_NewObject(cx, jsb_RefFinalizeHook_class, proto, nullptr));
+    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, jsb_RefFinalizeHook_class, proto));
     // Register arguments[0] as owner
     if (!args.get(0).isNullOrUndefined())
     {
@@ -5999,7 +6021,7 @@ static bool jsb_ObjFinalizeHook_constructor(JSContext *cx, uint32_t argc, JS::Va
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     // Create new object
     JS::RootedObject proto(cx, jsb_ObjFinalizeHook_prototype);
-    JS::RootedObject obj(cx, JS_NewObject(cx, jsb_ObjFinalizeHook_class, proto, nullptr));
+    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, jsb_ObjFinalizeHook_class, proto));
     // Register arguments[0] as owner
     if (!args.get(0).isNullOrUndefined())
     {
@@ -6036,17 +6058,23 @@ void jsb_ObjFinalizeHook_finalize(JSFreeOp *fop, JSObject *obj)
 }
 
 void jsb_register_RefFinalizeHook(JSContext *cx, JS::HandleObject global) {
-    jsb_RefFinalizeHook_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_RefFinalizeHook_class->name = "RefFinalizeHook";
-    jsb_RefFinalizeHook_class->addProperty = JS_PropertyStub;
-    jsb_RefFinalizeHook_class->delProperty = JS_DeletePropertyStub;
-    jsb_RefFinalizeHook_class->getProperty = JS_PropertyStub;
-    jsb_RefFinalizeHook_class->setProperty = JS_StrictPropertyStub;
-    jsb_RefFinalizeHook_class->enumerate = JS_EnumerateStub;
-    jsb_RefFinalizeHook_class->resolve = JS_ResolveStub;
-    jsb_RefFinalizeHook_class->convert = JS_ConvertStub;
-    jsb_RefFinalizeHook_class->finalize = jsb_RefFinalizeHook_finalize;
-    jsb_RefFinalizeHook_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        jsb_RefFinalizeHook_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "RefFinalizeHook",
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    jsb_RefFinalizeHook_class = &jsclass;
 
     jsb_RefFinalizeHook_prototype = JS_InitClass(cx, global,
                                               nullptr, // parent proto
@@ -6055,17 +6083,22 @@ void jsb_register_RefFinalizeHook(JSContext *cx, JS::HandleObject global) {
                                               NULL, NULL, NULL, NULL);
 }
 void jsb_register_ObjFinalizeHook(JSContext *cx, JS::HandleObject global) {
-    jsb_ObjFinalizeHook_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_ObjFinalizeHook_class->name = "ObjFinalizeHook";
-    jsb_ObjFinalizeHook_class->addProperty = JS_PropertyStub;
-    jsb_ObjFinalizeHook_class->delProperty = JS_DeletePropertyStub;
-    jsb_ObjFinalizeHook_class->getProperty = JS_PropertyStub;
-    jsb_ObjFinalizeHook_class->setProperty = JS_StrictPropertyStub;
-    jsb_ObjFinalizeHook_class->enumerate = JS_EnumerateStub;
-    jsb_ObjFinalizeHook_class->resolve = JS_ResolveStub;
-    jsb_ObjFinalizeHook_class->convert = JS_ConvertStub;
-    jsb_ObjFinalizeHook_class->finalize = jsb_ObjFinalizeHook_finalize;
-    jsb_ObjFinalizeHook_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        jsb_ObjFinalizeHook_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "ObjFinalizeHook",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_ObjFinalizeHook_class = &jsclass;
     
     jsb_ObjFinalizeHook_prototype = JS_InitClass(cx, global,
                                               nullptr, // parent proto

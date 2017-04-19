@@ -94,12 +94,12 @@ int js_module_register()
     
 #if CC_USE_3D_PHYSICS && CC_ENABLE_BULLET_INTEGRATION
     // Physics 3d can be commented out to reduce the package
-    sc->addRegisterCallback(register_all_cocos2dx_physics3d);
+//cjh    sc->addRegisterCallback(register_all_cocos2dx_physics3d);
     sc->addRegisterCallback(register_all_cocos2dx_physics3d_manual);
 #endif
 
 #if CC_USE_NAVMESH
-    sc->addRegisterCallback(register_all_cocos2dx_navmesh);
+//cjh    sc->addRegisterCallback(register_all_cocos2dx_navmesh);
     sc->addRegisterCallback(register_all_cocos2dx_navmesh_manual);
 #endif
 

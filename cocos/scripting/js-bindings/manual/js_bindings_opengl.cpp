@@ -64,7 +64,7 @@ void GLNode::onDraw(Mat4 &transform, uint32_t flags)
 
 NS_CC_END
 
-JSClass  *js_cocos2dx_GLNode_class;
+const JSClass  *js_cocos2dx_GLNode_class;
 JSObject *js_cocos2dx_GLNode_prototype;
 
 bool js_cocos2dx_GLNode_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -122,16 +122,23 @@ bool js_cocos2dx_GLNode_create(JSContext *cx, uint32_t argc, JS::Value *vp)
 extern JSObject* jsb_cocos2d_Node_prototype;
 
 void js_register_cocos2dx_GLNode(JSContext *cx, JS::HandleObject global) {
-    js_cocos2dx_GLNode_class = (JSClass *)calloc(1, sizeof(JSClass));
-    js_cocos2dx_GLNode_class->name = "GLNode";
-    js_cocos2dx_GLNode_class->addProperty = JS_PropertyStub;
-    js_cocos2dx_GLNode_class->delProperty = JS_DeletePropertyStub;
-    js_cocos2dx_GLNode_class->getProperty = JS_PropertyStub;
-    js_cocos2dx_GLNode_class->setProperty = JS_StrictPropertyStub;
-    js_cocos2dx_GLNode_class->enumerate = JS_EnumerateStub;
-    js_cocos2dx_GLNode_class->resolve = JS_ResolveStub;
-    js_cocos2dx_GLNode_class->convert = JS_ConvertStub;
-    js_cocos2dx_GLNode_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass cls = {
+        "GLNode",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    js_cocos2dx_GLNode_class = &cls;
 
     static JSPropertySpec properties[] = {
         {0, 0, 0, 0, 0}

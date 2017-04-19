@@ -525,7 +525,9 @@ bool JSB_glGetUniformfv(JSContext *cx, uint32_t argc, JS::Value *vp)
         glGetUniformfv(arg0, arg1, param);
 
         typedArray = JS_NewFloat32Array(cx, usize);
-        float *buffer = (float*)JS_GetArrayBufferViewData(typedArray);
+        JS::AutoCheckCannotGC nogc;
+        bool sharedDummy = false;
+        float *buffer = (float*)JS_GetArrayBufferViewData(typedArray, &sharedDummy, nogc);
         memcpy( buffer, param, sizeof(float) * usize);
         CC_SAFE_DELETE_ARRAY(param);
     } else if( utype == GL_INT ) {
@@ -536,7 +538,9 @@ bool JSB_glGetUniformfv(JSContext *cx, uint32_t argc, JS::Value *vp)
         glGetUniformiv(arg0, arg1, param);
 
         typedArray = JS_NewInt32Array(cx, usize);
-        GLint *buffer = (GLint*)JS_GetArrayBufferViewData(typedArray);
+        JS::AutoCheckCannotGC nogc;
+        bool sharedDummy = false;
+        GLint *buffer = (GLint*)JS_GetArrayBufferViewData(typedArray, &sharedDummy, nogc);
         memcpy( buffer, param, sizeof(GLint) * usize);
         CC_SAFE_DELETE_ARRAY(param);
     }

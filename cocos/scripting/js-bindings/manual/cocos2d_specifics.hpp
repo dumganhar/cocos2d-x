@@ -79,9 +79,9 @@ extern schedFunc_proxy_t *_schedFunc_target_ht;
 extern schedTarget_proxy_t *_schedObj_target_ht;
 extern callfuncTarget_proxy_t *_callfuncTarget_native_ht;
 
-extern JSClass  *jsb_RefFinalizeHook_class;
+extern const JSClass  *jsb_RefFinalizeHook_class;
 extern JSObject *jsb_RefFinalizeHook_prototype;
-extern JSClass  *jsb_ObjFinalizeHook_class;
+extern const JSClass  *jsb_ObjFinalizeHook_class;
 extern JSObject *jsb_ObjFinalizeHook_prototype;
 
 /**

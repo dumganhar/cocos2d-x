@@ -46,7 +46,7 @@ void jsb_register_chipmunk(JSContext* cx, JS::HandleObject object)
     chipmunkVal = JS::ObjectValue(*chipmunk);
     JS_SetProperty(cx, object, "cp", chipmunkVal);
     
-    JSB_cpBase_createClass(cx, chipmunk, "Base");  // manual base class registration
+    JSB_cpBase_createClass(cx, chipmunk);  // manual base class registration
 #include "scripting/js-bindings/auto/js_bindings_chipmunk_auto_classes_registration.h"
 #include "scripting/js-bindings/auto/js_bindings_chipmunk_functions_registration.h"
 

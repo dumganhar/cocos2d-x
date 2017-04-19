@@ -33,13 +33,13 @@
 //#pragma mark - Helpful Macros
 
 #define JS_BINDED_CLASS_GLUE(klass) \
-static JSClass js_class; \
+static const JSClass* js_class; \
 static JSObject* js_proto; \
 static JSObject* js_parent; \
 static void _js_register(JSContext* cx, JS::HandleObject global);
 
 #define JS_BINDED_CLASS_GLUE_IMPL(klass) \
-JSClass klass::js_class = {}; \
+const JSClass* klass::js_class = {}; \
 JSObject* klass::js_proto = NULL; \
 JSObject* klass::js_parent = NULL; \
 
@@ -122,7 +122,7 @@ JS_PSGS(#propName, _js_get_##klass##_##propName, _js_set_##klass##_##propName, J
 #define JS_CREATE_UINT_WRAPPED(valOut, propName, val) \
 do { \
 JSObject* jsobj = JS_NewObject(cx, NULL, NULL, NULL); \
-JS::Value propVal = UJS::Int32Value(val); \
+JS::Value propVal = JS::Int32Value(val); \
 JS_SetProperty(cx, jsobj, "__" propName, &propVal); \
 valOut = JS::ObjectValue(*jsobj); \
 } while(0)

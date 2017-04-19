@@ -80,7 +80,7 @@ static bool js_cocos2dx_Sprite3D_createAsync(JSContext *cx, uint32_t argc, JS::V
             JS::RootedValue rval(cx);
 		    bool ok = func->invoke(2, largv, &rval);
 		    if (!ok && JS_IsExceptionPending(cx)) {
-		        JS_ReportPendingException(cx);
+		        //cjh JS_ReportPendingException(cx);
 		    }
 
             delete v;

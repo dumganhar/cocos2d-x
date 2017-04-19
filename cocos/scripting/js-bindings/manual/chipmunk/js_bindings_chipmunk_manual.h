@@ -110,9 +110,9 @@ JS::Value cpPointQueryInfo_to_jsval(JSContext *cx, cpPointQueryInfo pointQueryIn
 JS::Value cpSegmentQueryInfo_to_jsval(JSContext *cx, cpSegmentQueryInfo segmentQueryInfo);
 
 // Object Oriented Chipmunk
-void JSB_cpBase_createClass(JSContext* cx, JS::HandleObject globalObj, const char * name );
+void JSB_cpBase_createClass(JSContext* cx, JS::HandleObject globalObj);
 extern JSObject* JSB_cpBase_object;
-extern JSClass* JSB_cpBase_class;
+extern const JSClass* JSB_cpBase_class;
 extern void register_CCPhysicsSprite(JSContext *cx, JS::HandleObject obj);
 extern void register_CCPhysicsDebugNode(JSContext *cx, JS::HandleObject obj);
 

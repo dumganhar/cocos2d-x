@@ -409,7 +409,7 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
     return true;
 }
 
-JSClass  *jsb_Effect3DOutline_class;
+const JSClass  *jsb_Effect3DOutline_class;
 JSObject *jsb_Effect3DOutline_prototype;
 
 bool js_cocos2dx_Effect3DOutline_setOutlineWidth(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -429,7 +429,7 @@ bool js_cocos2dx_Effect3DOutline_setOutlineWidth(JSContext *cx, uint32_t argc, J
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_Effect3DOutline_setOutlineWidth : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_Effect3DOutline_setOutlineWidth : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_Effect3DOutline_setOutlineColor(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -449,7 +449,7 @@ bool js_cocos2dx_Effect3DOutline_setOutlineColor(JSContext *cx, uint32_t argc, J
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_Effect3DOutline_setOutlineColor : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_Effect3DOutline_setOutlineColor : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_Effect3DOutline_create(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -469,7 +469,7 @@ bool js_cocos2dx_Effect3DOutline_create(JSContext *cx, uint32_t argc, JS::Value 
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_Effect3DOutline_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_Effect3DOutline_create : wrong number of arguments");
     return false;
 }
 
@@ -493,16 +493,22 @@ bool jsb_Effect3DOutline_constructor(JSContext *cx, uint32_t argc, JS::Value *vp
 }
 
 void js_register_cocos2dx_Effect3DOutline(JSContext *cx, JS::HandleObject global) {
-    jsb_Effect3DOutline_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_Effect3DOutline_class->name = "Effect3DOutline";
-    jsb_Effect3DOutline_class->addProperty = JS_PropertyStub;
-    jsb_Effect3DOutline_class->delProperty = JS_DeletePropertyStub;
-    jsb_Effect3DOutline_class->getProperty = JS_PropertyStub;
-    jsb_Effect3DOutline_class->setProperty = JS_StrictPropertyStub;
-    jsb_Effect3DOutline_class->enumerate = JS_EnumerateStub;
-    jsb_Effect3DOutline_class->resolve = JS_ResolveStub;
-    jsb_Effect3DOutline_class->convert = JS_ConvertStub;
-    jsb_Effect3DOutline_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "Effect3DOutline",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_Effect3DOutline_class = &jsclass;
 
     static JSPropertySpec properties[] = {
         JS_PSG("__nativeObj", js_is_native_obj, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -537,7 +543,7 @@ void js_register_cocos2dx_Effect3DOutline(JSContext *cx, JS::HandleObject global
 }
 
 
-JSClass  *jsb_EffectSprite3D_class;
+const JSClass  *jsb_EffectSprite3D_class;
 JSObject *jsb_EffectSprite3D_prototype;
 
 bool js_cocos2dx_EffectSprite3D_setEffect3D(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -564,7 +570,7 @@ bool js_cocos2dx_EffectSprite3D_setEffect3D(JSContext *cx, uint32_t argc, JS::Va
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_EffectSprite3D_setEffect3D : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_EffectSprite3D_setEffect3D : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_EffectSprite3D_addEffect(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -593,7 +599,7 @@ bool js_cocos2dx_EffectSprite3D_addEffect(JSContext *cx, uint32_t argc, JS::Valu
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_EffectSprite3D_addEffect : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_EffectSprite3D_addEffect : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
 bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -619,7 +625,7 @@ bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint3
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture : wrong number of arguments");
     return false;
 }
 
@@ -644,7 +650,7 @@ bool js_cocos2dx_EffectSprite3D_create(JSContext *cx, uint32_t argc, JS::Value *
         args.rval().set(jsret);
         return true;
     }
-    JS_ReportError(cx, "js_cocos2dx_EffectSprite3D_create : wrong number of arguments");
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_EffectSprite3D_create : wrong number of arguments");
     return false;
 }
 
@@ -679,16 +685,22 @@ bool jsb_EffectSprite3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 }
 
 void js_register_cocos2dx_EffectSprite3D(JSContext *cx, JS::HandleObject global) {
-    jsb_EffectSprite3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_EffectSprite3D_class->name = "EffectSprite3D";
-    jsb_EffectSprite3D_class->addProperty = JS_PropertyStub;
-    jsb_EffectSprite3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_EffectSprite3D_class->getProperty = JS_PropertyStub;
-    jsb_EffectSprite3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_EffectSprite3D_class->enumerate = JS_EnumerateStub;
-    jsb_EffectSprite3D_class->resolve = JS_ResolveStub;
-    jsb_EffectSprite3D_class->convert = JS_ConvertStub;
-    jsb_EffectSprite3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "EffectSprite3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_EffectSprite3D_class = &jsclass;
 
     static JSPropertySpec properties[] = {
         JS_PSG("__nativeObj", js_is_native_obj, JSPROP_PERMANENT | JSPROP_ENUMERATE),

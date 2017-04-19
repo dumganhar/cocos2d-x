@@ -415,7 +415,7 @@ JS_BINDED_CONSTRUCTOR_IMPL(MinXmlHttpRequest)
     MinXmlHttpRequest* req = new (std::nothrow) MinXmlHttpRequest(cx);
 
     JS::RootedObject proto(cx, MinXmlHttpRequest::js_proto);
-    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, &MinXmlHttpRequest::js_class, proto));
+    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, MinXmlHttpRequest::js_class, proto));
     js_proxy_t *p = jsb_new_proxy(req, obj);
 
 #if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
@@ -1087,7 +1087,7 @@ void MinXmlHttpRequest::_js_register(JSContext *cx, JS::HandleObject global)
         &classOps
     };
 
-    MinXmlHttpRequest::js_class = jsclass;
+    MinXmlHttpRequest::js_class = &jsclass;
     static JSPropertySpec props[] = {
         JS_BINDED_PROP_DEF_ACCESSOR(MinXmlHttpRequest, onloadstart),
         JS_BINDED_PROP_DEF_ACCESSOR(MinXmlHttpRequest, onabort),
@@ -1122,6 +1122,6 @@ void MinXmlHttpRequest::_js_register(JSContext *cx, JS::HandleObject global)
     };
 
     MinXmlHttpRequest::js_parent = nullptr;
-    MinXmlHttpRequest::js_proto = JS_InitClass(cx, global, nullptr, &MinXmlHttpRequest::js_class , MinXmlHttpRequest::_js_constructor, 0, props, funcs, nullptr, nullptr);
+    MinXmlHttpRequest::js_proto = JS_InitClass(cx, global, nullptr, MinXmlHttpRequest::js_class , MinXmlHttpRequest::_js_constructor, 0, props, funcs, nullptr, nullptr);
 
 }

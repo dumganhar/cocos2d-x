@@ -279,7 +279,7 @@ JS::Value spanimation_to_jsval(JSContext* cx, spAnimation& v)
     return JS::NullValue();
 }
 
-JSClass  *jsb_spine_TrackEntry_class;
+const JSClass  *jsb_spine_TrackEntry_class;
 JSObject *jsb_spine_TrackEntry_prototype;
 
 bool jsb_spine_TrackEntry_get_next(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -338,17 +338,22 @@ void js_spine_TrackEntry_finalize(JSFreeOp *fop, JSObject *obj) {
 
 void js_register_spine_TrackEntry(JSContext *cx, JS::HandleObject global)
 {
-    jsb_spine_TrackEntry_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_spine_TrackEntry_class->name = "TrackEntry";
-    jsb_spine_TrackEntry_class->addProperty = JS_PropertyStub;
-    jsb_spine_TrackEntry_class->delProperty = JS_DeletePropertyStub;
-    jsb_spine_TrackEntry_class->getProperty = JS_PropertyStub;
-    jsb_spine_TrackEntry_class->setProperty = JS_StrictPropertyStub;
-    jsb_spine_TrackEntry_class->enumerate = JS_EnumerateStub;
-    jsb_spine_TrackEntry_class->resolve = JS_ResolveStub;
-    jsb_spine_TrackEntry_class->convert = JS_ConvertStub;
-    jsb_spine_TrackEntry_class->finalize = js_spine_TrackEntry_finalize;
-    jsb_spine_TrackEntry_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        js_spine_TrackEntry_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "TrackEntry",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_spine_TrackEntry_class = &jsclass;
     
     static JSPropertySpec properties[] =
     {
@@ -372,7 +377,7 @@ JS::Value sptrackentry_to_jsval(JSContext* cx, spTrackEntry& v)
     else
     {
         JS::RootedObject proto(cx, jsb_spine_TrackEntry_prototype);
-        entry.set(JS_NewObject(cx, jsb_spine_TrackEntry_class, proto, nullptr));
+        entry.set(JS_NewObjectWithGivenProto(cx, jsb_spine_TrackEntry_class, proto));
     }
     
     JS::RootedValue entryVal(cx, JS::ObjectValue(*entry));

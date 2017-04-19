@@ -315,7 +315,7 @@ NS_CC_END
 /**
  * bindings for cc.DrawNode3D
  **/
-JSClass  *jsb_cocos2d_DrawNode3D_class;
+const JSClass  *jsb_cocos2d_DrawNode3D_class;
 JSObject *jsb_cocos2d_DrawNode3D_prototype;
 
 bool js_cocos2dx_DrawNode3D_getBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -333,7 +333,7 @@ bool js_cocos2dx_DrawNode3D_getBlendFunc(JSContext *cx, uint32_t argc, JS::Value
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_getBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_getBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_cocos2dx_DrawNode3D_setBlendFunc(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -353,7 +353,7 @@ bool js_cocos2dx_DrawNode3D_setBlendFunc(JSContext *cx, uint32_t argc, JS::Value
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_setBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 1);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_setBlendFunc : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_DrawNode3D_drawLine(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -377,7 +377,7 @@ bool js_cocos2dx_DrawNode3D_drawLine(JSContext *cx, uint32_t argc, JS::Value *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_drawLine : wrong number of arguments: %d, was expecting %d", argc, 3);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_drawLine : wrong number of arguments: %d, was expecting %d", argc, 3);
     return false;
 }
 bool js_cocos2dx_DrawNode3D_clear(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -393,7 +393,7 @@ bool js_cocos2dx_DrawNode3D_clear(JSContext *cx, uint32_t argc, JS::Value *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_clear : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_clear : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_cocos2dx_DrawNode3D_onDraw(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -415,7 +415,7 @@ bool js_cocos2dx_DrawNode3D_onDraw(JSContext *cx, uint32_t argc, JS::Value *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_onDraw : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_onDraw : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
 bool js_cocos2dx_DrawNode3D_init(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -433,7 +433,7 @@ bool js_cocos2dx_DrawNode3D_init(JSContext *cx, uint32_t argc, JS::Value *vp)
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_init : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_init : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_cocos2dx_DrawNode3D_drawCube(JSContext *cx, uint32_t argc, JS::Value *vp)
@@ -457,7 +457,7 @@ bool js_cocos2dx_DrawNode3D_drawCube(JSContext *cx, uint32_t argc, JS::Value *vp
     
         if (len != 8)
         {
-            JS_ReportError(cx, "array length error: %d, was expecting 8", len);
+            JS_ReportErrorUTF8(cx, "array length error: %d, was expecting 8", len);
         }
         for (uint32_t i=0; i < len; i++)
         {
@@ -479,7 +479,7 @@ bool js_cocos2dx_DrawNode3D_drawCube(JSContext *cx, uint32_t argc, JS::Value *vp
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_DrawNode3D_drawCube : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportErrorUTF8(cx, "js_cocos2dx_DrawNode3D_drawCube : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
 
@@ -510,16 +510,22 @@ extern JSObject *jsb_cocos2d_Node_prototype;
 
 
 void js_register_cocos2dx_DrawNode3D(JSContext *cx, JS::HandleObject global) {
-    jsb_cocos2d_DrawNode3D_class = (JSClass *)calloc(1, sizeof(JSClass));
-    jsb_cocos2d_DrawNode3D_class->name = "DrawNode3D";
-    jsb_cocos2d_DrawNode3D_class->addProperty = JS_PropertyStub;
-    jsb_cocos2d_DrawNode3D_class->delProperty = JS_DeletePropertyStub;
-    jsb_cocos2d_DrawNode3D_class->getProperty = JS_PropertyStub;
-    jsb_cocos2d_DrawNode3D_class->setProperty = JS_StrictPropertyStub;
-    jsb_cocos2d_DrawNode3D_class->enumerate = JS_EnumerateStub;
-    jsb_cocos2d_DrawNode3D_class->resolve = JS_ResolveStub;
-    jsb_cocos2d_DrawNode3D_class->convert = JS_ConvertStub;
-    jsb_cocos2d_DrawNode3D_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        nullptr,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
+    };
+
+    static const JSClass jsclass = {
+        "DrawNode3D",
+        JSCLASS_HAS_RESERVED_SLOTS(2),
+        &classOps
+    };
+
+    jsb_cocos2d_DrawNode3D_class = &jsclass;
 
     static JSPropertySpec properties[] = {
         JS_PSG("__nativeObj", js_is_native_obj, JSPROP_PERMANENT | JSPROP_ENUMERATE),

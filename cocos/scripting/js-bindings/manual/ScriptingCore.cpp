@@ -26,7 +26,7 @@
 
 // Removed in Firefox v27, use 'js/OldDebugAPI.h' instead
 //#include "jsdbgapi.h"
-#include "js/OldDebugAPI.h"
+//cjh #include "js/OldDebugAPI.h"
 
 
 #include "storage/local-storage/LocalStorage.h"
@@ -115,7 +115,8 @@ static void cc_closesocket(int fd)
 static void ReportException(JSContext *cx)
 {
     if (JS_IsExceptionPending(cx)) {
-        if (!JS_ReportPendingException(cx)) {
+//cjh         if (!JS_ReportPendingException(cx))
+        {
             JS_ClearPendingException(cx);
         }
     }
@@ -215,7 +216,7 @@ void removeJSObject(JSContext* cx, cocos2d::Ref* nativeObj)
     if (proxy)
     {
 #if ! CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-        JS::RemoveObjectRoot(cx, &proxy->obj);
+//cjh        JS::RemoveObjectRoot(cx, &proxy->obj);
 #endif
         // remove the proxy here, since this was a "stack" object, not heap
         // when js_finalize will be called, it will fail, but
@@ -299,9 +300,9 @@ bool JSBCore_version(JSContext *cx, uint32_t argc, JS::Value *vp)
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     char version[256];
     snprintf(version, sizeof(version)-1, "%s", cocos2dVersion());
-    JSString * js_version = JS_InternString(cx, version);
+    JS::RootedValue js_version(cx, std_string_to_jsval(cx, version));
 
-    args.rval().set(JS::StringValue(js_version));
+    args.rval().set(js_version);
 
     return true;
 };
@@ -316,32 +317,30 @@ bool JSBCore_os(JSContext *cx, uint32_t argc, JS::Value *vp)
 
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 
-    JSString * os;
-
     // osx, ios, android, windows, linux, etc..
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    os = JS_InternString(cx, "iOS");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "iOS"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    os = JS_InternString(cx, "Android");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Android"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-    os = JS_InternString(cx, "Windows");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Windows"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
-    os = JS_InternString(cx, "Marmalade");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Marmalade"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-    os = JS_InternString(cx, "Linux");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Linux"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_BADA)
-    os = JS_InternString(cx, "Bada");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Bada"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY)
-    os = JS_InternString(cx, "Blackberry");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Blackberry"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-    os = JS_InternString(cx, "OS X");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "OS X"));
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    os = JS_InternString(cx, "WINRT");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "WINRT"));
 #else
-    os = JS_InternString(cx, "Unknown");
+    JS::RootedValue os(cx, std_string_to_jsval(cx, "Unknown"));
 #endif
 
-    args.rval().set(JS::StringValue(os));
+    args.rval().set(os);
 
     return true;
 };
@@ -410,9 +409,7 @@ void registerDefaultClasses(JSContext* cx, JS::HandleObject global) {
     //
     // Javascript controller (__jsc__)
     //
-    JS::RootedObject proto(cx);
-    JS::RootedObject parent(cx);
-    JS::RootedObject jsc(cx, JS_NewObject(cx, NULL, proto, parent));
+    JS::RootedObject jsc(cx, JS_NewObject(cx, NULL));
     JS::RootedValue jscVal(cx);
     jscVal = JS::ObjectValue(*jsc);
     JS_SetProperty(cx, global, "__jsc__", jscVal);
@@ -440,19 +437,19 @@ static void sc_finalize(JSFreeOp *freeOp, JSObject *obj) {
     CCLOGINFO("jsbindings: finalizing JS object %p (global class)", obj);
 }
 
-//static JSClass global_class = {
-//    "global", JSCLASS_GLOBAL_FLAGS,
-//    JS_PropertyStub, JS_DeletePropertyStub, JS_PropertyStub, JS_StrictPropertyStub,
-//    JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub, sc_finalize,
-//    JSCLASS_NO_OPTIONAL_MEMBERS
-//};
-
-static const JSClass global_class = {
-    "global", JSCLASS_GLOBAL_FLAGS,
-    JS_PropertyStub, JS_DeletePropertyStub, JS_PropertyStub, JS_StrictPropertyStub,
-    JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub, sc_finalize,
+static const JSClassOps global_classOps = {
+    nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr,
+    nullptr,
+    nullptr,
     nullptr, nullptr, nullptr,
     JS_GlobalObjectTraceHook
+};
+
+static const JSClass global_class = {
+    "global",
+    JSCLASS_GLOBAL_FLAGS,
+    &global_classOps
 };
 
 ScriptingCore* ScriptingCore::getInstance()
@@ -522,13 +519,13 @@ bool ScriptingCore::evalString(const char *string, JS::MutableHandleValue outVal
     bool evaluatedOK = false;
     if (!content.empty())
     {
-        ok = JS::Compile(cx, global, op, content.c_str(), content.size(), &(script) );
+        ok = JS::Compile(cx, op, content.c_str(), content.size(), &(script) );
     }
     if (ok) {
-        evaluatedOK = JS_ExecuteScript(cx, global, script, outVal);
+        evaluatedOK = JS_ExecuteScript(cx, script, outVal);
         if (false == evaluatedOK) {
             cocos2d::log("Evaluating %s failed (evaluatedOK == JS_FALSE)", content.c_str());
-            JS_ReportPendingException(cx);
+            //cjh JS_ReportPendingException(cx);
         }
     }
     else {
@@ -822,7 +819,7 @@ bool ScriptingCore::runScript(const std::string& path, JS::HandleObject global, 
         evaluatedOK = JS_ExecuteScript(cx, global, *script, &rval);
         if (false == evaluatedOK) {
             cocos2d::log("Evaluating %s failed (evaluatedOK == JS_FALSE)", path.c_str());
-            JS_ReportPendingException(cx);
+            //cjh JS_ReportPendingException(cx);
         }
     }
 
@@ -852,7 +849,7 @@ bool ScriptingCore::requireScript(const char *path, JS::HandleObject global, JSC
         if (false == evaluatedOK)
         {
             cocos2d::log("(evaluatedOK == JS_FALSE)");
-            JS_ReportPendingException(cx);
+            //cjh JS_ReportPendingException(cx);
         }
     }
 
@@ -1534,7 +1531,7 @@ bool ScriptingCore::executeFunctionWithOwner(JS::Value owner, const char *name, 
 bool ScriptingCore::executeFunctionWithOwner(JS::Value owner, const char *name, uint32_t argc, JS::Value *vp, JS::MutableHandleValue retVal)
 {
     //should not use CallArgs here, use HandleValueArray instead !!
-    //because the "jsval* vp" is not the standard format from JSNative, the array doesn't contain this and retval
+    //because the "JS::Value* vp" is not the standard format from JSNative, the array doesn't contain this and retval
     //JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::HandleValueArray args = JS::HandleValueArray::fromMarkedLocation(argc, vp);
     return executeFunctionWithOwner(owner, name, args, retVal);
@@ -1896,7 +1893,7 @@ static bool NS_ProcessNextEvent()
     return true;
 }
 
-bool JSBDebug_enterNestedEventLoop(JSContext* cx, unsigned argc, jsval* vp)
+bool JSBDebug_enterNestedEventLoop(JSContext* cx, unsigned argc, JS::Value* vp)
 {
     enum {
         NS_OK = 0,
@@ -1918,27 +1915,27 @@ bool JSBDebug_enterNestedEventLoop(JSContext* cx, unsigned argc, jsval* vp)
              "nested event didn't unwind properly");
 
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    args.rval().set(UJS::Int32Value(s_nestedLoopLevel));
+    args.rval().set(JS::Int32Value(s_nestedLoopLevel));
     return true;
 }
 
-bool JSBDebug_exitNestedEventLoop(JSContext* cx, unsigned argc, jsval* vp)
+bool JSBDebug_exitNestedEventLoop(JSContext* cx, unsigned argc, JS::Value* vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (s_nestedLoopLevel > 0) {
         --s_nestedLoopLevel;
     } else {
-        args.rval().set(UJS::Int32Value(0));
+        args.rval().set(JS::Int32Value(0));
         return true;
     }
     args.rval().setUndefined();
     return true;
 }
 
-bool JSBDebug_getEventLoopNestLevel(JSContext* cx, unsigned argc, jsval* vp)
+bool JSBDebug_getEventLoopNestLevel(JSContext* cx, unsigned argc, JS::Value* vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    args.rval().set(UJS::Int32Value(s_nestedLoopLevel));
+    args.rval().set(JS::Int32Value(s_nestedLoopLevel));
     return true;
 }
 
@@ -2066,7 +2063,7 @@ static void serverEntryPoint(unsigned int port)
 #undef MAX_RECEIVED_SIZE
 }
 
-bool JSBDebug_BufferWrite(JSContext* cx, unsigned argc, jsval* vp)
+bool JSBDebug_BufferWrite(JSContext* cx, unsigned argc, JS::Value* vp)
 {
     if (argc == 1) {
         JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -2111,7 +2108,7 @@ void ScriptingCore::enableDebugger(unsigned int port)
         JS::HandleValueArray args = JS::HandleValueArray::fromMarkedLocation(1, &argv);
         bool ok = JS_CallFunctionName(_cx, rootedDebugObj, "_prepareDebugger", args, &outval);
         if (!ok) {
-            JS_ReportPendingException(_cx);
+            //cjh JS_ReportPendingException(_cx);
         }
 
         // start bg thread
@@ -2273,7 +2270,7 @@ JSObject* jsb_ref_create_jsobject(JSContext *cx, cocos2d::Ref *ref, js_type_clas
 {
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject jsObj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject jsObj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     js_proxy_t* newproxy = jsb_new_proxy(ref, jsObj);
     jsb_ref_init(cx, &newproxy->obj, ref, debug);
     return jsObj;
@@ -2283,7 +2280,7 @@ JSObject* jsb_ref_autoreleased_create_jsobject(JSContext *cx, cocos2d::Ref *ref,
 {
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject jsObj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject jsObj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     js_proxy_t* newproxy = jsb_new_proxy(ref, jsObj);
     jsb_ref_autoreleased_init(cx, &newproxy->obj, ref, debug);
     return jsObj;
@@ -2293,7 +2290,7 @@ JSObject* jsb_create_weak_jsobject(JSContext *cx, void *native, js_type_class_t 
 {
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject jsObj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject jsObj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     auto proxy = jsb_new_proxy(native, jsObj);
     js_add_FinalizeHook(cx, jsObj, false);
 
@@ -2323,7 +2320,7 @@ JSObject* jsb_ref_get_or_create_jsobject(JSContext *cx, cocos2d::Ref *ref, js_ty
 
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject jsObj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject jsObj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     js_proxy_t* newproxy = jsb_new_proxy(ref, jsObj);
 #if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
     CC_UNUSED_PARAM(newproxy);
@@ -2366,7 +2363,7 @@ JSObject* jsb_get_or_create_weak_jsobject(JSContext *cx, void *native, js_type_c
     // don't auto-release, don't retain.
     JS::RootedObject proto(cx, typeClass->proto.ref());
     JS::RootedObject parent(cx, typeClass->parentProto.ref());
-    JS::RootedObject jsObj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
+    JS::RootedObject jsObj(cx, JS_NewObjectWithGivenProto(cx, typeClass->jsclass, proto));
     proxy = jsb_new_proxy(native, jsObj);
 
     JS::RootedObject flag(cx, JS_NewObject(cx, nullptr));

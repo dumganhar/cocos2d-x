@@ -103,7 +103,7 @@ bool jsval_to_c_class( JSContext *cx, JS::HandleValue vp, void **out_native, str
 bool jsval_to_charptr( JSContext *cx, JS::HandleValue vp, const char **out);
 
 JS::Value opaque_to_jsval( JSContext *cx, void* opaque);
-JS::Value c_class_to_jsval( JSContext *cx, void* handle, JS::HandleObject object, JSClass *klass, const char* class_name);
+JS::Value c_class_to_jsval( JSContext *cx, void* handle, JS::HandleObject object, const JSClass *klass, const char* class_name);
 
 /* Converts a char ptr into a JS::Value (using JS string) */
 JS::Value charptr_to_jsval( JSContext *cx, const char *str);

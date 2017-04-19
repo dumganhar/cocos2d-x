@@ -239,7 +239,7 @@ JS_BINDED_CONSTRUCTOR_IMPL(JavaScriptObjCBridge)
     
     JS::RootedObject proto(cx, JavaScriptObjCBridge::js_proto);
     JS::RootedObject parentProto(cx, JavaScriptObjCBridge::js_parent);
-    JS::RootedObject obj(cx, JS_NewObject(cx, &JavaScriptObjCBridge::js_class, proto, parentProto));
+    JS::RootedObject obj(cx, JS_NewObjectWithGivenProto(cx, JavaScriptObjCBridge::js_class, proto));
     
     if (obj) {
         JS_SetPrivate(obj, jsj);
@@ -250,7 +250,7 @@ JS_BINDED_CONSTRUCTOR_IMPL(JavaScriptObjCBridge)
     args.rval().set(out);
     p = jsb_new_proxy(jsj, obj);
     
-    JS::AddNamedObjectRoot(cx, &p->obj, "JavaScriptObjCBridge");
+//cjh    JS::AddNamedObjectRoot(cx, &p->obj, "JavaScriptObjCBridge");
     return true;
 }
 
@@ -303,11 +303,23 @@ static bool js_is_native_obj(JSContext *cx, uint32_t argc, JS::Value *vp)
  */
 void JavaScriptObjCBridge::_js_register(JSContext *cx, JS::HandleObject global)
 {
-    JSClass jsclass = {
-        "JavaScriptObjCBridge", JSCLASS_HAS_PRIVATE, JS_PropertyStub, JS_DeletePropertyStub, JS_PropertyStub, JS_StrictPropertyStub, JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub,basic_object_finalize
+    static const JSClassOps classOps = {
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr,
+        basic_object_finalize,
+        nullptr, nullptr, nullptr,
+        JS_GlobalObjectTraceHook
     };
-    
-    JavaScriptObjCBridge::js_class = jsclass;
+
+    static const JSClass cls = {
+        "JavaScriptObjCBridge",
+        JSCLASS_HAS_PRIVATE,
+        &classOps
+    };
+
+    JavaScriptObjCBridge::js_class = &cls;
+
     static JSPropertySpec props[] = {
         JS_PSG("__nativeObj", js_is_native_obj, JSPROP_PERMANENT | JSPROP_ENUMERATE ),
         JS_PS_END
@@ -319,7 +331,7 @@ void JavaScriptObjCBridge::_js_register(JSContext *cx, JS::HandleObject global)
     };
     
     JavaScriptObjCBridge::js_parent = NULL;
-    JavaScriptObjCBridge::js_proto = JS_InitClass(cx, global, nullptr, &JavaScriptObjCBridge::js_class , JavaScriptObjCBridge::_js_constructor, 0, props, funcs, NULL, NULL);
+    JavaScriptObjCBridge::js_proto = JS_InitClass(cx, global, nullptr, JavaScriptObjCBridge::js_class , JavaScriptObjCBridge::_js_constructor, 0, props, funcs, NULL, NULL);
 }
 
 
