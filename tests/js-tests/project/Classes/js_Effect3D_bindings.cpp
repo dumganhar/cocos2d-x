@@ -457,13 +457,13 @@ bool js_cocos2dx_Effect3DOutline_create(JSContext *cx, uint32_t argc, JS::Value 
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc == 0) {
         Effect3DOutline* ret = Effect3DOutline::create();
-        JS::Value jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         do {
             if (ret) {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<Effect3DOutline>(cx, ret));
-                jsret = JS::ObjectValue(jsobj);
+                jsret = JS::ObjectValue(*jsobj);
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             }
         } while (0);
         args.rval().set(jsret);
@@ -485,10 +485,10 @@ bool jsb_Effect3DOutline_constructor(JSContext *cx, uint32_t argc, JS::Value *vp
 
     js_type_class_t *typeClass = js_get_type_from_native<Effect3DOutline>(cobj);
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "Effect3DOutline"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
 
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
@@ -613,13 +613,13 @@ bool js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture(JSContext *cx, uint3
         ok &= jsval_to_std_string(cx, args.get(1), &arg1);
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_EffectSprite3D_createFromObjFileAndTexture : Error processing arguments");
         EffectSprite3D* ret = EffectSprite3D::createFromObjFileAndTexture(arg0, arg1);
-        JS::Value jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         do {
             if (ret) {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<EffectSprite3D>(cx, ret));
-                jsret = OBJECT_TO_JSVAL(jsobj);
+                jsret = JS::ObjectValue(*jsobj);
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             }
         } while (0);
         args.rval().set(jsret);
@@ -638,13 +638,13 @@ bool js_cocos2dx_EffectSprite3D_create(JSContext *cx, uint32_t argc, JS::Value *
         ok &= jsval_to_std_string(cx, args.get(0), &arg0);
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_EffectSprite3D_create : Error processing arguments");
         EffectSprite3D* ret = EffectSprite3D::create(arg0);
-        JS::Value jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         do {
             if (ret) {
                 JS::RootedObject jsobj(cx, js_get_or_create_jsobject<EffectSprite3D>(cx, ret));
-                jsret = OBJECT_TO_JSVAL(jsobj);
+                jsret = JS::ObjectValue(*jsobj);
             } else {
-                jsret = JSVAL_NULL;
+                jsret = JS::NullValue();
             }
         } while (0);
         args.rval().set(jsret);
@@ -677,10 +677,10 @@ bool jsb_EffectSprite3D_constructor(JSContext *cx, uint32_t argc, JS::Value *vp)
 
     js_type_class_t *typeClass = js_get_type_from_native<EffectSprite3D>(cobj);
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "EffectSprite3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
 
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 

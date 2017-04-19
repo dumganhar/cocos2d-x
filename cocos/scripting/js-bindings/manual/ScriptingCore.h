@@ -81,7 +81,6 @@ public:
 class CC_JS_DLL ScriptingCore : public cocos2d::ScriptEngineProtocol
 {
 private:
-    JSRuntime *_rt;
     JSContext *_cx;
     JS::PersistentRootedObject *_global;
     JS::PersistentRootedObject *_debugGlobal;

@@ -27,7 +27,7 @@
 // Removed in Firefox v27, use 'js/OldDebugAPI.h' instead
 //#include "jsdbgapi.h"
 //cjh #include "js/OldDebugAPI.h"
-
+#include "js/Initialization.h"
 
 #include "storage/local-storage/LocalStorage.h"
 #include "scripting/js-bindings/manual/cocos2d_specifics.hpp"
@@ -462,8 +462,7 @@ ScriptingCore* ScriptingCore::getInstance()
 }
 
 ScriptingCore::ScriptingCore()
-: _rt(nullptr)
-, _cx(nullptr)
+: _cx(nullptr)
 , _jsInited(false)
 , _needCleanup(false)
 , _global(nullptr)
@@ -566,25 +565,12 @@ void ScriptingCore::removeAllRoots(JSContext *cx)
     auto it_js = _js_native_global_map.begin();
     while (it_js != _js_native_global_map.end())
     {
-        JS::RemoveObjectRoot(cx, &it_js->second->obj);
+//cjh        JS::RemoveObjectRoot(cx, &it_js->second->obj);
         free(it_js->second);
         it_js = _js_native_global_map.erase(it_js);
     }
     _js_native_global_map.clear();
 }
-
-// Just a wrapper around JSPrincipals that allows static construction.
-class CCJSPrincipals : public JSPrincipals
-{
-  public:
-    explicit CCJSPrincipals(int rc = 0)
-      : JSPrincipals()
-    {
-        refcount = rc;
-    }
-};
-
-static CCJSPrincipals shellTrustedPrincipals(1);
 
 static bool
 CheckObjectAccess(JSContext *cx)
@@ -592,18 +578,70 @@ CheckObjectAccess(JSContext *cx)
     return true;
 }
 
-static JSSecurityCallbacks securityCallbacks = {
-    CheckObjectAccess,
-    NULL
+/*
+ * A toy principals type for the shell.
+ *
+ * In the shell, a principal is simply a 32-bit mask: P subsumes Q if the
+ * set bits in P are a superset of those in Q. Thus, the principal 0 is
+ * subsumed by everything, and the principal ~0 subsumes everything.
+ *
+ * As a special case, a null pointer as a principal is treated like 0xffff.
+ *
+ * The 'newGlobal' function takes an option indicating which principal the
+ * new global should have; 'evaluate' does for the new code.
+ */
+class ShellPrincipals final : public JSPrincipals {
+    uint32_t bits;
+
+    static uint32_t getBits(JSPrincipals* p) {
+        if (!p)
+            return 0xffff;
+        return static_cast<ShellPrincipals*>(p)->bits;
+    }
+
+public:
+    explicit ShellPrincipals(uint32_t bits, int32_t refcount = 0) : bits(bits) {
+        this->refcount = refcount;
+    }
+
+    bool write(JSContext* cx, JSStructuredCloneWriter* writer) override {
+        // The shell doesn't have a read principals hook, so it doesn't really
+        // matter what we write here, but we have to write something so the
+        // fuzzer is happy.
+        return JS_WriteUint32Pair(writer, bits, 0);
+    }
+
+    static void destroy(JSPrincipals* principals) {
+        MOZ_ASSERT(principals != &fullyTrusted);
+        MOZ_ASSERT(principals->refcount == 0);
+        js_delete(static_cast<const ShellPrincipals*>(principals));
+    }
+
+    static bool subsumes(JSPrincipals* first, JSPrincipals* second) {
+        uint32_t firstBits  = getBits(first);
+        uint32_t secondBits = getBits(second);
+        return (firstBits | secondBits) == firstBits;
+    }
+
+    static JSSecurityCallbacks securityCallbacks;
+
+    // Fully-trusted principals singleton.
+    static ShellPrincipals fullyTrusted;
 };
 
+JSSecurityCallbacks ShellPrincipals::securityCallbacks = {
+    nullptr, // contentSecurityPolicyAllows
+    subsumes
+};
+
+// The fully-trusted principal subsumes all other principals.
+ShellPrincipals ShellPrincipals::fullyTrusted(-1, 1);
+
 void ScriptingCore::createGlobalContext() {
-    if (_cx && _rt) {
+    if (_cx) {
         ScriptingCore::removeAllRoots(_cx);
         JS_DestroyContext(_cx);
-        JS_DestroyRuntime(_rt);
         _cx = NULL;
-        _rt = NULL;
     }
 
     // Start the engine. Added in SpiderMonkey v25
@@ -619,13 +657,14 @@ void ScriptingCore::createGlobalContext() {
     _cx = JS_NewContext(32 * 1024);
 
     JS_SetGCParameter(_cx, JSGCParamKey::JSGC_MAX_BYTES, 0xffffffff);
-    JS_SetGCParameter(_cx, JSGCParamKey::JSGC_MODE, JSGC_MODE_COMPARTMENT);
+    JS_SetGCParameter(_cx, JSGCParamKey::JSGC_MODE, JSGC_MODE_ZONE);
 
-    JS_SetTrustedPrincipals(_cx, &shellTrustedPrincipals);
-    JS_SetSecurityCallbacks(_cx, &securityCallbacks);
+    JS_SetTrustedPrincipals(_cx, &ShellPrincipals::fullyTrusted);
+    JS_SetSecurityCallbacks(_cx, &ShellPrincipals::securityCallbacks);
     JS_SetNativeStackQuota(_cx, JSB_MAX_STACK_QUOTA);
 
-    JS::ContextOptionsRef(_cx).setBaseline(enableBaseline)
+    JS::ContextOptionsRef(_cx)
+    .setBaseline(true)
     .setIon(true)
     .setAsmJS(true)
     .setWasm(true)
@@ -636,16 +675,16 @@ void ScriptingCore::createGlobalContext() {
 //    JS::RuntimeOptionsRef(_rt).setIon(true);
 //    JS::RuntimeOptionsRef(_rt).setBaseline(true);
 
-    JS_SetErrorReporter(_cx, ScriptingCore::reportError);
+//cjh    JS_SetErrorReporter(_cx, ScriptingCore::reportError);
 #if defined(JS_GC_ZEAL) && defined(DEBUG)
     JS_SetGCZeal(this->_cx, 2, JS_DEFAULT_ZEAL_FREQ);
 #endif
 
-    _global = new (std::nothrow) JS::PersistentRootedObject(_rt, NewGlobalObject(_cx));
+    _global = new (std::nothrow) JS::PersistentRootedObject(_cx, NewGlobalObject(_cx));
     JS::RootedObject global(_cx, _global->get());
 
     // Removed in Firefox v34
-    js::SetDefaultObjectForContext(_cx, global);
+//cjh    js::SetDefaultObjectForContext(_cx, global);
 
     JSAutoCompartment ac(_cx, _global->get());
 
@@ -718,7 +757,13 @@ JS::PersistentRootedScript* ScriptingCore::compileScript(const std::string& path
         Data data = futil->getDataFromFile(byteCodePath);
         if (!data.isNull())
         {
-            *script = JS_DecodeScript(cx, data.getBytes(), static_cast<uint32_t>(data.getSize()), nullptr);
+            JS::TranscodeBuffer buf;
+            if (!buf.append(data.getBytes(), data.getSize()))
+            {
+                JS_ReportOutOfMemory(cx);
+                return nullptr;
+            }
+            JS::DecodeScript(cx, buf, script);
         }
         
         if (*script) {
@@ -746,7 +791,7 @@ JS::PersistentRootedScript* ScriptingCore::compileScript(const std::string& path
             ok = JS::Compile(cx, obj, op, jsFileContent.c_str(), jsFileContent.size(), &(*script));
         }
 #else
-        ok = JS::Compile(cx, obj, op, fullPath.c_str(), &(*script));
+        ok = JS::Compile(cx, op, fullPath.c_str(), script);
 #endif
         if (ok) {
             compileSucceed = true;
@@ -816,7 +861,7 @@ bool ScriptingCore::runScript(const std::string& path, JS::HandleObject global, 
     if (script) {
         JS::RootedValue rval(cx);
         JSAutoCompartment ac(cx, global);
-        evaluatedOK = JS_ExecuteScript(cx, global, *script, &rval);
+        evaluatedOK = JS_ExecuteScript(cx, *script, &rval);
         if (false == evaluatedOK) {
             cocos2d::log("Evaluating %s failed (evaluatedOK == JS_FALSE)", path.c_str());
             //cjh JS_ReportPendingException(cx);
@@ -845,7 +890,7 @@ bool ScriptingCore::requireScript(const char *path, JS::HandleObject global, JSC
     if (script)
     {
         JSAutoCompartment ac(cx, global);
-        evaluatedOK = JS_ExecuteScript(cx, global, (*script), jsvalRet);
+        evaluatedOK = JS_ExecuteScript(cx, (*script), jsvalRet);
         if (false == evaluatedOK)
         {
             cocos2d::log("(evaluatedOK == JS_FALSE)");
@@ -911,15 +956,10 @@ void ScriptingCore::cleanup()
         JS_DestroyContext(_cx);
         _cx = NULL;
     }
-    if (_rt)
-    {
-        JS_DestroyRuntime(_rt);
-        _rt = NULL;
-    }
     
     for (auto iter = _js_global_type_map.begin(); iter != _js_global_type_map.end(); ++iter)
     {
-        free(iter->second->jsclass);
+        free((void*)iter->second->jsclass);
         free(iter->second);
     }
     _js_global_type_map.clear();
@@ -1132,7 +1172,7 @@ void ScriptingCore::removeScriptObjectByObject(Ref* pObj)
     if (proxy)
     {
         JSContext *cx = getGlobalContext();
-        JS::RemoveObjectRoot(cx, &proxy->obj);
+//cjh        JS::RemoveObjectRoot(cx, &proxy->obj);
         jsb_remove_proxy(proxy);
     }
 }
@@ -1781,7 +1821,7 @@ void ScriptingCore::rootObject(Ref* ref)
     auto proxy = jsb_get_native_proxy(ref);
     if (proxy) {
         JSContext *cx = getGlobalContext();
-        JS::AddNamedObjectRoot(cx, &proxy->obj, typeid(*ref).name());
+//cjh        JS::AddNamedObjectRoot(cx, &proxy->obj, typeid(*ref).name());
         ref->_rooted = true;
     }
     else CCLOG("rootObject: BUG. native not found: %p (%s)",  ref, typeid(*ref).name());
@@ -1792,7 +1832,7 @@ void ScriptingCore::unrootObject(Ref* ref)
     auto proxy = jsb_get_native_proxy(ref);
     if (proxy) {
         JSContext *cx = getGlobalContext();
-        JS::RemoveObjectRoot(cx, &proxy->obj);
+//cjh        JS::RemoveObjectRoot(cx, &proxy->obj);
         ref->_rooted = false;
     }
     else CCLOG("unrootObject: BUG. native not found: %p (%s)",  ref, typeid(*ref).name());
@@ -1804,7 +1844,7 @@ void ScriptingCore::removeObjectProxy(Ref* obj)
     if (proxy)
     {
 #if ! CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-        JS::RemoveObjectRoot(_cx, &proxy->obj);
+//cjh        JS::RemoveObjectRoot(_cx, &proxy->obj);
 #endif
         // remove the proxy here, since this was a "stack" object, not heap
         // when js_finalize will be called, it will fail, but
@@ -1816,7 +1856,6 @@ void ScriptingCore::removeObjectProxy(Ref* obj)
 void ScriptingCore::garbageCollect()
 {
 #if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
-    auto runtime = JS_GetRuntime(_cx);
     // twice: yep, call it twice since this is a generational GC
     // and we want to collect as much as possible when this is being called
     // from replaceScene().
@@ -2081,7 +2120,7 @@ void ScriptingCore::enableDebugger(unsigned int port)
     {
         JSAutoCompartment ac0(_cx, _global->get());
 
-        JS_SetDebugMode(_cx, true);
+//cjh        JS_SetDebugMode(_cx, true);
 
         _debugGlobal = new (std::nothrow) JS::PersistentRootedObject(_cx, NewGlobalObject(_cx, true));
         // Adds the debugger object to root, otherwise it may be collected by GC.
@@ -2120,20 +2159,27 @@ void ScriptingCore::enableDebugger(unsigned int port)
     }
 }
 
+static void
+SetStandardCompartmentOptions(JS::CompartmentOptions& options)
+{
+    options.behaviors().setVersion(JSVERSION_LATEST);
+    options.creationOptions().setSharedMemoryAndAtomicsEnabled(true);
+}
+
 JSObject* NewGlobalObject(JSContext* cx, bool debug)
 {
     JS::CompartmentOptions options;
-    options.setVersion(JSVERSION_LATEST);
+    SetStandardCompartmentOptions(options);
 
-    JS::RootedObject glob(cx, JS_NewGlobalObject(cx, &global_class, &shellTrustedPrincipals, JS::DontFireOnNewGlobalHook, options));
+    JS::RootedObject glob(cx, JS_NewGlobalObject(cx, &global_class, &ShellPrincipals::fullyTrusted, JS::DontFireOnNewGlobalHook, options));
     if (!glob) {
         return nullptr;
     }
     JSAutoCompartment ac(cx, glob);
     bool ok = true;
     ok = JS_InitStandardClasses(cx, glob);
-    if (ok)
-        JS_InitReflect(cx, glob);
+//cjh    if (ok)
+//        JS_InitReflect(cx, glob);
     if (ok && debug)
         ok = JS_DefineDebuggerObject(cx, glob);
     if (!ok)
@@ -2156,7 +2202,7 @@ bool jsb_set_reserved_slot(JSObject *obj, uint32_t idx, JS::Value value)
     return true;
 }
 
-bool jsb_get_reserved_slot(JSObject *obj, uint32_t idx, jsval& ret)
+bool jsb_get_reserved_slot(JSObject *obj, uint32_t idx, JS::Value& ret)
 {
     const JSClass *klass = JS_GetClass(obj);
     unsigned int slots = JSCLASS_RESERVED_SLOTS(klass);
@@ -2295,7 +2341,7 @@ JSObject* jsb_create_weak_jsobject(JSContext *cx, void *native, js_type_class_t 
     js_add_FinalizeHook(cx, jsObj, false);
 
 #if ! CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-    JS::AddNamedObjectRoot(cx, &proxy->obj, debug);
+//cjh    JS::AddNamedObjectRoot(cx, &proxy->obj, debug);
 #else
     CC_UNUSED_PARAM(proxy);
 #if COCOS2D_DEBUG > 1
@@ -2331,7 +2377,7 @@ JSObject* jsb_ref_get_or_create_jsobject(JSContext *cx, cocos2d::Ref *ref, js_ty
 #endif // COCOS2D_DEBUG
 #else
     // don't auto-release, don't retain.
-    JS::AddNamedObjectRoot(cx, &newproxy->obj, debug);
+//cjh    JS::AddNamedObjectRoot(cx, &newproxy->obj, debug);
 #endif // CC_ENABLE_GC_FOR_NATIVE_OBJECTS
 
     return jsObj;
@@ -2371,7 +2417,7 @@ JSObject* jsb_get_or_create_weak_jsobject(JSContext *cx, void *native, js_type_c
     JS_SetProperty(cx, jsObj, "__cppCreated", flagVal);
 
 #if ! CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-    JS::AddNamedObjectRoot(cx, &proxy->obj, debug);
+//cjh    JS::AddNamedObjectRoot(cx, &proxy->obj, debug);
 #else
     js_add_FinalizeHook(cx, jsObj, false);
 #if COCOS2D_DEBUG > 1
@@ -2399,7 +2445,7 @@ void jsb_ref_init(JSContext* cx, JS::Heap<JSObject*> *obj, Ref* ref, const char*
 #else
     // autorelease it
     ref->autorelease();
-    JS::AddNamedObjectRoot(cx, obj, debug);
+//cjh    JS::AddNamedObjectRoot(cx, obj, debug);
 #endif
 }
 
@@ -2417,7 +2463,7 @@ void jsb_ref_autoreleased_init(JSContext* cx, JS::Heap<JSObject*> *obj, Ref* ref
 #endif // COCOS2D_DEBUG
 #else
     // don't autorelease it, since it is already autoreleased
-    JS::AddNamedObjectRoot(cx, obj, debug);
+//cjh    JS::AddNamedObjectRoot(cx, obj, debug);
 #endif
 }
 
@@ -2429,7 +2475,7 @@ void jsb_ref_rebind(JSContext* cx, JS::HandleObject jsobj, js_proxy_t *proxy, co
     // and the jsobj won't have any chance to release it in the future
     oldRef->release();
 #else
-    JS::RemoveObjectRoot(cx, &proxy->obj);
+//cjh    JS::RemoveObjectRoot(cx, &proxy->obj);
 #endif
     jsb_remove_proxy(proxy);
 
@@ -2439,7 +2485,7 @@ void jsb_ref_rebind(JSContext* cx, JS::HandleObject jsobj, js_proxy_t *proxy, co
 #if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
     CC_UNUSED_PARAM(newProxy);
 #else
-    JS::AddNamedObjectRoot(cx, &newProxy->obj, debug);
+//cjh    JS::AddNamedObjectRoot(cx, &newProxy->obj, debug);
 #endif
 }
 

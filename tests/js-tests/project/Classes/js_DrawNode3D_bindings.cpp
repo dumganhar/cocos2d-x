@@ -327,7 +327,7 @@ bool js_cocos2dx_DrawNode3D_getBlendFunc(JSContext *cx, uint32_t argc, JS::Value
     JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_DrawNode3D_getBlendFunc : Invalid Native Object");
     if (argc == 0) {
         const cocos2d::BlendFunc& ret = cobj->getBlendFunc();
-        JS::Value jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         jsret = blendfunc_to_jsval(cx, ret);
         args.rval().set(jsret);
         return true;
@@ -427,7 +427,7 @@ bool js_cocos2dx_DrawNode3D_init(JSContext *cx, uint32_t argc, JS::Value *vp)
     JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_DrawNode3D_init : Invalid Native Object");
     if (argc == 0) {
         bool ret = cobj->init();
-        JS::Value jsret = JSVAL_NULL;
+        JS::Value jsret = JS::NullValue();
         jsret = JS::BooleanValue(ret);
         args.rval().set(jsret);
         return true;
@@ -493,9 +493,9 @@ bool js_cocos2dx_DrawNode3D_constructor(JSContext *cx, uint32_t argc, JS::Value 
 
     // link the native object with the javascript object
     JS::RootedObject jsobj(cx, jsb_ref_create_jsobject(cx, cobj, typeClass, "cocos2d::DrawNode3D"));
-    args.rval().set(OBJECT_TO_JSVAL(jsobj));
+    args.rval().set(JS::ObjectValue(*jsobj));
     if (JS_HasProperty(cx, jsobj, "_ctor", &ok) && ok)
-        ScriptingCore::getInstance()->executeFunctionWithOwner(OBJECT_TO_JSVAL(jsobj), "_ctor", args);
+        ScriptingCore::getInstance()->executeFunctionWithOwner(JS::ObjectValue(*jsobj), "_ctor", args);
     return true;
 }
 
