@@ -1,7 +1,5 @@
 /*
- * Created by Rolando Abarca on 3/14/12.
- * Copyright (c) 2012 Zynga Inc. All rights reserved.
- * Copyright (c) 2013-2017 Chukong Technologies Inc.
+ * Copyright (c) 2017 Chukong Technologies Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +27,6 @@
 
 #include "jsapi.h"
 #include "jsfriendapi.h"
-
-#define ENGINE_VERSION "Cocos2d-JS v3.15"
 
 /**
  * @addtogroup jsb
