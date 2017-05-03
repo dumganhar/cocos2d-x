@@ -9,7 +9,7 @@
 #ifndef jsb_director_hpp
 #define jsb_director_hpp
 
-#include "SeApi.h"
+
 
 bool jsb_register_Director();
 

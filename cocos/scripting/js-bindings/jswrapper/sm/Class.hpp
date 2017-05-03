@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config.hpp"
+#include "../config.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
@@ -16,25 +16,31 @@ namespace se {
         Class();
         ~Class();
 
-        bool init(JSContext* cx, const std::string& className, Object* obj, Object* parentProto, JSNative ctor);
+        static Class* create(const std::string& className, Object* obj, Object* parentProto, JSNative ctor);
 
-        Object* installAndReturnProto();
+        bool init(const std::string& clsName, Object* obj, Object* parentProto, JSNative ctor);
 
-        void registerFunction(const char* name, JSNative func);
-        void registerProperty(const char* name, JSNative getter, JSNative setter);
-        void registerStaticFunction(const char* name, JSNative func);
-        void registerStaticProperty(const char* name, JSNative getter, JSNative setter);
-        void registerFinalizeFunction(JSFinalizeOp func);
+        bool install();
+        Object* getProto();
 
-        JSObject* _instantiate(const JS::CallArgs& args);
+        bool defineFunction(const char *name, JSNative func);
+        bool defineProperty(const char *name, JSNative getter, JSNative setter);
+        bool defineStaticFunction(const char *name, JSNative func);
+        bool defineStaticProperty(const char *name, JSNative getter, JSNative setter);
+        bool defineFinalizedFunction(JSFinalizeOp func);
+
+        static JSObject* _createJSObject(const std::string &clsName);
 
     private:
+
+        static void setContext(JSContext* cx);
+        static void cleanup();
+
         std::string _name;
         Object* _parent;
         Object* _proto;
         Object* _parentProto;
 
-        JSContext* _cx;
         JSNative _ctor;
 
         JSClass _jsCls;
@@ -45,6 +51,8 @@ namespace se {
         std::vector<JSPropertySpec> _properties;
         std::vector<JSPropertySpec> _staticProperties;
         JSFinalizeOp _finalizeOp;
+
+        friend class ScriptEngine;
     };
 
 } // namespace se {

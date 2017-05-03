@@ -9,6 +9,10 @@
 #ifndef jsb_sprite_hpp
 #define jsb_sprite_hpp
 
-#include <stdio.h>
+#include "SeApi.h"
+
+extern se::Object* __jsb_Sprite_proto;
+
+bool jsb_register_Sprite();
 
 #endif /* jsb_sprite_hpp */

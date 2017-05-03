@@ -25,18 +25,54 @@
 
 #include <iostream>
 
-int main_helloworld(int argc, char** argv)
+// --- Sample print function. Prints all arguments.
+
+JSWRAPPER_FUNCTION( print )
+    // --- JSWrapperArguments args; is already defined
+
+    for ( int i=0; i < args.count(); ++i )
+    {
+        JSWrapperData data=args.at( i );
+
+        if ( data.type() == JSWrapperData::Undefined )
+            std::cout << "Undefined ";
+        else
+        if ( data.type() == JSWrapperData::Null )
+            std::cout << "Null ";
+        else            
+        if ( data.type() == JSWrapperData::Number )
+            std::cout << data.toNumber() << " ";
+        else
+        if ( data.type() == JSWrapperData::String )
+            std::cout << data.toString() << " ";
+        else
+        if ( data.type() == JSWrapperData::Boolean )
+            std::cout << data.toBoolean() << " ";
+        else
+        if ( data.type() == JSWrapperData::Object )
+            std::cout << "[Object object] ";        
+    }
+ 
+    std::cout << std::endl;
+
+    JSWrapperData data;
+    JSWRAPPER_FUNCTION_SETRC( data )
+
+JSWRAPPER_FUNCTION_END
+
+int main_registerfunction(int argc, char** argv)
 {
     JSWrapper jsWrapper( argv[0] );
-    if ( !jsWrapper.isValid()) {
+    if ( !jsWrapper.isValid() ) {
         printf("Unable to Initialize JavaScript Wrapper.\n");
         return 1;
     }
 
-    JSWrapperData data;
-
-    jsWrapper.executeBuffer( "'Hello' + ', World!'", &data );
-    std::cout << data.toString() << std::endl;
+    JSWrapperObject *global=jsWrapper.globalObject(); // Get the global object
+    global->registerFunction( "print", print );
     
+    jsWrapper.executeBuffer( "print( \"'Hello' + ', World!'\" )" );
+    
+    delete global;
     return 0;
 }

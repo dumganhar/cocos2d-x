@@ -34,7 +34,7 @@ JSWrapperObject::JSWrapperObject( Isolate *isolate, Local<Object> obj ) : m_isol
 {
 }
 
-JSWrapperObject::JSWrapperObject( JSWrapperObject *object ) : m_isolate( object->m_isolate ), m_obj( object->m_isolate, object->m_obj.Get( m_isolate ) )
+JSWrapperObject::JSWrapperObject( JSWrapperObject *object ) : m_isolate( object->m_isolate ), m_obj( object->m_isolate, object->m_obj.Get( m_isolate ))
 {
 }
 
@@ -55,24 +55,24 @@ bool JSWrapperObject::get(const char *name, JSWrapperData *data )
 
     if (data )
     {
-        if (result->IsNumber() )
-            data->setNumber( result->ToNumber()->Value() );
+        if (result->IsNumber())
+            data->setNumber( result->ToNumber()->Value());
         else
-        if (result->IsString() )
+        if (result->IsString())
         {
             String::Utf8Value utf8( result );
             data->setString( *utf8 );
         } else
-        if (result->IsBoolean() )
-            data->setBoolean( result->ToBoolean()->Value() );
+        if (result->IsBoolean())
+            data->setBoolean( result->ToBoolean()->Value());
         else                
-        if (result->IsObject() )
-            data->setObject( new JSWrapperObject( m_isolate, result->ToObject() ) );
+        if (result->IsObject())
+            data->setObject( new JSWrapperObject( m_isolate, result->ToObject()) );
         else if (result->IsFunction()) {
             printf("I'm function\n");
         }
         else
-        if (result->IsNull() )
+        if (result->IsNull())
             data->setNull();
         else data->setUndefined();
     }
@@ -86,7 +86,7 @@ void JSWrapperObject::set(const char *name, JSWrapperData& data )
 
     if (data.getType() == JSWrapperData::Number )
     {
-        Local<Value> value=Number::New( m_isolate, data.toNumber() );
+        Local<Value> value=Number::New( m_isolate, data.toNumber());
         m_obj.Get( m_isolate )->Set( nameValue, value );
     } else
     if (data.getType() == JSWrapperData::String )
@@ -96,17 +96,17 @@ void JSWrapperObject::set(const char *name, JSWrapperData& data )
     } else
     if (data.getType() == JSWrapperData::Boolean )
     {
-        Local<Value> value=Boolean::New( m_isolate, data.toBoolean() );
+        Local<Value> value=Boolean::New( m_isolate, data.toBoolean());
         m_obj.Get( m_isolate )->Set( nameValue, value );
     } else
     if (data.getType() == JSWrapperData::Object )
     {
-        m_obj.Get( m_isolate )->Set( nameValue, data.object()->m_obj.Get( m_isolate ) );
+        m_obj.Get( m_isolate )->Set( nameValue, data.object()->m_obj.Get( m_isolate ));
     } else
     if (data.getType() == JSWrapperData::Null )
     {
-        m_obj.Get( m_isolate )->Set( nameValue, v8::Null( m_isolate ) );        
-    } else m_obj.Get( m_isolate )->Set( nameValue, v8::Undefined( m_isolate ) );
+        m_obj.Get( m_isolate )->Set( nameValue, v8::Null( m_isolate ));        
+    } else m_obj.Get( m_isolate )->Set( nameValue, v8::Undefined( m_isolate ));
 }
 
 // --- Call Function
@@ -123,21 +123,21 @@ bool JSWrapperObject::call( ValueArray *args, JSWrapperObject *object, JSWrapper
 
     if (data )
     {
-        if (result->IsNumber() )
-            data->setNumber( result->ToNumber()->Value() );
+        if (result->IsNumber())
+            data->setNumber( result->ToNumber()->Value());
         else
-        if (result->IsString() )
+        if (result->IsString())
         {
             String::Utf8Value utf8( result );
             data->setString( *utf8 );
         } else
-        if (result->IsBoolean() )
-            data->setBoolean( result->ToBoolean()->Value() );
+        if (result->IsBoolean())
+            data->setBoolean( result->ToBoolean()->Value());
         else                
-        if (result->IsObject() )
-            data->setObject( new JSWrapperObject( m_isolate, result->ToObject() ) );
+        if (result->IsObject())
+            data->setObject( new JSWrapperObject( m_isolate, result->ToObject()) );
         else
-        if (result->IsNull() )
+        if (result->IsNull())
             data->setNull();
         else data->setUndefined();
     }
@@ -147,15 +147,15 @@ bool JSWrapperObject::call( ValueArray *args, JSWrapperObject *object, JSWrapper
 
 // --- Register Function
 
-bool JSWrapperObject::registerFunction(const char *funcName, void (*func) (const FunctionCallbackInfo<Value>& args ) )
+bool JSWrapperObject::registerFunction(const char *funcName, void (*func) (const FunctionCallbackInfo<Value>& args ))
 {
-    m_obj.Get( m_isolate )->Set( String::NewFromUtf8( m_isolate, funcName ), FunctionTemplate::New( m_isolate, func )->GetFunction() );
+    m_obj.Get( m_isolate )->Set( String::NewFromUtf8( m_isolate, funcName ), FunctionTemplate::New( m_isolate, func )->GetFunction());
     return true;
 }
 
 // --- Classes
 
-JSWrapperClass *JSWrapperObject::createClass(const char *className, void (*constructor) (const FunctionCallbackInfo<Value>& args ) )
+JSWrapperClass *JSWrapperObject::createClass(const char *className, void (*constructor) (const FunctionCallbackInfo<Value>& args ))
 {
     JSWrapperClass *wrapperClass=new JSWrapperClass( m_isolate, className, this, constructor );
 
@@ -166,7 +166,7 @@ JSWrapperClass *JSWrapperObject::createClass(const char *className, void (*const
 
 void JSWrapperObject::getArrayLength( unsigned int *length )
 {
-    int len = m_obj.Get( m_isolate )->Get( String::NewFromUtf8( m_isolate, "length") )->ToObject()->Int32Value();
+    int len = m_obj.Get( m_isolate )->Get( String::NewFromUtf8( m_isolate, "length"))->ToObject()->Int32Value();
     *length=len;
 }
 
@@ -176,21 +176,21 @@ void JSWrapperObject::getArrayElement( unsigned int index, JSWrapperData *data )
 
     if (data )
     {
-        if (result->IsNumber() )
-            data->setNumber( result->ToNumber()->Value() );
+        if (result->IsNumber())
+            data->setNumber( result->ToNumber()->Value());
         else
-        if (result->IsString() )
+        if (result->IsString())
         {
             String::Utf8Value utf8( result );
             data->setString( *utf8 );
         } else
-        if (result->IsBoolean() )
-            data->setBoolean( result->ToBoolean()->Value() );
+        if (result->IsBoolean())
+            data->setBoolean( result->ToBoolean()->Value());
         else                
-        if (result->IsObject() )
-            data->setObject( new JSWrapperObject( m_isolate, result->ToObject() ) );
+        if (result->IsObject())
+            data->setObject( new JSWrapperObject( m_isolate, result->ToObject()) );
         else
-        if (result->IsNull() )
+        if (result->IsNull())
             data->setNull();
         else data->setUndefined();
     }    
@@ -204,7 +204,7 @@ void JSWrapperObject::getAsFloat32Array( float **ptr, unsigned int *length )
 
     Local<Float32Array> myarr = m_obj.Get( m_isolate ).As<Float32Array>();
     len=myarr->Length();
-    pt=(float *) ( (char *) myarr->Buffer()->GetContents().Data() +  myarr->ByteOffset() );
+    pt=(float *) ( (char *) myarr->Buffer()->GetContents().Data() +  myarr->ByteOffset());
 
     *length=len;
     *ptr=pt;
@@ -265,10 +265,10 @@ void JSWrapperObject::fillArgs( std::vector<Local<Value>> *vector, ValueArray *a
     {
         JSWrapperData data=args->at( i );
 
-        switch( data.getType() )
+        switch( data.getType())
         {
             case JSWrapperData::Number:
-                vector->push_back( v8::Number::New( m_isolate, data.toNumber() ) );
+                vector->push_back( v8::Number::New( m_isolate, data.toNumber()) );
             break;
 
             case JSWrapperData::String:
@@ -279,19 +279,19 @@ void JSWrapperObject::fillArgs( std::vector<Local<Value>> *vector, ValueArray *a
             break;            
 
             case JSWrapperData::Boolean:
-                vector->push_back( v8::Boolean::New( m_isolate, data.toBoolean() ) );
+                vector->push_back( v8::Boolean::New( m_isolate, data.toBoolean()) );
             break;   
 
             case JSWrapperData::Object:
-                vector->push_back( data.object()->m_obj.Get( m_isolate ) );
+                vector->push_back( data.object()->m_obj.Get( m_isolate ));
             break;
 
             case JSWrapperData::Null:
-                vector->push_back( v8::Null( m_isolate ) );
+                vector->push_back( v8::Null( m_isolate ));
             break;    
 
             case JSWrapperData::Undefined:
-                vector->push_back( v8::Undefined( m_isolate ) );
+                vector->push_back( v8::Undefined( m_isolate ));
             break;               
         }
     }

@@ -1,82 +1,89 @@
 #pragma once
 
-#include "config.hpp"
+#include "../config.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
 #include "Base.h"
-#include "Value.hpp"
+#include "../Value.hpp"
+#include "../Ref.hpp"
 
 namespace se {
 
-    class Class;
-
-    class Object
+    class Object : public Ref
     {
     public:
-        Object(JSContext* cx, JSObject* obj);
-        Object(Object* obj);
-        ~Object();
+        Object(JSObject* obj, bool rooted);
+        virtual ~Object();
+
+        static Object* createPlainObject();
+
+        static Object* createObject(const char* clsName, bool rooted);
+        static Object* getObjectWithPtr(void* ptr);
+        static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
 
         // --- Getter/Setter
-        bool get(const char *name,  Value *data );
-        void set(const char *name,  Value& data );	
+        bool getProperty(const char* name, Value* data);
+        void setProperty(const char* name, const Value& v);
 
-        JS::Value* getSMValue() { return m_rawValue; }
+        JSObject* _getJSObject() const;
 
         // --- Function
-        bool isFunction() { return JS_ObjectIsFunction( m_cx, &m_rawValue->toObject() ); }
+        bool isFunction() const;
         bool call(const ValueArray& args, Object* thisObject, Value* rval = nullptr);
 
-        bool registerFunction(const char *funcName, JSNative func, int minArgs=0 );
-
-
-        // ---
-        Object *copy();
+        bool defineFunction(const char *funcName, JSNative func, int minArgs = 0);
 
         // --- TypedArrays
-        bool isTypedArray() { return JS_IsTypedArrayObject( &m_rawValue->toObject() ); }
-        void getAsUint8Array( unsigned char **ptr, unsigned int *length ) { 
-            uint8_t *pt; uint32_t len;
-            bool isSharedMemory = false;
-            JS_GetObjectAsUint8Array(  &m_rawValue->toObject(), &len, &isSharedMemory, &pt );
-            *ptr=pt; *length=len;
-        }
-        void getAsUint16Array( unsigned short **ptr, unsigned int *length ) { 
-            unsigned short *pt; unsigned int len;
-            bool isSharedMemory = false;
-            JS_GetObjectAsUint16Array(  &m_rawValue->toObject(), &len, &isSharedMemory, &pt );
-            *ptr=pt; *length=len;
-        }	
-        void getAsUint32Array( unsigned int **ptr, unsigned int *length ) { 
-            unsigned int *pt; unsigned int len;
-            bool isSharedMemory = false;
-            JS_GetObjectAsUint32Array(  &m_rawValue->toObject(), &len, &isSharedMemory, &pt );
-            *ptr=pt; *length=len;
-        }		
-        void getAsFloat32Array( float **ptr, unsigned int *length ) { 
-            float *pt; unsigned int len;
-            bool isSharedMemory = false;
-            JS_GetObjectAsFloat32Array(  &m_rawValue->toObject(), &len, &isSharedMemory, &pt );
-            *ptr=pt; *length=len;
-        }	
+        bool isTypedArray() const;
+        void getAsUint8Array(unsigned char **ptr, unsigned int *length);
+        void getAsUint16Array(unsigned short **ptr, unsigned int *length);
+        void getAsUint32Array(unsigned int **ptr, unsigned int *length);
+        void getAsFloat32Array(float **ptr, unsigned int *length);
 
         // --- Arrays
-        bool isArray() {
-            JS::RootedValue value( m_cx, *m_rawValue );
-            bool isArray = false;
-            return JS_IsArrayObject( m_cx, value, &isArray ) && isArray;
-        }
-        void getArrayLength( unsigned int *length );
-        void getArrayElement( unsigned int index, Value *data );
+        bool isArray() const;
+        void getArrayLength(unsigned int *length);
+        void getArrayElement(unsigned int index, Value *data);
 
         // --- Private
-        void *getPrivate() { return JS_GetPrivate( &m_rawValue->toObject() ); }
+        void setPrivateData(void* data);
+        void* getPrivateData();
+
+        typedef void (*DestroyNotify)(JS::HandleObject thing, void *data);
+
+
+        void switchToRooted(DestroyNotify notify = nullptr, void *data = nullptr);
+        void switchToUnrooted();
+        bool isRooted() const;
 
     private:
-        JSContext               *m_cx;
-        JS::Value               *m_rawValue;
+        static void setContext(JSContext* cx);
+
+        void putToRoot(JSObject* thing, DestroyNotify notify = nullptr, void* data = nullptr);
+        void putToHeap(JSObject* thing);
+        void debug(const char *what);
+        void teardownRooting();
+        void invalidate();
+        void reset();
+
+        void trace(JSTracer* tracer, void* data);
+        bool updateAfterGC(void* data);
+
+        bool _isRooted;  /* wrapper is in rooted mode */
+        bool _hasWeakRef;  /* we have a weak reference to the GjsContext */
+
+        JS::Heap<JSObject*> _heap;  /* should be untouched if in rooted mode */
+        JS::PersistentRootedObject* _root;  /* should be null if not in rooted mode */
+
+        DestroyNotify m_notify;
+        void* m_data;
+
+        friend class ScriptEngine;
     };
+
+
+    extern std::unordered_map<void* /*native*/, Object* /*jsobj*/> __nativePtrToObjectMap;
 
 } // namespace se {
 

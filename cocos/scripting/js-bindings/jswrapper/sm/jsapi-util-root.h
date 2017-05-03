@@ -30,11 +30,13 @@
 #include "js/Proxy.h"  /* For jsapi-constructor-proxy */
 #include "assert.h"
 
+namespace se {
+
 /* jsapi-util-root.h - Utilities for dealing with the lifetime and ownership of
  * JS Objects and other things that can be collected by the garbage collector
  * (collectively called "GC things.")
  *
- * GjsMaybeOwned<T> is a multi-purpose wrapper for a GC thing of type T. You can
+ * MaybeOwned<T> is a multi-purpose wrapper for a GC thing of type T. You can
  * wrap a thing in one of three ways:
  *
  * - trace the thing (tie it to the lifetime of another GC thing),
@@ -43,18 +45,18 @@
  *   possibly be finalized out from under you).
  *
  * To trace or maintain a weak pointer, simply assign a thing of type T to the
- * GjsMaybeOwned wrapper. For tracing, you must call the trace() method when
+ * MaybeOwned wrapper. For tracing, you must call the trace() method when
  * your other GC thing is traced.
  *
  * Rooting requires a JSContext so can't just assign a thing of type T. Instead
  * you need to call the root() method to set up rooting.
  *
- * If the thing is rooted, it will be unrooted either when the GjsMaybeOwned is
+ * If the thing is rooted, it will be unrooted either when the MaybeOwned is
  * destroyed, or when the JSContext is destroyed. In the latter case, you can
  * get an optional notification by passing a callback to root().
  *
  * To switch between one of the three modes, you must first call reset(). This
- * drops all references to any GC thing and leaves the GjsMaybeOwned in the
+ * drops all references to any GC thing and leaves the MaybeOwned in the
  * same state as if it had just been constructed.
  */
 
@@ -64,7 +66,7 @@
  * complain if it's used somewhere but not instantiated here.
  */
 template<typename T>
-struct GjsHeapOperation {
+struct HeapOperation {
     static void trace(JSTracer    *tracer,
                       JS::Heap<T> *thing,
                       const char  *name);
@@ -73,7 +75,7 @@ struct GjsHeapOperation {
 };
 
 template<>
-struct GjsHeapOperation<JSObject *> {
+struct HeapOperation<JSObject *> {
     static void
     trace(JSTracer             *tracer,
           JS::Heap<JSObject *> *thing,
@@ -91,7 +93,7 @@ struct GjsHeapOperation<JSObject *> {
 };
 
 template<>
-struct GjsHeapOperation<JS::Value> {
+struct HeapOperation<JS::Value> {
     static void
     trace(JSTracer            *tracer,
           JS::Heap<JS::Value> *thing,
@@ -101,13 +103,13 @@ struct GjsHeapOperation<JS::Value> {
     }
 };
 
-/* GjsMaybeOwned is intended only for use in heap allocation. Do not allocate it
+/* MaybeOwned is intended only for use in heap allocation. Do not allocate it
  * on the stack, and do not allocate any instances of structures that have it as
  * a member on the stack either. Unfortunately we cannot enforce this at compile
  * time with a private constructor; that would prevent the intended usage as a
  * member of a heap-allocated struct. */
 template<typename T>
-class GjsMaybeOwned {
+class MaybeOwned {
 public:
     typedef void (*DestroyNotify)(JS::Handle<T> thing, void *data);
 
@@ -126,21 +128,21 @@ private:
     inline void
     debug(const char *what)
     {
-        printf("GjsMaybeOwned %p %s\n", this,
+        printf("MaybeOwned %p %s\n", this,
                             what);
     }
 
     static void
     on_context_destroy(void    *data)
     {
-        auto self = static_cast<GjsMaybeOwned<T> *>(data);
+        auto self = static_cast<MaybeOwned<T> *>(data);
         self->invalidate();
     }
 
     void
     teardown_rooting(void)
     {
-        debug("teardown_rooting()");
+        debug("teardownRooting()");
         assert(m_rooted);
 
         delete m_root;
@@ -150,7 +152,7 @@ private:
         if (!m_has_weakref)
             return;
 
-//cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(m_cx));
+//cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(_cx));
 //        g_object_weak_unref(G_OBJECT(gjs_cx), on_context_destroy, this);
         m_has_weakref = false;
     }
@@ -176,7 +178,7 @@ private:
     }
 
 public:
-    GjsMaybeOwned(void) :
+    MaybeOwned(void) :
         m_rooted(false),
         m_has_weakref(false),
         m_cx(nullptr),
@@ -187,7 +189,7 @@ public:
         debug("created");
     }
 
-    ~GjsMaybeOwned(void)
+    ~MaybeOwned(void)
     {
         debug("destroyed");
         if (m_rooted)
@@ -195,7 +197,7 @@ public:
     }
 
     /* To access the GC thing, call get(). In many cases you can just use the
-     * GjsMaybeOwned wrapper in place of the GC thing itself due to the implicit
+     * MaybeOwned wrapper in place of the GC thing itself due to the implicit
      * cast operator. But if you want to call methods on the GC thing, for
      * example if it's a JS::Value, you have to use get(). */
     const T
@@ -241,13 +243,13 @@ public:
         m_data = data;
         m_root = new JS::PersistentRooted<T>(m_cx, thing);
 
-//cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(m_cx));
+//cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(_cx));
 //        assert(GJS_IS_CONTEXT(gjs_cx));
 //        g_object_weak_ref(G_OBJECT(gjs_cx), on_context_destroy, this);
         m_has_weakref = true;
     }
 
-    /* You can only assign directly to the GjsMaybeOwned wrapper in the
+    /* You can only assign directly to the MaybeOwned wrapper in the
      * non-rooted case. */
     void
     operator=(const T& thing)
@@ -280,7 +282,7 @@ public:
         assert(!m_rooted);
 
         /* Prevent the thing from being garbage collected while it is in neither
-         * m_heap nor m_root */
+         * _heap nor m_root */
         JSAutoRequest ar(cx);
         JS::Rooted<T> thing(cx, m_heap);
 
@@ -296,7 +298,7 @@ public:
         assert(m_rooted);
 
         /* Prevent the thing from being garbage collected while it is in neither
-         * m_heap nor m_root */
+         * _heap nor m_root */
         JSAutoRequest ar(m_cx);
         JS::Rooted<T> thing(m_cx, *m_root);
 
@@ -313,7 +315,7 @@ public:
     {
         debug("trace()");
         assert(!m_rooted);
-        GjsHeapOperation<T>::trace(tracer, &m_heap, name);
+        HeapOperation<T>::trace(tracer, &m_heap, name);
     }
 
     /* If not tracing, then you must call this method during GC in order to
@@ -322,12 +324,14 @@ public:
     bool
     update_after_gc(void)
     {
-        debug("update_after_gc()");
+        debug("updateAfterGC()");
         assert(!m_rooted);
-        return GjsHeapOperation<T>::update_after_gc(&m_heap);
+        return HeapOperation<T>::update_after_gc(&m_heap);
     }
 
     bool rooted(void) { return m_rooted; }
 };
+
+} // namespace se {
 
 #endif /* GJS_JSAPI_UTIL_ROOT_H */

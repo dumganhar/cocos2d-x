@@ -21,6 +21,7 @@
  */
 
 #include "scripting/js-bindings/manual/ScriptingCore.h"
+#include "scripting/js-bindings/jswrapper/SeApi.h"
 
 #include "cocos2d.h"
 
@@ -50,7 +51,7 @@ ScriptingCore::~ScriptingCore()
 
 void ScriptingCore::retainScriptObject(Ref* owner, Ref* target)
 {
-
+    se::ScriptEngine::getInstance()->_retainScriptObject(owner, target);
 }
 
 void ScriptingCore::rootScriptObject(Ref* target)
@@ -60,7 +61,7 @@ void ScriptingCore::rootScriptObject(Ref* target)
 
 void ScriptingCore::releaseScriptObject(Ref* owner, Ref* target)
 {
-
+    se::ScriptEngine::getInstance()->_releaseScriptObject(owner, target);
 }
 
 void ScriptingCore::unrootScriptObject(Ref* target)

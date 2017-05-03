@@ -20,25 +20,35 @@ namespace se {
             Object
         };
 
+        static Value Null;
+        static Value Undefined;
+
         Value();
-        Value(Type type);
         Value(const Value& v);
         Value(Value&& v);
 
-        Value(bool v);
-        Value(double v);
-        Value(const std::string& v);
-        Value(Object* o);
+        explicit Value(Type type);
+        explicit Value(bool v);
+        explicit Value(double v);
+        explicit Value(const char* v);
+        explicit Value(const std::string& v);
+        explicit Value(Object* o);
 
         ~Value();
 
         Value& operator=(const Value& v);
         Value& operator=(Value&& v);
+        Value& operator=(bool v);
+        Value& operator=(double v);
+        Value& operator=(const char* v);
+        Value& operator=(const std::string& v);
+        Value& operator=(Object* o);
 
         void setUndefined();
         void setNull();
         void setBoolean(bool v);
         void setNumber(double v);
+        void setString(const char* v);
         void setString(const std::string& v);
         void setObject(Object* o);
 
@@ -56,8 +66,8 @@ namespace se {
         inline bool isNull() const { return _type == Type::Null; }
 
     private:
-
-        void reset();
+        
+        void reset(Type type);
 
         Type _type;
 

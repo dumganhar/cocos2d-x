@@ -21,41 +21,22 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __JSWRAPPER_CLASS_V8_HPP
-#define __JSWRAPPER_CLASS_V8_HPP
+#include "jswrapper.hpp"
 
-#include "config.hpp"
+#include <iostream>
 
-#ifdef __JSWRAPPER_V8
-
-#include "include/libplatform/libplatform.h"
-#include "include/v8.h"
-
-class JSWrapperClass
+int main_helloworld(int argc, char** argv)
 {
+    JSWrapper jsWrapper( argv[0] );
+    if ( !jsWrapper.isValid() ) {
+        printf("Unable to Initialize JavaScript Wrapper.\n");
+        return 1;
+    }
 
-public:
+    JSWrapperData data;
 
-	JSWrapperClass(  v8::Isolate *, std::string, JSWrapperObject *, void (*) (const v8::FunctionCallbackInfo<v8::Value>& args ));
-	~JSWrapperClass();
-
-	void install();
-	void registerFunction(const std::string& name, void (*) (const v8::FunctionCallbackInfo<v8::Value>& args ));
-	void registerProperty(const std::string& name, void (*) ( v8::Local<v8::String> property, const v8::PropertyCallbackInfo<v8::Value>& info ), 
-		void (*) ( v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::PropertyCallbackInfo<void>& info ));
-
-private:
-	
-	v8::Isolate             *m_isolate;
-	std::string              m_name;
-	JSWrapperObject         *m_parentObject;
-
-	void (*m_constructor) (const v8::FunctionCallbackInfo<v8::Value>& args );
-
-	v8::Handle<v8::FunctionTemplate> m_constructorTemplate;
-	v8::Handle<v8::ObjectTemplate>   m_constructorInstanceTemplate;
-};
-
-#endif // __JSWRAPPER_V8
-
-#endif
+    jsWrapper.executeBuffer( "'Hello' + ', World!'", &data );
+    std::cout << data.toString() << std::endl;
+    
+    return 0;
+}

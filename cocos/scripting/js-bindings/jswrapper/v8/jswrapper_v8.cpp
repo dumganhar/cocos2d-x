@@ -35,32 +35,32 @@ void JSWRAPPER_BUILDARGS( ValueArray *args, const FunctionCallbackInfo<Value> *v
 {
     for ( int i=0; i < v8args->Length(); i++) 
     {
-        v8::HandleScope handle_scope( v8args->GetIsolate() );
+        v8::HandleScope handle_scope( v8args->GetIsolate());
 
-        if ((*v8args)[i]->IsUndefined() )
+        if ((*v8args)[i]->IsUndefined())
         {
             args->append();
         } else
-        if ((*v8args)[i]->IsNull() )
+        if ((*v8args)[i]->IsNull())
         {
             args->append( JSWrapperData::Null );
         } else        
-        if ((*v8args)[i]->IsNumber() )
+        if ((*v8args)[i]->IsNumber())
         {
-            args->append( (*v8args)[i]->ToNumber()->Value() );
+            args->append( (*v8args)[i]->ToNumber()->Value());
         } else
-        if ((*v8args)[i]->IsString() )
+        if ((*v8args)[i]->IsString())
         {
             String::Utf8Value utf8( (*v8args)[i] );
-            args->append( std::string( *utf8 ) );
+            args->append( std::string( *utf8 ));
         } else
-        if ((*v8args)[i]->IsBoolean() )
+        if ((*v8args)[i]->IsBoolean())
         {
-            args->append( (*v8args)[i]->ToBoolean()->Value() );
+            args->append( (*v8args)[i]->ToBoolean()->Value());
         } else
-        if ((*v8args)[i]->IsObject() )
+        if ((*v8args)[i]->IsObject())
         {
-            JSWrapperObject *object=new JSWrapperObject( v8args->GetIsolate(), (*v8args)[i]->ToObject() );
+            JSWrapperObject *object=new JSWrapperObject( v8args->GetIsolate(), (*v8args)[i]->ToObject());
             args->append( object );
             delete object;
         }
@@ -71,32 +71,32 @@ void JSWRAPPER_BUILDARGS( ValueArray *args, const FunctionCallbackInfo<Value> *v
 
 void JSWRAPPER_BUILDPROPERTYDATA( JSWrapperData *data, const PropertyCallbackInfo<void>& info, Local<Value> *value )
 {
-    v8::HandleScope handle_scope( info.GetIsolate() );
+    v8::HandleScope handle_scope( info.GetIsolate());
 
-    if ((*value)->IsUndefined() )
+    if ((*value)->IsUndefined())
     {
         data->setUndefined();
     } else
-    if ((*value)->IsNull() )
+    if ((*value)->IsNull())
     {
         data->setNull();
     } else        
-    if ((*value)->IsNumber() )
+    if ((*value)->IsNumber())
     {
-        data->setNumber( (*value)->ToNumber()->Value() );
+        data->setNumber( (*value)->ToNumber()->Value());
     } else
-    if ((*value)->IsString() )
+    if ((*value)->IsString())
     {
-        String::Utf8Value utf8( (*value) );
-        data->setString( std::string( *utf8 ) );
+        String::Utf8Value utf8( (*value));
+        data->setString( std::string( *utf8 ));
     } else
-    if ((*value)->IsBoolean() )
+    if ((*value)->IsBoolean())
     {
-        data->setBoolean( (*value)->ToBoolean()->Value() );
+        data->setBoolean( (*value)->ToBoolean()->Value());
     } else
-    if ((*value)->IsObject() )
+    if ((*value)->IsObject())
     {
-        data->setObject( new JSWrapperObject( info.GetIsolate(), (*value)->ToObject() ) );
+        data->setObject( new JSWrapperObject( info.GetIsolate(), (*value)->ToObject()) );
     }
 }
 
@@ -106,15 +106,15 @@ void JSWRAPPER_FUNC_SETRC( JSWrapperData data, const FunctionCallbackInfo<Value>
 {
     if (data.getType() == JSWrapperData::Undefined )
     {
-        args->GetReturnValue().Set( v8::Undefined( args->GetIsolate() ) );
+        args->GetReturnValue().Set( v8::Undefined( args->GetIsolate()) );
     } else
     if (data.getType() == JSWrapperData::Null )
     {
-        args->GetReturnValue().Set( v8::Null( args->GetIsolate() ) );
+        args->GetReturnValue().Set( v8::Null( args->GetIsolate()) );
     } else    
     if (data.getType() == JSWrapperData::Number )
     {
-        args->GetReturnValue().Set( v8::Number::New( args->GetIsolate(), data.toNumber() ) );
+        args->GetReturnValue().Set( v8::Number::New( args->GetIsolate(), data.toNumber()) );
     } else
     if (data.getType() == JSWrapperData::String )
     {
@@ -123,11 +123,11 @@ void JSWRAPPER_FUNC_SETRC( JSWrapperData data, const FunctionCallbackInfo<Value>
     } else
     if (data.getType() == JSWrapperData::Boolean )
     {
-        args->GetReturnValue().Set( v8::Boolean::New( args->GetIsolate(), data.toBoolean() ) );
+        args->GetReturnValue().Set( v8::Boolean::New( args->GetIsolate(), data.toBoolean()) );
     } else
     if (data.getType() == JSWrapperData::Object )
     {
-        args->GetReturnValue().Set( data.object()->m_obj.Get( args->GetIsolate() ) );
+        args->GetReturnValue().Set( data.object()->m_obj.Get( args->GetIsolate()) );
     }
 }
 
@@ -137,15 +137,15 @@ void JSWRAPPER_PROP_SETRC( JSWrapperData data, const PropertyCallbackInfo<Value>
 {
     if (data.getType() == JSWrapperData::Undefined )
     {
-        args->GetReturnValue().Set( v8::Undefined( args->GetIsolate() ) );
+        args->GetReturnValue().Set( v8::Undefined( args->GetIsolate()) );
     } else
     if (data.getType() == JSWrapperData::Null )
     {
-        args->GetReturnValue().Set( v8::Null( args->GetIsolate() ) );
+        args->GetReturnValue().Set( v8::Null( args->GetIsolate()) );
     } else    
     if (data.getType() == JSWrapperData::Number )
     {
-        args->GetReturnValue().Set( v8::Number::New( args->GetIsolate(), data.toNumber() ) );
+        args->GetReturnValue().Set( v8::Number::New( args->GetIsolate(), data.toNumber()) );
     } else
     if (data.getType() == JSWrapperData::String )
     {
@@ -154,11 +154,11 @@ void JSWRAPPER_PROP_SETRC( JSWrapperData data, const PropertyCallbackInfo<Value>
     } else
     if (data.getType() == JSWrapperData::Boolean )
     {
-        args->GetReturnValue().Set( v8::Boolean::New( args->GetIsolate(), data.toBoolean() ) );
+        args->GetReturnValue().Set( v8::Boolean::New( args->GetIsolate(), data.toBoolean()) );
     } else
     if (data.getType() == JSWrapperData::Object )
     {
-        args->GetReturnValue().Set( data.object()->m_obj.Get( args->GetIsolate() ) );
+        args->GetReturnValue().Set( data.object()->m_obj.Get( args->GetIsolate()) );
     }
 }
 
@@ -189,7 +189,7 @@ JSWrapper::JSWrapper( char *arg ) : m_isValid( false )
 
 JSWrapperObject *JSWrapper::globalObject()
 {
-    JSWrapperObject *object=new JSWrapperObject( m_isolate,  m_context->Global() );
+    JSWrapperObject *object=new JSWrapperObject( m_isolate,  m_context->Global());
     return object;
 }
 
@@ -199,17 +199,17 @@ bool JSWrapper::execute(const char *scr, JSWrapperData *data, const char *fileNa
 
     Local<String> source = String::NewFromUtf8( m_isolate, scr, NewStringType::kNormal ).ToLocalChecked();
 
-    ScriptOrigin origin( v8::String::NewFromUtf8( m_isolate, fileName ? fileName : "Unknown" ) );
+    ScriptOrigin origin( v8::String::NewFromUtf8( m_isolate, fileName ? fileName : "Unknown" ));
     MaybeLocal<Script> maybeScript = Script::Compile( m_context, source, &origin );
 
     bool success=false;
 
-    if (!maybeScript.IsEmpty() )
+    if (!maybeScript.IsEmpty())
     {
         Local<Script> script = maybeScript.ToLocalChecked();        
         MaybeLocal<Value> maybeResult = script->Run(m_context);
 
-        if (!maybeResult.IsEmpty() )
+        if (!maybeResult.IsEmpty())
         {
             Local<Value> result = maybeResult.ToLocalChecked();
 
@@ -217,21 +217,21 @@ bool JSWrapper::execute(const char *scr, JSWrapperData *data, const char *fileNa
             {
                 v8::String::Utf8Value type(result->TypeOf(m_isolate));
                 printf("return : %s\n", *type);
-                if (result->IsNumber() )
-                    data->setNumber( result->ToNumber()->Value() );
+                if (result->IsNumber())
+                    data->setNumber( result->ToNumber()->Value());
                 else
-                if (result->IsString() )
+                if (result->IsString())
                 {
                     String::Utf8Value utf8( result );
                     data->setString( *utf8 );
                 } else
-                if (result->IsBoolean() )
-                    data->setBoolean( result->ToBoolean()->Value() );
+                if (result->IsBoolean())
+                    data->setBoolean( result->ToBoolean()->Value());
                 else                
-                if (result->IsObject() )
-                    data->setObject( new JSWrapperObject( m_isolate, result->ToObject() ) );
+                if (result->IsObject())
+                    data->setObject( new JSWrapperObject( m_isolate, result->ToObject()) );
                 else
-                if (result->IsNull() )
+                if (result->IsNull())
                     data->setNull();
                 else data->setUndefined();
             }

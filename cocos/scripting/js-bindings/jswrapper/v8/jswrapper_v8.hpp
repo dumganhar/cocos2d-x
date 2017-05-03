@@ -76,7 +76,7 @@ public:
 	bool execute(const char *string, JSWrapperData *data=NULL, const char *fileName=NULL );
 
 	// --- Run GC
-	void gc() { while(! m_isolate->IdleNotification( 100 ) ) {}; }
+	void gc() { while(! m_isolate->IdleNotification( 100 )) {}; }
 
 	bool isValid() { return m_isValid; }
 
@@ -107,25 +107,25 @@ void JSWRAPPER_PROP_SETRC( JSWrapperData, const v8::PropertyCallbackInfo<v8::Val
 // --- Function
 
 #define JSWRAPPER_FUNCTION( funcName ) void funcName(const v8::FunctionCallbackInfo<v8::Value>& v8args ) { \
-	ValueArray args; JSWRAPPER_BUILDARGS( &args, &v8args ); JSWrapperObject *thisObject=new JSWrapperObject( v8args.GetIsolate(), v8args.This() ); 
+	ValueArray args; JSWRAPPER_BUILDARGS( &args, &v8args ); JSWrapperObject *thisObject=new JSWrapperObject( v8args.GetIsolate(), v8args.This()); 
 #define JSWRAPPER_FUNCTION_END delete thisObject; }
 
 #define JSWRAPPER_FUNCTION_SETRC( data ) JSWRAPPER_FUNC_SETRC( data, &v8args );
-#define JSWRAPPER_FUNCTION_GETCLASS v8::Local<v8::External>::Cast( v8args.Holder()->GetInternalField(0) )->Value(); 
+#define JSWRAPPER_FUNCTION_GETCLASS v8::Local<v8::External>::Cast( v8args.Holder()->GetInternalField(0))->Value(); 
 #define JSWRAPPER_FUNCTION_RETURN delete thisObject; return;
 
 // --- Constructor
 
 #define JSWRAPPER_CONSTRUCTOR( constName, constNameText ) void constName(const v8::FunctionCallbackInfo<v8::Value>& v8args ) { \
-	ValueArray args; JSWRAPPER_BUILDARGS( &args, &v8args ); JSWrapperObject *thisObject=new JSWrapperObject( v8args.GetIsolate(), v8args.This() ); 
+	ValueArray args; JSWRAPPER_BUILDARGS( &args, &v8args ); JSWrapperObject *thisObject=new JSWrapperObject( v8args.GetIsolate(), v8args.This()); 
 #define JSWRAPPER_CONSTRUCTOR_END delete thisObject; }
 
-#define JSWRAPPER_CONSTRUCTOR_SETCLASS( ptr ) v8args.This()->SetInternalField( 0, v8::External::New( v8args.GetIsolate(), ptr ) );
+#define JSWRAPPER_CONSTRUCTOR_SETCLASS( ptr ) v8args.This()->SetInternalField( 0, v8::External::New( v8args.GetIsolate(), ptr ));
 
 // --- Get Property
 
 #define JSWRAPPER_GETPROPERTY( funcName ) void funcName( v8::Local<v8::String> property, const v8::PropertyCallbackInfo<v8::Value>& info ) { 
-#define JSWRAPPER_PROPERTY_GETCLASS v8::Local<v8::External>::Cast( info.Holder()->GetInternalField(0) )->Value(); 
+#define JSWRAPPER_PROPERTY_GETCLASS v8::Local<v8::External>::Cast( info.Holder()->GetInternalField(0))->Value(); 
 
 #define JSWRAPPER_GETPROPERTY_SETRC( data ) JSWRAPPER_PROP_SETRC( data, &info );
 

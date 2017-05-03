@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config.hpp"
+#include "../config.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
@@ -12,36 +12,42 @@ namespace se {
     class Class;
     class Value;
 
-    extern std::unordered_map<std::string, Class*> __clsMap;
-
     class ScriptEngine
     {
-    public:
-        ScriptEngine(char*);
+    private:
+        ScriptEngine();
         ~ScriptEngine();
 
     public:
+        static ScriptEngine* getInstance();
+        static void destroyInstance();
 
         // --- Global Object
-        Object* globalObject();
-
-        // --- Classes
-        Class* createClass(const std::string& className, Object* obj, Object* parentProto, JSNative constructor);
+        Object* getGlobalObject();
 
         // --- Execute
-        bool executeBuffer(const char *string, Value *data = nullptr, const char *fileName = nullptr);
-        bool executeBuffer(const char *string, size_t length, Value *data = nullptr, const char *fileName = nullptr);
-        bool executeFile(const std::string& filePath, Value* rval = nullptr);
+        bool executeScriptBuffer(const char *string, Value *data = nullptr, const char *fileName = nullptr);
+        bool executeScriptBuffer(const char *string, size_t length, Value *data = nullptr, const char *fileName = nullptr);
+        bool executeScriptFile(const std::string &filePath, Value *rval = nullptr);
 
         // --- Run GC
         void gc() { JS_GC( _cx );  }
 
         bool isValid() { return _isValid; }
 
+        void _retainScriptObject(void* owner, void* target);
+        void _releaseScriptObject(void* owner, void* target);
+
     private:
+        static void myWeakPointerZoneGroupCallback(JSContext* cx, void* data);
+        static void myExtraGCRootsTracer(JSTracer* trc, void* data);
+
+
+
+        bool init();
+        void cleanup();
 
         JSContext* _cx;
-        JS::PersistentRootedObject* _global;
         JSCompartment* _oldCompartment;
 
         Object* _globalObj;

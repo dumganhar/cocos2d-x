@@ -1,56 +1,113 @@
 #include "Object.hpp"
 #include "internal/Utils.hpp"
+#include "Class.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
 namespace se {
 
-    // ------------------------------------------------------- Object
+    std::unordered_map<void* /*native*/, Object* /*jsobj*/> __nativePtrToObjectMap;
 
-    Object::Object( JSContext *cx, JSObject *object) : m_cx( cx)
-    {
-        m_rawValue=new JS::Value( JS::ObjectValue( *object));
-        js::AddRawValueRoot( m_cx, m_rawValue, "Protected_Object");    
+    namespace {
+        JSContext *__cx = nullptr;
+
+
+
+//        void on_context_destroy(void* data)
+//        {
+//            auto self = static_cast<Object*>(data);
+//            self->invalidate();
+//        }
     }
 
-    Object::Object( Object *obj) : m_cx(obj->m_cx)
+    // ------------------------------------------------------- Object
+
+    Object::Object(JSObject* obj, bool rooted)
+    : _isRooted(false),
+    _hasWeakRef(false),
+    _root(nullptr),
+    m_notify(nullptr),
+    m_data(nullptr)
     {
-        m_rawValue=new JS::Value( *obj->m_rawValue);
-        js::AddRawValueRoot( m_cx, m_rawValue, "Protected_Object");    
+        debug("created");
+        if (rooted)
+            putToRoot(obj);
+        else
+            putToHeap(obj);
     }
 
     Object::~Object()
     {
-        if (m_rawValue) {
-            js::RemoveRawValueRoot( m_cx, m_rawValue);
-            delete m_rawValue;
+        void* nativeObj = JS_GetPrivate(_getJSObject());
+        auto iter = __nativePtrToObjectMap.find(nativeObj);
+        if (iter != __nativePtrToObjectMap.end())
+        {
+            __nativePtrToObjectMap.erase(iter);
         }
+
+        if (_isRooted)
+            teardownRooting();
     }
 
-    Object *Object::copy()
+    Object* Object::createPlainObject()
     {
-        Object *object=new Object( this);
-        return object;
+        Object* obj = new Object(JS_NewPlainObject(__cx), true);
+        return obj;
+    }
+
+    Object* Object::createObject(const char* clsName, bool rooted)
+    {
+        Object* obj = new Object(Class::_createJSObject(clsName), rooted);
+        return obj;
+    }
+
+    Object* Object::getObjectWithPtr(void* ptr)
+    {
+        Object* obj = nullptr;
+        auto iter = __nativePtrToObjectMap.find(ptr);
+        if (iter != __nativePtrToObjectMap.end())
+        {
+            obj = iter->second;
+            obj->addRef();
+        }
+        return obj;
+    }
+
+    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
+    {
+        Object* obj = nullptr;
+        auto iter = __nativePtrToObjectMap.find(ptr);
+        if (iter != __nativePtrToObjectMap.end())
+        {
+            obj = iter->second;
+            obj->addRef();
+        }
+        else
+        {
+            obj = new Object(Class::_createJSObject(clsName), rooted);
+            obj->setPrivateData(ptr);
+        }
+        return obj;
     }
 
     // --- Getter/Setter
 
-    bool Object::get(const char *name, Value *data)
+    bool Object::getProperty(const char* name, Value* data)
     {
-        JS::RootedObject object( m_cx, &m_rawValue->toObject());
+        JS::RootedObject object(__cx, _getJSObject());
 
-        JS::RootedValue rcValue( m_cx);
-        bool ok=JS_GetProperty( m_cx, object, name, &rcValue);
+        JS::RootedValue rcValue(__cx);
+        bool ok = JS_GetProperty(__cx, object, name, &rcValue);
 
         if (data)
         {
             if (rcValue.isString())
             {
                 JSString *jsstring = rcValue.toString();
-                const char *stringData=JS_EncodeString( m_cx, jsstring);
+                const char *stringData = JS_EncodeString(__cx, jsstring);
 
                 data->setString( stringData);
-                JS_free( m_cx, (void *) stringData);
+                JS_free(__cx, (void *) stringData);
             }
             else if (rcValue.isNumber())
             {
@@ -62,7 +119,9 @@ namespace se {
             }
             else if (rcValue.isObject())
             {
-                data->setObject( new Object( m_cx, &rcValue.toObject()));
+                Object* obj = new Object(&rcValue.toObject(), true);
+                data->setObject(obj);
+                obj->release();
             }
             else if (rcValue.isNull())
             {
@@ -77,46 +136,46 @@ namespace se {
         return ok;
     }
 
-    void Object::set(const char *name,  Value& data)
+    void Object::setProperty(const char* name, const Value& v)
     {
-        JS::RootedObject object( m_cx, &m_rawValue->toObject());
+        JS::RootedObject object(__cx, _getJSObject());
 
-        if (data.getType() == Value::Type::Number)
+        if (v.getType() == Value::Type::Number)
         {
-            JS::RootedValue value( m_cx);
-            value.setDouble( data.toNumber());
-            JS_SetProperty( m_cx, object, name, value);
+            JS::RootedValue value(__cx);
+            value.setDouble( v.toNumber());
+            JS_SetProperty(__cx, object, name, value);
         }
-        else if (data.getType() == Value::Type::String)
+        else if (v.getType() == Value::Type::String)
         {
-            JSString *string = JS_NewStringCopyN( m_cx, data.toString().c_str(), data.toString().length());
-            JS::RootedValue value( m_cx);
+            JSString *string = JS_NewStringCopyN(__cx, v.toString().c_str(), v.toString().length());
+            JS::RootedValue value(__cx);
             value.setString( string);
-            JS_SetProperty( m_cx, object, name, value);
+            JS_SetProperty(__cx, object, name, value);
         }
-        else if (data.getType() == Value::Type::Boolean)
+        else if (v.getType() == Value::Type::Boolean)
         {
-            JS::RootedValue value( m_cx);
-            value.setBoolean( data.toBoolean());
-            JS_SetProperty( m_cx, object, name, value);
+            JS::RootedValue value(__cx);
+            value.setBoolean( v.toBoolean());
+            JS_SetProperty(__cx, object, name, value);
         }
-        else if (data.getType() == Value::Type::Object)
+        else if (v.getType() == Value::Type::Object)
         {
-            JS::RootedValue value( m_cx);
-            value.setObject( data.toObject()->getSMValue()->toObject());
-            JS_SetProperty( m_cx, object, name, value);
+            JS::RootedValue value(__cx);
+            value.setObject(*v.toObject()->_getJSObject());
+            JS_SetProperty(__cx, object, name, value);
         }
-        else if (data.getType() == Value::Type::Null)
+        else if (v.getType() == Value::Type::Null)
         {
-            JS::RootedValue value( m_cx);
+            JS::RootedValue value(__cx);
             value.setNull();
-            JS_SetProperty( m_cx, object, name, value);
+            JS_SetProperty(__cx, object, name, value);
         }
         else
         {
-            JS::RootedValue value( m_cx);
+            JS::RootedValue value(__cx);
             value.setUndefined();
-            JS_SetProperty( m_cx, object, name, value);
+            JS_SetProperty(__cx, object, name, value);
         }
     }
 
@@ -124,36 +183,49 @@ namespace se {
 
     bool Object::call(const ValueArray& args, Object* thisObject, Value* rval/* = nullptr*/)
     {
-        JS::AutoValueVector jsarr(m_cx);
+        assert(isFunction());
+
+        JS::AutoValueVector jsarr(__cx);
         jsarr.reserve(args.size());
-        internal::seToJsArgs(m_cx, args, &jsarr);
+        internal::seToJsArgs(__cx, args, &jsarr);
 
-        JS::RootedObject contextObject( m_cx, &thisObject->getSMValue()->toObject());
-        JS::RootedValue fun( m_cx, *m_rawValue);
-        JS::RootedValue rcValue(m_cx);
+        JS::RootedObject contextObject(__cx);
+        if (thisObject != nullptr)
+        {
+            contextObject.set(thisObject->_getJSObject());
+        }
+        else
+        {
+            contextObject.set(JS::CurrentGlobalOrNull(__cx));
+        }
 
-        bool ok = JS::Call(m_cx, contextObject, fun, jsarr, &rcValue);
+        JS::RootedValue fun(__cx, JS::ObjectValue(*_getJSObject()));
+        JS::RootedValue rcValue(__cx);
 
-        if (rval != nullptr)
+        bool ok = JS_CallFunctionValue(__cx, contextObject, fun, jsarr, &rcValue);
+
+        if (ok && rval != nullptr)
         {
             if (rcValue.isString())
             {
                 JSString *jsstring = rcValue.toString();
-                const char *stringData=JS_EncodeString( m_cx, jsstring);
+                const char *stringData=JS_EncodeString(__cx, jsstring);
                 rval->setString( stringData);
-                JS_free( m_cx, (void *) stringData);
+                JS_free(__cx, (void *) stringData);
             }
             else if (rcValue.isNumber())
             {
-                rval->setNumber( rcValue.toNumber());
+                rval->setNumber(rcValue.toNumber());
             }
             else if (rcValue.isBoolean())
             {
-                rval->setBoolean( rcValue.toBoolean());
+                rval->setBoolean(rcValue.toBoolean());
             }
             else if (rcValue.isObject())
             {
-                rval->setObject( new Object( m_cx, &rcValue.toObject()));
+                Object* obj = new Object(&rcValue.toObject(), true);
+                rval->setObject(obj);
+                obj->release();
             }
             else if (rcValue.isNull())
             {
@@ -170,10 +242,10 @@ namespace se {
 
     // --- Register Function
 
-    bool Object::registerFunction(const char *funcName, JSNative func, int minArgs)
+    bool Object::defineFunction(const char *funcName, JSNative func, int minArgs)
     {
-        JS::RootedObject object( m_cx, &m_rawValue->toObject());
-        bool ok = JS_DefineFunction( m_cx, object, funcName, func, minArgs, 0);
+        JS::RootedObject object(__cx, _getJSObject());
+        bool ok = JS_DefineFunction(__cx, object, funcName, func, minArgs, 0);
         return ok;
     }
 
@@ -182,26 +254,26 @@ namespace se {
     void Object::getArrayLength( unsigned int *length) 
     {
         unsigned int len;
-        JS::RootedObject object( m_cx, &m_rawValue->toObject());
-        JS_GetArrayLength( m_cx, object, &len);
+        JS::RootedObject object(__cx, _getJSObject());
+        JS_GetArrayLength(__cx, object, &len);
         *length=len;
     }
 
     void Object::getArrayElement( unsigned int index, Value *data) 
     {
-        JS::RootedObject object( m_cx, &m_rawValue->toObject());
-        JS::RootedValue rcValue( m_cx);    
-        JS_GetElement( m_cx, object, index, &rcValue);
+        JS::RootedObject object(__cx, _getJSObject());
+        JS::RootedValue rcValue(__cx);
+        JS_GetElement(__cx, object, index, &rcValue);
 
         if (data)
         {
             if (rcValue.isString())
             {
                 JSString *jsstring = rcValue.toString();
-                const char *stringData=JS_EncodeString( m_cx, jsstring);
+                const char *stringData=JS_EncodeString(__cx, jsstring);
 
                 data->setString( stringData);
-                JS_free( m_cx, (void *) stringData);
+                JS_free(__cx, (void *) stringData);
             }
             else if (rcValue.isNumber())
             {
@@ -213,7 +285,9 @@ namespace se {
             }
             else if (rcValue.isObject())
             {
-                data->setObject( new Object( m_cx, &rcValue.toObject()));
+                Object* obj = new Object(&rcValue.toObject(), true);
+                data->setObject(obj);
+                obj->release();
             }
             else if (rcValue.isNull())
             {
@@ -226,7 +300,217 @@ namespace se {
         }    
     }
 
+    bool Object::isFunction() const
+    {
+        return JS_ObjectIsFunction(__cx, _getJSObject());
+    }
+
+    void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
+    {
+        uint8_t *pt; uint32_t len;
+        bool isSharedMemory = false;
+        JS_GetObjectAsUint8Array(_getJSObject(), &len, &isSharedMemory, &pt);
+        *ptr=pt; *length=len;
+    }
+
+    void Object::getAsUint16Array(unsigned short **ptr, unsigned int *length)
+    {
+        unsigned short *pt; unsigned int len;
+        bool isSharedMemory = false;
+        JS_GetObjectAsUint16Array(_getJSObject(), &len, &isSharedMemory, &pt);
+        *ptr=pt; *length=len;
+    }
+
+    bool Object::isTypedArray() const
+    {
+        return JS_IsTypedArrayObject( _getJSObject());
+    }
+
+    void Object::getAsUint32Array(unsigned int **ptr, unsigned int *length)
+    {
+        unsigned int *pt; unsigned int len;
+        bool isSharedMemory = false;
+        JS_GetObjectAsUint32Array(_getJSObject(), &len, &isSharedMemory, &pt);
+        *ptr=pt; *length=len;
+    }
+
+    void Object::getAsFloat32Array(float **ptr, unsigned int *length)
+    {
+        float *pt; unsigned int len;
+        bool isSharedMemory = false;
+        JS_GetObjectAsFloat32Array( _getJSObject(), &len, &isSharedMemory, &pt);
+        *ptr=pt; *length=len;
+    }
+
+    bool Object::isArray() const
+    {
+        JS::RootedValue value(__cx, JS::ObjectValue(*_getJSObject()));
+        bool isArray = false;
+        return JS_IsArrayObject(__cx, value, &isArray) && isArray;
+    }
+
+    void* Object::getPrivateData()
+    {
+        return JS_GetPrivate(_getJSObject());
+    }
+
+    void Object::setPrivateData(void *data)
+    {
+        JS_SetPrivate(_getJSObject(), data);
+        __nativePtrToObjectMap.emplace(data, this);
+    }
+
+    void Object::setContext(JSContext *cx)
+    {
+        __cx = cx;
+    }
+
+    void Object::debug(const char *what)
+    {
+//        printf("Object %p %s\n", this,
+//               what);
+    }
+
+    void Object::teardownRooting()
+    {
+        debug("teardownRooting()");
+        assert(_isRooted);
+
+        delete _root;
+        _root = nullptr;
+        _isRooted = false;
+
+        if (!_hasWeakRef)
+            return;
+
+        //cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(_cx));
+        //        g_object_weak_unref(G_OBJECT(gjs_cx), on_context_destroy, this);
+        _hasWeakRef = false;
+    }
+
+    /* Called for a rooted wrapper when the JSContext is about to be destroyed.
+     * This calls the destroy-notify callback if one was passed to root(), and
+     * then removes all rooting from the object. */
+    void Object::invalidate()
+    {
+        debug("invalidate()");
+        assert(_isRooted);
+
+        /* The weak ref is already gone because the context is dead, so no need
+         * to remove it. */
+        _hasWeakRef = false;
+
+        /* The object is still live across this callback. */
+        if (m_notify)
+        {
+            JS::RootedObject rootedObj(__cx, _getJSObject());
+            m_notify(rootedObj, m_data);
+        }
+        
+        reset();
+    }
+
+    /* To access the GC thing, call get(). In many cases you can just use the
+     * MaybeOwned wrapper in place of the GC thing itself due to the implicit
+     * cast operator. But if you want to call methods on the GC thing, for
+     * example if it's a JS::Value, you have to use get(). */
+    JSObject* Object::_getJSObject() const
+    {
+        return _isRooted ? _root->get() : _heap.get();
+    }
+
+    /* Roots the GC thing. You must not use this if you're already using the
+     * wrapper to store a non-rooted GC thing. */
+    void Object::putToRoot(JSObject* thing, DestroyNotify notify/* = nullptr*/, void* data/* = nullptr*/)
+    {
+        debug("root()");
+        assert(!_isRooted);
+        assert(_heap.get() == JS::GCPolicy<JSObject*>::initial());
+        _isRooted = true;
+        m_notify = notify;
+        m_data = data;
+        _root = new JS::PersistentRootedObject(__cx, thing);
+
+        //cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(_cx));
+        //        assert(GJS_IS_CONTEXT(gjs_cx));
+        //        g_object_weak_ref(G_OBJECT(gjs_cx), on_context_destroy, this);
+        _hasWeakRef = true;
+    }
+
+    void Object::putToHeap(JSObject* thing)
+    {
+        _heap = thing;
+        _isRooted = false;
+    }
+
+    void Object::reset()
+    {
+        debug("reset()");
+        if (!_isRooted) {
+            _heap = JS::GCPolicy<JSObject*>::initial();
+            return;
+        }
+
+        teardownRooting();
+        m_notify = nullptr;
+        m_data = nullptr;
+    }
+
+    void Object::switchToRooted(DestroyNotify notify/* = nullptr*/, void *data/* = nullptr*/)
+    {
+        debug("switch to rooted");
+        assert(!_isRooted);
+
+        /* Prevent the thing from being garbage collected while it is in neither
+         * _heap nor _root */
+        JSAutoRequest ar(__cx);
+        JS::RootedObject thing(__cx, _heap);
+
+        reset();
+        putToRoot(thing, notify, data);
+        assert(_isRooted);
+    }
+
+    void Object::switchToUnrooted()
+    {
+        debug("switch to unrooted");
+        assert(_isRooted);
+        /* Prevent the thing from being garbage collected while it is in neither
+         * _heap nor _root */
+        JSAutoRequest ar(__cx);
+        JS::RootedObject rootedThing(__cx, *_root);
+        reset();
+        putToHeap(_root->get());
+        assert(!_isRooted);
+    }
+
+    /* Tracing makes no sense in the rooted case, because JS::PersistentRooted
+     * already takes care of that. */
+    void Object::trace(JSTracer* tracer, void* data)
+    {
+        debug("trace()");
+        assert(!_isRooted);
+        JS::TraceEdge(tracer, &_heap, "ccobj tracing");
+    }
+
+    /* If not tracing, then you must call this method during GC in order to
+     * update the object's location if it was moved, or null it out if it was
+     * finalized. If the object was finalized, returns true. */
+    bool Object::updateAfterGC(void* data)
+    {
+        debug("updateAfterGC()");
+        assert(!_isRooted);
+        if (_heap != nullptr)
+            JS_UpdateWeakPointerAfterGC(&_heap);
+        return (_heap == nullptr);
+    }
     
+    bool Object::isRooted() const
+    {
+        return _isRooted;
+    }
+
+
 
 } // namespace se {
 

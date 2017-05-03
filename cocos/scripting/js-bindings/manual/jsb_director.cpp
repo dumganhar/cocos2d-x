@@ -8,9 +8,69 @@
 
 #include "jsb_director.hpp"
 
+#include "jsb_global.h"
+
+#include "cocos2d.h"
+
+using namespace cocos2d;
+
+SE_CTOR_BEGIN(Director_ctor, "Director")
+{
+
+}
+SE_CTOR_END
+
+SE_FUNC_BEGIN(Director_getInstance)
+{
+    auto director = Director::getInstance();
+    auto obj = se::Object::getOrCreateObjectWithPtr(director, "Director", true);
+    if (obj != nullptr)
+    {
+        SE_SET_RVAL(se::Value(obj));
+        if (obj->getReferenceCount() > 1)
+        {
+            obj->release();
+        }
+    }
+    else
+    {
+        ret = false;
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(Director_runWithScene)
+{
+    printf("cc.Director.runWithScene ...\n");
+    auto thiz = (Director*)thisObject->getPrivateData();
+    thiz->runWithScene((Scene*)args[0].toObject()->getPrivateData());
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(Director_replaceScene)
+{
+    printf("cc.Director.replaceScene ...\n");
+    auto thiz = (Director*)thisObject->getPrivateData();
+    thiz->replaceScene((Scene*)args[0].toObject()->getPrivateData());
+}
+SE_FUNC_END
+
+SE_FINALIZE_FUNC_BEGIN(Director_finalize)
+{
+    printf("cc.Director finalized\n");
+}
+SE_FINALIZE_FUNC_END
 
 bool jsb_register_Director()
 {
-    
-    return false;
+    auto cls = se::Class::create("Director", __ccObj, nullptr, Director_ctor);
+    cls->defineStaticFunction("getInstance", Director_getInstance);
+    cls->defineFunction("runWithScene", Director_runWithScene);
+    cls->defineFunction("replaceScene", Director_replaceScene);
+
+    cls->defineFinalizedFunction(Director_finalize);
+
+    cls->install();
+
+    return true;
 }

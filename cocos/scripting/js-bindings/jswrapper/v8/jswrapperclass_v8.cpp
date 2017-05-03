@@ -30,7 +30,7 @@ using namespace v8;
 // ------------------------------------------------------- JSWrapperObject
 
 
-JSWrapperClass::JSWrapperClass(  Isolate *isolate,const std::string& className, JSWrapperObject *parentObj, void (*constructor) (const FunctionCallbackInfo<Value>& args ) ) 
+JSWrapperClass::JSWrapperClass(  Isolate *isolate,const std::string& className, JSWrapperObject *parentObj, void (*constructor) (const FunctionCallbackInfo<Value>& args )) 
     :  m_isolate( isolate ), m_name( className ), m_parentObject( parentObj ), m_constructor( constructor )
 {
     m_constructorTemplate=FunctionTemplate::New( m_isolate, constructor );
@@ -46,18 +46,18 @@ JSWrapperClass::~JSWrapperClass()
 
 void JSWrapperClass::install()
 {
-    m_parentObject->m_obj.Get( m_isolate )->Set( String::NewFromUtf8( m_isolate, m_name.c_str() ), m_constructorTemplate->GetFunction() );        
+    m_parentObject->m_obj.Get( m_isolate )->Set( String::NewFromUtf8( m_isolate, m_name.c_str()), m_constructorTemplate->GetFunction());        
 }
 
-void JSWrapperClass::registerFunction(const std::string& name, void (*func) (const FunctionCallbackInfo<Value>& args ) )
+void JSWrapperClass::registerFunction(const std::string& name, void (*func) (const FunctionCallbackInfo<Value>& args ))
 {
-    m_constructorInstanceTemplate->Set( String::NewFromUtf8( m_isolate, name.c_str() ), FunctionTemplate::New( m_isolate, func ) );
+    m_constructorInstanceTemplate->Set( String::NewFromUtf8( m_isolate, name.c_str()), FunctionTemplate::New( m_isolate, func ));
 }
 
 void JSWrapperClass::registerProperty(const std::string& name, void (*getFunc) ( Local<String> property, const PropertyCallbackInfo<Value>& info ), 
-    void (*setFunc) ( Local<String> property, Local<Value> value, const PropertyCallbackInfo<void>& info ) )
+    void (*setFunc) ( Local<String> property, Local<Value> value, const PropertyCallbackInfo<void>& info ))
 {
-    m_constructorInstanceTemplate->SetAccessor( String::NewFromUtf8( m_isolate, name.c_str() ), getFunc, setFunc );
+    m_constructorInstanceTemplate->SetAccessor( String::NewFromUtf8( m_isolate, name.c_str()), getFunc, setFunc );
 }
 
 #endif // __JSWRAPPER_V8

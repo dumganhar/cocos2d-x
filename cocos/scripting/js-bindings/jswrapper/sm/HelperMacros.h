@@ -1,61 +1,81 @@
 #pragma once
 
+#define SAFE_ADD_REF(obj) if (obj != nullptr) obj->addRef()
+
+#define SAFE_RELEASE(obj) if (obj != nullptr) obj->release()
+
+
 #define SE_FUNC_BEGIN(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
+    static bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
     { \
+        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
         JS::Value _thiz = _argv.computeThis(cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(cx, argc, _argv, &args); \
-        se::Object* thisObject = new se::Object(cx, &_thiz.toObject());
-
+        void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
+        se::Object* thisObject = nullptr; \
+        if (_nativeObj != nullptr) \
+        { \
+            thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+        }
 
 #define SE_FUNC_END \
-        if (thisObject != nullptr) \
-            delete thisObject; \
-        return true; \
+        SAFE_RELEASE(thisObject); \
+        return ret; \
     }
 
 #define SE_FINALIZE_FUNC_BEGIN(funcName) \
-    void funcName(JSFreeOp *fop, JSObject *obj) {
-
+    static void funcName(JSFreeOp* fop, JSObject* obj) \
+    { \
+        void* nativeThisObject = JS_GetPrivate(obj); \
+        se::Object* thisObject = nullptr; \
+        if (nativeThisObject != nullptr) \
+        { \
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
+        }
 
 #define SE_FINALIZE_FUNC_END }
+
+#define SE_FINALIZE_FUNC_GET_PRIVATE_OBJ(jsobj) JS_GetPrivate(obj)
 
 // --- Constructor
 
 #define SE_CTOR_BEGIN(funcName, clsName) \
-    bool funcName(JSContext* cx, unsigned argc, JS::Value* vp) \
+    static bool funcName(JSContext* cx, unsigned argc, JS::Value* vp) \
     { \
+        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(cx, argc, _argv, &args); \
-        se::Class* _cls = se::__clsMap.at(clsName); \
-        JS::RootedObject _instanceObject(cx, _cls->_instantiate(_argv)); \
-        se::Object* thisObject = new se::Object(cx, _instanceObject);
-
-#define SE_CTOR_SET_NATIVE_OBJ(ptr) \
-        JS_SetPrivate(_instanceObject, ptr)
+        JS::RootedObject _jsobj(cx, se::Class::_createJSObject(clsName)); \
+        se::Object* thisObject = new se::Object(_jsobj, false); \
+        _argv.rval().setObject(*_jsobj);
 
 #define SE_CTOR_END \
-        if (thisObject != nullptr) \
-            delete thisObject; \
-        return true; \
+        SAFE_RELEASE(thisObject); \
+        return ret; \
     }
 
 // --- Get Property
 
 #define SE_GET_PROPERTY_BEGIN(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
+    static bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
     { \
-        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp);
+        bool ret = true; \
+        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
+        JS::Value _thiz = _argv.computeThis(cx); \
+        void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
+        se::Object* thisObject = nullptr; \
+        if (_nativeObj != nullptr) \
+        { \
+            thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+        }
 
 #define SE_GET_PROPERTY_END \
-        return true; \
+        SAFE_RELEASE(thisObject); \
+        return ret; \
     }
-
-#define SE_GET_NATIVE_OBJ() \
-    JS_GetPrivate(&_argv.computeThis(cx).toObject())
 
 #define SE_SET_RVAL(data) \
     se::internal::setReturnValue(cx, data, _argv);
@@ -63,13 +83,22 @@
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value *vp) \
+    static bool funcName(JSContext *cx, unsigned argc, JS::Value *vp) \
     { \
-        JS::CallArgs _argv = JS::CallArgsFromVp( argc, vp ); \
+        bool ret = true; \
+        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
+        JS::Value _thiz = _argv.computeThis(cx); \
+        void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
+        se::Object* thisObject = nullptr; \
+        if (_nativeObj != nullptr) \
+        { \
+            thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+        } \
         se::Value data; \
         se::internal::seToJsValue(cx, _argv[0], &data);
 
 #define SE_SET_PROPERTY_END \
-        return true; \
+        SAFE_RELEASE(thisObject); \
+        return ret; \
     }
 

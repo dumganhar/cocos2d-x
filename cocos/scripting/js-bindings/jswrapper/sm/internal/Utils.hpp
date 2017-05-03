@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Base.h"
+#include "../Base.h"
 
-#include "Value.hpp"
+#include "../../Value.hpp"
 
 namespace se {
 
@@ -12,7 +12,7 @@ namespace se {
         void seToJsArgs(JSContext* cx, const ValueArray& args, JS::AutoValueVector* outArr);
         void seToJsValue(JSContext *cx, const JS::Value& jsval, Value* v);
         
-        void setReturnValue(JSContext *cx, Value value, const JS::CallArgs& argv);
+        void setReturnValue(JSContext* cx, const Value& data, const JS::CallArgs& argv);
 
     } // namespace internal {
 } // namespace se {

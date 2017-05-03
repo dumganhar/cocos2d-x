@@ -7,6 +7,8 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 
+int test_main(int argc, char* argv[]);
+
 AppDelegate::AppDelegate()
 {
 }
@@ -40,11 +42,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
 
-    ScriptingCore* sc = ScriptingCore::getInstance();
-
-    ScriptEngineManager::getInstance()->setScriptEngine(sc);
-
-//    sc->runScript("main.js");
+//    ScriptingCore* sc = ScriptingCore::getInstance();
+//
+//    ScriptEngineManager::getInstance()->setScriptEngine(sc);
+//
+////    sc->runScript("main.js");
+//
+//    char* argv[] = {""};
+//    test_main(1, argv);
 
     return true;
 }

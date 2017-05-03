@@ -228,6 +228,8 @@
 		1A78A5531D1A3CE800B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5541D1A3D0F00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5551D1A3D1500B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
+		1A9E998E1EB1C92A001AEA19 /* registerclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */; };
+		1A9E99911EB1D052001AEA19 /* sm_main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99901EB1D052001AEA19 /* sm_main.mm */; };
 		1AAF534D180E2F4E000584C8 /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A15FB01807A4F9005B8026 /* libcocos2d Mac.a */; };
 		1AAF5400180E39D4000584C8 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A15FBE1807A4F9005B8026 /* libcocos2d iOS.a */; };
 		1ABCA28718CD91510087CE3A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64822165F391E007D4F18 /* Cocoa.framework */; };
@@ -1881,6 +1883,8 @@
 		1A0EE31418CDF733004CD58F /* lua-empty-test Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lua-empty-test Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0EE41318CDF775004CD58F /* cpp-empty-test iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cpp-empty-test iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0EE47E18CDF799004CD58F /* lua-empty-test iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lua-empty-test iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = registerclass.cpp; sourceTree = "<group>"; };
+		1A9E99901EB1D052001AEA19 /* sm_main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = sm_main.mm; sourceTree = "<group>"; };
 		1A9F808C177E98A600D9A1CB /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		1ABCA27618CD90A40087CE3A /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		1ABCA28618CD91510087CE3A /* lua-tests Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lua-tests Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3147,6 +3151,7 @@
 		185664011B422F72009EF2AE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A9E99871EB1C92A001AEA19 /* examples */,
 				185664021B422F72009EF2AE /* AppDelegate.cpp */,
 				185664031B422F72009EF2AE /* AppDelegate.h */,
 			);
@@ -3184,6 +3189,7 @@
 		185664401B423047009EF2AE /* proj.mac */ = {
 			isa = PBXGroup;
 			children = (
+				1A9E99901EB1D052001AEA19 /* sm_main.mm */,
 				185664411B423047009EF2AE /* InfoPlist.strings */,
 				185664431B423047009EF2AE /* MainMenu.xib */,
 				185664451B423047009EF2AE /* Icon.icns */,
@@ -3221,6 +3227,14 @@
 				50FC3F901D74BCC9001C936A /* game-controller-test Mac.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1A9E99871EB1C92A001AEA19 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */,
+			);
+			path = examples;
 			sourceTree = "<group>";
 		};
 		1ABCA27718CD90A40087CE3A /* Products */ = {
@@ -6506,8 +6520,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				185664081B422F72009EF2AE /* AppDelegate.cpp in Sources */,
+				1A9E998E1EB1C92A001AEA19 /* registerclass.cpp in Sources */,
 				1856643C1B422FFF009EF2AE /* NativeOcClass.m in Sources */,
 				1856644F1B423047009EF2AE /* main.cpp in Sources */,
+				1A9E99911EB1D052001AEA19 /* sm_main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

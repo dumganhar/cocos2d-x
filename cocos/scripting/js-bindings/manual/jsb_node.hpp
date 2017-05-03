@@ -9,6 +9,10 @@
 #ifndef jsb_node_hpp
 #define jsb_node_hpp
 
-#include <stdio.h>
+#include "SeApi.h"
+
+extern se::Object* __jsb_Node_proto;
+
+bool jsb_register_Node();
 
 #endif /* jsb_node_hpp */

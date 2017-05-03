@@ -7,38 +7,56 @@ namespace se {
 
     // --- Global Lookup for Constructor Functions
 
-    std::unordered_map<std::string, Class*> __clsMap;
-
-    // ------------------------------------------------------- Object
-    void myTracer(JSTracer* trc, JSObject* obj);
+    namespace {
+        std::unordered_map<std::string, Class *> __clsMap;
+        JSContext* __cx = nullptr;
+    }
 
     Class::Class()
     : _parent(nullptr)
     , _proto(nullptr)
     , _parentProto(nullptr)
-    , _cx(nullptr)
     , _ctor(nullptr)
     , _finalizeOp(nullptr)
     {
-
+        memset(&_jsCls, 0, sizeof(_jsCls));
+        memset(&_classOps, 0, sizeof(_classOps));
     }
 
     Class::~Class()
     {
+        SAFE_RELEASE(_parent);
+        SAFE_RELEASE(_proto);
+        SAFE_RELEASE(_parentProto);
     }
 
-    bool Class::init(JSContext *cx, const std::string &className, Object* parent, Object *parentProto, JSNative ctor)
+    Class* Class::create(const std::string& className, Object* obj, Object* parentProto, JSNative ctor)
     {
-        _cx = cx;
-        _name = className;
+        Class* cls = new Class();
+        if (cls != nullptr && !cls->init(className, obj, parentProto, ctor))
+        {
+            delete cls;
+            cls = nullptr;
+        }
+        return cls;
+    }
+
+    bool Class::init(const std::string &clsName, Object* parent, Object *parentProto, JSNative ctor)
+    {
+        _name = clsName;
         _parent = parent;
+        if (_parent != nullptr)
+            _parent->addRef();
         _parentProto = parentProto;
+
+        if (_parentProto != nullptr)
+            _parentProto->addRef();
         _ctor = ctor;
 
         return true;
     }
 
-    Object* Class::installAndReturnProto()
+    bool Class::install()
     {
         assert(__clsMap.find(_name) == __clsMap.end());
 
@@ -46,69 +64,96 @@ namespace se {
 
         _jsCls.name = _name.c_str();
         _jsCls.flags = JSCLASS_HAS_PRIVATE;
-        memset(&_classOps, 0, sizeof(_classOps));
+
         _classOps.finalize = _finalizeOp;
-        _classOps.trace = myTracer;
+        _classOps.trace = nullptr;
         _jsCls.cOps = &_classOps;
 
-        JSObject* parentObj = _parentProto != nullptr ? _parentProto->getSMValue()->toObjectOrNull() : nullptr;
-        JS::RootedObject parent(_cx, _parent->getSMValue()->toObjectOrNull());
-        JS::RootedObject parentProto(_cx, parentObj);
+        JSObject* parentObj = _parentProto != nullptr ? _parentProto->_getJSObject() : nullptr;
+        JS::RootedObject parent(__cx, _parent->_getJSObject());
+        JS::RootedObject parentProto(__cx, parentObj);
 
         _funcs.push_back(JS_FS_END);
         _properties.push_back(JS_PS_END);
         _staticFuncs.push_back(JS_FS_END);
         _staticProperties.push_back(JS_PS_END);
 
-        JS::RootedObject jsobj(_cx,
-                               JS_InitClass(_cx, parent, parentProto, &_jsCls,
+        JS::RootedObject jsobj(__cx,
+                               JS_InitClass(__cx, parent, parentProto, &_jsCls,
                                             _ctor, 0,
                                             _properties.data(), _funcs.data(),
                                             _staticProperties.data(), _staticFuncs.data())
                                );
 
-        _proto = new Object(_cx, jsobj);
-        return _proto;
+        if (jsobj)
+        {
+            _proto = new Object(jsobj, true);
+            return true;
+        }
+
+        return false;
     }
 
-    void Class::registerFunction(const char* name, JSNative func)
+    bool Class::defineFunction(const char *name, JSNative func)
     {
         JSFunctionSpec cb = JS_FN(name, func, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE);
         _funcs.push_back(cb);
+        return true;
     }
 
-    void Class::registerProperty(const char* name, JSNative getter, JSNative setter)
+    bool Class::defineProperty(const char *name, JSNative getter, JSNative setter)
     {
         JSPropertySpec property = JS_PSGS(name, getter, setter, JSPROP_ENUMERATE | JSPROP_PERMANENT);
         _properties.push_back(property);
+        return true;
     }
 
-    void Class::registerStaticFunction(const char* name, JSNative func)
+    bool Class::defineStaticFunction(const char *name, JSNative func)
     {
         JSFunctionSpec cb = JS_FN(name, func, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE);
         _staticFuncs.push_back(cb);
+        return true;
     }
 
-    void Class::registerStaticProperty(const char* name, JSNative getter, JSNative setter)
+    bool Class::defineStaticProperty(const char *name, JSNative getter, JSNative setter)
     {
         JSPropertySpec property = JS_PSGS(name, getter, setter, JSPROP_ENUMERATE | JSPROP_PERMANENT);
         _staticProperties.push_back(property);
+        return true;
     }
 
-    void Class::registerFinalizeFunction(JSFinalizeOp func)
+    bool Class::defineFinalizedFunction(JSFinalizeOp func)
     {
         _finalizeOp = func;
+        return true;
     }
 
-    JSObject* Class::_instantiate(const JS::CallArgs& args)
+    JSObject* Class::_createJSObject(const std::string &clsName)
     {
-        JSObject* proto = _proto != nullptr ? _proto->getSMValue()->toObjectOrNull() : nullptr;
-        JS::RootedObject jsProto(_cx, proto);
-        JS::RootedObject obj(_cx, JS_NewObjectWithGivenProto(_cx, &_jsCls, jsProto));
+        auto iter = __clsMap.find(clsName);
+        if (iter == __clsMap.end())
+            return nullptr;
 
-        args.rval().set( JS::ObjectValue( *obj ) );
-
+        Class* thiz = iter->second;
+        JSObject* proto = thiz->_proto != nullptr ? thiz->_proto->_getJSObject() : nullptr;
+        JS::RootedObject jsProto(__cx, proto);
+        JS::RootedObject obj(__cx, JS_NewObjectWithGivenProto(__cx, &thiz->_jsCls, jsProto));
         return obj;
+    }
+
+    void Class::setContext(JSContext* cx)
+    {
+        __cx = cx;
+    }
+
+    Object *Class::getProto()
+    {
+        return _proto;
+    }
+
+    void Class::cleanup()
+    {// TODO:
+
     }
 
 } // namespace se {

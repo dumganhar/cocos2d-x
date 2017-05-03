@@ -51,10 +51,10 @@ public:
 	// --- Function
 	bool isFunction() { return m_obj.Get( m_isolate )->IsCallable(); }
 	bool call( ValueArray *args, JSWrapperObject *object, JSWrapperData *data=NULL );
-	bool registerFunction(const char *funcName, void (*) (const v8::FunctionCallbackInfo<v8::Value>& args ) );
+	bool registerFunction(const char *funcName, void (*) (const v8::FunctionCallbackInfo<v8::Value>& args ));
 
 	// --- Classes
-	JSWrapperClass *createClass(const char *className, void (*) (const v8::FunctionCallbackInfo<v8::Value>& args ) );
+	JSWrapperClass *createClass(const char *className, void (*) (const v8::FunctionCallbackInfo<v8::Value>& args ));
 	
 	// ---
 	JSWrapperObject *copy();
@@ -72,7 +72,7 @@ public:
 	void getArrayElement( unsigned int index, JSWrapperData *data );
 
 	// --- Private
-	void *getPrivate() { return v8::Local<v8::External>::Cast(m_obj.Get( m_isolate)->GetInternalField(0) )->Value(); }
+	void *getPrivate() { return v8::Local<v8::External>::Cast(m_obj.Get( m_isolate)->GetInternalField(0))->Value(); }
 
 	// --- Utility
 	void fillArgs( std::vector<v8::Local<v8::Value>> *vector, ValueArray *args );	

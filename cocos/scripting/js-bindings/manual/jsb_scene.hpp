@@ -9,6 +9,6 @@
 #ifndef jsb_scene_hpp
 #define jsb_scene_hpp
 
-#include <stdio.h>
+bool jsb_register_Scene();
 
 #endif /* jsb_scene_hpp */

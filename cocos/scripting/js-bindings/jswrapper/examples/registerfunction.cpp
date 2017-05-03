@@ -63,7 +63,7 @@ JSWRAPPER_FUNCTION_END
 int main_registerfunction(int argc, char** argv)
 {
     JSWrapper jsWrapper( argv[0] );
-    if ( !jsWrapper.isValid() ) {
+    if ( !jsWrapper.isValid()) {
         printf("Unable to Initialize JavaScript Wrapper.\n");
         return 1;
     }

@@ -10,7 +10,6 @@
 #include "Object.hpp"
 
 namespace se { namespace internal {
-    // --- Fills in an ValueArray from SM Function Arguments
 
     void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr)
     {
@@ -19,32 +18,41 @@ namespace se { namespace internal {
             const JS::Value& v = argv[i];
             if (v.isNumber())
             {
-                outArr->push_back(v.toNumber());
+                outArr->push_back(Value(v.toNumber()));
             }
             else if (v.isString())
             {
                 JSString *jsstring = v.toString();
-                char* jsstr = JS_EncodeString( cx, jsstring );
-                outArr->push_back(jsstr);
-                JS_free(cx, jsstr);
+                const char* jsstr = JS_EncodeString( cx, jsstring );
+                outArr->push_back(Value(jsstr));
+                JS_free(cx, (void*)jsstr);
             }
             else if (v.isBoolean())
             {
-                outArr->push_back(v.toBoolean() );
+                outArr->push_back(Value(v.toBoolean()));
             }
             else if (v.isObject())
             {
-                Object *object = new Object(cx, &v.toObject());
-                outArr->push_back(object);
-                delete object;
+                Object* object = nullptr;
+                void* nativeObj = JS_GetPrivate(v.toObjectOrNull());
+                if (nativeObj != nullptr)
+                {
+                    object = se::Object::getObjectWithPtr(nativeObj);
+                }
+                if (object == nullptr)
+                {
+                    object = new Object(&v.toObject(), true);
+                }
+                outArr->push_back(Value(object));
+                object->release();
             }
             else if (v.isNull())
             {
-                outArr->push_back( Value::Type::Null );
+                outArr->push_back(Value::Null);
             }
             else
             {
-                outArr->push_back(Value::Type::Undefined);
+                outArr->push_back(Value::Undefined);
             }
         }
     }
@@ -74,15 +82,14 @@ namespace se { namespace internal {
                 case Value::Type::Boolean:
                 {
                     JS::RootedValue value(cx);
-                    value.setBoolean( arg.toBoolean());
+                    value.setBoolean(arg.toBoolean());
                     outArr->append(value);
                 }
                     break;
 
                 case Value::Type::Object:
                 {
-                    JS::RootedValue value(cx);
-                    value.setObject( arg.toObject()->getSMValue()->toObject());
+                    JS::RootedValue value(cx, JS::ObjectValue(*arg.toObject()->_getJSObject()));
                     outArr->append(value);
                 }
                     break;
@@ -124,11 +131,13 @@ namespace se { namespace internal {
         }
         else if (jsval.isBoolean())
         {
-            v->setBoolean(jsval.toBoolean() );
+            v->setBoolean(jsval.toBoolean());
         }
         else if (jsval.isObject())
         {
-            v->setObject(new Object(cx, &jsval.toObject()));
+            Object* obj = new Object(&jsval.toObject(), true);
+            v->setObject(obj);
+            obj->release();
         }
         else if (jsval.isNull())
         {
@@ -153,7 +162,7 @@ namespace se { namespace internal {
                 break;
             case Value::Type::String:
             {
-                JSString* jsstr = JS_NewStringCopyN( cx, data.toString().c_str(), data.toString().length() );
+                JSString* jsstr = JS_NewStringCopyN( cx, data.toString().c_str(), data.toString().length());
                 argv.rval().setString(jsstr);
             }
                 break;
@@ -161,7 +170,7 @@ namespace se { namespace internal {
                 argv.rval().setBoolean(data.toBoolean());
                 break;
             case Value::Type::Object:
-                argv.rval().setObject(data.toObject()->getSMValue()->toObject());
+                argv.rval().setObject(*data.toObject()->_getJSObject());
                 break;
             default:
                 argv.rval().setUndefined();
