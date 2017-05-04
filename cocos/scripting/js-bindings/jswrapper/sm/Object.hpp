@@ -78,6 +78,7 @@ namespace se {
 
         DestroyNotify m_notify;
         void* m_data;
+        bool _hasPrivateData;
 
         friend class ScriptEngine;
     };

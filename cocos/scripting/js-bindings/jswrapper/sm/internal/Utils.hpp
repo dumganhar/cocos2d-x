@@ -14,5 +14,7 @@ namespace se {
         
         void setReturnValue(JSContext* cx, const Value& data, const JS::CallArgs& argv);
 
+        bool hasPrivate(JSObject* obj);
+
     } // namespace internal {
 } // namespace se {

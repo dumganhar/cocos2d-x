@@ -63,7 +63,7 @@ namespace se {
         __clsMap.emplace(_name, this);
 
         _jsCls.name = _name.c_str();
-        _jsCls.flags = JSCLASS_HAS_PRIVATE;
+        _jsCls.flags = JSCLASS_HAS_PRIVATE | JSCLASS_FOREGROUND_FINALIZE;
 
         _classOps.finalize = _finalizeOp;
         _classOps.trace = nullptr;

@@ -135,12 +135,29 @@ namespace se {
     {
     }
 
+    void ScriptEngine::myWeakPointerCompartmentCallback(JSContext* cx, JSCompartment* comp, void* data)
+    {
+        myWeakPointerZoneGroupCallback(cx, data);
+    }
+
     void ScriptEngine::myWeakPointerZoneGroupCallback(JSContext* cx, void* data)
     {
-        for (const auto& e : __nativePtrToObjectMap)
+        bool isIterUpdated = false;
+        auto iter = __nativePtrToObjectMap.begin();
+        for (; iter != __nativePtrToObjectMap.end();)
         {
-            if (!e.second->isRooted())
-                e.second->updateAfterGC(data);
+            isIterUpdated = false;
+            if (!iter->second->isRooted())
+            {
+                if (iter->second->updateAfterGC(data))
+                {
+                    iter = __nativePtrToObjectMap.erase(iter);
+                    isIterUpdated = true;
+                }
+            }
+
+            if (!isIterUpdated)
+                ++iter;
         }
     }
 
@@ -148,7 +165,8 @@ namespace se {
     {
 //        for (const auto& e : __nativePtrToObjectMap)
 //        {
-//            e.second->trace(trc, data);
+//            if (!e.second->isRooted())
+//                e.second->trace(trc, data);
 //        }
     }
 
@@ -168,7 +186,7 @@ namespace se {
         Object::setContext(_cx);
 
         JS_SetGCParameter(_cx, JSGC_MAX_BYTES, 0xffffffff);
-        JS_SetGCParameter(_cx, JSGC_MODE, JSGC_MODE_ZONE);
+        JS_SetGCParameter(_cx, JSGC_MODE, JSGC_MODE_INCREMENTAL);
         JS_SetNativeStackQuota(_cx, 5000000);
 
         JS_SetGCCallback(_cx, on_garbage_collect, nullptr);
@@ -181,6 +199,10 @@ namespace se {
         JS_SetFutexCanWait(_cx);
 
         JS::SetWarningReporter(_cx, reportWarning);
+
+#if defined(JS_GC_ZEAL) && defined(DEBUG)
+        JS_SetGCZeal(_cx, 2, JS_DEFAULT_ZEAL_FREQ);
+#endif
 
         JS_SetDefaultLocale(_cx, "UTF-8");
 
@@ -212,7 +234,10 @@ namespace se {
         JS_DefineFunction(_cx, rootedGlobalObj, "forceGC", __forceGC, 0, JSPROP_READONLY | JSPROP_PERMANENT);
 
         JS_AddExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
-        JS_AddWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback, nullptr);
+//        JS_AddWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback, nullptr);
+        JS_AddWeakPointerCompartmentCallback(_cx, ScriptEngine::myWeakPointerCompartmentCallback, nullptr);
+
+        JS_FireOnNewGlobalObject(_cx, rootedGlobalObj);
 
         _isValid = true;
 
@@ -227,7 +252,8 @@ namespace se {
     void ScriptEngine::cleanup()
     {
         JS_RemoveExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
-        JS_RemoveWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback);
+//        JS_RemoveWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback);
+        JS_RemoveWeakPointerCompartmentCallback(_cx, ScriptEngine::myWeakPointerCompartmentCallback);
 
         if (_oldCompartment)
             JS_LeaveCompartment(_cx, _oldCompartment);
@@ -256,7 +282,21 @@ namespace se {
                .setVersion(JSVERSION_LATEST);
 
         JS::RootedValue rcValue( _cx );
-        bool ok = JS::Evaluate( _cx, options, script, strlen(script), &rcValue );
+        bool ok = JS::Evaluate( _cx, options, script, length, &rcValue);
+        if (!ok)
+        {
+            if (JS_IsExceptionPending(_cx))
+            {
+                JS::RootedValue exceptionValue(_cx);
+                JS_GetPendingException(_cx, &exceptionValue);
+                JS_ClearPendingException(_cx);
+                assert(exceptionValue.isObject());
+                JS::RootedObject exceptionObj(_cx, exceptionValue.toObjectOrNull());
+                JSErrorReport* report = JS_ErrorFromException(_cx, exceptionObj);
+                printf("ERROR: %s, file: %s, lineno: %u\n", report->message().c_str(), report->filename, report->lineno);
+                JS_ClearPendingException(_cx);
+            }
+        }
         assert(ok);
 
         if (ok && data)

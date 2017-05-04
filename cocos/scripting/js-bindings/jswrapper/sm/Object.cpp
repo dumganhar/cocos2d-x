@@ -5,7 +5,7 @@
 #ifdef SCRIPT_ENGINE_SM
 
 namespace se {
-
+ 
     std::unordered_map<void* /*native*/, Object* /*jsobj*/> __nativePtrToObjectMap;
 
     namespace {
@@ -23,11 +23,12 @@ namespace se {
     // ------------------------------------------------------- Object
 
     Object::Object(JSObject* obj, bool rooted)
-    : _isRooted(false),
-    _hasWeakRef(false),
-    _root(nullptr),
-    m_notify(nullptr),
-    m_data(nullptr)
+    : _isRooted(false)
+    , _hasWeakRef(false)
+    , _root(nullptr)
+    , m_notify(nullptr)
+    , m_data(nullptr)
+    , _hasPrivateData(false)
     {
         debug("created");
         if (rooted)
@@ -38,11 +39,14 @@ namespace se {
 
     Object::~Object()
     {
-        void* nativeObj = JS_GetPrivate(_getJSObject());
-        auto iter = __nativePtrToObjectMap.find(nativeObj);
-        if (iter != __nativePtrToObjectMap.end())
+        if (_hasPrivateData)
         {
-            __nativePtrToObjectMap.erase(iter);
+            void* nativeObj = JS_GetPrivate(_getJSObject());
+            auto iter = __nativePtrToObjectMap.find(nativeObj);
+            if (iter != __nativePtrToObjectMap.end())
+            {
+                __nativePtrToObjectMap.erase(iter);
+            }
         }
 
         if (_isRooted)
@@ -199,10 +203,11 @@ namespace se {
             contextObject.set(JS::CurrentGlobalOrNull(__cx));
         }
 
-        JS::RootedValue fun(__cx, JS::ObjectValue(*_getJSObject()));
+        JSObject* funcObj = _getJSObject();
+        JS::RootedValue func(__cx, JS::ObjectValue(*funcObj));
         JS::RootedValue rcValue(__cx);
 
-        bool ok = JS_CallFunctionValue(__cx, contextObject, fun, jsarr, &rcValue);
+        bool ok = JS_CallFunctionValue(__cx, contextObject, func, jsarr, &rcValue);
 
         if (ok && rval != nullptr)
         {
@@ -358,6 +363,7 @@ namespace se {
     {
         JS_SetPrivate(_getJSObject(), data);
         __nativePtrToObjectMap.emplace(data, this);
+        _hasPrivateData = true;
     }
 
     void Object::setContext(JSContext *cx)
@@ -440,6 +446,7 @@ namespace se {
     void Object::putToHeap(JSObject* thing)
     {
         _heap = thing;
+        _heap.get();
         _isRooted = false;
     }
 
@@ -500,9 +507,13 @@ namespace se {
     {
         debug("updateAfterGC()");
         assert(!_isRooted);
-        if (_heap != nullptr)
+        if (_heap.unbarrieredGet() != nullptr)
             JS_UpdateWeakPointerAfterGC(&_heap);
-        return (_heap == nullptr);
+        if (_heap.unbarrieredGet() == nullptr)
+        {
+            _isRooted = false;
+        }
+        return (_heap.unbarrieredGet() == nullptr);
     }
     
     bool Object::isRooted() const

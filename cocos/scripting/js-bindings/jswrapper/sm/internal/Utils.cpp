@@ -23,7 +23,7 @@ namespace se { namespace internal {
             else if (v.isString())
             {
                 JSString *jsstring = v.toString();
-                const char* jsstr = JS_EncodeString( cx, jsstring );
+                const char* jsstr = JS_EncodeString(cx, jsstring );
                 outArr->push_back(Value(jsstr));
                 JS_free(cx, (void*)jsstr);
             }
@@ -34,9 +34,10 @@ namespace se { namespace internal {
             else if (v.isObject())
             {
                 Object* object = nullptr;
-                void* nativeObj = JS_GetPrivate(v.toObjectOrNull());
-                if (nativeObj != nullptr)
+
+                if (hasPrivate(v.toObjectOrNull()))
                 {
+                    void* nativeObj = JS_GetPrivate(v.toObjectOrNull());
                     object = se::Object::getObjectWithPtr(nativeObj);
                 }
                 if (object == nullptr)
@@ -176,6 +177,12 @@ namespace se { namespace internal {
                 argv.rval().setUndefined();
                 break;
         }
+    }
+
+    bool hasPrivate(JSObject* obj)
+    {
+        const JSClass* cls = JS_GetClass(obj);
+        return !!(cls->flags & JSCLASS_HAS_PRIVATE);
     }
 
 

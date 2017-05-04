@@ -39,6 +39,7 @@ namespace se {
         void _releaseScriptObject(void* owner, void* target);
 
     private:
+        static void myWeakPointerCompartmentCallback(JSContext* cx, JSCompartment* comp, void* data);
         static void myWeakPointerZoneGroupCallback(JSContext* cx, void* data);
         static void myExtraGCRootsTracer(JSTracer* trc, void* data);
 

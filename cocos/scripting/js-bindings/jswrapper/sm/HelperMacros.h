@@ -13,11 +13,14 @@
         JS::Value _thiz = _argv.computeThis(cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(cx, argc, _argv, &args); \
-        void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
         se::Object* thisObject = nullptr; \
-        if (_nativeObj != nullptr) \
+        if (se::internal::hasPrivate(_thiz.toObjectOrNull())) \
         { \
-            thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+            void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
+            if (_nativeObj != nullptr) \
+            { \
+                thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+            } \
         }
 
 #define SE_FUNC_END \

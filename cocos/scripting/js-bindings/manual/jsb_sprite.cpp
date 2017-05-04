@@ -27,7 +27,7 @@ SE_FINALIZE_FUNC_BEGIN(Sprite_finalized)
     printf("Sprite_finalized ...\n");
     Node* thiz = (Node*) nativeThisObject;
     thiz->release();
-    thisObject->release();
+    SAFE_RELEASE(thisObject);
 }
 SE_FINALIZE_FUNC_END
 

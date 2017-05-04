@@ -42,14 +42,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
 
-//    ScriptingCore* sc = ScriptingCore::getInstance();
+    ScriptingCore* sc = ScriptingCore::getInstance();
 //
-//    ScriptEngineManager::getInstance()->setScriptEngine(sc);
+    ScriptEngineManager::getInstance()->setScriptEngine(sc);
 //
 ////    sc->runScript("main.js");
 //
-//    char* argv[] = {""};
-//    test_main(1, argv);
+    char* argv[] = {""};
+    test_main(1, argv);
 
     return true;
 }
