@@ -80,5 +80,6 @@ namespace se {
     };
 
     using ValueArray = std::vector<Value>;
+    extern ValueArray EmptyValueArray;
 
 } // namespace se {

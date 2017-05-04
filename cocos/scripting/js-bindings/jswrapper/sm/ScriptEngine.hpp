@@ -38,12 +38,20 @@ namespace se {
         void _retainScriptObject(void* owner, void* target);
         void _releaseScriptObject(void* owner, void* target);
 
+        enum class NodeEventType
+        {
+            ENTER,
+            EXIT,
+            ENTER_TRANSITION_DID_FINISH,
+            EXIT_TRANSITION_DID_START,
+            CLEANUP
+        };
+        void _onReceiveNodeEvent(void* node, NodeEventType type);
+
     private:
         static void myWeakPointerCompartmentCallback(JSContext* cx, JSCompartment* comp, void* data);
         static void myWeakPointerZoneGroupCallback(JSContext* cx, void* data);
         static void myExtraGCRootsTracer(JSTracer* trc, void* data);
-
-
 
         bool init();
         void cleanup();

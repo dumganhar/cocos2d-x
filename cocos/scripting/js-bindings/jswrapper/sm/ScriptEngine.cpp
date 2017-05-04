@@ -5,6 +5,12 @@
 
 #ifdef SCRIPT_ENGINE_SM
 
+SE_DECLARE_FUNC(Node_onEnter);
+SE_DECLARE_FUNC(Node_onExit);
+SE_DECLARE_FUNC(Node_onEnterTransitionDidFinish);
+SE_DECLARE_FUNC(Node_onExitTransitionDidStart);
+SE_DECLARE_FUNC(Node_cleanup);
+
 namespace se {
 
     namespace {
@@ -418,6 +424,56 @@ namespace se {
         JS::RootedValue rval(_cx);
 
         JS_CallFunctionName(_cx, jsbObj, "unregisterNativeRef", args, &rval);
+    }
+
+    void ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
+    {
+//        printf("ScriptEngine::_onReceiveNodeEvent, node: %p, type: %d\n", node, (int) type);
+
+        auto iter = __nativePtrToObjectMap.find(node);
+        if (iter  == __nativePtrToObjectMap.end())
+            return;
+
+        JS::RootedValue retval(_cx);
+        Object* target = iter->second;
+        const char* funcName = nullptr;
+        JSNative func = nullptr;
+        if (type == NodeEventType::ENTER)
+        {
+            funcName = "onEnter";
+            func = Node_onEnter;
+        }
+        else if (type == NodeEventType::EXIT)
+        {
+            funcName = "onExit";
+            func = Node_onExit;
+        }
+        else if (type == NodeEventType::ENTER_TRANSITION_DID_FINISH)
+        {
+            funcName = "onEnterTransitionDidFinish";
+            func = Node_onEnterTransitionDidFinish;
+        }
+        else if (type == NodeEventType::EXIT_TRANSITION_DID_START)
+        {
+            funcName = "onExitTransitionDidStart";
+            func = Node_onExitTransitionDidStart;
+        }
+        else if (type == NodeEventType::CLEANUP)
+        {
+            funcName = "cleanup";
+            func = Node_cleanup;
+        }
+        else
+        {
+            assert(false);
+        }
+
+        Value funcVal;
+        bool ok = target->getProperty(funcName, &funcVal);
+        if (ok && !funcVal.toObject()->isNativeFunction(func))
+        {
+            funcVal.toObject()->call(EmptyValueArray, target);
+        }
     }
 
 } // namespace se {

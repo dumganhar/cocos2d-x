@@ -103,7 +103,7 @@ namespace se {
         JS::RootedValue rcValue(__cx);
         bool ok = JS_GetProperty(__cx, object, name, &rcValue);
 
-        if (data)
+        if (ok && data)
         {
             if (rcValue.isString())
             {
@@ -308,6 +308,12 @@ namespace se {
     bool Object::isFunction() const
     {
         return JS_ObjectIsFunction(__cx, _getJSObject());
+    }
+
+    bool Object::isNativeFunction(JSNative func) const
+    {
+        JSObject* obj = _getJSObject();
+        return JS_ObjectIsFunction(__cx, obj) && JS_IsNativeFunction(obj, func);
     }
 
     void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
@@ -521,7 +527,14 @@ namespace se {
         return _isRooted;
     }
 
-
+    bool Object::isSame(Object* o) const
+    {
+        JS::RootedValue v1(__cx, JS::ObjectValue(*_getJSObject()));
+        JS::RootedValue v2(__cx, JS::ObjectValue(*o->_getJSObject()));
+        bool same = false;
+        bool ok = JS_SameValue(__cx, v1, v2, &same);
+        return ok && same;
+    }
 
 } // namespace se {
 

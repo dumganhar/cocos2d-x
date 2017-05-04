@@ -56,7 +56,7 @@ void ScriptingCore::retainScriptObject(Ref* owner, Ref* target)
 
 void ScriptingCore::rootScriptObject(Ref* target)
 {
-
+    assert(false);
 }
 
 void ScriptingCore::releaseScriptObject(Ref* owner, Ref* target)
@@ -66,36 +66,129 @@ void ScriptingCore::releaseScriptObject(Ref* owner, Ref* target)
 
 void ScriptingCore::unrootScriptObject(Ref* target)
 {
-
+    assert(false);
 }
 
 void ScriptingCore::releaseAllChildrenRecursive(Node *node)
 {
-
+    const Vector<Node*>& children = node->getChildren();
+    for (auto child : children)
+    {
+        releaseScriptObject(node, child);
+        releaseAllChildrenRecursive(child);
+    }
 }
 
 void ScriptingCore::releaseAllNativeRefs(Ref* owner)
 {
-
+    assert(false);
 }
 
 void ScriptingCore::removeScriptObjectByObject(Ref* obj)
 {
-
+    assert(false);
 }
 
 int ScriptingCore::executeGlobalFunction(const char* functionName)
 {
+    assert(false);
     return 0;
 }
 
-int ScriptingCore::sendEvent(cocos2d::ScriptEvent* message)
+int ScriptingCore::sendEvent(cocos2d::ScriptEvent* evt)
 {
+    if (NULL == evt)
+        return 0;
+
+    // special type, can't use this code after JSAutoCompartment
+    if (evt->type == kRestartGame)
+    {
+//        restartVM();
+        return 0;
+    }
+
+    switch (evt->type)
+    {
+        case kNodeEvent:
+        {
+            return handleNodeEvent(evt->data);
+        }
+            break;
+//        case kScriptActionEvent:
+//        {
+//            return handleActionEvent(evt->data);
+//        }
+//            break;
+//        case kMenuClickedEvent:
+//            break;
+//        case kTouchEvent:
+//        {
+//            TouchScriptData* data = (TouchScriptData*)evt->data;
+//            return handleTouchEvent(data->nativeObject, data->actionType, data->touch, data->event);
+//        }
+//            break;
+//        case kTouchesEvent:
+//        {
+//            TouchesScriptData* data = (TouchesScriptData*)evt->data;
+//            return handleTouchesEvent(data->nativeObject, data->actionType, data->touches, data->event);
+//        }
+//            break;
+//        case kComponentEvent:
+//        {
+//            return handleComponentEvent(evt->data);
+//        }
+//            break;
+        default:
+//            CCASSERT(false, "Invalid script event.");
+            break;
+    }
+
     return 0;
 }
 
 bool ScriptingCore::parseConfig(ConfigType type, const std::string& str)
 {
+    assert(false);
     return false;
+}
+
+// private methods
+
+int ScriptingCore::handleNodeEvent(void* data)
+{
+    if (nullptr == data)
+        return 0;
+
+    BasicScriptData* basicScriptData = static_cast<BasicScriptData*>(data);
+    if (nullptr == basicScriptData->nativeObject || nullptr == basicScriptData->value)
+        return 0;
+
+    int ret = 0;
+
+    void* node = basicScriptData->nativeObject;
+    int action = *((int*)(basicScriptData->value));
+
+    if (action == kNodeOnEnter)
+    {
+        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::ENTER);
+    }
+    else if (action == kNodeOnExit)
+    {
+        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::EXIT);
+    }
+    else if (action == kNodeOnEnterTransitionDidFinish)
+    {
+        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::ENTER_TRANSITION_DID_FINISH);
+    }
+    else if (action == kNodeOnExitTransitionDidStart)
+    {
+        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::EXIT_TRANSITION_DID_START);
+    }
+    else if (action == kNodeOnCleanup)
+    {
+        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::CLEANUP);
+    }
+    
+    return ret;
 }
 

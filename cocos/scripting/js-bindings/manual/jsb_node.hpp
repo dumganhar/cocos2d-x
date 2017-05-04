@@ -13,6 +13,8 @@
 
 extern se::Object* __jsb_Node_proto;
 
+SE_DECLARE_FUNC(Node_onEnter);
+
 bool jsb_register_Node();
 
 #endif /* jsb_node_hpp */

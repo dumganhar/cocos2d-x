@@ -25,9 +25,6 @@
 
 #include "base/CCScriptSupport.h"
 
-#include "jsapi.h"
-#include "jsfriendapi.h"
-
 /**
  * @addtogroup jsb
  * @{
@@ -135,6 +132,9 @@ public:
 
 private:
     ScriptingCore();
+
+    int handleNodeEvent(void* data);
+
     bool _callFromScript;
 };
 

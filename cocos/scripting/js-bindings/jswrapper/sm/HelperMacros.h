@@ -5,8 +5,11 @@
 #define SAFE_RELEASE(obj) if (obj != nullptr) obj->release()
 
 
+#define SE_DECLARE_FUNC(funcName) \
+    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp)
+
 #define SE_FUNC_BEGIN(funcName) \
-    static bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
+    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
     { \
         bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
@@ -29,7 +32,7 @@
     }
 
 #define SE_FINALIZE_FUNC_BEGIN(funcName) \
-    static void funcName(JSFreeOp* fop, JSObject* obj) \
+    void funcName(JSFreeOp* fop, JSObject* obj) \
     { \
         void* nativeThisObject = JS_GetPrivate(obj); \
         se::Object* thisObject = nullptr; \
@@ -38,14 +41,16 @@
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         }
 
-#define SE_FINALIZE_FUNC_END }
+#define SE_FINALIZE_FUNC_END \
+        SAFE_RELEASE(thisObject); \
+    }
 
 #define SE_FINALIZE_FUNC_GET_PRIVATE_OBJ(jsobj) JS_GetPrivate(obj)
 
 // --- Constructor
 
 #define SE_CTOR_BEGIN(funcName, clsName) \
-    static bool funcName(JSContext* cx, unsigned argc, JS::Value* vp) \
+    bool funcName(JSContext* cx, unsigned argc, JS::Value* vp) \
     { \
         bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
@@ -63,7 +68,7 @@
 // --- Get Property
 
 #define SE_GET_PROPERTY_BEGIN(funcName) \
-    static bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
+    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
     { \
         bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
@@ -86,7 +91,7 @@
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName) \
-    static bool funcName(JSContext *cx, unsigned argc, JS::Value *vp) \
+    bool funcName(JSContext *cx, unsigned argc, JS::Value *vp) \
     { \
         bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \

@@ -3,6 +3,8 @@
 
 namespace se {
 
+    ValueArray EmptyValueArray;
+
     Value Value::Null = Value(Type::Null);
     Value Value::Undefined = Value(Type::Undefined);
 

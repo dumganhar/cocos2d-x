@@ -30,6 +30,7 @@ namespace se {
 
         // --- Function
         bool isFunction() const;
+        bool isNativeFunction(JSNative func) const;
         bool call(const ValueArray& args, Object* thisObject, Value* rval = nullptr);
 
         bool defineFunction(const char *funcName, JSNative func, int minArgs = 0);
@@ -56,6 +57,8 @@ namespace se {
         void switchToRooted(DestroyNotify notify = nullptr, void *data = nullptr);
         void switchToUnrooted();
         bool isRooted() const;
+
+        bool isSame(Object* o) const;
 
     private:
         static void setContext(JSContext* cx);
