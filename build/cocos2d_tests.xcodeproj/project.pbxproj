@@ -224,7 +224,6 @@
 		1A0EE43318CDF799004CD58F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39E18CD9EE50087CE3A /* UIKit.framework */; };
 		1A0EE43418CDF799004CD58F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39C18CD9ED80087CE3A /* AVFoundation.framework */; };
 		1A0EE43518CDF799004CD58F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64832165F3AFD007D4F18 /* Foundation.framework */; };
-		1A4711B61EB9BACB0027E3D9 /* registerclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */; };
 		1A78A5521D1A3C9B00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5531D1A3CE800B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5541D1A3D0F00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
@@ -6520,7 +6519,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				185664081B422F72009EF2AE /* AppDelegate.cpp in Sources */,
-				1A4711B61EB9BACB0027E3D9 /* registerclass.cpp in Sources */,
 				1856643C1B422FFF009EF2AE /* NativeOcClass.m in Sources */,
 				1856644F1B423047009EF2AE /* main.cpp in Sources */,
 				1A9E99911EB1D052001AEA19 /* sm_main.mm in Sources */,

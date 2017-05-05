@@ -7,6 +7,9 @@
 //
 
 #include "Utils.hpp"
+
+#ifdef SCRIPT_ENGINE_SM
+
 #include "Object.hpp"
 
 namespace se { namespace internal {
@@ -188,3 +191,5 @@ namespace se { namespace internal {
 
 
 }} // namespace se { namespace internal {
+
+#endif // #ifdef SCRIPT_ENGINE_SM

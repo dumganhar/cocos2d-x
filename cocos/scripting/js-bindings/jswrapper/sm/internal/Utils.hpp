@@ -1,5 +1,9 @@
 #pragma once
 
+#include "../../config.hpp"
+
+#ifdef SCRIPT_ENGINE_SM
+
 #include "../Base.h"
 
 #include "../../Value.hpp"
@@ -18,3 +22,5 @@ namespace se {
 
     } // namespace internal {
 } // namespace se {
+
+#endif // #ifdef SCRIPT_ENGINE_SM

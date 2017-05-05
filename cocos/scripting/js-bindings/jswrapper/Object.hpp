@@ -3,10 +3,10 @@
 #include "config.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
-#include "sm/SeApi.h"
+#include "sm/Object.hpp"
 #endif
 
 #ifdef SCRIPT_ENGINE_V8
- #include "v8/SeApi.h"
+#include "v8/Object.hpp"
 #endif
 

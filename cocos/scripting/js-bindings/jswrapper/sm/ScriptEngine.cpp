@@ -74,7 +74,7 @@ namespace se {
         return true;
     }
 
-    // ------------------------------------------------------- JSWrapper
+    // ------------------------------------------------------- ScriptEngine
 
     static void
     on_garbage_collect(JSContext* cx, JSGCStatus status, void* data)
