@@ -130,6 +130,7 @@ static void removeSchedule(se::Object* jsFunc, se::Object* jsThis)
     auto funcObjKeyMapIter = __jsthis_schedulekey_map.find(jsThis);
     if (funcObjKeyMapIter != __jsthis_schedulekey_map.end())
     {
+        jsThis->detachChild(jsFunc);
         funcObjKeyMapIter->second.erase(jsFunc);
         if (funcObjKeyMapIter->second.empty())
             __jsthis_schedulekey_map.erase(funcObjKeyMapIter);
