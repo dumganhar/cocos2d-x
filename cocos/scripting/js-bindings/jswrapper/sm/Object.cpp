@@ -53,11 +53,15 @@ namespace se {
     {
         if (_hasPrivateData)
         {
-            void* nativeObj = JS_GetPrivate(_getJSObject());
-            auto iter = __nativePtrToObjectMap.find(nativeObj);
-            if (iter != __nativePtrToObjectMap.end())
+            JSObject* jsobj = _getJSObject();
+            if (jsobj != nullptr)
             {
-                __nativePtrToObjectMap.erase(iter);
+                void* nativeObj = JS_GetPrivate(jsobj);
+                auto iter = __nativePtrToObjectMap.find(nativeObj);
+                if (iter != __nativePtrToObjectMap.end())
+                {
+                    __nativePtrToObjectMap.erase(iter);
+                }
             }
         }
 

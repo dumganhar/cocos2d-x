@@ -142,6 +142,7 @@ namespace se {
             {
                 if (iter->second->updateAfterGC(data))
                 {
+                    iter->second->release();
                     iter = __nativePtrToObjectMap.erase(iter);
                     isIterUpdated = true;
                 }

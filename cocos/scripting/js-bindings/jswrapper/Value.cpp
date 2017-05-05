@@ -85,8 +85,11 @@ namespace se {
                     _u._boolean = v._u._boolean;
                     break;
                 case Type::Object:
+                {
+                    assert(nullptr == _u._object);
                     _u._object = v._u._object;
                     _u._object->addRef();
+                }
                     break;
                 default:
                     break;
@@ -220,12 +223,6 @@ namespace se {
         if (_type != type)
         {
             switch (_type) {
-                case Type::Null:
-                    break;
-                case Type::Number:
-                    break;
-                case Type::Boolean:
-                    break;
                 case Type::String:
                     delete _u._string;
                     break;
@@ -239,16 +236,8 @@ namespace se {
             memset(&_u, 0, sizeof(_u));
 
             switch (type) {
-                case Type::Null:
-                    break;
-                case Type::Number:
-                    break;
-                case Type::Boolean:
-                    break;
                 case Type::String:
                     _u._string = new std::string();
-                    break;
-                case Type::Object:
                     break;
                 default:
                     break;

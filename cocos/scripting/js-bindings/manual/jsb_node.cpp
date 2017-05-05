@@ -134,6 +134,9 @@ static void removeSchedule(se::Object* jsFunc, se::Object* jsThis)
         funcObjKeyMapIter->second.erase(jsFunc);
         if (funcObjKeyMapIter->second.empty())
             __jsthis_schedulekey_map.erase(funcObjKeyMapIter);
+
+        jsFunc->release();
+        jsThis->release();
     }
 }
 
@@ -165,6 +168,8 @@ static void insertSchedule(se::Object* jsFunc, se::Object* jsThis, const std::st
 {
     auto& funcKeyMap = __jsthis_schedulekey_map[jsThis];
     funcKeyMap.emplace(jsFunc, key);
+    jsFunc->addRef();
+    jsThis->addRef();
 }
 
 class UnscheduleNotifier
