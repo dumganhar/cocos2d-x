@@ -622,6 +622,7 @@
 		1AF5ECFC1E56D6BC00484A9D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
 		1AF5ECFD1E56D6BC00484A9D /* cocosvideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3EA0FB5D191B92F100B170C8 /* cocosvideo.mp4 */; };
 		1AF5ECFE1E56D6CD00484A9D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
+		1AF7B75A1EBC7B900076C958 /* registerclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */; };
 		1F33634F18E37E840074764D /* RefPtrTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F33634D18E37E840074764D /* RefPtrTest.cpp */; };
 		1F33635018E37E840074764D /* RefPtrTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F33634D18E37E840074764D /* RefPtrTest.cpp */; };
 		27C5CE011C6E0469000CA4B3 /* SpriteFrameCacheTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C5CDFF1C6E0469000CA4B3 /* SpriteFrameCacheTest.cpp */; };
@@ -6519,6 +6520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185664081B422F72009EF2AE /* AppDelegate.cpp in Sources */,
+				1AF7B75A1EBC7B900076C958 /* registerclass.cpp in Sources */,
 				1856643C1B422FFF009EF2AE /* NativeOcClass.m in Sources */,
 				1856644F1B423047009EF2AE /* main.cpp in Sources */,
 				1A9E99911EB1D052001AEA19 /* sm_main.mm in Sources */,

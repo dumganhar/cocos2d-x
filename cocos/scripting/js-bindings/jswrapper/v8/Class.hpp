@@ -13,24 +13,34 @@ namespace se {
 	class Class {
 
 	public:
-        Class(v8::Isolate* isolate, const std::string& clsName, Object* parentObj, v8::FunctionCallback ctor);
+        Class();
 		~Class();
 
-		void install();
+        static Class* create(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor);
 
-		void registerFunction(const char* name, v8::FunctionCallback func);
-        void registerProperty(const char* name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
+        bool init(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor);
+		bool install();
+
+        bool defineFunction(const char *name, v8::FunctionCallback func);
+        bool defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
+        bool defineStaticFunction(const char *name, v8::FunctionCallback func);
+        bool defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
 
 	private:
 
-		v8::Isolate* m_isolate;
-		std::string m_name;
-		Object* m_parentObject;
+        static v8::Local<v8::Object> _createJSObject(const std::string &clsName);
+        static void setIsolate(v8::Isolate* isolate);
+		
+		std::string _name;
+		Object* _parent;
+        Object* _parentProto;
 
-        v8::FunctionCallback m_constructor;
+        v8::FunctionCallback _ctor;
 
-		v8::Handle<v8::FunctionTemplate> m_constructorTemplate;
-		v8::Handle<v8::ObjectTemplate> m_constructorInstanceTemplate;
+		v8::Handle<v8::FunctionTemplate> _ctorTemplate;
+		v8::Handle<v8::ObjectTemplate> _ctorInstanceTemplate;
+
+        friend class ScriptEngine;
 	};
 
 } // namespace se {

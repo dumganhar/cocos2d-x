@@ -61,9 +61,8 @@
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(cx, argc, _argv, &args); \
-        JS::RootedObject _jsobj(cx, se::Class::_createJSObject(clsName)); \
-        se::Object* thisObject = new se::Object(_jsobj, false); \
-        _argv.rval().setObject(*_jsobj);
+        se::Object* thisObject = se::Object::createObject(clsName, false); \
+        _argv.rval().setObject(*thisObject->toObject());
 
 #define SE_CTOR_END \
         SAFE_RELEASE(thisObject); \

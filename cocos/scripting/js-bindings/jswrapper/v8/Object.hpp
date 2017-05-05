@@ -15,11 +15,9 @@ namespace se {
     class Object : public Ref
     {
     public:
-        Object(v8::Isolate* isolate, v8::Local<v8::Object> obj);
+        Object(v8::Local<v8::Object> obj);
 
-        Object(Object *);
-
-        ~Object();
+        virtual ~Object();
 
         // --- Getter/Setter
         bool get(const char *name, Value* data = NULL);
@@ -27,25 +25,14 @@ namespace se {
         void set(const char *name, Value& data);
 
         // --- Function
-        bool isFunction() {
-            return m_obj.Get(m_isolate)->IsCallable();
-        }
-
+        bool isFunction() const;
         bool call(ValueArray *args, Object *object, Value *data = NULL);
 
         bool registerFunction(const char *funcName, v8::FunctionCallback func);
 
-        // --- Classes
-        Class *createClass(const char *className, v8::FunctionCallback ctor);
-
-        // ---
-        Object *copy();
 
         // --- TypedArrays
-        bool isTypedArray() {
-            return m_obj.Get(m_isolate)->IsTypedArray();
-        }
-
+        bool isTypedArray() const;
         void getAsFloat32Array(float **ptr, unsigned int *length);
 
         void getAsUint8Array(unsigned char **ptr, unsigned int *length);
@@ -55,24 +42,19 @@ namespace se {
         void getAsUint32Array(unsigned int **ptr, unsigned int *length);
 
         // --- Arrays
-        bool isArray() {
-            return m_obj.Get(m_isolate)->IsArray();
-        }
-
+        bool isArray() const;
         void getArrayLength(unsigned int *length);
 
         void getArrayElement(unsigned int index, Value *data);
 
         // --- Private
-        void *getPrivate() {
-            return v8::Local<v8::External>::Cast(m_obj.Get(m_isolate)->GetInternalField(0))->Value();
-        }
-
+        void* getPrivateData() const;
         // --- Utility
         void fillArgs(std::vector<v8::Local<v8::Value>> *vector, ValueArray *args);
 
-        v8::Isolate *m_isolate;
-        v8::UniquePersistent<v8::Object> m_obj;
+    private:
+        static void setIsolate(v8::Isolate* isolate);
+        v8::UniquePersistent<v8::Object> _obj;
     };
 
 } // namespace se {

@@ -7,16 +7,17 @@
 namespace se {
 // ------------------------------------------------------- Object
 
+    namespace {
+        std::unordered_map<std::string, Class *> __clsMap;
+        v8::Isolate* __isolate = nullptr;
+    }
 
-    Class::Class(v8::Isolate* isolate, const std::string& clsName, Object* parentObj, v8::FunctionCallback ctor)
-    : m_isolate(isolate)
-    , m_name(clsName)
-    , m_parentObject(parentObj)
-    , m_constructor(ctor)
+    Class::Class()
+    : _parent(nullptr)
+    , _parentProto(nullptr)
+    , _ctor(nullptr)
     {
-        m_constructorTemplate = v8::FunctionTemplate::New(m_isolate, m_constructor);
-        m_constructorInstanceTemplate = m_constructorTemplate->InstanceTemplate();
-        m_constructorInstanceTemplate->SetInternalFieldCount(1);
+
     }
 
     Class::~Class()
@@ -24,19 +25,77 @@ namespace se {
 
     }
 
-    void Class::install()
+    /* static */
+    Class* Class::create(const std::string& clsName, se::Object* parent, Object* parentProto, v8::FunctionCallback ctor)
     {
-        m_parentObject->m_obj.Get(m_isolate)->Set(v8::String::NewFromUtf8(m_isolate, m_name.c_str()), m_constructorTemplate->GetFunction());
+        Class* cls = new Class();
+        if (cls != nullptr && !cls->init(clsName, parent, parentProto, ctor))
+        {
+            delete cls;
+            cls = nullptr;
+        }
+        return cls;
     }
 
-    void Class::registerFunction(const char* name, v8::FunctionCallback func)
+    bool Class::init(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor)
     {
-        m_constructorInstanceTemplate->Set(v8::String::NewFromUtf8(m_isolate, name), v8::FunctionTemplate::New(m_isolate, func));
+        _name = clsName;
+        _parent = parent;
+        _parentProto = parentProto;
+
+        _ctorTemplate = v8::FunctionTemplate::New(__isolate, _ctor);
+        _ctorInstanceTemplate = _ctorTemplate->InstanceTemplate();
+        _ctorInstanceTemplate->SetInternalFieldCount(1);
+
+        return true;
     }
 
-    void Class::registerProperty(const char* name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    bool Class::install()
     {
-        m_constructorInstanceTemplate->SetAccessor(v8::String::NewFromUtf8(m_isolate, name), getter, setter);
+        assert(__clsMap.find(_name) == __clsMap.end());
+
+        __clsMap.emplace(_name, this);
+        _parent->_obj.Get(__isolate)->Set(v8::String::NewFromUtf8(__isolate, _name.c_str()), _ctorTemplate->GetFunction());
+        return true;
+    }
+
+    bool Class::defineFunction(const char *name, v8::FunctionCallback func)
+    {
+        _ctorTemplate->PrototypeTemplate()->Set(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, func));
+        return true;
+    }
+
+    bool Class::defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    {
+        _ctorTemplate->PrototypeTemplate()->SetAccessor(v8::String::NewFromUtf8(__isolate, name), getter, setter);
+        return true;
+    }
+
+    bool Class::defineStaticFunction(const char *name, v8::FunctionCallback func)
+    {
+        assert(false);
+        return true;
+    }
+
+    bool Class::defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    {
+        assert(false);
+        return true;
+    }
+
+    v8::Local<v8::Object> Class::_createJSObject(const std::string &clsName)
+    {
+        auto iter = __clsMap.find(clsName);
+        if (iter == __clsMap.end())
+            return v8::Local<v8::Object>();
+
+        return iter->second->_ctorInstanceTemplate->NewInstance();
+    }
+
+    /* static */
+    void Class::setIsolate(v8::Isolate* isolate)
+    {
+        __isolate = isolate;
     }
 
 } // namespace se {

@@ -29,10 +29,9 @@ namespace se {
         bool defineStaticProperty(const char *name, JSNative getter, JSNative setter);
         bool defineFinalizedFunction(JSFinalizeOp func);
 
-        static JSObject* _createJSObject(const std::string &clsName);
-
     private:
 
+        static JSObject* _createJSObject(const std::string &clsName);
         static void setContext(JSContext* cx);
         static void cleanup();
 
@@ -53,6 +52,7 @@ namespace se {
         JSFinalizeOp _finalizeOp;
 
         friend class ScriptEngine;
+        friend class Object;
     };
 
 } // namespace se {

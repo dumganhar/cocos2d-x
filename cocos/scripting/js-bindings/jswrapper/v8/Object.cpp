@@ -6,26 +6,29 @@
 
 namespace se {
 
-    Object::Object(v8::Isolate *isolate, v8::Local<v8::Object> obj)
-            : m_isolate(isolate), m_obj(isolate, obj) {
+    namespace {
+        v8::Isolate* __isolate = nullptr;
     }
 
-    Object::Object(Object *object)
-            : m_isolate(object->m_isolate), m_obj(object->m_isolate, object->m_obj.Get(m_isolate)) {
+    Object::Object(v8::Local<v8::Object> obj)
+            : _obj(__isolate, obj) {
     }
 
-    Object *Object::copy() {
-        Object *object = new Object(this);
-        return object;
+    Object::~Object()
+    {
     }
 
-// --- Getter/Setter
+    /* static */
+    void Object::setIsolate(v8::Isolate* isolate)
+    {
+        __isolate = isolate;
+    }
 
     bool Object::get(const char *name, Value *data) {
-        v8::HandleScope handle_scope(m_isolate);
+        v8::HandleScope handle_scope(__isolate);
 
-        v8::Local <v8::String> nameValue = v8::String::NewFromUtf8(m_isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
-        v8::Local<v8::Value> result = m_obj.Get(m_isolate)->Get(nameValue);
+        v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
+        v8::Local<v8::Value> result = _obj.Get(__isolate)->Get(nameValue);
 
         if (data) {
             if (result->IsNumber())
@@ -36,7 +39,7 @@ namespace se {
             } else if (result->IsBoolean())
                 data->setBoolean(result->ToBoolean()->Value());
             else if (result->IsObject())
-                data->setObject(new Object(m_isolate, result->ToObject()));
+                data->setObject(new Object(result->ToObject()));
             else if (result->IsFunction()) {
                 printf("I'm function\n");
             } else if (result->IsNull())
@@ -48,35 +51,55 @@ namespace se {
     }
 
     void Object::set(const char *name, Value &data) {
-        v8::Local <v8::String> nameValue = v8::String::NewFromUtf8(m_isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
+        v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
 
         if (data.getType() == Value::Type::Number) {
-            v8::Local <v8::Value> value = v8::Number::New(m_isolate, data.toNumber());
-            m_obj.Get(m_isolate)->Set(nameValue, value);
+            v8::Local<v8::Value> value = v8::Number::New(__isolate, data.toNumber());
+            _obj.Get(__isolate)->Set(nameValue, value);
         } else if (data.getType() == Value::Type::String) {
-            v8::Local <v8::String> value = v8::String::NewFromUtf8(m_isolate, data.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-            m_obj.Get(m_isolate)->Set(nameValue, value);
+            v8::Local<v8::String> value = v8::String::NewFromUtf8(__isolate, data.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+            _obj.Get(__isolate)->Set(nameValue, value);
         } else if (data.getType() == Value::Type::Boolean) {
-            v8::Local <v8::Value> value = v8::Boolean::New(m_isolate, data.toBoolean());
-            m_obj.Get(m_isolate)->Set(nameValue, value);
+            v8::Local<v8::Value> value = v8::Boolean::New(__isolate, data.toBoolean());
+            _obj.Get(__isolate)->Set(nameValue, value);
         } else if (data.getType() == Value::Type::Object) {
-            m_obj.Get(m_isolate)->Set(nameValue, data.toObject()->m_obj.Get(m_isolate));
+            _obj.Get(__isolate)->Set(nameValue, data.toObject()->_obj.Get(__isolate));
         } else if (data.getType() == Value::Type::Null) {
-            m_obj.Get(m_isolate)->Set(nameValue, v8::Null(m_isolate));
-        } else m_obj.Get(m_isolate)->Set(nameValue, v8::Undefined(m_isolate));
+            _obj.Get(__isolate)->Set(nameValue, v8::Null(__isolate));
+        } else _obj.Get(__isolate)->Set(nameValue, v8::Undefined(__isolate));
+    }
+
+    bool Object::isFunction() const
+    {
+        return _obj.Get(__isolate)->IsCallable();
+    }
+
+    bool Object::isTypedArray() const
+    {
+        return _obj.Get(__isolate)->IsTypedArray();
+    }
+
+    bool Object::isArray() const
+    {
+        return _obj.Get(__isolate)->IsArray();
+    }
+
+    void* Object::getPrivateData() const
+    {
+        return v8::Local<v8::External>::Cast(_obj.Get(__isolate)->GetInternalField(0))->Value();
     }
 
 // --- Call Function
 
     bool Object::call(ValueArray *args, Object *object, Value *data) {
         int argc = 0;
-        std::vector<v8::Local < v8::Value>> argv;
+        std::vector<v8::Local<v8::Value>> argv;
         if (args) {
             argc = args->size();
             fillArgs(&argv, args);
         }
 
-        v8::Local <v8::Value> result = m_obj.Get(m_isolate)->CallAsFunction(object->m_obj.Get(m_isolate), argc, &argv[0]);
+        v8::Local<v8::Value> result = _obj.Get(__isolate)->CallAsFunction(object->_obj.Get(__isolate), argc, &argv[0]);
 
         if (data) {
             if (result->IsNumber())
@@ -87,7 +110,7 @@ namespace se {
             } else if (result->IsBoolean())
                 data->setBoolean(result->ToBoolean()->Value());
             else if (result->IsObject())
-                data->setObject(new Object(m_isolate, result->ToObject()));
+                data->setObject(new Object(result->ToObject()));
             else if (result->IsNull())
                 data->setNull();
             else data->setUndefined();
@@ -98,29 +121,20 @@ namespace se {
 
 // --- Register Function
 
-    bool Object::registerFunction(const char *funcName, void (*func)(const v8::FunctionCallbackInfo <v8::Value> &args)) {
-        m_obj.Get(m_isolate)->Set(v8::String::NewFromUtf8(m_isolate, funcName), v8::FunctionTemplate::New(m_isolate, func)->GetFunction());
+    bool Object::registerFunction(const char *funcName, void (*func)(const v8::FunctionCallbackInfo<v8::Value> &args)) {
+        _obj.Get(__isolate)->Set(v8::String::NewFromUtf8(__isolate, funcName), v8::FunctionTemplate::New(__isolate, func)->GetFunction());
         return true;
-    }
-
-// --- Classes
-
-    Class *Object::createClass(const char *className, v8::FunctionCallback ctor)
-    {
-        Class *wrapperClass = new Class(m_isolate, className, this, ctor);
-
-        return wrapperClass;
     }
 
 // --- Arrays
 
     void Object::getArrayLength(unsigned int *length) {
-        int len = m_obj.Get(m_isolate)->Get(v8::String::NewFromUtf8(m_isolate, "length"))->ToObject()->Int32Value();
+        int len = _obj.Get(__isolate)->Get(v8::String::NewFromUtf8(__isolate, "length"))->ToObject()->Int32Value();
         *length = len;
     }
 
     void Object::getArrayElement(unsigned int index, Value *data) {
-        v8::Local <v8::Value> result = m_obj.Get(m_isolate)->Get(index);
+        v8::Local<v8::Value> result = _obj.Get(__isolate)->Get(index);
 
         if (data) {
             if (result->IsNumber())
@@ -131,7 +145,7 @@ namespace se {
             } else if (result->IsBoolean())
                 data->setBoolean(result->ToBoolean()->Value());
             else if (result->IsObject())
-                data->setObject(new Object(m_isolate, result->ToObject()));
+                data->setObject(new Object(result->ToObject()));
             else if (result->IsNull())
                 data->setNull();
             else data->setUndefined();
@@ -142,9 +156,9 @@ namespace se {
         float *pt;
         unsigned int len;
 
-        v8::Local <v8::Value> value = m_obj.Get(m_isolate);
+        v8::Local<v8::Value> value = _obj.Get(__isolate);
 
-        v8::Local <v8::Float32Array> myarr = m_obj.Get(m_isolate).As<v8::Float32Array>();
+        v8::Local<v8::Float32Array> myarr = _obj.Get(__isolate).As<v8::Float32Array>();
         len = myarr->Length();
         pt = (float *) ((char *) myarr->Buffer()->GetContents().Data() + myarr->ByteOffset());
 
@@ -156,9 +170,9 @@ namespace se {
         unsigned char *pt;
         unsigned int len;
 
-        v8::Local<v8::Value> value = m_obj.Get(m_isolate);
+        v8::Local<v8::Value> value = _obj.Get(__isolate);
 
-        v8::Local <v8::Uint8Array> myarr = m_obj.Get(m_isolate).As<v8::Uint8Array>();
+        v8::Local<v8::Uint8Array> myarr = _obj.Get(__isolate).As<v8::Uint8Array>();
 
         len = myarr->Length();
         pt = (unsigned char *) myarr->Buffer()->GetContents().Data() + myarr->ByteOffset();
@@ -171,9 +185,9 @@ namespace se {
         unsigned short *pt;
         unsigned int len;
 
-        v8::Local<v8::Value> value = m_obj.Get(m_isolate);
+        v8::Local<v8::Value> value = _obj.Get(__isolate);
 
-        v8::Local <v8::Uint16Array> myarr = m_obj.Get(m_isolate).As<v8::Uint16Array>();
+        v8::Local<v8::Uint16Array> myarr = _obj.Get(__isolate).As<v8::Uint16Array>();
 
         len = myarr->Length();
         pt = (unsigned short *) myarr->Buffer()->GetContents().Data();
@@ -186,9 +200,9 @@ namespace se {
         unsigned int *pt;
         unsigned int len;
 
-        v8::Local<v8::Value> value = m_obj.Get(m_isolate);
+        v8::Local<v8::Value> value = _obj.Get(__isolate);
 
-        v8::Local <v8::Uint32Array> myarr = m_obj.Get(m_isolate).As<v8::Uint32Array>();
+        v8::Local<v8::Uint32Array> myarr = _obj.Get(__isolate).As<v8::Uint32Array>();
 
         len = myarr->Length();
 
@@ -199,73 +213,7 @@ namespace se {
         *ptr = pt;
     }
 
-// --- Fill Arguments
 
-    void Object::fillArgs(std::vector<v8::Local < v8::Value>> *vector, ValueArray *args) {
-    for(int i = 0; i<args->size(); ++i ) {
-    Value data = args->at(i);
-
-    switch( data.
-
-    getType()
-
-    ) {
-    case
-    Value::Type::Number:
-            vector
-    ->
-    push_back( v8::Number::New(m_isolate, data.toNumber()) );
-    break;
-
-    case
-
-    Value::Type::String: {
-        v8::Local <v8::String> valueString = v8::String::NewFromUtf8(m_isolate, data.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-        vector->push_back(valueString);
-    }
-
-    break;
-
-    case
-    Value::Type::Boolean:
-            vector
-    ->
-    push_back( v8::Boolean::New(m_isolate, data.toBoolean()) );
-    break;
-
-    case
-    Value::Type::Object:
-            vector
-    ->
-    push_back( data
-    .
-
-    toObject() -> m_obj
-
-    .
-    Get( m_isolate )
-    );
-    break;
-
-    case
-    Value::Type::Null:
-            vector
-    ->
-    push_back( v8::Null(m_isolate));
-    break;
-
-    case
-    Value::Type::Undefined:
-            vector
-    ->
-    push_back( v8::Undefined(m_isolate));
-    break;
-}
-}
-}
-
-Object::~Object() {
-}
 
 } // namespace se {
 
