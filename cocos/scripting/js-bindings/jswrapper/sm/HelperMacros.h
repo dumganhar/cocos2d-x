@@ -27,6 +27,13 @@
         }
 
 #define SE_FUNC_END \
+        for (auto& v : args) \
+        { \
+            if (v.isObject() && v.toObject()->isRooted()) \
+            { \
+                v.toObject()->switchToUnrooted(); \
+            } \
+        } \
         SAFE_RELEASE(thisObject); \
         return ret; \
     }

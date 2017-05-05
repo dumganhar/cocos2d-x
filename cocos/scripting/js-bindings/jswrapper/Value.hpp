@@ -27,7 +27,6 @@ namespace se {
         Value(const Value& v);
         Value(Value&& v);
 
-        explicit Value(Type type);
         explicit Value(bool v);
         explicit Value(double v);
         explicit Value(const char* v);
@@ -66,7 +65,7 @@ namespace se {
         inline bool isNull() const { return _type == Type::Null; }
 
     private:
-        
+        explicit Value(Type type);
         void reset(Type type);
 
         Type _type;

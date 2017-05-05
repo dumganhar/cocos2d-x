@@ -88,22 +88,22 @@ SE_FUNC_BEGIN(Node_addChild)
 }
 SE_FUNC_END
 
-static std::unordered_map<se::Object*, std::unordered_map<se::Object*, std::string>> __jsfunc_schedulekey_map;
+static std::unordered_map<se::Object*, std::unordered_map<se::Object*, std::string>> __jsthis_schedulekey_map;
 
 static bool isScheduleExist(se::Object* jsFunc, se::Object* jsThis, se::Object** outJsFunc, se::Object** outJsThis, std::string* outKey)
 {
     bool found = false;
-    for (const auto& e : __jsfunc_schedulekey_map)
+    for (const auto& e : __jsthis_schedulekey_map)
     {
-        if (e.first->isSame(jsFunc))
+        if (e.first->isSame(jsThis))
         {
             for (const auto& e2 : e.second)
             {
-                if (e2.first->isSame(jsThis))
+                if (e2.first->isSame(jsFunc))
                 {
+                    *outJsThis = e.first;
+                    *outJsFunc = e2.first;
                     *outKey = e2.second;
-                    *outJsThis = e2.first;
-                    *outJsFunc = e.first;
                     break;
                 }
             }
@@ -127,10 +127,13 @@ static bool isScheduleExist(se::Object* jsFunc, se::Object* jsThis, se::Object**
 
 static void removeSchedule(se::Object* jsFunc, se::Object* jsThis)
 {
-    auto& thisObjKeyMap = __jsfunc_schedulekey_map[jsFunc];
-    thisObjKeyMap.erase(jsThis);
-    if (thisObjKeyMap.empty())
-        __jsfunc_schedulekey_map.erase(jsFunc);
+    auto funcObjKeyMapIter = __jsthis_schedulekey_map.find(jsThis);
+    if (funcObjKeyMapIter != __jsthis_schedulekey_map.end())
+    {
+        funcObjKeyMapIter->second.erase(jsFunc);
+        if (funcObjKeyMapIter->second.empty())
+            __jsthis_schedulekey_map.erase(funcObjKeyMapIter);
+    }
 }
 
 static void removeScheduleByKey(const std::string& key)
@@ -138,14 +141,14 @@ static void removeScheduleByKey(const std::string& key)
     se::Object* jsFunc = nullptr;
     se::Object* jsThis = nullptr;
 
-    for (const auto& e : __jsfunc_schedulekey_map)
+    for (const auto& e : __jsthis_schedulekey_map)
     {
         for (const auto& e2 : e.second)
         {
             if (e2.second == key)
             {
-                jsThis = e2.first;
-                jsFunc = e.first;
+                jsThis = e.first;
+                jsFunc = e2.first;
                 break;
             }
         }
@@ -157,6 +160,11 @@ static void removeScheduleByKey(const std::string& key)
     removeSchedule(jsFunc, jsThis);
 }
 
+static void insertSchedule(se::Object* jsFunc, se::Object* jsThis, const std::string& key)
+{
+    auto& funcKeyMap = __jsthis_schedulekey_map[jsThis];
+    funcKeyMap.emplace(jsFunc, key);
+}
 
 class UnscheduleNotifier
 {
@@ -165,13 +173,21 @@ public:
     : _node(node)
     , _key(key)
     {
-
+        _node->retain();
     }
     ~UnscheduleNotifier()
     {
         printf("~UnscheduleNotifier, node: %p, key: %s\n", _node, _key.c_str());
-        removeScheduleByKey(_key);
-        _node->unschedule(_key);
+
+        Node* node = _node;
+        std::string key = _key;
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([node, key](){
+            removeScheduleByKey(key);
+            if (node->isScheduled(key))
+                node->unschedule(key);
+
+            node->release();
+        });
     }
 
 private:
@@ -181,10 +197,17 @@ private:
 
 SE_FUNC_BEGIN(Node_schedule)
 {
+    printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
+    for (const auto& e1 : __jsthis_schedulekey_map)
+    {
+        printf("target: %p, functions: %d\n", e1.first, (int)e1.second.size());
+    }
+    printf("-------------------------- \n");
     static uint32_t __idx = 0;
     Node* thiz = (Node*)thisObject->getPrivateData();
     se::Value jsThis(thisObject);
     se::Value jsFunc(args[0]);
+    jsThis.toObject()->attachChild(jsFunc.toObject());
 
     se::Object* foundThisObj = nullptr;
     se::Object* foundFuncObj = nullptr;
@@ -211,9 +234,7 @@ SE_FUNC_BEGIN(Node_schedule)
     if (argc >= 4)
         delay = args[3].toNumber();
 
-    auto& thisObjKeyMap = __jsfunc_schedulekey_map[jsFunc.toObject()];
-    thisObjKeyMap.emplace(jsThis.toObject(), key);
-
+    insertSchedule(jsFunc.toObject(), jsThis.toObject(), key);
     std::shared_ptr<UnscheduleNotifier> unscheduleNotifier = std::make_shared<UnscheduleNotifier>(thiz, key);
 
     thiz->schedule([jsThis, jsFunc, unscheduleNotifier](float dt){
@@ -221,7 +242,7 @@ SE_FUNC_BEGIN(Node_schedule)
         se::Object* funcObj = jsFunc.toObject();
 
         se::ValueArray args;
-        args.push_back(se::Value((float)dt));
+        args.push_back(se::Value((double)dt));
         funcObj->call(args, thisObj);
 
     }, interval, repeat, delay, key);

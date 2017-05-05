@@ -13,6 +13,7 @@ namespace se { namespace internal {
 
     void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr)
     {
+        outArr->reserve(argc);
         for (int i = 0; i < argc; ++i)
         {
             const JS::Value& v = argv[i];

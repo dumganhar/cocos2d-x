@@ -326,43 +326,43 @@ int main_register_class(int argc, char** argv)
         printf("Unable to Initialize JavaScript Wrapper.\n");
         return 1;
     }
-
-    se::Object* global = se->getGlobalObject();
-    global->setProperty("test", se::Value(1001.0));
-    global->setProperty("hello", se::Value("world"));
-    global->setProperty("boolval", se::Value(false));
-    global->setProperty("undefined", se::Value::Undefined);
-    global->setProperty("null", se::Value::Null);
-
-    se::Object* obj = se::Object::createPlainObject();
-    obj->setProperty("subhello", se::Value("world"));
-    obj->setProperty("subbool", se::Value(true));
-    obj->setProperty("subnumber", se::Value(222.0));
-    obj->setProperty("subundefined", se::Value::Undefined);
-    obj->setProperty("subnull", se::Value::Null);
-    global->setProperty("subobj", se::Value(obj));
-
-    se::Object* ssObj = se::Object::createPlainObject();
-    ssObj->setProperty("ssstr", se::Value("sss string"));
-    obj->setProperty("subobj", se::Value(ssObj));
-    ssObj->release();
-
-    obj->release();
-
-    // --- Register Class
-
-    se::Class* animalClass = se::Class::create("Animal", global, nullptr, Animal_constructor);
-    animalClass->defineFunction("eat", eat);
-    animalClass->defineFunction("setTimeout", setTimeout);
-    animalClass->defineProperty("id", GetAnimalProperty_id, SetAnimalProperty_id);
-    animalClass->defineFinalizedFunction(Animal_finalize);
-    animalClass->install();
-
-    se::Class *dogClass = se::Class::create("Dog", global, animalClass->getProto(), Dog_constructor);
-    dogClass->defineFunction("testFunc", testFunc);
-    dogClass->defineProperty("name", GetDogProperty_name, SetDogProperty_name);
-    dogClass->defineFinalizedFunction(Dog_finalize);
-    dogClass->install();
+//
+//    se::Object* global = se->getGlobalObject();
+//    global->setProperty("test", se::Value(1001.0));
+//    global->setProperty("hello", se::Value("world"));
+//    global->setProperty("boolval", se::Value(false));
+//    global->setProperty("undefined", se::Value::Undefined);
+//    global->setProperty("null", se::Value::Null);
+//
+//    se::Object* obj = se::Object::createPlainObject();
+//    obj->setProperty("subhello", se::Value("world"));
+//    obj->setProperty("subbool", se::Value(true));
+//    obj->setProperty("subnumber", se::Value(222.0));
+//    obj->setProperty("subundefined", se::Value::Undefined);
+//    obj->setProperty("subnull", se::Value::Null);
+//    global->setProperty("subobj", se::Value(obj));
+//
+//    se::Object* ssObj = se::Object::createPlainObject();
+//    ssObj->setProperty("ssstr", se::Value("sss string"));
+//    obj->setProperty("subobj", se::Value(ssObj));
+//    ssObj->release();
+//
+//    obj->release();
+//
+//    // --- Register Class
+//
+//    se::Class* animalClass = se::Class::create("Animal", global, nullptr, Animal_constructor);
+//    animalClass->defineFunction("eat", eat);
+//    animalClass->defineFunction("setTimeout", setTimeout);
+//    animalClass->defineProperty("id", GetAnimalProperty_id, SetAnimalProperty_id);
+//    animalClass->defineFinalizedFunction(Animal_finalize);
+//    animalClass->install();
+//
+//    se::Class *dogClass = se::Class::create("Dog", global, animalClass->getProto(), Dog_constructor);
+//    dogClass->defineFunction("testFunc", testFunc);
+//    dogClass->defineProperty("name", GetDogProperty_name, SetDogProperty_name);
+//    dogClass->defineFinalizedFunction(Dog_finalize);
+//    dogClass->install();
 
     jsb_register_all();
 

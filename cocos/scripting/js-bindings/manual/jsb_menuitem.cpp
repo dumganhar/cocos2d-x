@@ -87,6 +87,7 @@ SE_FUNC_BEGIN(MenuItemFont_create)
     std::string str = args[0].toString();
     se::Value func(args[1]);
     se::Value target(args[2]);
+    target.toObject()->attachChild(func.toObject());
     MenuItemFont* nativeObj = MenuItemFont::create(str, [func, target](Ref* sender){
         se::Object* funcObj = func.toObject();
         se::Object* targetObj = target.toObject();

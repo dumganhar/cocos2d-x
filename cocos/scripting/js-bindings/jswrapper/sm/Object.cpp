@@ -1,6 +1,7 @@
 #include "Object.hpp"
 #include "internal/Utils.hpp"
 #include "Class.hpp"
+#include "ScriptEngine.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
@@ -11,7 +12,18 @@ namespace se {
     namespace {
         JSContext *__cx = nullptr;
 
-
+        void get_or_create_js_obj(JSContext* cx, JS::HandleObject obj, const std::string &name, JS::MutableHandleObject jsObj)
+        {
+            JS::RootedValue nsval(cx);
+            JS_GetProperty(cx, obj, name.c_str(), &nsval);
+            if (nsval.isNullOrUndefined()) {
+                jsObj.set(JS_NewPlainObject(cx));
+                nsval = JS::ObjectValue(*jsObj);
+                JS_SetProperty(cx, obj, name.c_str(), nsval);
+            } else {
+                jsObj.set(nsval.toObjectOrNull());
+            }
+        }
 
 //        void on_context_destroy(void* data)
 //        {
@@ -395,7 +407,7 @@ namespace se {
         if (!_hasWeakRef)
             return;
 
-        //cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(_cx));
+        //cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(__cx));
         //        g_object_weak_unref(G_OBJECT(gjs_cx), on_context_destroy, this);
         _hasWeakRef = false;
     }
@@ -443,7 +455,7 @@ namespace se {
         m_data = data;
         _root = new JS::PersistentRootedObject(__cx, thing);
 
-        //cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(_cx));
+        //cjh        auto gjs_cx = static_cast<GjsContext *>(JS_GetContextPrivate(__cx));
         //        assert(GJS_IS_CONTEXT(gjs_cx));
         //        g_object_weak_ref(G_OBJECT(gjs_cx), on_context_destroy, this);
         _hasWeakRef = true;
@@ -493,7 +505,7 @@ namespace se {
         JSAutoRequest ar(__cx);
         JS::RootedObject rootedThing(__cx, *_root);
         reset();
-        putToHeap(_root->get());
+        putToHeap(rootedThing);
         assert(!_isRooted);
     }
 
@@ -513,13 +525,22 @@ namespace se {
     {
         debug("updateAfterGC()");
         assert(!_isRooted);
+        JSObject* oldPtr = _heap.unbarrieredGet();
         if (_heap.unbarrieredGet() != nullptr)
             JS_UpdateWeakPointerAfterGC(&_heap);
-        if (_heap.unbarrieredGet() == nullptr)
+
+        JSObject* newPtr = _heap.unbarrieredGet();
+        if (newPtr == nullptr)
         {
             _isRooted = false;
         }
-        return (_heap.unbarrieredGet() == nullptr);
+
+        // FIXME: test to see ggc
+        if (oldPtr != nullptr && newPtr != nullptr)
+        {
+            assert(oldPtr == newPtr);
+        }
+        return (newPtr == nullptr);
     }
     
     bool Object::isRooted() const
@@ -529,11 +550,58 @@ namespace se {
 
     bool Object::isSame(Object* o) const
     {
+        JSObject* thisObj = _getJSObject();
+        JSObject* oThisObj = o->_getJSObject();
+        if ((thisObj == nullptr || oThisObj == nullptr) && thisObj != oThisObj)
+            return false;
+
+        assert(thisObj);
+        assert(oThisObj);
         JS::RootedValue v1(__cx, JS::ObjectValue(*_getJSObject()));
         JS::RootedValue v2(__cx, JS::ObjectValue(*o->_getJSObject()));
         bool same = false;
         bool ok = JS_SameValue(__cx, v1, v2, &same);
         return ok && same;
+    }
+
+    bool Object::attachChild(Object* child)
+    {
+        assert(child);
+        JS::RootedValue valOwner(__cx, JS::ObjectValue(*_getJSObject()));
+        JS::RootedValue valTarget(__cx, JS::ObjectValue(*child->_getJSObject()));
+
+        JS::RootedObject jsbObj(__cx);
+        JS::RootedObject globalObj(__cx, ScriptEngine::getInstance()->getGlobalObject()->_getJSObject());
+        get_or_create_js_obj(__cx, globalObj, "jsb", &jsbObj);
+
+        JS::AutoValueVector args(__cx);
+        args.resize(2);
+        args[0].set(valOwner);
+        args[1].set(valTarget);
+
+        JS::RootedValue rval(__cx);
+
+        return JS_CallFunctionName(__cx, jsbObj, "registerNativeRef", args, &rval);
+    }
+
+    bool Object::detachChild(Object* child)
+    {
+        assert(child);
+        JS::RootedValue valOwner(__cx, JS::ObjectValue(*_getJSObject()));
+        JS::RootedValue valTarget(__cx, JS::ObjectValue(*child->_getJSObject()));
+
+        JS::RootedObject jsbObj(__cx);
+        JS::RootedObject globalObj(__cx, ScriptEngine::getInstance()->getGlobalObject()->_getJSObject());
+        get_or_create_js_obj(__cx, globalObj, "jsb", &jsbObj);
+
+        JS::AutoValueVector args(__cx);
+        args.resize(2);
+        args[0].set(valOwner);
+        args[1].set(valTarget);
+
+        JS::RootedValue rval(__cx);
+
+        return JS_CallFunctionName(__cx, jsbObj, "unregisterNativeRef", args, &rval);
     }
 
 } // namespace se {

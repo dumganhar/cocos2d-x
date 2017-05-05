@@ -13,21 +13,6 @@ SE_DECLARE_FUNC(Node_cleanup);
 
 namespace se {
 
-    namespace {
-        void get_or_create_js_obj(JSContext* cx, JS::HandleObject obj, const std::string &name, JS::MutableHandleObject jsObj)
-        {
-            JS::RootedValue nsval(cx);
-            JS_GetProperty(cx, obj, name.c_str(), &nsval);
-            if (nsval.isNullOrUndefined()) {
-                jsObj.set(JS_NewPlainObject(cx));
-                nsval = JS::ObjectValue(*jsObj);
-                JS_SetProperty(cx, obj, name.c_str(), nsval);
-            } else {
-                jsObj.set(nsval.toObjectOrNull());
-            }
-        }
-    }
-
     // --- SM Global Class
 
     static const JSClassOps sandbox_classOps = {
@@ -239,7 +224,7 @@ namespace se {
         JS_DefineFunction(_cx, rootedGlobalObj, "log", __log, 0, JSPROP_PERMANENT);
         JS_DefineFunction(_cx, rootedGlobalObj, "forceGC", __forceGC, 0, JSPROP_READONLY | JSPROP_PERMANENT);
 
-        JS_AddExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
+//        JS_AddExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
 //        JS_AddWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback, nullptr);
         JS_AddWeakPointerCompartmentCallback(_cx, ScriptEngine::myWeakPointerCompartmentCallback, nullptr);
 
@@ -257,7 +242,7 @@ namespace se {
 
     void ScriptEngine::cleanup()
     {
-        JS_RemoveExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
+//        JS_RemoveExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
 //        JS_RemoveWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback);
         JS_RemoveWeakPointerCompartmentCallback(_cx, ScriptEngine::myWeakPointerCompartmentCallback);
 
@@ -378,21 +363,67 @@ namespace se {
             return;
         }
 
-        JS::RootedValue valOwner(_cx, JS::ObjectValue(*iterOwner->second->_getJSObject()));
-        JS::RootedValue valTarget(_cx, JS::ObjectValue(*iterTarget->second->_getJSObject()));
+        iterOwner->second->attachChild(iterTarget->second);
 
-        JS::RootedObject jsbObj(_cx);
-        JS::RootedObject globalObj(_cx, _globalObj->_getJSObject());
-        get_or_create_js_obj(_cx, globalObj, "jsb", &jsbObj);
+//        bool ok = false;
+//        bool found = false;
+//
+//        JS::RootedObject jsOwner(_cx, iterOwner->second->_getJSObject());
+//        JS::RootedValue jsOwnerVal(_cx, JS::ObjectValue(*jsOwner));
+//        JS::RootedValue jsTargetVal(_cx, JS::ObjectValue(*iterTarget->second->_getJSObject()));
+//
+//        ok = JS_SameValue(_cx, jsOwnerVal, jsTargetVal, &found);
+//        assert(ok);
+//        if (found)
+//        {
+//            return;
+//        }
+//
+//        ok = JS_HasProperty(_cx, jsOwner, "__nativeRefs", &found);
+//        assert(ok);
+//
+//        if (!found)
+//        {
+//            JS::RootedValue arr(_cx, JS::ObjectValue(*JS_NewArrayObject(_cx, 0)));
+//            JS_SetProperty(_cx, jsOwner, "__nativeRefs", arr);
+//        }
+//
+//        JS::RootedValue refArr(_cx);
+//        ok = JS_GetProperty(_cx, jsOwner, "__nativeRefs", &refArr);
+//        assert(ok);
+//
+//        JS::RootedObject refArrObj(_cx, refArr.toObjectOrNull());
+//        uint32_t len = 0;
+//        JS_GetArrayLength(_cx, refArrObj, &len);
+//        JS::RootedValue v(_cx);
+//        found = false;
+//
+//        for (uint32_t i = 0; i < len; ++i)
+//        {
+//            if (JS_GetElement(_cx, refArrObj, i, &v))
+//            {
+//                if (JS_SameValue(_cx, v, jsTargetVal, &found) && found)
+//                {
+//                    return;
+//                }
+//            }
+//        }
+//
+//        uint32_t oldLen = len;
+//        JS_SetArrayLength(_cx, refArrObj, len+1);
+//        JS_SetElement(_cx, refArrObj, len, jsTargetVal);
+////        JS_DefineElement(_cx, refArrObj, len, jsTargetVal, JSPROP_ENUMERATE);
+//        JS_GetArrayLength(_cx, refArrObj, &len);
+//        printf("JS_SetElement, oldLen: %u, newLen: %u\n", oldLen, len);
+//        JS::ObjectOpResult deleteSucceeded;
+//        JS_DeleteElement(_cx, refArrObj, 0, deleteSucceeded);
+//        assert(deleteSucceeded.succeed());
+//        JS_GetArrayLength(_cx, refArrObj, &len);
+//        printf("test delete: %u\n", len);
 
-        JS::AutoValueVector args(_cx);
-        args.resize(2);
-        args[0].set(valOwner);
-        args[1].set(valTarget);
 
-        JS::RootedValue rval(_cx);
 
-        JS_CallFunctionName(_cx, jsbObj, "registerNativeRef", args, &rval);
+        
     }
 
     void ScriptEngine::_releaseScriptObject(void* owner, void* target)
@@ -409,21 +440,60 @@ namespace se {
             return;
         }
 
-        JS::RootedValue valOwner(_cx, JS::ObjectValue(*iterOwner->second->_getJSObject()));
-        JS::RootedValue valTarget(_cx, JS::ObjectValue(*iterTarget->second->_getJSObject()));
+        iterOwner->second->detachChild(iterTarget->second);
 
-        JS::RootedObject jsbObj(_cx);
-        JS::RootedObject globalObj(_cx, _globalObj->_getJSObject());
-        get_or_create_js_obj(_cx, globalObj, "jsb", &jsbObj);
+//        bool ok = false;
+//        bool found = false;
+//
+//        JS::RootedObject jsOwner(_cx, iterOwner->second->_getJSObject());
+//        JS::RootedValue jsOwnerVal(_cx, JS::ObjectValue(*jsOwner));
+//        JS::RootedValue jsTargetVal(_cx, JS::ObjectValue(*iterTarget->second->_getJSObject()));
+//
+//        ok = JS_SameValue(_cx, jsOwnerVal, jsTargetVal, &found);
+//        assert(ok);
+//        if (found)
+//        {
+//            return;
+//        }
+//
+//        ok = JS_HasProperty(_cx, jsOwner, "__nativeRefs", &found);
+//        assert(ok);
+//
+//        if (!found)
+//        {
+//            return;
+//        }
+//
+//        JS::RootedValue refArr(_cx);
+//        ok = JS_GetProperty(_cx, jsOwner, "__nativeRefs", &refArr);
+//        assert(ok);
+//
+//        JS::RootedObject refArrObj(_cx, refArr.toObjectOrNull());
+//        uint32_t len = 0;
+//        ok = JS_GetArrayLength(_cx, refArrObj, &len);
+//        assert(ok);
+//        JS::RootedValue v(_cx);
+//        found = false;
+//
+//        for (uint32_t i = 0; i < len; ++i)
+//        {
+//            if (JS_GetElement(_cx, refArrObj, i, &v))
+//            {
+//                if (JS_SameValue(_cx, v, jsTargetVal, &found) && found)
+//                {
+//                    ok = JS_DeleteElement(_cx, refArrObj, i);
+//                    assert(ok);
+//                    uint32_t oldLen = len;
+//                    ok = JS_GetArrayLength(_cx, refArrObj, &len);
+//                    assert(ok);
+//                    printf("JS_DeleteElement, idx = %u, old len: %u, new len: %u\n", i, oldLen, len);
+//                    return;
+//                }
+//            }
+//        }
 
-        JS::AutoValueVector args(_cx);
-        args.resize(2);
-        args[0].set(valOwner);
-        args[1].set(valTarget);
 
-        JS::RootedValue rval(_cx);
 
-        JS_CallFunctionName(_cx, jsbObj, "unregisterNativeRef", args, &rval);
     }
 
     void ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)

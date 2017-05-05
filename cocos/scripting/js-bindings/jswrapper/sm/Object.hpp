@@ -59,6 +59,8 @@ namespace se {
         bool isRooted() const;
 
         bool isSame(Object* o) const;
+        bool attachChild(Object* child);
+        bool detachChild(Object* child);
 
     private:
         static void setContext(JSContext* cx);

@@ -9,8 +9,8 @@ namespace se {
     Value Value::Undefined = Value(Type::Undefined);
 
     Value::Value()
+    : _type(Type::Undefined)
     {
-        _type = Type::Undefined;
     }
 
     Value::Value(Type type)
@@ -20,36 +20,43 @@ namespace se {
     }
 
     Value::Value(const Value& v)
+    : _type(Type::Undefined)
     {
         *this = v;
     }
 
     Value::Value(Value&& v)
+    : _type(Type::Undefined)
     {
         *this = std::move(v);
     }
 
     Value::Value(bool v)
+    : _type(Type::Undefined)
     {
         setBoolean(v);
     }
 
     Value::Value(double v)
+    : _type(Type::Undefined)
     {
         setNumber(v);
     }
 
     Value::Value(const char* v)
+    : _type(Type::Undefined)
     {
         setString(v);
     }
 
     Value::Value(const std::string& v)
+    : _type(Type::Undefined)
     {
         setString(v);
     }
 
     Value::Value(Object* o)
+    : _type(Type::Undefined)
     {
         setObject(o);
     }
@@ -108,7 +115,7 @@ namespace se {
                     break;
                 case Type::Object:
                     _u._object = v._u._object;
-                    _u._object->addRef();
+                    v._u._object = nullptr;
                     break;
                 default:
                     break;
@@ -223,7 +230,7 @@ namespace se {
                     delete _u._string;
                     break;
                 case Type::Object:
-                    _u._object->release();
+                    SAFE_RELEASE(_u._object);
                     break;
                 default:
                     break;
