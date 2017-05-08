@@ -28,6 +28,21 @@ namespace se {
         }
     }
 
+    /*static*/
+    void Object::nativeObjectFinalizeHook(void* nativeObj)
+    {
+        if (nativeObj == nullptr)
+            return;
+
+        auto iter = __nativePtrToObjectMap.find(nativeObj);
+        if (iter != __nativePtrToObjectMap.end())
+        {
+            iter->second->_getClass()->_finalizeFunc(nativeObj);
+            iter->second->release();
+            __nativePtrToObjectMap.erase(iter);
+        }
+    }
+
     /* static */
     void Object::setIsolate(v8::Isolate* isolate)
     {
@@ -47,7 +62,7 @@ namespace se {
         auto jsobj = Class::_createJSObject(clsName, &cls);
         Object* obj = _createJSObject(jsobj, rooted);
         obj->_cls = cls;
-        obj->_obj.setFinalizeCallback(cls->_finalizeFunc);
+        obj->_obj.setFinalizeCallback(nativeObjectFinalizeHook);
         return obj;
     }
 
@@ -175,8 +190,6 @@ namespace se {
         _obj.wrap(data);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
-        bool isWeak = _obj.persistent().IsWeak();
-        printf("isWeak: %d\n", isWeak);
     }
 
     void* Object::getPrivateData() const
@@ -202,8 +215,21 @@ namespace se {
         v8::Local<v8::Object> thiz = v8::Local<v8::Object>::Cast(v8::Undefined(__isolate));
         if (thisObject != nullptr)
         {
+            assert(!thisObject->_obj.persistent().IsEmpty());
             thiz = thisObject->_obj.handle(__isolate);
         }
+
+        assert(!_obj.persistent().IsEmpty());
+
+        for (size_t i = 0; i < argc; ++i)
+        {
+            if (argv[i].IsEmpty())
+            {
+                printf("%s argv[%d] is removed!\n", __FUNCTION__, (int)i);
+                return false;
+            }
+        }
+
         v8::Local<v8::Value> result = _obj.handle(__isolate)->CallAsFunction(thiz, (int)argc, argv.data());
 
         if (rval)

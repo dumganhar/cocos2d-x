@@ -72,6 +72,7 @@ namespace se {
         Class* _getClass() const;
 
     private:
+        static void nativeObjectFinalizeHook(void* nativeObj);
         static void setIsolate(v8::Isolate* isolate);
 
         Class* _cls;

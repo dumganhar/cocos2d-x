@@ -225,20 +225,11 @@
 		1A0EE43418CDF799004CD58F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39C18CD9ED80087CE3A /* AVFoundation.framework */; };
 		1A0EE43518CDF799004CD58F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64832165F3AFD007D4F18 /* Foundation.framework */; };
 		1A1853771EC024E500EF28DC /* registerclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */; };
-		1A1853941EC0257100EF28DC /* libfuzzer_support.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853861EC0257100EF28DC /* libfuzzer_support.a */; };
-		1A1853951EC0257100EF28DC /* libgmock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853871EC0257100EF28DC /* libgmock.a */; };
-		1A1853961EC0257100EF28DC /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853881EC0257100EF28DC /* libgtest.a */; };
-		1A1853971EC0257100EF28DC /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853891EC0257100EF28DC /* libicui18n.a */; };
-		1A1853981EC0257100EF28DC /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538A1EC0257100EF28DC /* libicuuc.a */; };
-		1A1853991EC0257100EF28DC /* libjson_fuzzer_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538B1EC0257100EF28DC /* libjson_fuzzer_lib.a */; };
-		1A18539A1EC0257100EF28DC /* libparser_fuzzer_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538C1EC0257100EF28DC /* libparser_fuzzer_lib.a */; };
-		1A18539B1EC0257100EF28DC /* libregexp_fuzzer_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538D1EC0257100EF28DC /* libregexp_fuzzer_lib.a */; };
-		1A18539C1EC0257100EF28DC /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538E1EC0257100EF28DC /* libv8_base.a */; };
-		1A18539D1EC0257100EF28DC /* libv8_external_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538F1EC0257100EF28DC /* libv8_external_snapshot.a */; };
-		1A18539E1EC0257100EF28DC /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853901EC0257100EF28DC /* libv8_libbase.a */; };
-		1A18539F1EC0257100EF28DC /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853911EC0257100EF28DC /* libv8_libplatform.a */; };
-		1A1853A01EC0257100EF28DC /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853921EC0257100EF28DC /* libv8_libsampler.a */; };
-		1A1853A11EC0257100EF28DC /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853931EC0257100EF28DC /* libv8_nosnapshot.a */; };
+		1A55434A1EC0A40500AEA55E /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5543491EC0A40500AEA55E /* libv8_base.a */; };
+		1A55434B1EC0A46900AEA55E /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5C79061EC079E00045BEC5 /* libv8_libplatform.a */; };
+		1A55434D1EC0A4FE00AEA55E /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55434C1EC0A4FE00AEA55E /* libv8_libsampler.a */; };
+		1A55434F1EC0A50200AEA55E /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55434E1EC0A50200AEA55E /* libv8_nosnapshot.a */; };
+		1A5543501EC0A51500AEA55E /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5C79051EC079E00045BEC5 /* libv8_libbase.a */; };
 		1A78A5521D1A3C9B00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5531D1A3CE800B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5541D1A3D0F00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
@@ -1911,6 +1902,13 @@
 		1A1853911EC0257100EF28DC /* libv8_libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libplatform.a; path = ../external/v8/prebuilt/mac/libv8_libplatform.a; sourceTree = "<group>"; };
 		1A1853921EC0257100EF28DC /* libv8_libsampler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libsampler.a; path = ../external/v8/prebuilt/mac/libv8_libsampler.a; sourceTree = "<group>"; };
 		1A1853931EC0257100EF28DC /* libv8_nosnapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_nosnapshot.a; path = ../external/v8/prebuilt/mac/libv8_nosnapshot.a; sourceTree = "<group>"; };
+		1A5543491EC0A40500AEA55E /* libv8_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_base.a; path = ../../v8/out.gn/foo/obj/libv8_base.a; sourceTree = "<group>"; };
+		1A55434C1EC0A4FE00AEA55E /* libv8_libsampler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libsampler.a; path = ../../v8/out.gn/foo/obj/libv8_libsampler.a; sourceTree = "<group>"; };
+		1A55434E1EC0A50200AEA55E /* libv8_nosnapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_nosnapshot.a; path = ../../v8/out.gn/foo/obj/libv8_nosnapshot.a; sourceTree = "<group>"; };
+		1A5C78F11EC072410045BEC5 /* libv8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libv8.dylib; path = ../../v8/out.gn/x64.debug/libv8.dylib; sourceTree = "<group>"; };
+		1A5C78F31EC0729F0045BEC5 /* libv8_libplatform.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libv8_libplatform.dylib; path = ../../v8/out.gn/x64.debug/libv8_libplatform.dylib; sourceTree = "<group>"; };
+		1A5C79051EC079E00045BEC5 /* libv8_libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libbase.a; path = ../../v8/out.gn/foo/obj/libv8_libbase.a; sourceTree = "<group>"; };
+		1A5C79061EC079E00045BEC5 /* libv8_libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libplatform.a; path = ../../v8/out.gn/foo/obj/libv8_libplatform.a; sourceTree = "<group>"; };
 		1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = registerclass.cpp; sourceTree = "<group>"; };
 		1A9E99901EB1D052001AEA19 /* sm_main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = sm_main.mm; sourceTree = "<group>"; };
 		1A9F808C177E98A600D9A1CB /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
@@ -2629,20 +2627,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1853941EC0257100EF28DC /* libfuzzer_support.a in Frameworks */,
-				1A1853951EC0257100EF28DC /* libgmock.a in Frameworks */,
-				1A1853961EC0257100EF28DC /* libgtest.a in Frameworks */,
-				1A1853971EC0257100EF28DC /* libicui18n.a in Frameworks */,
-				1A1853981EC0257100EF28DC /* libicuuc.a in Frameworks */,
-				1A1853991EC0257100EF28DC /* libjson_fuzzer_lib.a in Frameworks */,
-				1A18539A1EC0257100EF28DC /* libparser_fuzzer_lib.a in Frameworks */,
-				1A18539B1EC0257100EF28DC /* libregexp_fuzzer_lib.a in Frameworks */,
-				1A18539C1EC0257100EF28DC /* libv8_base.a in Frameworks */,
-				1A18539D1EC0257100EF28DC /* libv8_external_snapshot.a in Frameworks */,
-				1A18539E1EC0257100EF28DC /* libv8_libbase.a in Frameworks */,
-				1A18539F1EC0257100EF28DC /* libv8_libplatform.a in Frameworks */,
-				1A1853A01EC0257100EF28DC /* libv8_libsampler.a in Frameworks */,
-				1A1853A11EC0257100EF28DC /* libv8_nosnapshot.a in Frameworks */,
+				1A55434A1EC0A40500AEA55E /* libv8_base.a in Frameworks */,
+				1A5543501EC0A51500AEA55E /* libv8_libbase.a in Frameworks */,
+				1A55434B1EC0A46900AEA55E /* libv8_libplatform.a in Frameworks */,
+				1A55434D1EC0A4FE00AEA55E /* libv8_libsampler.a in Frameworks */,
+				1A55434F1EC0A50200AEA55E /* libv8_nosnapshot.a in Frameworks */,
 				185663581B4155D3009EF2AE /* Security.framework in Frameworks */,
 				185664951B4246C9009EF2AE /* libsqlite3.dylib in Frameworks */,
 				185664941B4246BA009EF2AE /* AppKit.framework in Frameworks */,
@@ -4591,6 +4580,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A55434E1EC0A50200AEA55E /* libv8_nosnapshot.a */,
+				1A55434C1EC0A4FE00AEA55E /* libv8_libsampler.a */,
+				1A5543491EC0A40500AEA55E /* libv8_base.a */,
+				1A5C79051EC079E00045BEC5 /* libv8_libbase.a */,
+				1A5C79061EC079E00045BEC5 /* libv8_libplatform.a */,
+				1A5C78F31EC0729F0045BEC5 /* libv8_libplatform.dylib */,
+				1A5C78F11EC072410045BEC5 /* libv8.dylib */,
 				1A1853861EC0257100EF28DC /* libfuzzer_support.a */,
 				1A1853871EC0257100EF28DC /* libgmock.a */,
 				1A1853881EC0257100EF28DC /* libgtest.a */,
@@ -7662,7 +7658,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/js-tests/project/proj.mac/Test_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../external/v8/prebuilt/mac";
+				LIBRARY_SEARCH_PATHS = /Users/james/Project/v8/out.gn/foo/obj;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"-pagezero_size",
@@ -7695,7 +7691,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/js-tests/project/proj.mac/Test_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../external/v8/prebuilt/mac";
+				LIBRARY_SEARCH_PATHS = /Users/james/Project/v8/out.gn/foo/obj;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"-pagezero_size",

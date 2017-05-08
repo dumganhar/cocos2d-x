@@ -86,10 +86,9 @@ namespace se {
         v8::Platform* _platform;
         v8::Isolate* _isolate;
 
-        v8::Isolate::Scope* _isolateScope;
+        v8::Persistent<v8::Context> _context;
 
-        v8::Local<v8::Context> _context;
-        v8::Context::Scope* _contextScope;
+        v8::HandleScope* _handleScope;
 
         ArrayBufferAllocator _allocator;
         v8::Isolate::CreateParams _createParams;

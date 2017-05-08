@@ -58,6 +58,14 @@
 		1A4711A21EB9BA880027E3D9 /* Ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99951EB1F3D6001AEA19 /* Ref.cpp */; };
 		1A4711A31EB9BA880027E3D9 /* Ref.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99961EB1F3D6001AEA19 /* Ref.hpp */; };
 		1A4711CA1EB9C4E00027E3D9 /* libmozglue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9E98D41EB080E6001AEA19 /* libmozglue.a */; };
+		1A5C78FD1EC078890045BEC5 /* v8-debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F51EC078890045BEC5 /* v8-debug.h */; };
+		1A5C78FE1EC078890045BEC5 /* v8-experimental.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F61EC078890045BEC5 /* v8-experimental.h */; };
+		1A5C78FF1EC078890045BEC5 /* v8-inspector-protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */; };
+		1A5C79001EC078890045BEC5 /* v8-inspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F81EC078890045BEC5 /* v8-inspector.h */; };
+		1A5C79011EC078890045BEC5 /* v8-profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F91EC078890045BEC5 /* v8-profiler.h */; };
+		1A5C79021EC078890045BEC5 /* v8-testing.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78FA1EC078890045BEC5 /* v8-testing.h */; };
+		1A5C79031EC078890045BEC5 /* v8-util.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78FB1EC078890045BEC5 /* v8-util.h */; };
+		1A5C79041EC078890045BEC5 /* v8-version-string.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78FC1EC078890045BEC5 /* v8-version-string.h */; };
 		1A9E98EA1EB081B4001AEA19 /* config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E98D81EB081B4001AEA19 /* config.hpp */; };
 		1A9E98EB1EB081B4001AEA19 /* config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E98D81EB081B4001AEA19 /* config.hpp */; };
 		1A9E98F01EB081B4001AEA19 /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E98DA1EB081B4001AEA19 /* SeApi.h */; };
@@ -308,6 +316,14 @@
 		1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_menuitem.hpp; sourceTree = "<group>"; };
 		1A5410A418B785A10016A3AF /* libjscocos2d Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5410A518B785A10016A3AF /* libjscocos2d iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A5C78F51EC078890045BEC5 /* v8-debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-debug.h"; sourceTree = "<group>"; };
+		1A5C78F61EC078890045BEC5 /* v8-experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-experimental.h"; sourceTree = "<group>"; };
+		1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-inspector-protocol.h"; sourceTree = "<group>"; };
+		1A5C78F81EC078890045BEC5 /* v8-inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-inspector.h"; sourceTree = "<group>"; };
+		1A5C78F91EC078890045BEC5 /* v8-profiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-profiler.h"; sourceTree = "<group>"; };
+		1A5C78FA1EC078890045BEC5 /* v8-testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-testing.h"; sourceTree = "<group>"; };
+		1A5C78FB1EC078890045BEC5 /* v8-util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-util.h"; sourceTree = "<group>"; };
+		1A5C78FC1EC078890045BEC5 /* v8-version-string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-version-string.h"; sourceTree = "<group>"; };
 		1A9E98D41EB080E6001AEA19 /* libmozglue.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmozglue.a; path = ../../../../external/spidermonkey/prebuilt/mac/libmozglue.a; sourceTree = "<group>"; };
 		1A9E98D81EB081B4001AEA19 /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		1A9E98DA1EB081B4001AEA19 /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
@@ -334,7 +350,6 @@
 		1A9E99831EB19ED7001AEA19 /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
 		1A9E99951EB1F3D6001AEA19 /* Ref.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ref.cpp; sourceTree = "<group>"; };
 		1A9E99961EB1F3D6001AEA19 /* Ref.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ref.hpp; sourceTree = "<group>"; };
-		1AC004F11EBC480D004B3660 /* DEPS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DEPS; sourceTree = "<group>"; };
 		1AC004F21EBC480D004B3660 /* libplatform-export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libplatform-export.h"; sourceTree = "<group>"; };
 		1AC004F31EBC480D004B3660 /* libplatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libplatform.h; sourceTree = "<group>"; };
 		1AC004F41EBC480D004B3660 /* v8-tracing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-tracing.h"; sourceTree = "<group>"; };
@@ -700,6 +715,14 @@
 		1AC004EF1EBC480D004B3660 /* mac */ = {
 			isa = PBXGroup;
 			children = (
+				1A5C78F51EC078890045BEC5 /* v8-debug.h */,
+				1A5C78F61EC078890045BEC5 /* v8-experimental.h */,
+				1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */,
+				1A5C78F81EC078890045BEC5 /* v8-inspector.h */,
+				1A5C78F91EC078890045BEC5 /* v8-profiler.h */,
+				1A5C78FA1EC078890045BEC5 /* v8-testing.h */,
+				1A5C78FB1EC078890045BEC5 /* v8-util.h */,
+				1A5C78FC1EC078890045BEC5 /* v8-version-string.h */,
 				1AC004F01EBC480D004B3660 /* libplatform */,
 				1AC004F51EBC480D004B3660 /* v8-platform.h */,
 				1AC004F61EBC480D004B3660 /* v8-version.h */,
@@ -712,7 +735,6 @@
 		1AC004F01EBC480D004B3660 /* libplatform */ = {
 			isa = PBXGroup;
 			children = (
-				1AC004F11EBC480D004B3660 /* DEPS */,
 				1AC004F21EBC480D004B3660 /* libplatform-export.h */,
 				1AC004F31EBC480D004B3660 /* libplatform.h */,
 				1AC004F41EBC480D004B3660 /* v8-tracing.h */,
@@ -1022,6 +1044,7 @@
 				60379D14956237191C929701 /* Class.h in Headers */,
 				6037909F40AFC1ACE4B8DF83 /* Debug.h in Headers */,
 				603796313C803B9105CADE23 /* GCAPI.h in Headers */,
+				1A5C79041EC078890045BEC5 /* v8-version-string.h in Headers */,
 				60379946BC5810870DDC07C2 /* Proxy.h in Headers */,
 				60379144A6D325534F5B73E6 /* Realm.h in Headers */,
 				60379ECCD971865AA9E5AD29 /* Value.h in Headers */,
@@ -1032,6 +1055,7 @@
 				1AC005281EBC483F004B3660 /* Class.hpp in Headers */,
 				603796205BF04979C332B6AE /* Utility.h in Headers */,
 				60379AE7EF6C3313CF9B457E /* CallArgs.h in Headers */,
+				1A5C78FE1EC078890045BEC5 /* v8-experimental.h in Headers */,
 				60379EB985BDB67CE267FFFC /* GCVector.h in Headers */,
 				603790708A27D88D5DC99691 /* GCVariant.h in Headers */,
 				60379B68BA5DA50CF207FDC8 /* HashTable.h in Headers */,
@@ -1083,6 +1107,7 @@
 				6037918FFE77374022A84CBF /* Range.h in Headers */,
 				60379F1264CB9DADAC631765 /* Tuple.h in Headers */,
 				6037917A2B74F5CE8904E28C /* Types.h in Headers */,
+				1A5C79031EC078890045BEC5 /* v8-util.h in Headers */,
 				60379EED3A32B0432650850D /* utils.h in Headers */,
 				1A1853681EC01F7700EF28DC /* jsb_scene.hpp in Headers */,
 				1A18536C1EC01F7700EF28DC /* jsb_sprite.hpp in Headers */,
@@ -1126,6 +1151,7 @@
 				603793E9A69498D4C3A7525E /* StackWalk.h in Headers */,
 				603796048E3C53966D026870 /* TimeStamp.h in Headers */,
 				603790DB50EE5E4F552BA049 /* UniquePtr.h in Headers */,
+				1A5C79011EC078890045BEC5 /* v8-profiler.h in Headers */,
 				60379FB1C08414341D73602B /* ArrayUtils.h in Headers */,
 				60379ED1DEA9687E810410D1 /* Assertions.h in Headers */,
 				6037926F852D8281F73B1379 /* Attributes.h in Headers */,
@@ -1155,6 +1181,7 @@
 				60379D0210A40F8024762604 /* FloatingPoint.h in Headers */,
 				603796422A2FA6EA97EB4D9F /* HashFunctions.h in Headers */,
 				603796C0962B2F7650C2B1A4 /* IndexSequence.h in Headers */,
+				1A5C78FF1EC078890045BEC5 /* v8-inspector-protocol.h in Headers */,
 				60379FCC3D2B1265387C0908 /* PodOperations.h in Headers */,
 				60379300280D4B647F7807B6 /* TypedEnumBits.h in Headers */,
 				1AC0050E1EBC480D004B3660 /* v8.h in Headers */,
@@ -1173,12 +1200,14 @@
 				603791DBF04D6FF504AE60E3 /* ReverseIterator.h in Headers */,
 				603793EC6D6D789B2394E9E6 /* SegmentedVector.h in Headers */,
 				1A4711911EB9BA880027E3D9 /* Utils.hpp in Headers */,
+				1A5C78FD1EC078890045BEC5 /* v8-debug.h in Headers */,
 				6037997E33198BDD20FC6C83 /* SizePrintfMacros.h in Headers */,
 				60379BBF4AF7EF31852E744B /* double-conversion.h in Headers */,
 				603798AE01E837FC60B248C6 /* IntegerTypeTraits.h in Headers */,
 				6037915397E0150AF9A548F5 /* FastBernoulliTrial.h in Headers */,
 				1A47119F1EB9BA880027E3D9 /* Value.hpp in Headers */,
 				6037971144648F44A89D0818 /* XorShift128PlusRNG.h in Headers */,
+				1A5C79001EC078890045BEC5 /* v8-inspector.h in Headers */,
 				603796B34AE43F7725F6F9F6 /* IntegerPrintfMacros.h in Headers */,
 				1A4711991EB9BA880027E3D9 /* HelperMacros.h in Headers */,
 				6037947002E95BE244EE4EC2 /* UniquePtrExtensions.h in Headers */,
@@ -1202,6 +1231,7 @@
 				1A47119A1EB9BA880027E3D9 /* Base.h in Headers */,
 				6037993FC2554CFA4D770718 /* jsfriendapi.h in Headers */,
 				1A1853641EBCCB3900EF28DC /* ObjectWrap.h in Headers */,
+				1A5C79021EC078890045BEC5 /* v8-testing.h in Headers */,
 				6037986DD79AA81267B4A35B /* jsprototypes.h in Headers */,
 				60379655807D59BB2F52602E /* jemalloc_types.h in Headers */,
 				60379FFB4B49064784ADB390 /* mozmemory_wrap.h in Headers */,

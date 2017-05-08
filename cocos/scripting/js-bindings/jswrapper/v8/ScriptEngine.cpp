@@ -51,8 +51,6 @@ namespace se {
     ScriptEngine::ScriptEngine()
     : _platform(nullptr)
     , _isolate(nullptr)
-    , _isolateScope(nullptr)
-    , _contextScope(nullptr)
     , _globalObj(nullptr)
     , _isValid(false)
     {
@@ -63,8 +61,9 @@ namespace se {
     {
         SAFE_RELEASE(_globalObj);
 
-        delete _contextScope;
-        delete _isolateScope;
+        _context.Get(_isolate)->Exit();
+        _context.Reset();
+        _isolate->Exit();
 
         _isolate->Dispose();
 
@@ -77,8 +76,8 @@ namespace se {
     {
         printf("Initializing V8\n");
 
-        RETRUN_VAL_IF_FAIL(v8::V8::InitializeICUDefaultLocation(nullptr, "/Users/james/Project/cocos2d-x/tests/js-tests/resjs/icudtl.dat"), false);
-        v8::V8::InitializeExternalStartupData("/Users/james/Project/cocos2d-x/tests/js-tests/resjs/natives_blob.bin", "/Users/james/Project/cocos2d-x/tests/js-tests/resjs/snapshot_blob.bin"); //TODO
+//        RETRUN_VAL_IF_FAIL(v8::V8::InitializeICUDefaultLocation(nullptr, "/Users/james/Project/v8/out.gn/x64.debug/icudtl.dat"), false);
+//        v8::V8::InitializeExternalStartupData("/Users/james/Project/v8/out.gn/x64.debug/natives_blob.bin", "/Users/james/Project/v8/out.gn/x64.debug/snapshot_blob.bin"); //TODO
         _platform = v8::platform::CreateDefaultPlatform();
         v8::V8::InitializePlatform(_platform);
         RETRUN_VAL_IF_FAIL(v8::V8::Initialize(), false);
@@ -86,18 +85,16 @@ namespace se {
         // Create a new Isolate and make it the current one.
         _createParams.array_buffer_allocator = &_allocator;
         _isolate = v8::Isolate::New(_createParams);
-
-        _isolateScope = new v8::Isolate::Scope(_isolate);
-
         v8::HandleScope hs(_isolate);
+        _isolate->Enter();
 
-        _context = v8::Context::New(_isolate);
-        _contextScope = new v8::Context::Scope(_context);
+        _context.Reset(_isolate, v8::Context::New(_isolate));
+        _context.Get(_isolate)->Enter();
 
         Class::setIsolate(_isolate);
         Object::setIsolate(_isolate);
 
-        _globalObj = Object::_createJSObject(_context->Global(), true);
+        _globalObj = Object::_createJSObject(_context.Get(_isolate)->Global(), true);
 
         _globalObj->defineFunction("log", __log);
         _globalObj->defineFunction("forceGC", __forceGC);
@@ -114,7 +111,15 @@ namespace se {
 
     void ScriptEngine::gc()
     {
-        while (!_isolate->IdleNotification(100)) {};
+        printf("GC begin ...\n");
+        const double kLongIdlePauseInSeconds = 1.0;
+        _isolate->ContextDisposedNotification();
+        _isolate->IdleNotificationDeadline(_platform->MonotonicallyIncreasingTime() + kLongIdlePauseInSeconds);
+        // By sending a low memory notifications, we will try hard to collect all
+        // garbage and will therefore also invoke all weak callbacks of actually
+        // unreachable persistent handles.
+        _isolate->LowMemoryNotification();
+        printf("GC end ...\n");
     }
 
     bool ScriptEngine::isValid() const
@@ -132,18 +137,16 @@ namespace se {
     {
         std::string scriptStr(script, length);
 
-        v8::HandleScope handle_scope(_isolate);
-
         v8::Local<v8::String> source = v8::String::NewFromUtf8(_isolate, scriptStr.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
 
         v8::ScriptOrigin origin(v8::String::NewFromUtf8(_isolate, fileName ? fileName : "Unknown"));
-        v8::MaybeLocal<v8::Script> maybeScript = v8::Script::Compile(_context, source, &origin);
+        v8::MaybeLocal<v8::Script> maybeScript = v8::Script::Compile(_context.Get(_isolate), source, &origin);
 
         bool success = false;
 
         if (!maybeScript.IsEmpty()) {
             v8::Local <v8::Script> v8Script = maybeScript.ToLocalChecked();
-            v8::MaybeLocal<v8::Value> maybeResult = v8Script->Run(_context);
+            v8::MaybeLocal<v8::Value> maybeResult = v8Script->Run(_context.Get(_isolate));
 
             if (!maybeResult.IsEmpty()) {
                 v8::Local<v8::Value> result = maybeResult.ToLocalChecked();

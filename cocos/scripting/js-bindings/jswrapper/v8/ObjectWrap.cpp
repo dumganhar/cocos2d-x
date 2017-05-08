@@ -57,7 +57,7 @@ namespace se {
     }
 
     void ObjectWrap::makeWeak() {
-        persistent().SetWeak(this, weakCallback, v8::WeakCallbackType::kParameter);
+        persistent().SetWeak(this, weakCallback, v8::WeakCallbackType::kFinalizer);
         persistent().MarkIndependent();
     }
 
@@ -79,6 +79,7 @@ namespace se {
 /*static*/
     void ObjectWrap::weakCallback(const v8::WeakCallbackInfo<ObjectWrap> &data) {
         ObjectWrap *wrap = data.GetParameter();
+//        printf("weakCallback: %p, nativeObj = %p, finalize: %p\n", wrap, wrap->_nativeObj, wrap->_finalizeCb);
         assert(wrap->refs_ == 0);
         wrap->handle_.Reset();
         if (wrap->_finalizeCb != nullptr) {
