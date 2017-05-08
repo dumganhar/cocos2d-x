@@ -12,6 +12,13 @@ namespace se {
     class Class;
     class Value;
 
+    class AutoHandleScope
+    {
+    public:
+        AutoHandleScope() {}
+        ~AutoHandleScope() {}
+    };
+    
     class ScriptEngine
     {
     private:

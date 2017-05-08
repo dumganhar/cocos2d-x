@@ -104,7 +104,7 @@ namespace se {
         }
         else
         {
-            obj = new Object(Class::_createJSObject(clsName), rooted);
+            obj = createObject(clsName, rooted);
             obj->setPrivateData(ptr);
         }
         return obj;

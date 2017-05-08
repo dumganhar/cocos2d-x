@@ -9,6 +9,8 @@
 
 namespace se {
 
+    class Object;
+    class Class;
     class Value;
 
     class ArrayBufferAllocator : public v8::ArrayBuffer::Allocator {
@@ -27,59 +29,73 @@ namespace se {
         }
     };
 
-    class JSWrapperScope {
-
+    class AutoHandleScope
+    {
     public:
-
-        JSWrapperScope(v8::Isolate *isolate) : m_handle_scope(isolate) {
+        AutoHandleScope()
+        : _handleScope(v8::Isolate::GetCurrent())
+        {
         }
-
+        ~AutoHandleScope()
+        {
+        }
     private:
-
-        v8::HandleScope m_handle_scope;
+        v8::HandleScope _handleScope;
     };
 
-    class ScriptEngine {
-
-    public:
-
-        ScriptEngine(char *arg);
-
+    class ScriptEngine
+    {
+    private:
+        ScriptEngine();
         ~ScriptEngine();
-
     public:
+
+        static ScriptEngine* getInstance();
+        static void destroyInstance();
+
+        bool init();
 
         // --- Returns the global object
-        Object *globalObject();
+        Object* getGlobalObject() const;
 
-        // --- Execute a script
-        bool execute(const char *string, Value *data = NULL, const char *fileName = NULL);
+        // --- Execute
+        bool executeScriptBuffer(const char *string, Value *data = nullptr, const char *fileName = nullptr);
+        bool executeScriptBuffer(const char *string, size_t length, Value *data = nullptr, const char *fileName = nullptr);
+        bool executeScriptFile(const std::string &filePath, Value *rval = nullptr);
 
         // --- Run GC
-        void gc() {
-            while (!m_isolate->IdleNotification(100)) {};
-        }
+        void gc();
 
-        bool isValid() {
-            return m_isValid;
-        }
+        bool isValid() const;
+
+        void _retainScriptObject(void* owner, void* target);
+        void _releaseScriptObject(void* owner, void* target);
+
+        enum class NodeEventType
+        {
+            ENTER,
+            EXIT,
+            ENTER_TRANSITION_DID_FINISH,
+            EXIT_TRANSITION_DID_START,
+            CLEANUP
+        };
+        void _onReceiveNodeEvent(void* node, NodeEventType type);
 
     private:
 
-        v8::Platform *m_platform;
-        v8::Isolate *m_isolate;
+        v8::Platform* _platform;
+        v8::Isolate* _isolate;
 
-        v8::Isolate::Scope *m_isolate_scope;
+        v8::Isolate::Scope* _isolateScope;
 
-        v8::Local<v8::Context> m_context;
-        v8::Context::Scope *m_context_scope;
+        v8::Local<v8::Context> _context;
+        v8::Context::Scope* _contextScope;
 
-        JSWrapperScope *m_scope;
+        ArrayBufferAllocator _allocator;
+        v8::Isolate::CreateParams _createParams;
+        Object* _globalObj;
 
-        ArrayBufferAllocator m_allocator;
-        v8::Isolate::CreateParams m_create_params;
-
-        bool m_isValid;
+        bool _isValid;
     };
 
 } // namespace se {

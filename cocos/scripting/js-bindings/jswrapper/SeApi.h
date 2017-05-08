@@ -7,6 +7,6 @@
 #endif
 
 #ifdef SCRIPT_ENGINE_V8
- #include "v8/SeApi.h"
+#include "v8/SeApi.h"
 #endif
 

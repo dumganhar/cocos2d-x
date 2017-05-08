@@ -25,22 +25,26 @@ namespace se {
         bool defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
         bool defineStaticFunction(const char *name, v8::FunctionCallback func);
         bool defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
+        bool defineFinalizedFunction(V8FinalizeFunc finalizeFunc);
+
+        Object* getProto() const;
 
 	private:
 
-        static v8::Local<v8::Object> _createJSObject(const std::string &clsName);
+        static v8::Local<v8::Object> _createJSObject(const std::string &clsName, Class** outCls);
         static void setIsolate(v8::Isolate* isolate);
 		
 		std::string _name;
 		Object* _parent;
         Object* _parentProto;
+        Object* _proto;
 
         v8::FunctionCallback _ctor;
-
-		v8::Handle<v8::FunctionTemplate> _ctorTemplate;
-		v8::Handle<v8::ObjectTemplate> _ctorInstanceTemplate;
+		v8::UniquePersistent<v8::FunctionTemplate> _ctorTemplate;
+        V8FinalizeFunc _finalizeFunc;
 
         friend class ScriptEngine;
+        friend class Object;
 	};
 
 } // namespace se {

@@ -15,6 +15,7 @@ namespace se {
     Class::Class()
     : _parent(nullptr)
     , _parentProto(nullptr)
+    , _proto(nullptr)
     , _ctor(nullptr)
     {
 
@@ -22,7 +23,7 @@ namespace se {
 
     Class::~Class()
     {
-
+        SAFE_RELEASE(_proto);
     }
 
     /* static */
@@ -43,9 +44,8 @@ namespace se {
         _parent = parent;
         _parentProto = parentProto;
 
-        _ctorTemplate = v8::FunctionTemplate::New(__isolate, _ctor);
-        _ctorInstanceTemplate = _ctorTemplate->InstanceTemplate();
-        _ctorInstanceTemplate->SetInternalFieldCount(1);
+        _ctorTemplate.Reset(__isolate, v8::FunctionTemplate::New(__isolate, _ctor));
+        _ctorTemplate.Get(__isolate)->InstanceTemplate()->SetInternalFieldCount(1);
 
         return true;
     }
@@ -55,41 +55,65 @@ namespace se {
         assert(__clsMap.find(_name) == __clsMap.end());
 
         __clsMap.emplace(_name, this);
-        _parent->_obj.Get(__isolate)->Set(v8::String::NewFromUtf8(__isolate, _name.c_str()), _ctorTemplate->GetFunction());
+
+        if (_parentProto != nullptr)
+        {
+            _ctorTemplate.Get(__isolate)->Inherit(_parentProto->_getClass()->_ctorTemplate.Get(__isolate));
+        }
+
+        _parent->_getJSObject()->Set(v8::String::NewFromUtf8(__isolate, _name.c_str()), _ctorTemplate.Get(__isolate)->GetFunction());
+
+        _proto = Object::createObject(_name.c_str(), true);
         return true;
     }
 
     bool Class::defineFunction(const char *name, v8::FunctionCallback func)
     {
-        _ctorTemplate->PrototypeTemplate()->Set(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, func));
+        _ctorTemplate.Get(__isolate)->PrototypeTemplate()->Set(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, func));
         return true;
     }
 
     bool Class::defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
     {
-        _ctorTemplate->PrototypeTemplate()->SetAccessor(v8::String::NewFromUtf8(__isolate, name), getter, setter);
+        _ctorTemplate.Get(__isolate)->PrototypeTemplate()->SetAccessor(v8::String::NewFromUtf8(__isolate, name), getter, setter);
         return true;
     }
 
     bool Class::defineStaticFunction(const char *name, v8::FunctionCallback func)
     {
-        assert(false);
+        _ctorTemplate.Get(__isolate)->Set(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, func));
         return true;
     }
 
     bool Class::defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
     {
+//        _ctorTemplate.Get(__isolate)->SetAccessorProperty(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, getter), v8::FunctionTemplate::New(__isolate, setter));
         assert(false);
         return true;
     }
 
-    v8::Local<v8::Object> Class::_createJSObject(const std::string &clsName)
+    bool Class::defineFinalizedFunction(V8FinalizeFunc finalizeFunc)
+    {
+        _finalizeFunc = finalizeFunc;
+        return true;
+    }
+
+    v8::Local<v8::Object> Class::_createJSObject(const std::string &clsName, Class** outCls)
     {
         auto iter = __clsMap.find(clsName);
         if (iter == __clsMap.end())
-            return v8::Local<v8::Object>();
+        {
+            *outCls = nullptr;
+            return v8::Local<v8::Object>::Cast(v8::Undefined(__isolate));
+        }
 
-        return iter->second->_ctorInstanceTemplate->NewInstance();
+        *outCls = iter->second;
+        return iter->second->_ctorTemplate.Get(__isolate)->InstanceTemplate()->NewInstance();
+    }
+
+    Object* Class::getProto() const
+    {
+        return _proto;
     }
 
     /* static */

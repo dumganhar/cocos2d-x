@@ -7,6 +7,7 @@
 #include "Base.h"
 #include "../Ref.hpp"
 #include "../Value.hpp"
+#include "ObjectWrap.h"
 
 namespace se {
 
@@ -14,21 +15,30 @@ namespace se {
 
     class Object : public Ref
     {
-    public:
-        Object(v8::Local<v8::Object> obj);
+    private:
+        Object();
+        bool init(v8::Local<v8::Object> obj, bool rooted);
 
+    public:
         virtual ~Object();
 
-        // --- Getter/Setter
-        bool get(const char *name, Value* data = NULL);
+        static Object* createPlainObject();
 
-        void set(const char *name, Value& data);
+        static Object* createObject(const char* clsName, bool rooted);
+        static Object* getObjectWithPtr(void* ptr);
+        static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
+
+        static Object* _createJSObject(v8::Local<v8::Object> obj, bool rooted);
+        
+        // --- Getter/Setter
+        bool getProperty(const char *name, Value* data);
+        void setProperty(const char *name, const Value& data);
 
         // --- Function
         bool isFunction() const;
-        bool call(ValueArray *args, Object *object, Value *data = NULL);
+        bool call(const ValueArray& args, Object* thisObject, Value* rval = nullptr);
 
-        bool registerFunction(const char *funcName, v8::FunctionCallback func);
+        bool defineFunction(const char *funcName, v8::FunctionCallback func);
 
 
         // --- TypedArrays
@@ -48,14 +58,31 @@ namespace se {
         void getArrayElement(unsigned int index, Value *data);
 
         // --- Private
+        void setPrivateData(void* data);
         void* getPrivateData() const;
-        // --- Utility
-        void fillArgs(std::vector<v8::Local<v8::Value>> *vector, ValueArray *args);
+
+        void switchToUnrooted();
+        bool isRooted() const;
+
+        bool isSame(Object* o) const;
+        bool attachChild(Object* child);
+        bool detachChild(Object* child);
+
+        v8::Local<v8::Object> _getJSObject() const;
+        Class* _getClass() const;
 
     private:
         static void setIsolate(v8::Isolate* isolate);
-        v8::UniquePersistent<v8::Object> _obj;
+
+        Class* _cls;
+        ObjectWrap _obj;
+        bool _isRooted;
+        bool _hasPrivateData;
+
+        friend class ScriptEngine;
     };
+
+    extern std::unordered_map<void* /*native*/, Object* /*jsobj*/> __nativePtrToObjectMap;
 
 } // namespace se {
 
