@@ -11,24 +11,6 @@
 		1A119F0018BDF19200352BAA /* ScriptingCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A119E7C18BDF19200352BAA /* ScriptingCore.cpp */; };
 		1A119F0218BDF19200352BAA /* ScriptingCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A119E7D18BDF19200352BAA /* ScriptingCore.h */; };
 		1A1853641EBCCB3900EF28DC /* ObjectWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A1853621EBCCB3900EF28DC /* ObjectWrap.h */; };
-		1A1853651EC01D2B00EF28DC /* jsb_director.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E991C1EB0823A001AEA19 /* jsb_director.cpp */; };
-		1A1853661EC01D2B00EF28DC /* jsb_director.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E991D1EB0823A001AEA19 /* jsb_director.hpp */; };
-		1A1853671EC01F7700EF28DC /* jsb_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99241EB0826E001AEA19 /* jsb_scene.cpp */; };
-		1A1853681EC01F7700EF28DC /* jsb_scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99251EB0826E001AEA19 /* jsb_scene.hpp */; };
-		1A1853691EC01F7700EF28DC /* jsb_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E992C1EB0827B001AEA19 /* jsb_node.cpp */; };
-		1A18536A1EC01F7700EF28DC /* jsb_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E992D1EB0827B001AEA19 /* jsb_node.hpp */; };
-		1A18536B1EC01F7700EF28DC /* jsb_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99341EB08291001AEA19 /* jsb_sprite.cpp */; };
-		1A18536C1EC01F7700EF28DC /* jsb_sprite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99351EB08291001AEA19 /* jsb_sprite.hpp */; };
-		1A18536D1EC01F7700EF28DC /* jsb_global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60379C4EE6E94AC75C007BE5 /* jsb_global.cpp */; };
-		1A18536E1EC01F7700EF28DC /* jsb_global.h in Headers */ = {isa = PBXBuildFile; fileRef = 60379529B27073083FEC9F56 /* jsb_global.h */; };
-		1A18536F1EC01F7700EF28DC /* jsb_register_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6037984404793E5ED86116E2 /* jsb_register_all.cpp */; };
-		1A1853701EC01F7700EF28DC /* jsb_register_all.h in Headers */ = {isa = PBXBuildFile; fileRef = 603796A9049039255F3E1B6D /* jsb_register_all.h */; };
-		1A1853711EC01F7700EF28DC /* jsb_menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757591EB96C2C000CA182 /* jsb_menu.cpp */; };
-		1A1853721EC01F7700EF28DC /* jsb_menu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A37575A1EB96C2C000CA182 /* jsb_menu.hpp */; };
-		1A1853731EC01F7700EF28DC /* jsb_menuitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757611EB96C56000CA182 /* jsb_menuitem.cpp */; };
-		1A1853741EC01F7700EF28DC /* jsb_menuitem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */; };
-		1A1853751EC0245400EF28DC /* ScriptingCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A119E7C18BDF19200352BAA /* ScriptingCore.cpp */; };
-		1A1853761EC0245400EF28DC /* ScriptingCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A119E7D18BDF19200352BAA /* ScriptingCore.h */; };
 		1A1853A31EC052FE00EF28DC /* ObjectWrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1853A21EC052FE00EF28DC /* ObjectWrap.cpp */; };
 		1A1853A41EC052FE00EF28DC /* ObjectWrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1853A21EC052FE00EF28DC /* ObjectWrap.cpp */; };
 		1A1853A51EC052FE00EF28DC /* ObjectWrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1853A21EC052FE00EF28DC /* ObjectWrap.cpp */; };
@@ -40,8 +22,6 @@
 		1A3757651EB96C56000CA182 /* jsb_menuitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757611EB96C56000CA182 /* jsb_menuitem.cpp */; };
 		1A3757671EB96C56000CA182 /* jsb_menuitem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */; };
 		1A3757681EB96C56000CA182 /* jsb_menuitem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */; };
-		1A4711901EB9BA880027E3D9 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99621EB0AF1F001AEA19 /* Utils.cpp */; };
-		1A4711911EB9BA880027E3D9 /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99631EB0AF1F001AEA19 /* Utils.hpp */; };
 		1A4711921EB9BA880027E3D9 /* Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E993D1EB09565001AEA19 /* Class.cpp */; };
 		1A4711931EB9BA880027E3D9 /* Class.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E993E1EB09565001AEA19 /* Class.hpp */; };
 		1A4711941EB9BA880027E3D9 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99401EB09566001AEA19 /* Object.cpp */; };
@@ -58,6 +38,64 @@
 		1A4711A21EB9BA880027E3D9 /* Ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99951EB1F3D6001AEA19 /* Ref.cpp */; };
 		1A4711A31EB9BA880027E3D9 /* Ref.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99961EB1F3D6001AEA19 /* Ref.hpp */; };
 		1A4711CA1EB9C4E00027E3D9 /* libmozglue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9E98D41EB080E6001AEA19 /* libmozglue.a */; };
+		1A5543531EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
+		1A5543541EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
+		1A5543551EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
+		1A5543571EC155EC00AEA55E /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543561EC155EC00AEA55E /* Base.h */; };
+		1A5543581EC155EC00AEA55E /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543561EC155EC00AEA55E /* Base.h */; };
+		1A5543591EC155EC00AEA55E /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543561EC155EC00AEA55E /* Base.h */; };
+		1A55435B1EC1561900AEA55E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55435A1EC1561900AEA55E /* JavaScriptCore.framework */; };
+		1A55435D1EC15EA100AEA55E /* HelperMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A55435C1EC15EA100AEA55E /* HelperMacros.h */; };
+		1A55435E1EC15EA100AEA55E /* HelperMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A55435C1EC15EA100AEA55E /* HelperMacros.h */; };
+		1A55435F1EC15EA100AEA55E /* HelperMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A55435C1EC15EA100AEA55E /* HelperMacros.h */; };
+		1A5543621EC15F1800AEA55E /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543601EC15F1800AEA55E /* Object.cpp */; };
+		1A5543631EC15F1800AEA55E /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543601EC15F1800AEA55E /* Object.cpp */; };
+		1A5543641EC15F1800AEA55E /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543601EC15F1800AEA55E /* Object.cpp */; };
+		1A5543651EC15F1800AEA55E /* Object.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543611EC15F1800AEA55E /* Object.hpp */; };
+		1A5543661EC15F1800AEA55E /* Object.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543611EC15F1800AEA55E /* Object.hpp */; };
+		1A5543671EC15F1800AEA55E /* Object.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543611EC15F1800AEA55E /* Object.hpp */; };
+		1A55436C1EC1606800AEA55E /* Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543681EC1606800AEA55E /* Class.cpp */; };
+		1A55436D1EC1606800AEA55E /* Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543681EC1606800AEA55E /* Class.cpp */; };
+		1A55436E1EC1606800AEA55E /* Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543681EC1606800AEA55E /* Class.cpp */; };
+		1A55436F1EC1606800AEA55E /* Class.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543691EC1606800AEA55E /* Class.hpp */; };
+		1A5543701EC1606800AEA55E /* Class.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543691EC1606800AEA55E /* Class.hpp */; };
+		1A5543711EC1606800AEA55E /* Class.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543691EC1606800AEA55E /* Class.hpp */; };
+		1A5543721EC1606800AEA55E /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A55436A1EC1606800AEA55E /* ScriptEngine.cpp */; };
+		1A5543731EC1606800AEA55E /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A55436A1EC1606800AEA55E /* ScriptEngine.cpp */; };
+		1A5543741EC1606800AEA55E /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A55436A1EC1606800AEA55E /* ScriptEngine.cpp */; };
+		1A5543751EC1606800AEA55E /* ScriptEngine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A55436B1EC1606800AEA55E /* ScriptEngine.hpp */; };
+		1A5543761EC1606800AEA55E /* ScriptEngine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A55436B1EC1606800AEA55E /* ScriptEngine.hpp */; };
+		1A5543771EC1606800AEA55E /* ScriptEngine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A55436B1EC1606800AEA55E /* ScriptEngine.hpp */; };
+		1A55437A1EC182E900AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543781EC182E900AEA55E /* Utils.cpp */; };
+		1A55437B1EC182E900AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543781EC182E900AEA55E /* Utils.cpp */; };
+		1A55437C1EC182E900AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543781EC182E900AEA55E /* Utils.cpp */; };
+		1A55437D1EC182E900AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543791EC182E900AEA55E /* Utils.hpp */; };
+		1A55437E1EC182E900AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543791EC182E900AEA55E /* Utils.hpp */; };
+		1A55437F1EC182E900AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543791EC182E900AEA55E /* Utils.hpp */; };
+		1A5543821EC18C9800AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543801EC18C9800AEA55E /* Utils.cpp */; };
+		1A5543831EC18C9800AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543801EC18C9800AEA55E /* Utils.cpp */; };
+		1A5543841EC18C9800AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543801EC18C9800AEA55E /* Utils.cpp */; };
+		1A5543851EC18C9800AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543811EC18C9800AEA55E /* Utils.hpp */; };
+		1A5543861EC18C9800AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543811EC18C9800AEA55E /* Utils.hpp */; };
+		1A5543871EC18C9800AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543811EC18C9800AEA55E /* Utils.hpp */; };
+		1A5543881EC1AE4F00AEA55E /* jsb_director.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E991C1EB0823A001AEA19 /* jsb_director.cpp */; };
+		1A5543891EC1AE5200AEA55E /* jsb_director.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E991D1EB0823A001AEA19 /* jsb_director.hpp */; };
+		1A55438A1EC1AF7D00AEA55E /* ScriptingCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A119E7C18BDF19200352BAA /* ScriptingCore.cpp */; };
+		1A55438B1EC1AF7D00AEA55E /* ScriptingCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A119E7D18BDF19200352BAA /* ScriptingCore.h */; };
+		1A55438C1EC1AF8600AEA55E /* jsb_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99241EB0826E001AEA19 /* jsb_scene.cpp */; };
+		1A55438D1EC1AF8600AEA55E /* jsb_scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99251EB0826E001AEA19 /* jsb_scene.hpp */; };
+		1A55438E1EC1AF9000AEA55E /* jsb_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E992C1EB0827B001AEA19 /* jsb_node.cpp */; };
+		1A55438F1EC1AF9000AEA55E /* jsb_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E992D1EB0827B001AEA19 /* jsb_node.hpp */; };
+		1A5543901EC1AF9000AEA55E /* jsb_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99341EB08291001AEA19 /* jsb_sprite.cpp */; };
+		1A5543911EC1AF9000AEA55E /* jsb_sprite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99351EB08291001AEA19 /* jsb_sprite.hpp */; };
+		1A5543921EC1AF9000AEA55E /* jsb_global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60379C4EE6E94AC75C007BE5 /* jsb_global.cpp */; };
+		1A5543931EC1AF9000AEA55E /* jsb_global.h in Headers */ = {isa = PBXBuildFile; fileRef = 60379529B27073083FEC9F56 /* jsb_global.h */; };
+		1A5543941EC1AF9000AEA55E /* jsb_register_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6037984404793E5ED86116E2 /* jsb_register_all.cpp */; };
+		1A5543951EC1AF9000AEA55E /* jsb_register_all.h in Headers */ = {isa = PBXBuildFile; fileRef = 603796A9049039255F3E1B6D /* jsb_register_all.h */; };
+		1A5543961EC1AF9000AEA55E /* jsb_menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757591EB96C2C000CA182 /* jsb_menu.cpp */; };
+		1A5543971EC1AF9000AEA55E /* jsb_menu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A37575A1EB96C2C000CA182 /* jsb_menu.hpp */; };
+		1A5543981EC1AF9000AEA55E /* jsb_menuitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757611EB96C56000CA182 /* jsb_menuitem.cpp */; };
+		1A5543991EC1AF9000AEA55E /* jsb_menuitem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */; };
 		1A5C78FD1EC078890045BEC5 /* v8-debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F51EC078890045BEC5 /* v8-debug.h */; };
 		1A5C78FE1EC078890045BEC5 /* v8-experimental.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F61EC078890045BEC5 /* v8-experimental.h */; };
 		1A5C78FF1EC078890045BEC5 /* v8-inspector-protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */; };
@@ -102,10 +140,6 @@
 		1A9E995D1EB09566001AEA19 /* Value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99441EB09566001AEA19 /* Value.cpp */; };
 		1A9E995F1EB09566001AEA19 /* Value.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99451EB09566001AEA19 /* Value.hpp */; };
 		1A9E99601EB09566001AEA19 /* Value.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99451EB09566001AEA19 /* Value.hpp */; };
-		1A9E99651EB0AF1F001AEA19 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99621EB0AF1F001AEA19 /* Utils.cpp */; };
-		1A9E99661EB0AF1F001AEA19 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E99621EB0AF1F001AEA19 /* Utils.cpp */; };
-		1A9E99681EB0AF1F001AEA19 /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99631EB0AF1F001AEA19 /* Utils.hpp */; };
-		1A9E99691EB0AF1F001AEA19 /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E99631EB0AF1F001AEA19 /* Utils.hpp */; };
 		1A9E996C1EB0AFC9001AEA19 /* HelperMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E996A1EB0AFC9001AEA19 /* HelperMacros.h */; };
 		1A9E996D1EB0AFC9001AEA19 /* HelperMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E996A1EB0AFC9001AEA19 /* HelperMacros.h */; };
 		1A9E99701EB197CC001AEA19 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9E996E1EB197CC001AEA19 /* Base.h */; };
@@ -316,6 +350,20 @@
 		1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_menuitem.hpp; sourceTree = "<group>"; };
 		1A5410A418B785A10016A3AF /* libjscocos2d Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5410A518B785A10016A3AF /* libjscocos2d iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A5543521EC155D200AEA55E /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
+		1A5543561EC155EC00AEA55E /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		1A55435A1EC1561900AEA55E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		1A55435C1EC15EA100AEA55E /* HelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperMacros.h; sourceTree = "<group>"; };
+		1A5543601EC15F1800AEA55E /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
+		1A5543611EC15F1800AEA55E /* Object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
+		1A5543681EC1606800AEA55E /* Class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Class.cpp; sourceTree = "<group>"; };
+		1A5543691EC1606800AEA55E /* Class.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Class.hpp; sourceTree = "<group>"; };
+		1A55436A1EC1606800AEA55E /* ScriptEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptEngine.cpp; sourceTree = "<group>"; };
+		1A55436B1EC1606800AEA55E /* ScriptEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ScriptEngine.hpp; sourceTree = "<group>"; };
+		1A5543781EC182E900AEA55E /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		1A5543791EC182E900AEA55E /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
+		1A5543801EC18C9800AEA55E /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		1A5543811EC18C9800AEA55E /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1A5C78F51EC078890045BEC5 /* v8-debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-debug.h"; sourceTree = "<group>"; };
 		1A5C78F61EC078890045BEC5 /* v8-experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-experimental.h"; sourceTree = "<group>"; };
 		1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-inspector-protocol.h"; sourceTree = "<group>"; };
@@ -343,8 +391,6 @@
 		1A9E99431EB09566001AEA19 /* ScriptEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ScriptEngine.hpp; sourceTree = "<group>"; };
 		1A9E99441EB09566001AEA19 /* Value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Value.cpp; sourceTree = "<group>"; };
 		1A9E99451EB09566001AEA19 /* Value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Value.hpp; sourceTree = "<group>"; };
-		1A9E99621EB0AF1F001AEA19 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
-		1A9E99631EB0AF1F001AEA19 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1A9E996A1EB0AFC9001AEA19 /* HelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperMacros.h; sourceTree = "<group>"; };
 		1A9E996E1EB197CC001AEA19 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
 		1A9E99831EB19ED7001AEA19 /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
@@ -561,6 +607,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A55435B1EC1561900AEA55E /* JavaScriptCore.framework in Frameworks */,
 				1A0BAAFA1EB9B306005FF27F /* libjs_static.a in Frameworks */,
 				1A4711CA1EB9C4E00027E3D9 /* libmozglue.a in Frameworks */,
 			);
@@ -643,9 +690,28 @@
 			name = spidermonkey;
 			sourceTree = "<group>";
 		};
+		1A5543511EC155D200AEA55E /* jsc */ = {
+			isa = PBXGroup;
+			children = (
+				1A5543781EC182E900AEA55E /* Utils.cpp */,
+				1A5543791EC182E900AEA55E /* Utils.hpp */,
+				1A5543681EC1606800AEA55E /* Class.cpp */,
+				1A5543691EC1606800AEA55E /* Class.hpp */,
+				1A55436A1EC1606800AEA55E /* ScriptEngine.cpp */,
+				1A55436B1EC1606800AEA55E /* ScriptEngine.hpp */,
+				1A5543601EC15F1800AEA55E /* Object.cpp */,
+				1A5543611EC15F1800AEA55E /* Object.hpp */,
+				1A55435C1EC15EA100AEA55E /* HelperMacros.h */,
+				1A5543561EC155EC00AEA55E /* Base.h */,
+				1A5543521EC155D200AEA55E /* SeApi.h */,
+			);
+			path = jsc;
+			sourceTree = "<group>";
+		};
 		1A9E98D31EB080E6001AEA19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A55435A1EC1561900AEA55E /* JavaScriptCore.framework */,
 				1A9E98D41EB080E6001AEA19 /* libmozglue.a */,
 			);
 			name = Frameworks;
@@ -654,6 +720,7 @@
 		1A9E98D71EB081B4001AEA19 /* jswrapper */ = {
 			isa = PBXGroup;
 			children = (
+				1A5543511EC155D200AEA55E /* jsc */,
 				1AC0051E1EBC483F004B3660 /* v8 */,
 				1A9E993C1EB09565001AEA19 /* sm */,
 				1A9E99441EB09566001AEA19 /* Value.cpp */,
@@ -671,7 +738,8 @@
 		1A9E993C1EB09565001AEA19 /* sm */ = {
 			isa = PBXGroup;
 			children = (
-				1A9E99611EB0AEE4001AEA19 /* internal */,
+				1A5543801EC18C9800AEA55E /* Utils.cpp */,
+				1A5543811EC18C9800AEA55E /* Utils.hpp */,
 				1A9E993D1EB09565001AEA19 /* Class.cpp */,
 				1A9E993E1EB09565001AEA19 /* Class.hpp */,
 				1A9E99401EB09566001AEA19 /* Object.cpp */,
@@ -683,15 +751,6 @@
 				1A9E99831EB19ED7001AEA19 /* SeApi.h */,
 			);
 			path = sm;
-			sourceTree = "<group>";
-		};
-		1A9E99611EB0AEE4001AEA19 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				1A9E99621EB0AF1F001AEA19 /* Utils.cpp */,
-				1A9E99631EB0AF1F001AEA19 /* Utils.hpp */,
-			);
-			path = internal;
 			sourceTree = "<group>";
 		};
 		1AC004ED1EBC480D004B3660 /* v8 */ = {
@@ -1010,9 +1069,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5543871EC18C9800AEA55E /* Utils.hpp in Headers */,
+				1A55437F1EC182E900AEA55E /* Utils.hpp in Headers */,
 				1A9E999C1EB1F3D6001AEA19 /* Ref.hpp in Headers */,
-				1A9E99691EB0AF1F001AEA19 /* Utils.hpp in Headers */,
+				1A55435F1EC15EA100AEA55E /* HelperMacros.h in Headers */,
+				1A5543771EC1606800AEA55E /* ScriptEngine.hpp in Headers */,
 				1A9E98EB1EB081B4001AEA19 /* config.hpp in Headers */,
+				1A5543551EC155D200AEA55E /* SeApi.h in Headers */,
 				1A9E99861EB19ED7001AEA19 /* SeApi.h in Headers */,
 				1A9E98F11EB081B4001AEA19 /* SeApi.h in Headers */,
 				1A9E99541EB09566001AEA19 /* Object.hpp in Headers */,
@@ -1021,12 +1084,15 @@
 				1A9E99711EB197CC001AEA19 /* Base.h in Headers */,
 				1A9E996D1EB0AFC9001AEA19 /* HelperMacros.h in Headers */,
 				1A3757681EB96C56000CA182 /* jsb_menuitem.hpp in Headers */,
+				1A5543671EC15F1800AEA55E /* Object.hpp in Headers */,
 				1A9E992B1EB0826E001AEA19 /* jsb_scene.hpp in Headers */,
 				507B42731C31DCC60067B53E /* jsb_cocos2dx_experimental_webView_manual.h in Headers */,
 				1A9E993B1EB08291001AEA19 /* jsb_sprite.hpp in Headers */,
+				1A5543711EC1606800AEA55E /* Class.hpp in Headers */,
 				1A9E99231EB0823A001AEA19 /* jsb_director.hpp in Headers */,
 				1A9E99331EB0827B001AEA19 /* jsb_node.hpp in Headers */,
 				1A9E994B1EB09566001AEA19 /* Class.hpp in Headers */,
+				1A5543591EC155EC00AEA55E /* Base.h in Headers */,
 				1A3757601EB96C2C000CA182 /* jsb_menu.hpp in Headers */,
 				1A9E995A1EB09566001AEA19 /* ScriptEngine.hpp in Headers */,
 				6037911ED2ACA2FDD998083F /* jsb_global.h in Headers */,
@@ -1045,6 +1111,7 @@
 				6037909F40AFC1ACE4B8DF83 /* Debug.h in Headers */,
 				603796313C803B9105CADE23 /* GCAPI.h in Headers */,
 				1A5C79041EC078890045BEC5 /* v8-version-string.h in Headers */,
+				1A5543891EC1AE5200AEA55E /* jsb_director.hpp in Headers */,
 				60379946BC5810870DDC07C2 /* Proxy.h in Headers */,
 				60379144A6D325534F5B73E6 /* Realm.h in Headers */,
 				60379ECCD971865AA9E5AD29 /* Value.h in Headers */,
@@ -1069,11 +1136,10 @@
 				603798B0515AA2623129946C /* WeakMapPtr.h in Headers */,
 				60379288D40C7856E88C6BAE /* Conversions.h in Headers */,
 				60379FB25B06725088BAE550 /* GCHashTable.h in Headers */,
-				1A18536E1EC01F7700EF28DC /* jsb_global.h in Headers */,
 				6037927EF814B92F08DADB27 /* GCPolicyAPI.h in Headers */,
+				1A5543971EC1AF9000AEA55E /* jsb_menu.hpp in Headers */,
 				603797C089A40041BFEC5CE7 /* SliceBudget.h in Headers */,
 				603793BA08C9B99550AD9510 /* SweepingAPI.h in Headers */,
-				1A1853701EC01F7700EF28DC /* jsb_register_all.h in Headers */,
 				60379112FBD138801480470E /* GCAnnotations.h in Headers */,
 				603799AA8BA7A6E28D671256 /* MemoryMetrics.h in Headers */,
 				60379F63C59FCFD7C547CF05 /* UbiNodeCensus.h in Headers */,
@@ -1090,27 +1156,25 @@
 				6037969A7F5CEE87672991F8 /* UbiNodeBreadthFirst.h in Headers */,
 				60379450BE2534D0FAD6CAD3 /* CallNonGenericMethod.h in Headers */,
 				1AC005261EBC483F004B3660 /* ScriptEngine.hpp in Headers */,
-				1A1853661EC01D2B00EF28DC /* jsb_director.hpp in Headers */,
 				6037995447A4496DE208E6FF /* UbiNodeDominatorTree.h in Headers */,
 				603795BF53AD82316F040C98 /* UbiNodeShortestPaths.h in Headers */,
 				6037918D09797A7BB6052E3D /* ProfilingFrameIterator.h in Headers */,
 				6037969D9898806654F62E92 /* TrackedOptimizationInfo.h in Headers */,
 				60379D78CAD225FE80893FED /* jsapi.h in Headers */,
-				1A18536A1EC01F7700EF28DC /* jsb_node.hpp in Headers */,
 				603796E96E43992386307020 /* jsprf.h in Headers */,
 				60379FEE6368CEAD88D1DC99 /* Move.h in Headers */,
 				60379821884D5635AEEDEFD8 /* Pair.h in Headers */,
+				1A5543991EC1AF9000AEA55E /* jsb_menuitem.hpp in Headers */,
 				603797C12D7EBD1787CBD7A5 /* SHA1.h in Headers */,
 				60379F2F69991D175448B752 /* Array.h in Headers */,
 				1A4711951EB9BA880027E3D9 /* Object.hpp in Headers */,
 				6037918D2EC7CBDA3E0456B4 /* Maybe.h in Headers */,
 				6037918FFE77374022A84CBF /* Range.h in Headers */,
+				1A5543651EC15F1800AEA55E /* Object.hpp in Headers */,
 				60379F1264CB9DADAC631765 /* Tuple.h in Headers */,
 				6037917A2B74F5CE8904E28C /* Types.h in Headers */,
 				1A5C79031EC078890045BEC5 /* v8-util.h in Headers */,
 				60379EED3A32B0432650850D /* utils.h in Headers */,
-				1A1853681EC01F7700EF28DC /* jsb_scene.hpp in Headers */,
-				1A18536C1EC01F7700EF28DC /* jsb_sprite.hpp in Headers */,
 				60379391EF561FEB96B68E58 /* Char16.h in Headers */,
 				6037992AE2413A55A7239581 /* Likely.h in Headers */,
 				6037992517C7A9C336039C4F /* Opaque.h in Headers */,
@@ -1119,7 +1183,6 @@
 				6037960D3B0C8D3108B651CF /* Scoped.h in Headers */,
 				60379EB70F60BD5CE4540052 /* Unused.h in Headers */,
 				603792F775FD133E45A316B3 /* Vector.h in Headers */,
-				1A1853741EC01F7700EF28DC /* jsb_menuitem.hpp in Headers */,
 				603792AC9E53D8634996BFF5 /* Atomics.h in Headers */,
 				1AC005091EBC480D004B3660 /* libplatform-export.h in Headers */,
 				1AC0052E1EBC490F004B3660 /* SeApi.h in Headers */,
@@ -1149,6 +1212,7 @@
 				1AC0050D1EBC480D004B3660 /* v8-version.h in Headers */,
 				603794818A88106FCF16797D /* SplayTree.h in Headers */,
 				603793E9A69498D4C3A7525E /* StackWalk.h in Headers */,
+				1A55436F1EC1606800AEA55E /* Class.hpp in Headers */,
 				603796048E3C53966D026870 /* TimeStamp.h in Headers */,
 				603790DB50EE5E4F552BA049 /* UniquePtr.h in Headers */,
 				1A5C79011EC078890045BEC5 /* v8-profiler.h in Headers */,
@@ -1163,16 +1227,18 @@
 				6037909DD4D9BE0B6632A505 /* RefCounted.h in Headers */,
 				1A4711A31EB9BA880027E3D9 /* Ref.hpp in Headers */,
 				603791CCBC9DCC7302AE064A /* TypeTraits.h in Headers */,
+				1A55438B1EC1AF7D00AEA55E /* ScriptingCore.h in Headers */,
 				60379CB04E9D99E194C29C60 /* AllocPolicy.h in Headers */,
 				60379BC82210FF39EB7C0302 /* BloomFilter.h in Headers */,
 				60379DB1B77544BCF7D6C53A /* Compression.h in Headers */,
+				1A55438D1EC1AF8600AEA55E /* jsb_scene.hpp in Headers */,
 				60379E3E3032EB0AF0035B1D /* EndianUtils.h in Headers */,
 				60379229337C600D8F4CA196 /* RangedArray.h in Headers */,
 				60379AADB6FFC83F21A2F554 /* RollingMean.h in Headers */,
 				60379F6B43419C9CCE5C4505 /* TemplateLib.h in Headers */,
 				603798CC2AA2BB2787B3367A /* ThreadLocal.h in Headers */,
 				60379BB389DD166141E93E5A /* BinarySearch.h in Headers */,
-				1A1853721EC01F7700EF28DC /* jsb_menu.hpp in Headers */,
+				1A5543571EC155EC00AEA55E /* Base.h in Headers */,
 				60379C650354F5F8124AE387 /* GuardObjects.h in Headers */,
 				60379D5C7248EBC2057B37C1 /* IntegerRange.h in Headers */,
 				603792801D87041B7D9A7135 /* MacroForEach.h in Headers */,
@@ -1183,6 +1249,9 @@
 				603796C0962B2F7650C2B1A4 /* IndexSequence.h in Headers */,
 				1A5C78FF1EC078890045BEC5 /* v8-inspector-protocol.h in Headers */,
 				60379FCC3D2B1265387C0908 /* PodOperations.h in Headers */,
+				1A5543931EC1AF9000AEA55E /* jsb_global.h in Headers */,
+				1A5543851EC18C9800AEA55E /* Utils.hpp in Headers */,
+				1A55437D1EC182E900AEA55E /* Utils.hpp in Headers */,
 				60379300280D4B647F7807B6 /* TypedEnumBits.h in Headers */,
 				1AC0050E1EBC480D004B3660 /* v8.h in Headers */,
 				603794B1FC6C9D555C5B85B0 /* EnumTypeTraits.h in Headers */,
@@ -1196,25 +1265,27 @@
 				60379EA626BB78F83B0830A7 /* MemoryReporting.h in Headers */,
 				603798DD543BD205CE351826 /* ReentrancyGuard.h in Headers */,
 				1A4711A01EB9BA880027E3D9 /* config.hpp in Headers */,
-				1A1853761EC0245400EF28DC /* ScriptingCore.h in Headers */,
 				603791DBF04D6FF504AE60E3 /* ReverseIterator.h in Headers */,
 				603793EC6D6D789B2394E9E6 /* SegmentedVector.h in Headers */,
-				1A4711911EB9BA880027E3D9 /* Utils.hpp in Headers */,
 				1A5C78FD1EC078890045BEC5 /* v8-debug.h in Headers */,
 				6037997E33198BDD20FC6C83 /* SizePrintfMacros.h in Headers */,
 				60379BBF4AF7EF31852E744B /* double-conversion.h in Headers */,
 				603798AE01E837FC60B248C6 /* IntegerTypeTraits.h in Headers */,
 				6037915397E0150AF9A548F5 /* FastBernoulliTrial.h in Headers */,
 				1A47119F1EB9BA880027E3D9 /* Value.hpp in Headers */,
+				1A55438F1EC1AF9000AEA55E /* jsb_node.hpp in Headers */,
 				6037971144648F44A89D0818 /* XorShift128PlusRNG.h in Headers */,
 				1A5C79001EC078890045BEC5 /* v8-inspector.h in Headers */,
 				603796B34AE43F7725F6F9F6 /* IntegerPrintfMacros.h in Headers */,
+				1A5543911EC1AF9000AEA55E /* jsb_sprite.hpp in Headers */,
 				1A4711991EB9BA880027E3D9 /* HelperMacros.h in Headers */,
 				6037947002E95BE244EE4EC2 /* UniquePtrExtensions.h in Headers */,
 				60379A9BDE9AC1C9EA89BA5E /* OperatorNewExtensions.h in Headers */,
 				60379A1797109E57D1DBAD74 /* TaggedAnonymousMemory.h in Headers */,
 				603796736D4FF9F6CF592219 /* StaticAnalysisFunctions.h in Headers */,
 				60379F853C20AFA574C1139B /* fdlibm.h in Headers */,
+				1A55435D1EC15EA100AEA55E /* HelperMacros.h in Headers */,
+				1A5543531EC155D200AEA55E /* SeApi.h in Headers */,
 				603797BD3F58D2FA3CAC2B03 /* jsperf.h in Headers */,
 				603790FA281808A95AE3D742 /* jsalloc.h in Headers */,
 				603792A2D792788DDAD06649 /* jsclist.h in Headers */,
@@ -1223,6 +1294,7 @@
 				60379C40A6F3FF8B9EAB6C79 /* jscpucfg.h in Headers */,
 				6037959B8876FA7711233F51 /* js-config.h in Headers */,
 				603791C5BB5E8672CD5CAFA9 /* jsversion.h in Headers */,
+				1A5543951EC1AF9000AEA55E /* jsb_register_all.h in Headers */,
 				60379FA4A650F10AA8F81727 /* jswrapper.h in Headers */,
 				1A4711971EB9BA880027E3D9 /* ScriptEngine.hpp in Headers */,
 				1AC0050A1EBC480D004B3660 /* libplatform.h in Headers */,
@@ -1234,6 +1306,7 @@
 				1A5C79021EC078890045BEC5 /* v8-testing.h in Headers */,
 				6037986DD79AA81267B4A35B /* jsprototypes.h in Headers */,
 				60379655807D59BB2F52602E /* jemalloc_types.h in Headers */,
+				1A5543751EC1606800AEA55E /* ScriptEngine.hpp in Headers */,
 				60379FFB4B49064784ADB390 /* mozmemory_wrap.h in Headers */,
 				60379A003B7C185E61E054B3 /* Utils.hpp in Headers */,
 			);
@@ -1243,9 +1316,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5543861EC18C9800AEA55E /* Utils.hpp in Headers */,
+				1A55437E1EC182E900AEA55E /* Utils.hpp in Headers */,
 				1A9E999B1EB1F3D6001AEA19 /* Ref.hpp in Headers */,
-				1A9E99681EB0AF1F001AEA19 /* Utils.hpp in Headers */,
+				1A55435E1EC15EA100AEA55E /* HelperMacros.h in Headers */,
+				1A5543761EC1606800AEA55E /* ScriptEngine.hpp in Headers */,
 				1A9E98EA1EB081B4001AEA19 /* config.hpp in Headers */,
+				1A5543541EC155D200AEA55E /* SeApi.h in Headers */,
 				1A9E99851EB19ED7001AEA19 /* SeApi.h in Headers */,
 				1A9E98F01EB081B4001AEA19 /* SeApi.h in Headers */,
 				1A9E99531EB09566001AEA19 /* Object.hpp in Headers */,
@@ -1254,12 +1331,15 @@
 				1A9E99701EB197CC001AEA19 /* Base.h in Headers */,
 				1A9E996C1EB0AFC9001AEA19 /* HelperMacros.h in Headers */,
 				1A3757671EB96C56000CA182 /* jsb_menuitem.hpp in Headers */,
+				1A5543661EC15F1800AEA55E /* Object.hpp in Headers */,
 				1A9E992A1EB0826E001AEA19 /* jsb_scene.hpp in Headers */,
 				4BE089EC1ADF967400D65D4B /* jsb_cocos2dx_experimental_webView_manual.h in Headers */,
 				1A9E993A1EB08291001AEA19 /* jsb_sprite.hpp in Headers */,
+				1A5543701EC1606800AEA55E /* Class.hpp in Headers */,
 				1A9E99221EB0823A001AEA19 /* jsb_director.hpp in Headers */,
 				1A9E99321EB0827B001AEA19 /* jsb_node.hpp in Headers */,
 				1A9E994A1EB09566001AEA19 /* Class.hpp in Headers */,
+				1A5543581EC155EC00AEA55E /* Base.h in Headers */,
 				1A37575F1EB96C2C000CA182 /* jsb_menu.hpp in Headers */,
 				1A9E99591EB09566001AEA19 /* ScriptEngine.hpp in Headers */,
 				603799782A0215AB34E958D0 /* jsb_global.h in Headers */,
@@ -1357,18 +1437,22 @@
 				1A1853A51EC052FE00EF28DC /* ObjectWrap.cpp in Sources */,
 				1A9E99381EB08291001AEA19 /* jsb_sprite.cpp in Sources */,
 				1A9E99991EB1F3D6001AEA19 /* Ref.cpp in Sources */,
+				1A5543841EC18C9800AEA55E /* Utils.cpp in Sources */,
+				1A55437C1EC182E900AEA55E /* Utils.cpp in Sources */,
 				1A37575D1EB96C2C000CA182 /* jsb_menu.cpp in Sources */,
 				1A3757651EB96C56000CA182 /* jsb_menuitem.cpp in Sources */,
 				1A9E99511EB09566001AEA19 /* Object.cpp in Sources */,
 				1A9E995D1EB09566001AEA19 /* Value.cpp in Sources */,
-				1A9E99661EB0AF1F001AEA19 /* Utils.cpp in Sources */,
+				1A5543641EC15F1800AEA55E /* Object.cpp in Sources */,
 				1A9E99301EB0827B001AEA19 /* jsb_node.cpp in Sources */,
 				1A9E99201EB0823A001AEA19 /* jsb_director.cpp in Sources */,
 				1A9E99281EB0826E001AEA19 /* jsb_scene.cpp in Sources */,
 				1A9E99481EB09566001AEA19 /* Class.cpp in Sources */,
 				1A9E99571EB09566001AEA19 /* ScriptEngine.cpp in Sources */,
 				507B42401C31DCC60067B53E /* ScriptingCore.cpp in Sources */,
+				1A5543741EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				60379E9CD24D2AE4E98E139D /* jsb_global.cpp in Sources */,
+				1A55436E1EC1606800AEA55E /* Class.cpp in Sources */,
 				60379CF2325A7BF4C9135CEE /* jsb_register_all.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1377,26 +1461,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A18536F1EC01F7700EF28DC /* jsb_register_all.cpp in Sources */,
-				1A18536B1EC01F7700EF28DC /* jsb_sprite.cpp in Sources */,
-				1A1853691EC01F7700EF28DC /* jsb_node.cpp in Sources */,
 				1A4711961EB9BA880027E3D9 /* ScriptEngine.cpp in Sources */,
 				1AC005271EBC483F004B3660 /* Class.cpp in Sources */,
-				1A1853731EC01F7700EF28DC /* jsb_menuitem.cpp in Sources */,
-				1A18536D1EC01F7700EF28DC /* jsb_global.cpp in Sources */,
-				1A1853671EC01F7700EF28DC /* jsb_scene.cpp in Sources */,
+				1A55438A1EC1AF7D00AEA55E /* ScriptingCore.cpp in Sources */,
+				1A5543621EC15F1800AEA55E /* Object.cpp in Sources */,
+				1A5543921EC1AF9000AEA55E /* jsb_global.cpp in Sources */,
 				1A4711921EB9BA880027E3D9 /* Class.cpp in Sources */,
-				1A4711901EB9BA880027E3D9 /* Utils.cpp in Sources */,
 				1A4711A21EB9BA880027E3D9 /* Ref.cpp in Sources */,
+				1A5543721EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				1A4711941EB9BA880027E3D9 /* Object.cpp in Sources */,
+				1A5543961EC1AF9000AEA55E /* jsb_menu.cpp in Sources */,
+				1A55436C1EC1606800AEA55E /* Class.cpp in Sources */,
+				1A5543981EC1AF9000AEA55E /* jsb_menuitem.cpp in Sources */,
 				1A1853A31EC052FE00EF28DC /* ObjectWrap.cpp in Sources */,
 				1AC005291EBC483F004B3660 /* Object.cpp in Sources */,
-				1A1853651EC01D2B00EF28DC /* jsb_director.cpp in Sources */,
 				1AC005251EBC483F004B3660 /* ScriptEngine.cpp in Sources */,
+				1A5543901EC1AF9000AEA55E /* jsb_sprite.cpp in Sources */,
+				1A5543881EC1AE4F00AEA55E /* jsb_director.cpp in Sources */,
+				1A55438E1EC1AF9000AEA55E /* jsb_node.cpp in Sources */,
 				1A47119E1EB9BA880027E3D9 /* Value.cpp in Sources */,
+				1A55438C1EC1AF8600AEA55E /* jsb_scene.cpp in Sources */,
+				1A5543941EC1AF9000AEA55E /* jsb_register_all.cpp in Sources */,
+				1A55437A1EC182E900AEA55E /* Utils.cpp in Sources */,
+				1A5543821EC18C9800AEA55E /* Utils.cpp in Sources */,
 				603792BDE137AB207177063D /* Utils.cpp in Sources */,
-				1A1853751EC0245400EF28DC /* ScriptingCore.cpp in Sources */,
-				1A1853711EC01F7700EF28DC /* jsb_menu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,18 +1495,22 @@
 				1A1853A41EC052FE00EF28DC /* ObjectWrap.cpp in Sources */,
 				1A9E99371EB08291001AEA19 /* jsb_sprite.cpp in Sources */,
 				1A9E99981EB1F3D6001AEA19 /* Ref.cpp in Sources */,
+				1A5543831EC18C9800AEA55E /* Utils.cpp in Sources */,
+				1A55437B1EC182E900AEA55E /* Utils.cpp in Sources */,
 				1A37575C1EB96C2C000CA182 /* jsb_menu.cpp in Sources */,
 				1A3757641EB96C56000CA182 /* jsb_menuitem.cpp in Sources */,
 				1A9E99501EB09566001AEA19 /* Object.cpp in Sources */,
 				1A9E995C1EB09566001AEA19 /* Value.cpp in Sources */,
-				1A9E99651EB0AF1F001AEA19 /* Utils.cpp in Sources */,
+				1A5543631EC15F1800AEA55E /* Object.cpp in Sources */,
 				1A9E992F1EB0827B001AEA19 /* jsb_node.cpp in Sources */,
 				1A9E991F1EB0823A001AEA19 /* jsb_director.cpp in Sources */,
 				1A9E99271EB0826E001AEA19 /* jsb_scene.cpp in Sources */,
 				1A9E99471EB09566001AEA19 /* Class.cpp in Sources */,
 				1A9E99561EB09566001AEA19 /* ScriptEngine.cpp in Sources */,
 				1A119F0018BDF19200352BAA /* ScriptingCore.cpp in Sources */,
+				1A5543731EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				60379C55954457DCDA33E26C /* jsb_global.cpp in Sources */,
+				1A55436D1EC1606800AEA55E /* Class.cpp in Sources */,
 				60379F94A885F4F798D38A1D /* jsb_register_all.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

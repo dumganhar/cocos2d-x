@@ -10,3 +10,7 @@
 #include "v8/Object.hpp"
 #endif
 
+#ifdef SCRIPT_ENGINE_JSC
+#include "jsc/Object.hpp"
+#endif
+

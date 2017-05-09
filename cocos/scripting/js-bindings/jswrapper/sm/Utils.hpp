@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../config.hpp"
+#include "../config.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
-#include "../Base.h"
+#include "Base.h"
 
-#include "../../Value.hpp"
+#include "../Value.hpp"
 
 namespace se {
 
@@ -14,7 +14,7 @@ namespace se {
 
         void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr);
         void seToJsArgs(JSContext* cx, const ValueArray& args, JS::AutoValueVector* outArr);
-        void seToJsValue(JSContext *cx, const JS::Value& jsval, Value* v);
+        void jsToSeValue(JSContext *cx, const JS::Value& jsval, Value* v);
         
         void setReturnValue(JSContext* cx, const Value& data, const JS::CallArgs& argv);
 

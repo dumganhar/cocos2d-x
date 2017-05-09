@@ -1,5 +1,5 @@
 #include "Object.hpp"
-#include "internal/Utils.hpp"
+#include "Utils.hpp"
 #include "Class.hpp"
 #include "ScriptEngine.hpp"
 
@@ -227,35 +227,7 @@ namespace se {
 
         if (ok && rval != nullptr)
         {
-            if (rcValue.isString())
-            {
-                JSString *jsstring = rcValue.toString();
-                const char *stringData=JS_EncodeString(__cx, jsstring);
-                rval->setString( stringData);
-                JS_free(__cx, (void *) stringData);
-            }
-            else if (rcValue.isNumber())
-            {
-                rval->setNumber(rcValue.toNumber());
-            }
-            else if (rcValue.isBoolean())
-            {
-                rval->setBoolean(rcValue.toBoolean());
-            }
-            else if (rcValue.isObject())
-            {
-                Object* obj = new Object(&rcValue.toObject(), true);
-                rval->setObject(obj);
-                obj->release();
-            }
-            else if (rcValue.isNull())
-            {
-                rval->setNull();
-            }
-            else
-            {
-                rval->setUndefined();
-            }
+            internal::jsToSeValue(__cx, rcValue, rval);
         }
 
         return ok;    

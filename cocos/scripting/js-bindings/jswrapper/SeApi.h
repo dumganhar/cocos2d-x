@@ -10,3 +10,7 @@
 #include "v8/SeApi.h"
 #endif
 
+#ifdef SCRIPT_ENGINE_JSC
+#include "jsc/SeApi.h"
+#endif
+

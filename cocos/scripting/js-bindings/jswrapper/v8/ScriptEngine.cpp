@@ -59,17 +59,7 @@ namespace se {
 
     ScriptEngine::~ScriptEngine()
     {
-        SAFE_RELEASE(_globalObj);
-
-        _context.Get(_isolate)->Exit();
-        _context.Reset();
-        _isolate->Exit();
-
-        _isolate->Dispose();
-
-        v8::V8::Dispose();
-        v8::V8::ShutdownPlatform();
-        delete _platform;
+        cleanup();
     }
 
     bool ScriptEngine::init()
@@ -102,6 +92,22 @@ namespace se {
         _isValid = true;
 
         return _isValid;
+    }
+
+    void ScriptEngine::cleanup()
+    {
+        SAFE_RELEASE(_globalObj);
+
+        Class::cleanup();
+        _context.Get(_isolate)->Exit();
+        _context.Reset();
+        _isolate->Exit();
+
+        _isolate->Dispose();
+
+        v8::V8::Dispose();
+        v8::V8::ShutdownPlatform();
+        delete _platform;
     }
 
     Object* ScriptEngine::getGlobalObject() const
@@ -240,6 +246,8 @@ namespace se {
         if (iter  == __nativePtrToObjectMap.end())
             return;
 
+        assert(false);
+        //FIXME:
 //        JS::RootedValue retval(_cx);
 //        Object* target = iter->second;
 //        const char* funcName = nullptr;

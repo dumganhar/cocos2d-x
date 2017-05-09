@@ -18,7 +18,7 @@ namespace se { namespace internal {
     {
         outArr->reserve(argc);
         for (int i = 0; i < argc; ++i)
-        {
+        {//todo: uses jsToSeValue
             const JS::Value& v = argv[i];
             if (v.isNumber())
             {
@@ -119,9 +119,7 @@ namespace se { namespace internal {
         }
     }
 
-    // --- Fills in an Value from an SM Property
-
-    void seToJsValue(JSContext *cx, const JS::Value& jsval, Value* v)
+    void jsToSeValue(JSContext *cx, const JS::Value& jsval, Value* v)
     {
         if (jsval.isNumber())
         {
@@ -140,7 +138,7 @@ namespace se { namespace internal {
         }
         else if (jsval.isObject())
         {
-            Object* obj = new Object(&jsval.toObject(), true);
+            Object* obj = new Object(&jsval.toObject(), true); //FIXME: ?? should root?
             v->setObject(obj);
             obj->release();
         }
