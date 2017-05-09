@@ -14,7 +14,9 @@ namespace se {
         JSValueRef __forceGC(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject,
                              size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
         {
+            printf("GC begin ...\n");
             JSGarbageCollect(ctx);
+            printf("GC end ...\n");
             return JSValueMakeUndefined(ctx);
         }
 
@@ -77,7 +79,7 @@ namespace se {
         if (nullptr == globalObj)
             return false;
 
-        _globalObj = Object::_createJSObject(globalObj, true);
+        _globalObj = Object::_createJSObject(nullptr, globalObj, true);
 
         JSStringRef propertyName = JSStringCreateWithUTF8CString("log");
         JSObjectSetProperty(_cx, globalObj, propertyName, JSObjectMakeFunctionWithCallback(_cx, propertyName, __log), kJSPropertyAttributeReadOnly, nullptr);

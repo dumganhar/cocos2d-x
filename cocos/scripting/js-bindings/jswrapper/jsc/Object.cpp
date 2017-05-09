@@ -45,7 +45,7 @@ namespace se {
 
     Object* Object::createPlainObject()
     {
-        Object* obj = _createJSObject(JSObjectMake(__cx, nullptr, nullptr), false);
+        Object* obj = _createJSObject(nullptr, JSObjectMake(__cx, nullptr, nullptr), false);
         return obj;
     }
 
@@ -53,8 +53,7 @@ namespace se {
     {
         Class* cls = nullptr;
         JSObjectRef jsObj = Class::_createJSObject(clsName, &cls);
-        Object* obj = _createJSObject(jsObj, rooted);
-        obj->_cls = cls;
+        Object* obj = _createJSObject(cls, jsObj, rooted);
         return obj;
     }
 
@@ -87,7 +86,7 @@ namespace se {
         return obj;
     }
 
-    Object* Object::_createJSObject(JSObjectRef obj, bool rooted)
+    Object* Object::_createJSObject(Class* cls, JSObjectRef obj, bool rooted)
     {
         Object* ret = new Object();
         if (!ret->init(obj, rooted))
@@ -95,6 +94,8 @@ namespace se {
             delete ret;
             ret = nullptr;
         }
+
+        ret->_cls = cls;
         return ret;
     }
 
@@ -217,7 +218,6 @@ namespace se {
             internal::forceConvertJsValueToStdString(__cx, _obj, &info);
             if (info.find("[native code]") != std::string::npos)
             {
-                printf("IT'S NATIVE FUNCTION!!!\n");
                 return true;
             }
         }
@@ -315,6 +315,14 @@ namespace se {
     bool Object::isSame(Object* o) const
     {
         //FIXME:
+        if (_obj == o->_obj)
+        {
+            printf("same\n");
+        }
+        else
+        {
+            printf("not same\n");
+        }
         return _obj == o->_obj;
     }
 

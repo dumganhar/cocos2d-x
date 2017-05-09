@@ -59,7 +59,7 @@ namespace se { namespace internal {
         }
         else if (JSValueIsObject(cx, jsValue))
         {
-            Object* obj = Object::_createJSObject(JSValueToObject(cx, jsValue, nullptr), false);
+            Object* obj = Object::_createJSObject(nullptr, JSValueToObject(cx, jsValue, nullptr), false);
             data->setObject(obj);
             obj->release();
         }

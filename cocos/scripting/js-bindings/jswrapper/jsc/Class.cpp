@@ -124,7 +124,11 @@ namespace se {
             JSStringRelease(name);
 
         }
-        _proto = Object::_createJSObject(jsCtor, true);
+
+        _proto = Object::_createJSObject(this, jsCtor, true);
+
+        _parent->setProperty(_name.c_str(), Value(_proto));
+
         return true;
     }
 
