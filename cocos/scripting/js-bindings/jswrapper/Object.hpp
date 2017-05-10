@@ -14,3 +14,7 @@
 #include "jsc/Object.hpp"
 #endif
 
+#ifdef SCRIPT_ENGINE_CHAKRACORE
+#include "chakracore/Object.hpp"
+#endif
+

@@ -205,6 +205,9 @@ namespace se {
             printf("%s\n", exceptionStr.c_str());
         }
 
+        // set return value
+        assert(false);
+
         return ok;
     }
 

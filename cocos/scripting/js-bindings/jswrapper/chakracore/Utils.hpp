@@ -12,13 +12,13 @@ namespace se {
 
     namespace internal {
 
-        void jsToSeArgs(JSContextRef cx, int argc, const JSValueRef* argv, ValueArray* outArr);
-        void seToJsArgs(JSContextRef cx, const ValueArray& args, JSValueRef* outArr);
-        void jsToSeValue(JSContextRef cx, JSValueRef jsval, Value* v);
-        void seToJsValue(JSContextRef cx, const Value& v, JSValueRef* jsval);
+        void jsToSeArgs(int argc, const JsValueRef* argv, ValueArray* outArr);
+        void seToJsArgs(const ValueArray& args, JsValueRef* outArr);
+        void jsToSeValue(JsValueRef jsval, Value* v);
+        void seToJsValue(const Value& v, JsValueRef* jsval);
 
-        void forceConvertJsValueToStdString(JSContextRef cx, JSValueRef jsval, std::string* ret);
-        void jsStringToStdString(JSContextRef cx, JSStringRef jsStr, std::string* ret);
+        void forceConvertJsValueToStdString(JsValueRef jsval, std::string* ret);
+        void jsStringToStdString(JsValueRef jsStr, std::string* ret);
 
         bool hasPrivate(JsValueRef obj);
 

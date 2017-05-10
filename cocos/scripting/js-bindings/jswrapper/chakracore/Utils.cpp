@@ -8,58 +8,65 @@
 
 #include "Utils.hpp"
 
-#ifdef SCRIPT_ENGINE_CHAKRACORE11
+#ifdef SCRIPT_ENGINE_CHAKRACORE
 
 #include "Object.hpp"
 
 namespace se { namespace internal {
 
-    void jsToSeArgs(JSContextRef cx, int argc, const JSValueRef* argv, ValueArray* outArr)
+    void jsToSeArgs(int argc, const JsValueRef* argv, ValueArray* outArr)
     {
         outArr->reserve(argc);
         for (int i = 0; i < argc; ++i)
         {
             Value v;
-            jsToSeValue(cx, argv[i], &v);
+            jsToSeValue(argv[i], &v);
             outArr->push_back(v);
         }
     }
 
-    void seToJsArgs(JSContextRef cx, const ValueArray& args, JSValueRef* outArr)
+    void seToJsArgs(const ValueArray& args, JsValueRef* outArr)
     {
         for (size_t i = 0, len = args.size(); i < len; ++i)
         {
-            seToJsValue(cx, args[i], &outArr[i]);
+            seToJsValue(args[i], &outArr[i]);
         }
     }
 
-    void jsToSeValue(JSContextRef cx, JSValueRef jsValue, Value* data)
+    void jsToSeValue(JsValueRef jsValue, Value* data)
     {
-        if (JSValueIsNull(cx, jsValue))
+        JsValueType type;
+        JsGetValueType(jsValue, &type);
+
+        if (type == JsNull)
         {
             data->setNull();
         }
-        else if (JSValueIsUndefined(cx, jsValue))
+        else if (type == JsUndefined)
         {
             data->setUndefined();
         }
-        else if (JSValueIsNumber(cx, jsValue))
+        else if (type == JsNumber)
         {
-            data->setNumber(JSValueToNumber(cx, jsValue, nullptr));
+            double v = 0.0;
+            JsNumberToDouble(jsValue, &v);
+            data->setNumber(v);
         }
-        else if (JSValueIsBoolean(cx, jsValue))
+        else if (type == JsBoolean)
         {
-            data->setBoolean(JSValueToBoolean(cx, jsValue));
+            bool v = false;
+            JsBooleanToBool(jsValue, &v);
+            data->setBoolean(v);
         }
-        else if (JSValueIsString(cx, jsValue))
+        else if (type == JsString)
         {
             std::string str;
-            forceConvertJsValueToStdString(cx, jsValue, &str);
+            forceConvertJsValueToStdString(jsValue, &str);
             data->setString(str);
         }
-        else if (JSValueIsObject(cx, jsValue))
+        else if (type == JsObject)
         {
-            Object* obj = Object::_createJSObject(nullptr, JSValueToObject(cx, jsValue, nullptr), true);
+            Object* obj = Object::_createJSObject(nullptr, jsValue, true);
             data->setObject(obj);
             obj->release();
         }
@@ -69,27 +76,25 @@ namespace se { namespace internal {
         }
     }
 
-    void seToJsValue(JSContextRef cx, const Value& v, JSValueRef* jsval)
+    void seToJsValue(const Value& v, JsValueRef* jsval)
     {
         switch (v.getType()) {
             case Value::Type::Null:
-                *jsval = JSValueMakeNull(cx);
+                JsGetNullValue(jsval);
                 break;
 
             case Value::Type::Number:
-                *jsval = JSValueMakeNumber(cx, v.toNumber());
+                JsDoubleToNumber(v.toNumber(), jsval);
                 break;
 
             case Value::Type::String:
             {
-                JSStringRef str = JSStringCreateWithUTF8CString(v.toString().c_str());
-                *jsval = JSValueMakeString(cx, str);
-                JSStringRelease(str);
+                JsCreateStringUtf8((const unsigned char *)v.toString().c_str(), v.toString().length(), jsval);
             }
                 break;
 
             case Value::Type::Boolean:
-                *jsval = JSValueMakeBoolean(cx, v.toBoolean());
+                JsBoolToBoolean(v.toBoolean(), jsval);
                 break;
 
             case Value::Type::Object:
@@ -97,32 +102,37 @@ namespace se { namespace internal {
                 break;
                 
             default: // Undefined
-                *jsval = JSValueMakeUndefined(cx);
+                JsGetUndefinedValue(jsval);
                 break;
         }
     }
 
-    void forceConvertJsValueToStdString(JSContextRef cx, JSValueRef jsval, std::string* ret)
+    void forceConvertJsValueToStdString(JsValueRef jsval, std::string* ret)
     {
-        JSStringRef jsstr = JSValueToStringCopy(cx, jsval, nullptr);
-        jsStringToStdString(cx, jsstr, ret);
-        JSStringRelease(jsstr);
+        JsValueRef strVal = JS_INVALID_REFERENCE;
+        JsConvertValueToString(jsval, &strVal);
+        jsStringToStdString(strVal, ret);
     }
 
-    void jsStringToStdString(JSContextRef cx, JSStringRef jsStr, std::string* ret)
+    void jsStringToStdString(JsValueRef strVal, std::string* ret)
     {
-        size_t len = JSStringGetLength(jsStr);
-        const size_t BUF_SIZE = len * 4 + 1;
-        char* buf = (char*)malloc(BUF_SIZE);
-        memset(buf, 0, BUF_SIZE);
-        JSStringGetUTF8CString(jsStr, buf, BUF_SIZE);
+        // Get the buffer size
+        size_t bufSize = 0;
+        JsCopyStringUtf8(strVal, nullptr, 0, &bufSize);
+        // Allocate buffer
+        char* buf = (char*)malloc(bufSize + 1);
+        memset(buf, 0, bufSize + 1);
+        // Copy
+        JsCopyStringUtf8(strVal, (unsigned char*)buf, bufSize, nullptr);
         *ret = buf;
         free(buf);
     }
 
     bool hasPrivate(JsValueRef obj)
     {
-        return JSObjectGetPrivate(obj) != nullptr;
+        void* nativeObj = nullptr;
+        JsGetExternalData(obj, &nativeObj);
+        return nativeObj != nullptr;
     }
 
 

@@ -8,17 +8,18 @@
 
 
 #define SE_DECLARE_FUNC(funcName) \
-    JSValueRef funcName(JSContextRef cx, JsValueRef _function, JsValueRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* exception)
+    JsValueRef funcName(JsValueRef _thisObject, bool _isConstructCall, JsValueRef* _argv, unsigned short argc, void* _callbackState)
 
 #define SE_FUNC_BEGIN(funcName) \
-    JSValueRef funcName(JSContextRef cx, JsValueRef _function, JsValueRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* exception) \
+    JsValueRef funcName(JsValueRef _thisObject, bool _isConstructCall, JsValueRef* _argv, unsigned short argc, void* _callbackState) \
     { \
-        JSValueRef _jsRet = JSValueMakeUndefined(cx); \
+        JsValueRef _jsRet = JS_INVALID_REFERENCE; \
         bool ret = true; \
         se::ValueArray args; \
-        se::internal::jsToSeArgs(cx, argc, _argv, &args); \
+        se::internal::jsToSeArgs(argc, _argv, &args); \
         se::Object* thisObject = nullptr; \
-        void* _nativeObj = JSObjectGetPrivate(_thisObject); \
+        void* _nativeObj = nullptr; \
+        JsGetExternalData(_thisObject, &_nativeObj); \
         if (_nativeObj != nullptr) \
         { \
             thisObject = se::Object::getObjectWithPtr(_nativeObj); \
@@ -38,15 +39,13 @@
     }
 
 #define SE_FINALIZE_FUNC_BEGIN(funcName) \
-    void funcName(JsValueRef _obj) \
+    void funcName(void* nativeThisObject) \
     { \
-        void* nativeThisObject = JSObjectGetPrivate(_obj); \
         se::Object* _thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \
             _thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
             if (_thisObject) _thisObject->_cleanup(); \
-            JSObjectSetPrivate(_obj, nullptr); \
             SAFE_RELEASE(_thisObject); \
             SAFE_RELEASE(_thisObject); \
         }
@@ -56,11 +55,11 @@
 
 // --- Constructor
 #define SE_CTOR_BEGIN(funcName, clsName) \
-    JsValueRef funcName(JSContextRef cx, JsValueRef constructor, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
+    JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short argc, void* _callbackState) \
     { \
         bool ret = true; \
         se::ValueArray args; \
-        se::internal::jsToSeArgs(cx, argc, _argv, &args); \
+        se::internal::jsToSeArgs(argc, _argv, &args); \
         se::Object* thisObject = se::Object::createObject(clsName, false); \
         JsValueRef _jsRet = thisObject->_getJSObject();
 
@@ -72,11 +71,12 @@
 // --- Get Property
 
 #define SE_GET_PROPERTY_BEGIN(funcName) \
-    JSValueRef funcName(JSContextRef cx, JsValueRef _object, JSStringRef _propertyName, JSValueRef* _exception) \
+    JsValueRef funcName(JsValueRef _thisObject, const char* _name) \
     { \
-        JSValueRef _jsRet = JSValueMakeUndefined(cx); \
+        JsValueRef _jsRet = JS_INVALID_REFERENCE; \
         bool ret = true; \
-        void* _nativeObj = JSObjectGetPrivate(_object); \
+        void* _nativeObj = nullptr; \
+        JsGetExternalData(_thisObject, &_nativeObj); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
         { \
@@ -89,25 +89,25 @@
     }
 
 #define SE_SET_RVAL(data) \
-    se::internal::seToJsValue(cx, data, &_jsRet)
+    se::internal::seToJsValue(data, &_jsRet)
 
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName) \
-    bool funcName(JSContextRef cx, JsValueRef _object, JSStringRef _propertyName, JSValueRef _value, JSValueRef* _exception) \
+    void funcName(JsValueRef _thisObject, const char* _name, JsValueRef _value) \
     { \
         bool ret = true; \
-        void* _nativeObj = JSObjectGetPrivate(_object); \
+        void* _nativeObj = nullptr; \
+        JsGetExternalData(_thisObject, &_nativeObj); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
         { \
             thisObject = se::Object::getObjectWithPtr(_nativeObj); \
         } \
         se::Value data; \
-        se::internal::jsToSeValue(cx, _value, &data);
+        se::internal::jsToSeValue(_value, &data);
 
 #define SE_SET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \
-        return ret; \
     }
 

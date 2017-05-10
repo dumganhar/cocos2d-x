@@ -3,19 +3,19 @@
 #include "Class.hpp"
 #include "ScriptEngine.hpp"
 
-#ifdef SCRIPT_ENGINE_CHAKRACORE11
+#ifdef SCRIPT_ENGINE_CHAKRACORE
 
 namespace se {
  
     std::unordered_map<void* /*native*/, Object* /*jsobj*/> __nativePtrToObjectMap;
 
     namespace {
-        JSContextRef __cx = nullptr;
+        JsContextRef __cx = nullptr;
     }
 
     Object::Object()
     : _cls(nullptr)
-    , _obj(nullptr)
+    , _obj(JS_INVALID_REFERENCE)
     , _isRooted(false)
     , _hasPrivateData(false)
     , _isCleanup(false)
@@ -29,7 +29,9 @@ namespace se {
 
     Object* Object::createPlainObject(bool rooted)
     {
-        Object* obj = _createJSObject(nullptr, JSObjectMake(__cx, nullptr, nullptr), rooted);
+        JsValueRef jsobj;
+        JsCreateObject(&jsobj);
+        Object* obj = _createJSObject(nullptr, jsobj, rooted);
         return obj;
     }
 
@@ -83,7 +85,8 @@ namespace se {
         _isRooted = rooted;
         if (_isRooted)
         {
-            JSValueProtect(__cx, _obj);
+            unsigned int count = 0;
+            JsAddRef(_obj, &count);
         }
         return true;
     }
@@ -97,7 +100,9 @@ namespace se {
         {
             if (_obj != nullptr)
             {
-                void* nativeObj = JSObjectGetPrivate(_obj);
+                void* nativeObj = nullptr;
+                JsGetExternalData(_obj, &nativeObj);
+
                 if (nativeObj != nullptr)
                 {
                     auto iter = __nativePtrToObjectMap.find(nativeObj);
@@ -111,7 +116,8 @@ namespace se {
 
         if (_isRooted)
         {
-            JSValueUnprotect(__cx, _obj);
+            unsigned int count = 0;
+            JsRelease(_obj, &count);
         }
 
         _isCleanup = true;
@@ -121,49 +127,22 @@ namespace se {
 
     bool Object::getProperty(const char* name, Value* data)
     {
-        JSStringRef jsName = JSStringCreateWithUTF8CString(name);
-        JSValueRef jsValue = JSObjectGetProperty(__cx, _obj, jsName, nullptr);
-        JSStringRelease(jsName);
-
-        internal::jsToSeValue(__cx, jsValue, data);
+        JsPropertyIdRef propertyId;
+        JsCreatePropertyIdUtf8(name, strlen(name), &propertyId);
+        JsValueRef jsValue;
+        JsGetProperty(_obj, propertyId, &jsValue);
+        internal::jsToSeValue(jsValue, data);
 
         return true;
     }
 
     void Object::setProperty(const char* name, const Value& v)
     {
-        JSStringRef jsName = JSStringCreateWithUTF8CString(name);
-        JSValueRef jsValue = nullptr;
-        JsValueRef obj = _obj;
-        if (v.getType() == Value::Type::Number)
-        {
-            jsValue = JSValueMakeNumber(__cx, v.toNumber());
-        }
-        else if (v.getType() == Value::Type::String)
-        {
-            JSStringRef jsstr = JSStringCreateWithUTF8CString(v.toString().c_str());
-            jsValue = JSValueMakeString(__cx, jsstr);
-            JSStringRelease(jsstr);
-        }
-        else if (v.getType() == Value::Type::Boolean)
-        {
-            jsValue = JSValueMakeBoolean(__cx, v.toBoolean());
-        }
-        else if (v.getType() == Value::Type::Object)
-        {
-            jsValue = v.toObject()->_obj;
-        }
-        else if (v.getType() == Value::Type::Null)
-        {
-            jsValue = JSValueMakeNull(__cx);
-        }
-        else
-        {
-            jsValue = JSValueMakeUndefined(__cx);
-        }
-
-        JSObjectSetProperty(__cx, obj, jsName, jsValue, kJSPropertyAttributeNone, nullptr);
-        JSStringRelease(jsName);
+        JsValueRef jsValue = JS_INVALID_REFERENCE;
+        internal::seToJsValue(v, &jsValue);
+        JsPropertyIdRef propertyId;
+        JsCreatePropertyIdUtf8(name, strlen(name), &propertyId);
+        JsSetProperty(_obj, propertyId, jsValue, true);
     }
 
     // --- call
@@ -178,31 +157,38 @@ namespace se {
             contextObject = thisObject->_obj;
         }
 
-        JSValueRef* jsArgs = nullptr;
+        JsValueRef* jsArgs = (JsValueRef*)malloc(sizeof(JsValueRef) * args.size() + 1); // Requires thisArg as first argument of arguments.
 
         if (!args.empty())
         {
-            jsArgs = (JSValueRef*)malloc(sizeof(JSValueRef) * args.size());
-            internal::seToJsArgs(__cx, args, jsArgs);
+            internal::seToJsArgs(args, jsArgs + 1);
         }
 
-        JSValueRef rcValue = JSObjectCallAsFunction(__cx, _obj, contextObject, args.size(), jsArgs, nullptr);
+        jsArgs[0] = contextObject;
+        JsValueRef rcValue = JS_INVALID_REFERENCE;
+        JsCallFunction(_obj, jsArgs, args.size() + 1, &rcValue);
         free(jsArgs);
 
-        if (rval != nullptr && !JSValueIsUndefined(__cx, rcValue))
+        JsValueType type;
+        JsGetValueType(rcValue, &type);
+        if (rval != JS_INVALID_REFERENCE && type != JsUndefined)
         {
-            internal::jsToSeValue(__cx, rcValue, rval);
+            internal::jsToSeValue(rcValue, rval);
             return true;
         }
 
         return false;
     }
 
-    bool Object::defineFunction(const char* funcName, JSObjectCallAsFunctionCallback func)
+    bool Object::defineFunction(const char* funcName, JsNativeFunction func)
     {
-        JSStringRef jsName = JSStringCreateWithUTF8CString(funcName);
-        JsValueRef jsFunc = JSObjectMakeFunctionWithCallback(__cx, nullptr, func);
-        JSObjectSetProperty(__cx, _obj, jsName, jsFunc, kJSPropertyAttributeNone, nullptr);
+        JsPropertyIdRef propertyId;
+        JsCreatePropertyIdUtf8(funcName, strlen(funcName), &propertyId);
+
+        JsValueRef funcVal = JS_INVALID_REFERENCE;
+        JsCreateFunction(func, nullptr, &funcVal);
+
+        JsSetProperty(_obj, propertyId, funcVal, true);
         return true;
     }
 
@@ -220,7 +206,13 @@ namespace se {
 
     bool Object::isFunction() const
     {
-        return JSObjectIsFunction(__cx, _obj);
+        JsValueType type;
+        JsGetValueType(_obj, &type);
+        if (_obj != JS_INVALID_REFERENCE && type != JsFunction)
+        {
+            return true;
+        }
+        return false;
     }
 
     bool Object::_isNativeFunction() const
@@ -228,7 +220,7 @@ namespace se {
         if (isFunction())
         {
             std::string info;
-            internal::forceConvertJsValueToStdString(__cx, _obj, &info);
+            internal::forceConvertJsValueToStdString(_obj, &info);
             if (info.find("[native code]") != std::string::npos)
             {
                 return true;
@@ -271,19 +263,16 @@ namespace se {
 
     void* Object::getPrivateData()
     {
-        return JSObjectGetPrivate(_obj);
+        void* nativeObj = nullptr;
+        JsGetExternalData(_obj, &nativeObj);
+        return nativeObj;
     }
 
     void Object::setPrivateData(void *data)
     {
-        JSObjectSetPrivate(_obj, data);
+        JsSetExternalData(_obj, data);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
-    }
-
-    void Object::setContext(JSContextRef cx)
-    {
-        __cx = cx;
     }
 
     void Object::debug(const char *what)
@@ -307,7 +296,8 @@ namespace se {
         debug("switch to rooted");
         assert(!_isRooted);
 
-        JSValueProtect(__cx, _obj);
+        unsigned int count = 0;
+        JsAddRef(_obj, &count);
         _isRooted = true;
     }
 
@@ -316,7 +306,8 @@ namespace se {
         debug("switch to unrooted");
         assert(_isRooted);
 
-        JSValueUnprotect(__cx, _obj);
+        unsigned int count = 0;
+        JsRelease(_obj, &count);
         _isRooted = false;
     }
     
@@ -327,16 +318,9 @@ namespace se {
 
     bool Object::isSame(Object* o) const
     {
-        //FIXME:
-        if (_obj == o->_obj)
-        {
-            printf("same\n");
-        }
-        else
-        {
-            printf("not same\n");
-        }
-        return _obj == o->_obj;
+        bool same = false;
+        JsStrictEquals(_obj, o->_obj, &same);
+        return same;
     }
 
     bool Object::attachChild(Object* child)

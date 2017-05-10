@@ -4,36 +4,42 @@
 #include "Class.hpp"
 #include "Utils.hpp"
 
-#ifdef SCRIPT_ENGINE_CHAKRACORE11
+#ifdef SCRIPT_ENGINE_CHAKRACORE
 
-extern "C" JS_EXPORT void JSSynchronousGarbageCollectForDebugging(JSContextRef);
+#define FAIL_CHECK(cmd)                     \
+    do                                      \
+    {                                       \
+        JsErrorCode errCode = cmd;          \
+        if (errCode != JsNoError)           \
+        {                                   \
+            printf("Error %d at '%s'\n",    \
+                errCode, #cmd);             \
+            return false;                   \
+        }                                   \
+    } while(0)
 
 namespace se {
 
     namespace {
         ScriptEngine* __instance = nullptr;
 
-        JSValueRef __forceGC(JSContextRef ctx, JsValueRef function, JsValueRef thisObject,
-                             size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
+        JsValueRef __forceGC(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
             printf("GC begin ...\n");
-//            JSGarbageCollect(ctx);
-            JSSynchronousGarbageCollectForDebugging(ctx);
+            ScriptEngine::getInstance()->gc();
             printf("GC end ...\n");
-            return JSValueMakeUndefined(ctx);
+            return JS_INVALID_REFERENCE;
         }
 
-        JSValueRef __log(JSContextRef ctx, JsValueRef function, JsValueRef thisObject,
-                         size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
+        JsValueRef __log(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
             if (argumentCount > 0)
             {
-                assert(JSValueIsString(ctx, arguments[0]));
-                Value v;
-                internal::jsToSeValue(ctx, arguments[0], &v);
-                printf("%s\n", v.toString().c_str());
+                std::string str;
+                internal::forceConvertJsValueToStdString(arguments[0], &str);
+                printf("%s\n", str.c_str());
             }
-            return JSValueMakeUndefined(ctx);
+            return JS_INVALID_REFERENCE;
         }
     }
 
@@ -59,9 +65,11 @@ namespace se {
     }
 
     ScriptEngine::ScriptEngine()
-            : _cx(nullptr)
+            : _rt(JS_INVALID_RUNTIME_HANDLE)
+            , _cx(JS_INVALID_REFERENCE)
             , _globalObj(nullptr)
             , _isValid(false)
+            , _currentSourceContext(0)
     {
     }
 
@@ -69,28 +77,20 @@ namespace se {
     {
         printf("Initializing JavaScriptCore \n");
 
-        _cx = JSGlobalContextCreate(nullptr);
+        FAIL_CHECK(JsCreateRuntime(JsRuntimeAttributeNone, nullptr, &_rt));
+        FAIL_CHECK(JsCreateContext(_rt, &_cx));
+        FAIL_CHECK(JsSetCurrentContext(_cx));
 
-        if (nullptr == _cx)
-            return false;
+        // Set up ES6 Promise
+//        if (JsSetPromiseContinuationCallback(PromiseContinuationCallback, &taskQueue) != JsNoError)
 
-        Class::setContext(_cx);
-        Object::setContext(_cx);
-
-        JsValueRef globalObj = JSContextGetGlobalObject(_cx);
-
-        if (nullptr == globalObj)
-            return false;
+        JsValueRef globalObj = JS_INVALID_REFERENCE;
+        FAIL_CHECK(JsGetGlobalObject(&globalObj));
 
         _globalObj = Object::_createJSObject(nullptr, globalObj, true);
 
-        JSStringRef propertyName = JSStringCreateWithUTF8CString("log");
-        JSObjectSetProperty(_cx, globalObj, propertyName, JSObjectMakeFunctionWithCallback(_cx, propertyName, __log), kJSPropertyAttributeReadOnly, nullptr);
-        JSStringRelease(propertyName);
-
-        propertyName = JSStringCreateWithUTF8CString("forceGC");
-        JSObjectSetProperty(_cx, globalObj, propertyName, JSObjectMakeFunctionWithCallback(_cx, propertyName, __forceGC), kJSPropertyAttributeReadOnly, nullptr);
-        JSStringRelease(propertyName);
+        _globalObj->defineFunction("log", __log);
+        _globalObj->defineFunction("forceGC", __forceGC);
 
         _isValid = true;
 
@@ -107,47 +107,28 @@ namespace se {
         SAFE_RELEASE(_globalObj);
 
         Class::cleanup();
-        
-        JSGlobalContextRelease(_cx);
+
+        JsSetCurrentContext(JS_INVALID_REFERENCE);
+        JsDisposeRuntime(_rt);
     }
 
-    std::string ScriptEngine::formatException(JSValueRef exception)
+    std::string ScriptEngine::formatException(JsValueRef exception)
     {
-        std::string ret;
-        internal::forceConvertJsValueToStdString(_cx, exception, &ret);
-
-        JSType type = JSValueGetType(_cx, exception);
-
-        if (type == kJSTypeObject)
+        JsPropertyIdRef messageName;
+        if (JsCreatePropertyIdUtf8("message", strlen("message"), &messageName) != JsNoError)
         {
-            JsValueRef obj = JSValueToObject(_cx, exception, nullptr);
-            JSPropertyNameArrayRef nameArr = JSObjectCopyPropertyNames(_cx, obj);
-
-            size_t count =JSPropertyNameArrayGetCount(nameArr);
-            for (size_t i = 0; i < count; ++i)
-            {
-                JSStringRef jsName = JSPropertyNameArrayGetNameAtIndex(nameArr, i);
-                JSValueRef jsValue = JSObjectGetProperty(_cx, obj, jsName, nullptr);
-
-                std::string name;
-                internal::jsStringToStdString(_cx, jsName, &name);
-                std::string value;
-                internal::forceConvertJsValueToStdString(_cx, jsValue, &value);
-
-                if (name == "line")
-                {
-                    ret += ", line: " + value;
-                }
-                else if (name == "sourceURL")
-                {
-                    ret += ", sourceURL: " + value;
-                }
-            }
-
-            JSPropertyNameArrayRelease(nameArr);
+            return "failed to get and clear exception";
         }
 
-        return ret;
+        JsValueRef messageValue;
+        if (JsGetProperty(exception, messageName, &messageValue) != JsNoError)
+        {
+            return "failed to get error message";
+        }
+
+        Value v;
+        internal::jsToSeValue(messageValue, &v);
+        return v.toString();
     }
 
     Object* ScriptEngine::getGlobalObject()
@@ -157,7 +138,7 @@ namespace se {
 
     void ScriptEngine::gc()
     {
-        JSGarbageCollect(_cx);
+        JsCollectGarbage(_rt);
     }
 
     bool ScriptEngine::executeScriptBuffer(const char *string, Value *data, const char *fileName)
@@ -167,45 +148,42 @@ namespace se {
 
     bool ScriptEngine::executeScriptBuffer(const char *script, size_t length, Value *data, const char *fileName)
     {
-        std::string exceptionStr;
-        std::string scriptStr(script, length);
+        JsValueRef fname;
+        FAIL_CHECK(JsCreateString(fileName, strlen(fileName), &fname));
 
-        JSValueRef exception = nullptr;
-        JSStringRef jsSourceUrl = JSStringCreateWithUTF8CString(fileName);
-        JSStringRef jsScript = JSStringCreateWithUTF8CString(scriptStr.c_str());
+        JsValueRef scriptSource;
+        FAIL_CHECK(JsCreateString(script, length, &scriptSource));
 
-        bool ok = JSCheckScriptSyntax(_cx, jsScript, jsSourceUrl, 1, &exception);;
-        if (ok)
+        JsValueRef result;
+        // Run the script.
+        FAIL_CHECK(JsRun(scriptSource, _currentSourceContext++, fname,
+                         JsParseScriptAttributeNone, &result));
+
+        bool hasException = false;
+        FAIL_CHECK(JsHasException(&hasException));
+
+        if (hasException)
         {
-            JSEvaluateScript(_cx, jsScript, nullptr, jsSourceUrl, 1, &exception);
+            JsValueRef exception;
+            FAIL_CHECK(JsGetAndClearException(&exception));
 
-            if (exception)
-            {
-                exceptionStr = formatException(exception);
-                ok = false;
-            }
+            formatException(exception);
+
+            return false;
+        }
+
+        JsValueType type;
+        JsGetValueType(result, &type);
+        if (type != JsUndefined)
+        {
+            internal::jsToSeValue(result, data);
         }
         else
         {
-            if (exception)
-            {
-                exceptionStr = formatException(exception);
-            }
-            else
-            {
-                printf("Unknown syntax error parsing file %s\n", fileName);
-            }
+            data->setUndefined();
         }
 
-        JSStringRelease(jsScript);
-        JSStringRelease(jsSourceUrl);
-
-        if (!exceptionStr.empty())
-        {
-            printf("%s\n", exceptionStr.c_str());
-        }
-
-        return ok;
+        return true;
     }
 
     bool ScriptEngine::executeScriptFile(const std::string &filePath, Value *rval/* = nullptr*/)

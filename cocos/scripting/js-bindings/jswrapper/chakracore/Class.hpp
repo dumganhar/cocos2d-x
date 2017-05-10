@@ -10,6 +10,22 @@ namespace se {
 
     class Object;
 
+    typedef JsValueRef (*JSObjectGetPropertyCallback)(JsValueRef thisObject, const char* name);
+    typedef void (*JSObjectSetPropertyCallback)(JsValueRef thisObject, const char* name, JsValueRef value);
+
+    struct JSFunctionSpec
+    {
+        const char* name;
+        JsNativeFunction func;
+    };
+
+    struct JSPropertySpec
+    {
+        const char* name;
+        JSObjectGetPropertyCallback getter;
+        JSObjectSetPropertyCallback setter;
+    };
+
     class Class
     {
     public:
@@ -32,7 +48,6 @@ namespace se {
     private:
 
         static JsValueRef _createJSObject(const std::string &clsName, Class** outCls);
-        static void setContext(JsContextRef cx);
         static void cleanup();
 
         std::string _name;
@@ -42,13 +57,10 @@ namespace se {
 
         JsNativeFunction _ctor;
 
-        JSClassRef _jsCls;
-        JSClassDefinition _jsClsDef;
-
-        std::vector<JsNativeFunction> _funcs;
-        std::vector<JsNativeFunction> _staticFuncs;
-        std::vector<JSStaticValue> _properties;
-        std::vector<JSStaticValue> _staticProperties;
+        std::vector<JSFunctionSpec> _funcs;
+        std::vector<JSFunctionSpec> _staticFuncs;
+        std::vector<JSPropertySpec> _properties;
+        std::vector<JSPropertySpec> _staticProperties;
         JsFinalizeCallback _finalizeOp;
 
         friend class ScriptEngine;

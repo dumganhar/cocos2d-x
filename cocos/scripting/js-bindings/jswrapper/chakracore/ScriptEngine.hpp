@@ -60,13 +60,15 @@ namespace se {
         bool init();
         void cleanup();
 
-        std::string formatException(JSValueRef exception);
+        std::string formatException(JsValueRef exception);
 
-        JSGlobalContextRef _cx;
+        JsRuntimeHandle _rt;
+        JsContextRef _cx;
 
         Object* _globalObj;
 
         bool _isValid;
+        unsigned _currentSourceContext;
     };
 
  } // namespace se {

@@ -70,7 +70,6 @@ namespace se {
         bool detachChild(Object* child);
 
     private:
-        static void setContext(JSContextRef cx);
         void debug(const char *what);
 
         Class* _cls;

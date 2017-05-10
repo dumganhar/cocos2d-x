@@ -150,14 +150,17 @@ namespace se {
 
         bool success = false;
 
-        if (!maybeScript.IsEmpty()) {
+        if (!maybeScript.IsEmpty())
+        {
             v8::Local <v8::Script> v8Script = maybeScript.ToLocalChecked();
             v8::MaybeLocal<v8::Value> maybeResult = v8Script->Run(_context.Get(_isolate));
 
-            if (!maybeResult.IsEmpty()) {
+            if (!maybeResult.IsEmpty())
+            {
                 v8::Local<v8::Value> result = maybeResult.ToLocalChecked();
 
-                if (data) {
+                if (!result->IsUndefined() && data)
+                {
                     v8::String::Utf8Value type(result->TypeOf(_isolate));
                     printf("return : %s\n", *type);
                     if (result->IsNumber())
