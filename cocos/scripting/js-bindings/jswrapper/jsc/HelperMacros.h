@@ -41,14 +41,17 @@
     void funcName(JSObjectRef _obj) \
     { \
         void* nativeThisObject = JSObjectGetPrivate(_obj); \
-        se::Object* thisObject = nullptr; \
+        se::Object* _thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \
-            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
+            _thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
+            if (_thisObject) _thisObject->_cleanup(); \
+            JSObjectSetPrivate(_obj, nullptr); \
+            SAFE_RELEASE(_thisObject); \
+            SAFE_RELEASE(_thisObject); \
         }
 
 #define SE_FINALIZE_FUNC_END \
-        SAFE_RELEASE(thisObject); \
     }
 
 // --- Constructor

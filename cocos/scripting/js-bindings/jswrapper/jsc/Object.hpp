@@ -19,7 +19,7 @@ namespace se {
     public:
         virtual ~Object();
 
-        static Object* createPlainObject();
+        static Object* createPlainObject(bool rooted);
 
         static Object* createObject(const char* clsName, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
@@ -35,6 +35,7 @@ namespace se {
 
         JSObjectRef _getJSObject() const;
         Class* _getClass() const;
+        void _cleanup();
 
         // --- Function
         bool isFunction() const;
@@ -76,6 +77,7 @@ namespace se {
         JSObjectRef _obj;
         bool _isRooted;  /* wrapper is in rooted mode */
         bool _hasPrivateData;
+        bool _isCleanup;
 
         friend class ScriptEngine;
     };

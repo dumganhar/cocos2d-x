@@ -69,9 +69,9 @@ namespace se {
             teardownRooting();
     }
 
-    Object* Object::createPlainObject()
+    Object* Object::createPlainObject(bool rooted)
     {
-        Object* obj = new Object(JS_NewPlainObject(__cx), true);
+        Object* obj = new Object(JS_NewPlainObject(__cx), rooted);
         return obj;
     }
 
@@ -95,14 +95,8 @@ namespace se {
 
     Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
     {
-        Object* obj = nullptr;
-        auto iter = __nativePtrToObjectMap.find(ptr);
-        if (iter != __nativePtrToObjectMap.end())
-        {
-            obj = iter->second;
-            obj->addRef();
-        }
-        else
+        Object* obj = getObjectWithPtr(ptr);
+        if (obj == nullptr)
         {
             obj = createObject(clsName, rooted);
             obj->setPrivateData(ptr);

@@ -24,9 +24,12 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(Sprite_finalized)
 {
-    printf("Sprite_finalized ...\n");
-    Node* thiz = (Node*) nativeThisObject;
-    thiz->release();
+    if (nativeThisObject)
+    {
+        printf("Sprite_finalized ...\n");
+        Node* thiz = (Node*) nativeThisObject;
+        SAFE_RELEASE(thiz);
+    }
 }
 SE_FINALIZE_FUNC_END
 

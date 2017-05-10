@@ -25,7 +25,10 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(MenuItem_finalized)
 {
-    printf("MenuItem_finalized ...\n");
+    if (nativeThisObject)
+    {
+        printf("MenuItem_finalized ...\n");
+    }
 }
 SE_FINALIZE_FUNC_END
 
@@ -51,7 +54,10 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(MenuItemLabel_finalized)
 {
-    printf("MenuItemLabel_finalized ...\n");
+    if (nativeThisObject)
+    {
+        printf("MenuItemLabel_finalized ...\n");
+    }
 }
 SE_FINALIZE_FUNC_END
 
@@ -76,9 +82,12 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(MenuItemFont_finalized)
 {
-    printf("MenuItemFont_finalized ...\n");
-    Node* thiz = (Node*) nativeThisObject;
-    thiz->release();
+    if (nativeThisObject)
+    {
+        printf("MenuItemFont_finalized ...\n");
+        Node* thiz = (Node*) nativeThisObject;
+        SAFE_RELEASE(thiz);
+    }
 }
 SE_FINALIZE_FUNC_END
 

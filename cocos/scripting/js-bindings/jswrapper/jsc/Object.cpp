@@ -18,34 +18,18 @@ namespace se {
     , _obj(nullptr)
     , _isRooted(false)
     , _hasPrivateData(false)
+    , _isCleanup(false)
     {
     }
 
     Object::~Object()
     {
-        if (_hasPrivateData)
-        {
-            JSObjectRef jsobj = _getJSObject();
-            if (jsobj != nullptr)
-            {
-                void* nativeObj = JSObjectGetPrivate(jsobj);
-                auto iter = __nativePtrToObjectMap.find(nativeObj);
-                if (iter != __nativePtrToObjectMap.end())
-                {
-                    __nativePtrToObjectMap.erase(iter);
-                }
-            }
-        }
-
-        if (_isRooted)
-        {
-            JSValueUnprotect(__cx, _obj);
-        }
+        _cleanup();
     }
 
-    Object* Object::createPlainObject()
+    Object* Object::createPlainObject(bool rooted)
     {
-        Object* obj = _createJSObject(nullptr, JSObjectMake(__cx, nullptr, nullptr), false);
+        Object* obj = _createJSObject(nullptr, JSObjectMake(__cx, nullptr, nullptr), rooted);
         return obj;
     }
 
@@ -71,14 +55,8 @@ namespace se {
 
     Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
     {
-        Object* obj = nullptr;
-        auto iter = __nativePtrToObjectMap.find(ptr);
-        if (iter != __nativePtrToObjectMap.end())
-        {
-            obj = iter->second;
-            obj->addRef();
-        }
-        else
+        Object* obj = getObjectWithPtr(ptr);
+        if (obj == nullptr)
         {
             obj = createObject(clsName, rooted);
             obj->setPrivateData(ptr);
@@ -110,12 +88,41 @@ namespace se {
         return true;
     }
 
+    void Object::_cleanup()
+    {
+        if (_isCleanup)
+            return;
+
+        if (_hasPrivateData)
+        {
+            if (_obj != nullptr)
+            {
+                void* nativeObj = JSObjectGetPrivate(_obj);
+                if (nativeObj != nullptr)
+                {
+                    auto iter = __nativePtrToObjectMap.find(nativeObj);
+                    if (iter != __nativePtrToObjectMap.end())
+                    {
+                        __nativePtrToObjectMap.erase(iter);
+                    }
+                }
+            }
+        }
+
+        if (_isRooted)
+        {
+            JSValueUnprotect(__cx, _obj);
+        }
+
+        _isCleanup = true;
+    }
+
     // --- Getter/Setter
 
     bool Object::getProperty(const char* name, Value* data)
     {
         JSStringRef jsName = JSStringCreateWithUTF8CString(name);
-        JSValueRef jsValue = JSObjectGetProperty(__cx, _getJSObject(), jsName, nullptr);
+        JSValueRef jsValue = JSObjectGetProperty(__cx, _obj, jsName, nullptr);
         JSStringRelease(jsName);
 
         internal::jsToSeValue(__cx, jsValue, data);
@@ -127,7 +134,7 @@ namespace se {
     {
         JSStringRef jsName = JSStringCreateWithUTF8CString(name);
         JSValueRef jsValue = nullptr;
-        JSObjectRef obj = _getJSObject();
+        JSObjectRef obj = _obj;
         if (v.getType() == Value::Type::Number)
         {
             jsValue = JSValueMakeNumber(__cx, v.toNumber());
@@ -144,7 +151,7 @@ namespace se {
         }
         else if (v.getType() == Value::Type::Object)
         {
-            jsValue = v.toObject()->_getJSObject();
+            jsValue = v.toObject()->_obj;
         }
         else if (v.getType() == Value::Type::Null)
         {
@@ -168,15 +175,21 @@ namespace se {
         JSObjectRef contextObject = nullptr;
         if (thisObject != nullptr)
         {
-            contextObject = thisObject->_getJSObject();
+            contextObject = thisObject->_obj;
         }
 
-        JSValueRef jsArgs[args.size()];
-        internal::seToJsArgs(__cx, args, jsArgs);
+        JSValueRef* jsArgs = nullptr;
 
-        JSValueRef rcValue = JSObjectCallAsFunction(__cx, _getJSObject(), contextObject, args.size(), jsArgs, nullptr);
+        if (!args.empty())
+        {
+            jsArgs = (JSValueRef*)malloc(sizeof(JSValueRef) * args.size());
+            internal::seToJsArgs(__cx, args, jsArgs);
+        }
 
-        if (!JSValueIsUndefined(__cx, rcValue))
+        JSValueRef rcValue = JSObjectCallAsFunction(__cx, _obj, contextObject, args.size(), jsArgs, nullptr);
+        free(jsArgs);
+
+        if (rval != nullptr && !JSValueIsUndefined(__cx, rcValue))
         {
             internal::jsToSeValue(__cx, rcValue, rval);
             return true;
@@ -189,7 +202,7 @@ namespace se {
     {
         JSStringRef jsName = JSStringCreateWithUTF8CString(funcName);
         JSObjectRef jsFunc = JSObjectMakeFunctionWithCallback(__cx, nullptr, func);
-        JSObjectSetProperty(__cx, _getJSObject(), jsName, jsFunc, kJSPropertyAttributeNone, nullptr);
+        JSObjectSetProperty(__cx, _obj, jsName, jsFunc, kJSPropertyAttributeNone, nullptr);
         return true;
     }
 
@@ -207,7 +220,7 @@ namespace se {
 
     bool Object::isFunction() const
     {
-        return JSObjectIsFunction(__cx, _getJSObject());
+        return JSObjectIsFunction(__cx, _obj);
     }
 
     bool Object::_isNativeFunction() const
@@ -258,12 +271,12 @@ namespace se {
 
     void* Object::getPrivateData()
     {
-        return JSObjectGetPrivate(_getJSObject());
+        return JSObjectGetPrivate(_obj);
     }
 
     void Object::setPrivateData(void *data)
     {
-        JSObjectSetPrivate(_getJSObject(), data);
+        JSObjectSetPrivate(_obj, data);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
     }

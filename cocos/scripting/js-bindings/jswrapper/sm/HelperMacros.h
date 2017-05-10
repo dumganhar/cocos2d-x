@@ -48,7 +48,9 @@
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         }
 
+// Should release twice since getObjectWithPtr will addRef.
 #define SE_FINALIZE_FUNC_END \
+        SAFE_RELEASE(thisObject); \
         SAFE_RELEASE(thisObject); \
     }
 

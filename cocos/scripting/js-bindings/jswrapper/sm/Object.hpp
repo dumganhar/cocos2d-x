@@ -16,7 +16,7 @@ namespace se {
         Object(JSObject* obj, bool rooted);
         virtual ~Object();
 
-        static Object* createPlainObject();
+        static Object* createPlainObject(bool rooted);
 
         static Object* createObject(const char* clsName, bool rooted);
         static Object* getObjectWithPtr(void* ptr);

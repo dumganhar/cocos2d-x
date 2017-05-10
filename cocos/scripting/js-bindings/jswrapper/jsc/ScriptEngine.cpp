@@ -6,6 +6,8 @@
 
 #ifdef SCRIPT_ENGINE_JSC
 
+extern "C" JS_EXPORT void JSSynchronousGarbageCollectForDebugging(JSContextRef);
+
 namespace se {
 
     namespace {
@@ -15,7 +17,8 @@ namespace se {
                              size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
         {
             printf("GC begin ...\n");
-            JSGarbageCollect(ctx);
+//            JSGarbageCollect(ctx);
+            JSSynchronousGarbageCollectForDebugging(ctx);
             printf("GC end ...\n");
             return JSValueMakeUndefined(ctx);
         }

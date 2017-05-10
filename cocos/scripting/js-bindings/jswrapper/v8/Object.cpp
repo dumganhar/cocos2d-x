@@ -49,10 +49,10 @@ namespace se {
         __isolate = isolate;
     }
 
-    Object* Object::createPlainObject()
+    Object* Object::createPlainObject(bool rooted)
     {
         v8::Local<v8::Object> jsobj = v8::Object::New(__isolate);
-        Object* obj = _createJSObject(jsobj, false);
+        Object* obj = _createJSObject(jsobj, rooted);
         return obj;
     }
 
@@ -80,14 +80,8 @@ namespace se {
 
     Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
     {
-        Object* obj = nullptr;
-        auto iter = __nativePtrToObjectMap.find(ptr);
-        if (iter != __nativePtrToObjectMap.end())
-        {
-            obj = iter->second;
-            obj->addRef();
-        }
-        else
+        Object* obj = getObjectWithPtr(ptr);
+        if (obj == nullptr)
         {
             obj = createObject(clsName, rooted);
             obj->setPrivateData(ptr);
