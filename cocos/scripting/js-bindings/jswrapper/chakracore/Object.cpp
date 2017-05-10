@@ -3,7 +3,7 @@
 #include "Class.hpp"
 #include "ScriptEngine.hpp"
 
-#ifdef SCRIPT_ENGINE_JSC
+#ifdef SCRIPT_ENGINE_CHAKRACORE11
 
 namespace se {
  
@@ -36,7 +36,7 @@ namespace se {
     Object* Object::createObject(const char* clsName, bool rooted)
     {
         Class* cls = nullptr;
-        JSObjectRef jsObj = Class::_createJSObject(clsName, &cls);
+        JsValueRef jsObj = Class::_createJSObject(clsName, &cls);
         Object* obj = _createJSObject(cls, jsObj, rooted);
         return obj;
     }
@@ -64,7 +64,7 @@ namespace se {
         return obj;
     }
 
-    Object* Object::_createJSObject(Class* cls, JSObjectRef obj, bool rooted)
+    Object* Object::_createJSObject(Class* cls, JsValueRef obj, bool rooted)
     {
         Object* ret = new Object();
         if (!ret->init(obj, rooted))
@@ -77,7 +77,7 @@ namespace se {
         return ret;
     }
 
-    bool Object::init(JSObjectRef obj, bool rooted)
+    bool Object::init(JsValueRef obj, bool rooted)
     {
         _obj = obj;
         _isRooted = rooted;
@@ -134,7 +134,7 @@ namespace se {
     {
         JSStringRef jsName = JSStringCreateWithUTF8CString(name);
         JSValueRef jsValue = nullptr;
-        JSObjectRef obj = _obj;
+        JsValueRef obj = _obj;
         if (v.getType() == Value::Type::Number)
         {
             jsValue = JSValueMakeNumber(__cx, v.toNumber());
@@ -172,7 +172,7 @@ namespace se {
     {
         assert(isFunction());
 
-        JSObjectRef contextObject = nullptr;
+        JsValueRef contextObject = nullptr;
         if (thisObject != nullptr)
         {
             contextObject = thisObject->_obj;
@@ -201,7 +201,7 @@ namespace se {
     bool Object::defineFunction(const char* funcName, JSObjectCallAsFunctionCallback func)
     {
         JSStringRef jsName = JSStringCreateWithUTF8CString(funcName);
-        JSObjectRef jsFunc = JSObjectMakeFunctionWithCallback(__cx, nullptr, func);
+        JsValueRef jsFunc = JSObjectMakeFunctionWithCallback(__cx, nullptr, func);
         JSObjectSetProperty(__cx, _obj, jsName, jsFunc, kJSPropertyAttributeNone, nullptr);
         return true;
     }
@@ -292,7 +292,7 @@ namespace se {
 //               what);
     }
 
-    JSObjectRef Object::_getJSObject() const
+    JsValueRef Object::_getJSObject() const
     {
         return _obj;
     }
@@ -327,7 +327,16 @@ namespace se {
 
     bool Object::isSame(Object* o) const
     {
-        return JSValueIsStrictEqual(__cx, _obj, o->_obj);
+        //FIXME:
+        if (_obj == o->_obj)
+        {
+            printf("same\n");
+        }
+        else
+        {
+            printf("not same\n");
+        }
+        return _obj == o->_obj;
     }
 
     bool Object::attachChild(Object* child)
@@ -375,4 +384,4 @@ namespace se {
 
 } // namespace se {
 
-#endif // SCRIPT_ENGINE_JSC
+#endif // SCRIPT_ENGINE_CHAKRACORE

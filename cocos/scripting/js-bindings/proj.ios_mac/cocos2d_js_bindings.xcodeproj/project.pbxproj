@@ -96,6 +96,20 @@
 		1A5543971EC1AF9000AEA55E /* jsb_menu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A37575A1EB96C2C000CA182 /* jsb_menu.hpp */; };
 		1A5543981EC1AF9000AEA55E /* jsb_menuitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757611EB96C56000CA182 /* jsb_menuitem.cpp */; };
 		1A5543991EC1AF9000AEA55E /* jsb_menuitem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */; };
+		1A5543A61EC2B03500AEA55E /* ChakraCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543A21EC2B03500AEA55E /* ChakraCommon.h */; };
+		1A5543A71EC2B03500AEA55E /* ChakraCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543A31EC2B03500AEA55E /* ChakraCore.h */; };
+		1A5543A81EC2B03500AEA55E /* ChakraDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543A41EC2B03500AEA55E /* ChakraDebug.h */; };
+		1A5543B71EC2B14E00AEA55E /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543AC1EC2B14E00AEA55E /* Base.h */; };
+		1A5543B81EC2B14E00AEA55E /* Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543AD1EC2B14E00AEA55E /* Class.cpp */; };
+		1A5543B91EC2B14E00AEA55E /* Class.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543AE1EC2B14E00AEA55E /* Class.hpp */; };
+		1A5543BA1EC2B14E00AEA55E /* HelperMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543AF1EC2B14E00AEA55E /* HelperMacros.h */; };
+		1A5543BB1EC2B14E00AEA55E /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543B01EC2B14E00AEA55E /* Object.cpp */; };
+		1A5543BC1EC2B14E00AEA55E /* Object.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543B11EC2B14E00AEA55E /* Object.hpp */; };
+		1A5543BD1EC2B14E00AEA55E /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543B21EC2B14E00AEA55E /* ScriptEngine.cpp */; };
+		1A5543BE1EC2B14E00AEA55E /* ScriptEngine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543B31EC2B14E00AEA55E /* ScriptEngine.hpp */; };
+		1A5543BF1EC2B14E00AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543B41EC2B14E00AEA55E /* SeApi.h */; };
+		1A5543C01EC2B14E00AEA55E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5543B51EC2B14E00AEA55E /* Utils.cpp */; };
+		1A5543C11EC2B14E00AEA55E /* Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543B61EC2B14E00AEA55E /* Utils.hpp */; };
 		1A5C78FD1EC078890045BEC5 /* v8-debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F51EC078890045BEC5 /* v8-debug.h */; };
 		1A5C78FE1EC078890045BEC5 /* v8-experimental.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F61EC078890045BEC5 /* v8-experimental.h */; };
 		1A5C78FF1EC078890045BEC5 /* v8-inspector-protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */; };
@@ -364,6 +378,22 @@
 		1A5543791EC182E900AEA55E /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1A5543801EC18C9800AEA55E /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		1A5543811EC18C9800AEA55E /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
+		1A55439D1EC2AF2200AEA55E /* libChakra.Jsrt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChakra.Jsrt.a; path = ../../../../../ChakraCore/BuildLinux/Test/lib/Jsrt/libChakra.Jsrt.a; sourceTree = "<group>"; };
+		1A5543A21EC2B03500AEA55E /* ChakraCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChakraCommon.h; sourceTree = "<group>"; };
+		1A5543A31EC2B03500AEA55E /* ChakraCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChakraCore.h; sourceTree = "<group>"; };
+		1A5543A41EC2B03500AEA55E /* ChakraDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChakraDebug.h; sourceTree = "<group>"; };
+		1A5543A91EC2B10F00AEA55E /* libChakra.Jsrt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChakra.Jsrt.a; path = ../../../../../ChakraCore/BuildLinux/Debug/lib/Jsrt/libChakra.Jsrt.a; sourceTree = "<group>"; };
+		1A5543AC1EC2B14E00AEA55E /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		1A5543AD1EC2B14E00AEA55E /* Class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Class.cpp; sourceTree = "<group>"; };
+		1A5543AE1EC2B14E00AEA55E /* Class.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Class.hpp; sourceTree = "<group>"; };
+		1A5543AF1EC2B14E00AEA55E /* HelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperMacros.h; sourceTree = "<group>"; };
+		1A5543B01EC2B14E00AEA55E /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
+		1A5543B11EC2B14E00AEA55E /* Object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
+		1A5543B21EC2B14E00AEA55E /* ScriptEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptEngine.cpp; sourceTree = "<group>"; };
+		1A5543B31EC2B14E00AEA55E /* ScriptEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ScriptEngine.hpp; sourceTree = "<group>"; };
+		1A5543B41EC2B14E00AEA55E /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
+		1A5543B51EC2B14E00AEA55E /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		1A5543B61EC2B14E00AEA55E /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1A5C78F51EC078890045BEC5 /* v8-debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-debug.h"; sourceTree = "<group>"; };
 		1A5C78F61EC078890045BEC5 /* v8-experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-experimental.h"; sourceTree = "<group>"; };
 		1A5C78F71EC078890045BEC5 /* v8-inspector-protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-inspector-protocol.h"; sourceTree = "<group>"; };
@@ -675,6 +705,7 @@
 		1A119F0918BDF1D400352BAA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				1A55439F1EC2B03500AEA55E /* chakracore */,
 				1AC004ED1EBC480D004B3660 /* v8 */,
 				1A119F0A18BDF1E200352BAA /* spidermonkey */,
 			);
@@ -708,9 +739,64 @@
 			path = jsc;
 			sourceTree = "<group>";
 		};
+		1A55439F1EC2B03500AEA55E /* chakracore */ = {
+			isa = PBXGroup;
+			children = (
+				1A5543A01EC2B03500AEA55E /* include */,
+				1A5543A51EC2B03500AEA55E /* prebuilt */,
+			);
+			name = chakracore;
+			path = ../../../../external/chakracore;
+			sourceTree = "<group>";
+		};
+		1A5543A01EC2B03500AEA55E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				1A5543A11EC2B03500AEA55E /* mac */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		1A5543A11EC2B03500AEA55E /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				1A5543A21EC2B03500AEA55E /* ChakraCommon.h */,
+				1A5543A31EC2B03500AEA55E /* ChakraCore.h */,
+				1A5543A41EC2B03500AEA55E /* ChakraDebug.h */,
+			);
+			path = mac;
+			sourceTree = "<group>";
+		};
+		1A5543A51EC2B03500AEA55E /* prebuilt */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = prebuilt;
+			sourceTree = "<group>";
+		};
+		1A5543AB1EC2B14E00AEA55E /* chakracore */ = {
+			isa = PBXGroup;
+			children = (
+				1A5543AC1EC2B14E00AEA55E /* Base.h */,
+				1A5543AD1EC2B14E00AEA55E /* Class.cpp */,
+				1A5543AE1EC2B14E00AEA55E /* Class.hpp */,
+				1A5543AF1EC2B14E00AEA55E /* HelperMacros.h */,
+				1A5543B01EC2B14E00AEA55E /* Object.cpp */,
+				1A5543B11EC2B14E00AEA55E /* Object.hpp */,
+				1A5543B21EC2B14E00AEA55E /* ScriptEngine.cpp */,
+				1A5543B31EC2B14E00AEA55E /* ScriptEngine.hpp */,
+				1A5543B41EC2B14E00AEA55E /* SeApi.h */,
+				1A5543B51EC2B14E00AEA55E /* Utils.cpp */,
+				1A5543B61EC2B14E00AEA55E /* Utils.hpp */,
+			);
+			path = chakracore;
+			sourceTree = "<group>";
+		};
 		1A9E98D31EB080E6001AEA19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A5543A91EC2B10F00AEA55E /* libChakra.Jsrt.a */,
+				1A55439D1EC2AF2200AEA55E /* libChakra.Jsrt.a */,
 				1A55435A1EC1561900AEA55E /* JavaScriptCore.framework */,
 				1A9E98D41EB080E6001AEA19 /* libmozglue.a */,
 			);
@@ -720,6 +806,7 @@
 		1A9E98D71EB081B4001AEA19 /* jswrapper */ = {
 			isa = PBXGroup;
 			children = (
+				1A5543AB1EC2B14E00AEA55E /* chakracore */,
 				1A5543511EC155D200AEA55E /* jsc */,
 				1AC0051E1EBC483F004B3660 /* v8 */,
 				1A9E993C1EB09565001AEA19 /* sm */,
@@ -1108,6 +1195,7 @@
 				1A4711A11EB9BA880027E3D9 /* SeApi.h in Headers */,
 				60379A919A53AB62EA8E5E7D /* Date.h in Headers */,
 				60379D14956237191C929701 /* Class.h in Headers */,
+				1A5543A81EC2B03500AEA55E /* ChakraDebug.h in Headers */,
 				6037909F40AFC1ACE4B8DF83 /* Debug.h in Headers */,
 				603796313C803B9105CADE23 /* GCAPI.h in Headers */,
 				1A5C79041EC078890045BEC5 /* v8-version-string.h in Headers */,
@@ -1124,9 +1212,11 @@
 				60379AE7EF6C3313CF9B457E /* CallArgs.h in Headers */,
 				1A5C78FE1EC078890045BEC5 /* v8-experimental.h in Headers */,
 				60379EB985BDB67CE267FFFC /* GCVector.h in Headers */,
+				1A5543BE1EC2B14E00AEA55E /* ScriptEngine.hpp in Headers */,
 				603790708A27D88D5DC99691 /* GCVariant.h in Headers */,
 				60379B68BA5DA50CF207FDC8 /* HashTable.h in Headers */,
 				6037910E75DD01F6F988CCE7 /* TraceKind.h in Headers */,
+				1A5543A71EC2B03500AEA55E /* ChakraCore.h in Headers */,
 				603799DD5E3D7D90F6BEBE61 /* TypeDecls.h in Headers */,
 				1AC0050C1EBC480D004B3660 /* v8-platform.h in Headers */,
 				60379F9CE53395C4B51FE720 /* UniquePtr.h in Headers */,
@@ -1134,6 +1224,7 @@
 				60379BA3AA7E3753F1932E36 /* RootingAPI.h in Headers */,
 				60379DD8AEB097A2F3316B95 /* TracingAPI.h in Headers */,
 				603798B0515AA2623129946C /* WeakMapPtr.h in Headers */,
+				1A5543C11EC2B14E00AEA55E /* Utils.hpp in Headers */,
 				60379288D40C7856E88C6BAE /* Conversions.h in Headers */,
 				60379FB25B06725088BAE550 /* GCHashTable.h in Headers */,
 				6037927EF814B92F08DADB27 /* GCPolicyAPI.h in Headers */,
@@ -1178,11 +1269,13 @@
 				60379391EF561FEB96B68E58 /* Char16.h in Headers */,
 				6037992AE2413A55A7239581 /* Likely.h in Headers */,
 				6037992517C7A9C336039C4F /* Opaque.h in Headers */,
+				1A5543BA1EC2B14E00AEA55E /* HelperMacros.h in Headers */,
 				60379F813732F3EC94448AB5 /* Poison.h in Headers */,
 				6037950BAC15CCF4A8631DD0 /* RefPtr.h in Headers */,
 				6037960D3B0C8D3108B651CF /* Scoped.h in Headers */,
 				60379EB70F60BD5CE4540052 /* Unused.h in Headers */,
 				603792F775FD133E45A316B3 /* Vector.h in Headers */,
+				1A5543BF1EC2B14E00AEA55E /* SeApi.h in Headers */,
 				603792AC9E53D8634996BFF5 /* Atomics.h in Headers */,
 				1AC005091EBC480D004B3660 /* libplatform-export.h in Headers */,
 				1AC0052E1EBC490F004B3660 /* SeApi.h in Headers */,
@@ -1246,6 +1339,7 @@
 				60379B16136569125659C480 /* RefCountType.h in Headers */,
 				60379D0210A40F8024762604 /* FloatingPoint.h in Headers */,
 				603796422A2FA6EA97EB4D9F /* HashFunctions.h in Headers */,
+				1A5543B71EC2B14E00AEA55E /* Base.h in Headers */,
 				603796C0962B2F7650C2B1A4 /* IndexSequence.h in Headers */,
 				1A5C78FF1EC078890045BEC5 /* v8-inspector-protocol.h in Headers */,
 				60379FCC3D2B1265387C0908 /* PodOperations.h in Headers */,
@@ -1273,6 +1367,7 @@
 				603798AE01E837FC60B248C6 /* IntegerTypeTraits.h in Headers */,
 				6037915397E0150AF9A548F5 /* FastBernoulliTrial.h in Headers */,
 				1A47119F1EB9BA880027E3D9 /* Value.hpp in Headers */,
+				1A5543A61EC2B03500AEA55E /* ChakraCommon.h in Headers */,
 				1A55438F1EC1AF9000AEA55E /* jsb_node.hpp in Headers */,
 				6037971144648F44A89D0818 /* XorShift128PlusRNG.h in Headers */,
 				1A5C79001EC078890045BEC5 /* v8-inspector.h in Headers */,
@@ -1305,10 +1400,12 @@
 				1A1853641EBCCB3900EF28DC /* ObjectWrap.h in Headers */,
 				1A5C79021EC078890045BEC5 /* v8-testing.h in Headers */,
 				6037986DD79AA81267B4A35B /* jsprototypes.h in Headers */,
+				1A5543B91EC2B14E00AEA55E /* Class.hpp in Headers */,
 				60379655807D59BB2F52602E /* jemalloc_types.h in Headers */,
 				1A5543751EC1606800AEA55E /* ScriptEngine.hpp in Headers */,
 				60379FFB4B49064784ADB390 /* mozmemory_wrap.h in Headers */,
 				60379A003B7C185E61E054B3 /* Utils.hpp in Headers */,
+				1A5543BC1EC2B14E00AEA55E /* Object.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1465,12 +1562,14 @@
 				1AC005271EBC483F004B3660 /* Class.cpp in Sources */,
 				1A55438A1EC1AF7D00AEA55E /* ScriptingCore.cpp in Sources */,
 				1A5543621EC15F1800AEA55E /* Object.cpp in Sources */,
+				1A5543BB1EC2B14E00AEA55E /* Object.cpp in Sources */,
 				1A5543921EC1AF9000AEA55E /* jsb_global.cpp in Sources */,
 				1A4711921EB9BA880027E3D9 /* Class.cpp in Sources */,
 				1A4711A21EB9BA880027E3D9 /* Ref.cpp in Sources */,
 				1A5543721EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				1A4711941EB9BA880027E3D9 /* Object.cpp in Sources */,
 				1A5543961EC1AF9000AEA55E /* jsb_menu.cpp in Sources */,
+				1A5543B81EC2B14E00AEA55E /* Class.cpp in Sources */,
 				1A55436C1EC1606800AEA55E /* Class.cpp in Sources */,
 				1A5543981EC1AF9000AEA55E /* jsb_menuitem.cpp in Sources */,
 				1A1853A31EC052FE00EF28DC /* ObjectWrap.cpp in Sources */,
@@ -1479,8 +1578,10 @@
 				1A5543901EC1AF9000AEA55E /* jsb_sprite.cpp in Sources */,
 				1A5543881EC1AE4F00AEA55E /* jsb_director.cpp in Sources */,
 				1A55438E1EC1AF9000AEA55E /* jsb_node.cpp in Sources */,
+				1A5543BD1EC2B14E00AEA55E /* ScriptEngine.cpp in Sources */,
 				1A47119E1EB9BA880027E3D9 /* Value.cpp in Sources */,
 				1A55438C1EC1AF8600AEA55E /* jsb_scene.cpp in Sources */,
+				1A5543C01EC2B14E00AEA55E /* Utils.cpp in Sources */,
 				1A5543941EC1AF9000AEA55E /* jsb_register_all.cpp in Sources */,
 				1A55437A1EC182E900AEA55E /* Utils.cpp in Sources */,
 				1A5543821EC18C9800AEA55E /* Utils.cpp in Sources */,
