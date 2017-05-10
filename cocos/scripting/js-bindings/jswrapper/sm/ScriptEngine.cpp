@@ -542,7 +542,7 @@ namespace se {
 
         Value funcVal;
         bool ok = target->getProperty(funcName, &funcVal);
-        if (ok && !funcVal.toObject()->isNativeFunction(func))
+        if (ok && !funcVal.toObject()->_isNativeFunction(func))
         {
             funcVal.toObject()->call(EmptyValueArray, target);
         }

@@ -30,7 +30,7 @@ namespace se {
 
         // --- Function
         bool isFunction() const;
-        bool isNativeFunction(JSNative func) const;
+        bool _isNativeFunction(JSNative func) const;
         bool call(const ValueArray& args, Object* thisObject, Value* rval = nullptr);
 
         bool defineFunction(const char *funcName, JSNative func, int minArgs = 0);

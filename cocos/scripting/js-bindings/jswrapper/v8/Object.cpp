@@ -169,6 +169,20 @@ namespace se {
         return const_cast<Object*>(this)->_obj.handle(__isolate)->IsCallable();
     }
 
+    bool Object::_isNativeFunction() const
+    {
+        if (isFunction())
+        {
+            v8::String::Utf8Value utf8(const_cast<Object*>(this)->_obj.handle(__isolate));
+            std::string info = *utf8;
+            if (info.find("[native code]") != std::string::npos)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool Object::isTypedArray() const
     {
         return const_cast<Object*>(this)->_obj.handle(__isolate)->IsTypedArray();

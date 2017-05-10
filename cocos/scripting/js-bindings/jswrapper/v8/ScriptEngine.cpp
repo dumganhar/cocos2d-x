@@ -246,48 +246,41 @@ namespace se {
         if (iter  == __nativePtrToObjectMap.end())
             return;
 
-        assert(false);
-        //FIXME:
-//        JS::RootedValue retval(_cx);
-//        Object* target = iter->second;
-//        const char* funcName = nullptr;
-//        JSNative func = nullptr;
-//        if (type == NodeEventType::ENTER)
-//        {
-//            funcName = "onEnter";
-//            func = Node_onEnter;
-//        }
-//        else if (type == NodeEventType::EXIT)
-//        {
-//            funcName = "onExit";
-//            func = Node_onExit;
-//        }
-//        else if (type == NodeEventType::ENTER_TRANSITION_DID_FINISH)
-//        {
-//            funcName = "onEnterTransitionDidFinish";
-//            func = Node_onEnterTransitionDidFinish;
-//        }
-//        else if (type == NodeEventType::EXIT_TRANSITION_DID_START)
-//        {
-//            funcName = "onExitTransitionDidStart";
-//            func = Node_onExitTransitionDidStart;
-//        }
-//        else if (type == NodeEventType::CLEANUP)
-//        {
-//            funcName = "cleanup";
-//            func = Node_cleanup;
-//        }
-//        else
-//        {
-//            assert(false);
-//        }
-//        
-//        Value funcVal;
-//        bool ok = target->getProperty(funcName, &funcVal);
-//        if (ok && !funcVal.toObject()->isNativeFunction(func))
-//        {
-//            funcVal.toObject()->call(EmptyValueArray, target);
-//        }
+        Object* target = iter->second;
+        const char* funcName = nullptr;
+        if (type == NodeEventType::ENTER)
+        {
+            funcName = "onEnter";
+        }
+        else if (type == NodeEventType::EXIT)
+        {
+            funcName = "onExit";
+        }
+        else if (type == NodeEventType::ENTER_TRANSITION_DID_FINISH)
+        {
+            funcName = "onEnterTransitionDidFinish";
+        }
+        else if (type == NodeEventType::EXIT_TRANSITION_DID_START)
+        {
+            funcName = "onExitTransitionDidStart";
+        }
+        else if (type == NodeEventType::CLEANUP)
+        {
+            funcName = "cleanup";
+        }
+        else
+        {
+            assert(false);
+        }
+
+        AutoHandleScope hs;
+
+        Value funcVal;
+        bool ok = target->getProperty(funcName, &funcVal);
+        if (ok && !funcVal.toObject()->_isNativeFunction())
+        {
+            funcVal.toObject()->call(EmptyValueArray, target);
+        }
     }
 
 } // namespace se {

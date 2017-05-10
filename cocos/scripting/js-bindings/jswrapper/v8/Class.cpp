@@ -50,6 +50,12 @@ namespace se {
         return true;
     }
 
+    void Class::cleanup()
+    {
+        //TODO:
+        assert(false);
+    }
+
     bool Class::install()
     {
         assert(__clsMap.find(_name) == __clsMap.end());

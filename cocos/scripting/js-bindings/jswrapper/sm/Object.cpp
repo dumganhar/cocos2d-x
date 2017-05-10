@@ -292,7 +292,7 @@ namespace se {
         return JS_ObjectIsFunction(__cx, _getJSObject());
     }
 
-    bool Object::isNativeFunction(JSNative func) const
+    bool Object::_isNativeFunction(JSNative func) const
     {
         JSObject* obj = _getJSObject();
         return JS_ObjectIsFunction(__cx, obj) && JS_IsNativeFunction(obj, func);

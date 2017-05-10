@@ -30,7 +30,7 @@ namespace se {
         Object* getProto() const;
 
 	private:
-
+        static void cleanup();
         static v8::Local<v8::Object> _createJSObject(const std::string &clsName, Class** outCls);
         static void setIsolate(v8::Isolate* isolate);
 		

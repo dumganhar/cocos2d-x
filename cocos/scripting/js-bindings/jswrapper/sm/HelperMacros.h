@@ -111,7 +111,7 @@
             thisObject = se::Object::getObjectWithPtr(_nativeObj); \
         } \
         se::Value data; \
-        se::internal::seToJsValue(cx, _argv[0], &data);
+        se::internal::jsToSeValue(cx, _argv[0], &data);
 
 #define SE_SET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \

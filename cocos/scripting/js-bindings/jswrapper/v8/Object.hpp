@@ -36,6 +36,7 @@ namespace se {
 
         // --- Function
         bool isFunction() const;
+        bool _isNativeFunction() const;
         bool call(const ValueArray& args, Object* thisObject, Value* rval = nullptr);
 
         bool defineFunction(const char *funcName, v8::FunctionCallback func);
