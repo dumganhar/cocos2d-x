@@ -75,7 +75,7 @@ namespace se {
 
     bool ScriptEngine::init()
     {
-        printf("Initializing JavaScriptCore \n");
+        printf("Initializing ChakraCore ... \n");
 
         FAIL_CHECK(JsCreateRuntime(JsRuntimeAttributeNone, nullptr, &_rt));
         FAIL_CHECK(JsCreateContext(_rt, &_cx));

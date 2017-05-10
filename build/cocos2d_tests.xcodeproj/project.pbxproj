@@ -626,8 +626,6 @@
 		1AC35DF818CEE65B00F37B72 /* pew-pew-lei.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1AC35CC418CED84500F37B72 /* pew-pew-lei.wav */; };
 		1ACF6A521E4C52660033C137 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
 		1ACF6A531E4C52660033C137 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
-		1ADB8B281EC2FDD1007B7FA3 /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B271EC2FDD1007B7FA3 /* libicui18n.a */; };
-		1ADB8B2A1EC2FDE7007B7FA3 /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B291EC2FDE7007B7FA3 /* libicuuc.a */; };
 		1ADB8B2C1EC30316007B7FA3 /* libChakraCore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B2B1EC30316007B7FA3 /* libChakraCore.dylib */; };
 		1AF5ECFC1E56D6BC00484A9D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
 		1AF5ECFD1E56D6BC00484A9D /* cocosvideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3EA0FB5D191B92F100B170C8 /* cocosvideo.mp4 */; };
@@ -2639,8 +2637,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ADB8B2A1EC2FDE7007B7FA3 /* libicuuc.a in Frameworks */,
-				1ADB8B281EC2FDD1007B7FA3 /* libicui18n.a in Frameworks */,
 				1ADB8B2C1EC30316007B7FA3 /* libChakraCore.dylib in Frameworks */,
 				1A55439C1EC1B02F00AEA55E /* JavaScriptCore.framework in Frameworks */,
 				1A55434A1EC0A40500AEA55E /* libv8_base.a in Frameworks */,
