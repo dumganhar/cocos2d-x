@@ -231,6 +231,9 @@
 		1A5543501EC0A51500AEA55E /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5C79051EC079E00045BEC5 /* libv8_libbase.a */; };
 		1A55439C1EC1B02F00AEA55E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55439B1EC1B02F00AEA55E /* JavaScriptCore.framework */; };
 		1A5543C21EC2C7BE00AEA55E /* registerclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */; };
+		1A6984F01EC31A1E00DE485F /* libChakraCoreStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6984EF1EC31A1E00DE485F /* libChakraCoreStatic.a */; };
+		1A6984F11EC31A6F00DE485F /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B271EC2FDD1007B7FA3 /* libicui18n.a */; };
+		1A6984F21EC31A6F00DE485F /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B291EC2FDE7007B7FA3 /* libicuuc.a */; };
 		1A78A5521D1A3C9B00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5531D1A3CE800B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
 		1A78A5541D1A3D0F00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
@@ -626,7 +629,6 @@
 		1AC35DF818CEE65B00F37B72 /* pew-pew-lei.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1AC35CC418CED84500F37B72 /* pew-pew-lei.wav */; };
 		1ACF6A521E4C52660033C137 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
 		1ACF6A531E4C52660033C137 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
-		1ADB8B2C1EC30316007B7FA3 /* libChakraCore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B2B1EC30316007B7FA3 /* libChakraCore.dylib */; };
 		1AF5ECFC1E56D6BC00484A9D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
 		1AF5ECFD1E56D6BC00484A9D /* cocosvideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3EA0FB5D191B92F100B170C8 /* cocosvideo.mp4 */; };
 		1AF5ECFE1E56D6CD00484A9D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF6A511E4C52660033C137 /* cacert.pem */; };
@@ -1912,6 +1914,7 @@
 		1A5C78F31EC0729F0045BEC5 /* libv8_libplatform.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libv8_libplatform.dylib; path = ../../v8/out.gn/x64.debug/libv8_libplatform.dylib; sourceTree = "<group>"; };
 		1A5C79051EC079E00045BEC5 /* libv8_libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libbase.a; path = ../../v8/out.gn/foo/obj/libv8_libbase.a; sourceTree = "<group>"; };
 		1A5C79061EC079E00045BEC5 /* libv8_libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_libplatform.a; path = ../../v8/out.gn/foo/obj/libv8_libplatform.a; sourceTree = "<group>"; };
+		1A6984EF1EC31A1E00DE485F /* libChakraCoreStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChakraCoreStatic.a; path = ../../ChakraCore/out/Debug/lib/libChakraCoreStatic.a; sourceTree = "<group>"; };
 		1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = registerclass.cpp; sourceTree = "<group>"; };
 		1A9E99901EB1D052001AEA19 /* sm_main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = sm_main.mm; sourceTree = "<group>"; };
 		1A9F808C177E98A600D9A1CB /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
@@ -2637,7 +2640,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ADB8B2C1EC30316007B7FA3 /* libChakraCore.dylib in Frameworks */,
+				1A6984F01EC31A1E00DE485F /* libChakraCoreStatic.a in Frameworks */,
+				1A6984F21EC31A6F00DE485F /* libicuuc.a in Frameworks */,
+				1A6984F11EC31A6F00DE485F /* libicui18n.a in Frameworks */,
 				1A55439C1EC1B02F00AEA55E /* JavaScriptCore.framework in Frameworks */,
 				1A55434A1EC0A40500AEA55E /* libv8_base.a in Frameworks */,
 				1A5543501EC0A51500AEA55E /* libv8_libbase.a in Frameworks */,
@@ -4592,6 +4597,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A6984EF1EC31A1E00DE485F /* libChakraCoreStatic.a */,
 				1ADB8B2B1EC30316007B7FA3 /* libChakraCore.dylib */,
 				1ADB8B291EC2FDE7007B7FA3 /* libicuuc.a */,
 				1ADB8B271EC2FDD1007B7FA3 /* libicui18n.a */,
@@ -7680,10 +7686,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/james/Project/v8/out.gn/foo/obj,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug/lib/Common/Core,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug/lib/Jsrt,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug/pal/src,
+					/Users/james/Project/ChakraCore/out/Debug/lib,
 					/usr/local/Cellar/icu4c/58.2/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -7720,10 +7723,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/james/Project/v8/out.gn/foo/obj,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug/lib/Common/Core,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug/lib/Jsrt,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug,
-					/Users/james/Project/ChakraCore/BuildLinux/Debug/pal/src,
+					/Users/james/Project/ChakraCore/out/Debug/lib,
 					/usr/local/Cellar/icu4c/58.2/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;

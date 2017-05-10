@@ -128,7 +128,7 @@ namespace se {
     bool Object::getProperty(const char* name, Value* data)
     {
         JsPropertyIdRef propertyId;
-        JsCreatePropertyIdUtf8(name, strlen(name), &propertyId);
+        JsCreatePropertyId(name, strlen(name), &propertyId);
         JsValueRef jsValue;
         JsGetProperty(_obj, propertyId, &jsValue);
         internal::jsToSeValue(jsValue, data);
@@ -141,7 +141,7 @@ namespace se {
         JsValueRef jsValue = JS_INVALID_REFERENCE;
         internal::seToJsValue(v, &jsValue);
         JsPropertyIdRef propertyId;
-        JsCreatePropertyIdUtf8(name, strlen(name), &propertyId);
+        JsCreatePropertyId(name, strlen(name), &propertyId);
         JsSetProperty(_obj, propertyId, jsValue, true);
     }
 
@@ -157,7 +157,7 @@ namespace se {
             contextObject = thisObject->_obj;
         }
 
-        JsValueRef* jsArgs = (JsValueRef*)malloc(sizeof(JsValueRef) * args.size() + 1); // Requires thisArg as first argument of arguments.
+        JsValueRef* jsArgs = (JsValueRef*)malloc(sizeof(JsValueRef) * (args.size() + 1)); // Requires thisArg as first argument of arguments.
 
         if (!args.empty())
         {
@@ -183,7 +183,7 @@ namespace se {
     bool Object::defineFunction(const char* funcName, JsNativeFunction func)
     {
         JsPropertyIdRef propertyId;
-        JsCreatePropertyIdUtf8(funcName, strlen(funcName), &propertyId);
+        JsCreatePropertyId(funcName, strlen(funcName), &propertyId);
 
         JsValueRef funcVal = JS_INVALID_REFERENCE;
         JsCreateFunction(func, nullptr, &funcVal);
@@ -208,7 +208,7 @@ namespace se {
     {
         JsValueType type;
         JsGetValueType(_obj, &type);
-        if (_obj != JS_INVALID_REFERENCE && type != JsFunction)
+        if (_obj != JS_INVALID_REFERENCE && type == JsFunction)
         {
             return true;
         }

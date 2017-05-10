@@ -62,19 +62,19 @@ namespace se {
 
         __clsMap.emplace(_name, this);
 
-        assert(false);
-
+        JsValueRef funcName;
+        JsCreateString(_name.c_str(), _name.length(), &funcName);
         JsValueRef jsConstructor;
-        JsCreateFunction(_ctor, nullptr, &jsConstructor);
+        JsCreateNamedFunction(funcName, _ctor, nullptr, &jsConstructor);
 
         Object* ctorObj = Object::_createJSObject(nullptr, jsConstructor, false);
-        _parent->setProperty(_name.c_str(), Value(ctorObj));
+
 
         // create class's prototype and project its member functions
         JsValueRef prototype;
         JsCreateObject(&prototype);
 
-        Object* prototypeObj = Object::_createJSObject(nullptr, prototype, false);
+        Object* prototypeObj = Object::_createJSObject(nullptr, prototype, true);
 
         for (const auto& func : _funcs)
         {
@@ -82,8 +82,11 @@ namespace se {
         }
 
         ctorObj->setProperty("prototype", Value(prototypeObj));
-
-        prototypeObj->release();
+        if (_parentProto != nullptr)
+        {
+            JsSetPrototype(prototype, _parentProto->_getJSObject());
+        }
+//        JsSetPrototype(jsConstructor, prototypeObj->_getJSObject()); // This set the __proto__ property
 
         for (const auto& sfunc : _staticFuncs)
         {
@@ -91,9 +94,10 @@ namespace se {
         }
 
         //FIXME: accessor
+        _proto = prototypeObj;
+        _parent->setProperty(_name.c_str(), Value(ctorObj));
 
-        _proto = ctorObj; // Don't release ctorObj, it should be released in Class::cleanup
-        _parent->setProperty(_name.c_str(), Value(_proto));
+        ctorObj->release();
 
         return true;
     }
@@ -146,9 +150,7 @@ namespace se {
         JsValueRef obj;
         JsCreateExternalObject(nullptr, thiz->_finalizeOp, &obj);
 
-        Value prototypeValue;
-        thiz->_proto->getProperty("prototype", &prototypeValue);
-        JsSetPrototype(obj, prototypeValue.toObject()->_getJSObject());
+        JsSetPrototype(obj, thiz->getProto()->_getJSObject());
 
         *outCls = thiz;
         return obj;

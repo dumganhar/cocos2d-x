@@ -64,7 +64,7 @@ namespace se { namespace internal {
             forceConvertJsValueToStdString(jsValue, &str);
             data->setString(str);
         }
-        else if (type == JsObject)
+        else if (type == JsObject || type == JsFunction)
         {
             Object* obj = Object::_createJSObject(nullptr, jsValue, true);
             data->setObject(obj);
@@ -89,7 +89,7 @@ namespace se { namespace internal {
 
             case Value::Type::String:
             {
-                JsCreateStringUtf8((const unsigned char *)v.toString().c_str(), v.toString().length(), jsval);
+                JsCreateString(v.toString().c_str(), v.toString().length(), jsval);
             }
                 break;
 
@@ -118,12 +118,12 @@ namespace se { namespace internal {
     {
         // Get the buffer size
         size_t bufSize = 0;
-        JsCopyStringUtf8(strVal, nullptr, 0, &bufSize);
+        JsCopyString(strVal, nullptr, 0, &bufSize);
         // Allocate buffer
         char* buf = (char*)malloc(bufSize + 1);
         memset(buf, 0, bufSize + 1);
         // Copy
-        JsCopyStringUtf8(strVal, (unsigned char*)buf, bufSize, nullptr);
+        JsCopyString(strVal, buf, bufSize, nullptr);
         *ret = buf;
         free(buf);
     }

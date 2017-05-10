@@ -9,11 +9,11 @@
 #define FAIL_CHECK(cmd)                     \
     do                                      \
     {                                       \
-        JsErrorCode errCode = cmd;          \
-        if (errCode != JsNoError)           \
+        JsErrorCode _errCode = cmd;          \
+        if (_errCode != JsNoError)           \
         {                                   \
             printf("Error %d at '%s'\n",    \
-                errCode, #cmd);             \
+                _errCode, #cmd);             \
             return false;                   \
         }                                   \
     } while(0)
@@ -33,11 +33,11 @@ namespace se {
 
         JsValueRef __log(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
-            if (argumentCount > 0)
+            if (argumentCount > 1)
             {
                 std::string str;
-                internal::forceConvertJsValueToStdString(arguments[0], &str);
-                printf("%s\n", str.c_str());
+                internal::forceConvertJsValueToStdString(arguments[1], &str);
+                printf("JS: %s\n", str.c_str());
             }
             return JS_INVALID_REFERENCE;
         }
@@ -114,21 +114,55 @@ namespace se {
 
     std::string ScriptEngine::formatException(JsValueRef exception)
     {
-        JsPropertyIdRef messageName;
-        if (JsCreatePropertyIdUtf8("message", strlen("message"), &messageName) != JsNoError)
+        std::string ret;
+        JsValueRef propertyNames = JS_INVALID_REFERENCE;
+        JsGetOwnPropertyNames(exception, &propertyNames);
+        JsValueType type;
+        JsGetValueType(propertyNames, &type);
+        assert(type == JsArray);
+
+        for (int i = 0; ; ++i)
         {
-            return "failed to get and clear exception";
+            JsValueRef index = JS_INVALID_REFERENCE;
+            JsValueRef result = JS_INVALID_REFERENCE;
+            JsIntToNumber(i, &index);
+            if (JsNoError != JsGetIndexedProperty(propertyNames, index, &result))
+                break;
+            JsGetValueType(result, &type);
+
+            if (type == JsUndefined)
+                break;
+
+            assert(type == JsString);
+
+            Value key;
+            internal::jsToSeValue(result, &key);
+            std::string keyStr = key.toString();
+
+            if (keyStr == "stack")
+            {
+                JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+
+                if (JsCreatePropertyId(keyStr.c_str(), keyStr.length(), &propertyId) != JsNoError)
+                {
+                    return "failed to get and clear exception";
+                }
+
+                JsValueRef jsValue;
+                if (JsGetProperty(exception, propertyId, &jsValue) != JsNoError)
+                {
+                    return "failed to get error message";
+                }
+
+                internal::forceConvertJsValueToStdString(jsValue, &ret);
+
+//                printf("[%s]=%s\n", keyStr.c_str(), tmp.c_str());
+
+                break;
+            }
         }
 
-        JsValueRef messageValue;
-        if (JsGetProperty(exception, messageName, &messageValue) != JsNoError)
-        {
-            return "failed to get error message";
-        }
-
-        Value v;
-        internal::jsToSeValue(messageValue, &v);
-        return v.toString();
+        return ret;
     }
 
     Object* ScriptEngine::getGlobalObject()
@@ -156,31 +190,37 @@ namespace se {
 
         JsValueRef result;
         // Run the script.
-        FAIL_CHECK(JsRun(scriptSource, _currentSourceContext++, fname,
-                         JsParseScriptAttributeNone, &result));
+        JsErrorCode errCode = JsRun(scriptSource, _currentSourceContext++, fname, JsParseScriptAttributeNone, &result);
 
-        bool hasException = false;
-        FAIL_CHECK(JsHasException(&hasException));
-
-        if (hasException)
+        if (errCode != JsNoError)
         {
-            JsValueRef exception;
-            FAIL_CHECK(JsGetAndClearException(&exception));
+            bool hasException = false;
+            FAIL_CHECK(JsHasException(&hasException));
 
-            formatException(exception);
+            if (hasException)
+            {
+                JsValueRef exception;
+                FAIL_CHECK(JsGetAndClearException(&exception));
 
+                std::string exceptionMsg = formatException(exception);
+                printf("%s\n", exceptionMsg.c_str());
+                
+            }
             return false;
         }
 
-        JsValueType type;
-        JsGetValueType(result, &type);
-        if (type != JsUndefined)
+        if (data != nullptr)
         {
-            internal::jsToSeValue(result, data);
-        }
-        else
-        {
-            data->setUndefined();
+            JsValueType type;
+            JsGetValueType(result, &type);
+            if (type != JsUndefined)
+            {
+                internal::jsToSeValue(result, data);
+            }
+            else
+            {
+                data->setUndefined();
+            }
         }
 
         return true;
