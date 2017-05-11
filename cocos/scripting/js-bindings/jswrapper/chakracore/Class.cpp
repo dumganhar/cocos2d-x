@@ -12,6 +12,43 @@ namespace se {
 
     namespace {
         std::unordered_map<std::string, Class *> __clsMap;
+
+        bool _defineProperty(JsValueRef obj, const char* name, JsNativeFunction getter, JsNativeFunction setter, bool enumerable, bool configurable)
+        {
+            bool result = false;
+
+            JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+            JsCreatePropertyId(name, strlen(name), &propertyId);
+            JsValueRef propertyDescriptor;
+            JsCreateObject(&propertyDescriptor);
+
+            const char* tmp = "get";
+            JsValueRef jsValue = JS_INVALID_REFERENCE;
+            JsPropertyIdRef id = JS_INVALID_REFERENCE;
+
+            JsCreateFunction(getter, nullptr, &jsValue);
+            JsCreatePropertyId(tmp, strlen(tmp), &id);
+            JsSetProperty(propertyDescriptor, id, jsValue, true);
+
+            tmp = "set";
+            JsCreateFunction(setter, nullptr, &jsValue);
+            JsCreatePropertyId(tmp, strlen(tmp), &id);
+            JsSetProperty(propertyDescriptor, id, jsValue, true);
+
+            JsValueRef trueValue;
+            JsGetTrueValue(&trueValue);
+
+            tmp = "enumerable";
+            JsCreatePropertyId(tmp, strlen(tmp), &id);
+            JsSetProperty(propertyDescriptor, id, trueValue, true);
+
+            tmp = "configurable";
+            JsCreatePropertyId(tmp, strlen(tmp), &id);
+            JsSetProperty(propertyDescriptor, id, trueValue, true);
+
+            JsDefineProperty(obj, propertyId, propertyDescriptor, &result);
+            return result;
+        }
     }
 
     Class::Class()
@@ -81,19 +118,28 @@ namespace se {
             prototypeObj->defineFunction(func.name, func.func);
         }
 
+
+        for (const auto& property : _properties)
+        {
+            _defineProperty(prototype, property.name, property.getter, property.setter, true, true);
+        }
+
         ctorObj->setProperty("prototype", Value(prototypeObj));
         if (_parentProto != nullptr)
         {
             JsSetPrototype(prototype, _parentProto->_getJSObject());
         }
-//        JsSetPrototype(jsConstructor, prototypeObj->_getJSObject()); // This set the __proto__ property
 
         for (const auto& sfunc : _staticFuncs)
         {
             ctorObj->defineFunction(sfunc.name, sfunc.func);
         }
 
-        //FIXME: accessor
+        for (const auto& property : _staticProperties)
+        {
+            _defineProperty(jsConstructor, property.name, property.getter, property.setter, true, true);
+        }
+
         _proto = prototypeObj;
         _parent->setProperty(_name.c_str(), Value(ctorObj));
 
@@ -109,7 +155,7 @@ namespace se {
         return true;
     }
 
-    bool Class::defineProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter)
+    bool Class::defineProperty(const char *name, JsNativeFunction getter, JsNativeFunction setter)
     {
         JSPropertySpec property = JS_PSGS(name, getter, setter);
         _properties.push_back(property);
@@ -123,7 +169,7 @@ namespace se {
         return true;
     }
 
-    bool Class::defineStaticProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter)
+    bool Class::defineStaticProperty(const char *name, JsNativeFunction getter, JsNativeFunction setter)
     {
         JSPropertySpec property = JS_PSGS(name, getter, setter);
         _staticProperties.push_back(property);

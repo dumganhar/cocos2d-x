@@ -22,8 +22,8 @@ namespace se {
     struct JSPropertySpec
     {
         const char* name;
-        JSObjectGetPropertyCallback getter;
-        JSObjectSetPropertyCallback setter;
+        JsNativeFunction getter;
+        JsNativeFunction setter;
     };
 
     class Class
@@ -40,9 +40,9 @@ namespace se {
         Object* getProto();
 
         bool defineFunction(const char *name, JsNativeFunction func);
-        bool defineProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter);
+        bool defineProperty(const char *name, JsNativeFunction getter, JsNativeFunction setter);
         bool defineStaticFunction(const char *name, JsNativeFunction func);
-        bool defineStaticProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter);
+        bool defineStaticProperty(const char *name, JsNativeFunction getter, JsNativeFunction setter);
         bool defineFinalizedFunction(JsFinalizeCallback func);
 
     private:

@@ -73,12 +73,13 @@
 // --- Get Property
 
 #define SE_GET_PROPERTY_BEGIN(funcName) \
-    JsValueRef funcName(JsValueRef _thisObject, const char* _name) \
+    JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short _argc, void* _callbackState) \
     { \
+        assert(_argc == 1); \
         JsValueRef _jsRet = JS_INVALID_REFERENCE; \
         bool ret = true; \
         void* _nativeObj = nullptr; \
-        JsGetExternalData(_thisObject, &_nativeObj); \
+        JsGetExternalData(_argv[0], &_nativeObj); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
         { \
@@ -96,20 +97,22 @@
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName) \
-    void funcName(JsValueRef _thisObject, const char* _name, JsValueRef _value) \
+    JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short _argc, void* _callbackState) \
     { \
+        assert(_argc == 2); \
         bool ret = true; \
         void* _nativeObj = nullptr; \
-        JsGetExternalData(_thisObject, &_nativeObj); \
+        JsGetExternalData(_argv[0], &_nativeObj); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
         { \
             thisObject = se::Object::getObjectWithPtr(_nativeObj); \
         } \
         se::Value data; \
-        se::internal::jsToSeValue(_value, &data);
+        se::internal::jsToSeValue(_argv[1], &data);
 
 #define SE_SET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \
+        return JS_INVALID_REFERENCE; \
     }
 

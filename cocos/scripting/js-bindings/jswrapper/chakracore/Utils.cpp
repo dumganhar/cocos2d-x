@@ -130,9 +130,9 @@ namespace se { namespace internal {
 
     bool hasPrivate(JsValueRef obj)
     {
-        void* nativeObj = nullptr;
-        JsGetExternalData(obj, &nativeObj);
-        return nativeObj != nullptr;
+        bool isExist = false;
+        JsHasExternalData(obj, &isExist);
+        return isExist;
     }
 
 
