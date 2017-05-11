@@ -118,7 +118,6 @@ namespace se {
             prototypeObj->defineFunction(func.name, func.func);
         }
 
-
         for (const auto& property : _properties)
         {
             _defineProperty(prototype, property.name, property.getter, property.setter, true, true);
