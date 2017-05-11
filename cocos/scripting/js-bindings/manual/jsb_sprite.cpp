@@ -18,7 +18,8 @@ se::Object* __jsb_Sprite_proto = nullptr;
 
 SE_CTOR_BEGIN(Sprite_ctor, "Sprite")
 {
-
+    Sprite* obj = new Sprite();
+    thisObject->setPrivateData(obj);
 }
 SE_CTOR_END
 
@@ -44,11 +45,20 @@ SE_FUNC_BEGIN(Sprite_create)
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(Sprite_initWithFile)
+{
+    std::string filePath = args[0].toString();
+    Sprite* nativeObj = (Sprite*)thisObject->getPrivateData();
+    bool ok = nativeObj->initWithFile(filePath);
+    SE_SET_RVAL(se::Value(ok));
+}
+SE_FUNC_END
 
 bool jsb_register_Sprite()
 {
     auto cls = se::Class::create("Sprite", __ccObj, __jsb_Node_proto, Sprite_ctor);
     cls->defineStaticFunction("create", Sprite_create);
+    cls->defineFunction("initWithFile", Sprite_initWithFile);
 
     cls->defineFinalizedFunction(Sprite_finalized);
 

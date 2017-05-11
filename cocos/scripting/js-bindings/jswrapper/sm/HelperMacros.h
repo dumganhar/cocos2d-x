@@ -10,16 +10,16 @@
 
 
 #define SE_DECLARE_FUNC(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp)
+    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp)
 
 #define SE_FUNC_BEGIN(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
+    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
-        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
-        JS::Value _thiz = _argv.computeThis(cx); \
+        JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
+        JS::Value _thiz = _argv.computeThis(_cx); \
         se::ValueArray args; \
-        se::internal::jsToSeArgs(cx, argc, _argv, &args); \
+        se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = nullptr; \
         if (se::internal::hasPrivate(_thiz.toObjectOrNull())) \
         { \
@@ -43,9 +43,9 @@
     }
 
 #define SE_FINALIZE_FUNC_BEGIN(funcName) \
-    void funcName(JSFreeOp* fop, JSObject* obj) \
+    void funcName(JSFreeOp* _fop, JSObject* _obj) \
     { \
-        void* nativeThisObject = JS_GetPrivate(obj); \
+        void* nativeThisObject = JS_GetPrivate(_obj); \
         se::Object* thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \
@@ -58,33 +58,34 @@
         SAFE_RELEASE(thisObject); \
     }
 
-#define SE_FINALIZE_FUNC_GET_PRIVATE_OBJ(jsobj) JS_GetPrivate(obj)
-
 // --- Constructor
-
 #define SE_CTOR_BEGIN(funcName, clsName) \
-    bool funcName(JSContext* cx, unsigned argc, JS::Value* vp) \
+    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
-        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
+        JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         se::ValueArray args; \
-        se::internal::jsToSeArgs(cx, argc, _argv, &args); \
+        se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = se::Object::createObject(clsName, false); \
         _argv.rval().setObject(*thisObject->_getJSObject());
 
+
 #define SE_CTOR_END \
-        SAFE_RELEASE(thisObject); \
+        se::Value _property; \
+        bool _found = false; \
+        _found = thisObject->getProperty("_ctor", &_property); \
+        if (_found) _property.toObject()->call(args, thisObject); \
         return ret; \
     }
 
 // --- Get Property
 
 #define SE_GET_PROPERTY_BEGIN(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value* vp) \
+    bool funcName(JSContext *_cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
-        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
-        JS::Value _thiz = _argv.computeThis(cx); \
+        JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
+        JS::Value _thiz = _argv.computeThis(_cx); \
         void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
@@ -98,16 +99,16 @@
     }
 
 #define SE_SET_RVAL(data) \
-    se::internal::setReturnValue(cx, data, _argv);
+    se::internal::setReturnValue(_cx, data, _argv);
 
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName) \
-    bool funcName(JSContext *cx, unsigned argc, JS::Value *vp) \
+    bool funcName(JSContext *_cx, unsigned argc, JS::Value *_vp) \
     { \
         bool ret = true; \
-        JS::CallArgs _argv = JS::CallArgsFromVp(argc, vp); \
-        JS::Value _thiz = _argv.computeThis(cx); \
+        JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
+        JS::Value _thiz = _argv.computeThis(_cx); \
         void* _nativeObj = JS_GetPrivate(_thiz.toObjectOrNull()); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
@@ -115,7 +116,7 @@
             thisObject = se::Object::getObjectWithPtr(_nativeObj); \
         } \
         se::Value data; \
-        se::internal::jsToSeValue(cx, _argv[0], &data);
+        se::internal::jsToSeValue(_cx, _argv[0], &data);
 
 #define SE_SET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \

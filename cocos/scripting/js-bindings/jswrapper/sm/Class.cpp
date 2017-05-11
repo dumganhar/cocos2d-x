@@ -87,7 +87,7 @@ namespace se {
 
         if (jsobj)
         {
-            _proto = new Object(jsobj, true);
+            _proto = Object::_createJSObject(jsobj, true);
             return true;
         }
 

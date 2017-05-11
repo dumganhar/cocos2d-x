@@ -13,8 +13,9 @@ namespace se {
     namespace internal {
 
         void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr);
+        void jsToSeValue(JSContext *cx, JS::HandleValue jsval, Value* v);
         void seToJsArgs(JSContext* cx, const ValueArray& args, JS::AutoValueVector* outArr);
-        void jsToSeValue(JSContext *cx, const JS::Value& jsval, Value* v);
+        void seToJsValue(JSContext* cx, const Value& v, JS::MutableHandleValue outVal);
         
         void setReturnValue(JSContext* cx, const Value& data, const JS::CallArgs& argv);
 

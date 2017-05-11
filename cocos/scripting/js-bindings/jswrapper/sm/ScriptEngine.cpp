@@ -2,6 +2,7 @@
 
 #include "Object.hpp"
 #include "Class.hpp"
+#include "Utils.hpp"
 
 #ifdef SCRIPT_ENGINE_SM
 
@@ -60,7 +61,7 @@ namespace se {
     {
         JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
         if (argc > 0) {
-            JSString *string = args[0].toString();
+            JSString *string = JS::ToString(cx, args[0]);
             if (string) {
                 JS::RootedString jsstr(cx, string);
                 char* buffer = JS_EncodeStringToUTF8(cx, jsstr);
@@ -216,7 +217,7 @@ namespace se {
         if (nullptr == globalObj)
             return false;
 
-        _globalObj = new Object(globalObj, true);
+        _globalObj = Object::_createJSObject(globalObj, true);
         JS::RootedObject rootedGlobalObj(_cx, _globalObj->_getJSObject());
 
         _oldCompartment = JS_EnterCompartment(_cx, rootedGlobalObj);
@@ -292,42 +293,9 @@ namespace se {
         }
         assert(ok);
 
-        if (ok && data)
+        if (ok && data && !rcValue.isNullOrUndefined())
         {
-            if (rcValue.isNullOrUndefined())
-            {
-                printf("JS::Evaluate returns null or undefined!\n");
-            }
-            else if (rcValue.isString())
-            {
-                JSString *jsstring = rcValue.toString();
-                const char *stringData = JS_EncodeString( _cx, jsstring );
-
-                data->setString( stringData );
-                JS_free(_cx, (void *) stringData );
-            }
-            else if (rcValue.isNumber())
-            {
-                data->setNumber( rcValue.toNumber());
-            }
-            else if (rcValue.isBoolean())
-            {
-                data->setBoolean( rcValue.toBoolean());
-            }
-            else if (rcValue.isObject())
-            {
-                Object *obj = new Object(&rcValue.toObject(), true);
-                data->setObject(obj);
-                obj->release();
-            }
-            else if (rcValue.isNull())
-            {
-                data->setNull();
-            }
-            else
-            {
-                data->setUndefined();
-            }
+            internal::jsToSeValue(_cx, rcValue, data);
         }
         return ok;
     }

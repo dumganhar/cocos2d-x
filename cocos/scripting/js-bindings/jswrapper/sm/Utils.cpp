@@ -18,47 +18,10 @@ namespace se { namespace internal {
     {
         outArr->reserve(argc);
         for (int i = 0; i < argc; ++i)
-        {//todo: uses jsToSeValue
-            const JS::Value& v = argv[i];
-            if (v.isNumber())
-            {
-                outArr->push_back(Value(v.toNumber()));
-            }
-            else if (v.isString())
-            {
-                JSString *jsstring = v.toString();
-                const char* jsstr = JS_EncodeString(cx, jsstring );
-                outArr->push_back(Value(jsstr));
-                JS_free(cx, (void*)jsstr);
-            }
-            else if (v.isBoolean())
-            {
-                outArr->push_back(Value(v.toBoolean()));
-            }
-            else if (v.isObject())
-            {
-                Object* object = nullptr;
-
-                if (hasPrivate(v.toObjectOrNull()))
-                {
-                    void* nativeObj = JS_GetPrivate(v.toObjectOrNull());
-                    object = se::Object::getObjectWithPtr(nativeObj);
-                }
-                if (object == nullptr)
-                {
-                    object = new Object(&v.toObject(), true);
-                }
-                outArr->push_back(Value(object));
-                object->release();
-            }
-            else if (v.isNull())
-            {
-                outArr->push_back(Value::Null);
-            }
-            else
-            {
-                outArr->push_back(Value::Undefined);
-            }
+        {
+            Value v;
+            jsToSeValue(cx, argv[i], &v);
+            outArr->push_back(v);
         }
     }
 
@@ -66,60 +29,70 @@ namespace se { namespace internal {
     {
         for (const auto& arg : args)
         {
-            switch( arg.getType())
-            {
-                case Value::Type::Number:
-                {
-                    JS::RootedValue value(cx);
-                    value.setDouble(arg.toNumber());
-                    outArr->append(value);
-                }
-                    break;
-
-                case Value::Type::String:
-                {
-                    JSString *string = JS_NewStringCopyN(cx, arg.toString().c_str(), arg.toString().length());
-                    JS::RootedValue value(cx); value.setString( string);
-                    outArr->append(value);
-                }
-                    break;
-
-                case Value::Type::Boolean:
-                {
-                    JS::RootedValue value(cx);
-                    value.setBoolean(arg.toBoolean());
-                    outArr->append(value);
-                }
-                    break;
-
-                case Value::Type::Object:
-                {
-                    JS::RootedValue value(cx, JS::ObjectValue(*arg.toObject()->_getJSObject()));
-                    outArr->append(value);
-                }
-                    break;
-
-                case Value::Type::Null:
-                {
-                    JS::RootedValue value(cx);
-                    value.setNull();
-                    outArr->append(value);
-                }
-                    break;
-
-                default:
-                {
-                    JS::RootedValue value(cx);
-                    value.setUndefined();
-                    outArr->append(value);
-                }
-                    break;
-
-            }
+            JS::RootedValue v(cx);
+            seToJsValue(cx, arg, &v);
+            outArr->append(v);
         }
     }
 
-    void jsToSeValue(JSContext *cx, const JS::Value& jsval, Value* v)
+    void seToJsValue(JSContext* cx, const Value& arg, JS::MutableHandleValue outVal)
+    {
+        switch( arg.getType())
+        {
+            case Value::Type::Number:
+            {
+                JS::RootedValue value(cx);
+                value.setDouble(arg.toNumber());
+                outVal.set(value);
+            }
+                break;
+
+            case Value::Type::String:
+            {
+                JSString *string = JS_NewStringCopyN(cx, arg.toString().c_str(), arg.toString().length());
+                JS::RootedValue value(cx);
+                value.setString( string);
+                outVal.set(value);
+            }
+                break;
+
+            case Value::Type::Boolean:
+            {
+                JS::RootedValue value(cx);
+                value.setBoolean(arg.toBoolean());
+                outVal.set(value);
+            }
+                break;
+
+            case Value::Type::Object:
+            {
+                JS::RootedValue value(cx, JS::ObjectValue(*arg.toObject()->_getJSObject()));
+                outVal.set(value);
+            }
+                break;
+
+            case Value::Type::Null:
+            {
+                JS::RootedValue value(cx);
+                value.setNull();
+                outVal.set(value);
+            }
+                break;
+
+            case Value::Type::Undefined:
+            {
+                JS::RootedValue value(cx);
+                value.setUndefined();
+                outVal.set(value);
+            }
+                break;
+            default:
+                assert(false);
+                break;
+        }
+    }
+
+    void jsToSeValue(JSContext *cx, JS::HandleValue jsval, Value* v)
     {
         if (jsval.isNumber())
         {
@@ -138,17 +111,32 @@ namespace se { namespace internal {
         }
         else if (jsval.isObject())
         {
-            Object* obj = new Object(&jsval.toObject(), true); //FIXME: ?? should root?
-            v->setObject(obj);
-            obj->release();
+            Object* object = nullptr;
+
+            if (hasPrivate(jsval.toObjectOrNull()))
+            {
+                void* nativeObj = JS_GetPrivate(jsval.toObjectOrNull());
+                object = se::Object::getObjectWithPtr(nativeObj);
+            }
+
+            if (object == nullptr)
+            {
+                object = Object::_createJSObject(jsval.toObjectOrNull(), true); //FIXME: ?? should root?
+            }
+            v->setObject(object);
+            object->release();
         }
         else if (jsval.isNull())
         {
             v->setNull();
         }
-        else
+        else if (jsval.isUndefined())
         {
             v->setUndefined();
+        }
+        else
+        {
+            assert(false);
         }
     }
 

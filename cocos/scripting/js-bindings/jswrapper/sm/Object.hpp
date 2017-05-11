@@ -12,15 +12,17 @@ namespace se {
 
     class Object : public Ref
     {
+    private:
+        Object();
+        bool init(JSObject* obj, bool rooted);
     public:
-        Object(JSObject* obj, bool rooted);
         virtual ~Object();
 
         static Object* createPlainObject(bool rooted);
-
         static Object* createObject(const char* clsName, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
         static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
+        static Object* _createJSObject(JSObject* obj, bool rooted);
 
         // --- Getter/Setter
         bool getProperty(const char* name, Value* data);

@@ -34,7 +34,7 @@ namespace se {
 
     // ------------------------------------------------------- Object
 
-    Object::Object(JSObject* obj, bool rooted)
+    Object::Object()
     : _isRooted(false)
     , _hasWeakRef(false)
     , _root(nullptr)
@@ -42,11 +42,7 @@ namespace se {
     , m_data(nullptr)
     , _hasPrivateData(false)
     {
-        debug("created");
-        if (rooted)
-            putToRoot(obj);
-        else
-            putToHeap(obj);
+
     }
 
     Object::~Object()
@@ -69,15 +65,38 @@ namespace se {
             teardownRooting();
     }
 
+    bool Object::init(JSObject* obj, bool rooted)
+    {
+        debug("created");
+        if (rooted)
+            putToRoot(obj);
+        else
+            putToHeap(obj);
+
+        return true;
+    }
+
+    Object* Object::_createJSObject(JSObject* obj, bool rooted)
+    {
+        Object* ret = new Object();
+        if (!ret->init(obj, rooted))
+        {
+            delete ret;
+            ret = nullptr;
+        }
+
+        return ret;
+    }
+
     Object* Object::createPlainObject(bool rooted)
     {
-        Object* obj = new Object(JS_NewPlainObject(__cx), rooted);
+        Object* obj = Object::_createJSObject(JS_NewPlainObject(__cx), rooted);
         return obj;
     }
 
     Object* Object::createObject(const char* clsName, bool rooted)
     {
-        Object* obj = new Object(Class::_createJSObject(clsName), rooted);
+        Object* obj = Object::_createJSObject(Class::_createJSObject(clsName), rooted);
         return obj;
     }
 
@@ -110,41 +129,20 @@ namespace se {
     {
         JS::RootedObject object(__cx, _getJSObject());
 
+        bool found = false;
+        bool ok = JS_HasProperty(__cx, object, name, &found);
+
+        if (!ok || !found)
+        {
+            return false;
+        }
+
         JS::RootedValue rcValue(__cx);
-        bool ok = JS_GetProperty(__cx, object, name, &rcValue);
+        ok = JS_GetProperty(__cx, object, name, &rcValue);
 
         if (ok && data)
         {
-            if (rcValue.isString())
-            {
-                JSString *jsstring = rcValue.toString();
-                const char *stringData = JS_EncodeString(__cx, jsstring);
-
-                data->setString( stringData);
-                JS_free(__cx, (void *) stringData);
-            }
-            else if (rcValue.isNumber())
-            {
-                data->setNumber( rcValue.toNumber());
-            }
-            else if (rcValue.isBoolean())
-            {
-                data->setBoolean( rcValue.toBoolean());
-            }
-            else if (rcValue.isObject())
-            {
-                Object* obj = new Object(&rcValue.toObject(), true);
-                data->setObject(obj);
-                obj->release();
-            }
-            else if (rcValue.isNull())
-            {
-                data->setNull();
-            }
-            else
-            {
-                data->setUndefined();
-            }
+            internal::jsToSeValue(__cx, rcValue, data);
         }
 
         return ok;
@@ -154,43 +152,9 @@ namespace se {
     {
         JS::RootedObject object(__cx, _getJSObject());
 
-        if (v.getType() == Value::Type::Number)
-        {
-            JS::RootedValue value(__cx);
-            value.setDouble( v.toNumber());
-            JS_SetProperty(__cx, object, name, value);
-        }
-        else if (v.getType() == Value::Type::String)
-        {
-            JSString *string = JS_NewStringCopyN(__cx, v.toString().c_str(), v.toString().length());
-            JS::RootedValue value(__cx);
-            value.setString( string);
-            JS_SetProperty(__cx, object, name, value);
-        }
-        else if (v.getType() == Value::Type::Boolean)
-        {
-            JS::RootedValue value(__cx);
-            value.setBoolean( v.toBoolean());
-            JS_SetProperty(__cx, object, name, value);
-        }
-        else if (v.getType() == Value::Type::Object)
-        {
-            JS::RootedValue value(__cx);
-            value.setObject(*v.toObject()->_getJSObject());
-            JS_SetProperty(__cx, object, name, value);
-        }
-        else if (v.getType() == Value::Type::Null)
-        {
-            JS::RootedValue value(__cx);
-            value.setNull();
-            JS_SetProperty(__cx, object, name, value);
-        }
-        else
-        {
-            JS::RootedValue value(__cx);
-            value.setUndefined();
-            JS_SetProperty(__cx, object, name, value);
-        }
+        JS::RootedValue value(__cx);
+        internal::seToJsValue(__cx, v, &value);
+        JS_SetProperty(__cx, object, name, value);
     }
 
     // --- call
@@ -250,41 +214,12 @@ namespace se {
     {
         JS::RootedObject object(__cx, _getJSObject());
         JS::RootedValue rcValue(__cx);
-        JS_GetElement(__cx, object, index, &rcValue);
+        bool ok = JS_GetElement(__cx, object, index, &rcValue);
 
-        if (data)
+        if (ok && data)
         {
-            if (rcValue.isString())
-            {
-                JSString *jsstring = rcValue.toString();
-                const char *stringData=JS_EncodeString(__cx, jsstring);
-
-                data->setString( stringData);
-                JS_free(__cx, (void *) stringData);
-            }
-            else if (rcValue.isNumber())
-            {
-                data->setNumber( rcValue.toNumber());
-            }
-            else if (rcValue.isBoolean())
-            {
-                data->setBoolean( rcValue.toBoolean());
-            }
-            else if (rcValue.isObject())
-            {
-                Object* obj = new Object(&rcValue.toObject(), true);
-                data->setObject(obj);
-                obj->release();
-            }
-            else if (rcValue.isNull())
-            {
-                data->setNull();
-            }
-            else
-            {
-                data->setUndefined();
-            }
-        }    
+            internal::jsToSeValue(__cx, rcValue, data);
+        }
     }
 
     bool Object::isFunction() const

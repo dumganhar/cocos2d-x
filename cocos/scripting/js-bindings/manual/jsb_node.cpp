@@ -18,7 +18,9 @@ se::Object* __jsb_Node_proto = nullptr;
 
 SE_CTOR_BEGIN(Node_ctor, "Node")
 {
-
+    printf("Node_ctor ...\n");
+    Node* node = new Node();
+    thisObject->setPrivateData(node);
 }
 SE_CTOR_END
 
@@ -26,8 +28,8 @@ SE_FINALIZE_FUNC_BEGIN(Node_finalized)
 {
     if (nativeThisObject)
     {
-        printf("Node_finalized ...\n");
         Node* thiz = (Node*) nativeThisObject;
+        printf("Node_finalized %p ...\n", thiz->getUserData());
         SAFE_RELEASE(thiz);
     }
 }
