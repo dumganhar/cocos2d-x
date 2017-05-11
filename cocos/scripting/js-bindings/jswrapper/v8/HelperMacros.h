@@ -100,7 +100,7 @@
             } \
         } \
         se::Value data; \
-        se::internal::seToJsValue(_v8args, _value, &data);
+        se::internal::jsToSeValue(_v8args, _value, &data);
 
 #define SE_SET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \

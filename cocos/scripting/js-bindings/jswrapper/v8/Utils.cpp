@@ -37,36 +37,42 @@ namespace se {
         {
             for (const auto& data : args)
             {
-                switch (data.getType())
-                {
-                    case Value::Type::Number:
-                        outArr->push_back(v8::Number::New(isolate, data.toNumber()));
-                        break;
-
-                    case Value::Type::String: {
-                        v8::Local<v8::String> valueString = v8::String::NewFromUtf8(isolate, data.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-                        outArr->push_back(valueString);
-                    }
-                        break;
-                    case
-                        Value::Type::Boolean:
-                        outArr->push_back(v8::Boolean::New(isolate, data.toBoolean()));
-                        break;
-                    case Value::Type::Object:
-                        outArr->push_back(data.toObject()->_getJSObject());
-                        break;
-                    case Value::Type::Null:
-                        outArr->push_back(v8::Null(isolate));
-                        break;
-
-                    case Value::Type::Undefined:
-                        outArr->push_back(v8::Undefined(isolate));
-                        break;
-                }
+                v8::Local<v8::Value> jsval;
+                seToJsValue(isolate, data, &jsval);
+                outArr->push_back(jsval);
             }
         }
 
-        void seToJsValue(const v8::PropertyCallbackInfo<void> &info, const v8::Local<v8::Value>& jsval, Value* v)
+        void seToJsValue(v8::Isolate* isolate, const Value& v, v8::Local<v8::Value>* outJsVal)
+        {
+            switch (v.getType())
+            {
+                case Value::Type::Number:
+                    *outJsVal = v8::Number::New(isolate, v.toNumber());
+                    break;
+                case Value::Type::String:
+                    *outJsVal = v8::String::NewFromUtf8(isolate, v.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+                    break;
+                case Value::Type::Boolean:
+                    *outJsVal = v8::Boolean::New(isolate, v.toBoolean());
+                    break;
+                case Value::Type::Object:
+                    *outJsVal = v.toObject()->_getJSObject();
+                    break;
+                case Value::Type::Null:
+                    *outJsVal = v8::Null(isolate);
+                    break;
+                case Value::Type::Undefined:
+                    *outJsVal = v8::Undefined(isolate);
+                    break;
+
+                default:
+                    assert(false);
+                    break;
+            }
+        }
+
+        void jsToSeValue(const v8::PropertyCallbackInfo<void> &info, const v8::Local<v8::Value>& jsval, Value* v)
         {
             v8::HandleScope handle_scope(info.GetIsolate());
 

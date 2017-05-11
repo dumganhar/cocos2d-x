@@ -3,6 +3,7 @@
 #ifdef SCRIPT_ENGINE_V8
 
 #include "Object.hpp"
+#include "Utils.hpp"
 
 namespace se {
 // ------------------------------------------------------- Object
@@ -45,6 +46,8 @@ namespace se {
         _parentProto = parentProto;
 
         _ctorTemplate.Reset(__isolate, v8::FunctionTemplate::New(__isolate, _ctor));
+        v8::Local<v8::String> jsNameVal = v8::String::NewFromUtf8(__isolate, _name.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+        _ctorTemplate.Get(__isolate)->SetClassName(jsNameVal);
         _ctorTemplate.Get(__isolate)->InstanceTemplate()->SetInternalFieldCount(1);
 
         return true;

@@ -9,10 +9,6 @@ namespace se {
  
     std::unordered_map<void* /*native*/, Object* /*jsobj*/> __nativePtrToObjectMap;
 
-    namespace {
-        JsContextRef __cx = nullptr;
-    }
-
     Object::Object()
     : _cls(nullptr)
     , _obj(JS_INVALID_REFERENCE)

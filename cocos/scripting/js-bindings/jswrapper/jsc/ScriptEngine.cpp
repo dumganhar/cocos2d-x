@@ -173,11 +173,12 @@ namespace se {
         JSValueRef exception = nullptr;
         JSStringRef jsSourceUrl = JSStringCreateWithUTF8CString(fileName);
         JSStringRef jsScript = JSStringCreateWithUTF8CString(scriptStr.c_str());
+        JSValueRef result = nullptr;
 
         bool ok = JSCheckScriptSyntax(_cx, jsScript, jsSourceUrl, 1, &exception);;
         if (ok)
         {
-            JSEvaluateScript(_cx, jsScript, nullptr, jsSourceUrl, 1, &exception);
+            result = JSEvaluateScript(_cx, jsScript, nullptr, jsSourceUrl, 1, &exception);
 
             if (exception)
             {
@@ -200,13 +201,15 @@ namespace se {
         JSStringRelease(jsScript);
         JSStringRelease(jsSourceUrl);
 
-        if (!exceptionStr.empty())
+        if (ok)
+        {
+            if (data != nullptr)
+                internal::jsToSeValue(_cx, result, data);
+        }
+        else if (!exceptionStr.empty())
         {
             printf("%s\n", exceptionStr.c_str());
         }
-
-        // set return value
-        assert(false);
 
         return ok;
     }
