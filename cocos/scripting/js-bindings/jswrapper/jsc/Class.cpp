@@ -18,24 +18,18 @@ namespace se {
 
         JSValueRef _getPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName, JSValueRef* exception)
         {
-            SE_UNUSED_PARAM(context);
-            SE_UNUSED_PARAM(object);
             return JSValueMakeUndefined(__cx);
         }
 
         bool _setPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception)
         {
-            SE_UNUSED_PARAM(context);
-            SE_UNUSED_PARAM(object);
-
+            assert(false);
             return false;
         }
 
         bool _hasPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName)
         {
-            SE_UNUSED_PARAM(context);
-            SE_UNUSED_PARAM(object);
-            
+            assert(false);
             return false;
         }
     }
@@ -106,9 +100,9 @@ namespace se {
         _jsClsDef.staticValues = _properties.data();
         _jsClsDef.staticFunctions = _funcs.data();
 
-        _jsClsDef.getProperty = _getPropertyCallback;
-        _jsClsDef.setProperty = _setPropertyCallback;
-        _jsClsDef.hasProperty = _hasPropertyCallback;
+//        _jsClsDef.getProperty = _getPropertyCallback;
+//        _jsClsDef.setProperty = _setPropertyCallback;
+//        _jsClsDef.hasProperty = _hasPropertyCallback;
 
         _jsClsDef.finalize = _finalizeOp;
 

@@ -1,6 +1,14 @@
 #pragma once
 
-#define SE_UNUSED_PARAM(unusedparam) (void)unusedparam
+#include "../config.hpp"
+
+#ifdef SCRIPT_ENGINE_JSC
+
+#ifdef __GNUC__
+#define SE_UNUSED __attribute__ ((unused))
+#else
+#define SE_UNUSED
+#endif
 
 #define SAFE_ADD_REF(obj) if (obj != nullptr) obj->addRef()
 
@@ -11,10 +19,11 @@
     JSValueRef funcName(JSContextRef cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* exception)
 
 #define SE_FUNC_BEGIN(funcName) \
-    JSValueRef funcName(JSContextRef cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* exception) \
+    JSValueRef funcName(JSContextRef cx, JSObjectRef _function, JSObjectRef _thisObject, size_t _argc, const JSValueRef _argv[], JSValueRef* exception) \
     { \
+        unsigned short argc = (unsigned short) _argc; \
         JSValueRef _jsRet = JSValueMakeUndefined(cx); \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(cx, argc, _argv, &args); \
         se::Object* thisObject = nullptr; \
@@ -58,7 +67,7 @@
 #define SE_CTOR_BEGIN(funcName, clsName) \
     JSObjectRef funcName(JSContextRef cx, JSObjectRef constructor, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(cx, argc, _argv, &args); \
         se::Object* thisObject = se::Object::createObject(clsName, false); \
@@ -75,7 +84,7 @@
     JSValueRef funcName(JSContextRef cx, JSObjectRef _object, JSStringRef _propertyName, JSValueRef* _exception) \
     { \
         JSValueRef _jsRet = JSValueMakeUndefined(cx); \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         void* _nativeObj = JSObjectGetPrivate(_object); \
         se::Object* thisObject = nullptr; \
         if (_nativeObj != nullptr) \
@@ -111,3 +120,4 @@
         return ret; \
     }
 
+#endif // #ifdef SCRIPT_ENGINE_JSC

@@ -1,6 +1,14 @@
 #pragma once
 
-#define SE_UNUSED_PARAM(unusedparam) (void)unusedparam
+#include "../config.hpp"
+
+#ifdef SCRIPT_ENGINE_CHAKRACORE
+
+#ifdef __GNUC__
+#define SE_UNUSED __attribute__ ((unused))
+#else
+#define SE_UNUSED
+#endif
 
 #define SAFE_ADD_REF(obj) if (obj != nullptr) obj->addRef()
 
@@ -16,7 +24,7 @@
         assert(argc > 0); \
         --argc; \
         JsValueRef _jsRet = JS_INVALID_REFERENCE; \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(argc, _argv+1, &args); \
         se::Object* thisObject = nullptr; \
@@ -59,7 +67,7 @@
 #define SE_CTOR_BEGIN(funcName, clsName) \
     JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short argc, void* _callbackState) \
     { \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(argc, _argv, &args); \
         se::Object* thisObject = se::Object::createObject(clsName, false); \
@@ -77,7 +85,7 @@
     { \
         assert(_argc == 1); \
         JsValueRef _jsRet = JS_INVALID_REFERENCE; \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         void* _nativeObj = nullptr; \
         JsGetExternalData(_argv[0], &_nativeObj); \
         se::Object* thisObject = nullptr; \
@@ -100,7 +108,7 @@
     JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short _argc, void* _callbackState) \
     { \
         assert(_argc == 2); \
-        bool ret = true; \
+        SE_UNUSED bool ret = true; \
         void* _nativeObj = nullptr; \
         JsGetExternalData(_argv[0], &_nativeObj); \
         se::Object* thisObject = nullptr; \
@@ -116,3 +124,4 @@
         return JS_INVALID_REFERENCE; \
     }
 
+#endif // #ifdef SCRIPT_ENGINE_CHAKRACORE

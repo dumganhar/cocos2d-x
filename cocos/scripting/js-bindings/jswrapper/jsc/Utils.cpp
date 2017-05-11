@@ -14,10 +14,10 @@
 
 namespace se { namespace internal {
 
-    void jsToSeArgs(JSContextRef cx, int argc, const JSValueRef* argv, ValueArray* outArr)
+    void jsToSeArgs(JSContextRef cx, unsigned short argc, const JSValueRef* argv, ValueArray* outArr)
     {
         outArr->reserve(argc);
-        for (int i = 0; i < argc; ++i)
+        for (unsigned short i = 0; i < argc; ++i)
         {
             Value v;
             jsToSeValue(cx, argv[i], &v);

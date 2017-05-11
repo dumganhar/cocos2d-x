@@ -12,7 +12,7 @@ namespace se {
 
     namespace internal {
 
-        void jsToSeArgs(JSContextRef cx, int argc, const JSValueRef* argv, ValueArray* outArr);
+        void jsToSeArgs(JSContextRef cx, unsigned short argc, const JSValueRef* argv, ValueArray* outArr);
         void seToJsArgs(JSContextRef cx, const ValueArray& args, JSValueRef* outArr);
         void jsToSeValue(JSContextRef cx, JSValueRef jsval, Value* v);
         void seToJsValue(JSContextRef cx, const Value& v, JSValueRef* jsval);

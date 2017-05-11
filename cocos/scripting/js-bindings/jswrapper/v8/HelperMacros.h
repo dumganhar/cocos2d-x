@@ -1,9 +1,13 @@
 #pragma once
 
+#include "../config.hpp"
+
+#ifdef SCRIPT_ENGINE_V8
+
 #ifdef __GNUC__
-#define CC_UNUSED __attribute__ ((unused))
+#define SE_UNUSED __attribute__ ((unused))
 #else
-#define CC_UNUSED
+#define SE_UNUSED
 #endif
 
 #define SAFE_ADD_REF(obj) if (obj != nullptr) obj->addRef()
@@ -18,8 +22,8 @@
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        CC_UNUSED bool ret = false; \
-        CC_UNUSED unsigned argc = (unsigned)_v8args.Length(); \
+        SE_UNUSED bool ret = false; \
+        SE_UNUSED unsigned argc = (unsigned)_v8args.Length(); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_v8args, &args); \
         se::Object* thisObject = nullptr; \
@@ -54,7 +58,7 @@
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        CC_UNUSED bool ret = false;
+        SE_UNUSED bool ret = false;
 
 #define SE_CTOR_END \
     }
@@ -65,7 +69,7 @@
     void funcName(v8::Local<v8::String> _property, const v8::PropertyCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        CC_UNUSED bool ret = false; \
+        SE_UNUSED bool ret = false; \
         se::Object* thisObject = nullptr; \
         if (se::internal::hasPrivate(_v8args.This())) \
         { \
@@ -89,7 +93,7 @@
     void funcName(v8::Local<v8::String> _property, v8::Local<v8::Value> _value, const v8::PropertyCallbackInfo<void>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        CC_UNUSED bool ret = false; \
+        SE_UNUSED bool ret = false; \
         se::Object* thisObject = nullptr; \
         if (se::internal::hasPrivate(_v8args.This())) \
         { \
@@ -106,3 +110,5 @@
         SAFE_RELEASE(thisObject); \
     }
 
+
+#endif // #ifdef SCRIPT_ENGINE_V8
