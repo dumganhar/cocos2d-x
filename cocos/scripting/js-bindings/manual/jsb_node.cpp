@@ -285,7 +285,7 @@ SE_FUNC_END
 
 SE_SET_PROPERTY_BEGIN(Node_set_x)
 {
-    printf("Node_set_x, this: %p\n", thisObject);
+    printf("Node_set_x, this: %p, jsthis: %p\n", thisObject, _object);
     assert(thisObject);
     Node* thiz = (Node*)nativeThisObject;
     float x = data.toNumber();

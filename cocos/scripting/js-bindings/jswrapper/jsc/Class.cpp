@@ -69,14 +69,10 @@ namespace se {
     {
         _name = clsName;
         _parent = parent;
-        if (_parent != nullptr)
-            _parent->addRef();
+        SAFE_ADD_REF(_parent);
         _parentProto = parentProto;
-
-        if (_parentProto != nullptr)
-            _parentProto->addRef();
+        SAFE_ADD_REF(_parentProto);
         _ctor = ctor;
-
         return true;
     }
 
