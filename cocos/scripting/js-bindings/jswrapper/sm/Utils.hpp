@@ -10,7 +10,17 @@
 
 namespace se {
 
+    class Class;
+
     namespace internal {
+
+        struct PrivateData
+        {
+            void* data;
+            JSFinalizeOp finalizeCb;
+        };
+
+        std::string jsToStdString(JSContext* cx, JSString* jsStr);
 
         void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr);
         void jsToSeValue(JSContext *cx, JS::HandleValue jsval, Value* v);
@@ -19,7 +29,9 @@ namespace se {
         
         void setReturnValue(JSContext* cx, const Value& data, const JS::CallArgs& argv);
 
-        bool hasPrivate(JSObject* obj);
+        bool hasPrivate(JSContext* cx, JS::HandleObject obj);
+        void* getPrivate(JSContext* cx, JS::HandleObject obj);
+        void setPrivate(JSContext* cx, JS::HandleObject obj, void* data, JSFinalizeOp finalizeCb);
 
     } // namespace internal {
 } // namespace se {

@@ -16,12 +16,13 @@ namespace se {
         Class();
         ~Class();
 
-        static Class* create(const std::string& className, Object* obj, Object* parentProto, JSNative ctor);
+        static Class* create(const char* className, Object* obj, Object* parentProto, JSNative ctor);
 
-        bool init(const std::string& clsName, Object* obj, Object* parentProto, JSNative ctor);
+        bool init(const char* clsName, Object* obj, Object* parentProto, JSNative ctor);
 
         bool install();
         Object* getProto();
+        JSFinalizeOp _getFinalizeCb() const;
 
         bool defineFunction(const char *name, JSNative func);
         bool defineProperty(const char *name, JSNative getter, JSNative setter);
@@ -31,11 +32,11 @@ namespace se {
 
     private:
 
-        static JSObject* _createJSObject(const std::string &clsName);
+        static JSObject* _createJSObject(const std::string &clsName, Class** outCls);
         static void setContext(JSContext* cx);
         static void cleanup();
 
-        std::string _name;
+        const char* _name;
         Object* _parent;
         Object* _proto;
         Object* _parentProto;

@@ -10,9 +10,18 @@
 
 #ifdef SCRIPT_ENGINE_SM
 
+#include "Class.hpp"
 #include "Object.hpp"
 
 namespace se { namespace internal {
+
+    std::string jsToStdString(JSContext* cx, JSString* jsStr)
+    {
+        char* str = JS_EncodeString(cx, jsStr);
+        std::string ret(str);
+        JS_free(cx, str);
+        return ret;
+    }
 
     void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr)
     {
@@ -113,15 +122,16 @@ namespace se { namespace internal {
         {
             Object* object = nullptr;
 
-            if (hasPrivate(jsval.toObjectOrNull()))
+            JS::RootedObject jsobj(cx, jsval.toObjectOrNull());
+            if (hasPrivate(cx, jsobj))
             {
-                void* nativeObj = JS_GetPrivate(jsval.toObjectOrNull());
-                object = se::Object::getObjectWithPtr(nativeObj);
+                void* nativeObj = getPrivate(cx, jsobj);
+                object = Object::getObjectWithPtr(nativeObj);
             }
 
             if (object == nullptr)
             {
-                object = Object::_createJSObject(jsval.toObjectOrNull(), true); //FIXME: ?? should root?
+                object = Object::_createJSObject(nullptr, jsval.toObjectOrNull(), true); //FIXME: ?? should root?
             }
             v->setObject(object);
             object->release();
@@ -169,10 +179,68 @@ namespace se { namespace internal {
         }
     }
 
-    bool hasPrivate(JSObject* obj)
+    bool hasPrivate(JSContext* cx, JS::HandleObject obj)
     {
+        bool found = false;
         const JSClass* cls = JS_GetClass(obj);
-        return !!(cls->flags & JSCLASS_HAS_PRIVATE);
+        found = !!(cls->flags & JSCLASS_HAS_PRIVATE);
+
+        if (!found)
+        {
+            JS::RootedObject jsobj(cx, obj);
+            if (JS_HasProperty(cx, jsobj, "__cc_private_data", &found) && found)
+            {
+                return true;
+            }
+        }
+
+        return found;
+    }
+
+    void* getPrivate(JSContext* cx, JS::HandleObject obj)
+    {
+        bool found = false;
+        const JSClass* cls = JS_GetClass(obj);
+        found = !!(cls->flags & JSCLASS_HAS_PRIVATE);
+
+        if (found)
+            return JS_GetPrivate(obj);
+
+        if (JS_HasProperty(cx, obj, "__cc_private_data", &found) && found)
+        {
+            JS::RootedValue jsData(cx);
+            if (JS_GetProperty(cx, obj, "__cc_private_data", &jsData))
+            {
+                internal::PrivateData* privateData = (internal::PrivateData*)JS_GetPrivate(jsData.toObjectOrNull());
+                return privateData->data;
+            }
+        }
+
+        return nullptr;
+    }
+
+    void setPrivate(JSContext* cx, JS::HandleObject obj, void* data, JSFinalizeOp finalizeCb)
+    {
+        bool found = false;
+        const JSClass* jsCls = JS_GetClass(obj);
+        found = !!(jsCls->flags & JSCLASS_HAS_PRIVATE);
+
+        if (found)
+        {
+            JS_SetPrivate(obj, data);
+        }
+        else
+        {
+            assert(finalizeCb);
+            Object* privateObj = Object::createObject("__CCPrivateData", false);
+            internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
+            privateData->data = data;
+            privateData->finalizeCb = finalizeCb;
+            JS_SetPrivate(privateObj->_getJSObject(), privateData);
+
+            JS::RootedValue privateVal(cx, JS::ObjectValue(*privateObj->_getJSObject()));
+            JS_SetProperty(cx, obj, "__cc_private_data", privateVal);
+        }
     }
 
 

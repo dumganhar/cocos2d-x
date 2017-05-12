@@ -16,7 +16,7 @@ using namespace cocos2d;
 
 se::Object* __jsb_Sprite_proto = nullptr;
 
-SE_CTOR_BEGIN(Sprite_ctor, "Sprite")
+SE_CTOR_BEGIN(Sprite_constructor, "Sprite")
 {
     Sprite* obj = new Sprite();
     thisObject->setPrivateData(obj);
@@ -54,11 +54,26 @@ SE_FUNC_BEGIN(Sprite_initWithFile)
 }
 SE_FUNC_END
 
+SE_CTOR2_BEGIN(Sprite_ctor, Sprite_finalized)
+{
+    const JSClass* cls = JS_GetClass(_thiz.toObjectOrNull());
+    printf("class name: %s\n", cls->name);
+    Sprite* obj = new Sprite();
+    thisObject->setPrivateData(obj);
+
+    se::Value _property;
+    bool found = false;
+    found = thisObject->getProperty("_ctor", &_property);
+    if (found) _property.toObject()->call(args, thisObject);
+}
+SE_CTOR2_END
+
 bool jsb_register_Sprite()
 {
-    auto cls = se::Class::create("Sprite", __ccObj, __jsb_Node_proto, Sprite_ctor);
+    auto cls = se::Class::create("Sprite", __ccObj, __jsb_Node_proto, Sprite_constructor);
     cls->defineStaticFunction("create", Sprite_create);
     cls->defineFunction("initWithFile", Sprite_initWithFile);
+    cls->defineFunction("ctor", Sprite_ctor);
 
     cls->defineFinalizedFunction(Sprite_finalized);
 

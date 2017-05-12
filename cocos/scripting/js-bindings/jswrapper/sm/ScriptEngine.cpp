@@ -75,6 +75,23 @@ namespace se {
         return true;
     }
 
+    // Private data class
+    static bool privateDataContructor(JSContext* cx, uint32_t argc, JS::Value* vp)
+    {
+//        JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+
+        return true;
+    }
+
+    static void privateDataFinalize(JSFreeOp* fop, JSObject* obj)
+    {
+        internal::PrivateData* p = (internal::PrivateData*)JS_GetPrivate(obj);
+        JS_SetPrivate(obj, p->data);
+        if (p->finalizeCb != nullptr)
+            p->finalizeCb(fop, obj);
+        free(p);
+    }
+
     // ------------------------------------------------------- ScriptEngine
 
     static void
@@ -170,7 +187,7 @@ namespace se {
         if (!JS_Init())
             return false;
 
-        _cx = JS_NewContext(JS::DefaultHeapMaxBytes / 8);
+        _cx = JS_NewContext(JS::DefaultHeapMaxBytes);
 
         if (nullptr == _cx)
             return false;
@@ -217,7 +234,7 @@ namespace se {
         if (nullptr == globalObj)
             return false;
 
-        _globalObj = Object::_createJSObject(globalObj, true);
+        _globalObj = Object::_createJSObject(nullptr, globalObj, true);
         JS::RootedObject rootedGlobalObj(_cx, _globalObj->_getJSObject());
 
         _oldCompartment = JS_EnterCompartment(_cx, rootedGlobalObj);
@@ -231,6 +248,10 @@ namespace se {
         JS_AddWeakPointerCompartmentCallback(_cx, ScriptEngine::myWeakPointerCompartmentCallback, nullptr);
 
         JS_FireOnNewGlobalObject(_cx, rootedGlobalObj);
+
+        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        privateDataCls->defineFinalizedFunction(privateDataFinalize);
+        privateDataCls->install();
 
         _isValid = true;
 

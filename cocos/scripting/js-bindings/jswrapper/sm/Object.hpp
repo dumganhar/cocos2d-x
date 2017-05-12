@@ -10,11 +10,13 @@
 
 namespace se {
 
+    class Class;
+
     class Object : public Ref
     {
     private:
         Object();
-        bool init(JSObject* obj, bool rooted);
+        bool init(Class* cls, JSObject* obj, bool rooted);
     public:
         virtual ~Object();
 
@@ -22,7 +24,9 @@ namespace se {
         static Object* createObject(const char* clsName, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
         static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
-        static Object* _createJSObject(JSObject* obj, bool rooted);
+        static Object* _createJSObject(Class* cls, JSObject* obj, bool rooted);
+
+        void _setFinalizeCallback(JSFinalizeOp finalizeCb);
 
         // --- Getter/Setter
         bool getProperty(const char* name, Value* data);
@@ -86,6 +90,9 @@ namespace se {
         DestroyNotify m_notify;
         void* m_data;
         bool _hasPrivateData;
+
+        Class* _cls;
+        JSFinalizeOp _finalizeCb;
 
         friend class ScriptEngine;
     };

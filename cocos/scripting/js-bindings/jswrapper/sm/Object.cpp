@@ -41,33 +41,35 @@ namespace se {
     , m_notify(nullptr)
     , m_data(nullptr)
     , _hasPrivateData(false)
+    , _cls(nullptr)
     {
 
     }
 
     Object::~Object()
     {
-        if (_hasPrivateData)
-        {
-            JSObject* jsobj = _getJSObject();
-            if (jsobj != nullptr)
-            {
-                void* nativeObj = JS_GetPrivate(jsobj);
-                auto iter = __nativePtrToObjectMap.find(nativeObj);
-                if (iter != __nativePtrToObjectMap.end())
-                {
-                    __nativePtrToObjectMap.erase(iter);
-                }
-            }
-        }
+//FIXME:        if (_hasPrivateData)
+//        {
+//            JSObject* jsobj = _getJSObject();
+//            if (jsobj != nullptr)
+//            {
+//                void* nativeObj = JS_GetPrivate(jsobj);
+//                auto iter = __nativePtrToObjectMap.find(nativeObj);
+//                if (iter != __nativePtrToObjectMap.end())
+//                {
+//                    __nativePtrToObjectMap.erase(iter);
+//                }
+//            }
+//        }
 
         if (_isRooted)
             teardownRooting();
     }
 
-    bool Object::init(JSObject* obj, bool rooted)
+    bool Object::init(Class* cls, JSObject* obj, bool rooted)
     {
         debug("created");
+        _cls = cls;
         if (rooted)
             putToRoot(obj);
         else
@@ -76,10 +78,10 @@ namespace se {
         return true;
     }
 
-    Object* Object::_createJSObject(JSObject* obj, bool rooted)
+    Object* Object::_createJSObject(Class* cls, JSObject* obj, bool rooted)
     {
         Object* ret = new Object();
-        if (!ret->init(obj, rooted))
+        if (!ret->init(cls, obj, rooted))
         {
             delete ret;
             ret = nullptr;
@@ -90,13 +92,15 @@ namespace se {
 
     Object* Object::createPlainObject(bool rooted)
     {
-        Object* obj = Object::_createJSObject(JS_NewPlainObject(__cx), rooted);
+        Object* obj = Object::_createJSObject(nullptr, JS_NewPlainObject(__cx), rooted);
         return obj;
     }
 
     Object* Object::createObject(const char* clsName, bool rooted)
     {
-        Object* obj = Object::_createJSObject(Class::_createJSObject(clsName), rooted);
+        Class* cls = nullptr;
+        JSObject* jsobj = Class::_createJSObject(clsName, &cls);
+        Object* obj = Object::_createJSObject(cls, jsobj, rooted);
         return obj;
     }
 
@@ -121,6 +125,11 @@ namespace se {
             obj->setPrivateData(ptr);
         }
         return obj;
+    }
+
+    void Object::_setFinalizeCallback(JSFinalizeOp finalizeCb)
+    {
+        _finalizeCb = finalizeCb;
     }
 
     // --- Getter/Setter
@@ -279,12 +288,15 @@ namespace se {
 
     void* Object::getPrivateData()
     {
-        return JS_GetPrivate(_getJSObject());
+        JS::RootedObject obj(__cx, _getJSObject());
+        return internal::getPrivate(__cx, obj);
     }
 
-    void Object::setPrivateData(void *data)
+    void Object::setPrivateData(void* data)
     {
-        JS_SetPrivate(_getJSObject(), data);
+        JS::RootedObject obj(__cx, _getJSObject());
+        internal::setPrivate(__cx, obj, data, _finalizeCb);
+
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
     }
