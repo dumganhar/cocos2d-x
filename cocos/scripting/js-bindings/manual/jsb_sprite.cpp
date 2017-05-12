@@ -56,15 +56,8 @@ SE_FUNC_END
 
 SE_CTOR2_BEGIN(Sprite_ctor, Sprite_finalized)
 {
-    const JSClass* cls = JS_GetClass(_thiz.toObjectOrNull());
-    printf("class name: %s\n", cls->name);
     Sprite* obj = new Sprite();
     thisObject->setPrivateData(obj);
-
-    se::Value _property;
-    bool found = false;
-    found = thisObject->getProperty("_ctor", &_property);
-    if (found) _property.toObject()->call(args, thisObject);
 }
 SE_CTOR2_END
 

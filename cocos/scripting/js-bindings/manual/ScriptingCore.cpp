@@ -163,32 +163,31 @@ int ScriptingCore::handleNodeEvent(void* data)
     if (nullptr == basicScriptData->nativeObject || nullptr == basicScriptData->value)
         return 0;
 
-    int ret = 0;
-
     void* node = basicScriptData->nativeObject;
     int action = *((int*)(basicScriptData->value));
 
+    bool ret = false;
     if (action == kNodeOnEnter)
     {
-        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::ENTER);
+        ret = se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::ENTER);
     }
     else if (action == kNodeOnExit)
     {
-        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::EXIT);
+        ret = se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::EXIT);
     }
     else if (action == kNodeOnEnterTransitionDidFinish)
     {
-        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::ENTER_TRANSITION_DID_FINISH);
+        ret = se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::ENTER_TRANSITION_DID_FINISH);
     }
     else if (action == kNodeOnExitTransitionDidStart)
     {
-        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::EXIT_TRANSITION_DID_START);
+        ret = se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::EXIT_TRANSITION_DID_START);
     }
     else if (action == kNodeOnCleanup)
     {
-        se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::CLEANUP);
+        ret = se::ScriptEngine::getInstance()->_onReceiveNodeEvent(node, se::ScriptEngine::NodeEventType::CLEANUP);
     }
     
-    return ret;
+    return ret ? 1 : 0;
 }
 

@@ -14,7 +14,7 @@
 
 using namespace cocos2d;
 
-SE_CTOR_BEGIN(Scene_ctor, "Scene")
+SE_CTOR_BEGIN(Scene_constructor, "Scene")
 {
 
 }
@@ -38,10 +38,28 @@ SE_FUNC_BEGIN(Scene_create)
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(Scene_init)
+{
+    Scene* nativeObj = (Scene*)thisObject->getPrivateData();
+    bool ok = nativeObj->init();
+    SE_SET_RVAL(se::Value(ok));
+}
+SE_FUNC_END
+
+SE_CTOR2_BEGIN(Scene_ctor, Scene_finalized)
+{
+    Scene* obj = new Scene();
+    thisObject->setPrivateData(obj);
+}
+SE_CTOR2_END
+
 bool jsb_register_Scene()
 {
-    auto cls = se::Class::create("Scene", __ccObj, __jsb_Node_proto, Scene_ctor);
+    auto cls = se::Class::create("Scene", __ccObj, __jsb_Node_proto, Scene_constructor);
     cls->defineStaticFunction("create", Scene_create);
+    cls->defineFunction("init", Scene_init);
+    cls->defineFunction("ctor", Scene_ctor);
+
     cls->defineFinalizedFunction(Scene_finalized);
 
     cls->install();

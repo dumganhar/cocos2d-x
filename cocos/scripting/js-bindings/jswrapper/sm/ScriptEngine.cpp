@@ -66,7 +66,7 @@ namespace se {
                 JS::RootedString jsstr(cx, string);
                 char* buffer = JS_EncodeStringToUTF8(cx, jsstr);
 
-                printf("%s\n", buffer);
+                printf("JS: %s\n", buffer);
 
                 JS_free(cx, (void*)buffer);
             }
@@ -78,8 +78,6 @@ namespace se {
     // Private data class
     static bool privateDataContructor(JSContext* cx, uint32_t argc, JS::Value* vp)
     {
-//        JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-
         return true;
     }
 
@@ -355,66 +353,6 @@ namespace se {
         }
 
         iterOwner->second->attachChild(iterTarget->second);
-
-//        bool ok = false;
-//        bool found = false;
-//
-//        JS::RootedObject jsOwner(_cx, iterOwner->second->_getJSObject());
-//        JS::RootedValue jsOwnerVal(_cx, JS::ObjectValue(*jsOwner));
-//        JS::RootedValue jsTargetVal(_cx, JS::ObjectValue(*iterTarget->second->_getJSObject()));
-//
-//        ok = JS_SameValue(_cx, jsOwnerVal, jsTargetVal, &found);
-//        assert(ok);
-//        if (found)
-//        {
-//            return;
-//        }
-//
-//        ok = JS_HasProperty(_cx, jsOwner, "__nativeRefs", &found);
-//        assert(ok);
-//
-//        if (!found)
-//        {
-//            JS::RootedValue arr(_cx, JS::ObjectValue(*JS_NewArrayObject(_cx, 0)));
-//            JS_SetProperty(_cx, jsOwner, "__nativeRefs", arr);
-//        }
-//
-//        JS::RootedValue refArr(_cx);
-//        ok = JS_GetProperty(_cx, jsOwner, "__nativeRefs", &refArr);
-//        assert(ok);
-//
-//        JS::RootedObject refArrObj(_cx, refArr.toObjectOrNull());
-//        uint32_t len = 0;
-//        JS_GetArrayLength(_cx, refArrObj, &len);
-//        JS::RootedValue v(_cx);
-//        found = false;
-//
-//        for (uint32_t i = 0; i < len; ++i)
-//        {
-//            if (JS_GetElement(_cx, refArrObj, i, &v))
-//            {
-//                if (JS_SameValue(_cx, v, jsTargetVal, &found) && found)
-//                {
-//                    return;
-//                }
-//            }
-//        }
-//
-//        uint32_t oldLen = len;
-//        JS_SetArrayLength(_cx, refArrObj, len+1);
-//        JS_SetElement(_cx, refArrObj, len, jsTargetVal);
-////        JS_DefineElement(_cx, refArrObj, len, jsTargetVal, JSPROP_ENUMERATE);
-//        JS_GetArrayLength(_cx, refArrObj, &len);
-//        printf("JS_SetElement, oldLen: %u, newLen: %u\n", oldLen, len);
-//        JS::ObjectOpResult deleteSucceeded;
-//        JS_DeleteElement(_cx, refArrObj, 0, deleteSucceeded);
-//        assert(deleteSucceeded.succeed());
-//        JS_GetArrayLength(_cx, refArrObj, &len);
-//        printf("test delete: %u\n", len);
-
-
-
-        
     }
 
     void ScriptEngine::_releaseScriptObject(void* owner, void* target)
@@ -432,68 +370,15 @@ namespace se {
         }
 
         iterOwner->second->detachChild(iterTarget->second);
-
-//        bool ok = false;
-//        bool found = false;
-//
-//        JS::RootedObject jsOwner(_cx, iterOwner->second->_getJSObject());
-//        JS::RootedValue jsOwnerVal(_cx, JS::ObjectValue(*jsOwner));
-//        JS::RootedValue jsTargetVal(_cx, JS::ObjectValue(*iterTarget->second->_getJSObject()));
-//
-//        ok = JS_SameValue(_cx, jsOwnerVal, jsTargetVal, &found);
-//        assert(ok);
-//        if (found)
-//        {
-//            return;
-//        }
-//
-//        ok = JS_HasProperty(_cx, jsOwner, "__nativeRefs", &found);
-//        assert(ok);
-//
-//        if (!found)
-//        {
-//            return;
-//        }
-//
-//        JS::RootedValue refArr(_cx);
-//        ok = JS_GetProperty(_cx, jsOwner, "__nativeRefs", &refArr);
-//        assert(ok);
-//
-//        JS::RootedObject refArrObj(_cx, refArr.toObjectOrNull());
-//        uint32_t len = 0;
-//        ok = JS_GetArrayLength(_cx, refArrObj, &len);
-//        assert(ok);
-//        JS::RootedValue v(_cx);
-//        found = false;
-//
-//        for (uint32_t i = 0; i < len; ++i)
-//        {
-//            if (JS_GetElement(_cx, refArrObj, i, &v))
-//            {
-//                if (JS_SameValue(_cx, v, jsTargetVal, &found) && found)
-//                {
-//                    ok = JS_DeleteElement(_cx, refArrObj, i);
-//                    assert(ok);
-//                    uint32_t oldLen = len;
-//                    ok = JS_GetArrayLength(_cx, refArrObj, &len);
-//                    assert(ok);
-//                    printf("JS_DeleteElement, idx = %u, old len: %u, new len: %u\n", i, oldLen, len);
-//                    return;
-//                }
-//            }
-//        }
-
-
-
     }
 
-    void ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
+    bool ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
     {
 //        printf("ScriptEngine::_onReceiveNodeEvent, node: %p, type: %d\n", node, (int) type);
 
         auto iter = __nativePtrToObjectMap.find(node);
         if (iter  == __nativePtrToObjectMap.end())
-            return;
+            return false;
 
         JS::RootedValue retval(_cx);
         Object* target = iter->second;
@@ -529,12 +414,15 @@ namespace se {
             assert(false);
         }
 
+        bool ret = false;
         Value funcVal;
         bool ok = target->getProperty(funcName, &funcVal);
         if (ok && !funcVal.toObject()->_isNativeFunction(func))
         {
-            funcVal.toObject()->call(EmptyValueArray, target);
+            ret = funcVal.toObject()->call(EmptyValueArray, target);
         }
+
+        return ret;
     }
 
 } // namespace se {

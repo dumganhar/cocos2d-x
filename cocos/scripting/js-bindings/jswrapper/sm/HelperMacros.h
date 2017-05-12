@@ -92,6 +92,10 @@
 
 
 #define SE_CTOR2_END \
+        se::Value _property; \
+        bool _found = false; \
+        _found = thisObject->getProperty("_ctor", &_property); \
+        if (_found) _property.toObject()->call(args, thisObject); \
         for (auto& v : args) \
         { \
             if (v.isObject() && v.toObject()->isRooted()) \
