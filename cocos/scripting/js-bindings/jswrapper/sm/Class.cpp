@@ -144,7 +144,7 @@ namespace se {
         __clsMap.emplace(_name, this);
 
         _jsCls.name = _name;
-        _jsCls.flags = JSCLASS_HAS_PRIVATE | JSCLASS_FOREGROUND_FINALIZE;
+        _jsCls.flags = JSCLASS_HAS_PRIVATE | JSCLASS_FOREGROUND_FINALIZE; //FIXME: Use JSCLASS_BACKGROUND_FINALIZE to improve GC performance
 
         _classOps.finalize = _finalizeOp;
         _classOps.trace = nullptr;

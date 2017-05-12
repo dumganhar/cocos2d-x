@@ -8,7 +8,6 @@
 
 #define SAFE_RELEASE(obj) if (obj != nullptr) obj->release()
 
-
 #define SE_DECLARE_FUNC(funcName) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp)
 
@@ -22,13 +21,10 @@
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = nullptr; \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
-        if (se::internal::hasPrivate(_cx, _thizObj)) \
+        void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
+        if (nativeThisObject != nullptr) \
         { \
-            void* _nativeObj = se::internal::getPrivate(_cx, _thizObj); \
-            if (_nativeObj != nullptr) \
-            { \
-                thisObject = se::Object::getObjectWithPtr(_nativeObj); \
-            } \
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         }
 
 #define SE_FUNC_END \
@@ -60,7 +56,7 @@
     }
 
 // --- Constructor
-#define SE_CTOR_BEGIN(funcName, clsName) \
+#define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
@@ -76,10 +72,17 @@
         bool _found = false; \
         _found = thisObject->getProperty("_ctor", &_property); \
         if (_found) _property.toObject()->call(args, thisObject); \
+        for (auto& v : args) \
+        { \
+            if (v.isObject() && v.toObject()->isRooted()) \
+            { \
+                v.toObject()->switchToUnrooted(); \
+            } \
+        } \
         return ret; \
     }
 
-#define SE_CTOR2_BEGIN(funcName, finalizeCb) \
+#define SE_CTOR2_BEGIN(funcName, clsName, finalizeCb) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
@@ -91,20 +94,7 @@
         thisObject->_setFinalizeCallback(finalizeCb);
 
 
-#define SE_CTOR2_END \
-        se::Value _property; \
-        bool _found = false; \
-        _found = thisObject->getProperty("_ctor", &_property); \
-        if (_found) _property.toObject()->call(args, thisObject); \
-        for (auto& v : args) \
-        { \
-            if (v.isObject() && v.toObject()->isRooted()) \
-            { \
-                v.toObject()->switchToUnrooted(); \
-            } \
-        } \
-        return ret; \
-    }
+#define SE_CTOR2_END SE_CTOR_END
 
 // --- Get Property
 
@@ -115,11 +105,11 @@
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
-        void* _nativeObj = se::internal::getPrivate(_cx, _thizObj); \
+        void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
         se::Object* thisObject = nullptr; \
-        if (_nativeObj != nullptr) \
+        if (nativeThisObject != nullptr) \
         { \
-            thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         }
 
 #define SE_GET_PROPERTY_END \
@@ -139,11 +129,11 @@
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
-        void* _nativeObj = se::internal::getPrivate(_cx, _thizObj); \
+        void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
         se::Object* thisObject = nullptr; \
-        if (_nativeObj != nullptr) \
+        if (nativeThisObject != nullptr) \
         { \
-            thisObject = se::Object::getObjectWithPtr(_nativeObj); \
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \
         se::Value data; \
         se::internal::jsToSeValue(_cx, _argv[0], &data);

@@ -16,12 +16,6 @@ using namespace cocos2d;
 
 se::Object* __jsb_Menu_proto = nullptr;
 
-SE_CTOR_BEGIN(Menu_ctor, "Menu")
-{
-
-}
-SE_CTOR_END
-
 SE_FINALIZE_FUNC_BEGIN(Menu_finalized)
 {
     if (nativeThisObject)
@@ -32,6 +26,12 @@ SE_FINALIZE_FUNC_BEGIN(Menu_finalized)
     }
 }
 SE_FINALIZE_FUNC_END
+
+SE_CTOR_BEGIN(Menu_ctor, "Menu", Menu_finalized)
+{
+
+}
+SE_CTOR_END
 
 SE_FUNC_BEGIN(Menu_create)
 {

@@ -70,7 +70,10 @@ namespace se {
         bool detachChild(Object* child);
 
         v8::Local<v8::Object> _getJSObject() const;
+        ObjectWrap& _getWrap();
         Class* _getClass() const;
+
+        void _setFinalizeCallback(V8FinalizeFunc finalizeCb);
 
     private:
         static void nativeObjectFinalizeHook(void* nativeObj);
@@ -80,6 +83,7 @@ namespace se {
         ObjectWrap _obj;
         bool _isRooted;
         bool _hasPrivateData;
+        V8FinalizeFunc _finalizeCb;
 
         friend class ScriptEngine;
     };

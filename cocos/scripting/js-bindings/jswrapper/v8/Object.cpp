@@ -17,6 +17,7 @@ namespace se {
     : _cls(nullptr)
     , _isRooted(false)
     , _hasPrivateData(false)
+    , _finalizeCb(nullptr)
     {
     }
 
@@ -37,9 +38,22 @@ namespace se {
         auto iter = __nativePtrToObjectMap.find(nativeObj);
         if (iter != __nativePtrToObjectMap.end())
         {
-            iter->second->_getClass()->_finalizeFunc(nativeObj);
-            iter->second->release();
+            Object* obj = iter->second;
+            if (obj->_finalizeCb != nullptr)
+            {
+                obj->_finalizeCb(nativeObj);
+            }
+            else
+            {
+                assert(obj->_getClass());
+                obj->_getClass()->_finalizeFunc(nativeObj);
+            }
+            obj->release();
             __nativePtrToObjectMap.erase(iter);
+        }
+        else
+        {
+            assert(false);
         }
     }
 
@@ -62,7 +76,7 @@ namespace se {
         auto jsobj = Class::_createJSObject(clsName, &cls);
         Object* obj = _createJSObject(jsobj, rooted);
         obj->_cls = cls;
-        obj->_obj.setFinalizeCallback(nativeObjectFinalizeHook);
+
         return obj;
     }
 
@@ -104,6 +118,7 @@ namespace se {
     {
         _isRooted = rooted;
         _obj.init(obj);
+        _obj.setFinalizeCallback(nativeObjectFinalizeHook);
 
         if (_isRooted)
         {
@@ -195,19 +210,24 @@ namespace se {
 
     void Object::setPrivateData(void* data)
     {
-        _obj.wrap(data);
+        internal::setPrivate(__isolate, _obj, data);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
     }
 
     void* Object::getPrivateData() const
     {
-        return ObjectWrap::unwrap(const_cast<Object*>(this)->_obj.handle(__isolate));
+        return internal::getPrivate(__isolate, const_cast<Object*>(this)->_obj.handle(__isolate));
     }
 
     v8::Local<v8::Object> Object::_getJSObject() const
     {
         return const_cast<Object*>(this)->_obj.handle(__isolate);
+    }
+
+    ObjectWrap& Object::_getWrap()
+    {
+        return _obj;
     }
 
 // --- Call Function
@@ -362,8 +382,13 @@ namespace se {
         *ptr = pt;
     }
 
-    Class *Object::_getClass() const {
+    Class* Object::_getClass() const {
         return _cls;
+    }
+
+    void Object::_setFinalizeCallback(V8FinalizeFunc finalizeCb)
+    {
+        _finalizeCb = finalizeCb;
     }
 
     void Object::switchToUnrooted() {

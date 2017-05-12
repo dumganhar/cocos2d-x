@@ -17,12 +17,6 @@ using namespace cocos2d;
 
 se::Object* __jsb_MenuItem_proto = nullptr;
 
-SE_CTOR_BEGIN(MenuItem_ctor, "MenuItem")
-{
-
-}
-SE_CTOR_END
-
 SE_FINALIZE_FUNC_BEGIN(MenuItem_finalized)
 {
     if (nativeThisObject)
@@ -42,15 +36,15 @@ SE_FUNC_BEGIN(MenuItem_create)
 }
 SE_FUNC_END
 
-///
-
-se::Object* __jsb_MenuItemLabel_proto = nullptr;
-
-SE_CTOR_BEGIN(MenuItemLabel_ctor, "MenuItemLabel")
+SE_CTOR_BEGIN(MenuItem_ctor, "MenuItem", MenuItem_finalized)
 {
 
 }
 SE_CTOR_END
+
+///
+
+se::Object* __jsb_MenuItemLabel_proto = nullptr;
 
 SE_FINALIZE_FUNC_BEGIN(MenuItemLabel_finalized)
 {
@@ -71,14 +65,14 @@ SE_FUNC_BEGIN(MenuItemLabel_create)
 }
 SE_FUNC_END
 
-///
-se::Object* __jsb_MenuItemFont_proto = nullptr;
-
-SE_CTOR_BEGIN(MenuItemFont_ctor, "MenuItemFont")
+SE_CTOR_BEGIN(MenuItemLabel_ctor, "MenuItemLabel", MenuItemLabel_finalized)
 {
 
 }
 SE_CTOR_END
+
+///
+se::Object* __jsb_MenuItemFont_proto = nullptr;
 
 SE_FINALIZE_FUNC_BEGIN(MenuItemFont_finalized)
 {
@@ -111,6 +105,12 @@ SE_FUNC_BEGIN(MenuItemFont_create)
     SE_SET_RVAL(se::Value(item));
 }
 SE_FUNC_END
+
+SE_CTOR_BEGIN(MenuItemFont_ctor, "MenuItemFont", MenuItemFont_finalized)
+{
+
+}
+SE_CTOR_END
 
 bool jsb_register_menuitem()
 {

@@ -18,6 +18,7 @@ namespace se {
     , _parentProto(nullptr)
     , _proto(nullptr)
     , _ctor(nullptr)
+    , _finalizeFunc(nullptr)
     {
 
     }
@@ -44,6 +45,7 @@ namespace se {
         _name = clsName;
         _parent = parent;
         _parentProto = parentProto;
+        _ctor = ctor;
 
         _ctorTemplate.Reset(__isolate, v8::FunctionTemplate::New(__isolate, _ctor));
         v8::Local<v8::String> jsNameVal = v8::String::NewFromUtf8(__isolate, _name.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
@@ -123,6 +125,11 @@ namespace se {
     Object* Class::getProto() const
     {
         return _proto;
+    }
+
+    V8FinalizeFunc Class::_getFinalizeFunction() const
+    {
+        return _finalizeFunc;
     }
 
     /* static */

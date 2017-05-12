@@ -16,14 +16,6 @@ using namespace cocos2d;
 
 se::Object* __jsb_Node_proto = nullptr;
 
-SE_CTOR_BEGIN(Node_ctor, "Node")
-{
-    printf("Node_ctor ...\n");
-    Node* node = new Node();
-    thisObject->setPrivateData(node);
-}
-SE_CTOR_END
-
 SE_FINALIZE_FUNC_BEGIN(Node_finalized)
 {
     if (nativeThisObject)
@@ -34,6 +26,14 @@ SE_FINALIZE_FUNC_BEGIN(Node_finalized)
     }
 }
 SE_FINALIZE_FUNC_END
+
+SE_CTOR_BEGIN(Node_ctor, "Node", Node_finalized)
+{
+    printf("Node_ctor ...\n");
+    Node* node = new Node();
+    thisObject->setPrivateData(node);
+}
+SE_CTOR_END
 
 SE_FUNC_BEGIN(Node_create)
 {
@@ -48,7 +48,7 @@ SE_FUNC_END
 SE_FUNC_BEGIN(Node_onEnter)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*) thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     thiz->onEnter();
 }
 SE_FUNC_END
@@ -56,7 +56,7 @@ SE_FUNC_END
 SE_FUNC_BEGIN(Node_onExit)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*) thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     thiz->onExit();
 }
 SE_FUNC_END
@@ -64,7 +64,7 @@ SE_FUNC_END
 SE_FUNC_BEGIN(Node_onEnterTransitionDidFinish)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*) thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     thiz->onEnterTransitionDidFinish();
 }
 SE_FUNC_END
@@ -80,14 +80,14 @@ SE_FUNC_END
 SE_FUNC_BEGIN(Node_cleanup)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*) thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     thiz->cleanup();
 }
 SE_FUNC_END
 
 SE_FUNC_BEGIN(Node_addChild)
 {
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     Node* child = (Node*)args[0].toObject()->getPrivateData();
     thiz->addChild(child);
 }
@@ -215,7 +215,7 @@ SE_FUNC_BEGIN(Node_schedule)
     }
     printf("-------------------------- \n");
     static uint32_t __idx = 0;
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     se::Value jsThis(thisObject);
     se::Value jsFunc(args[0]);
     jsThis.toObject()->attachChild(jsFunc.toObject());
@@ -262,7 +262,7 @@ SE_FUNC_END
 
 SE_FUNC_BEGIN(Node_unschedule)
 {
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     se::Value jsThis(thisObject);
     se::Value jsFunc(args[0]);
     se::Object* foundThisObj = nullptr;
@@ -285,7 +285,9 @@ SE_FUNC_END
 
 SE_SET_PROPERTY_BEGIN(Node_set_x)
 {
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    printf("Node_set_x, this: %p\n", thisObject);
+    assert(thisObject);
+    Node* thiz = (Node*)nativeThisObject;
     float x = data.toNumber();
     thiz->setPositionX(x);
 }
@@ -293,14 +295,14 @@ SE_SET_PROPERTY_END
 
 SE_GET_PROPERTY_BEGIN(Node_get_x)
 {
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     SE_SET_RVAL(se::Value(thiz->getPositionX()));
 }
 SE_GET_PROPERTY_END
 
 SE_SET_PROPERTY_BEGIN(Node_set_y)
 {
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     float y = data.toNumber();
     thiz->setPositionY(y);
 }
@@ -308,7 +310,7 @@ SE_SET_PROPERTY_END
 
 SE_GET_PROPERTY_BEGIN(Node_get_y)
 {
-    Node* thiz = (Node*)thisObject->getPrivateData();
+    Node* thiz = (Node*)nativeThisObject;
     SE_SET_RVAL(se::Value(thiz->getPositionY()));
 }
 SE_GET_PROPERTY_END

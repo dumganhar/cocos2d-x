@@ -179,6 +179,8 @@ namespace se { namespace internal {
         }
     }
 
+    const char* KEY_PRIVATE_DATE = "__cc_private_data";
+
     bool hasPrivate(JSContext* cx, JS::HandleObject obj)
     {
         bool found = false;
@@ -188,7 +190,7 @@ namespace se { namespace internal {
         if (!found)
         {
             JS::RootedObject jsobj(cx, obj);
-            if (JS_HasProperty(cx, jsobj, "__cc_private_data", &found) && found)
+            if (JS_HasProperty(cx, jsobj, KEY_PRIVATE_DATE, &found) && found)
             {
                 return true;
             }
@@ -206,10 +208,10 @@ namespace se { namespace internal {
         if (found)
             return JS_GetPrivate(obj);
 
-        if (JS_HasProperty(cx, obj, "__cc_private_data", &found) && found)
+        if (JS_HasProperty(cx, obj, KEY_PRIVATE_DATE, &found) && found)
         {
             JS::RootedValue jsData(cx);
-            if (JS_GetProperty(cx, obj, "__cc_private_data", &jsData))
+            if (JS_GetProperty(cx, obj, KEY_PRIVATE_DATE, &jsData))
             {
                 internal::PrivateData* privateData = (internal::PrivateData*)JS_GetPrivate(jsData.toObjectOrNull());
                 return privateData->data;
@@ -239,7 +241,8 @@ namespace se { namespace internal {
             JS_SetPrivate(privateObj->_getJSObject(), privateData);
 
             JS::RootedValue privateVal(cx, JS::ObjectValue(*privateObj->_getJSObject()));
-            JS_SetProperty(cx, obj, "__cc_private_data", privateVal);
+            JS_SetProperty(cx, obj, KEY_PRIVATE_DATE, privateVal);
+            privateObj->release();
         }
     }
 

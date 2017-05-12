@@ -14,12 +14,6 @@
 
 using namespace cocos2d;
 
-SE_CTOR_BEGIN(Director_ctor, "Director")
-{
-
-}
-SE_CTOR_END
-
 SE_FUNC_BEGIN(Director_getInstance)
 {
     auto director = Director::getInstance();
@@ -39,10 +33,11 @@ SE_FUNC_BEGIN(Director_getInstance)
 }
 SE_FUNC_END
 
+
 SE_FUNC_BEGIN(Director_runWithScene)
 {
     printf("cc.Director.runWithScene ...\n");
-    auto thiz = (Director*)thisObject->getPrivateData();
+    auto thiz = (Director*)nativeThisObject;
     thiz->runWithScene((Scene*)args[0].toObject()->getPrivateData());
 }
 SE_FUNC_END
@@ -50,7 +45,7 @@ SE_FUNC_END
 SE_FUNC_BEGIN(Director_replaceScene)
 {
     printf("cc.Director.replaceScene ...\n");
-    auto thiz = (Director*)thisObject->getPrivateData();
+    auto thiz = (Director*)nativeThisObject;
     thiz->replaceScene((Scene*)args[0].toObject()->getPrivateData());
 }
 SE_FUNC_END
@@ -60,6 +55,12 @@ SE_FINALIZE_FUNC_BEGIN(Director_finalize)
     printf("cc.Director finalized\n");
 }
 SE_FINALIZE_FUNC_END
+
+SE_CTOR_BEGIN(Director_ctor, "Director", Director_finalize)
+{
+
+}
+SE_CTOR_END
 
 bool jsb_register_Director()
 {

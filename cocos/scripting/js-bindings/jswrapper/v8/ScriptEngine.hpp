@@ -80,9 +80,11 @@ namespace se {
             EXIT_TRANSITION_DID_START,
             CLEANUP
         };
-        void _onReceiveNodeEvent(void* node, NodeEventType type);
+        bool _onReceiveNodeEvent(void* node, NodeEventType type);
 
     private:
+
+        static void privateDataFinalize(void* nativeObj);
 
         v8::Platform* _platform;
         v8::Isolate* _isolate;

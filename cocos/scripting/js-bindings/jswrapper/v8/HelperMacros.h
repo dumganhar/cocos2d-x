@@ -15,26 +15,26 @@
 #define SAFE_RELEASE(obj) if (obj != nullptr) obj->release()
 
 
+// FIXME: expose nativeThisObjectect for all macros
+
 #define SE_DECLARE_FUNC(funcName) \
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& v8args)
+
 
 #define SE_FUNC_BEGIN(funcName) \
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        SE_UNUSED bool ret = false; \
+        SE_UNUSED bool ret = true; \
         SE_UNUSED unsigned argc = (unsigned)_v8args.Length(); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_v8args, &args); \
         se::Object* thisObject = nullptr; \
-        if (se::internal::hasPrivate(_v8args.This())) \
+        void* nativeThisObject = se::internal::getPrivate(_v8args.GetIsolate(), _v8args.This()); \
+        if (nativeThisObject != nullptr) \
         { \
-            void* _nativeObj = se::ObjectWrap::unwrap(_v8args.This()); \
-            if (_nativeObj != nullptr) \
-            { \
-                thisObject = se::Object::getObjectWithPtr(_nativeObj); \
-            } \
-        }
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
+        } \
 
 #define SE_FUNC_END \
         for (auto& v : args) \
@@ -54,14 +54,34 @@
 #define SE_FINALIZE_FUNC_END \
     }
 
-#define SE_CTOR_BEGIN(funcName, clsName) \
+// v8 doesn't need to create a new JSObject in SE_CTOR_BEGIN while SpiderMonkey needs.
+#define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        SE_UNUSED bool ret = false;
+        SE_UNUSED bool ret = true; \
+        se::ValueArray args; \
+        se::internal::jsToSeArgs(_v8args, &args); \
+        se::Object* thisObject = se::Object::_createJSObject(_v8args.This(), false); \
+        thisObject->_setFinalizeCallback(finalizeCb);
+
 
 #define SE_CTOR_END \
+        se::Value _property; \
+        bool _found = false; \
+        _found = thisObject->getProperty("_ctor", &_property); \
+        if (_found) _property.toObject()->call(args, thisObject); \
+        for (auto& v : args) \
+        { \
+            if (v.isObject() && v.toObject()->isRooted()) \
+            { \
+                v.toObject()->switchToUnrooted(); \
+            } \
+        } \
     }
+
+#define SE_CTOR2_BEGIN SE_CTOR_BEGIN
+#define SE_CTOR2_END SE_CTOR_END
 
 // --- Get Property
 
@@ -69,16 +89,13 @@
     void funcName(v8::Local<v8::String> _property, const v8::PropertyCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        SE_UNUSED bool ret = false; \
+        SE_UNUSED bool ret = true; \
         se::Object* thisObject = nullptr; \
-        if (se::internal::hasPrivate(_v8args.This())) \
+        void* nativeThisObject = se::internal::getPrivate(_v8args.GetIsolate(), _v8args.This()); \
+        if (nativeThisObject != nullptr) \
         { \
-            void* _nativeObj = se::ObjectWrap::unwrap(_v8args.This()); \
-            if (_nativeObj != nullptr) \
-            { \
-                thisObject = se::Object::getObjectWithPtr(_nativeObj); \
-            } \
-        }
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
+        } \
 
 #define SE_GET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \
@@ -93,15 +110,12 @@
     void funcName(v8::Local<v8::String> _property, v8::Local<v8::Value> _value, const v8::PropertyCallbackInfo<void>& _v8args) \
     { \
         v8::HandleScope _hs(_v8args.GetIsolate()); \
-        SE_UNUSED bool ret = false; \
+        SE_UNUSED bool ret = true; \
         se::Object* thisObject = nullptr; \
-        if (se::internal::hasPrivate(_v8args.This())) \
+        void* nativeThisObject = se::internal::getPrivate(_v8args.GetIsolate(), _v8args.This()); \
+        if (nativeThisObject != nullptr) \
         { \
-            void* _nativeObj = se::ObjectWrap::unwrap(_v8args.This()); \
-            if (_nativeObj != nullptr) \
-            { \
-                thisObject = se::Object::getObjectWithPtr(_nativeObj); \
-            } \
+            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \
         se::Value data; \
         se::internal::jsToSeValue(_v8args, _value, &data);

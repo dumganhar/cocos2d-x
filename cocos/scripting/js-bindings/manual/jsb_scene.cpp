@@ -14,16 +14,10 @@
 
 using namespace cocos2d;
 
-SE_CTOR_BEGIN(Scene_constructor, "Scene")
-{
-
-}
-SE_CTOR_END
-
 SE_FINALIZE_FUNC_BEGIN(Scene_finalized)
 {
     printf("Scene_finalized ...\n");
-    Node* thiz = (Node*) nativeThisObject;
+    Node* thiz = (Node*)nativeThisObject;
     SAFE_RELEASE(thiz);
 }
 SE_FINALIZE_FUNC_END
@@ -40,13 +34,21 @@ SE_FUNC_END
 
 SE_FUNC_BEGIN(Scene_init)
 {
-    Scene* nativeObj = (Scene*)thisObject->getPrivateData();
-    bool ok = nativeObj->init();
+    auto scene = (Scene*)nativeThisObject;
+    bool ok = scene->init();
     SE_SET_RVAL(se::Value(ok));
 }
 SE_FUNC_END
 
-SE_CTOR2_BEGIN(Scene_ctor, Scene_finalized)
+SE_CTOR_BEGIN(Scene_constructor, "Scene", Scene_finalized)
+{
+    printf("Scene constructor\n");
+    Scene* obj = new Scene();
+    thisObject->setPrivateData(obj);
+}
+SE_CTOR_END
+
+SE_CTOR2_BEGIN(Scene_ctor, "Scene", Scene_finalized)
 {
     Scene* obj = new Scene();
     thisObject->setPrivateData(obj);

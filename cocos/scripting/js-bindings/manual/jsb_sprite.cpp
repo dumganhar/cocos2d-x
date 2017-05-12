@@ -16,13 +16,6 @@ using namespace cocos2d;
 
 se::Object* __jsb_Sprite_proto = nullptr;
 
-SE_CTOR_BEGIN(Sprite_constructor, "Sprite")
-{
-    Sprite* obj = new Sprite();
-    thisObject->setPrivateData(obj);
-}
-SE_CTOR_END
-
 SE_FINALIZE_FUNC_BEGIN(Sprite_finalized)
 {
     if (nativeThisObject)
@@ -48,13 +41,21 @@ SE_FUNC_END
 SE_FUNC_BEGIN(Sprite_initWithFile)
 {
     std::string filePath = args[0].toString();
-    Sprite* nativeObj = (Sprite*)thisObject->getPrivateData();
+    Sprite* nativeObj = (Sprite*)nativeThisObject;
     bool ok = nativeObj->initWithFile(filePath);
     SE_SET_RVAL(se::Value(ok));
 }
 SE_FUNC_END
 
-SE_CTOR2_BEGIN(Sprite_ctor, Sprite_finalized)
+SE_CTOR_BEGIN(Sprite_constructor, "Sprite", Sprite_finalized)
+{
+    Sprite* obj = new Sprite();
+    thisObject->setPrivateData(obj);
+    printf("Sprite_constructor, this: %p\n", thisObject);
+}
+SE_CTOR_END
+
+SE_CTOR2_BEGIN(Sprite_ctor, "Sprite", Sprite_finalized)
 {
     Sprite* obj = new Sprite();
     thisObject->setPrivateData(obj);

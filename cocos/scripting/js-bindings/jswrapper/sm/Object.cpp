@@ -42,6 +42,7 @@ namespace se {
     , m_data(nullptr)
     , _hasPrivateData(false)
     , _cls(nullptr)
+    , _finalizeCb(nullptr)
     {
 
     }

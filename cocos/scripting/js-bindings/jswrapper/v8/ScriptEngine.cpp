@@ -4,6 +4,7 @@
 
 #include "Object.hpp"
 #include "Class.hpp"
+#include "Utils.hpp"
 
 #define RETRUN_VAL_IF_FAIL(cond, val) \
     if (!(cond)) return val
@@ -25,6 +26,23 @@ namespace se {
         {
             ScriptEngine::getInstance()->gc();
         }
+
+        void privateDataContructor(const v8::FunctionCallbackInfo<v8::Value>& info)
+        {
+        }
+    }
+
+    void ScriptEngine::privateDataFinalize(void* nativeObj)
+    {
+        internal::PrivateData* p = (internal::PrivateData*)nativeObj;
+
+        Object::nativeObjectFinalizeHook(p->data);
+
+        assert(p->seObj->getReferenceCount() == 1);
+
+        p->seObj->release();
+
+        free(p);
     }
 
     ScriptEngine *ScriptEngine::getInstance()
@@ -89,6 +107,10 @@ namespace se {
         _globalObj->defineFunction("log", __log);
         _globalObj->defineFunction("forceGC", __forceGC);
 
+        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        privateDataCls->defineFinalizedFunction(privateDataFinalize);
+        privateDataCls->install();
+
         _isValid = true;
 
         return _isValid;
@@ -117,7 +139,7 @@ namespace se {
 
     void ScriptEngine::gc()
     {
-        printf("GC begin ...\n");
+        printf("GC begin ..., (js->native map) size: %d\n", (int)__nativePtrToObjectMap.size());
         const double kLongIdlePauseInSeconds = 1.0;
         _isolate->ContextDisposedNotification();
         _isolate->IdleNotificationDeadline(_platform->MonotonicallyIncreasingTime() + kLongIdlePauseInSeconds);
@@ -125,7 +147,7 @@ namespace se {
         // garbage and will therefore also invoke all weak callbacks of actually
         // unreachable persistent handles.
         _isolate->LowMemoryNotification();
-        printf("GC end ...\n");
+        printf("GC end ..., (js->native map) size: %d\n", (int)__nativePtrToObjectMap.size());
     }
 
     bool ScriptEngine::isValid() const
@@ -241,13 +263,13 @@ namespace se {
         iterOwner->second->detachChild(iterTarget->second);
     }
 
-    void ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
+    bool ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
     {
         //        printf("ScriptEngine::_onReceiveNodeEvent, node: %p, type: %d\n", node, (int) type);
 
         auto iter = __nativePtrToObjectMap.find(node);
         if (iter  == __nativePtrToObjectMap.end())
-            return;
+            return false;
 
         Object* target = iter->second;
         const char* funcName = nullptr;
@@ -278,12 +300,14 @@ namespace se {
 
         AutoHandleScope hs;
 
+        bool ret = false;
         Value funcVal;
         bool ok = target->getProperty(funcName, &funcVal);
         if (ok && !funcVal.toObject()->_isNativeFunction())
         {
-            funcVal.toObject()->call(EmptyValueArray, target);
+            ret = funcVal.toObject()->call(EmptyValueArray, target);
         }
+        return ret;
     }
 
 } // namespace se {

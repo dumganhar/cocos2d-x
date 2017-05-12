@@ -3,6 +3,7 @@
 #ifdef SCRIPT_ENGINE_V8
 
 #include "Object.hpp"
+#include "Class.hpp"
 
 namespace se {
 
@@ -123,11 +124,68 @@ namespace se {
             _setReturnValue(data, argv);
         }
 
-        bool hasPrivate(v8::Local<v8::Value> value)
+        const char* KEY_PRIVATE_DATE = "__cc_private_data";
+
+        bool hasPrivate(v8::Isolate* isolate, v8::Local<v8::Value> value)
         {
             v8::Local<v8::Object> obj = v8::Local<v8::Object>::Cast(value);
             int c =  obj->InternalFieldCount();
-            return c > 0;
+            if (c > 0)
+                return true;
+
+            // Pure JS subclass object doesn't have a internal field
+            v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
+            return obj->Has(key);
+        }
+
+        void setPrivate(v8::Isolate* isolate, ObjectWrap& wrap, void* data)
+        {
+            v8::Local<v8::Object> obj = wrap.handle(isolate);
+            int c =  obj->InternalFieldCount();
+            if (c > 0)
+            {
+                wrap.wrap(data);
+                printf("setPrivate1: %p\n", data);
+            }
+            else
+            {
+                Object* privateObj = Object::createObject("__CCPrivateData", false);
+                internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
+                privateData->data = data;
+                privateData->seObj = privateObj;
+
+                privateObj->_getWrap().setFinalizeCallback(privateObj->_getClass()->_getFinalizeFunction());
+                privateObj->_getWrap().wrap(privateData);
+
+                v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
+                obj->Set(key, privateObj->_getJSObject());
+//                printf("setPrivate: native data: %p\n", privateData);
+//                privateObj->release();
+            }
+        }
+
+        void* getPrivate(v8::Isolate* isolate, v8::Local<v8::Value> value)
+        {
+            v8::Local<v8::Object> obj = value->ToObject(isolate);
+            int c =  obj->InternalFieldCount();
+            if (c > 0)
+            {
+                void* nativeObj = ObjectWrap::unwrap(obj);
+                printf("getPrivate1: %p\n", nativeObj);
+                return nativeObj;
+            }
+
+            // Pure JS subclass object doesn't have a internal field
+            v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
+
+            if (obj->Has(key))
+            {
+                v8::Local<v8::Object> privateObj = obj->Get(key)->ToObject(isolate);
+                internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj);
+//                printf("getPrivate: native data: %p\n", privateData);
+                return privateData->data;
+            }
+            return nullptr;
         }
 
     } // namespace internal {

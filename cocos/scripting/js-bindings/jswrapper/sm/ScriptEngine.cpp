@@ -101,11 +101,11 @@ namespace se {
          * garbage collected. */
         if (status == JSGC_BEGIN)
         {
-            printf("on_garbage_collect: begin\n");
+            printf("on_garbage_collect: begin, Native -> JS map count: %d\n", (int)__nativePtrToObjectMap.size());
         }
         else if (status == JSGC_END)
         {
-            printf("on_garbage_collect: end\n");
+            printf("on_garbage_collect: end, Native -> JS map count: %d\n", (int)__nativePtrToObjectMap.size());
         }
     }
 

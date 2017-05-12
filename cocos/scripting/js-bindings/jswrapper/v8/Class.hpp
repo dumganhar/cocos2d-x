@@ -29,6 +29,8 @@ namespace se {
 
         Object* getProto() const;
 
+        V8FinalizeFunc _getFinalizeFunction() const;
+
 	private:
         static void cleanup();
         static v8::Local<v8::Object> _createJSObject(const std::string &clsName, Class** outCls);
