@@ -19,6 +19,7 @@ namespace se {
     , _isRooted(false)
     , _hasPrivateData(false)
     , _isCleanup(false)
+    , _finalizeCb(nullptr)
     {
     }
 
@@ -88,24 +89,29 @@ namespace se {
         return true;
     }
 
-    void Object::_cleanup()
+    void Object::_cleanup(void* nativeObj/* = nullptr*/)
     {
         if (_isCleanup)
             return;
 
         if (_hasPrivateData)
         {
-            if (_obj != nullptr)
+            if (nativeObj == nullptr)
             {
-                void* nativeObj = JSObjectGetPrivate(_obj);
-                if (nativeObj != nullptr)
+                nativeObj = internal::getPrivate(_obj);
+            }
+
+            if (nativeObj != nullptr)
+            {
+                auto iter = __nativePtrToObjectMap.find(nativeObj);
+                if (iter != __nativePtrToObjectMap.end())
                 {
-                    auto iter = __nativePtrToObjectMap.find(nativeObj);
-                    if (iter != __nativePtrToObjectMap.end())
-                    {
-                        __nativePtrToObjectMap.erase(iter);
-                    }
+                    __nativePtrToObjectMap.erase(iter);
                 }
+            }
+            else
+            {
+                assert(false);
             }
         }
 
@@ -115,6 +121,11 @@ namespace se {
         }
 
         _isCleanup = true;
+    }
+
+    void Object::_setFinalizeCallback(JSObjectFinalizeCallback finalizeCb)
+    {
+        _finalizeCb = finalizeCb;
     }
 
     // --- Getter/Setter
@@ -203,6 +214,7 @@ namespace se {
         JSStringRef jsName = JSStringCreateWithUTF8CString(funcName);
         JSObjectRef jsFunc = JSObjectMakeFunctionWithCallback(__cx, nullptr, func);
         JSObjectSetProperty(__cx, _obj, jsName, jsFunc, kJSPropertyAttributeNone, nullptr);
+        JSStringRelease(jsName);
         return true;
     }
 
@@ -271,12 +283,12 @@ namespace se {
 
     void* Object::getPrivateData()
     {
-        return JSObjectGetPrivate(_obj);
+        return internal::getPrivate(_obj);
     }
 
     void Object::setPrivateData(void *data)
     {
-        JSObjectSetPrivate(_obj, data);
+        internal::setPrivate(_obj, data, _finalizeCb);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
     }

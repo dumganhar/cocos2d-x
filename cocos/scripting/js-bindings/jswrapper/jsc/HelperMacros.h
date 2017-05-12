@@ -27,7 +27,7 @@
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = nullptr; \
-        void* nativeThisObject = JSObjectGetPrivate(_thisObject); \
+        void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         if (nativeThisObject != nullptr) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
@@ -54,7 +54,7 @@
         if (nativeThisObject != nullptr) \
         { \
             _thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-            if (_thisObject) _thisObject->_cleanup(); \
+            if (_thisObject) _thisObject->_cleanup(nativeThisObject); \
             JSObjectSetPrivate(_obj, nullptr); \
             SAFE_RELEASE(_thisObject); \
             SAFE_RELEASE(_thisObject); \
@@ -92,12 +92,27 @@
     JSValueRef funcName(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         SE_UNUSED bool ret = true; \
+        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
-        se::Object* thisObject = se::Object::createObject(clsName, false); \
-        JSObjectRef _jsRet = thisObject->_getJSObject();
+        se::Object* thisObject = se::Object::_createJSObject(nullptr, _thisObject, false); \
+        thisObject->_setFinalizeCallback(finalizeCb);
 
-#define SE_CTOR2_END SE_CTOR_END
+
+#define SE_CTOR2_END \
+        se::Value _property; \
+        bool _found = false; \
+        _found = thisObject->getProperty("_ctor", &_property); \
+        if (_found) _property.toObject()->call(args, thisObject); \
+        for (auto& v : args) \
+        { \
+            if (v.isObject() && v.toObject()->isRooted()) \
+            { \
+                v.toObject()->switchToUnrooted(); \
+            } \
+        } \
+        return _jsRet; \
+    }
 
 // --- Get Property
 
@@ -106,7 +121,7 @@
     { \
         JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
         SE_UNUSED bool ret = true; \
-        void* nativeThisObject = JSObjectGetPrivate(_object); \
+        void* nativeThisObject = se::internal::getPrivate(_object); \
         se::Object* thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \
@@ -127,7 +142,7 @@
     bool funcName(JSContextRef _cx, JSObjectRef _object, JSStringRef _propertyName, JSValueRef _value, JSValueRef* _exception) \
     { \
         bool ret = true; \
-        void* nativeThisObject = JSObjectGetPrivate(_object); \
+        void* nativeThisObject = se::internal::getPrivate(_object); \
         se::Object* thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \

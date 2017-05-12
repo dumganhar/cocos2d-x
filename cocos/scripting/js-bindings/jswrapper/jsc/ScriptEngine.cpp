@@ -34,6 +34,20 @@ namespace se {
             }
             return JSValueMakeUndefined(ctx);
         }
+
+        JSObjectRef privateDataContructor(JSContextRef ctx, JSObjectRef constructor, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
+        {
+            return nullptr;
+        }
+
+        void privateDataFinalize(JSObjectRef obj)
+        {
+            internal::PrivateData* p = (internal::PrivateData*)JSObjectGetPrivate(obj);
+            JSObjectSetPrivate(obj, p->data);
+            if (p->finalizeCb != nullptr)
+                p->finalizeCb(obj);
+            free(p);
+        }
     }
 
     ScriptEngine *ScriptEngine::getInstance()
@@ -73,6 +87,7 @@ namespace se {
         if (nullptr == _cx)
             return false;
 
+        internal::setContext(_cx);
         Class::setContext(_cx);
         Object::setContext(_cx);
 
@@ -91,6 +106,10 @@ namespace se {
         JSObjectSetProperty(_cx, globalObj, propertyName, JSObjectMakeFunctionWithCallback(_cx, propertyName, __forceGC), kJSPropertyAttributeReadOnly, nullptr);
         JSStringRelease(propertyName);
 
+        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        privateDataCls->defineFinalizedFunction(privateDataFinalize);
+        privateDataCls->install();
+        
         _isValid = true;
 
         return true;

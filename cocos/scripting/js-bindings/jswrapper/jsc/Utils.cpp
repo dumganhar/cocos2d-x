@@ -14,6 +14,15 @@
 
 namespace se { namespace internal {
 
+    namespace {
+        JSContextRef __cx = nullptr;
+    }
+
+    void setContext(JSContextRef cx)
+    {
+        __cx = cx;
+    }
+
     void jsToSeArgs(JSContextRef cx, unsigned short argc, const JSValueRef* argv, ValueArray* outArr)
     {
         outArr->reserve(argc);
@@ -120,9 +129,60 @@ namespace se { namespace internal {
         free(buf);
     }
 
+    const char* KEY_PRIVATE_DATE = "__cc_private_data";
+
     bool hasPrivate(JSObjectRef obj)
     {
-        return JSObjectGetPrivate(obj) != nullptr;
+        void* data = JSObjectGetPrivate(obj);
+        if (data != nullptr)
+            return true;
+
+        JSStringRef key = JSStringCreateWithUTF8CString(KEY_PRIVATE_DATE);
+        bool found = JSObjectHasProperty(__cx, obj, key);
+        JSStringRelease(key);
+
+        return found;
+    }
+
+    void setPrivate(JSObjectRef obj, void* data, JSObjectFinalizeCallback finalizeCb)
+    {
+        bool ok = JSObjectSetPrivate(obj, data);
+        if (ok)
+        {
+            return;
+        }
+
+        assert(finalizeCb);
+        Object* privateObj = Object::createObject("__CCPrivateData", false);
+        internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
+        privateData->data = data;
+        privateData->finalizeCb = finalizeCb;
+        assert(JSObjectSetPrivate(privateObj->_getJSObject(), privateData));
+
+        JSStringRef key = JSStringCreateWithUTF8CString(KEY_PRIVATE_DATE);
+        JSObjectSetProperty(__cx, obj, key, privateObj->_getJSObject(), kJSPropertyAttributeDontEnum, nullptr);
+        JSStringRelease(key);
+        privateObj->release();
+    }
+
+    void* getPrivate(JSObjectRef obj)
+    {
+        void* data = JSObjectGetPrivate(obj);
+        if (data != nullptr)
+            return data;
+
+        JSStringRef key = JSStringCreateWithUTF8CString(KEY_PRIVATE_DATE);
+        bool found = JSObjectHasProperty(__cx, obj, key);
+        if (found)
+        {
+            JSValueRef privateDataVal = JSObjectGetProperty(__cx, obj, key, nullptr);
+            internal::PrivateData* privateData = (internal::PrivateData*)JSObjectGetPrivate(JSValueToObject(__cx, privateDataVal, nullptr));
+            assert(privateData);
+            data = privateData->data;
+        }
+
+        JSStringRelease(key);
+        return data;
     }
 
 
