@@ -15,6 +15,7 @@
 using namespace cocos2d;
 
 se::Object* __jsb_Sprite_proto = nullptr;
+se::Class* __jsb_Sprite_class = nullptr;
 
 SE_FINALIZE_FUNC_BEGIN(Sprite_finalized)
 {
@@ -32,7 +33,7 @@ SE_FUNC_BEGIN(Sprite_create)
     std::string filePath = args[0].toString();
     Sprite* sprite = Sprite::create(filePath);
     sprite->retain();
-    auto obj = se::Object::createObject("Sprite", false);
+    auto obj = se::Object::createObjectWithClass(__jsb_Sprite_class, false);
     obj->setPrivateData(sprite);
     SE_SET_RVAL(se::Value(obj));
 }
@@ -49,7 +50,7 @@ SE_FUNC_BEGIN(Sprite_initWithFile)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(Sprite_constructor, "Sprite", Sprite_finalized)
+SE_CTOR_BEGIN(Sprite_constructor, Sprite, Sprite_finalized)
 {
 //    printf("Sprite_constructor1: %p, jsret: %p\n", _constructor, _jsRet);
     Sprite* obj = new Sprite();
@@ -58,7 +59,7 @@ SE_CTOR_BEGIN(Sprite_constructor, "Sprite", Sprite_finalized)
 }
 SE_CTOR_END
 
-SE_CTOR2_BEGIN(Sprite_ctor, "Sprite", Sprite_finalized)
+SE_CTOR2_BEGIN(Sprite_ctor, Sprite, Sprite_finalized)
 {
 //    printf("Sprite_ctor: %p\n", _thisObject);
     Sprite* obj = new Sprite();
@@ -94,6 +95,7 @@ bool jsb_register_Sprite()
     cls->install();
 
     __jsb_Sprite_proto = cls->getProto();
+    __jsb_Sprite_class = cls;
 
     return true;
 }

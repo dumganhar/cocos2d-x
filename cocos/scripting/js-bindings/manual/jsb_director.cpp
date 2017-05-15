@@ -14,22 +14,25 @@
 
 using namespace cocos2d;
 
+se::Class* __jsb_Director_class = nullptr;
+
 SE_FUNC_BEGIN(Director_getInstance)
 {
     auto director = Director::getInstance();
-    auto obj = se::Object::getOrCreateObjectWithPtr(director, "Director", true);
-    if (obj != nullptr)
+    se::Object* obj = nullptr;
+    if (director->_scriptObject == nullptr)
     {
-        SE_SET_RVAL(se::Value(obj));
-        if (obj->getReferenceCount() > 1)
-        {
-            obj->release();
-        }
+        obj = se::Object::createObjectWithClass(__jsb_Director_class, true);
+        obj->setPrivateData(director);
+        director->_scriptObject = obj;
     }
     else
     {
-        ret = false;
+        obj = se::Object::getObjectWithPtr(director);
     }
+
+    assert(obj);
+    SE_SET_RVAL(se::Value(obj));
 }
 SE_FUNC_END
 
@@ -56,7 +59,7 @@ SE_FINALIZE_FUNC_BEGIN(Director_finalize)
 }
 SE_FINALIZE_FUNC_END
 
-SE_CTOR_BEGIN(Director_ctor, "Director", Director_finalize)
+SE_CTOR_BEGIN(Director_ctor, Director, Director_finalize)
 {
 
 }
@@ -72,6 +75,8 @@ bool jsb_register_Director()
     cls->defineFinalizedFunction(Director_finalize);
 
     cls->install();
+
+    __jsb_Director_class = cls;
 
     return true;
 }

@@ -63,7 +63,7 @@
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
-        se::Object* thisObject = se::Object::createObject(clsName, false); \
+        se::Object* thisObject = se::Object::createObjectWithClass(__jsb_##clsName##_class, false); \
         _argv.rval().setObject(*thisObject->_getJSObject());
 
 

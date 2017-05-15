@@ -33,6 +33,8 @@ namespace se {
     private:
 
         static JSObject* _createJSObject(const std::string &clsName, Class** outCls);
+        static JSObject* _createJSObjectWithClass(Class* cls);
+
         static void setContext(JSContext* cx);
         static void cleanup();
 

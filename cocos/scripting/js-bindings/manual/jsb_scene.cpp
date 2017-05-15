@@ -14,6 +14,9 @@
 
 using namespace cocos2d;
 
+se::Object* __jsb_Scene_proto = nullptr;
+se::Class* __jsb_Scene_class = nullptr;
+
 SE_FINALIZE_FUNC_BEGIN(Scene_finalized)
 {
     printf("Scene_finalized ...\n");
@@ -26,7 +29,7 @@ SE_FUNC_BEGIN(Scene_create)
 {
     Scene* scene = Scene::create();
     scene->retain();
-    auto obj = se::Object::createObject("Scene", false);
+    auto obj = se::Object::createObjectWithClass(__jsb_Scene_class, false);
     obj->setPrivateData(scene);
     SE_SET_RVAL(se::Value(obj));
 }
@@ -40,7 +43,7 @@ SE_FUNC_BEGIN(Scene_init)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(Scene_constructor, "Scene", Scene_finalized)
+SE_CTOR_BEGIN(Scene_constructor, Scene, Scene_finalized)
 {
     printf("Scene constructor\n");
     Scene* obj = new Scene();
@@ -48,7 +51,7 @@ SE_CTOR_BEGIN(Scene_constructor, "Scene", Scene_finalized)
 }
 SE_CTOR_END
 
-SE_CTOR2_BEGIN(Scene_ctor, "Scene", Scene_finalized)
+SE_CTOR2_BEGIN(Scene_ctor, Scene, Scene_finalized)
 {
     Scene* obj = new Scene();
     thisObject->setPrivateData(obj);
@@ -65,6 +68,9 @@ bool jsb_register_Scene()
     cls->defineFinalizedFunction(Scene_finalized);
 
     cls->install();
+
+    __jsb_Scene_proto = cls->getProto();
+    __jsb_Scene_class = cls;
 
     return true;
 }

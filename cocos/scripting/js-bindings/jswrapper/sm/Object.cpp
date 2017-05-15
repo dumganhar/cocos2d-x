@@ -105,6 +105,13 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createObjectWithClass(Class* cls, bool rooted)
+    {
+        JSObject* jsobj = Class::_createJSObjectWithClass(cls);
+        Object* obj = Object::_createJSObject(cls, jsobj, rooted);
+        return obj;
+    }
+
     Object* Object::getObjectWithPtr(void* ptr)
     {
         Object* obj = nullptr;

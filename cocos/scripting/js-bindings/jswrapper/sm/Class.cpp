@@ -219,10 +219,16 @@ namespace se {
         }
 
         Class* thiz = iter->second;
-        JSObject* proto = thiz->_proto != nullptr ? thiz->_proto->_getJSObject() : nullptr;
-        JS::RootedObject jsProto(__cx, proto);
-        JS::RootedObject obj(__cx, JS_NewObjectWithGivenProto(__cx, &thiz->_jsCls, jsProto));
+        JS::RootedObject obj(__cx, _createJSObjectWithClass(thiz));
         *outCls = thiz;
+        return obj;
+    }
+
+    JSObject* Class::_createJSObjectWithClass(Class* cls)
+    {
+        JSObject* proto = cls->_proto != nullptr ? cls->_proto->_getJSObject() : nullptr;
+        JS::RootedObject jsProto(__cx, proto);
+        JS::RootedObject obj(__cx, JS_NewObjectWithGivenProto(__cx, &cls->_jsCls, jsProto));
         return obj;
     }
 
