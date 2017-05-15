@@ -25,7 +25,7 @@ SE_FINALIZE_FUNC_BEGIN(Scene_finalized)
 }
 SE_FINALIZE_FUNC_END
 
-SE_FUNC_BEGIN(Scene_create)
+SE_FUNC_BEGIN(Scene_create, se::DONT_NEED_THIS)
 {
     Scene* scene = Scene::create();
     scene->retain();
@@ -35,7 +35,7 @@ SE_FUNC_BEGIN(Scene_create)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Scene_init)
+SE_FUNC_BEGIN(Scene_init, se::DONT_NEED_THIS)
 {
     auto scene = (Scene*)nativeThisObject;
     bool ok = scene->init();

@@ -21,7 +21,7 @@
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& v8args)
 
 
-#define SE_FUNC_BEGIN(funcName) \
+#define SE_FUNC_BEGIN(funcName, needThisObject) \
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::Isolate* _isolate = _v8args.GetIsolate(); \
@@ -32,7 +32,7 @@
         se::internal::jsToSeArgs(_v8args, &args); \
         se::Object* thisObject = nullptr; \
         void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
-        if (nativeThisObject != nullptr) \
+        if (nativeThisObject != nullptr && needThisObject) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \
@@ -87,7 +87,7 @@
 
 // --- Get Property
 
-#define SE_GET_PROPERTY_BEGIN(funcName) \
+#define SE_GET_PROPERTY_BEGIN(funcName, needThisObject) \
     void funcName(v8::Local<v8::String> _property, const v8::PropertyCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::Isolate* _isolate = _v8args.GetIsolate(); \
@@ -95,7 +95,7 @@
         SE_UNUSED bool ret = true; \
         se::Object* thisObject = nullptr; \
         void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
-        if (nativeThisObject != nullptr) \
+        if (nativeThisObject != nullptr && needThisObject) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \
@@ -109,7 +109,7 @@
 
 // --- Set Property
 
-#define SE_SET_PROPERTY_BEGIN(funcName) \
+#define SE_SET_PROPERTY_BEGIN(funcName, needThisObject) \
     void funcName(v8::Local<v8::String> _property, v8::Local<v8::Value> _value, const v8::PropertyCallbackInfo<void>& _v8args) \
     { \
         v8::Isolate* _isolate = _v8args.GetIsolate(); \
@@ -117,7 +117,7 @@
         SE_UNUSED bool ret = true; \
         se::Object* thisObject = nullptr; \
         void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
-        if (nativeThisObject != nullptr) \
+        if (nativeThisObject != nullptr && needThisObject) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \

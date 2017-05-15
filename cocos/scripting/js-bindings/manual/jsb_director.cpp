@@ -16,7 +16,7 @@ using namespace cocos2d;
 
 se::Class* __jsb_Director_class = nullptr;
 
-SE_FUNC_BEGIN(Director_getInstance)
+SE_FUNC_BEGIN(Director_getInstance, se::DONT_NEED_THIS)
 {
     auto director = Director::getInstance();
     se::Object* obj = nullptr;
@@ -37,7 +37,7 @@ SE_FUNC_BEGIN(Director_getInstance)
 SE_FUNC_END
 
 
-SE_FUNC_BEGIN(Director_runWithScene)
+SE_FUNC_BEGIN(Director_runWithScene, se::DONT_NEED_THIS)
 {
     printf("cc.Director.runWithScene ...\n");
     auto thiz = (Director*)nativeThisObject;
@@ -45,7 +45,7 @@ SE_FUNC_BEGIN(Director_runWithScene)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Director_replaceScene)
+SE_FUNC_BEGIN(Director_replaceScene, se::DONT_NEED_THIS)
 {
     printf("cc.Director.replaceScene ...\n");
     auto thiz = (Director*)nativeThisObject;

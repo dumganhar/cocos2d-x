@@ -14,7 +14,12 @@
 #include "Object.hpp"
 #include "ScriptEngine.hpp"
 
-namespace se { namespace internal {
+namespace se {
+
+    const bool NEED_THIS = true;
+    const bool DONT_NEED_THIS = false;
+
+    namespace internal {
 
     std::string jsToStdString(JSContext* cx, JSString* jsStr)
     {

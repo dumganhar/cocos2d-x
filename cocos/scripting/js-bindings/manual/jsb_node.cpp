@@ -44,7 +44,7 @@ SE_CTOR2_BEGIN(Node_ctor, Node, Node_finalized)
 }
 SE_CTOR2_END
 
-SE_FUNC_BEGIN(Node_create)
+SE_FUNC_BEGIN(Node_create, se::DONT_NEED_THIS)
 {
     Node* node = Node::create();
     node->retain();
@@ -54,7 +54,7 @@ SE_FUNC_BEGIN(Node_create)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_onEnter)
+SE_FUNC_BEGIN(Node_onEnter, se::DONT_NEED_THIS)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
     Node* thiz = (Node*)nativeThisObject;
@@ -62,7 +62,7 @@ SE_FUNC_BEGIN(Node_onEnter)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_onExit)
+SE_FUNC_BEGIN(Node_onExit, se::DONT_NEED_THIS)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
     Node* thiz = (Node*)nativeThisObject;
@@ -70,7 +70,7 @@ SE_FUNC_BEGIN(Node_onExit)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_onEnterTransitionDidFinish)
+SE_FUNC_BEGIN(Node_onEnterTransitionDidFinish, se::DONT_NEED_THIS)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
     Node* thiz = (Node*)nativeThisObject;
@@ -78,7 +78,7 @@ SE_FUNC_BEGIN(Node_onEnterTransitionDidFinish)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_onExitTransitionDidStart)
+SE_FUNC_BEGIN(Node_onExitTransitionDidStart, se::DONT_NEED_THIS)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
     Node* thiz = (Node*) nativeThisObject;
@@ -86,7 +86,7 @@ SE_FUNC_BEGIN(Node_onExitTransitionDidStart)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_cleanup)
+SE_FUNC_BEGIN(Node_cleanup, se::DONT_NEED_THIS)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
     Node* thiz = (Node*)nativeThisObject;
@@ -94,7 +94,7 @@ SE_FUNC_BEGIN(Node_cleanup)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_addChild)
+SE_FUNC_BEGIN(Node_addChild, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
     Node* child = (Node*)args[0].toObject()->getPrivateData();
@@ -215,7 +215,7 @@ private:
     std::string _key;
 };
 
-SE_FUNC_BEGIN(Node_schedule)
+SE_FUNC_BEGIN(Node_schedule, se::NEED_THIS)
 {
     printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
     for (const auto& e1 : __jsthis_schedulekey_map)
@@ -269,7 +269,7 @@ SE_FUNC_BEGIN(Node_schedule)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_unschedule)
+SE_FUNC_BEGIN(Node_unschedule, se::NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
     se::Value jsThis(thisObject);
@@ -292,7 +292,7 @@ SE_FUNC_BEGIN(Node_unschedule)
 }
 SE_FUNC_END
 
-SE_SET_PROPERTY_BEGIN(Node_set_x)
+SE_SET_PROPERTY_BEGIN(Node_set_x, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
     printf("cc.Node set_x native obj: %p\n", thiz);
@@ -301,14 +301,14 @@ SE_SET_PROPERTY_BEGIN(Node_set_x)
 }
 SE_SET_PROPERTY_END
 
-SE_GET_PROPERTY_BEGIN(Node_get_x)
+SE_GET_PROPERTY_BEGIN(Node_get_x, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
     SE_SET_RVAL(se::Value(thiz->getPositionX()));
 }
 SE_GET_PROPERTY_END
 
-SE_SET_PROPERTY_BEGIN(Node_set_y)
+SE_SET_PROPERTY_BEGIN(Node_set_y, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
     printf("cc.Node set_y native obj: %p\n", thiz);
@@ -317,7 +317,7 @@ SE_SET_PROPERTY_BEGIN(Node_set_y)
 }
 SE_SET_PROPERTY_END
 
-SE_GET_PROPERTY_BEGIN(Node_get_y)
+SE_GET_PROPERTY_BEGIN(Node_get_y, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
     SE_SET_RVAL(se::Value(thiz->getPositionY()));

@@ -42,7 +42,7 @@ SE_CTOR2_BEGIN(Menu_ctor, Menu, Menu_finalized)
 }
 SE_CTOR2_END
 
-SE_FUNC_BEGIN(Menu_create)
+SE_FUNC_BEGIN(Menu_create, se::DONT_NEED_THIS)
 {
     Menu* menu = Menu::create();
     menu->retain();

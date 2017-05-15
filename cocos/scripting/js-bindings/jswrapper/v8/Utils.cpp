@@ -8,6 +8,9 @@
 
 namespace se {
 
+    const bool NEED_THIS = true;
+    const bool DONT_NEED_THIS = false;
+
     namespace internal {
 
         void jsToSeArgs(const v8::FunctionCallbackInfo<v8::Value>& v8args, ValueArray* outArr)

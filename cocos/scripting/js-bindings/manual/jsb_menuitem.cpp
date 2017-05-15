@@ -29,7 +29,7 @@ SE_FINALIZE_FUNC_BEGIN(MenuItem_finalized)
 }
 SE_FINALIZE_FUNC_END
 
-SE_FUNC_BEGIN(MenuItem_create)
+SE_FUNC_BEGIN(MenuItem_create, se::DONT_NEED_THIS)
 {
     MenuItem* nativeObj = MenuItem::create();
     nativeObj->retain();
@@ -58,7 +58,7 @@ SE_FINALIZE_FUNC_BEGIN(MenuItemLabel_finalized)
 }
 SE_FINALIZE_FUNC_END
 
-SE_FUNC_BEGIN(MenuItemLabel_create)
+SE_FUNC_BEGIN(MenuItemLabel_create, se::DONT_NEED_THIS)
 {
 //    MenuItemLabel* nativeObj = MenuItemLabel::create();
 //    nativeObj->retain();
@@ -88,7 +88,7 @@ SE_FINALIZE_FUNC_BEGIN(MenuItemFont_finalized)
 }
 SE_FINALIZE_FUNC_END
 
-SE_FUNC_BEGIN(MenuItemFont_create)
+SE_FUNC_BEGIN(MenuItemFont_create, se::DONT_NEED_THIS)
 {
     std::string str = args[0].toString();
     se::Value func(args[1]);

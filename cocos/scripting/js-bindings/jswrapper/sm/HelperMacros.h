@@ -5,13 +5,12 @@
 #ifdef SCRIPT_ENGINE_SM
 
 #define SAFE_ADD_REF(obj) if (obj != nullptr) obj->addRef()
-
 #define SAFE_RELEASE(obj) if (obj != nullptr) obj->release()
 
 #define SE_DECLARE_FUNC(funcName) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp)
 
-#define SE_FUNC_BEGIN(funcName) \
+#define SE_FUNC_BEGIN(funcName, needThisObject) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
@@ -22,7 +21,7 @@
         se::Object* thisObject = nullptr; \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
-        if (nativeThisObject != nullptr) \
+        if (nativeThisObject != nullptr && needThisObject) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         }
@@ -98,7 +97,7 @@
 
 // --- Get Property
 
-#define SE_GET_PROPERTY_BEGIN(funcName) \
+#define SE_GET_PROPERTY_BEGIN(funcName, needThisObject) \
     bool funcName(JSContext *_cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
@@ -107,7 +106,7 @@
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
         se::Object* thisObject = nullptr; \
-        if (nativeThisObject != nullptr) \
+        if (nativeThisObject != nullptr && needThisObject) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         }
@@ -122,7 +121,7 @@
 
 // --- Set Property
 
-#define SE_SET_PROPERTY_BEGIN(funcName) \
+#define SE_SET_PROPERTY_BEGIN(funcName, needThisObject) \
     bool funcName(JSContext *_cx, unsigned argc, JS::Value *_vp) \
     { \
         bool ret = true; \
@@ -131,7 +130,7 @@
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
         se::Object* thisObject = nullptr; \
-        if (nativeThisObject != nullptr) \
+        if (nativeThisObject != nullptr && needThisObject) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \

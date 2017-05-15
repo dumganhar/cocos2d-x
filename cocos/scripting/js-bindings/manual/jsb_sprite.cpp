@@ -28,7 +28,7 @@ SE_FINALIZE_FUNC_BEGIN(Sprite_finalized)
 }
 SE_FINALIZE_FUNC_END
 
-SE_FUNC_BEGIN(Sprite_create)
+SE_FUNC_BEGIN(Sprite_create, se::DONT_NEED_THIS)
 {
     std::string filePath = args[0].toString();
     Sprite* sprite = Sprite::create(filePath);
@@ -39,7 +39,7 @@ SE_FUNC_BEGIN(Sprite_create)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(Sprite_initWithFile)
+SE_FUNC_BEGIN(Sprite_initWithFile, se::DONT_NEED_THIS)
 {
     assert(argc == 1);
     assert(args[0].isString());
@@ -70,13 +70,13 @@ SE_CTOR2_END
 
 static double __test_static_property = 100.0;
 
-SE_GET_PROPERTY_BEGIN(Sprite_test_static_property_getter)
+SE_GET_PROPERTY_BEGIN(Sprite_test_static_property_getter, se::DONT_NEED_THIS)
 {
     SE_SET_RVAL(se::Value(__test_static_property));
 }
 SE_GET_PROPERTY_END
 
-SE_SET_PROPERTY_BEGIN(Sprite_test_static_property_setter)
+SE_SET_PROPERTY_BEGIN(Sprite_test_static_property_setter, se::DONT_NEED_THIS)
 {
     __test_static_property = data.toNumber();
 }
