@@ -10,6 +10,8 @@ extern "C" JS_EXPORT void JSSynchronousGarbageCollectForDebugging(JSContextRef);
 
 namespace se {
 
+    Class* __jsb_CCPrivateData_class = nullptr;
+    
     namespace {
         ScriptEngine* __instance = nullptr;
 
@@ -108,9 +110,9 @@ namespace se {
 
         executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/new-jsb-prepare.js");
 
-        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
-        privateDataCls->defineFinalizedFunction(privateDataFinalize);
-        privateDataCls->install();
+        __jsb_CCPrivateData_class = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        __jsb_CCPrivateData_class->defineFinalizedFunction(privateDataFinalize);
+        __jsb_CCPrivateData_class->install();
         
         _isValid = true;
 

@@ -13,6 +13,8 @@ namespace se {
     class Class;
     class Value;
 
+    extern Class* __jsb_CCPrivateData_class;
+
     class ArrayBufferAllocator : public v8::ArrayBuffer::Allocator {
     public:
         virtual void *Allocate(size_t length) {

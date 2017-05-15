@@ -14,7 +14,7 @@ SE_DECLARE_FUNC(Node_cleanup);
 
 namespace se {
 
-    // --- SM Global Class
+    Class* __jsb_CCPrivateData_class = nullptr;
 
     static const JSClassOps sandbox_classOps = {
         nullptr, nullptr, nullptr, nullptr,
@@ -247,9 +247,9 @@ namespace se {
 
         JS_FireOnNewGlobalObject(_cx, rootedGlobalObj);
 
-        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
-        privateDataCls->defineFinalizedFunction(privateDataFinalize);
-        privateDataCls->install();
+        __jsb_CCPrivateData_class = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        __jsb_CCPrivateData_class->defineFinalizedFunction(privateDataFinalize);
+        __jsb_CCPrivateData_class->install();
 
         _isValid = true;
 

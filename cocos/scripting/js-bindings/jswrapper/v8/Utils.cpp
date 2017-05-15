@@ -4,6 +4,7 @@
 
 #include "Object.hpp"
 #include "Class.hpp"
+#include "ScriptEngine.hpp"
 
 namespace se {
 
@@ -135,7 +136,7 @@ namespace se {
             }
             else
             {
-                Object* privateObj = Object::createObject("__CCPrivateData", false);
+                Object* privateObj = Object::createObjectWithClass(__jsb_CCPrivateData_class, false);
                 internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
                 privateData->data = data;
                 privateData->seObj = privateObj;

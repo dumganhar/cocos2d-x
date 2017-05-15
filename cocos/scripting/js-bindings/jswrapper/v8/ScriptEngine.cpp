@@ -10,6 +10,9 @@
     if (!(cond)) return val
 
 namespace se {
+
+    Class* __jsb_CCPrivateData_class = nullptr;
+
     namespace {
         ScriptEngine* __instance = nullptr;
 
@@ -107,9 +110,9 @@ namespace se {
         _globalObj->defineFunction("log", __log);
         _globalObj->defineFunction("forceGC", __forceGC);
 
-        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
-        privateDataCls->defineFinalizedFunction(privateDataFinalize);
-        privateDataCls->install();
+        __jsb_CCPrivateData_class = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        __jsb_CCPrivateData_class->defineFinalizedFunction(privateDataFinalize);
+        __jsb_CCPrivateData_class->install();
 
         _isValid = true;
 
