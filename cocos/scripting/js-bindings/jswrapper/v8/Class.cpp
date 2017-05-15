@@ -98,8 +98,8 @@ namespace se {
 
     bool Class::defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
     {
-//        _ctorTemplate.Get(__isolate)->SetAccessorProperty(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, getter), v8::FunctionTemplate::New(__isolate, setter));
-        assert(false);
+        _ctorTemplate.Get(__isolate)->SetNativeDataProperty(v8::String::NewFromUtf8(__isolate, name), getter, setter);
+//        assert(false);
         return true;
     }
 

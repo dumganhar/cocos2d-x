@@ -145,7 +145,7 @@ namespace se {
             if (c > 0)
             {
                 wrap.wrap(data);
-                printf("setPrivate1: %p\n", data);
+//                printf("setPrivate1: %p\n", data);
             }
             else
             {
@@ -171,7 +171,7 @@ namespace se {
             if (c > 0)
             {
                 void* nativeObj = ObjectWrap::unwrap(obj);
-                printf("getPrivate1: %p\n", nativeObj);
+//                printf("getPrivate1: %p\n", nativeObj);
                 return nativeObj;
             }
 
