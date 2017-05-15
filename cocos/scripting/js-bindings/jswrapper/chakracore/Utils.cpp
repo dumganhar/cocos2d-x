@@ -159,7 +159,7 @@ namespace se { namespace internal {
         privateData->data = data;
         privateData->finalizeCb = finalizeCb;
         JsSetExternalData(privateObj->_getJSObject(), privateData);
-        printf("setPrivate: %p\n", data);
+//        printf("setPrivate: %p\n", data);
 
         JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
         JsCreatePropertyId(KEY_PRIVATE_DATE, strlen(KEY_PRIVATE_DATE), &propertyId);
@@ -191,7 +191,7 @@ namespace se { namespace internal {
             assert(privateData);
             data = privateData->data;
         }
-        printf("getPrivate: %p\n", data);
+//        printf("getPrivate: %p\n", data);
         return data;
     }
 
