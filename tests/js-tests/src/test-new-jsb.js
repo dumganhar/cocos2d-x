@@ -183,7 +183,7 @@ var __sceneIndex = 0;
 var __spriteId = 0;
 
 cc.Sprite.prototype._ctor = function(filePath) {
-  log("cc.Sprite.prototype._ctor");
+  log("cc.Sprite.prototype._ctor: file: " + filePath);
   var ok = this.initWithFile(filePath);
   log(ok);
 }
@@ -228,6 +228,11 @@ var MySprite = cc.Sprite.extend({
   onEnter: function() {
     log("MySprite onEnter1 ...: id:" + this.id);
     this._super();
+    var sp = new cc.Sprite("res/Images/arrows.png");
+    log('after create sp');
+    sp.x = 40;
+    sp.y = 40;
+    this.addChild(sp);
     log("MySprite onEnter2 ...: id:" + this.id);
   },
   onExit: function() {
@@ -290,13 +295,14 @@ log("start THIS: " + this);
 
 
     var sp3 = new MySprite("res/Images/arrows.png");
-
+    log('after create sp3');
     scene.addChild(sp3);
+    log('after addChild sp3');
     // log("before iterate MySprite ...");
     // iterateObject(MySprite.prototype.__proto__);
     // log("after iterate MySprite ...");
     log("before sp3.x:" + sp3.x + ", y:" + sp3.y);
-    sp3.x = 20;
+    sp3.x = 80;
     sp3.y = 300;
     log("after sp3.x:" + sp3.x + ", y:" + sp3.y);
     log("native ------ test ");

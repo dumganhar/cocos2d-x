@@ -40,6 +40,8 @@ SE_FUNC_END
 
 SE_FUNC_BEGIN(Sprite_initWithFile)
 {
+    assert(argc == 1);
+    assert(args[0].isString());
     std::string filePath = args[0].toString();
     Sprite* nativeObj = (Sprite*)nativeThisObject;
     bool ok = nativeObj->initWithFile(filePath);

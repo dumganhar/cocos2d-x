@@ -15,6 +15,7 @@ namespace se {
     , _isRooted(false)
     , _hasPrivateData(false)
     , _isCleanup(false)
+    , _finalizeCb(nullptr)
     {
     }
 
@@ -87,7 +88,7 @@ namespace se {
         return true;
     }
 
-    void Object::_cleanup()
+    void Object::_cleanup(void* nativeObject/* = nullptr*/)
     {
         if (_isCleanup)
             return;
@@ -96,12 +97,14 @@ namespace se {
         {
             if (_obj != nullptr)
             {
-                void* nativeObj = nullptr;
-                JsGetExternalData(_obj, &nativeObj);
-
-                if (nativeObj != nullptr)
+                if (nativeObject == nullptr)
                 {
-                    auto iter = __nativePtrToObjectMap.find(nativeObj);
+                    nativeObject = internal::getPrivate(_obj);
+                }
+
+                if (nativeObject != nullptr)
+                {
+                    auto iter = __nativePtrToObjectMap.find(nativeObject);
                     if (iter != __nativePtrToObjectMap.end())
                     {
                         __nativePtrToObjectMap.erase(iter);
@@ -117,6 +120,11 @@ namespace se {
         }
 
         _isCleanup = true;
+    }
+
+    void Object::_setFinalizeCallback(JsFinalizeCallback finalizeCb)
+    {
+        _finalizeCb = finalizeCb;
     }
 
     // --- Getter/Setter
@@ -259,14 +267,12 @@ namespace se {
 
     void* Object::getPrivateData()
     {
-        void* nativeObj = nullptr;
-        JsGetExternalData(_obj, &nativeObj);
-        return nativeObj;
+        return internal::getPrivate(_obj);
     }
 
     void Object::setPrivateData(void *data)
     {
-        JsSetExternalData(_obj, data);
+        internal::setPrivate(_obj, data, _finalizeCb);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
     }

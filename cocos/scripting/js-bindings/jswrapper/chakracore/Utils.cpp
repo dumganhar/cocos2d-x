@@ -128,13 +128,72 @@ namespace se { namespace internal {
         free(buf);
     }
 
+    const char* KEY_PRIVATE_DATE = "__cc_private_data";
+
     bool hasPrivate(JsValueRef obj)
     {
         bool isExist = false;
         JsHasExternalData(obj, &isExist);
+        if (isExist)
+            return true;
+
+        JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+        JsCreatePropertyId(KEY_PRIVATE_DATE, strlen(KEY_PRIVATE_DATE), &propertyId);
+        JsHasProperty(obj, propertyId, &isExist);
         return isExist;
     }
 
+    void setPrivate(JsValueRef obj, void* data, JsFinalizeCallback finalizeCb)
+    {
+        bool isExist = false;
+        JsHasExternalData(obj, &isExist);
+        if (isExist)
+        {
+            JsSetExternalData(obj, data);
+            return;
+        }
+
+        assert(finalizeCb);
+        Object* privateObj = Object::createObject("__CCPrivateData", false);
+        internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
+        privateData->data = data;
+        privateData->finalizeCb = finalizeCb;
+        JsSetExternalData(privateObj->_getJSObject(), privateData);
+        printf("setPrivate: %p\n", data);
+
+        JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+        JsCreatePropertyId(KEY_PRIVATE_DATE, strlen(KEY_PRIVATE_DATE), &propertyId);
+        JsSetProperty(obj, propertyId, privateObj->_getJSObject(), true);
+        privateObj->release();
+    }
+
+    void* getPrivate(JsValueRef obj)
+    {
+        void* data = nullptr;
+        bool isExist = false;
+        JsHasExternalData(obj, &isExist);
+        if (isExist)
+        {
+            JsGetExternalData(obj, &data);
+            return data;
+        }
+
+        JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+        JsCreatePropertyId(KEY_PRIVATE_DATE, strlen(KEY_PRIVATE_DATE), &propertyId);
+        JsHasProperty(obj, propertyId, &isExist);
+        if (isExist)
+        {
+            JsValueRef privateDataVal;
+            JsGetProperty(obj, propertyId, &privateDataVal);
+            void* tmpPrivateData = nullptr;
+            JsGetExternalData(privateDataVal, &tmpPrivateData);
+            internal::PrivateData* privateData = (internal::PrivateData*)tmpPrivateData;
+            assert(privateData);
+            data = privateData->data;
+        }
+        printf("getPrivate: %p\n", data);
+        return data;
+    }
 
 }} // namespace se { namespace internal {
 

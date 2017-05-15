@@ -25,9 +25,9 @@ namespace se {
 
         JsValueRef __forceGC(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
-            printf("GC begin ...\n");
+            printf("GC begin ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
             ScriptEngine::getInstance()->gc();
-            printf("GC end ...\n");
+            printf("GC end ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
             return JS_INVALID_REFERENCE;
         }
 
@@ -40,6 +40,19 @@ namespace se {
                 printf("JS: %s\n", str.c_str());
             }
             return JS_INVALID_REFERENCE;
+        }
+
+        JsValueRef privateDataContructor(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
+        {
+            return JS_INVALID_REFERENCE;
+        }
+
+        void privateDataFinalize(void *data)
+        {
+            internal::PrivateData* p = (internal::PrivateData*)data;
+            if (p->finalizeCb != nullptr)
+                p->finalizeCb(p->data);
+            free(p);
         }
     }
 
@@ -91,6 +104,10 @@ namespace se {
 
         _globalObj->defineFunction("log", __log);
         _globalObj->defineFunction("forceGC", __forceGC);
+
+        Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
+        privateDataCls->defineFinalizedFunction(privateDataFinalize);
+        privateDataCls->install();
 
         _isValid = true;
 

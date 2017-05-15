@@ -35,7 +35,8 @@ namespace se {
 
         JsValueRef _getJSObject() const;
         Class* _getClass() const;
-        void _cleanup();
+        void _cleanup(void* nativeObject = nullptr);
+        void _setFinalizeCallback(JsFinalizeCallback finalizeCb);
 
         // --- Function
         bool isFunction() const;
@@ -77,6 +78,7 @@ namespace se {
         bool _isRooted;  /* wrapper is in rooted mode */
         bool _hasPrivateData;
         bool _isCleanup;
+        JsFinalizeCallback _finalizeCb;
 
         friend class ScriptEngine;
     };
