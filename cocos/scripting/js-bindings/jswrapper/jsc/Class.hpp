@@ -10,6 +10,14 @@ namespace se {
 
     class Object;
 
+    struct JSPropertySpec
+    {
+        const char* name;
+        JSObjectCallAsFunctionCallback getter;
+        JSObjectCallAsFunctionCallback setter;
+        JSPropertyAttributes attributes;
+    };
+
     class Class
     {
     public:
@@ -24,9 +32,9 @@ namespace se {
         Object* getProto();
 
         bool defineFunction(const char *name, JSObjectCallAsFunctionCallback func);
-        bool defineProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter);
+        bool defineProperty(const char *name, JSObjectCallAsFunctionCallback getter, JSObjectCallAsFunctionCallback setter);
         bool defineStaticFunction(const char *name, JSObjectCallAsFunctionCallback func);
-        bool defineStaticProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter);
+        bool defineStaticProperty(const char *name, JSObjectCallAsFunctionCallback getter, JSObjectCallAsFunctionCallback setter);
         bool defineFinalizedFunction(JSObjectFinalizeCallback func);
 
     private:
@@ -47,8 +55,8 @@ namespace se {
 
         std::vector<JSStaticFunction> _funcs;
         std::vector<JSStaticFunction> _staticFuncs;
-        std::vector<JSStaticValue> _properties;
-        std::vector<JSStaticValue> _staticProperties;
+        std::vector<JSPropertySpec> _properties;
+        std::vector<JSPropertySpec> _staticProperties;
         JSObjectFinalizeCallback _finalizeOp;
 
         friend class ScriptEngine;

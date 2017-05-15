@@ -1,9 +1,10 @@
 #include "Object.hpp"
+
+#ifdef SCRIPT_ENGINE_JSC
+
 #include "Utils.hpp"
 #include "Class.hpp"
 #include "ScriptEngine.hpp"
-
-#ifdef SCRIPT_ENGINE_JSC
 
 namespace se {
  

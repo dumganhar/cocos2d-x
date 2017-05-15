@@ -65,10 +65,25 @@ SE_CTOR2_BEGIN(Sprite_ctor, "Sprite", Sprite_finalized)
 }
 SE_CTOR2_END
 
+static double __test_static_property = 100.0;
+
+SE_GET_PROPERTY_BEGIN(Sprite_test_static_property_getter)
+{
+    SE_SET_RVAL(se::Value(__test_static_property));
+}
+SE_GET_PROPERTY_END
+
+SE_SET_PROPERTY_BEGIN(Sprite_test_static_property_setter)
+{
+    __test_static_property = data.toNumber();
+}
+SE_SET_PROPERTY_END
+
 bool jsb_register_Sprite()
 {
     auto cls = se::Class::create("Sprite", __ccObj, __jsb_Node_proto, Sprite_constructor);
     cls->defineStaticFunction("create", Sprite_create);
+    cls->defineStaticProperty("test_static_property", Sprite_test_static_property_getter, Sprite_test_static_property_setter);
     cls->defineFunction("initWithFile", Sprite_initWithFile);
     cls->defineFunction("ctor", Sprite_ctor);
 

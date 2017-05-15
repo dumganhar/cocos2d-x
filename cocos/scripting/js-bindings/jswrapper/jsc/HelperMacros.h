@@ -74,18 +74,15 @@
         JSObjectRef _jsRet = thisObject->_getJSObject();
 
 #define SE_CTOR_END \
-        if (!se::__isInvokedFromCCClass) \
+        se::Value _property; \
+        bool _found = false; \
+        _found = thisObject->getProperty("_ctor", &_property); \
+        if (_found) _property.toObject()->call(args, thisObject); \
+        for (auto& v : args) \
         { \
-            se::Value _property; \
-            bool _found = false; \
-            _found = thisObject->getProperty("_ctor", &_property); \
-            if (_found) _property.toObject()->call(args, thisObject); \
-            for (auto& v : args) \
+            if (v.isObject() && v.toObject()->isRooted()) \
             { \
-                if (v.isObject() && v.toObject()->isRooted()) \
-                { \
-                    v.toObject()->switchToUnrooted(); \
-                } \
+                v.toObject()->switchToUnrooted(); \
             } \
         } \
         return _jsRet; \
@@ -121,11 +118,12 @@
 // --- Get Property
 
 #define SE_GET_PROPERTY_BEGIN(funcName) \
-    JSValueRef funcName(JSContextRef _cx, JSObjectRef _object, JSStringRef _propertyName, JSValueRef* _exception) \
+    JSValueRef funcName(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
+        assert(argc == 0); \
         JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
         SE_UNUSED bool ret = true; \
-        void* nativeThisObject = se::internal::getPrivate(_object); \
+        void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         se::Object* thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \
@@ -143,21 +141,23 @@
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName) \
-    bool funcName(JSContextRef _cx, JSObjectRef _object, JSStringRef _propertyName, JSValueRef _value, JSValueRef* _exception) \
+    JSValueRef funcName(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
-        bool ret = true; \
-        void* nativeThisObject = se::internal::getPrivate(_object); \
+        assert(argc == 1); \
+        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        SE_UNUSED bool ret = true; \
+        void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         se::Object* thisObject = nullptr; \
         if (nativeThisObject != nullptr) \
         { \
             thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
         } \
         se::Value data; \
-        se::internal::jsToSeValue(_cx, _value, &data);
+        se::internal::jsToSeValue(_cx, _argv[0], &data);
 
 #define SE_SET_PROPERTY_END \
         SAFE_RELEASE(thisObject); \
-        return ret; \
+        return _jsRet; \
     }
 
 #endif // #ifdef SCRIPT_ENGINE_JSC

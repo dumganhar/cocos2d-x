@@ -365,6 +365,7 @@ int main_register_class(int argc, char** argv)
 //    dogClass->install();
 
     se::AutoHandleScope hs;
+
     jsb_register_all();
 
     se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");

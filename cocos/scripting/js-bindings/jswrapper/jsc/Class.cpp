@@ -1,8 +1,10 @@
 #include "Class.hpp"
-#include "Object.hpp"
-#include "Utils.hpp"
 
 #ifdef SCRIPT_ENGINE_JSC
+
+#include "Object.hpp"
+#include "Utils.hpp"
+#include "ScriptEngine.hpp"
 
 namespace se {
 
@@ -101,9 +103,9 @@ namespace se {
         }
 
         _funcs.push_back(JS_FS_END);
-        _properties.push_back(JS_PS_END);
+//        _properties.push_back(JS_PS_END);
 
-        _jsClsDef.staticValues = _properties.data();
+//        _jsClsDef.staticValues = _properties.data();
         _jsClsDef.staticFunctions = _funcs.data();
 
 //        _jsClsDef.getProperty = _getPropertyCallback;
@@ -124,13 +126,49 @@ namespace se {
             JSStringRelease(name);
         }
 
-//        for (const auto& property : _properties)
-//        {
-//            JSStringRef name = JSStringCreateWithUTF8CString(property.name);
-//            JSStringRelease(name);
-//        }
+        Object* globalObject = ScriptEngine::getInstance()->getGlobalObject();
+        Value v;
+        globalObject->getProperty("__defineProperty", &v);
+        Object* definePropertyFunc = v.toObject();
 
         _proto = Object::_createJSObject(this, jsCtor, true);
+
+        Value prototypeValue;
+        _proto->getProperty("prototype", &prototypeValue);
+        Object* prototypeObject = prototypeValue.toObject();
+
+        ValueArray args;
+        args.reserve(4);
+
+        // Set instance properties
+        for (const auto& property : _properties)
+        {
+            args.clear();
+            JSObjectRef getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.getter);
+            JSObjectRef setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.setter);
+
+            args.push_back(Value(prototypeObject));
+            args.push_back(Value(property.name));
+            args.push_back(Value(Object::_createJSObject(nullptr, getter, false)));
+            args.push_back(Value(Object::_createJSObject(nullptr, setter, false)));
+
+            definePropertyFunc->call(args, nullptr);
+        }
+
+        // Set class properties
+        for (const auto& property : _staticProperties)
+        {
+            args.clear();
+            JSObjectRef getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.getter);
+            JSObjectRef setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.setter);
+
+            args.push_back(Value(_proto));
+            args.push_back(Value(property.name));
+            args.push_back(Value(Object::_createJSObject(nullptr, getter, false)));
+            args.push_back(Value(Object::_createJSObject(nullptr, setter, false)));
+
+            definePropertyFunc->call(args, nullptr);
+        }
 
         _parent->setProperty(_name.c_str(), Value(_proto));
 
@@ -144,9 +182,9 @@ namespace se {
         return true;
     }
 
-    bool Class::defineProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter)
+    bool Class::defineProperty(const char *name, JSObjectCallAsFunctionCallback getter, JSObjectCallAsFunctionCallback setter)
     {
-        JSStaticValue property = JS_PSGS(name, getter, setter, kJSPropertyAttributeNone);
+        JSPropertySpec property = JS_PSGS(name, getter, setter, kJSPropertyAttributeNone);
         _properties.push_back(property);
         return true;
     }
@@ -158,9 +196,9 @@ namespace se {
         return true;
     }
 
-    bool Class::defineStaticProperty(const char *name, JSObjectGetPropertyCallback getter, JSObjectSetPropertyCallback setter)
+    bool Class::defineStaticProperty(const char *name, JSObjectCallAsFunctionCallback getter, JSObjectCallAsFunctionCallback setter)
     {
-        JSStaticValue property = JS_PSGS(name, getter, setter, kJSPropertyAttributeNone);
+        JSPropertySpec property = JS_PSGS(name, getter, setter, kJSPropertyAttributeNone);
         _staticProperties.push_back(property);
         return true;
     }

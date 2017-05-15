@@ -22,6 +22,7 @@ log("before1");
 iterateObject(cc.Scene.prototype);
 log("after1");
 
+
 // log("before1");
 // iterateObject(cc.Node.prototype);
 // log("after1");
@@ -283,17 +284,21 @@ log("start THIS: " + this);
 
     log("this: " + this);
 
+    log("begin cc.Sprite.test_static_property = " + cc.Sprite.test_static_property);
+    cc.Sprite.test_static_property = 23;
+    log("after cc.Sprite.test_static_property = " + cc.Sprite.test_static_property);
+
 
     var sp3 = new MySprite("res/Images/arrows.png");
-    log("before sp3.x:" + sp3.x + ", y:" + sp3.y);
 
-    log("after sp3.x:" + sp3.x + ", y:" + sp3.y);
     scene.addChild(sp3);
-    log("before iterate MySprite ...");
-    iterateObject(MySprite.prototype);
-    log("after iterate MySprite ...");
+    // log("before iterate MySprite ...");
+    // iterateObject(MySprite.prototype.__proto__);
+    // log("after iterate MySprite ...");
+    log("before sp3.x:" + sp3.x + ", y:" + sp3.y);
     sp3.x = 20;
     sp3.y = 300;
+    log("after sp3.x:" + sp3.x + ", y:" + sp3.y);
     log("native ------ test ");
 
     log("before iterate scene ...");

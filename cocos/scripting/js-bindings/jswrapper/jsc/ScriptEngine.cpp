@@ -1,10 +1,10 @@
 #include "ScriptEngine.hpp"
 
+#ifdef SCRIPT_ENGINE_JSC
+
 #include "Object.hpp"
 #include "Class.hpp"
 #include "Utils.hpp"
-
-#ifdef SCRIPT_ENGINE_JSC
 
 extern "C" JS_EXPORT void JSSynchronousGarbageCollectForDebugging(JSContextRef);
 
@@ -105,6 +105,8 @@ namespace se {
         propertyName = JSStringCreateWithUTF8CString("forceGC");
         JSObjectSetProperty(_cx, globalObj, propertyName, JSObjectMakeFunctionWithCallback(_cx, propertyName, __forceGC), kJSPropertyAttributeReadOnly, nullptr);
         JSStringRelease(propertyName);
+
+        executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/new-jsb-prepare.js");
 
         Class* privateDataCls = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
         privateDataCls->defineFinalizedFunction(privateDataFinalize);
