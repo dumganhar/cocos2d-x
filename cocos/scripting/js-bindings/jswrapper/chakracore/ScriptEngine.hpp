@@ -12,6 +12,8 @@ namespace se {
     class Class;
     class Value;
 
+    extern Class* __jsb_CCPrivateData_class;
+
     class AutoHandleScope
     {
     public:

@@ -11,6 +11,7 @@
 #ifdef SCRIPT_ENGINE_CHAKRACORE
 
 #include "Object.hpp"
+#include "ScriptEngine.hpp"
 
 namespace se { namespace internal {
 
@@ -156,7 +157,7 @@ namespace se { namespace internal {
         }
 
         assert(finalizeCb);
-        Object* privateObj = Object::createObject("__CCPrivateData", false);
+        Object* privateObj = Object::createObjectWithClass(__jsb_CCPrivateData_class, false);
         internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
         privateData->data = data;
         privateData->finalizeCb = finalizeCb;
