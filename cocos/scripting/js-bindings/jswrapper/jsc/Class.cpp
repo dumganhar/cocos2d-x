@@ -219,9 +219,14 @@ namespace se {
         }
 
         Class* thiz = iter->second;
-        JSObjectRef obj = JSObjectMake(__cx, thiz->_jsCls, nullptr);
         *outCls = thiz;
-        return obj;
+
+        return _createJSObjectWithClass(thiz);
+    }
+
+    JSObjectRef Class::_createJSObjectWithClass(Class* cls)
+    {
+        return JSObjectMake(__cx, cls->_jsCls, nullptr);
     }
 
     void Class::setContext(JSContextRef cx)

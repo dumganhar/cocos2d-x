@@ -40,6 +40,8 @@ namespace se {
     private:
 
         static JSObjectRef _createJSObject(const std::string &clsName, Class** outCls);
+        static JSObjectRef _createJSObjectWithClass(Class* cls);
+        
         static void setContext(JSContextRef cx);
         static void cleanup();
 

@@ -35,12 +35,12 @@ SE_CTOR_BEGIN(Menu_constructor, Menu, Menu_finalized)
 }
 SE_CTOR_END
 
-SE_CTOR_BEGIN(Menu_ctor, Menu, Menu_finalized)
+SE_CTOR2_BEGIN(Menu_ctor, Menu, Menu_finalized)
 {
     Menu* obj = new Menu();
     thisObject->setPrivateData(obj);
 }
-SE_CTOR_END
+SE_CTOR2_END
 
 SE_FUNC_BEGIN(Menu_create)
 {

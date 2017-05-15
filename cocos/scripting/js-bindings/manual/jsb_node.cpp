@@ -36,13 +36,13 @@ SE_CTOR_BEGIN(Node_constructor, Node, Node_finalized)
 }
 SE_CTOR_END
 
-SE_CTOR_BEGIN(Node_ctor, Node, Node_finalized)
+SE_CTOR2_BEGIN(Node_ctor, Node, Node_finalized)
 {
     printf("Node_ctor ...\n");
     Node* obj = new Node();
     thisObject->setPrivateData(obj);
 }
-SE_CTOR_END
+SE_CTOR2_END
 
 SE_FUNC_BEGIN(Node_create)
 {

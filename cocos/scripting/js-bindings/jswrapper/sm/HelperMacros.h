@@ -90,7 +90,7 @@
         JS::Value _thiz = _argv.computeThis(_cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
-        se::Object* thisObject = se::Object::_createJSObject(nullptr, _thiz.toObjectOrNull(), false); \
+        se::Object* thisObject = se::Object::_createJSObject(__jsb_##clsName##_class, _thiz.toObjectOrNull(), false); \
         thisObject->_setFinalizeCallback(finalizeCb);
 
 
