@@ -17,7 +17,7 @@ namespace se {
     {
     private:
         Object();
-        bool init(v8::Local<v8::Object> obj, bool rooted);
+        bool init(Class* cls, v8::Local<v8::Object> obj, bool rooted);
 
     public:
         virtual ~Object();
@@ -27,9 +27,9 @@ namespace se {
         static Object* createObject(const char* clsName, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
         static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
+        static Object* createObjectWithClass(Class* cls, bool rooted);
+        static Object* _createJSObject(Class* cls, v8::Local<v8::Object> obj, bool rooted);
 
-        static Object* _createJSObject(v8::Local<v8::Object> obj, bool rooted);
-        
         // --- Getter/Setter
         bool getProperty(const char *name, Value* data);
         void setProperty(const char *name, const Value& data);

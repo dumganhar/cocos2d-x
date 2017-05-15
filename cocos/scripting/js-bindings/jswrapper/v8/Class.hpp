@@ -34,6 +34,7 @@ namespace se {
 	private:
         static void cleanup();
         static v8::Local<v8::Object> _createJSObject(const std::string &clsName, Class** outCls);
+        static v8::Local<v8::Object> _createJSObjectWithClass(Class* cls);
         static void setIsolate(v8::Isolate* isolate);
 		
 		std::string _name;

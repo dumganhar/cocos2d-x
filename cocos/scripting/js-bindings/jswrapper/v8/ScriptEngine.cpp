@@ -102,7 +102,7 @@ namespace se {
         Class::setIsolate(_isolate);
         Object::setIsolate(_isolate);
 
-        _globalObj = Object::_createJSObject(_context.Get(_isolate)->Global(), true);
+        _globalObj = Object::_createJSObject(nullptr, _context.Get(_isolate)->Global(), true);
 
         _globalObj->defineFunction("log", __log);
         _globalObj->defineFunction("forceGC", __forceGC);
@@ -174,33 +174,16 @@ namespace se {
 
         if (!maybeScript.IsEmpty())
         {
-            v8::Local <v8::Script> v8Script = maybeScript.ToLocalChecked();
+            v8::Local<v8::Script> v8Script = maybeScript.ToLocalChecked();
             v8::MaybeLocal<v8::Value> maybeResult = v8Script->Run(_context.Get(_isolate));
 
             if (!maybeResult.IsEmpty())
             {
                 v8::Local<v8::Value> result = maybeResult.ToLocalChecked();
 
-                if (!result->IsUndefined() && data)
+                if (!result->IsUndefined() && data != nullptr)
                 {
-                    v8::String::Utf8Value type(result->TypeOf(_isolate));
-                    printf("return : %s\n", *type);
-                    if (result->IsNumber())
-                        data->setNumber(result->ToNumber()->Value());
-                    else if (result->IsString()) {
-                        v8::String::Utf8Value utf8(result);
-                        data->setString(*utf8);
-                    } else if (result->IsBoolean())
-                        data->setBoolean(result->ToBoolean()->Value());
-                    else if (result->IsObject())
-                    {
-                        Object* obj = Object::_createJSObject(result->ToObject(), false);
-                        data->setObject(obj);
-                        obj->release();
-                    }
-                    else if (result->IsNull())
-                        data->setNull();
-                    else data->setUndefined();
+                    internal::jsToSeValue(_isolate, result, data);
                 }
 
                 success = true;

@@ -119,7 +119,12 @@ namespace se {
         }
 
         *outCls = iter->second;
-        return iter->second->_ctorTemplate.Get(__isolate)->InstanceTemplate()->NewInstance();
+        return _createJSObjectWithClass(iter->second);
+    }
+
+    v8::Local<v8::Object> Class::_createJSObjectWithClass(Class* cls)
+    {
+        return cls->_ctorTemplate.Get(__isolate)->InstanceTemplate()->NewInstance();
     }
 
     Object* Class::getProto() const

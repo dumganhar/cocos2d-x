@@ -11,26 +11,12 @@ namespace se {
 
         void jsToSeArgs(const v8::FunctionCallbackInfo<v8::Value>& v8args, ValueArray* outArr)
         {
+            v8::Isolate* isolate = v8args.GetIsolate();
             for (int i = 0; i < v8args.Length(); i++)
             {
-                v8::HandleScope handle_scope(v8args.GetIsolate());
-                // todo: uses jsToSeValue
-                if (v8args[i]->IsUndefined()) {
-                    outArr->push_back(Value::Undefined);
-                } else if (v8args[i]->IsNull()) {
-                    outArr->push_back(Value::Null);
-                } else if (v8args[i]->IsNumber()) {
-                    outArr->push_back(Value(v8args[i]->ToNumber()->Value()));
-                } else if (v8args[i]->IsString()) {
-                    v8::String::Utf8Value utf8(v8args[i]);
-                    outArr->push_back(Value(*utf8));
-                } else if (v8args[i]->IsBoolean()) {
-                    outArr->push_back(Value(v8args[i]->ToBoolean()->Value()));
-                } else if (v8args[i]->IsObject()) {
-                    Object *object = Object::_createJSObject(v8args[i]->ToObject(), false);
-                    outArr->push_back(Value(object));
-                    object->release();
-                }
+                Value v;
+                jsToSeValue(isolate, v8args[i], &v);
+                outArr->push_back(v);
             }
         }
 
@@ -73,9 +59,9 @@ namespace se {
             }
         }
 
-        void jsToSeValue(const v8::PropertyCallbackInfo<void> &info, const v8::Local<v8::Value>& jsval, Value* v)
+        void jsToSeValue(v8::Isolate* isolate, v8::Local<v8::Value> jsval, Value* v)
         {
-            v8::HandleScope handle_scope(info.GetIsolate());
+            v8::HandleScope handle_scope(isolate);
 
             if (jsval->IsUndefined()) {
                 v->setUndefined();
@@ -89,7 +75,7 @@ namespace se {
             } else if (jsval->IsBoolean()) {
                 v->setBoolean(jsval->ToBoolean()->Value());
             } else if (jsval->IsObject()) {
-                Object* obj = Object::_createJSObject(jsval->ToObject(), false);
+                Object* obj = Object::_createJSObject(nullptr, jsval->ToObject(), false);
                 v->setObject(obj);
                 obj->release();
             }

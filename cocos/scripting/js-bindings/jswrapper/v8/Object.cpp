@@ -66,7 +66,7 @@ namespace se {
     Object* Object::createPlainObject(bool rooted)
     {
         v8::Local<v8::Object> jsobj = v8::Object::New(__isolate);
-        Object* obj = _createJSObject(jsobj, rooted);
+        Object* obj = _createJSObject(nullptr, jsobj, rooted);
         return obj;
     }
 
@@ -74,8 +74,7 @@ namespace se {
     {
         Class* cls = nullptr;
         auto jsobj = Class::_createJSObject(clsName, &cls);
-        Object* obj = _createJSObject(jsobj, rooted);
-        obj->_cls = cls;
+        Object* obj = _createJSObject(cls, jsobj, rooted);
 
         return obj;
     }
@@ -103,10 +102,10 @@ namespace se {
         return obj;
     }
 
-    Object* Object::_createJSObject(v8::Local<v8::Object> obj, bool rooted)
+    Object* Object::_createJSObject(Class* cls, v8::Local<v8::Object> obj, bool rooted)
     {
         Object* ret = new Object();
-        if (!ret->init(obj, rooted))
+        if (!ret->init(cls, obj, rooted))
         {
             delete ret;
             ret = nullptr;
@@ -114,8 +113,16 @@ namespace se {
         return ret;
     }
 
-    bool Object::init(v8::Local<v8::Object> obj, bool rooted)
+    Object* Object::createObjectWithClass(Class* cls, bool rooted)
     {
+        v8::Local<v8::Object> jsobj = Class::_createJSObjectWithClass(cls);
+        Object* obj = Object::_createJSObject(cls, jsobj, rooted);
+        return obj;
+    }
+
+    bool Object::init(Class* cls, v8::Local<v8::Object> obj, bool rooted)
+    {
+        _cls = cls;
         _isRooted = rooted;
         _obj.init(obj);
         _obj.setFinalizeCallback(nativeObjectFinalizeHook);
@@ -135,25 +142,9 @@ namespace se {
         v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
         v8::Local<v8::Value> result = _obj.handle(__isolate)->Get(nameValue);
 
-        if (data) {
-            if (result->IsNumber())
-                data->setNumber(result->ToNumber()->Value());
-            else if (result->IsString()) {
-                v8::String::Utf8Value utf8(result);
-                data->setString(*utf8);
-            } else if (result->IsBoolean())
-                data->setBoolean(result->ToBoolean()->Value());
-            else if (result->IsObject())
-            {
-                Object* obj = Object::_createJSObject(result->ToObject(), false);
-                data->setObject(obj);
-                obj->release();
-            }
-            else if (result->IsFunction()) {
-                printf("I'm function\n");
-            } else if (result->IsNull())
-                data->setNull();
-            else data->setUndefined();
+        if (data != nullptr)
+        {
+            internal::jsToSeValue(__isolate, result, data);
         }
 
         return true;
@@ -163,20 +154,9 @@ namespace se {
     {
         v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
 
-        if (data.getType() == Value::Type::Number) {
-            v8::Local<v8::Value> value = v8::Number::New(__isolate, data.toNumber());
-            _obj.handle(__isolate)->Set(nameValue, value);
-        } else if (data.getType() == Value::Type::String) {
-            v8::Local<v8::String> value = v8::String::NewFromUtf8(__isolate, data.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-            _obj.handle(__isolate)->Set(nameValue, value);
-        } else if (data.getType() == Value::Type::Boolean) {
-            v8::Local<v8::Value> value = v8::Boolean::New(__isolate, data.toBoolean());
-            _obj.handle(__isolate)->Set(nameValue, value);
-        } else if (data.getType() == Value::Type::Object) {
-            _obj.handle(__isolate)->Set(nameValue, data.toObject()->_obj.handle(__isolate));
-        } else if (data.getType() == Value::Type::Null) {
-            _obj.handle(__isolate)->Set(nameValue, v8::Null(__isolate));
-        } else _obj.handle(__isolate)->Set(nameValue, v8::Undefined(__isolate));
+        v8::Local<v8::Value> value;
+        internal::seToJsValue(__isolate, data, &value);
+        _obj.handle(__isolate)->Set(nameValue, value);
     }
 
     bool Object::isFunction() const
@@ -260,24 +240,9 @@ namespace se {
 
         v8::Local<v8::Value> result = _obj.handle(__isolate)->CallAsFunction(thiz, (int)argc, argv.data());
 
-        if (rval)
+        if (rval != nullptr)
         {
-            if (result->IsNumber())
-                rval->setNumber(result->ToNumber()->Value());
-            else if (result->IsString()) {
-                v8::String::Utf8Value utf8(result);
-                rval->setString(*utf8);
-            } else if (result->IsBoolean())
-                rval->setBoolean(result->ToBoolean()->Value());
-            else if (result->IsObject())
-            {
-                Object* obj = Object::_createJSObject(result->ToObject(), false);
-                rval->setObject(obj);
-                obj->release();
-            }
-            else if (result->IsNull())
-                rval->setNull();
-            else rval->setUndefined();
+            internal::jsToSeValue(__isolate, result, rval);
         }
 
         return true;
@@ -301,23 +266,9 @@ namespace se {
     void Object::getArrayElement(unsigned int index, Value *data) {
         v8::Local<v8::Value> result = _obj.handle(__isolate)->Get(index);
 
-        if (data) {
-            if (result->IsNumber())
-                data->setNumber(result->ToNumber()->Value());
-            else if (result->IsString()) {
-                v8::String::Utf8Value utf8(result);
-                data->setString(*utf8);
-            } else if (result->IsBoolean())
-                data->setBoolean(result->ToBoolean()->Value());
-            else if (result->IsObject())
-            {
-                Object* obj = Object::_createJSObject(result->ToObject(), false);
-                data->setObject(obj);
-                obj->release();
-            }
-            else if (result->IsNull())
-                data->setNull();
-            else data->setUndefined();
+        if (data != nullptr)
+        {
+            internal::jsToSeValue(__isolate, result, data);
         }
     }
 
