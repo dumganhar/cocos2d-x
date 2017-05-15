@@ -74,15 +74,18 @@
         JSObjectRef _jsRet = thisObject->_getJSObject();
 
 #define SE_CTOR_END \
-        se::Value _property; \
-        bool _found = false; \
-        _found = thisObject->getProperty("_ctor", &_property); \
-        if (_found) _property.toObject()->call(args, thisObject); \
-        for (auto& v : args) \
+        if (!se::__isInvokedFromCCClass) \
         { \
-            if (v.isObject() && v.toObject()->isRooted()) \
+            se::Value _property; \
+            bool _found = false; \
+            _found = thisObject->getProperty("_ctor", &_property); \
+            if (_found) _property.toObject()->call(args, thisObject); \
+            for (auto& v : args) \
             { \
-                v.toObject()->switchToUnrooted(); \
+                if (v.isObject() && v.toObject()->isRooted()) \
+                { \
+                    v.toObject()->switchToUnrooted(); \
+                } \
             } \
         } \
         return _jsRet; \
@@ -96,7 +99,8 @@
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = se::Object::_createJSObject(nullptr, _thisObject, false); \
-        thisObject->_setFinalizeCallback(finalizeCb);
+        thisObject->_setFinalizeCallback(finalizeCb); \
+        
 
 
 #define SE_CTOR2_END \

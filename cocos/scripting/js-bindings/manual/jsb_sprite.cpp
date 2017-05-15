@@ -49,17 +49,19 @@ SE_FUNC_END
 
 SE_CTOR_BEGIN(Sprite_constructor, "Sprite", Sprite_finalized)
 {
-    printf("Sprite_constructor1: %p, jsret: %p\n", _constructor, _jsRet);
+//    printf("Sprite_constructor1: %p, jsret: %p\n", _constructor, _jsRet);
     Sprite* obj = new Sprite();
     thisObject->setPrivateData(obj);
-    printf("Sprite_constructor2, this: %p\n", thisObject);
+//    printf("Sprite_constructor2, this: %p\n", thisObject);
 }
 SE_CTOR_END
 
 SE_CTOR2_BEGIN(Sprite_ctor, "Sprite", Sprite_finalized)
 {
+//    printf("Sprite_ctor: %p\n", _thisObject);
     Sprite* obj = new Sprite();
     thisObject->setPrivateData(obj);
+//    printf("cc.Sprite native obj: %p\n", obj);
 }
 SE_CTOR2_END
 

@@ -279,13 +279,13 @@ namespace se {
         iterOwner->second->detachChild(iterTarget->second);
     }
 
-    void ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
+    bool ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
     {
 //        printf("ScriptEngine::_onReceiveNodeEvent, node: %p, type: %d\n", node, (int) type);
 
         auto iter = __nativePtrToObjectMap.find(node);
         if (iter  == __nativePtrToObjectMap.end())
-            return;
+            return false;
 
         Object* target = iter->second;
         const char* funcName = nullptr;
@@ -314,12 +314,14 @@ namespace se {
             assert(false);
         }
 
+        bool ret = false;
         Value funcVal;
         bool ok = target->getProperty(funcName, &funcVal);
         if (ok && !funcVal.toObject()->_isNativeFunction())
         {
-            funcVal.toObject()->call(EmptyValueArray, target);
+            ret = funcVal.toObject()->call(EmptyValueArray, target);
         }
+        return ret;
     }
 
 } // namespace se {

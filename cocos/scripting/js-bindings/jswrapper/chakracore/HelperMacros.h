@@ -64,7 +64,7 @@
     }
 
 // --- Constructor
-#define SE_CTOR_BEGIN(funcName, clsName) \
+#define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
     JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short argc, void* _callbackState) \
     { \
         SE_UNUSED bool ret = true; \
@@ -77,6 +77,9 @@
         SAFE_RELEASE(thisObject); \
         return _argv[0]; \
     }
+
+#define SE_CTOR2_BEGIN SE_CTOR_BEGIN
+#define SE_CTOR2_END SE_CTOR_END
 
 // --- Get Property
 

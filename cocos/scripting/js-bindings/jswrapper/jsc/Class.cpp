@@ -1,5 +1,6 @@
 #include "Class.hpp"
 #include "Object.hpp"
+#include "Utils.hpp"
 
 #ifdef SCRIPT_ENGINE_JSC
 
@@ -18,19 +19,28 @@ namespace se {
 
         JSValueRef _getPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName, JSValueRef* exception)
         {
+            std::string name;
+            internal::jsStringToStdString(context, propertyName, &name);
+            printf("propertyName: %s\n", name.c_str());
             return JSValueMakeUndefined(__cx);
         }
 
         bool _setPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception)
         {
+            std::string name;
+            internal::jsStringToStdString(context, propertyName, &name);
+            printf("propertyName: %s\n", name.c_str());
             assert(false);
             return false;
         }
 
         bool _hasPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName)
         {
-            assert(false);
-            return false;
+            std::string name;
+            internal::jsStringToStdString(context, propertyName, &name);
+            printf("propertyName: %s\n", name.c_str());
+//            assert(false);
+            return true;
         }
     }
 
@@ -112,8 +122,13 @@ namespace se {
             JSObjectRef func = JSObjectMakeFunctionWithCallback(__cx, nullptr, staticfunc.callAsFunction);
             JSObjectSetProperty(__cx, jsCtor, name, func, kJSPropertyAttributeNone, nullptr);
             JSStringRelease(name);
-
         }
+
+//        for (const auto& property : _properties)
+//        {
+//            JSStringRef name = JSStringCreateWithUTF8CString(property.name);
+//            JSStringRelease(name);
+//        }
 
         _proto = Object::_createJSObject(this, jsCtor, true);
 

@@ -285,9 +285,10 @@ SE_FUNC_END
 
 SE_SET_PROPERTY_BEGIN(Node_set_x)
 {
-    printf("Node_set_x, this: %p, jsthis: %p\n", thisObject, _object);
+//    printf("Node_set_x, this: %p, jsthis: %p\n", thisObject, _object);
     assert(thisObject);
     Node* thiz = (Node*)nativeThisObject;
+    printf("cc.Node set_x native obj: %p\n", thiz);
     float x = data.toNumber();
     thiz->setPositionX(x);
 }
@@ -303,6 +304,7 @@ SE_GET_PROPERTY_END
 SE_SET_PROPERTY_BEGIN(Node_set_y)
 {
     Node* thiz = (Node*)nativeThisObject;
+    printf("cc.Node set_y native obj: %p\n", thiz);
     float y = data.toNumber();
     thiz->setPositionY(y);
 }
