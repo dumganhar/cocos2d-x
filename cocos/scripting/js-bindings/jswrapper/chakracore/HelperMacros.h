@@ -71,7 +71,7 @@
         SE_UNUSED bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(argc, _argv+1, &args); \
-        se::Object* thisObject = se::Object::createObject(clsName, false); \
+        se::Object* thisObject = se::Object::createObjectWithClass(__jsb_##clsName##_class, false); \
         JsValueRef _jsRet = thisObject->_getJSObject();
 
 #define SE_CTOR_END \
@@ -98,7 +98,7 @@
         SE_UNUSED bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(argc, _argv+1, &args); \
-        se::Object* thisObject = se::Object::_createJSObject(nullptr, _argv[0], false); \
+        se::Object* thisObject = se::Object::_createJSObject(__jsb_##clsName##_class, _argv[0], false); \
         thisObject->_setFinalizeCallback(finalizeCb); \
 
 #define SE_CTOR2_END \

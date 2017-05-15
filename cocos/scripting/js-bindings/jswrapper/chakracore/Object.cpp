@@ -76,6 +76,13 @@ namespace se {
         return ret;
     }
 
+    Object* Object::createObjectWithClass(Class* cls, bool rooted)
+    {
+        JsValueRef jsobj = Class::_createJSObjectWithClass(cls);
+        Object* obj = Object::_createJSObject(cls, jsobj, rooted);
+        return obj;
+    }
+
     bool Object::init(JsValueRef obj, bool rooted)
     {
         _obj = obj;

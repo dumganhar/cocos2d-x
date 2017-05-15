@@ -24,7 +24,7 @@ namespace se {
         static Object* createObject(const char* clsName, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
         static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
-
+        static Object* createObjectWithClass(Class* cls, bool rooted);
         static Object* _createJSObject(Class* cls, JsValueRef obj, bool rooted);
 
         bool init(JsValueRef obj, bool rooted);

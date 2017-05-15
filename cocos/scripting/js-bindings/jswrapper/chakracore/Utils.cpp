@@ -133,7 +133,8 @@ namespace se { namespace internal {
     bool hasPrivate(JsValueRef obj)
     {
         bool isExist = false;
-        JsHasExternalData(obj, &isExist);
+        JsErrorCode err = JsHasExternalData(obj, &isExist);
+        assert(err == JsNoError);
         if (isExist)
             return true;
 
@@ -146,7 +147,8 @@ namespace se { namespace internal {
     void setPrivate(JsValueRef obj, void* data, JsFinalizeCallback finalizeCb)
     {
         bool isExist = false;
-        JsHasExternalData(obj, &isExist);
+        JsErrorCode err = JsHasExternalData(obj, &isExist);
+        assert(err == JsNoError);
         if (isExist)
         {
             JsSetExternalData(obj, data);
@@ -158,12 +160,14 @@ namespace se { namespace internal {
         internal::PrivateData* privateData = (internal::PrivateData*)malloc(sizeof(internal::PrivateData));
         privateData->data = data;
         privateData->finalizeCb = finalizeCb;
-        JsSetExternalData(privateObj->_getJSObject(), privateData);
+        err = JsSetExternalData(privateObj->_getJSObject(), privateData);
+        assert(err == JsNoError);
 //        printf("setPrivate: %p\n", data);
 
         JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
         JsCreatePropertyId(KEY_PRIVATE_DATE, strlen(KEY_PRIVATE_DATE), &propertyId);
-        JsSetProperty(obj, propertyId, privateObj->_getJSObject(), true);
+        err = JsSetProperty(obj, propertyId, privateObj->_getJSObject(), true);
+        assert(err == JsNoError);
         privateObj->release();
     }
 

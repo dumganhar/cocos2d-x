@@ -48,6 +48,8 @@ namespace se {
     private:
 
         static JsValueRef _createJSObject(const std::string &clsName, Class** outCls);
+        static JsValueRef _createJSObjectWithClass(Class* cls);
+
         static void cleanup();
 
         std::string _name;

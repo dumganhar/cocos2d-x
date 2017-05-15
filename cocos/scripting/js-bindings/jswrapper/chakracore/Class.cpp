@@ -191,13 +191,16 @@ namespace se {
         }
 
         Class* thiz = iter->second;
-
-        JsValueRef obj;
-        JsCreateExternalObject(nullptr, thiz->_finalizeOp, &obj);
-
-        JsSetPrototype(obj, thiz->getProto()->_getJSObject());
-
         *outCls = thiz;
+        return _createJSObjectWithClass(thiz);
+    }
+
+    JsValueRef Class::_createJSObjectWithClass(Class* cls)
+    {
+        JsValueRef obj;
+        JsCreateExternalObject(nullptr, cls->_finalizeOp, &obj);
+
+        JsSetPrototype(obj, cls->getProto()->_getJSObject());
         return obj;
     }
 
