@@ -346,10 +346,18 @@ namespace se {
         _finalizeCb = finalizeCb;
     }
 
-    void Object::switchToUnrooted() {
-        if (_isRooted) {
-            _obj.unref();
-        }
+    void Object::switchToRooted()
+    {
+        assert(!_isRooted);
+        _obj.ref();
+        _isRooted = true;
+    }
+
+    void Object::switchToUnrooted()
+    {
+        assert(_isRooted);
+        _obj.unref();
+        _isRooted = false;
     }
 
     bool Object::isRooted() const {

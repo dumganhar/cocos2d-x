@@ -379,14 +379,16 @@ SE_CTOR_BEGIN(XMLHttpRequest_constructor, XMLHttpRequest, XMLHttpRequest_finaliz
         }
     };
 
-    request->onloadstart = [cb](){
+    request->onloadstart = [cb, thiz](){
+        thiz.toObject()->switchToRooted();
         cb("onloadstart");
     };
     request->onload = [cb](){
         cb("onload");
     };
-    request->onloadend = [cb](){
+    request->onloadend = [cb, thiz](){
         cb("onloadend");
+        thiz.toObject()->switchToUnrooted();
     };
     request->onreadystatechange = [cb](){
         cb("onreadystatechange");

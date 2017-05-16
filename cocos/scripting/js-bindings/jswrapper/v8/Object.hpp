@@ -62,6 +62,7 @@ namespace se {
         void setPrivateData(void* data);
         void* getPrivateData() const;
 
+        void switchToRooted();
         void switchToUnrooted();
         bool isRooted() const;
 
