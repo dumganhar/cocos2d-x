@@ -572,6 +572,7 @@ SE_GET_PROPERTY_BEGIN(XMLHttpRequest_getResponse, se::DONT_NEED_THIS)
                 if (seObj != nullptr)
                 {
                     SE_SET_RVAL(se::Value(seObj));
+                    seObj->release();
                 }
                 else
                 {
@@ -582,7 +583,15 @@ SE_GET_PROPERTY_BEGIN(XMLHttpRequest_getResponse, se::DONT_NEED_THIS)
             {
                 const Data& data = xhr->getResponseData();
                 se::Object* seObj = se::Object::createArrayBufferObject(data.getBytes(), data.getSize(), false);
-                SE_SET_RVAL(se::Value(seObj));
+                if (seObj != nullptr)
+                {
+                    SE_SET_RVAL(se::Value(seObj));
+                    seObj->release();
+                }
+                else
+                {
+                    SE_SET_RVAL(se::Value::Null);
+                }
             }
             else
             {
