@@ -60,7 +60,7 @@ function XHRTest() {
   for (var i = 0; i < bytes.length; ++i) {
     bytes[i] = i;
   }
-  xhr.send(data);
+  xhr.send(bytes);
   // xhr.send([1, 2, 3, 4, 5]);
   // xhr.open("GET", "https://www.baidu.com");
   // forceGC();

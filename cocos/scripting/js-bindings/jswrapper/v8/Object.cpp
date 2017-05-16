@@ -120,6 +120,28 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
+    {
+        v8::Local<v8::ArrayBuffer> jsobj = v8::ArrayBuffer::New(__isolate, data, byteLength);
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
+    Object* Object::createJSONObject(const std::string& jsonStr, bool rooted)
+    {
+        Value strVal(jsonStr);
+        v8::Local<v8::Value> jsStr;
+        internal::seToJsValue(__isolate, strVal, &jsStr);
+        Object* obj = nullptr;
+        v8::Local<v8::String> v8Str = v8::Local<v8::String>::Cast(jsStr);
+        v8::MaybeLocal<v8::Value> ret = v8::JSON::Parse(__isolate, v8Str);
+        if (!ret.IsEmpty())
+        {
+            obj = Object::_createJSObject(nullptr, ret.ToLocalChecked()->ToObject(__isolate), rooted);
+        }
+        return obj;
+    }
+
     bool Object::init(Class* cls, v8::Local<v8::Object> obj, bool rooted)
     {
         _cls = cls;
@@ -187,9 +209,38 @@ namespace se {
         return const_cast<Object*>(this)->_obj.handle(__isolate)->IsTypedArray();
     }
 
+    bool Object::getTypedArrayData(uint8_t** ptr, size_t* length) const
+    {
+        assert(isTypedArray());
+        v8::Local<v8::Object> obj = const_cast<Object*>(this)->_obj.handle(__isolate);
+        v8::Local<v8::Uint8Array> arr = v8::Local<v8::Uint8Array>::Cast(obj);
+        v8::ArrayBuffer::Contents content = arr->Buffer()->GetContents();
+        *ptr = (uint8_t*)content.Data();
+        *length = content.ByteLength();
+        return true;
+    }
+
     bool Object::isArray() const
     {
         return const_cast<Object*>(this)->_obj.handle(__isolate)->IsArray();
+    }
+
+    // --- ArrayBuffer
+    bool Object::isArrayBuffer() const
+    {
+        v8::Local<v8::Object> obj = const_cast<Object*>(this)->_obj.handle(__isolate);
+        return obj->IsArrayBuffer();
+    }
+
+    bool Object::getArrayBufferData(uint8_t** ptr, size_t* length) const
+    {
+        assert(isArrayBuffer());
+        v8::Local<v8::Object> obj = const_cast<Object*>(this)->_obj.handle(__isolate);
+        v8::Local<v8::ArrayBuffer> arrBuf = v8::Local<v8::ArrayBuffer>::Cast(obj);
+        v8::ArrayBuffer::Contents content = arrBuf->GetContents();
+        *ptr = (uint8_t*)content.Data();
+        *length = content.ByteLength();
+        return true;
     }
 
     void Object::setPrivateData(void* data)
