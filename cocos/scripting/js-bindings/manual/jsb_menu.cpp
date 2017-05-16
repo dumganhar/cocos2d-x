@@ -53,7 +53,7 @@ SE_FUNC_BEGIN(Menu_create, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-bool jsb_register_menu()
+bool jsb_register_Menu()
 {
     auto cls = se::Class::create("Menu", __ccObj, __jsb_Node_proto, Menu_constructor);
     cls->defineFunction("ctor", Menu_ctor);

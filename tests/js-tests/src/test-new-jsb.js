@@ -1,6 +1,43 @@
 "use strict"
 log("test-new-jsb begin ...");
 
+var console = console || {};
+console.log = log;
+var cc = cc || {};
+cc.log = log;
+
+function XHRTest() {
+  var xhr = new XMLHttpRequest();
+  xhr.onloadstart = function() {
+    console.log("onloadstart");
+  };
+  xhr.onload = function() {
+    console.log("onload");
+  };
+  xhr.onloadend = function() {
+    console.log("onloadend");
+  };
+
+  xhr.onerror = function(err) {
+    console.log("onerror: " + arguments.length + ", " + err + ", status:" + xhr.status);
+    iterateObject(err);
+  };
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && (xhr.status >= 200 && xhr.status <= 207)) {
+      var httpStatus = xhr.statusText;
+      cc.log("readyState:" + xhr.readyState + ", status: " + xhr.statusText + ", response:\n" + xhr.responseText);
+    } else {
+      log("ERROR: readyState:" + xhr.readyState + ", status: " + xhr.statusText);
+    }
+  }
+
+  xhr.open("GET", "https://1www.baidu.com");
+  forceGC();
+  xhr.send();
+  forceGC();
+}
+
 function iterateObject(obj, indent) {
   indent = indent || 0;
   for (var key in obj) {
@@ -374,6 +411,7 @@ log("start THIS: " + this);
     item = cc.MenuItemFont.create("unschedule2", function(sender) {
       // log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn2);
+      XHRTest();
     }, scene);
     item.id = "item1:" + __sceneIndex;
     item.x -= 200;

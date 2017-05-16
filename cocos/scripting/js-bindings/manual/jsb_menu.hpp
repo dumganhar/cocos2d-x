@@ -13,6 +13,6 @@
 
 extern se::Object* __jsb_Menu_proto;
 
-bool jsb_register_menu();
+bool jsb_register_Menu();
 
 #endif /* jsb_menu_hpp */

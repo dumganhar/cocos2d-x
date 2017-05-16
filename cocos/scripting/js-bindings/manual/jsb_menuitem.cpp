@@ -116,7 +116,7 @@ SE_CTOR_BEGIN(MenuItemFont_ctor, MenuItemFont, MenuItemFont_finalized)
 }
 SE_CTOR_END
 
-bool jsb_register_menuitem()
+bool jsb_register_MenuItem()
 {
     auto cls = se::Class::create("MenuItem", __ccObj, __jsb_Node_proto, MenuItem_ctor);
     cls->defineFinalizedFunction(MenuItem_finalized);

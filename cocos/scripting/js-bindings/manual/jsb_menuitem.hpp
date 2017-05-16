@@ -11,6 +11,6 @@
 
 #include "SeApi.h"
 
-bool jsb_register_menuitem();
+bool jsb_register_MenuItem();
 
 #endif /* jsb_menuitem_hpp */
