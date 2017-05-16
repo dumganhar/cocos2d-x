@@ -23,8 +23,11 @@ namespace se {
         static Object* createPlainObject(bool rooted);
         static Object* createObject(const char* clsName, bool rooted);
         static Object* createObjectWithClass(Class* cls, bool rooted);
+        static Object* createArrayBufferObject(void* data, size_t byteLength, bool rooted);
+        static Object* createJSONObject(const std::string& jsonStr, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
         static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
+
         static Object* _createJSObject(Class* cls, JSObject* obj, bool rooted);
 
         void _setFinalizeCallback(JSFinalizeOp finalizeCb);
@@ -44,15 +47,21 @@ namespace se {
 
         // --- TypedArrays
         bool isTypedArray() const;
-        void getAsUint8Array(unsigned char **ptr, unsigned int *length);
-        void getAsUint16Array(unsigned short **ptr, unsigned int *length);
-        void getAsUint32Array(unsigned int **ptr, unsigned int *length);
-        void getAsFloat32Array(float **ptr, unsigned int *length);
+        bool getTypedArrayData(uint8_t** ptr, size_t* length) const;
+
+//        bool getAsUint8Array(uint8_t** ptr, size_t* length) const;
+//        bool getAsUint16Array(uint16_t** ptr, size_t* length) const;
+//        bool getAsUint32Array(uint32_t** ptr, size_t* length) const;
+//        bool getAsFloat32Array(float** ptr, size_t* length) const;
 
         // --- Arrays
         bool isArray() const;
         void getArrayLength(unsigned int *length);
         void getArrayElement(unsigned int index, Value *data);
+
+        // --- ArrayBuffer
+        bool isArrayBuffer() const;
+        bool getArrayBufferData(uint8_t** ptr, size_t* length) const;
 
         // --- Private
         void setPrivateData(void* data);

@@ -64,9 +64,9 @@ namespace se {
 
             case Value::Type::String:
             {
-                JSString *string = JS_NewStringCopyN(cx, arg.toString().c_str(), arg.toString().length());
+                JSString* string = JS_NewStringCopyN(cx, arg.toString().c_str(), arg.toString().length());
                 JS::RootedValue value(cx);
-                value.setString( string);
+                value.setString(string);
                 outVal.set(value);
             }
                 break;
@@ -116,9 +116,7 @@ namespace se {
         else if (jsval.isString())
         {
             JSString* jsstr = jsval.toString();
-            char* str = JS_EncodeString( cx, jsstr );
-            v->setString(str);
-            JS_free(cx, str);
+            v->setString(jsToStdString(cx, jsstr));
         }
         else if (jsval.isBoolean())
         {

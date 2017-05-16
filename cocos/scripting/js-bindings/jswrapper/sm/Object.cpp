@@ -135,6 +135,32 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
+    {
+        JS::RootedObject jsobj(__cx, JS_NewArrayBuffer(__cx, (uint32_t)byteLength));
+        bool isShared = false;
+        JS::AutoCheckCannotGC nogc;
+        uint8_t* tmpData = JS_GetArrayBufferData(jsobj, &isShared, nogc);
+        memcpy((void*)tmpData, (const void*)data, byteLength);
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
+    Object* Object::createJSONObject(const std::string& jsonStr, bool rooted)
+    {
+        Value strVal(jsonStr);
+        JS::RootedValue jsStr(__cx);
+        internal::seToJsValue(__cx, strVal, &jsStr);
+        JS::RootedValue jsObj(__cx);
+        JS::RootedString rootedStr(__cx, jsStr.toString());
+        Object* obj = nullptr;
+        if (JS_ParseJSON(__cx, rootedStr, &jsObj))
+        {
+            obj = Object::_createJSObject(nullptr, jsObj.toObjectOrNull(), rooted);
+        }
+        return obj;
+    }
+
     void Object::_setFinalizeCallback(JSFinalizeOp finalizeCb)
     {
         _finalizeCb = finalizeCb;
@@ -250,48 +276,113 @@ namespace se {
         return JS_ObjectIsFunction(__cx, obj) && JS_IsNativeFunction(obj, func);
     }
 
-    void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
-    {
-        uint8_t *pt; uint32_t len;
-        bool isSharedMemory = false;
-        JS_GetObjectAsUint8Array(_getJSObject(), &len, &isSharedMemory, &pt);
-        *ptr=pt; *length=len;
-    }
-
-    void Object::getAsUint16Array(unsigned short **ptr, unsigned int *length)
-    {
-        unsigned short *pt; unsigned int len;
-        bool isSharedMemory = false;
-        JS_GetObjectAsUint16Array(_getJSObject(), &len, &isSharedMemory, &pt);
-        *ptr=pt; *length=len;
-    }
-
     bool Object::isTypedArray() const
     {
         return JS_IsTypedArrayObject( _getJSObject());
     }
 
-    void Object::getAsUint32Array(unsigned int **ptr, unsigned int *length)
+    bool Object::getTypedArrayData(uint8_t** ptr, size_t* length) const
     {
-        unsigned int *pt; unsigned int len;
-        bool isSharedMemory = false;
-        JS_GetObjectAsUint32Array(_getJSObject(), &len, &isSharedMemory, &pt);
-        *ptr=pt; *length=len;
+        assert(JS_IsArrayBufferViewObject(_getJSObject()));
+        bool isShared = false;
+        JS::AutoCheckCannotGC nogc;
+        *ptr = (uint8_t*)JS_GetArrayBufferViewData(_getJSObject(), &isShared, nogc);
+        *length = JS_GetArrayBufferViewByteLength(_getJSObject());
+        return (*ptr != nullptr);
     }
 
-    void Object::getAsFloat32Array(float **ptr, unsigned int *length)
-    {
-        float *pt; unsigned int len;
-        bool isSharedMemory = false;
-        JS_GetObjectAsFloat32Array( _getJSObject(), &len, &isSharedMemory, &pt);
-        *ptr=pt; *length=len;
-    }
+//    bool Object::getAsUint8Array(uint8_t** ptr, size_t* length) const
+//    {
+//        uint8_t* pt = nullptr;
+//        uint32_t len = 0;
+//        bool isSharedMemory = false;
+//        JSObject* obj = JS_GetObjectAsUint8Array(_getJSObject(), &len, &isSharedMemory, &pt);
+//        if (obj != nullptr)
+//        {
+//            *ptr = pt;
+//            *length = len;
+//            return true;
+//        }
+//        *ptr = nullptr;
+//        *length = 0;
+//        return false;
+//    }
+//
+//    bool Object::getAsUint16Array(uint16_t** ptr, size_t* length) const
+//    {
+//        assert(ptr && length);
+//        uint16_t* pt = nullptr;
+//        uint32_t len = 0;
+//        bool isSharedMemory = false;
+//        JSObject* obj = JS_GetObjectAsUint16Array(_getJSObject(), &len, &isSharedMemory, &pt);
+//        if (obj != nullptr)
+//        {
+//            *ptr = pt;
+//            *length = len;
+//            return true;
+//        }
+//        *ptr = nullptr;
+//        *length = 0;
+//        return false;
+//    }
+//
+//    bool Object::getAsUint32Array(uint32_t** ptr, size_t* length) const
+//    {
+//        *ptr = nullptr;
+//        *length = 0;
+//        unsigned int *pt; uint32_t len;
+//        bool isSharedMemory = false;
+//        JSObject* obj = JS_GetObjectAsUint32Array(_getJSObject(), &len, &isSharedMemory, &pt);
+//        if (obj != nullptr)
+//        {
+//            *ptr = pt;
+//            *length = len;
+//            return true;
+//        }
+//        *ptr = nullptr;
+//        *length = 0;
+//        return false;
+//    }
+//
+//    bool Object::getAsFloat32Array(float **ptr, size_t* length) const
+//    {
+//        *ptr = nullptr;
+//        *length = 0;
+//        float *pt; unsigned int len;
+//        bool isSharedMemory = false;
+//        JSObject* obj = JS_GetObjectAsFloat32Array( _getJSObject(), &len, &isSharedMemory, &pt);
+//        if (obj != nullptr)
+//        {
+//            *ptr = pt;
+//            *length = len;
+//            return true;
+//        }
+//        *ptr = nullptr;
+//        *length = 0;
+//        return false;
+//    }
 
     bool Object::isArray() const
     {
         JS::RootedValue value(__cx, JS::ObjectValue(*_getJSObject()));
         bool isArray = false;
         return JS_IsArrayObject(__cx, value, &isArray) && isArray;
+    }
+
+    bool Object::isArrayBuffer() const
+    {
+        return JS_IsArrayBufferObject(_getJSObject());
+    }
+
+    bool Object::getArrayBufferData(uint8_t** ptr, size_t* length) const
+    {
+        assert(isArrayBuffer());
+
+        bool isShared = false;
+        JS::AutoCheckCannotGC nogc;
+        *ptr = (uint8_t*)JS_GetArrayBufferData(_getJSObject(), &isShared, nogc);
+        *length = JS_GetArrayBufferByteLength(_getJSObject());
+        return (*ptr != nullptr);
     }
 
     void* Object::getPrivateData()

@@ -436,10 +436,42 @@ SE_FUNC_BEGIN(XMLHttpRequest_send, se::DONT_NEED_THIS)
         }
         else if (args[0].isObject())
         {
-//            se::Object* obj = args[0].toObject();
-//            unsigned char* ptr = nullptr;
-//            unsigned int length = 0;
-//            obj->getAsUint8Array(&ptr, &length);
+            se::Object* obj = args[0].toObject();
+
+            if (obj->isTypedArray())
+            {
+                uint8_t* ptr = nullptr;
+                size_t len = 0;
+                if (obj->getTypedArrayData(&ptr, &len))
+                {
+                    Data data;
+                    data.copy(ptr, len);
+                    request->sendBinary(data);
+                }
+                else
+                {
+                    assert(false);
+                }
+            }
+            else if (obj->isArrayBuffer())
+            {
+                uint8_t* ptr = nullptr;
+                size_t len = 0;
+                if (obj->getArrayBufferData(&ptr, &len))
+                {
+                    Data data;
+                    data.copy(ptr, len);
+                    request->sendBinary(data);
+                }
+                else
+                {
+                    assert(false);
+                }
+            }
+            else
+            {
+                assert(false);
+            }
         }
     }
 
@@ -476,7 +508,7 @@ SE_FUNC_END
 
 SE_FUNC_BEGIN(XMLHttpRequest_overrideMimeType, se::DONT_NEED_THIS)
 {
-
+    assert(false); //FIXME:
 }
 SE_FUNC_END
 
@@ -535,11 +567,22 @@ SE_GET_PROPERTY_BEGIN(XMLHttpRequest_getResponse, se::DONT_NEED_THIS)
         {
             if (xhr->getResponseType() == XMLHttpRequest::ResponseType::JSON)
             {
-                assert(false); // FIXME:
+                const std::string& jsonText = xhr->getResponseText();
+                se::Object* seObj = se::Object::createJSONObject(jsonText, false);
+                if (seObj != nullptr)
+                {
+                    SE_SET_RVAL(se::Value(seObj));
+                }
+                else
+                {
+                    SE_SET_RVAL(se::Value::Null);
+                }
             }
             else if (xhr->getResponseType() == XMLHttpRequest::ResponseType::ARRAY_BUFFER)
             {
-                assert(false); // FIXME:
+                const Data& data = xhr->getResponseData();
+                se::Object* seObj = se::Object::createArrayBufferObject(data.getBytes(), data.getSize(), false);
+                SE_SET_RVAL(se::Value(seObj));
             }
             else
             {
@@ -560,9 +603,50 @@ SE_GET_PROPERTY_END
 SE_GET_PROPERTY_BEGIN(XMLHttpRequest_getResponseType, se::DONT_NEED_THIS)
 {
     XMLHttpRequest* xhr = (XMLHttpRequest*)nativeThisObject;
-    SE_SET_RVAL(se::Value((double)xhr->getResponseType()));
+    se::Value str;
+    switch(xhr->getResponseType())
+    {
+        case XMLHttpRequest::ResponseType::STRING:
+            str.setString("text");
+            break;
+        case XMLHttpRequest::ResponseType::ARRAY_BUFFER:
+            str.setString("arraybuffer");
+            break;
+        case XMLHttpRequest::ResponseType::JSON:
+            str.setString("json");
+            break;
+        default:
+            break;
+    }
+    SE_SET_RVAL(str);
 }
 SE_GET_PROPERTY_END
+
+SE_SET_PROPERTY_BEGIN(XMLHttpRequest_setResponseType, se::DONT_NEED_THIS)
+{
+    assert(data.isString());
+
+    XMLHttpRequest* xhr = (XMLHttpRequest*)nativeThisObject;
+
+    const std::string& type = data.toString();
+    if (type == "text")
+    {
+        xhr->setResponseType(XMLHttpRequest::ResponseType::STRING);
+    }
+    else if (type == "arraybuffer")
+    {
+        xhr->setResponseType(XMLHttpRequest::ResponseType::ARRAY_BUFFER);
+    }
+    else if (type == "json")
+    {
+        xhr->setResponseType(XMLHttpRequest::ResponseType::JSON);
+    }
+    else
+    {
+        assert(false);
+    }
+}
+SE_SET_PROPERTY_END
 
 SE_GET_PROPERTY_BEGIN(XMLHttpRequest_getWithCredentials, se::DONT_NEED_THIS)
 {
@@ -594,7 +678,7 @@ void jsb_register_XMLHttpRequest()
     cls->defineProperty("responseXML", XMLHttpRequest_getResponseXML, nullptr);
     cls->defineProperty("response", XMLHttpRequest_getResponse, nullptr);
     cls->defineProperty("timeout", XMLHttpRequest_getTimeout, nullptr);
-    cls->defineProperty("responseType", XMLHttpRequest_getResponseType, nullptr);
+    cls->defineProperty("responseType", XMLHttpRequest_getResponseType, XMLHttpRequest_setResponseType);
     cls->defineProperty("withCredentials", XMLHttpRequest_getWithCredentials, nullptr);
 
     cls->install();

@@ -122,10 +122,10 @@
 // --- Set Property
 
 #define SE_SET_PROPERTY_BEGIN(funcName, needThisObject) \
-    bool funcName(JSContext *_cx, unsigned argc, JS::Value *_vp) \
+    bool funcName(JSContext *_cx, unsigned _argc, JS::Value *_vp) \
     { \
         bool ret = true; \
-        JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
+        JS::CallArgs _argv = JS::CallArgsFromVp(_argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \

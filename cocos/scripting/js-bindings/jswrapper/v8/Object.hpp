@@ -44,13 +44,11 @@ namespace se {
 
         // --- TypedArrays
         bool isTypedArray() const;
-        void getAsFloat32Array(float **ptr, unsigned int *length);
 
-        void getAsUint8Array(unsigned char **ptr, unsigned int *length);
-
-        void getAsUint16Array(unsigned short **ptr, unsigned int *length);
-
-        void getAsUint32Array(unsigned int **ptr, unsigned int *length);
+//        void getAsFloat32Array(float **ptr, unsigned int *length);
+//        void getAsUint8Array(unsigned char **ptr, unsigned int *length);
+//        void getAsUint16Array(unsigned short **ptr, unsigned int *length);
+//        void getAsUint32Array(unsigned int **ptr, unsigned int *length);
 
         // --- Arrays
         bool isArray() const;

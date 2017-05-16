@@ -50,7 +50,9 @@ public:
     long getStatus() const { return _status; }
     const std::string& getStatusText() const { return _statusText; }
     const std::string& getResponseText() const { return _responseText; }
+    const cocos2d::Data& getResponseData() const { return _responseData; }
     ResponseType getResponseType() const { return _responseType; }
+    void setResponseType(ResponseType type) { _responseType = type; }
 
 private:
     void gotHeader(std::string& header);

@@ -26,16 +26,46 @@ function XHRTest() {
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && (xhr.status >= 200 && xhr.status <= 207)) {
       var httpStatus = xhr.statusText;
-      cc.log("readyState:" + xhr.readyState + ", status: " + xhr.statusText + ", response:\n" + xhr.responseText);
+      console.log("readyState:" + xhr.readyState + ", status: " + xhr.statusText + ", response:\n" + xhr.response);
+      if (xhr.responseType == "json") {
+        iterateObject(xhr.response);
+      }
+      if (xhr.responseType == "arraybuffer") {
+        var bytes = new Uint8Array(xhr.response);
+        log("byte length: " + bytes.length);
+        for (var i = 0; i < bytes.length; ++i) {
+          console.log("bytes[" + i + "]=" + bytes[i]);
+        }
+      }
     } else {
-      log("ERROR: readyState:" + xhr.readyState + ", status: " + xhr.statusText);
+      console.log("ERROR: readyState:" + xhr.readyState + ", status: " + xhr.statusText);
     }
   }
 
-  xhr.open("GET", "https://www.baidu.com");
-  forceGC();
-  xhr.send();
-  forceGC();
+  xhr.responseType = "json";
+
+  xhr.open("POST", "http://httpbin.org/post");
+  //set Content-type "text/plain" to post ArrayBuffer or ArrayBufferView
+  xhr.setRequestHeader("Content-Type", "text/plain");
+  // Uint8Array is an ArrayBufferView
+  // xhr.send(new Uint8Array([1, 2, 3, 4, 5]));
+  // var data = new ArrayBuffer(6);
+  // var bytes = new Uint16Array(6);
+  // for (var i = 0; i < bytes.length; ++i) {
+  //   bytes[i] = i;
+  // }
+  var data = new ArrayBuffer(6);
+  var bytes = new Uint8Array(data);
+  log("byte length: " + bytes.length);
+  for (var i = 0; i < bytes.length; ++i) {
+    bytes[i] = i;
+  }
+  xhr.send(data);
+  // xhr.send([1, 2, 3, 4, 5]);
+  // xhr.open("GET", "https://www.baidu.com");
+  // forceGC();
+  // xhr.send();
+  // forceGC();
 }
 
 function iterateObject(obj, indent) {
