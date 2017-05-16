@@ -138,13 +138,21 @@ namespace se {
 
     bool Object::getProperty(const char* name, Value* data)
     {
+        assert(data != nullptr);
         JsPropertyIdRef propertyId;
         JsCreatePropertyId(name, strlen(name), &propertyId);
-        JsValueRef jsValue;
-        JsGetProperty(_obj, propertyId, &jsValue);
-        internal::jsToSeValue(jsValue, data);
 
-        return true;
+        bool exist = false;
+        JsHasProperty(_obj, propertyId, &exist);
+
+        if (exist)
+        {
+            JsValueRef jsValue;
+            JsGetProperty(_obj, propertyId, &jsValue);
+            internal::jsToSeValue(jsValue, data);
+        }
+
+        return exist;
     }
 
     void Object::setProperty(const char* name, const Value& v)

@@ -7,7 +7,7 @@
 #include <string>
 #include <functional>
 
-class XMLHttpRequest : public cocos2d::Ref
+class XMLHttpRequest
 {
 public:
     enum class ResponseType

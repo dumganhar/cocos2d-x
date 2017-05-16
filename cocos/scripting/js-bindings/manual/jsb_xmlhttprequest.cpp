@@ -355,8 +355,9 @@ se::Class* __jsb_XMLHttpRequest_class = nullptr;
 
 SE_FINALIZE_FUNC_BEGIN(XMLHttpRequest_finalize)
 {
+    printf("XMLHttpRequest_finalize ... \n");
     XMLHttpRequest* request = (XMLHttpRequest*)nativeThisObject;
-    SAFE_RELEASE(request);
+    delete request;
 }
 SE_FINALIZE_FUNC_END
 

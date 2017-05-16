@@ -32,7 +32,7 @@ function XHRTest() {
     }
   }
 
-  xhr.open("GET", "https://1www.baidu.com");
+  xhr.open("GET", "https://www.baidu.com");
   forceGC();
   xhr.send();
   forceGC();

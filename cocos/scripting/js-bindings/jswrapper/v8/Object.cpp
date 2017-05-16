@@ -137,15 +137,19 @@ namespace se {
 
     bool Object::getProperty(const char *name, Value *data)
     {
+        assert(data != nullptr);
+
         v8::HandleScope handle_scope(__isolate);
 
         v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
+
+        bool exist = _obj.handle(__isolate)->Has(nameValue);
+        if (!exist)
+            return false;
+
         v8::Local<v8::Value> result = _obj.handle(__isolate)->Get(nameValue);
 
-        if (data != nullptr)
-        {
-            internal::jsToSeValue(__isolate, result, data);
-        }
+        internal::jsToSeValue(__isolate, result, data);
 
         return true;
     }

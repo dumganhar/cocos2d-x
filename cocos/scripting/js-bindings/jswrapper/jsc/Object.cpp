@@ -140,13 +140,19 @@ namespace se {
 
     bool Object::getProperty(const char* name, Value* data)
     {
+        assert(data != nullptr);
         JSStringRef jsName = JSStringCreateWithUTF8CString(name);
-        JSValueRef jsValue = JSObjectGetProperty(__cx, _obj, jsName, nullptr);
+        bool exist = JSObjectHasProperty(__cx, _obj, jsName);
+
+        if (exist)
+        {
+            JSValueRef jsValue = JSObjectGetProperty(__cx, _obj, jsName, nullptr);
+            internal::jsToSeValue(__cx, jsValue, data);
+        }
+
         JSStringRelease(jsName);
 
-        internal::jsToSeValue(__cx, jsValue, data);
-
-        return true;
+        return exist;
     }
 
     void Object::setProperty(const char* name, const Value& v)
