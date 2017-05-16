@@ -158,29 +158,9 @@ namespace se {
 
     void setReturnValue(JSContext* cx, const Value& data, const JS::CallArgs& argv)
     {
-        switch (data.getType()) {
-            case Value::Type::Null:
-                argv.rval().setNull();
-                break;
-            case Value::Type::Number:
-                argv.rval().setNumber(data.toNumber());
-                break;
-            case Value::Type::String:
-            {
-                JSString* jsstr = JS_NewStringCopyN( cx, data.toString().c_str(), data.toString().length());
-                argv.rval().setString(jsstr);
-            }
-                break;
-            case Value::Type::Boolean:
-                argv.rval().setBoolean(data.toBoolean());
-                break;
-            case Value::Type::Object:
-                argv.rval().setObject(*data.toObject()->_getJSObject());
-                break;
-            default:
-                argv.rval().setUndefined();
-                break;
-        }
+        JS::RootedValue rval(cx);
+        internal::seToJsValue(cx, data, &rval);
+        argv.rval().set(rval);
     }
 
     const char* KEY_PRIVATE_DATE = "__cc_private_data";
