@@ -372,10 +372,10 @@ SE_CTOR_BEGIN(XMLHttpRequest_constructor, XMLHttpRequest, XMLHttpRequest_finaliz
     auto cb = [thiz](const char* eventName){
         se::Object* thizObj = thiz.toObject();
 
-        se::Value onloadstart;
-        if (thizObj->getProperty(eventName, &onloadstart))
+        se::Value func;
+        if (thizObj->getProperty(eventName, &func))
         {
-            onloadstart.toObject()->call(se::EmptyValueArray, thizObj);
+            func.toObject()->call(se::EmptyValueArray, thizObj);
         }
     };
 

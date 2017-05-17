@@ -43,6 +43,33 @@ namespace se {
         return obj;
     }
 
+    static void myJSTypedArrayBytesDeallocator(void* bytes, void* deallocatorContext)
+    {
+        free(bytes);
+    }
+
+    Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
+    {
+        void* copiedData = malloc(byteLength);
+        memcpy(copiedData, data, byteLength);
+        JSObjectRef jsobj = JSObjectMakeArrayBufferWithBytesNoCopy(__cx, copiedData, byteLength, myJSTypedArrayBytesDeallocator, nullptr, nullptr);
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
+    Object* Object::createJSONObject(const std::string& jsonStr, bool rooted)
+    {
+        Object* obj = nullptr;
+        JSStringRef jsStr = JSStringCreateWithUTF8CString(jsonStr.c_str());
+        JSValueRef ret = JSValueMakeFromJSONString(__cx, jsStr);
+
+        if (ret != nullptr)
+        {
+            obj = Object::_createJSObject(nullptr, JSValueToObject(__cx, ret, nullptr), rooted);
+        }
+        return obj;
+    }
+
     Object* Object::getObjectWithPtr(void* ptr)
     {
         Object* obj = nullptr;
@@ -249,6 +276,20 @@ namespace se {
         return JSObjectIsFunction(__cx, _obj);
     }
 
+    bool Object::isTypedArray() const
+    {
+        JSTypedArrayType type = JSValueGetTypedArrayType(__cx, _obj, nullptr);
+        return type != kJSTypedArrayTypeNone && type != kJSTypedArrayTypeArrayBuffer;
+    }
+
+    bool Object::getTypedArrayData(uint8_t** ptr, size_t* length) const
+    {
+        assert(isTypedArray());
+        *length = JSObjectGetTypedArrayByteLength(__cx, _obj, nullptr);
+        *ptr = (uint8_t*)JSObjectGetTypedArrayBytesPtr(__cx, _obj, nullptr);
+        return (*ptr != nullptr);
+    }
+
     bool Object::_isNativeFunction() const
     {
         if (isFunction())
@@ -263,36 +304,45 @@ namespace se {
         return false;
     }
 
-    void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
-    {
-        assert(false);
-    }
-
-    void Object::getAsUint16Array(unsigned short **ptr, unsigned int *length)
-    {
-        assert(false);
-    }
-
-    bool Object::isTypedArray() const
-    {
-        assert(false);
-        return false;
-    }
-
-    void Object::getAsUint32Array(unsigned int **ptr, unsigned int *length)
-    {
-        assert(false);
-    }
-
-    void Object::getAsFloat32Array(float **ptr, unsigned int *length)
-    {
-        assert(false);
-    }
+//    void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
+//
+//    void Object::getAsUint16Array(unsigned short **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
+//
+//
+//    void Object::getAsUint32Array(unsigned int **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
+//
+//    void Object::getAsFloat32Array(float **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
 
     bool Object::isArray() const
     {
-        assert(false);
-        return false;
+        return JSValueIsArray(__cx, _obj);
+    }
+
+    bool Object::isArrayBuffer() const
+    {
+        JSTypedArrayType type = JSValueGetTypedArrayType(__cx, _obj, nullptr);
+        return type == kJSTypedArrayTypeArrayBuffer;
+    }
+
+    bool Object::getArrayBufferData(uint8_t** ptr, size_t* length) const
+    {
+        assert(ptr && length);
+        assert(isArrayBuffer());
+        *length = JSObjectGetArrayBufferByteLength(__cx, _obj, nullptr);
+        *ptr = (uint8_t*)JSObjectGetArrayBufferBytesPtr(__cx, _obj, nullptr);
+        return (*ptr != nullptr);
     }
 
     void* Object::getPrivateData()

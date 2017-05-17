@@ -40,6 +40,47 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
+    {
+        Object* obj = nullptr;
+        JsValueRef jsobj;
+        JsCreateArrayBuffer((unsigned int)byteLength, &jsobj);
+        ChakraBytePtr buffer = nullptr;
+        unsigned int bufferLength = 0;
+        if (JsNoError == JsGetArrayBufferStorage(jsobj, &buffer, &bufferLength))
+        {
+            memcpy((void*)buffer, data, byteLength);
+            obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        }
+
+        return obj;
+    }
+
+    Object* Object::createJSONObject(const std::string& jsonStr, bool rooted)
+    {
+        bool ok = false;
+        Object* obj = nullptr;
+
+        Object* global = ScriptEngine::getInstance()->getGlobalObject();
+        Value jsonVal;
+        ok = global->getProperty("JSON", &jsonVal);
+        assert(ok);
+
+        Value parseVal;
+        ok = jsonVal.toObject()->getProperty("parse", &parseVal);
+        assert(ok);
+
+        Value ret;
+        ValueArray args;
+        args.push_back(Value(jsonStr));
+        if (parseVal.toObject()->call(args, jsonVal.toObject(), &ret))
+        {
+            obj = Object::_createJSObject(nullptr, ret.toObject(), rooted);
+        }
+
+        return obj;
+    }
+
     Object* Object::getObjectWithPtr(void* ptr)
     {
         Object* obj = nullptr;
@@ -170,7 +211,7 @@ namespace se {
     {
         assert(isFunction());
 
-        JsValueRef contextObject = nullptr;
+        JsValueRef contextObject = JS_INVALID_REFERENCE;
         if (thisObject != nullptr)
         {
             contextObject = thisObject->_obj;
@@ -185,18 +226,20 @@ namespace se {
 
         jsArgs[0] = contextObject;
         JsValueRef rcValue = JS_INVALID_REFERENCE;
-        JsCallFunction(_obj, jsArgs, args.size() + 1, &rcValue);
+        JsErrorCode errCode = JsCallFunction(_obj, jsArgs, args.size() + 1, &rcValue);
         free(jsArgs);
 
-        JsValueType type;
-        JsGetValueType(rcValue, &type);
-        if (rval != JS_INVALID_REFERENCE && type != JsUndefined)
+        if (errCode == JsNoError && rval != nullptr)
         {
-            internal::jsToSeValue(rcValue, rval);
-            return true;
+            JsValueType type;
+            JsGetValueType(rcValue, &type);
+            if (rval != JS_INVALID_REFERENCE && type != JsUndefined)
+            {
+                internal::jsToSeValue(rcValue, rval);
+            }
         }
 
-        return false;
+        return errCode == JsNoError;
     }
 
     bool Object::defineFunction(const char* funcName, JsNativeFunction func)
@@ -248,35 +291,97 @@ namespace se {
         return false;
     }
 
-    void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
-    {
-        assert(false);
-    }
 
-    void Object::getAsUint16Array(unsigned short **ptr, unsigned int *length)
-    {
-        assert(false);
-    }
 
     bool Object::isTypedArray() const
     {
-        assert(false);
+        JsValueType type;
+        if (JsNoError == JsGetValueType(_obj, &type))
+        {
+            return type == JsTypedArray;
+        }
         return false;
     }
 
-    void Object::getAsUint32Array(unsigned int **ptr, unsigned int *length)
+    bool Object::getTypedArrayData(uint8_t** ptr, size_t* length) const
     {
-        assert(false);
+        assert(isTypedArray());
+        JsTypedArrayType arrayType;
+        ChakraBytePtr buffer = nullptr;
+        unsigned int bufferLength = 0;
+        int elementSize = 0;
+        bool ret = false;
+        if (JsNoError == JsGetTypedArrayStorage(_obj, &buffer, &bufferLength, &arrayType, &elementSize))
+        {
+            *ptr = buffer;
+            *length = bufferLength;
+            ret = true;
+        }
+        else
+        {
+            *ptr = nullptr;
+            *length = 0;
+        }
+        return ret;
     }
 
-    void Object::getAsFloat32Array(float **ptr, unsigned int *length)
+    // --- ArrayBuffer
+    bool Object::isArrayBuffer() const
     {
-        assert(false);
+        JsValueType type;
+        if (JsNoError == JsGetValueType(_obj, &type))
+        {
+            return type == JsArrayBuffer;
+        }
+        return false;
     }
+
+    bool Object::getArrayBufferData(uint8_t** ptr, size_t* length) const
+    {
+        assert(isArrayBuffer());
+        ChakraBytePtr buffer = nullptr;
+        unsigned int bufferLength = 0;
+        bool ret = false;
+        if (JsNoError == JsGetArrayBufferStorage(_obj, &buffer, &bufferLength))
+        {
+            *ptr = buffer;
+            *length = bufferLength;
+            ret = true;
+        }
+        else
+        {
+            *ptr = nullptr;
+            *length = 0;
+        }
+        return ret;
+    }
+
+//    void Object::getAsUint8Array(unsigned char **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
+//
+//    void Object::getAsUint16Array(unsigned short **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
+//    void Object::getAsUint32Array(unsigned int **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
+//
+//    void Object::getAsFloat32Array(float **ptr, unsigned int *length)
+//    {
+//        assert(false);
+//    }
 
     bool Object::isArray() const
     {
-        assert(false);
+        JsValueType type;
+        if (JsNoError == JsGetValueType(_obj, &type))
+        {
+            return type == JsArray;
+        }
         return false;
     }
 

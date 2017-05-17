@@ -70,7 +70,7 @@ namespace se {
             forceConvertJsValueToStdString(jsValue, &str);
             data->setString(str);
         }
-        else if (type == JsObject || type == JsFunction)
+        else if (type == JsObject || type == JsFunction || type == JsArrayBuffer || type == JsTypedArray)
         {
             Object* obj = Object::_createJSObject(nullptr, jsValue, true);
             data->setObject(obj);
