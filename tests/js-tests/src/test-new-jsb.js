@@ -6,6 +6,33 @@ console.log = log;
 var cc = cc || {};
 cc.log = log;
 
+function foo() {
+  var a = {
+    a: 1,
+    b: 2
+  };
+  var b = 1.2;
+  var c = "aaa";
+  var d = true;
+  var e = [2, 3, 5];
+  for (var i = 0; i < 1000; ++i) {
+    var f = a.b * b * e[2];
+    var h = {
+      e: f
+    };
+    e.push(f);
+    e.push(h);
+  }
+  // log("foo...");
+  return e;
+}
+
+function perfTest() {
+  // while (true) {
+  foo();
+  // }
+}
+
 function XHRTest() {
   var xhr = new XMLHttpRequest();
   xhr.onloadstart = function() {
@@ -26,7 +53,9 @@ function XHRTest() {
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && (xhr.status >= 200 && xhr.status <= 207)) {
       var httpStatus = xhr.statusText;
-      console.log("readyState:" + xhr.readyState + ", status: " + xhr.statusText + ", response:\n" + xhr.response);
+      console.log("before print");
+      console.log("readyState:" + xhr.readyState + ", status: " + xhr.statusText + ", response:\n"); // + xhr.response);
+      console.log("after print");
       if (xhr.responseType == "json") {
         iterateObject(xhr.response);
       }
@@ -60,7 +89,7 @@ function XHRTest() {
   for (var i = 0; i < bytes.length; ++i) {
     bytes[i] = i;
   }
-  xhr.send(bytes);
+  xhr.send(data);
   // xhr.send([1, 2, 3, 4, 5]);
   // xhr.open("GET", "https://www.baidu.com");
   // forceGC();
@@ -405,6 +434,7 @@ log("start THIS: " + this);
 
     var fn = function(dt) {
       log("schedule updated 1: " + scene);
+      // perfTest();
     };
 
     var fn2 = function(dt) {
@@ -422,16 +452,17 @@ log("start THIS: " + this);
     var item = null;
 
     item = cc.MenuItemFont.create("unschedule1", function(sender) {
-      // log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
+      log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn);
       var aaa = cc.Node.create();
       forceGC();
+      // perfTest();
     }, scene);
     item.id = "item1:" + __sceneIndex;
     menu.addChild(item);
 
     item = cc.MenuItemFont.create("schedule1", function(sender) {
-      log("scene: " + scene);
+      log("click schedule1 scene: " + scene);
       scene.schedule(fn, 1);
     }, scene);
     item.id = "item1:" + __sceneIndex;
@@ -441,7 +472,7 @@ log("start THIS: " + this);
     item = cc.MenuItemFont.create("unschedule2", function(sender) {
       // log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn2);
-      XHRTest();
+      // XHRTest();
     }, scene);
     item.id = "item1:" + __sceneIndex;
     item.x -= 200;

@@ -56,11 +56,14 @@
             _thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
             if (_thisObject) _thisObject->_cleanup(nativeThisObject); \
             JSObjectSetPrivate(_obj, nullptr); \
-            SAFE_RELEASE(_thisObject); \
-            SAFE_RELEASE(_thisObject); \
         }
 
 #define SE_FINALIZE_FUNC_END \
+        if (nativeThisObject != nullptr) \
+        { \
+            SAFE_RELEASE(_thisObject); \
+            SAFE_RELEASE(_thisObject); \
+        } \
     }
 
 // --- Constructor

@@ -140,34 +140,53 @@ namespace se {
         ValueArray args;
         args.reserve(4);
 
+        auto defineProperty = [&](Object* obj, const char* name, JSObjectCallAsFunctionCallback jsGetter, JSObjectCallAsFunctionCallback jsSetter){
+            args.clear();
+
+            JSObjectRef getter = nullptr;
+            if (jsGetter != nullptr)
+            {
+                getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, jsGetter);
+            }
+            JSObjectRef setter = nullptr;
+
+            if (jsSetter != nullptr)
+            {
+                setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, jsSetter);
+            }
+
+            args.push_back(Value(obj));
+            args.push_back(Value(name));
+
+            assert(getter != nullptr);
+
+            if (getter != nullptr)
+            {
+                Object* getterObj = Object::_createJSObject(nullptr, getter, false);
+                args.push_back(Value(getterObj));
+                getterObj->release();
+            }
+
+            if (setter != nullptr)
+            {
+                Object* setterObj = Object::_createJSObject(nullptr, setter, false);
+                args.push_back(Value(setterObj));
+                setterObj->release();
+            }
+
+            definePropertyFunc->call(args, nullptr);
+        };
+
         // Set instance properties
         for (const auto& property : _properties)
         {
-            args.clear();
-            JSObjectRef getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.getter);
-            JSObjectRef setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.setter);
-
-            args.push_back(Value(prototypeObject));
-            args.push_back(Value(property.name));
-            args.push_back(Value(Object::_createJSObject(nullptr, getter, false)));
-            args.push_back(Value(Object::_createJSObject(nullptr, setter, false)));
-
-            definePropertyFunc->call(args, nullptr);
+            defineProperty(prototypeObject, property.name, property.getter, property.setter);
         }
 
         // Set class properties
         for (const auto& property : _staticProperties)
         {
-            args.clear();
-            JSObjectRef getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.getter);
-            JSObjectRef setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.setter);
-
-            args.push_back(Value(_proto));
-            args.push_back(Value(property.name));
-            args.push_back(Value(Object::_createJSObject(nullptr, getter, false)));
-            args.push_back(Value(Object::_createJSObject(nullptr, setter, false)));
-
-            definePropertyFunc->call(args, nullptr);
+            defineProperty(_proto, property.name, property.getter, property.setter);
         }
 
         _parent->setProperty(_name.c_str(), Value(_proto));

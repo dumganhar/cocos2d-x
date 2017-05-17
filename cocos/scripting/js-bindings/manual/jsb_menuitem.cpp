@@ -81,7 +81,7 @@ SE_FINALIZE_FUNC_BEGIN(MenuItemFont_finalized)
 {
     if (nativeThisObject)
     {
-        printf("MenuItemFont_finalized ...\n");
+        printf("MenuItemFont_finalized...\n");
         Node* thiz = (Node*) nativeThisObject;
         SAFE_RELEASE(thiz);
     }
@@ -102,6 +102,7 @@ SE_FUNC_BEGIN(MenuItemFont_create, se::DONT_NEED_THIS)
         se::ValueArray args;
         args.push_back(se::Value(senderObj));
         funcObj->call(args, targetObj);
+        senderObj->release();
     });
     nativeObj->retain();
     item->setPrivateData(nativeObj);
