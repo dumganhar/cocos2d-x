@@ -28,6 +28,13 @@ namespace se {
         Value(Value&& v);
 
         explicit Value(bool v);
+        explicit Value(int32_t v);
+        explicit Value(uint32_t v);
+        explicit Value(int16_t v);
+        explicit Value(uint16_t v);
+        explicit Value(long v);
+        explicit Value(unsigned long v);
+        explicit Value(float v);
         explicit Value(double v);
         explicit Value(const char* v);
         explicit Value(const std::string& v);
@@ -46,14 +53,30 @@ namespace se {
         void setUndefined();
         void setNull();
         void setBoolean(bool v);
+        void setInt32(int32_t v);
+        void setUint32(uint32_t v);
+        void setInt16(int16_t v);
+        void setUint16(uint16_t v);
+        void setLong(long v);
+        void setUlong(unsigned long v);
+        void setFloat(float v);
         void setNumber(double v);
         void setString(const char* v);
         void setString(const std::string& v);
         void setObject(Object* o);
 
+        uint16_t toUint16() const;
+        int32_t toInt32() const;
+        uint32_t toUint32() const;
+        long toLong() const;
+        unsigned long toUlong() const;
+        float toFloat() const;
+
         double toNumber() const;
         bool toBoolean() const;
         const std::string& toString() const;
+        std::string toStringForce() const;
+
         Object* toObject() const;
 
         inline Type getType() const { return _type; }
