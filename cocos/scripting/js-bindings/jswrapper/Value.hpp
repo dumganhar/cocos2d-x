@@ -86,6 +86,7 @@ namespace se {
         inline bool isBoolean() const { return _type == Type::Boolean; }
         inline bool isUndefined() const { return _type == Type::Undefined; }
         inline bool isNull() const { return _type == Type::Null; }
+        inline bool isNullOrUndefined() const { return (isNull() || isUndefined()); }
 
     private:
         explicit Value(Type type);

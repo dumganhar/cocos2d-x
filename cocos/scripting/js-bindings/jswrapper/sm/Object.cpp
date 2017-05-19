@@ -415,6 +415,40 @@ namespace se {
         return (*ptr != nullptr);
     }
 
+    bool Object::getAllKeys(std::vector<std::string>* allKeys)
+    {
+        assert(allKeys != nullptr);
+        JS::RootedObject jsobj(__cx, _getJSObject());
+        JS::Rooted<JS::IdVector> props(__cx, JS::IdVector(__cx));
+        if (!JS_Enumerate(__cx, jsobj, &props))
+            return false;
+
+        std::vector<std::string> keys;
+        for (size_t i = 0, length = props.length(); i < length; ++i)
+        {
+            JS::RootedId id(__cx, props[i]);
+            JS::RootedValue keyVal(__cx);
+            JS_IdToValue(__cx, id, &keyVal);
+
+            if (JSID_IS_STRING(id))
+            {
+                allKeys->push_back(internal::jsToStdString(__cx, keyVal.toString()));
+            }
+            else if (JSID_IS_INT(id))
+            {
+                char buf[50] = {0};
+                snprintf(buf, sizeof(buf), "%d", keyVal.toInt32());
+                allKeys->push_back(buf);
+            }
+            else
+            {
+                assert(false);
+            }
+        }
+
+        return true;
+    }
+
     void* Object::getPrivateData()
     {
         JS::RootedObject obj(__cx, _getJSObject());

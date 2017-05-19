@@ -65,6 +65,8 @@ namespace se {
         bool isArrayBuffer() const;
         bool getArrayBufferData(uint8_t** ptr, size_t* length) const;
 
+        bool getAllKeys(std::vector<std::string>* allKeys);
+
         // --- Private
         void setPrivateData(void* data);
         void* getPrivateData();

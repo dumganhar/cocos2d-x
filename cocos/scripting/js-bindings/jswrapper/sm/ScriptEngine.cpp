@@ -267,11 +267,9 @@ namespace se {
 //        JS_RemoveExtraGCRootsTracer(_cx, ScriptEngine::myExtraGCRootsTracer, nullptr);
 //        JS_RemoveWeakPointerZoneGroupCallback(_cx, ScriptEngine::myWeakPointerZoneGroupCallback);
         JS_RemoveWeakPointerCompartmentCallback(_cx, ScriptEngine::myWeakPointerCompartmentCallback);
-
-        if (_oldCompartment)
-            JS_LeaveCompartment(_cx, _oldCompartment);
-
         SAFE_RELEASE(_globalObj);
+
+        JS_LeaveCompartment(_cx, _oldCompartment);
 
         JS_EndRequest(_cx);
         JS_DestroyContext(_cx);

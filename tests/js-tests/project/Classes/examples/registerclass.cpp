@@ -128,7 +128,85 @@ int main_register_class(int argc, char** argv)
         obj->release();
     }
 
-    
+    {
+        se::Object* obj = se::Object::createPlainObject(false);
+        obj->setProperty("r", se::Value(233));
+        obj->setProperty("g", se::Value(123));
+        obj->setProperty("b", se::Value(43));
+        obj->setProperty("a", se::Value(11));
+
+        se::Object* subObj = se::Object::createPlainObject(false);
+        subObj->setProperty("a", se::Value(233));
+        subObj->setProperty("b", se::Value(123));
+        subObj->setProperty("c", se::Value(43));
+        subObj->setProperty("d", se::Value(11));
+        obj->setProperty("subobj", se::Value(subObj));
+
+
+        se::Object* subArr = se::Object::createArrayObject(0, false);
+        subArr->setArrayElement(0, se::Value(3244));
+        subArr->setArrayElement(1, se::Value(1314));
+        subArr->setArrayElement(2, se::Value(520));
+        subObj->setProperty("subsubarray", se::Value(subArr));
+
+        // start test
+        cocos2d::ValueMap valueMap;
+        assert(jsval_to_ccvaluemap(se::Value(obj), &valueMap));
+
+        assert(valueMap["r"].asInt() == 233);
+        assert(valueMap["g"].asInt() == 123);
+        assert(valueMap["b"].asInt() == 43);
+        assert(valueMap["a"].asInt() == 11);
+        //
+
+        auto& subObjMap = valueMap["subobj"].asValueMap();
+        assert(subObjMap["a"].asInt() == 233);
+        assert(subObjMap["b"].asInt() == 123);
+        assert(subObjMap["c"].asInt() == 43);
+        assert(subObjMap["d"].asInt() == 11);
+
+        auto& subsubVector = subObjMap["subsubarray"].asValueVector();
+        assert(subsubVector[0].asInt() == 3244);
+        assert(subsubVector[1].asInt() == 1314);
+        assert(subsubVector[2].asInt() == 520);
+
+
+        subArr->release();
+        subObj->release();
+        obj->release();
+    }
+
+    {
+        se::Object* obj = se::Object::createPlainObject(false);
+        obj->setProperty("3", se::Value(233));
+        obj->setProperty("493", se::Value(123));
+        obj->setProperty("1223", se::Value(43));
+        obj->setProperty("444", se::Value(11));
+
+        cocos2d::ValueMapIntKey ret;
+        assert(jsval_to_ccvaluemapintkey(se::Value(obj), &ret));
+
+        assert(ret[3].asInt() == 233);
+        assert(ret[493].asInt() == 123);
+        assert(ret[1223].asInt() == 43);
+        assert(ret[444].asInt() == 11);
+
+        obj->release();
+    }
+
+    {
+        se::Object* obj = se::Object::createPlainObject(false);
+        obj->setProperty("src", se::Value(0x0302));
+        obj->setProperty("dst", se::Value(0x0303));
+
+        cocos2d::BlendFunc blendFunc;
+        assert(jsval_to_blendfunc(se::Value(obj), &blendFunc));
+
+        assert(blendFunc.src == 0x0302);
+        assert(blendFunc.dst == 0x0303);
+
+        obj->release();
+    }
 
     return 0;
 }

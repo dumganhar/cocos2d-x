@@ -211,3 +211,291 @@ bool jsval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
     color->a = a.toFloat();
     return true;
 }
+
+bool jsval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
+{
+    assert(ret != nullptr);
+    if (v.isObject())
+    {
+        se::Object* jsobj = v.toObject();
+        if (!jsobj->isArray())
+        {
+            // It's a normal js object.
+            cocos2d::ValueMap dictVal;
+            bool ok = jsval_to_ccvaluemap(v, &dictVal);
+            if (ok)
+            {
+                *ret = cocos2d::Value(dictVal);
+            }
+        }
+        else
+        {
+            // It's a js array object.
+            cocos2d::ValueVector arrVal;
+            bool ok = jsval_to_ccvaluevector(v, &arrVal);
+            if (ok)
+            {
+                *ret = cocos2d::Value(arrVal);
+            }
+        }
+    }
+    else if (v.isString())
+    {
+        *ret = v.toString();
+    }
+    else if (v.isNumber())
+    {
+        *ret = v.toNumber();
+    }
+    else if (v.isBoolean())
+    {
+        *ret = v.toBoolean();
+    }
+    else
+    {
+        CCASSERT(false, "not supported type");
+    }
+
+    return true;
+}
+
+bool jsval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
+{
+    if (v.isNullOrUndefined())
+        return false;
+
+    assert(v.isObject());
+
+    se::Object* obj = v.toObject();
+
+    cocos2d::ValueMap& dict = *ret;
+
+    std::vector<std::string> allKeys;
+    if (!obj->getAllKeys(&allKeys))
+    {
+        CCLOGERROR("Can't get keys for obj: %p", obj);
+        return false;
+    }
+
+    se::Value value;
+    for (const auto& key : allKeys)
+    {
+        if (!obj->getProperty(key.c_str(), &value))
+        {
+            ret->clear();
+            return false;
+        }
+
+        if (value.isObject())
+        {
+            se::Object* subObj = value.toObject();
+            if (!subObj->isArray())
+            {
+                // It's a normal js object.
+                cocos2d::ValueMap dictVal;
+                bool ok = jsval_to_ccvaluemap(value, &dictVal);
+                if (ok)
+                {
+                    dict.emplace(key, cocos2d::Value(dictVal));
+                }
+            }
+            else
+            {
+                // It's a js array object.
+                cocos2d::ValueVector arrVal;
+                bool ok = jsval_to_ccvaluevector(value, &arrVal);
+                if (ok)
+                {
+                    dict.emplace(key, cocos2d::Value(arrVal));
+                }
+            }
+        }
+        else if (value.isString())
+        {
+            dict.emplace(key, cocos2d::Value(value.toString()));
+        }
+        else if (value.isNumber())
+        {
+            dict.emplace(key, cocos2d::Value(value.toNumber()));
+        }
+        else if (value.isBoolean())
+        {
+            dict.emplace(key, cocos2d::Value(value.toBoolean()));
+        }
+        else
+        {
+            CCASSERT(false, "not supported type");
+        }
+    }
+
+    return true;
+}
+
+static bool isNumberString(const std::string& str)
+{
+    for (const auto& c : str)
+    {
+        if (!isdigit(c))
+            return false;
+    }
+    return true;
+}
+
+bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
+{
+    if (v.isNullOrUndefined())
+        return false;
+
+    assert(v.isObject());
+
+    se::Object* obj = v.toObject();
+
+    cocos2d::ValueMapIntKey& dict = *ret;
+
+    std::vector<std::string> allKeys;
+    if (!obj->getAllKeys(&allKeys))
+    {
+        CCLOGERROR("Can't get keys for obj: %p", obj);
+        return false;
+    }
+
+    se::Value value;
+    for (const auto& key : allKeys)
+    {
+        if (!obj->getProperty(key.c_str(), &value))
+        {
+            ret->clear();
+            return false;
+        }
+
+        if (!isNumberString(key))
+        {
+            CCLOGWARN("jsval_to_ccvaluemapintkey, found not numeric key: %s", key.c_str());
+            continue;
+        }
+
+        int intKey = atoi(key.c_str());
+
+        if (value.isObject())
+        {
+            se::Object* subObj = value.toObject();
+            if (!subObj->isArray())
+            {
+                // It's a normal js object.
+                cocos2d::ValueMap dictVal;
+                bool ok = jsval_to_ccvaluemap(value, &dictVal);
+                if (ok)
+                {
+                    dict.emplace(intKey, cocos2d::Value(dictVal));
+                }
+            }
+            else
+            {
+                // It's a js array object.
+                cocos2d::ValueVector arrVal;
+                bool ok = jsval_to_ccvaluevector(value, &arrVal);
+                if (ok)
+                {
+                    dict.emplace(intKey, cocos2d::Value(arrVal));
+                }
+            }
+        }
+        else if (value.isString())
+        {
+            dict.emplace(intKey, cocos2d::Value(value.toString()));
+        }
+        else if (value.isNumber())
+        {
+            dict.emplace(intKey, cocos2d::Value(value.toNumber()));
+        }
+        else if (value.isBoolean())
+        {
+            dict.emplace(intKey, cocos2d::Value(value.toBoolean()));
+        }
+        else
+        {
+            CCASSERT(false, "not supported type");
+        }
+    }
+    
+    return true;
+}
+
+bool jsval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
+{
+    assert(ret != nullptr);
+
+    assert(v.isObject());
+
+    se::Object* obj = v.toObject();
+    JSB_PRECONDITION3(obj->isArray(), false, "Object must be an array");
+
+    uint32_t len = 0;
+    obj->getArrayLength(&len);
+
+    bool ok = false;
+    se::Value value;
+    for (uint32_t i=0; i < len; i++)
+    {
+        if (obj->getArrayElement(i, &value))
+        {
+            if (value.isObject())
+            {
+                if (!value.toObject()->isArray())
+                {
+                    // It's a normal js object.
+                    cocos2d::ValueMap dictVal;
+                    ok = jsval_to_ccvaluemap(value, &dictVal);
+                    if (ok)
+                    {
+                        ret->push_back(cocos2d::Value(dictVal));
+                    }
+                }
+                else
+                {
+                    // It's a js array object.
+                    cocos2d::ValueVector arrVal;
+                    ok = jsval_to_ccvaluevector(value, &arrVal);
+                    if (ok)
+                    {
+                        ret->push_back(cocos2d::Value(arrVal));
+                    }
+                }
+            }
+            else if (value.isString())
+            {
+                ret->push_back(cocos2d::Value(value.toString()));
+            }
+            else if (value.isNumber())
+            {
+                ret->push_back(cocos2d::Value(value.toNumber()));
+            }
+            else if (value.isBoolean())
+            {
+                ret->push_back(cocos2d::Value(value.toBoolean()));
+            }
+            else
+            {
+                CCASSERT(false, "not supported type");
+            }
+        }
+    }
+    
+    return true;
+}
+
+bool jsval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret)
+{
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    se::Value value;
+
+    if (!obj->getProperty("src", &value))
+        return false;
+    ret->src = value.toUint32();
+
+    if (!obj->getProperty("dst", &value))
+        return false;
+    ret->dst = value.toUint32();
+    return true;
+}

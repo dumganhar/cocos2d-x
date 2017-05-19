@@ -21,3 +21,8 @@ bool jsval_to_Rect(const se::Value& v, cocos2d::Rect* rect);
 bool jsval_to_Color3B(const se::Value& v, cocos2d::Color3B* color);
 bool jsval_to_Color4B(const se::Value& v, cocos2d::Color4B* color);
 bool jsval_to_Color4F(const se::Value& v, cocos2d::Color4F* color);
+bool jsval_to_ccvalue(const se::Value& v, cocos2d::Value* ret);
+bool jsval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret);
+bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret);
+bool jsval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret);
+bool jsval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret);
