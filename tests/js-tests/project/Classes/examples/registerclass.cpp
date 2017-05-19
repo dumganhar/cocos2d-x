@@ -107,6 +107,28 @@ int main_register_class(int argc, char** argv)
         obj->release();
     }
 
+    {
+        se::Object* obj = se::Object::createArrayObject(16, false);
+
+        se::Value v;
+        for (uint32_t i = 0; i < 16; ++i)
+        {
+            v.setFloat(i * 2.3f);
+            obj->setArrayElement(i, v);
+        }
+
+        Mat4 mat4;
+        jsval_to_Mat4(se::Value(obj), &mat4);
+
+        for (uint32_t i = 0; i < 16; ++i)
+        {
+            assert(std::abs(mat4.m[i] - i * 2.3f) < FLT_EPSILON);
+        }
+
+        obj->release();
+    }
+
+    
 
     return 0;
 }

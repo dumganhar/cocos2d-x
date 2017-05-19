@@ -39,6 +39,8 @@ namespace se {
         bool executeScriptBuffer(const char *string, size_t length, Value *data = nullptr, const char *fileName = nullptr);
         bool executeScriptFile(const std::string &filePath, Value *rval = nullptr);
 
+        JSContext* _getContext() { return _cx; }
+
         // --- Run GC
         void gc() { JS_GC( _cx );  }
 
@@ -64,6 +66,8 @@ namespace se {
 
         bool init();
         void cleanup();
+
+        void clearException();
 
         JSContext* _cx;
         JSCompartment* _oldCompartment;

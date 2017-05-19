@@ -261,14 +261,16 @@ namespace se {
 
     // --- Arrays
 
-    void Object::getArrayLength( unsigned int *length) 
+    bool Object::getArrayLength(uint32_t* length) const 
     {
         assert(false);
+        return false;
     }
 
-    void Object::getArrayElement( unsigned int index, Value *data) 
+    bool Object::getArrayElement(uint32_t index, Value* data) const 
     {
         assert(false);
+        return false;
     }
 
     bool Object::isFunction() const

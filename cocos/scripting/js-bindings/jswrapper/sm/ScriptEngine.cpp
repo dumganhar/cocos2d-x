@@ -298,17 +298,7 @@ namespace se {
         bool ok = JS::Evaluate( _cx, options, script, length, &rcValue);
         if (!ok)
         {
-            if (JS_IsExceptionPending(_cx))
-            {
-                JS::RootedValue exceptionValue(_cx);
-                JS_GetPendingException(_cx, &exceptionValue);
-                JS_ClearPendingException(_cx);
-                assert(exceptionValue.isObject());
-                JS::RootedObject exceptionObj(_cx, exceptionValue.toObjectOrNull());
-                JSErrorReport* report = JS_ErrorFromException(_cx, exceptionObj);
-                printf("ERROR: %s, file: %s, lineno: %u\n", report->message().c_str(), report->filename, report->lineno);
-                JS_ClearPendingException(_cx);
-            }
+            clearException();
         }
         assert(ok);
 
@@ -352,6 +342,7 @@ namespace se {
             return;
         }
 
+        clearException();
         iterOwner->second->attachChild(iterTarget->second);
     }
 
@@ -369,6 +360,7 @@ namespace se {
             return;
         }
 
+        clearException();
         iterOwner->second->detachChild(iterTarget->second);
     }
 
@@ -379,6 +371,8 @@ namespace se {
         auto iter = __nativePtrToObjectMap.find(node);
         if (iter  == __nativePtrToObjectMap.end())
             return false;
+
+        clearException();
 
         JS::RootedValue retval(_cx);
         Object* target = iter->second;
@@ -423,6 +417,22 @@ namespace se {
         }
 
         return ret;
+    }
+
+    void ScriptEngine::clearException()
+    {
+        if (JS_IsExceptionPending(_cx))
+        {
+            JS::RootedValue exceptionValue(_cx);
+            JS_GetPendingException(_cx, &exceptionValue);
+            JS_ClearPendingException(_cx);
+            assert(exceptionValue.isObject());
+            JS::RootedObject exceptionObj(_cx, exceptionValue.toObjectOrNull());
+            JSErrorReport* report = JS_ErrorFromException(_cx, exceptionObj);
+            const char* fileName = report->filename != nullptr ? report->filename : "(no filename)";
+            printf("ERROR: %s, file: %s, lineno: %u\n", report->message().c_str(), fileName, report->lineno);
+            JS_ClearPendingException(_cx);
+        }
     }
 
 } // namespace se {

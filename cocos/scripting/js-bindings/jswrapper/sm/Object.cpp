@@ -135,6 +135,13 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayObject(size_t length, bool rooted)
+    {
+        JS::RootedObject jsobj(__cx, JS_NewArrayObject(__cx, length));
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
     Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
     {
         JS::RootedObject jsobj(__cx, JS_NewArrayBuffer(__cx, (uint32_t)byteLength));
@@ -245,24 +252,47 @@ namespace se {
 
     // --- Arrays
 
-    void Object::getArrayLength( unsigned int *length) 
+    bool Object::getArrayLength(uint32_t* length) const 
     {
-        unsigned int len;
+        assert(length != nullptr);
+        if (!isArray())
+            return false;
+
         JS::RootedObject object(__cx, _getJSObject());
-        JS_GetArrayLength(__cx, object, &len);
-        *length=len;
+        if (JS_GetArrayLength(__cx, object, length))
+            return true;
+
+        *length = 0;
+        return false;
     }
 
-    void Object::getArrayElement( unsigned int index, Value *data) 
+    bool Object::getArrayElement(uint32_t index, Value* data) const 
     {
+        assert(data != nullptr);
+        if (!isArray())
+            return false;
+
         JS::RootedObject object(__cx, _getJSObject());
         JS::RootedValue rcValue(__cx);
-        bool ok = JS_GetElement(__cx, object, index, &rcValue);
-
-        if (ok && data)
+        if (JS_GetElement(__cx, object, index, &rcValue))
         {
             internal::jsToSeValue(__cx, rcValue, data);
+            return true;
         }
+
+        data->setUndefined();
+        return false;
+    }
+
+    bool Object::setArrayElement(uint32_t index, const Value& data)
+    {
+        if (!isArray())
+            return false;
+
+        JS::RootedValue jsval(__cx);
+        internal::seToJsValue(__cx, data, &jsval);
+        JS::RootedObject thisObj(__cx, _getJSObject());
+        return JS_SetElement(__cx, thisObj, index, jsval);
     }
 
     bool Object::isFunction() const

@@ -142,4 +142,7 @@
         return ret; \
     }
 
+
+#define SE_REPORT_ERROR(format, ...)  JS_ReportErrorUTF8(se::ScriptEngine::getInstance()->_getContext(), format, ##__VA_ARGS__)
+
 #endif // #ifdef SCRIPT_ENGINE_SM

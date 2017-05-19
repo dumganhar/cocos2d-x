@@ -313,18 +313,22 @@ namespace se {
 
 // --- Arrays
 
-    void Object::getArrayLength(unsigned int *length) {
+    bool Object::getArrayLength(uint32_t* length) const
+    {
         int len = _obj.handle(__isolate)->Get(v8::String::NewFromUtf8(__isolate, "length"))->ToObject()->Int32Value();
         *length = len;
+        return true;
     }
 
-    void Object::getArrayElement(unsigned int index, Value *data) {
+    bool Object::getArrayElement(uint32_t index, Value* data) const
+    {
         v8::Local<v8::Value> result = _obj.handle(__isolate)->Get(index);
 
         if (data != nullptr)
         {
             internal::jsToSeValue(__isolate, result, data);
         }
+        return true;
     }
 
 //    void Object::getAsFloat32Array(float **ptr, unsigned int *length) {

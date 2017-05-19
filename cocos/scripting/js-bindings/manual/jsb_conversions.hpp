@@ -15,6 +15,7 @@
 bool jsval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt);
 bool jsval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt);
 bool jsval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt);
+bool jsval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat);
 bool jsval_to_Size(const se::Value& v, cocos2d::Size* size);
 bool jsval_to_Rect(const se::Value& v, cocos2d::Rect* rect);
 bool jsval_to_Color3B(const se::Value& v, cocos2d::Color3B* color);

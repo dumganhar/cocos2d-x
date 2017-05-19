@@ -37,6 +37,7 @@ namespace se {
         void setPrivate(JSContext* cx, JS::HandleObject obj, void* data, JSFinalizeOp finalizeCb);
 
     } // namespace internal {
+
 } // namespace se {
 
 #endif // #ifdef SCRIPT_ENGINE_SM

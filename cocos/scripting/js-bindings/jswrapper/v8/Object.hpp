@@ -54,9 +54,9 @@ namespace se {
 
         // --- Arrays
         bool isArray() const;
-        void getArrayLength(unsigned int *length);
+        bool getArrayLength(uint32_t* length) const;
 
-        void getArrayElement(unsigned int index, Value *data);
+        bool getArrayElement(uint32_t index, Value* data) const;
 
         // --- ArrayBuffer
         bool isArrayBuffer() const;

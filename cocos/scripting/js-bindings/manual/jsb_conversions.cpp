@@ -65,6 +65,47 @@ bool jsval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt)
     return true;
 }
 
+bool jsval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
+{
+    assert(v.isObject() && mat != nullptr);
+
+    JSB_PRECONDITION3(v.toObject()->isArray(), false, "Matrix object must be an Array");
+
+    se::Object* obj = v.toObject();
+
+    bool ok = false;
+    uint32_t len = 0;
+    ok = obj->getArrayLength(&len);
+    JSB_PRECONDITION3(ok, false, "getArrayLength failed!");
+
+    if (len != 16)
+    {
+        SE_REPORT_ERROR("Array length error: %d, was expecting 16", len);
+        return false;
+    }
+
+    se::Value tmp;
+    for (uint32_t i = 0; i < len; ++i)
+    {
+        ok = obj->getArrayElement(i, &tmp);
+        JSB_PRECONDITION3(ok, false, "getArrayElement failed!");
+
+        if (tmp.isNumber())
+        {
+            mat->m[i] = tmp.toFloat();
+        }
+        else
+        {
+            SE_REPORT_ERROR("%u, not supported type in matrix", i);
+            return false;
+        }
+
+        tmp.setUndefined();
+    }
+
+    return true;
+}
+
 bool jsval_to_Size(const se::Value& v, cocos2d::Size* size)
 {
     assert(v.isObject() && size != nullptr);
