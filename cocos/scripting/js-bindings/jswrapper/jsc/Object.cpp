@@ -43,6 +43,13 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayObject(size_t length, bool rooted)
+    {
+        JSObjectRef jsObj = JSObjectMakeArray(__cx, 0, nullptr, nullptr);
+        Object* obj = _createJSObject(nullptr, jsObj, rooted);
+        return obj;
+    }
+
     static void myJSTypedArrayBytesDeallocator(void* bytes, void* deallocatorContext)
     {
         free(bytes);
@@ -263,14 +270,53 @@ namespace se {
 
     bool Object::getArrayLength(uint32_t* length) const 
     {
-        assert(false);
-        return false;
+        assert(isArray());
+        assert(length != nullptr);
+        JSStringRef key = JSStringCreateWithUTF8CString("length");
+        JSValueRef v = JSObjectGetProperty(__cx, _obj, key, nullptr);
+        assert(JSValueIsNumber(__cx, v));
+        double len = JSValueToNumber(__cx, v, nullptr);
+        JSStringRelease(key);
+
+        *length = (uint32_t)len;
+        return true;
     }
 
     bool Object::getArrayElement(uint32_t index, Value* data) const 
     {
-        assert(false);
-        return false;
+        assert(isArray());
+        assert(data != nullptr);
+        JSValueRef v = JSObjectGetPropertyAtIndex(__cx, _obj, index, nullptr);
+        internal::jsToSeValue(__cx, v, data);
+
+        return true;
+    }
+
+    bool Object::setArrayElement(uint32_t index, const Value& data)
+    {
+        assert(isArray());
+
+        JSValueRef v;
+        internal::seToJsValue(__cx, data, &v);
+        JSObjectSetPropertyAtIndex(__cx, _obj, index, v, nullptr);
+        return true;
+    }
+
+    bool Object::getAllKeys(std::vector<std::string>* allKeys) const
+    {
+        JSPropertyNameArrayRef keys = JSObjectCopyPropertyNames(__cx, _obj);
+        size_t expectedCount = JSPropertyNameArrayGetCount(keys);
+
+        std::string tmp;
+        for (size_t count = 0; count < expectedCount; ++count)
+        {
+            JSStringRef key = JSPropertyNameArrayGetNameAtIndex(keys, count);
+            internal::jsStringToStdString(__cx, key, &tmp);
+            allKeys->push_back(tmp);
+        }
+
+        JSPropertyNameArrayRelease(keys);
+        return true;
     }
 
     bool Object::isFunction() const

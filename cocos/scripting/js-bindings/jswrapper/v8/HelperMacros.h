@@ -129,4 +129,7 @@
     }
 
 
+//FIXME: implement this macro
+#define SE_REPORT_ERROR
+
 #endif // #ifdef SCRIPT_ENGINE_V8

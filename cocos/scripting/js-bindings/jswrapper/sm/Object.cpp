@@ -415,7 +415,7 @@ namespace se {
         return (*ptr != nullptr);
     }
 
-    bool Object::getAllKeys(std::vector<std::string>* allKeys)
+    bool Object::getAllKeys(std::vector<std::string>* allKeys) const
     {
         assert(allKeys != nullptr);
         JS::RootedObject jsobj(__cx, _getJSObject());

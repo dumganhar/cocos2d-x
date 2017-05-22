@@ -40,6 +40,14 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayObject(size_t length, bool rooted)
+    {
+        JsValueRef jsObj = JS_INVALID_REFERENCE;
+        JsCreateArray((unsigned int)length, &jsObj);
+        Object* obj = _createJSObject(nullptr, jsObj, rooted);
+        return obj;
+    }
+
     Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
     {
         Object* obj = nullptr;
@@ -244,7 +252,7 @@ namespace se {
 
     bool Object::defineFunction(const char* funcName, JsNativeFunction func)
     {
-        JsPropertyIdRef propertyId;
+        JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
         JsCreatePropertyId(funcName, strlen(funcName), &propertyId);
 
         JsValueRef funcVal = JS_INVALID_REFERENCE;
@@ -256,16 +264,126 @@ namespace se {
 
     // --- Arrays
 
-    bool Object::getArrayLength(uint32_t* length) const 
+    static bool isArrayOfObject(JsValueRef obj)
     {
-        assert(false);
+        JsValueType type;
+        if (JsNoError == JsGetValueType(obj, &type))
+        {
+            return type == JsArray;
+        }
         return false;
+    }
+
+    static bool getArrayLengthOfObject(JsValueRef arrObj, uint32_t* length)
+    {
+        assert(isArrayOfObject(arrObj));
+        assert(length != nullptr);
+
+        JsErrorCode err = JsNoError;
+        JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+        const char* lengthName = "length";
+        err = JsCreatePropertyId(lengthName, strlen(lengthName), &propertyId);
+        if (err != JsNoError)
+            return false;
+
+        JsValueRef jsLen = JS_INVALID_REFERENCE;
+        err = JsGetProperty(arrObj, propertyId, &jsLen);
+        if (err != JsNoError)
+            return false;
+
+        int intVal = 0;
+        err = JsNumberToInt(jsLen, &intVal);
+        if (err != JsNoError)
+            return false;
+
+        *length = (uint32_t)intVal;
+        
+        return true;
+    }
+
+    bool Object::isArray() const
+    {
+        return isArrayOfObject(_obj);
+    }
+
+    bool Object::getArrayLength(uint32_t* length) const
+    {
+        return getArrayLengthOfObject(_obj, length);
     }
 
     bool Object::getArrayElement(uint32_t index, Value* data) const 
     {
-        assert(false);
-        return false;
+        assert(isArray());
+        assert(data != nullptr);
+
+        JsErrorCode err = JsNoError;
+        JsValueRef result = JS_INVALID_REFERENCE;
+        JsValueRef jsIndex = JS_INVALID_REFERENCE;
+        err = JsIntToNumber(index, &jsIndex);
+        if (err != JsNoError)
+            return false;
+
+        err = JsGetIndexedProperty(_obj, jsIndex, &result);
+        if (err != JsNoError)
+            return false;
+
+        internal::jsToSeValue(result, data);
+
+        return true;
+    }
+
+    bool Object::setArrayElement(uint32_t index, const Value& data)
+    {
+        assert(isArray());
+
+        JsErrorCode err = JsNoError;
+        JsValueRef jsIndex = JS_INVALID_REFERENCE;
+        err = JsIntToNumber(index, &jsIndex);
+        if (err != JsNoError)
+            return false;
+
+        JsValueRef value = JS_INVALID_REFERENCE;
+        internal::seToJsValue(data, &value);
+
+        err = JsSetIndexedProperty(_obj, jsIndex, value);
+        if (err != JsNoError)
+            return false;
+
+        return true;
+    }
+
+    bool Object::getAllKeys(std::vector<std::string>* allKeys) const
+    {
+        assert(allKeys != nullptr);
+
+        JsErrorCode err = JsNoError;
+        JsValueRef keys = JS_INVALID_REFERENCE;
+        err = JsGetOwnPropertyNames(_obj, &keys);
+        if (err != JsNoError)
+            return false;
+
+        uint32_t len = 0;
+        bool ok = false;
+        ok = getArrayLengthOfObject(keys, &len);
+        if (!ok)
+            return false;
+
+        std::string key;
+        for (uint32_t index = 0; index < len; ++index)
+        {
+            JsValueRef indexValue = JS_INVALID_REFERENCE;
+            err = JsIntToNumber(index, &indexValue);
+            if (err != JsNoError)
+                return false;
+
+            JsValueRef nameValue = JS_INVALID_REFERENCE;
+            JsGetIndexedProperty(keys, indexValue, &nameValue);
+
+            internal::jsStringToStdString(nameValue, &key);
+            allKeys->push_back(key);
+        }
+
+        return true;
     }
 
     bool Object::isFunction() const
@@ -377,15 +495,6 @@ namespace se {
 //        assert(false);
 //    }
 
-    bool Object::isArray() const
-    {
-        JsValueType type;
-        if (JsNoError == JsGetValueType(_obj, &type))
-        {
-            return type == JsArray;
-        }
-        return false;
-    }
 
     void* Object::getPrivateData()
     {

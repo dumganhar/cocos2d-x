@@ -21,6 +21,7 @@ namespace se {
 
         static Object* createPlainObject(bool rooted);
         static Object* createObject(const char* clsName, bool rooted);
+        static Object* createArrayObject(size_t length, bool rooted);
         static Object* createArrayBufferObject(void* data, size_t byteLength, bool rooted);
         static Object* createJSONObject(const std::string& jsonStr, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
@@ -59,10 +60,13 @@ namespace se {
         bool isArray() const;
         bool getArrayLength(uint32_t* length) const;
         bool getArrayElement(uint32_t index, Value* data) const;
+        bool setArrayElement(uint32_t index, const Value& data);
 
         // --- ArrayBuffer
         bool isArrayBuffer() const;
         bool getArrayBufferData(uint8_t** ptr, size_t* length) const;
+
+        bool getAllKeys(std::vector<std::string>* allKeys) const;
 
         // --- Private
         void setPrivateData(void* data);

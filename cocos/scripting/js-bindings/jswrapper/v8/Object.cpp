@@ -120,6 +120,13 @@ namespace se {
         return obj;
     }
 
+    Object* Object::createArrayObject(size_t length, bool rooted)
+    {
+        v8::Local<v8::Array> jsobj = v8::Array::New(__isolate, (int)length);
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
     Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
     {
         v8::Local<v8::ArrayBuffer> jsobj = v8::ArrayBuffer::New(__isolate, data, byteLength);
@@ -220,11 +227,6 @@ namespace se {
         return true;
     }
 
-    bool Object::isArray() const
-    {
-        return const_cast<Object*>(this)->_obj.handle(__isolate)->IsArray();
-    }
-
     // --- ArrayBuffer
     bool Object::isArrayBuffer() const
     {
@@ -313,22 +315,39 @@ namespace se {
 
 // --- Arrays
 
+    bool Object::isArray() const
+    {
+        return const_cast<Object*>(this)->_obj.handle(__isolate)->IsArray();
+    }
+
     bool Object::getArrayLength(uint32_t* length) const
     {
-        int len = _obj.handle(__isolate)->Get(v8::String::NewFromUtf8(__isolate, "length"))->ToObject()->Int32Value();
-        *length = len;
+        assert(isArray());
+        Object* thiz = const_cast<Object*>(this);
+        *length = thiz->_obj.handle(__isolate)->Get(v8::String::NewFromUtf8(__isolate, "length"))->ToObject()->Uint32Value();
         return true;
     }
 
     bool Object::getArrayElement(uint32_t index, Value* data) const
     {
-        v8::Local<v8::Value> result = _obj.handle(__isolate)->Get(index);
+        assert(isArray());
+        Object* thiz = const_cast<Object*>(this);
+        v8::Local<v8::Value> result = thiz->_obj.handle(__isolate)->Get(index);
 
         if (data != nullptr)
         {
             internal::jsToSeValue(__isolate, result, data);
         }
         return true;
+    }
+
+    bool Object::setArrayElement(uint32_t index, const Value& data)
+    {
+        assert(isArray());
+
+        v8::Local<v8::Value> jsval;
+        internal::seToJsValue(__isolate, data, &jsval);
+        return _obj.handle(__isolate)->Set(index, jsval);
     }
 
 //    void Object::getAsFloat32Array(float **ptr, unsigned int *length) {
@@ -391,6 +410,35 @@ namespace se {
 //        *length = len;
 //        *ptr = pt;
 //    }
+
+    bool Object::getAllKeys(std::vector<std::string>* allKeys) const
+    {
+        assert(allKeys != nullptr);
+        Object* thiz = const_cast<Object*>(this);
+        v8::Local<v8::Array> keys = thiz->_obj.handle(__isolate)->GetOwnPropertyNames();
+
+        Value keyVal;
+        for (uint32_t i = 0, len = keys->Length(); i < len; ++i)
+        {
+            v8::Local<v8::Value> key = keys->Get(i);
+            internal::jsToSeValue(__isolate, key, &keyVal);
+            if (keyVal.isString())
+            {
+                allKeys->push_back(keyVal.toString());
+            }
+            else if (keyVal.isNumber())
+            {
+                char buf[50] = {0};
+                snprintf(buf, sizeof(buf), "%d", keyVal.toInt32());
+                allKeys->push_back(buf);
+            }
+            else
+            {
+                assert(false);
+            }
+        }
+        return true;
+    }
 
     Class* Object::_getClass() const {
         return _cls;
