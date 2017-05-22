@@ -8,6 +8,7 @@
 
 #include "jsb_node.hpp"
 #include "jsb_global.h"
+#include "jsb_conversions.hpp"
 #include "ScriptingCore.h"
 
 #include "cocos2d.h"
@@ -292,6 +293,18 @@ SE_FUNC_BEGIN(Node_unschedule, se::NEED_THIS)
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(Node_getChildren, se::DONT_NEED_THIS)
+{
+    Node* thiz = (Node*)nativeThisObject;
+    const auto& children = thiz->getChildren();
+    se::Value v;
+    if (Vector_to_seval(children, &v))
+    {
+        SE_SET_RVAL(v);
+    }
+}
+SE_FUNC_END
+
 SE_SET_PROPERTY_BEGIN(Node_set_x, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
@@ -342,6 +355,7 @@ bool jsb_register_Node()
     cls->defineFunction("unschedule", Node_unschedule);
 
     cls->defineFunction("addChild", Node_addChild);
+    cls->defineFunction("getChildren", Node_getChildren);
     cls->defineFinalizedFunction(Node_finalized);
 
     cls->install();

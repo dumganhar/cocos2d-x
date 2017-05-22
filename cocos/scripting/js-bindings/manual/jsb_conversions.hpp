@@ -39,6 +39,7 @@ bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret);
 bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret);
 bool Vec3_to_seval(const cocos2d::Vec3& v, se::Value* ret);
 bool Vec4_to_seval(const cocos2d::Vec4& v, se::Value* ret);
+bool Mat4_to_seval(const cocos2d::Mat4& v, se::Value* ret);
 bool Color3B_to_seval(const cocos2d::Color3B& v, se::Value* ret);
 bool Color4B_to_seval(const cocos2d::Color4B& v, se::Value* ret);
 bool Color4F_to_seval(const cocos2d::Color4F& v, se::Value* ret);
@@ -52,3 +53,30 @@ bool std_vector_int_to_seval(const std::vector<int>& v, se::Value* ret);
 bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret);
 bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret);
 bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
+
+template<typename T>
+bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    bool ok = true;
+    se::Object* obj = se::Object::createArrayObject(v.size(), false);
+
+    uint32_t i = 0;
+    for (const auto& e : v)
+    {
+        auto iter = se::__nativePtrToObjectMap.find(e);
+        if (iter == se::__nativePtrToObjectMap.end())
+        {
+            CCLOGWARN("WARNING: type: (%s) isn't catched!", typeid(*e).name());
+            continue;
+        }
+
+        obj->setArrayElement(i, se::Value(iter->second));
+        ++i;
+    }
+
+    ret->setObject(obj);
+    obj->release();
+
+    return ok;
+}

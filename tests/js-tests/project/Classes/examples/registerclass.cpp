@@ -129,7 +129,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createPlainObject(false);
+        se::Object* obj = se::Object::createPlainObject(true);
         obj->setProperty("r", se::Value(233));
         obj->setProperty("g", se::Value(123));
         obj->setProperty("b", se::Value(43));
@@ -177,7 +177,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createPlainObject(false);
+        se::Object* obj = se::Object::createPlainObject(true);
         obj->setProperty("3", se::Value(233));
         obj->setProperty("493", se::Value(123));
         obj->setProperty("1223", se::Value(43));
@@ -195,7 +195,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createPlainObject(false);
+        se::Object* obj = se::Object::createPlainObject(true);
         obj->setProperty("src", se::Value(0x0302));
         obj->setProperty("dst", se::Value(0x0303));
 
@@ -209,7 +209,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createArrayObject(3, false);
+        se::Object* obj = se::Object::createArrayObject(3, true);
 
         se::Value str1("str1");
         se::Value str2("str2");
@@ -233,7 +233,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createArrayObject(3, false);
+        se::Object* obj = se::Object::createArrayObject(3, true);
 
         se::Value float1(1233.1334f);
         se::Value float2(84973.237f);
@@ -257,7 +257,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createArrayObject(3, false);
+        se::Object* obj = se::Object::createArrayObject(3, true);
 
         se::Value v1(123);
         se::Value v2(443);
@@ -281,19 +281,21 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createArrayObject(3, false);
+        se::Object* obj = se::Object::createArrayObject(3, true);
 
         {
             se::Object* subobj = se::Object::createPlainObject(false);
             subobj->setProperty("x", se::Value(2382.239f));
             subobj->setProperty("y", se::Value(348923.23923f));
             obj->setArrayElement(0, se::Value(subobj));
+            subobj->release();
         }
         {
             se::Object* subobj = se::Object::createPlainObject(false);
             subobj->setProperty("x", se::Value(232003.23892f));
             subobj->setProperty("y", se::Value(23.32932f));
             obj->setArrayElement(1, se::Value(subobj));
+            subobj->release();
         }
 
         {
@@ -301,6 +303,7 @@ int main_register_class(int argc, char** argv)
             subobj->setProperty("x", se::Value(28938923.231f));
             subobj->setProperty("y", se::Value(1278231.23891f));
             obj->setArrayElement(2, se::Value(subobj));
+            subobj->release();
         }
 
         {
@@ -308,6 +311,7 @@ int main_register_class(int argc, char** argv)
             subobj->setProperty("x", se::Value(239184543.2372f));
             subobj->setProperty("y", se::Value(3.2389f));
             obj->setArrayElement(3, se::Value(subobj));
+            subobj->release();
         }
 
         std::vector<cocos2d::Vec2> ret;
@@ -330,7 +334,7 @@ int main_register_class(int argc, char** argv)
     }
 
     {
-        se::Object* obj = se::Object::createPlainObject(false);
+        se::Object* obj = se::Object::createPlainObject(true);
 
         obj->setProperty("fontName", se::Value("MyArial"));
         obj->setProperty("fontSize", se::Value(33));
@@ -359,7 +363,7 @@ int main_register_class(int argc, char** argv)
         assert(ret._alignment == TextHAlignment::CENTER);
         assert(ret._vertAlignment == TextVAlignment::BOTTOM);
         assert(ret._fontFillColor == Color3B::RED);
-        assert(ret._dimensions.equals(Size(400, 300)));
+        assert(ret._dimensions.equals(cocos2d::Size(400, 300)));
         assert(ret._shadow._shadowEnabled);
         assert(std::abs(ret._shadow._shadowOffset.width - 12) < FLT_EPSILON);
         assert(std::abs(ret._shadow._shadowOffset.height - (-12)) < FLT_EPSILON);
@@ -482,7 +486,7 @@ int main_register_class(int argc, char** argv)
         v._alignment = TextHAlignment::CENTER;
         v._vertAlignment = TextVAlignment::BOTTOM;
         v._fontFillColor = Color3B::RED;
-        v._dimensions = Size(400, 300);
+        v._dimensions = cocos2d::Size(400, 300);
         v._shadow._shadowEnabled = true;
         v._shadow._shadowOffset = Vec2(12, -12);
         v._shadow._shadowBlur = 0.34f;
@@ -632,6 +636,28 @@ int main_register_class(int argc, char** argv)
         assert(obj->getArrayElement(1, &tmp2) && std::abs(tmp2.toFloat() - (-21334.23f)) < FLT_EPSILON);
         assert(obj->getArrayElement(2, &tmp2) && std::abs(tmp2.toFloat() - (-233.043f)) < FLT_EPSILON);
         assert(obj->getArrayElement(3, &tmp2) && std::abs(tmp2.toFloat() - 3494.2305f) < FLT_EPSILON);
+    }
+
+    {
+        cocos2d::Mat4 mat4;
+        for (uint8_t i = 0; i < 16; ++i)
+        {
+            mat4.m[i] = i * 23.25f;
+        }
+
+        se::Value ret;
+        assert(Mat4_to_seval(mat4, &ret) && ret.isObject());
+        se::Object* obj = ret.toObject();
+        uint32_t len = 0;
+        assert(obj->isArray() && obj->getArrayLength(&len) && len == 16);
+
+        se::Value tmp;
+        for (uint8_t i = 0; i < 16; ++i)
+        {
+            assert(obj->getArrayElement(i, &tmp));
+            assert(std::abs(tmp.toFloat() - i * 23.25f) < FLT_EPSILON);
+        }
+
     }
 
     return 0;

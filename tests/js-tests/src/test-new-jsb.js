@@ -494,6 +494,11 @@ log("start THIS: " + this);
     item.y -= 100;
     menu.addChild(item);
 
+    var children = scene.getChildren();
+    log("iterate children begin");
+    iterateObject(children);
+    log("iterate children end");
+
     var director = cc.Director.getInstance();
     if (__sceneIndex == 0) {
       director.runWithScene(scene);

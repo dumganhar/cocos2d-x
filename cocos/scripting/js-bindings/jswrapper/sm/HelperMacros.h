@@ -145,4 +145,6 @@
 
 #define SE_REPORT_ERROR(format, ...)  JS_ReportErrorUTF8(se::ScriptEngine::getInstance()->_getContext(), format, ##__VA_ARGS__)
 
+#define TYPE_NAME(t) typeid(t).name()
+
 #endif // #ifdef SCRIPT_ENGINE_SM

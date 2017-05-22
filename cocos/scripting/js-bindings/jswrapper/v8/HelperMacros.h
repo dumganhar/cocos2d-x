@@ -132,4 +132,6 @@
 //FIXME: implement this macro
 #define SE_REPORT_ERROR
 
+#define TYPE_NAME(t) typeid(t).name()
+
 #endif // #ifdef SCRIPT_ENGINE_V8
