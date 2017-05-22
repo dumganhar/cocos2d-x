@@ -145,6 +145,26 @@
 
 #define SE_REPORT_ERROR(format, ...)  JS_ReportErrorUTF8(se::ScriptEngine::getInstance()->_getContext(), format, ##__VA_ARGS__)
 
-#define TYPE_NAME(t) typeid(t).name()
+#define SE_TYPE_NAME(t) typeid(t).name()
+
+#define SE_QUOTEME(x) #x
+
+#if COCOS2D_DEBUG > 0
+
+#define SE_ASSERT(cond, fmt, ...) \
+    do \
+    { \
+        if (!(cond)) \
+        { \
+            printf("ASSERT (" SE_QUOTEME(__LINE__) "): " fmt "\n", ##__VA_ARGS__); \
+            assert(false); \
+        } \
+    } while(false)
+
+#else
+
+#define SE_ASSERT(cond, fmt, ...) 
+
+#endif // #if COCOS2D_DEBUG > 0
 
 #endif // #ifdef SCRIPT_ENGINE_SM
