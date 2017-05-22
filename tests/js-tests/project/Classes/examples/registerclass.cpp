@@ -522,5 +522,117 @@ int main_register_class(int argc, char** argv)
         assert(obj->getProperty("strokeAlpha", &tmp) && tmp.toUint8() == 223);
     }
 
+    {
+        se::Value tmp;
+        cocos2d::Value v1(323.12f);
+        assert(ccvalue_to_seval(v1, &tmp) && std::abs(tmp.toFloat() - 323.12f) < FLT_EPSILON);
+        cocos2d::Value v2(true);
+        assert(ccvalue_to_seval(v2, &tmp) && tmp.toBoolean());
+        cocos2d::Value v3(false);
+        assert(ccvalue_to_seval(v3, &tmp) && !tmp.toBoolean());
+        cocos2d::Value v4("aaa");
+        assert(ccvalue_to_seval(v4, &tmp) && tmp.toString() == "aaa");
+        cocos2d::Value v5(1002);
+        assert(ccvalue_to_seval(v5, &tmp) && tmp.toInt32() == 1002);
+        {
+            cocos2d::ValueMap map;
+            map["aaa"] = "bbb";
+            map["bbb"] = true;
+            map["c"] = false;
+            map["int"] = 123;
+            map["float"] = 239.02f;
+            assert(ccvalue_to_seval(cocos2d::Value(map), &tmp) && tmp.isObject());
+            se::Object* obj = tmp.toObject();
+            std::vector<std::string> allKeys;
+            assert(obj->getAllKeys(&allKeys) && allKeys.size() == 5);
+            se::Value tmp2;
+            assert(obj->getProperty("aaa", &tmp2) && tmp2.toString() == "bbb");
+            assert(obj->getProperty("bbb", &tmp2) && tmp2.toBoolean());
+            assert(obj->getProperty("c", &tmp2) && !tmp2.toBoolean());
+            assert(obj->getProperty("int", &tmp2) && tmp2.toInt32() == 123);
+            assert(obj->getProperty("float", &tmp2) && tmp2.toFloat() == 239.02f);
+        }
+
+        {
+            cocos2d::ValueMapIntKey map;
+            map[111] = "bbb";
+            map[22] = true;
+            map[334] = false;
+            map[12345] = 123;
+            map[11124] = 239.02f;
+            assert(ccvalue_to_seval(cocos2d::Value(map), &tmp) && tmp.isObject());
+            se::Object* obj = tmp.toObject();
+            std::vector<std::string> allKeys;
+            assert(obj->getAllKeys(&allKeys) && allKeys.size() == 5);
+            se::Value tmp2;
+            assert(obj->getProperty("111", &tmp2) && tmp2.toString() == "bbb");
+            assert(obj->getProperty("22", &tmp2) && tmp2.toBoolean());
+            assert(obj->getProperty("334", &tmp2) && !tmp2.toBoolean());
+            assert(obj->getProperty("12345", &tmp2) && tmp2.toInt32() == 123);
+            assert(obj->getProperty("11124", &tmp2) && tmp2.toFloat() == 239.02f);
+        }
+
+        {
+            cocos2d::ValueVector vec;
+            vec.push_back(cocos2d::Value("bbb"));
+            vec.push_back(cocos2d::Value(true));
+            vec.push_back(cocos2d::Value(false));
+            vec.push_back(cocos2d::Value(123));
+            vec.push_back(cocos2d::Value(239.02f));
+            assert(ccvalue_to_seval(cocos2d::Value(vec), &tmp) && tmp.isObject());
+            se::Object* obj = tmp.toObject();
+            uint32_t len = 0;
+            assert(obj->isArray() && obj->getArrayLength(&len) && len == 5);
+            se::Value tmp2;
+            assert(obj->getArrayElement(0, &tmp2) && tmp2.toString() == "bbb");
+            assert(obj->getArrayElement(1, &tmp2) && tmp2.toBoolean());
+            assert(obj->getArrayElement(2, &tmp2) && !tmp2.toBoolean());
+            assert(obj->getArrayElement(3, &tmp2) && tmp2.toInt32() == 123);
+            assert(obj->getArrayElement(4, &tmp2) && tmp2.toFloat() == 239.02f);
+        }
+    }
+
+    {
+        std::vector<std::string> vec = {"aaa", "bbb", "hello", "world"};
+        se::Value tmp;
+        se::Value tmp2;
+        assert(std_vector_string_to_seval(vec, &tmp) && tmp.isObject());
+        se::Object* obj = tmp.toObject();
+        uint32_t len = 0;
+        assert(obj->isArray() && obj->getArrayLength(&len) && len == 4);
+        assert(obj->getArrayElement(0, &tmp2) && tmp2.toString() == "aaa");
+        assert(obj->getArrayElement(1, &tmp2) && tmp2.toString() == "bbb");
+        assert(obj->getArrayElement(2, &tmp2) && tmp2.toString() == "hello");
+        assert(obj->getArrayElement(3, &tmp2) && tmp2.toString() == "world");
+    }
+
+    {
+        std::vector<int> vec = {123, -21334, -233, 3494};
+        se::Value tmp;
+        se::Value tmp2;
+        assert(std_vector_int_to_seval(vec, &tmp) && tmp.isObject());
+        se::Object* obj = tmp.toObject();
+        uint32_t len = 0;
+        assert(obj->isArray() && obj->getArrayLength(&len) && len == 4);
+        assert(obj->getArrayElement(0, &tmp2) && tmp2.toInt32() == 123);
+        assert(obj->getArrayElement(1, &tmp2) && tmp2.toInt32() == -21334);
+        assert(obj->getArrayElement(2, &tmp2) && tmp2.toInt32() == -233);
+        assert(obj->getArrayElement(3, &tmp2) && tmp2.toInt32() == 3494);
+    }
+
+    {
+        std::vector<float> vec = {123.03f, -21334.23f, -233.043f, 3494.2305f};
+        se::Value tmp;
+        se::Value tmp2;
+        assert(std_vector_float_to_seval(vec, &tmp) && tmp.isObject());
+        se::Object* obj = tmp.toObject();
+        uint32_t len = 0;
+        assert(obj->isArray() && obj->getArrayLength(&len) && len == 4);
+        assert(obj->getArrayElement(0, &tmp2) && std::abs(tmp2.toFloat() - 123.03f) < FLT_EPSILON);
+        assert(obj->getArrayElement(1, &tmp2) && std::abs(tmp2.toFloat() - (-21334.23f)) < FLT_EPSILON);
+        assert(obj->getArrayElement(2, &tmp2) && std::abs(tmp2.toFloat() - (-233.043f)) < FLT_EPSILON);
+        assert(obj->getArrayElement(3, &tmp2) && std::abs(tmp2.toFloat() - 3494.2305f) < FLT_EPSILON);
+    }
+
     return 0;
 }

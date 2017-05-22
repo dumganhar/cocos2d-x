@@ -843,6 +843,126 @@ bool Color4F_to_seval(const cocos2d::Color4F& v, se::Value* ret)
     return true;
 }
 
+bool ccvalue_to_seval(const cocos2d::Value& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    bool ok = true;
+    switch (v.getType())
+    {
+        case cocos2d::Value::Type::BOOLEAN:
+            ret->setBoolean(v.asBool());
+            break;
+        case cocos2d::Value::Type::FLOAT:
+        case cocos2d::Value::Type::DOUBLE:
+            ret->setNumber(v.asDouble());
+            break;
+        case cocos2d::Value::Type::INTEGER:
+            ret->setInt32(v.asInt());
+            break;
+        case cocos2d::Value::Type::STRING:
+            ret->setString(v.asString());
+            break;
+        case cocos2d::Value::Type::VECTOR:
+            ok = ccvaluevector_to_seval(v.asValueVector(), ret);
+            break;
+        case cocos2d::Value::Type::MAP:
+            ok = ccvaluemap_to_seval(v.asValueMap(), ret);
+            break;
+        case cocos2d::Value::Type::INT_KEY_MAP:
+            ok = ccvaluemapintkey_to_seval(v.asIntKeyMap(), ret);
+            break;
+        default:
+            ok = false;
+            break;
+    }
+
+    return ok;
+}
+
+bool ccvaluemap_to_seval(const cocos2d::ValueMap& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+    bool ok = true;
+    for (const auto& e : v)
+    {
+        const std::string& key = e.first;
+        const cocos2d::Value& value = e.second;
+
+        if (key.empty())
+            continue;
+
+        se::Value tmp;
+        if (!ccvalue_to_seval(value, &tmp))
+        {
+            ok = false;
+            break;
+        }
+
+        obj->setProperty(key.c_str(), tmp);
+    }
+    ret->setObject(obj);
+    obj->release();
+
+    return ok;
+}
+
+bool ccvaluemapintkey_to_seval(const cocos2d::ValueMapIntKey& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+    bool ok = true;
+    for (const auto& e : v)
+    {
+        std::stringstream keyss;
+        keyss << e.first;
+        std::string key = keyss.str();
+        const cocos2d::Value& value = e.second;
+
+        if (key.empty())
+            continue;
+
+        se::Value tmp;
+        if (!ccvalue_to_seval(value, &tmp))
+        {
+            ok = false;
+            break;
+        }
+
+        obj->setProperty(key.c_str(), tmp);
+    }
+    ret->setObject(obj);
+    obj->release();
+
+    return ok;
+}
+
+bool ccvaluevector_to_seval(const cocos2d::ValueVector& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createArrayObject(v.size(), false);
+    bool ok = true;
+
+    uint32_t i = 0;
+    for (const auto& value : v)
+    {
+        se::Value tmp;
+        if (!ccvalue_to_seval(value, &tmp))
+        {
+            ok = false;
+            break;
+        }
+
+        obj->setArrayElement(i, tmp);
+        ++i;
+    }
+    ret->setObject(obj);
+    obj->release();
+    return ok;
+}
+
 bool blendfunc_to_seval(const cocos2d::BlendFunc& v, se::Value* ret)
 {
     assert(ret != nullptr);
@@ -853,6 +973,49 @@ bool blendfunc_to_seval(const cocos2d::BlendFunc& v, se::Value* ret)
     obj->release();
 
     return true;
+}
+
+namespace {
+
+    template<typename T>
+    bool std_vector_T_to_seval(const std::vector<T>& v, se::Value* ret)
+    {
+        assert(ret != nullptr);
+        se::Object* obj = se::Object::createArrayObject(v.size(), false);
+        bool ok = true;
+
+        uint32_t i = 0;
+        for (const auto& value : v)
+        {
+            if (!obj->setArrayElement(i, se::Value(value)))
+            {
+                ok = false;
+                break;
+            }
+            ++i;
+        }
+
+        ret->setObject(obj);
+        
+        obj->release();
+        return ok;
+    }
+
+}
+
+bool std_vector_string_to_seval(const std::vector<std::string>& v, se::Value* ret)
+{
+    return std_vector_T_to_seval(v, ret);
+}
+
+bool std_vector_int_to_seval(const std::vector<int>& v, se::Value* ret)
+{
+    return std_vector_T_to_seval(v, ret);
+}
+
+bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret)
+{
+    return std_vector_T_to_seval(v, ret);
 }
 
 bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret)
