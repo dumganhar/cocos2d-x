@@ -8,7 +8,7 @@
 
 #include "jsb_conversions.hpp"
 
-bool jsval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt)
+bool seval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt)
 {
     assert(v.isObject() && pt != nullptr);
     se::Object* obj = v.toObject();
@@ -23,7 +23,7 @@ bool jsval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt)
     return true;
 }
 
-bool jsval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt)
+bool seval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt)
 {
     assert(v.isObject() && pt != nullptr);
     se::Object* obj = v.toObject();
@@ -42,7 +42,7 @@ bool jsval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt)
     return true;
 }
 
-bool jsval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt)
+bool seval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt)
 {
     assert(v.isObject() && pt != nullptr);
     se::Object* obj = v.toObject();
@@ -65,7 +65,7 @@ bool jsval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt)
     return true;
 }
 
-bool jsval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
+bool seval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
 {
     assert(v.isObject() && mat != nullptr);
 
@@ -106,7 +106,7 @@ bool jsval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
     return true;
 }
 
-bool jsval_to_Size(const se::Value& v, cocos2d::Size* size)
+bool seval_to_Size(const se::Value& v, cocos2d::Size* size)
 {
     assert(v.isObject() && size != nullptr);
     se::Object* obj = v.toObject();
@@ -122,7 +122,7 @@ bool jsval_to_Size(const se::Value& v, cocos2d::Size* size)
     return true;
 }
 
-bool jsval_to_Rect(const se::Value& v, cocos2d::Rect* rect)
+bool seval_to_Rect(const se::Value& v, cocos2d::Rect* rect)
 {
     assert(v.isObject() && rect != nullptr);
     se::Object* obj = v.toObject();
@@ -147,7 +147,7 @@ bool jsval_to_Rect(const se::Value& v, cocos2d::Rect* rect)
     return true;
 }
 
-bool jsval_to_Color3B(const se::Value& v, cocos2d::Color3B* color)
+bool seval_to_Color3B(const se::Value& v, cocos2d::Color3B* color)
 {
     assert(v.isObject() && color != nullptr);
     se::Object* obj = v.toObject();
@@ -166,7 +166,7 @@ bool jsval_to_Color3B(const se::Value& v, cocos2d::Color3B* color)
     return true;
 }
 
-bool jsval_to_Color4B(const se::Value& v, cocos2d::Color4B* color)
+bool seval_to_Color4B(const se::Value& v, cocos2d::Color4B* color)
 {
     assert(v.isObject() && color != nullptr);
     se::Object* obj = v.toObject();
@@ -189,7 +189,7 @@ bool jsval_to_Color4B(const se::Value& v, cocos2d::Color4B* color)
     return true;
 }
 
-bool jsval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
+bool seval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
 {
     assert(v.isObject() && color != nullptr);
     se::Object* obj = v.toObject();
@@ -212,7 +212,7 @@ bool jsval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
     return true;
 }
 
-bool jsval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
+bool seval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
 {
     assert(ret != nullptr);
     if (v.isObject())
@@ -222,7 +222,7 @@ bool jsval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
         {
             // It's a normal js object.
             cocos2d::ValueMap dictVal;
-            bool ok = jsval_to_ccvaluemap(v, &dictVal);
+            bool ok = seval_to_ccvaluemap(v, &dictVal);
             if (ok)
             {
                 *ret = cocos2d::Value(dictVal);
@@ -232,7 +232,7 @@ bool jsval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
         {
             // It's a js array object.
             cocos2d::ValueVector arrVal;
-            bool ok = jsval_to_ccvaluevector(v, &arrVal);
+            bool ok = seval_to_ccvaluevector(v, &arrVal);
             if (ok)
             {
                 *ret = cocos2d::Value(arrVal);
@@ -259,7 +259,7 @@ bool jsval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
     return true;
 }
 
-bool jsval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
+bool seval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
 {
     if (v.isNullOrUndefined())
         return false;
@@ -293,7 +293,7 @@ bool jsval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
             {
                 // It's a normal js object.
                 cocos2d::ValueMap dictVal;
-                bool ok = jsval_to_ccvaluemap(value, &dictVal);
+                bool ok = seval_to_ccvaluemap(value, &dictVal);
                 if (ok)
                 {
                     dict.emplace(key, cocos2d::Value(dictVal));
@@ -303,7 +303,7 @@ bool jsval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
             {
                 // It's a js array object.
                 cocos2d::ValueVector arrVal;
-                bool ok = jsval_to_ccvaluevector(value, &arrVal);
+                bool ok = seval_to_ccvaluevector(value, &arrVal);
                 if (ok)
                 {
                     dict.emplace(key, cocos2d::Value(arrVal));
@@ -341,7 +341,7 @@ static bool isNumberString(const std::string& str)
     return true;
 }
 
-bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
+bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
 {
     if (v.isNullOrUndefined())
         return false;
@@ -370,7 +370,7 @@ bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
 
         if (!isNumberString(key))
         {
-            CCLOGWARN("jsval_to_ccvaluemapintkey, found not numeric key: %s", key.c_str());
+            CCLOGWARN("seval_to_ccvaluemapintkey, found not numeric key: %s", key.c_str());
             continue;
         }
 
@@ -383,7 +383,7 @@ bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
             {
                 // It's a normal js object.
                 cocos2d::ValueMap dictVal;
-                bool ok = jsval_to_ccvaluemap(value, &dictVal);
+                bool ok = seval_to_ccvaluemap(value, &dictVal);
                 if (ok)
                 {
                     dict.emplace(intKey, cocos2d::Value(dictVal));
@@ -393,7 +393,7 @@ bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
             {
                 // It's a js array object.
                 cocos2d::ValueVector arrVal;
-                bool ok = jsval_to_ccvaluevector(value, &arrVal);
+                bool ok = seval_to_ccvaluevector(value, &arrVal);
                 if (ok)
                 {
                     dict.emplace(intKey, cocos2d::Value(arrVal));
@@ -421,7 +421,7 @@ bool jsval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
     return true;
 }
 
-bool jsval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
+bool seval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
 {
     assert(ret != nullptr);
 
@@ -445,7 +445,7 @@ bool jsval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
                 {
                     // It's a normal js object.
                     cocos2d::ValueMap dictVal;
-                    ok = jsval_to_ccvaluemap(value, &dictVal);
+                    ok = seval_to_ccvaluemap(value, &dictVal);
                     if (ok)
                     {
                         ret->push_back(cocos2d::Value(dictVal));
@@ -455,7 +455,7 @@ bool jsval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
                 {
                     // It's a js array object.
                     cocos2d::ValueVector arrVal;
-                    ok = jsval_to_ccvaluevector(value, &arrVal);
+                    ok = seval_to_ccvaluevector(value, &arrVal);
                     if (ok)
                     {
                         ret->push_back(cocos2d::Value(arrVal));
@@ -484,7 +484,7 @@ bool jsval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
     return true;
 }
 
-bool jsval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret)
+bool seval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret)
 {
     assert(v.isObject());
     se::Object* obj = v.toObject();
@@ -498,4 +498,116 @@ bool jsval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret)
         return false;
     ret->dst = value.toUint32();
     return true;
+}
+
+bool seval_to_std_vector_string(const se::Value& v, std::vector<std::string>* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    assert(obj->isArray());
+    uint32_t len = 0;
+    if (obj->getArrayLength(&len))
+    {
+        se::Value value;
+        for (uint32_t i = 0; i < len; ++i)
+        {
+            if (!obj->getArrayElement(i, &value))
+            {
+                ret->clear();
+                return false;
+            }
+
+            assert(value.isString());
+            ret->push_back(value.toString());
+        }
+        return true;
+    }
+
+    ret->clear();
+    return false;
+}
+
+bool seval_to_std_vector_int(const se::Value& v, std::vector<int>* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    assert(obj->isArray());
+    uint32_t len = 0;
+    if (obj->getArrayLength(&len))
+    {
+        se::Value value;
+        for (uint32_t i = 0; i < len; ++i)
+        {
+            if (!obj->getArrayElement(i, &value))
+            {
+                ret->clear();
+                return false;
+            }
+
+            assert(value.isNumber());
+            ret->push_back(value.toInt32());
+        }
+        return true;
+    }
+
+    ret->clear();
+    return false;
+}
+
+bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    assert(obj->isArray());
+    uint32_t len = 0;
+    if (obj->getArrayLength(&len))
+    {
+        se::Value value;
+        for (uint32_t i = 0; i < len; ++i)
+        {
+            if (!obj->getArrayElement(i, &value))
+            {
+                ret->clear();
+                return false;
+            }
+
+            assert(value.isNumber());
+            ret->push_back(value.toFloat());
+        }
+        return true;
+    }
+
+    ret->clear();
+    return false;
+}
+
+bool seval_to_std_vector_vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    assert(obj->isArray());
+    uint32_t len = 0;
+    if (obj->getArrayLength(&len))
+    {
+        se::Value value;
+        cocos2d::Vec2 pt;
+        for (uint32_t i = 0; i < len; ++i)
+        {
+            if (!obj->getArrayElement(i, &value) || !seval_to_Vec2(value, &pt))
+            {
+                ret->clear();
+                return false;
+            }
+
+            ret->push_back(pt);
+        }
+        return true;
+    }
+
+    ret->clear();
+    return false;
 }
