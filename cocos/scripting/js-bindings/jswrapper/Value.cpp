@@ -37,6 +37,18 @@ namespace se {
         setBoolean(v);
     }
 
+    Value::Value(int8_t v)
+    : _type(Type::Undefined)
+    {
+        setInt8(v);
+    }
+
+    Value::Value(uint8_t v)
+    : _type(Type::Undefined)
+    {
+        setUint8(v);
+    }
+
     Value::Value(int32_t v)
     : _type(Type::Undefined)
     {
@@ -211,6 +223,18 @@ namespace se {
         _u._boolean = v;
     }
 
+    void Value::setInt8(int8_t v)
+    {
+        reset(Type::Number);
+        _u._number = (double)v;
+    }
+
+    void Value::setUint8(uint8_t v)
+    {
+        reset(Type::Number);
+        _u._number = (double)v;
+    }
+
     void Value::setInt32(int32_t v)
     {
         reset(Type::Number);
@@ -280,6 +304,24 @@ namespace se {
             _u._object = object;
             SAFE_ADD_REF(_u._object);
         }
+    }
+
+    int8_t Value::toInt8() const
+    {
+        assert(_type == Type::Number);
+        return static_cast<int8_t>(_u._number);
+    }
+
+    uint8_t Value::toUint8() const
+    {
+        assert(_type == Type::Number);
+        return static_cast<uint8_t>(_u._number);
+    }
+
+    int16_t Value::toInt16() const
+    {
+        assert(_type == Type::Number);
+        return static_cast<int16_t>(_u._number);
     }
 
     uint16_t Value::toUint16() const

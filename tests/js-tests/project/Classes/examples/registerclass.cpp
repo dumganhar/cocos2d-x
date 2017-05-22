@@ -329,5 +329,198 @@ int main_register_class(int argc, char** argv)
         obj->release();
     }
 
+    {
+        se::Object* obj = se::Object::createPlainObject(false);
+
+        obj->setProperty("fontName", se::Value("MyArial"));
+        obj->setProperty("fontSize", se::Value(33));
+        obj->setProperty("textAlign", se::Value((int32_t)(TextHAlignment::CENTER)));
+        obj->setProperty("verticalAlign", se::Value((int32_t)(TextVAlignment::BOTTOM)));
+        se::Value tmp;
+        Color3B_to_seval(Color3B::RED, &tmp);
+        obj->setProperty("fillStyle", tmp);
+        obj->setProperty("boundingWidth", se::Value(400));
+        obj->setProperty("boundingHeight", se::Value(300));
+        obj->setProperty("shadowEnabled", se::Value(true));
+        obj->setProperty("shadowOffsetX", se::Value(12));
+        obj->setProperty("shadowOffsetY", se::Value(-12));
+        obj->setProperty("shadowBlur", se::Value(0.34f));
+        obj->setProperty("shadowOpacity", se::Value(0.32f));
+        obj->setProperty("strokeEnabled", se::Value(true));
+        Color3B_to_seval(Color3B::BLUE, &tmp);
+        obj->setProperty("strokeStyle", tmp);
+        obj->setProperty("lineWidth", se::Value(1.23f));
+        obj->setProperty("strokeAlpha", se::Value(223));
+
+        FontDefinition ret;
+        assert(seval_to_FontDefinition(se::Value(obj), &ret));
+        assert(ret._fontName == "MyArial");
+        assert(ret._fontSize == 33);
+        assert(ret._alignment == TextHAlignment::CENTER);
+        assert(ret._vertAlignment == TextVAlignment::BOTTOM);
+        assert(ret._fontFillColor == Color3B::RED);
+        assert(ret._dimensions.equals(Size(400, 300)));
+        assert(ret._shadow._shadowEnabled);
+        assert(std::abs(ret._shadow._shadowOffset.width - 12) < FLT_EPSILON);
+        assert(std::abs(ret._shadow._shadowOffset.height - (-12)) < FLT_EPSILON);
+        assert(std::abs(ret._shadow._shadowBlur - (0.34f)) < FLT_EPSILON);
+        assert(std::abs(ret._shadow._shadowOpacity - (0.32f)) < FLT_EPSILON);
+        assert(ret._stroke._strokeEnabled);
+        assert(ret._stroke._strokeColor == Color3B::BLUE);
+        assert(std::abs(ret._stroke._strokeSize - 1.23f) < FLT_EPSILON);
+        assert(ret._stroke._strokeAlpha == 223);
+
+        obj->release();
+    }
+
+    // native value -> se value
+    {
+        cocos2d::Vec2 v(100.2334f, 283.32891f);
+        se::Value ret;
+        assert(Vec2_to_seval(v, &ret));
+        assert(ret.isObject());
+        se::Object* obj = ret.toObject();
+        se::Value x, y;
+        assert(obj->getProperty("x", &x));
+        assert(obj->getProperty("y", &y));
+
+        assert(x.isNumber() && y.isNumber());
+
+        assert(std::abs(x.toFloat() - 100.2334f) < FLT_EPSILON);
+        assert(std::abs(y.toFloat() - 283.32891f) < FLT_EPSILON);
+    }
+
+    {
+        cocos2d::Vec3 v(100.2334f, 283.32891f, 2382.482f);
+        se::Value ret;
+        assert(Vec3_to_seval(v, &ret));
+        assert(ret.isObject());
+        se::Object* obj = ret.toObject();
+        se::Value x, y, z;
+        assert(obj->getProperty("x", &x));
+        assert(obj->getProperty("y", &y));
+        assert(obj->getProperty("z", &z));
+
+        assert(x.isNumber() && y.isNumber() && z.isNumber());
+
+        assert(std::abs(x.toFloat() - 100.2334f) < FLT_EPSILON);
+        assert(std::abs(y.toFloat() - 283.32891f) < FLT_EPSILON);
+        assert(std::abs(z.toFloat() - 2382.482f) < FLT_EPSILON);
+    }
+
+    {
+        cocos2d::Vec4 v(100.2334f, 283.32891f, 2382.482f, 1289.32f);
+        se::Value ret;
+        assert(Vec4_to_seval(v, &ret));
+        assert(ret.isObject());
+        se::Object* obj = ret.toObject();
+        se::Value x, y, z, w;
+        assert(obj->getProperty("x", &x));
+        assert(obj->getProperty("y", &y));
+        assert(obj->getProperty("z", &z));
+        assert(obj->getProperty("w", &w));
+
+        assert(x.isNumber() && y.isNumber() && z.isNumber() && w.isNumber());
+
+        assert(std::abs(x.toFloat() - 100.2334f) < FLT_EPSILON);
+        assert(std::abs(y.toFloat() - 283.32891f) < FLT_EPSILON);
+        assert(std::abs(z.toFloat() - 2382.482f) < FLT_EPSILON);
+        assert(std::abs(w.toFloat() - 1289.32f) < FLT_EPSILON);
+    }
+
+    {
+        cocos2d::BlendFunc v;
+        v.src = GL_ONE_MINUS_DST_ALPHA;
+        v.dst = GL_SRC_COLOR;
+
+        se::Value ret;
+        assert(blendfunc_to_seval(v, &ret));
+        assert(ret.isObject());
+
+        se::Object* obj = ret.toObject();
+        se::Value src, dst;
+        assert(obj->getProperty("src", &src));
+        assert(obj->getProperty("dst", &dst));
+        assert(src.isNumber());
+        assert(dst.isNumber());
+        assert(src.toUint32() == GL_ONE_MINUS_DST_ALPHA);
+        assert(dst.toUint32() == GL_SRC_COLOR);
+    }
+
+    {
+        cocos2d::Uniform v;
+        v.location = 103;
+        v.size = 123894;
+        v.type = 392;
+        v.name = "hello uniform";
+
+        se::Value ret;
+        assert(uniform_to_seval(v, &ret));
+        assert(ret.isObject());
+
+        se::Object* obj = ret.toObject();
+        se::Value location, size, type, name;
+        assert(obj->getProperty("location", &location));
+        assert(obj->getProperty("size", &size));
+        assert(obj->getProperty("type", &type));
+        assert(obj->getProperty("name", &name));
+        assert(location.isNumber());
+        assert(size.isNumber());
+        assert(type.isNumber());
+        assert(name.isString());
+
+        assert(location.toUint32() == 103);
+        assert(size.toUint32() == 123894);
+        assert(type.toUint32() == 392);
+        assert(name.toString() == "hello uniform");
+    }
+
+    {
+        cocos2d::FontDefinition v;
+        v._fontName = "MyArial";
+        v._fontSize = 33;
+        v._alignment = TextHAlignment::CENTER;
+        v._vertAlignment = TextVAlignment::BOTTOM;
+        v._fontFillColor = Color3B::RED;
+        v._dimensions = Size(400, 300);
+        v._shadow._shadowEnabled = true;
+        v._shadow._shadowOffset = Vec2(12, -12);
+        v._shadow._shadowBlur = 0.34f;
+        v._shadow._shadowOpacity = 0.32f;
+        v._stroke._strokeEnabled = true;
+        v._stroke._strokeColor = Color3B::BLUE;
+        v._stroke._strokeSize = 1.23f;
+        v._stroke._strokeAlpha = 223;
+
+
+        se::Value ret;
+        assert(FontDefinition_to_seval(v, &ret));
+        assert(ret.isObject());
+        se::Object* obj = ret.toObject();
+        se::Value tmp;
+        assert(obj->getProperty("fontName", &tmp) && tmp.toString() == "MyArial");
+        assert(obj->getProperty("fontSize", &tmp) && tmp.toInt32() == 33);
+        assert(obj->getProperty("textAlign", &tmp) && tmp.toInt32() == (int32_t)TextHAlignment::CENTER);
+        assert(obj->getProperty("verticalAlign", &tmp) && tmp.toInt32() == (int32_t)TextVAlignment::BOTTOM);
+        assert(obj->getProperty("fillStyle", &tmp) && tmp.isObject());
+        Color3B color;
+        seval_to_Color3B(tmp, &color);
+        assert(color == Color3B::RED);
+        assert(obj->getProperty("boundingWidth", &tmp) && std::abs(tmp.toFloat() - 400) < FLT_EPSILON);
+        assert(obj->getProperty("boundingHeight", &tmp) && std::abs(tmp.toFloat() - 300) < FLT_EPSILON);
+
+        assert(obj->getProperty("shadowEnabled", &tmp) && tmp.toBoolean());
+        assert(obj->getProperty("shadowOffsetX", &tmp) && std::abs(tmp.toFloat() - 12) < FLT_EPSILON);
+        assert(obj->getProperty("shadowOffsetY", &tmp) && std::abs(tmp.toFloat() - (-12)) < FLT_EPSILON);
+        assert(obj->getProperty("shadowBlur", &tmp) && std::abs(tmp.toFloat() - 0.34f) < FLT_EPSILON);
+
+        assert(obj->getProperty("strokeEnabled", &tmp) && tmp.toBoolean());
+        assert(obj->getProperty("strokeStyle", &tmp) && tmp.isObject());
+        seval_to_Color3B(tmp, &color);
+        assert(color == Color3B::BLUE);
+        assert(obj->getProperty("lineWidth", &tmp) && std::abs(tmp.toFloat() - 1.23f) < FLT_EPSILON);
+        assert(obj->getProperty("strokeAlpha", &tmp) && tmp.toUint8() == 223);
+    }
+
     return 0;
 }

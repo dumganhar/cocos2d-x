@@ -611,3 +611,297 @@ bool seval_to_std_vector_vec2(const se::Value& v, std::vector<cocos2d::Vec2>* re
     ret->clear();
     return false;
 }
+
+bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+
+    // default values
+    const char* defautlFontName = "Arial";
+    const int defaultFontSize = 32;
+    cocos2d::TextHAlignment defaultTextAlignment = cocos2d::TextHAlignment::LEFT;
+    cocos2d::TextVAlignment defaultTextVAlignment = cocos2d::TextVAlignment::TOP;
+
+    // by default shadow and stroke are off
+    ret->_shadow._shadowEnabled = false;
+    ret->_stroke._strokeEnabled = false;
+
+    // white text by default
+    ret->_fontFillColor = cocos2d::Color3B::WHITE;
+
+    se::Value tmp, tmp2;
+
+    // font name
+    if (obj->getProperty("fontName", &tmp) && tmp.isString())
+    {
+        if (tmp.toString().empty())
+        {
+            ret->_fontName = defautlFontName;
+        }
+        else
+        {
+            ret->_fontName = tmp.toString();
+        }
+    }
+    else
+    {
+        ret->_fontName = defautlFontName;
+    }
+
+    // font size
+    if (obj->getProperty("fontSize", &tmp) && tmp.isNumber())
+    {
+        ret->_fontSize = tmp.toInt32();
+    }
+    else
+    {
+        ret->_fontSize = defaultFontSize;
+    }
+
+    // font alignment horizontal
+    if (obj->getProperty("textAlign", &tmp) && tmp.isNumber())
+    {
+        ret->_alignment = (cocos2d::TextHAlignment)tmp.toInt32();
+    }
+    else
+    {
+        ret->_alignment = defaultTextAlignment;
+    }
+
+    // font alignment vertical
+    if (obj->getProperty("verticalAlign", &tmp) && tmp.isNumber())
+    {
+        ret->_vertAlignment = (cocos2d::TextVAlignment)tmp.toInt32();
+    }
+    else
+    {
+        ret->_vertAlignment = defaultTextVAlignment;
+    }
+
+    // font fill color
+    if (obj->getProperty("fillStyle", &tmp) && tmp.isObject())
+    {
+        seval_to_Color3B(tmp, &ret->_fontFillColor);
+    }
+
+    // font rendering box dimensions
+    if (obj->getProperty("boundingWidth", &tmp) && tmp.isNumber()
+        && obj->getProperty("boundingHeight", &tmp2) && tmp2.isNumber())
+    {
+        ret->_dimensions.width = tmp.toFloat();
+        ret->_dimensions.height = tmp2.toFloat();
+    }
+
+    // shadow
+    if (obj->getProperty("shadowEnabled", &tmp) && tmp.isBoolean())
+    {
+        ret->_shadow._shadowEnabled = tmp.toBoolean();
+
+        if (ret->_shadow._shadowEnabled)
+        {
+            // default shadow values
+            ret->_shadow._shadowOffset  = cocos2d::Size(5, 5);
+            ret->_shadow._shadowBlur    = 1;
+            ret->_shadow._shadowOpacity = 1;
+
+            // shadow offset
+            if (obj->getProperty("shadowOffsetX", &tmp) && tmp.isNumber()
+                && obj->getProperty("shadowOffsetY", &tmp2) && tmp2.isNumber())
+            {
+                ret->_shadow._shadowOffset.width = tmp.toFloat();
+                ret->_shadow._shadowOffset.height = tmp2.toFloat();
+            }
+
+            // shadow blur
+            if (obj->getProperty("shadowBlur", &tmp) && tmp.isNumber())
+            {
+                ret->_shadow._shadowBlur = tmp.toNumber();
+            }
+
+            // shadow intensity
+            if (obj->getProperty("shadowOpacity", &tmp) && tmp.isNumber())
+            {
+                ret->_shadow._shadowOpacity = tmp.toNumber();
+            }
+        }
+    }
+
+    // stroke
+    if (obj->getProperty("strokeEnabled", &tmp) && tmp.isBoolean())
+    {
+        ret->_stroke._strokeEnabled = tmp.toBoolean();
+        if (ret->_stroke._strokeEnabled)
+        {
+            // default stroke values
+            ret->_stroke._strokeSize  = 1;
+            ret->_stroke._strokeColor = cocos2d::Color3B::BLUE;
+
+            // stroke color
+            if (obj->getProperty("strokeStyle", &tmp) && tmp.isObject())
+            {
+                seval_to_Color3B(tmp, &ret->_stroke._strokeColor);
+            }
+
+            // stroke size
+            if (obj->getProperty("lineWidth", &tmp) && tmp.isNumber())
+            {
+                ret->_stroke._strokeSize = tmp.toNumber();
+            }
+
+            // stroke alpha
+            if (obj->getProperty("strokeAlpha", &tmp) && tmp.isNumber())
+            {
+                ret->_stroke._strokeAlpha = tmp.toUint8();
+            }
+        }
+    }
+
+    return true;
+}
+
+//
+
+bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Vec3_to_seval(const cocos2d::Vec3& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("z", se::Value(v.z));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Vec4_to_seval(const cocos2d::Vec4& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("z", se::Value(v.z));
+    obj->setProperty("w", se::Value(v.w));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Color3B_to_seval(const cocos2d::Color3B& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("r", se::Value(v.r));
+    obj->setProperty("g", se::Value(v.g));
+    obj->setProperty("b", se::Value(v.b));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Color4B_to_seval(const cocos2d::Color4B& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("r", se::Value(v.r));
+    obj->setProperty("g", se::Value(v.g));
+    obj->setProperty("b", se::Value(v.b));
+    obj->setProperty("a", se::Value(v.a));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Color4F_to_seval(const cocos2d::Color4F& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("r", se::Value(v.r));
+    obj->setProperty("g", se::Value(v.g));
+    obj->setProperty("b", se::Value(v.b));
+    obj->setProperty("a", se::Value(v.a));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool blendfunc_to_seval(const cocos2d::BlendFunc& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("src", se::Value(v.src));
+    obj->setProperty("dst", se::Value(v.dst));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("location", se::Value(v.location));
+    obj->setProperty("size", se::Value(v.size));
+    obj->setProperty("type", se::Value(v.type));
+    obj->setProperty("name", se::Value(v.name));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Value tmp;
+
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("fontName", se::Value(v._fontName));
+    obj->setProperty("fontSize", se::Value(v._fontSize));
+    obj->setProperty("textAlign", se::Value((int32_t)v._alignment));
+    obj->setProperty("verticalAlign", se::Value((int32_t)v._vertAlignment));
+
+    if (!Color3B_to_seval(v._fontFillColor, &tmp))
+        return false;
+    obj->setProperty("fillStyle", tmp);
+    obj->setProperty("boundingWidth", se::Value(v._dimensions.width));
+    obj->setProperty("boundingHeight", se::Value(v._dimensions.height));
+
+    obj->setProperty("shadowEnabled", se::Value(v._shadow._shadowEnabled));
+    obj->setProperty("shadowOffsetX", se::Value(v._shadow._shadowOffset.width));
+    obj->setProperty("shadowOffsetY", se::Value(v._shadow._shadowOffset.height));
+    obj->setProperty("shadowBlur", se::Value(v._shadow._shadowBlur));
+    obj->setProperty("shadowOpacity", se::Value(v._shadow._shadowOpacity));
+
+    obj->setProperty("strokeEnabled", se::Value(v._stroke._strokeEnabled));
+    if (!Color3B_to_seval(v._stroke._strokeColor, &tmp))
+        return false;
+
+    obj->setProperty("strokeStyle", tmp);
+    obj->setProperty("lineWidth", se::Value(v._stroke._strokeSize));
+    obj->setProperty("strokeAlpha", se::Value(v._stroke._strokeAlpha));
+
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}

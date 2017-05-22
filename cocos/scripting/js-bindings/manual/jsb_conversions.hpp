@@ -32,5 +32,16 @@ bool seval_to_std_vector_string(const se::Value& v, std::vector<std::string>* re
 bool seval_to_std_vector_int(const se::Value& v, std::vector<int>* ret);
 bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret);
 bool seval_to_std_vector_vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret);
+bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret);
 
 // native value -> se value
+
+bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret);
+bool Vec3_to_seval(const cocos2d::Vec3& v, se::Value* ret);
+bool Vec4_to_seval(const cocos2d::Vec4& v, se::Value* ret);
+bool Color3B_to_seval(const cocos2d::Color3B& v, se::Value* ret);
+bool Color4B_to_seval(const cocos2d::Color4B& v, se::Value* ret);
+bool Color4F_to_seval(const cocos2d::Color4F& v, se::Value* ret);
+bool blendfunc_to_seval(const cocos2d::BlendFunc& v, se::Value* ret);
+bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret);
+bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
