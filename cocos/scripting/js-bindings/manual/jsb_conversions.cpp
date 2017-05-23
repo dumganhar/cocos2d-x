@@ -10,7 +10,7 @@
 
 bool seval_to_int32(const se::Value& v, int32_t* ret)
 {
-    *ret = v.toInt32();
+    *ret = v.toInt32(); //FIXME: need to check isNan?
     return true;
 }
 
@@ -83,6 +83,12 @@ bool seval_to_longlong(const se::Value& v, long long* ret)
 bool seval_to_ssize(const se::Value& v, ssize_t* ret)
 {
     *ret = (ssize_t)v.toLong();
+    return true;
+}
+
+bool seval_to_std_string(const se::Value& v, std::string* ret)
+{
+    *ret = v.toString();
     return true;
 }
 
@@ -592,7 +598,7 @@ bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret)
     return false;
 }
 
-bool seval_to_std_vector_vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret)
+bool seval_to_std_vector_Vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret)
 {
     assert(ret != nullptr);
     assert(v.isObject());
@@ -888,6 +894,12 @@ bool longlong_to_seval(long long v, se::Value* ret)
 bool ssize_to_seval(ssize_t v, se::Value* ret)
 {
     ret->setLong((long)v);
+    return true;
+}
+
+bool std_string_to_seval(const std::string& v, se::Value* ret)
+{
+    ret->setString(v);
     return true;
 }
 

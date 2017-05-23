@@ -27,7 +27,7 @@ bool seval_to_long(const se::Value& v, long* ret);
 bool seval_to_ulong(const se::Value& v, unsigned long* ret);
 bool seval_to_longlong(const se::Value& v, long long* ret);
 bool seval_to_ssize(const se::Value& v, ssize_t* ret);
-
+bool seval_to_std_string(const se::Value& v, std::string* ret);
 bool seval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt);
 bool seval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt);
 bool seval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt);
@@ -46,10 +46,66 @@ bool seval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret);
 bool seval_to_std_vector_string(const se::Value& v, std::vector<std::string>* ret);
 bool seval_to_std_vector_int(const se::Value& v, std::vector<int>* ret);
 bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret);
-bool seval_to_std_vector_vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret);
+bool seval_to_std_vector_Vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret);
 bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret);
 bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret);
 bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret);
+
+template<typename T>
+bool seval_to_native_ptr(const se::Value& v, T* ret)
+{
+    assert(ret != nullptr);
+    if (!v.isObject())
+    {
+        *ret = nullptr;
+        return false;
+    }
+
+    T ptr = v.toObject()->getPrivateData();
+    if (ptr == nullptr)
+    {
+        *ret = nullptr;
+        return false;
+    }
+
+    *ret = ptr;
+    return true;
+}
+
+template<typename T>
+bool seval_to_Vector(const se::Value& v, cocos2d::Vector<T>* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    assert(obj->isArray());
+
+    bool ok = true;
+    uint32_t len = 0;
+    ok = obj->getArrayLength(&len);
+    if (!ok)
+    {
+        ret->clear();
+        return false;
+    }
+
+    se::Value tmp;
+    for (uint32_t i = 0; i < len; ++i)
+    {
+        ok = obj->getArrayElement(i, &tmp);
+        if (!ok && tmp.isObject())
+        {
+            ret->clear();
+            return false;
+        }
+
+        T nativeObj = (T)tmp.toObject()->getPrivateData();
+
+        ret->pushBack(nativeObj);
+    }
+
+    return true;
+}
 
 // native value -> se value
 bool int32_to_seval(int32_t v, se::Value* ret);
@@ -63,6 +119,7 @@ bool long_to_seval(long v, se::Value* ret);
 bool ulong_to_seval(unsigned long v, se::Value* ret);
 bool longlong_to_seval(long long v, se::Value* ret);
 bool ssize_to_seval(ssize_t v, se::Value* ret);
+bool std_string_to_seval(const std::string& v, se::Value* ret);
 
 bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret);
 bool Vec3_to_seval(const cocos2d::Vec3& v, se::Value* ret);
@@ -109,4 +166,20 @@ bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
     obj->release();
 
     return ok;
+}
+
+template<typename T>
+bool native_ptr_to_seval(T v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    auto iter = se::__nativePtrToObjectMap.find(v);
+    if (iter == se::__nativePtrToObjectMap.end())
+    {
+        CCLOGWARN("WARNING: type: (%s) isn't catched!", typeid(*v).name());
+        ret->setUndefined();
+        return false;
+    }
+
+    ret->setObject(iter->second);
+    return true;
 }
