@@ -340,12 +340,25 @@ var MySprite = cc.Sprite.extend({
 
 log("start THIS: " + this);
 
+cc.p = function(x, y) {
+  return {
+    x: x,
+    y: y
+  };
+};
+
 (function() {
   log("test start ...: THIS: " + this);
 
   function runScene() {
     log("runScene start ...: THIS: " + this);
     forceGC();
+
+    var result = cc.pAdd(cc.p(10.34, 23.1), cc.p(2, 3));
+    log("result.x = " + result.x);
+    log("result.y = " + result.y);
+    cc.assert(Math.abs(result.x - 12.34) < 0.000001);
+    cc.assert(Math.abs(result.y - 26.1) < 0.000001);
 
     var scene = new cc.Scene();
     // var sp = cc.Sprite.create("res/Images/arrows.png");

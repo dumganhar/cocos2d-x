@@ -391,6 +391,26 @@ namespace {
     }
     SE_FUNC_END
 
+    SE_FUNC_BEGIN(ccassert, se::DONT_NEED_THIS)
+    {
+        if (argc >= 1)
+        {
+            if (argc == 1)
+            {
+                SE_ASSERT(args[0].toBoolean(), "NO MESSAGE");
+            }
+            else
+            {
+                SE_ASSERT(args[0].toBoolean(), "%s", args[1].toString().c_str());
+            }
+        }
+        else
+        {
+            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+            ret = false;
+        }
+    }
+    SE_FUNC_END
 
     bool jsb_register_var_under_cc()
     {
@@ -414,6 +434,7 @@ namespace {
         __ccObj->defineFunction("pLength", ccpLength);
 
         //
+        __ccObj->defineFunction("assert", ccassert);
 
         return true;
     }

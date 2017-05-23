@@ -277,7 +277,9 @@ bool seval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
         return false;
     }
 
+    bool ok = false;
     se::Value value;
+    cocos2d::Value ccvalue;
     for (const auto& key : allKeys)
     {
         if (!obj->getProperty(key.c_str(), &value))
@@ -286,46 +288,14 @@ bool seval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
             return false;
         }
 
-        if (value.isObject())
+        ok = seval_to_ccvalue(value, &ccvalue);
+        if (!ok)
         {
-            se::Object* subObj = value.toObject();
-            if (!subObj->isArray())
-            {
-                // It's a normal js object.
-                cocos2d::ValueMap dictVal;
-                bool ok = seval_to_ccvaluemap(value, &dictVal);
-                if (ok)
-                {
-                    dict.emplace(key, cocos2d::Value(dictVal));
-                }
-            }
-            else
-            {
-                // It's a js array object.
-                cocos2d::ValueVector arrVal;
-                bool ok = seval_to_ccvaluevector(value, &arrVal);
-                if (ok)
-                {
-                    dict.emplace(key, cocos2d::Value(arrVal));
-                }
-            }
+            ret->clear();
+            return false;
         }
-        else if (value.isString())
-        {
-            dict.emplace(key, cocos2d::Value(value.toString()));
-        }
-        else if (value.isNumber())
-        {
-            dict.emplace(key, cocos2d::Value(value.toNumber()));
-        }
-        else if (value.isBoolean())
-        {
-            dict.emplace(key, cocos2d::Value(value.toBoolean()));
-        }
-        else
-        {
-            CCASSERT(false, "not supported type");
-        }
+
+        dict.emplace(key, ccvalue);
     }
 
     return true;
@@ -359,7 +329,9 @@ bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
         return false;
     }
 
+    bool ok = false;
     se::Value value;
+    cocos2d::Value ccvalue;
     for (const auto& key : allKeys)
     {
         if (!obj->getProperty(key.c_str(), &value))
@@ -376,46 +348,14 @@ bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
 
         int intKey = atoi(key.c_str());
 
-        if (value.isObject())
+        ok = seval_to_ccvalue(value, &ccvalue);
+        if (!ok)
         {
-            se::Object* subObj = value.toObject();
-            if (!subObj->isArray())
-            {
-                // It's a normal js object.
-                cocos2d::ValueMap dictVal;
-                bool ok = seval_to_ccvaluemap(value, &dictVal);
-                if (ok)
-                {
-                    dict.emplace(intKey, cocos2d::Value(dictVal));
-                }
-            }
-            else
-            {
-                // It's a js array object.
-                cocos2d::ValueVector arrVal;
-                bool ok = seval_to_ccvaluevector(value, &arrVal);
-                if (ok)
-                {
-                    dict.emplace(intKey, cocos2d::Value(arrVal));
-                }
-            }
+            ret->clear();
+            return false;
         }
-        else if (value.isString())
-        {
-            dict.emplace(intKey, cocos2d::Value(value.toString()));
-        }
-        else if (value.isNumber())
-        {
-            dict.emplace(intKey, cocos2d::Value(value.toNumber()));
-        }
-        else if (value.isBoolean())
-        {
-            dict.emplace(intKey, cocos2d::Value(value.toBoolean()));
-        }
-        else
-        {
-            CCASSERT(false, "not supported type");
-        }
+
+        dict.emplace(intKey, ccvalue);
     }
     
     return true;
@@ -435,52 +375,42 @@ bool seval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
 
     bool ok = false;
     se::Value value;
-    for (uint32_t i=0; i < len; i++)
+    cocos2d::Value ccvalue;
+    for (uint32_t i = 0; i < len; ++i)
     {
         if (obj->getArrayElement(i, &value))
         {
-            if (value.isObject())
+            ok = seval_to_ccvalue(value, &ccvalue);
+            if (!ok)
             {
-                if (!value.toObject()->isArray())
-                {
-                    // It's a normal js object.
-                    cocos2d::ValueMap dictVal;
-                    ok = seval_to_ccvaluemap(value, &dictVal);
-                    if (ok)
-                    {
-                        ret->push_back(cocos2d::Value(dictVal));
-                    }
-                }
-                else
-                {
-                    // It's a js array object.
-                    cocos2d::ValueVector arrVal;
-                    ok = seval_to_ccvaluevector(value, &arrVal);
-                    if (ok)
-                    {
-                        ret->push_back(cocos2d::Value(arrVal));
-                    }
-                }
+                ret->clear();
+                return false;
             }
-            else if (value.isString())
-            {
-                ret->push_back(cocos2d::Value(value.toString()));
-            }
-            else if (value.isNumber())
-            {
-                ret->push_back(cocos2d::Value(value.toNumber()));
-            }
-            else if (value.isBoolean())
-            {
-                ret->push_back(cocos2d::Value(value.toBoolean()));
-            }
-            else
-            {
-                CCASSERT(false, "not supported type");
-            }
+
+            ret->push_back(ccvalue);
         }
     }
     
+    return true;
+}
+
+bool sevals_variadic_to_ccvaluevector(const se::ValueArray& args, cocos2d::ValueVector* ret)
+{
+    bool ok = false;
+    cocos2d::Value ccvalue;
+
+    for (const auto& arg : args)
+    {
+        ok = seval_to_ccvalue(arg, &ccvalue);
+        if (!ok)
+        {
+            ret->clear();
+            return false;
+        }
+
+        ret->push_back(ccvalue);
+    }
+
     return true;
 }
 
@@ -757,6 +687,60 @@ bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret)
             }
         }
     }
+
+    return true;
+}
+
+bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    bool ok = false;
+    se::Value tmp;
+
+    ok = obj->getProperty("x", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->x = tmp.toNumber();
+
+    ok = obj->getProperty("y", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->y = tmp.toNumber();
+
+    ok = obj->getProperty("z", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->z = tmp.toNumber();
+
+    ok = obj->getProperty("timestamp", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->timestamp = tmp.toNumber();
+
+    return true;
+}
+
+bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Object* obj = v.toObject();
+    bool ok = false;
+    se::Value tmp;
+
+    ok = obj->getProperty("x", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->x = tmp.toFloat();
+
+    ok = obj->getProperty("y", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->y = tmp.toFloat();
+
+    ok = obj->getProperty("z", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->z = tmp.toFloat();
+
+    ok = obj->getProperty("w", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    ret->w = tmp.toFloat();
 
     return true;
 }
@@ -1092,5 +1076,33 @@ bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret)
     obj->release();
 
     return ok;
+}
+
+bool Acceleration_to_seval(const cocos2d::Acceleration& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("z", se::Value(v.z));
+    obj->setProperty("timestamp", se::Value(v.timestamp));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Quaternion_to_seval(const cocos2d::Quaternion& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("z", se::Value(v.z));
+    obj->setProperty("w", se::Value(v.w));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
 }
 

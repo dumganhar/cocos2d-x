@@ -26,13 +26,16 @@ bool seval_to_Color4F(const se::Value& v, cocos2d::Color4F* color);
 bool seval_to_ccvalue(const se::Value& v, cocos2d::Value* ret);
 bool seval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret);
 bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret);
-bool seval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret);
+bool seval_to_ccvaluevector(const se::Value& v, cocos2d::ValueVector* ret);
+bool sevals_variadic_to_ccvaluevector(const se::ValueArray& args, cocos2d::ValueVector* ret);
 bool seval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret);
 bool seval_to_std_vector_string(const se::Value& v, std::vector<std::string>* ret);
 bool seval_to_std_vector_int(const se::Value& v, std::vector<int>* ret);
 bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret);
 bool seval_to_std_vector_vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret);
 bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret);
+bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret);
+bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret);
 
 // native value -> se value
 
@@ -53,6 +56,8 @@ bool std_vector_int_to_seval(const std::vector<int>& v, se::Value* ret);
 bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret);
 bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret);
 bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
+bool Acceleration_to_seval(const cocos2d::Acceleration& v, se::Value* ret);
+bool Quaternion_to_seval(const cocos2d::Quaternion& v, se::Value* ret);
 
 template<typename T>
 bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
