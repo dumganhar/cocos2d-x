@@ -12,6 +12,16 @@ se::Object* __jsbObj = nullptr;
 
 namespace {
 
+    SE_FUNC_BEGIN(require, se::DONT_NEED_THIS)
+    {
+        assert(argc >= 1);
+        assert(args[0].isString());
+        se::Value rval;
+        se::ScriptEngine::getInstance()->executeScriptFile(args[0].toString(), &rval);
+        SE_SET_RVAL(rval);
+    }
+    SE_FUNC_END
+
     SE_FUNC_BEGIN(ccpAdd, se::DONT_NEED_THIS)
     {
         if (argc == 2)
@@ -443,6 +453,9 @@ namespace {
 bool jsb_register_global_variables()
 {
     auto global = se::ScriptEngine::getInstance()->getGlobalObject();
+
+    global->defineFunction("require", require);
+
     __ccObj = se::Object::createPlainObject(false);
     global->setProperty("cc", se::Value(__ccObj));
 
