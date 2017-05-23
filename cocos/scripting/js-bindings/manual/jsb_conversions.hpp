@@ -14,6 +14,20 @@
 
 
 // se value -> native value
+bool seval_to_int32(const se::Value& v, int32_t* ret);
+bool seval_to_uint32(const se::Value& v, uint32_t* ret);
+bool seval_to_int8(const se::Value& v, int8_t* ret);
+bool seval_to_uint8(const se::Value& v, uint8_t* ret);
+bool seval_to_int16(const se::Value& v, int16_t* ret);
+bool seval_to_uint16(const se::Value& v, uint16_t* ret);
+bool seval_to_boolean(const se::Value& v, bool* ret);
+bool seval_to_float(const se::Value& v, float* ret);
+bool seval_to_double(const se::Value& v, double* ret);
+bool seval_to_long(const se::Value& v, long* ret);
+bool seval_to_ulong(const se::Value& v, unsigned long* ret);
+bool seval_to_longlong(const se::Value& v, long long* ret);
+bool seval_to_ssize(const se::Value& v, ssize_t* ret);
+
 bool seval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt);
 bool seval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt);
 bool seval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt);
@@ -38,6 +52,17 @@ bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret);
 bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret);
 
 // native value -> se value
+bool int32_to_seval(int32_t v, se::Value* ret);
+bool uint32_to_seval(uint32_t v, se::Value* ret);
+bool uint16_to_seval(uint16_t v, se::Value* ret);
+bool uint8_to_seval(uint8_t v, se::Value* ret);
+bool boolean_to_seval(bool v, se::Value* ret);
+bool float_to_seval(float v, se::Value* ret);
+bool double_to_seval(double v, se::Value* ret);
+bool long_to_seval(long v, se::Value* ret);
+bool ulong_to_seval(unsigned long v, se::Value* ret);
+bool longlong_to_seval(long long v, se::Value* ret);
+bool ssize_to_seval(ssize_t v, se::Value* ret);
 
 bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret);
 bool Vec3_to_seval(const cocos2d::Vec3& v, se::Value* ret);

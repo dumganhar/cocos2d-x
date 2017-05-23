@@ -8,6 +8,84 @@
 
 #include "jsb_conversions.hpp"
 
+bool seval_to_int32(const se::Value& v, int32_t* ret)
+{
+    *ret = v.toInt32();
+    return true;
+}
+
+bool seval_to_uint32(const se::Value& v, uint32_t* ret)
+{
+    *ret = v.toUint32();
+    return true;
+}
+
+bool seval_to_int8(const se::Value& v, int8_t* ret)
+{
+    *ret = v.toInt8();
+    return true;
+}
+
+bool seval_to_uint8(const se::Value& v, uint8_t* ret)
+{
+    *ret = v.toUint8();
+    return true;
+}
+
+bool seval_to_int16(const se::Value& v, int16_t* ret)
+{
+    *ret = v.toInt16();
+    return true;
+}
+
+bool seval_to_uint16(const se::Value& v, uint16_t* ret)
+{
+    *ret = v.toUint16();
+    return true;
+}
+
+bool seval_to_boolean(const se::Value& v, bool* ret)
+{
+    *ret = v.toBoolean();
+    return true;
+}
+
+bool seval_to_float(const se::Value& v, float* ret)
+{
+    *ret = v.toFloat();
+    return true;
+}
+
+bool seval_to_double(const se::Value& v, double* ret)
+{
+    *ret = v.toNumber();
+    return true;
+}
+
+bool seval_to_long(const se::Value& v, long* ret)
+{
+    *ret = v.toLong();
+    return true;
+}
+
+bool seval_to_ulong(const se::Value& v, unsigned long* ret)
+{
+    *ret = v.toUlong();
+    return true;
+}
+
+bool seval_to_longlong(const se::Value& v, long long* ret)
+{
+    *ret = (long long)v.toLong();
+    return true;
+}
+
+bool seval_to_ssize(const se::Value& v, ssize_t* ret)
+{
+    *ret = (ssize_t)v.toLong();
+    return true;
+}
+
 bool seval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt)
 {
     assert(v.isObject() && pt != nullptr);
@@ -745,7 +823,73 @@ bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret)
     return true;
 }
 
-//
+//////////////////////////////////////////////////////////////////////////////////
+
+bool int32_to_seval(int32_t v, se::Value* ret)
+{
+    ret->setInt32(v);
+    return true;
+}
+
+bool uint32_to_seval(uint32_t v, se::Value* ret)
+{
+    ret->setUint32(v);
+    return true;
+}
+
+bool uint16_to_seval(uint16_t v, se::Value* ret)
+{
+    ret->setUint16(v);
+    return true;
+}
+
+bool uint8_to_seval(uint8_t v, se::Value* ret)
+{
+    ret->setUint8(v);
+    return true;
+}
+
+bool boolean_to_seval(bool v, se::Value* ret)
+{
+    ret->setBoolean(v);
+    return true;
+}
+
+bool float_to_seval(float v, se::Value* ret)
+{
+    ret->setFloat(v);
+    return true;
+}
+
+bool double_to_seval(double v, se::Value* ret)
+{
+    ret->setNumber(v);
+    return true;
+}
+
+bool long_to_seval(long v, se::Value* ret)
+{
+    ret->setLong(v);
+    return true;
+}
+
+bool ulong_to_seval(unsigned long v, se::Value* ret)
+{
+    ret->setUlong(v);
+    return true;
+}
+
+bool longlong_to_seval(long long v, se::Value* ret)
+{
+    ret->setLong((long)v);
+    return true;
+}
+
+bool ssize_to_seval(ssize_t v, se::Value* ret)
+{
+    ret->setLong((long)v);
+    return true;
+}
 
 bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret)
 {
