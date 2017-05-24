@@ -305,6 +305,12 @@ SE_FUNC_BEGIN(Node_getChildren, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(Node_foo, se::DONT_NEED_THIS)
+{
+    SE_SET_RVAL(se::Value("hello world"));
+}
+SE_FUNC_END
+
 SE_SET_PROPERTY_BEGIN(Node_set_x, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
@@ -362,6 +368,10 @@ bool jsb_register_Node()
 
     __jsb_Node_proto = cls->getProto();
     __jsb_Node_class = cls;
+
+    __jsb_Node_proto->defineFunction("foo", Node_foo);
+    __jsb_Node_proto->setProperty("var1", se::Value("I'm var1"));
+    __jsb_Node_proto->setProperty("var2", se::Value(10000.323));
 
     return true;
 }

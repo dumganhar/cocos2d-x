@@ -20,7 +20,6 @@
     } while(0)
 
 
-
 // se value -> native value
 bool seval_to_int32(const se::Value& v, int32_t* ret);
 bool seval_to_uint32(const se::Value& v, uint32_t* ret);
@@ -69,7 +68,7 @@ bool seval_to_native_ptr(const se::Value& v, T* ret)
         return false;
     }
 
-    T ptr = v.toObject()->getPrivateData();
+    T ptr = (T)v.toObject()->getPrivateData();
     if (ptr == nullptr)
     {
         *ret = nullptr;
@@ -116,10 +115,11 @@ bool seval_to_Vector(const se::Value& v, cocos2d::Vector<T>* ret)
 }
 
 // native value -> se value
+bool uint8_to_seval(uint8_t v, se::Value* ret);
 bool int32_to_seval(int32_t v, se::Value* ret);
 bool uint32_to_seval(uint32_t v, se::Value* ret);
+bool int16_to_seval(uint16_t v, se::Value* ret);
 bool uint16_to_seval(uint16_t v, se::Value* ret);
-bool uint8_to_seval(uint8_t v, se::Value* ret);
 bool boolean_to_seval(bool v, se::Value* ret);
 bool float_to_seval(float v, se::Value* ret);
 bool double_to_seval(double v, se::Value* ret);
@@ -133,6 +133,8 @@ bool Vec2_to_seval(const cocos2d::Vec2& v, se::Value* ret);
 bool Vec3_to_seval(const cocos2d::Vec3& v, se::Value* ret);
 bool Vec4_to_seval(const cocos2d::Vec4& v, se::Value* ret);
 bool Mat4_to_seval(const cocos2d::Mat4& v, se::Value* ret);
+bool Size_to_seval(const cocos2d::Size& v, se::Value* ret);
+bool Rect_to_seval(const cocos2d::Rect& v, se::Value* ret);
 bool Color3B_to_seval(const cocos2d::Color3B& v, se::Value* ret);
 bool Color4B_to_seval(const cocos2d::Color4B& v, se::Value* ret);
 bool Color4F_to_seval(const cocos2d::Color4F& v, se::Value* ret);
@@ -144,9 +146,9 @@ bool blendfunc_to_seval(const cocos2d::BlendFunc& v, se::Value* ret);
 bool std_vector_string_to_seval(const std::vector<std::string>& v, se::Value* ret);
 bool std_vector_int_to_seval(const std::vector<int>& v, se::Value* ret);
 bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret);
-bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret);
+bool uniform_to_seval(const cocos2d::Uniform* v, se::Value* ret);
 bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
-bool Acceleration_to_seval(const cocos2d::Acceleration& v, se::Value* ret);
+bool Acceleration_to_seval(const cocos2d::Acceleration* v, se::Value* ret);
 bool Quaternion_to_seval(const cocos2d::Quaternion& v, se::Value* ret);
 
 template<typename T>
@@ -180,7 +182,8 @@ template<typename T>
 bool native_ptr_to_seval(T v, se::Value* ret)
 {
     assert(ret != nullptr);
-    auto iter = se::__nativePtrToObjectMap.find(v);
+    void* e = (void*)v;
+    auto iter = se::__nativePtrToObjectMap.find(e);
     if (iter == se::__nativePtrToObjectMap.end())
     {
         CCLOGWARN("WARNING: type: (%s) isn't catched!", typeid(*v).name());

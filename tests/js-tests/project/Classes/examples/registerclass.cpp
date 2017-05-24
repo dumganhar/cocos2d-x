@@ -315,7 +315,7 @@ int main_register_class(int argc, char** argv)
         }
 
         std::vector<cocos2d::Vec2> ret;
-        assert(seval_to_std_vector_vec2(se::Value(obj), &ret));
+        assert(seval_to_std_vector_Vec2(se::Value(obj), &ret));
 
         assert(ret.size() == 4);
         assert(std::abs(ret[0].x - 2382.239f) < FLT_EPSILON);
@@ -459,7 +459,7 @@ int main_register_class(int argc, char** argv)
         v.name = "hello uniform";
 
         se::Value ret;
-        assert(uniform_to_seval(v, &ret));
+        assert(uniform_to_seval(&v, &ret));
         assert(ret.isObject());
 
         se::Object* obj = ret.toObject();

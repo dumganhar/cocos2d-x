@@ -72,9 +72,10 @@ namespace se {
             _ctorTemplate.Get(__isolate)->Inherit(_parentProto->_getClass()->_ctorTemplate.Get(__isolate));
         }
 
-        _parent->_getJSObject()->Set(v8::String::NewFromUtf8(__isolate, _name.c_str()), _ctorTemplate.Get(__isolate)->GetFunction());
-
-        _proto = Object::createObject(_name.c_str(), true);
+        v8::Local<v8::Function> ctor = _ctorTemplate.Get(__isolate)->GetFunction();
+        _parent->_getJSObject()->Set(v8::String::NewFromUtf8(__isolate, _name.c_str()), ctor);
+        v8::Local<v8::Value> prototypeObj = ctor->Get(v8::String::NewFromUtf8(__isolate, "prototype", v8::NewStringType::kNormal).ToLocalChecked());
+        _proto = Object::_createJSObject(this, v8::Local<v8::Object>::Cast(prototypeObj), true); //FIXME: release proto in cleanup method
         return true;
     }
 

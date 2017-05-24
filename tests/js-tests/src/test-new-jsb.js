@@ -361,6 +361,7 @@ cc.p = function(x, y) {
     cc.assert(Math.abs(result.y - 26.1) < 0.000001);
 
     var scene = new cc.Scene();
+    log(">>>>> " + scene.foo() + ", var1: " + scene.var1 + ", var2=" + scene.var2);
     // var sp = cc.Sprite.create("res/Images/arrows.png");
 
     // log("before get x");

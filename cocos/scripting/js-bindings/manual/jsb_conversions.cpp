@@ -843,6 +843,12 @@ bool uint32_to_seval(uint32_t v, se::Value* ret)
     return true;
 }
 
+bool int16_to_seval(uint16_t v, se::Value* ret)
+{
+    ret->setInt16(v);
+    return true;
+}
+
 bool uint16_to_seval(uint16_t v, se::Value* ret)
 {
     ret->setUint16(v);
@@ -954,6 +960,32 @@ bool Mat4_to_seval(const cocos2d::Mat4& v, se::Value* ret)
 
     ret->setObject(obj);
     obj->release();
+    return true;
+}
+
+bool Size_to_seval(const cocos2d::Size& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("width", se::Value(v.width));
+    obj->setProperty("height", se::Value(v.height));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Rect_to_seval(const cocos2d::Rect& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("x", se::Value(v.origin.x));
+    obj->setProperty("y", se::Value(v.origin.y));
+    obj->setProperty("width", se::Value(v.size.width));
+    obj->setProperty("height", se::Value(v.size.height));
+    ret->setObject(obj);
+    obj->release();
+
     return true;
 }
 
@@ -1173,14 +1205,15 @@ bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret)
     return std_vector_T_to_seval(v, ret);
 }
 
-bool uniform_to_seval(const cocos2d::Uniform& v, se::Value* ret)
+//FIXME: why v has to be a pointer?
+bool uniform_to_seval(const cocos2d::Uniform* v, se::Value* ret)
 {
-    assert(ret != nullptr);
+    assert(v != nullptr && ret != nullptr);
     se::Object* obj = se::Object::createPlainObject(false);
-    obj->setProperty("location", se::Value(v.location));
-    obj->setProperty("size", se::Value(v.size));
-    obj->setProperty("type", se::Value(v.type));
-    obj->setProperty("name", se::Value(v.name));
+    obj->setProperty("location", se::Value(v->location));
+    obj->setProperty("size", se::Value(v->size));
+    obj->setProperty("type", se::Value(v->type));
+    obj->setProperty("name", se::Value(v->name));
     ret->setObject(obj);
     obj->release();
 
@@ -1234,14 +1267,15 @@ bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret)
     return ok;
 }
 
-bool Acceleration_to_seval(const cocos2d::Acceleration& v, se::Value* ret)
+//FIXME: why v has to be a pointer?
+bool Acceleration_to_seval(const cocos2d::Acceleration* v, se::Value* ret)
 {
-    assert(ret != nullptr);
+    assert(v != nullptr && ret != nullptr);
     se::Object* obj = se::Object::createPlainObject(false);
-    obj->setProperty("x", se::Value(v.x));
-    obj->setProperty("y", se::Value(v.y));
-    obj->setProperty("z", se::Value(v.z));
-    obj->setProperty("timestamp", se::Value(v.timestamp));
+    obj->setProperty("x", se::Value(v->x));
+    obj->setProperty("y", se::Value(v->y));
+    obj->setProperty("z", se::Value(v->z));
+    obj->setProperty("timestamp", se::Value(v->timestamp));
     ret->setObject(obj);
     obj->release();
 
