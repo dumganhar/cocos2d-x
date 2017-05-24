@@ -127,11 +127,6 @@ namespace se {
             JSStringRelease(name);
         }
 
-        Object* globalObject = ScriptEngine::getInstance()->getGlobalObject();
-        Value v;
-        globalObject->getProperty("__defineProperty", &v);
-        Object* definePropertyFunc = v.toObject();
-
         JSValueRef prototypeObj = nullptr;
         JSStringRef prototypeName = JSStringCreateWithUTF8CString("prototype");
         bool exist = JSObjectHasProperty(__cx, jsCtor, prototypeName);
@@ -145,56 +140,16 @@ namespace se {
         // FIXME: how to release ctor?
         _proto = Object::_createJSObject(this, JSValueToObject(__cx, prototypeObj, nullptr), true); // FIXME: release me in cleanup method
 
-        ValueArray args;
-        args.reserve(4);
-
-        auto defineProperty = [&](Object* obj, const char* name, JSObjectCallAsFunctionCallback jsGetter, JSObjectCallAsFunctionCallback jsSetter){
-            args.clear();
-
-            JSObjectRef getter = nullptr;
-            if (jsGetter != nullptr)
-            {
-                getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, jsGetter);
-            }
-            JSObjectRef setter = nullptr;
-
-            if (jsSetter != nullptr)
-            {
-                setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, jsSetter);
-            }
-
-            args.push_back(Value(obj));
-            args.push_back(Value(name));
-
-            assert(getter != nullptr);
-
-            if (getter != nullptr)
-            {
-                Object* getterObj = Object::_createJSObject(nullptr, getter, false);
-                args.push_back(Value(getterObj));
-                getterObj->release();
-            }
-
-            if (setter != nullptr)
-            {
-                Object* setterObj = Object::_createJSObject(nullptr, setter, false);
-                args.push_back(Value(setterObj));
-                setterObj->release();
-            }
-
-            definePropertyFunc->call(args, nullptr);
-        };
-
         // Set instance properties
         for (const auto& property : _properties)
         {
-            defineProperty(_proto, property.name, property.getter, property.setter);
+            internal::defineProperty(_proto, property.name, property.getter, property.setter);
         }
 
         // Set class properties
         for (const auto& property : _staticProperties)
         {
-            defineProperty(ctorObj, property.name, property.getter, property.setter);
+            internal::defineProperty(ctorObj, property.name, property.getter, property.setter);
         }
 
         _parent->setProperty(_name.c_str(), Value(ctorObj));

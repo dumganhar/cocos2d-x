@@ -23,6 +23,8 @@ namespace se {
         
         void setContext(JSContextRef cx);
 
+        bool defineProperty(Object* obj, const char* name, JSObjectCallAsFunctionCallback jsGetter, JSObjectCallAsFunctionCallback jsSetter);
+
         void jsToSeArgs(JSContextRef cx, unsigned short argc, const JSValueRef* argv, ValueArray* outArr);
         void seToJsArgs(JSContextRef cx, const ValueArray& args, JSValueRef* outArr);
         void jsToSeValue(JSContextRef cx, JSValueRef jsval, Value* v);

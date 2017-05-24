@@ -62,6 +62,9 @@
 #define SE_FINALIZE_FUNC_END \
     }
 
+#define SE_DECLARE_FINALIZE_FUNC(funcName) \
+    void funcName(void* nativeThisObject);
+
 // --- Constructor
 #define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
     JsValueRef funcName(JsValueRef _callee, bool _isConstructCall, JsValueRef* _argv, unsigned short argc, void* _callbackState) \
@@ -186,5 +189,18 @@
 #define SE_ASSERT(cond, fmt, ...) 
 
 #endif // #if COCOS2D_DEBUG > 0
+
+#define _CHECK(cmd)                     \
+    do                                      \
+    {                                       \
+        JsErrorCode _errCode = cmd;          \
+        if (_errCode != JsNoError)           \
+        {                                   \
+            printf("Error 0x%x at '%s, %s, %d'\n",    \
+                _errCode, #cmd, __FILE__, __LINE__); \
+            assert(false); \
+        }                                   \
+    } while(0)
+
 
 #endif // #ifdef SCRIPT_ENGINE_CHAKRACORE

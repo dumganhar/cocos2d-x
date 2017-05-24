@@ -6,18 +6,6 @@
 
 #ifdef SCRIPT_ENGINE_CHAKRACORE
 
-#define FAIL_CHECK(cmd)                     \
-    do                                      \
-    {                                       \
-        JsErrorCode _errCode = cmd;          \
-        if (_errCode != JsNoError)           \
-        {                                   \
-            printf("Error %d at '%s'\n",    \
-                _errCode, #cmd);             \
-            return false;                   \
-        }                                   \
-    } while(0)
-
 namespace se {
 
     Class* __jsb_CCPrivateData_class = nullptr;
@@ -42,6 +30,11 @@ namespace se {
                 printf("JS: %s\n", str.c_str());
             }
             return JS_INVALID_REFERENCE;
+        }
+
+        void myJsBeforeCollectCallback(void *callbackState)
+        {
+            printf("GC start ...\n");
         }
 
         JsValueRef privateDataContructor(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
@@ -92,15 +85,17 @@ namespace se {
     {
         printf("Initializing ChakraCore ... \n");
 
-        FAIL_CHECK(JsCreateRuntime(JsRuntimeAttributeNone, nullptr, &_rt));
-        FAIL_CHECK(JsCreateContext(_rt, &_cx));
-        FAIL_CHECK(JsSetCurrentContext(_cx));
+        _CHECK(JsCreateRuntime(JsRuntimeAttributeNone, nullptr, &_rt));
+        _CHECK(JsCreateContext(_rt, &_cx));
+        _CHECK(JsSetCurrentContext(_cx));
 
         // Set up ES6 Promise
 //        if (JsSetPromiseContinuationCallback(PromiseContinuationCallback, &taskQueue) != JsNoError)
 
         JsValueRef globalObj = JS_INVALID_REFERENCE;
-        FAIL_CHECK(JsGetGlobalObject(&globalObj));
+        _CHECK(JsGetGlobalObject(&globalObj));
+
+        _CHECK(JsSetRuntimeBeforeCollectCallback(_rt, nullptr, myJsBeforeCollectCallback));
 
         _globalObj = Object::_createJSObject(nullptr, globalObj, true);
 
@@ -127,8 +122,8 @@ namespace se {
 
         Class::cleanup();
 
-        JsSetCurrentContext(JS_INVALID_REFERENCE);
-        JsDisposeRuntime(_rt);
+        _CHECK(JsSetCurrentContext(JS_INVALID_REFERENCE));
+        _CHECK(JsDisposeRuntime(_rt));
     }
 
     std::string ScriptEngine::formatException(JsValueRef exception)
@@ -137,14 +132,14 @@ namespace se {
         JsValueRef propertyNames = JS_INVALID_REFERENCE;
         JsGetOwnPropertyNames(exception, &propertyNames);
         JsValueType type;
-        JsGetValueType(propertyNames, &type);
+        _CHECK(JsGetValueType(propertyNames, &type));
         assert(type == JsArray);
 
         for (int i = 0; ; ++i)
         {
             JsValueRef index = JS_INVALID_REFERENCE;
             JsValueRef result = JS_INVALID_REFERENCE;
-            JsIntToNumber(i, &index);
+            _CHECK(JsIntToNumber(i, &index));
             if (JsNoError != JsGetIndexedProperty(propertyNames, index, &result))
                 break;
             JsGetValueType(result, &type);
@@ -191,7 +186,7 @@ namespace se {
 
     void ScriptEngine::gc()
     {
-        JsCollectGarbage(_rt);
+        _CHECK(JsCollectGarbage(_rt));
     }
 
     bool ScriptEngine::executeScriptBuffer(const char *string, Value *data, const char *fileName)
@@ -201,11 +196,16 @@ namespace se {
 
     bool ScriptEngine::executeScriptBuffer(const char *script, size_t length, Value *data, const char *fileName)
     {
+        if (fileName == nullptr)
+        {
+            fileName = "(no filename)";
+        }
+
         JsValueRef fname;
-        FAIL_CHECK(JsCreateString(fileName, strlen(fileName), &fname));
+        _CHECK(JsCreateString(fileName, strlen(fileName), &fname));
 
         JsValueRef scriptSource;
-        FAIL_CHECK(JsCreateString(script, length, &scriptSource));
+        _CHECK(JsCreateString(script, length, &scriptSource));
 
         JsValueRef result;
         // Run the script.
@@ -214,12 +214,12 @@ namespace se {
         if (errCode != JsNoError)
         {
             bool hasException = false;
-            FAIL_CHECK(JsHasException(&hasException));
+            _CHECK(JsHasException(&hasException));
 
             if (hasException)
             {
                 JsValueRef exception;
-                FAIL_CHECK(JsGetAndClearException(&exception));
+                _CHECK(JsGetAndClearException(&exception));
 
                 std::string exceptionMsg = formatException(exception);
                 printf("%s\n", exceptionMsg.c_str());

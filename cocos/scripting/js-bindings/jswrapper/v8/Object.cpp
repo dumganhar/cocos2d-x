@@ -192,6 +192,14 @@ namespace se {
         _obj.handle(__isolate)->Set(nameValue, value);
     }
 
+    bool Object::defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    {
+        v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
+        _obj.handle(__isolate)->SetAccessor(nameValue, getter, setter);
+
+        return true;
+    }
+
     bool Object::isFunction() const
     {
         return const_cast<Object*>(this)->_obj.handle(__isolate)->IsCallable();

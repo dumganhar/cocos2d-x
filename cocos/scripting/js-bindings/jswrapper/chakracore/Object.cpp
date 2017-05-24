@@ -27,7 +27,7 @@ namespace se {
     Object* Object::createPlainObject(bool rooted)
     {
         JsValueRef jsobj;
-        JsCreateObject(&jsobj);
+        _CHECK(JsCreateObject(&jsobj));
         Object* obj = _createJSObject(nullptr, jsobj, rooted);
         return obj;
     }
@@ -43,7 +43,7 @@ namespace se {
     Object* Object::createArrayObject(size_t length, bool rooted)
     {
         JsValueRef jsObj = JS_INVALID_REFERENCE;
-        JsCreateArray((unsigned int)length, &jsObj);
+        _CHECK(JsCreateArray((unsigned int)length, &jsObj));
         Object* obj = _createJSObject(nullptr, jsObj, rooted);
         return obj;
     }
@@ -52,7 +52,7 @@ namespace se {
     {
         Object* obj = nullptr;
         JsValueRef jsobj;
-        JsCreateArrayBuffer((unsigned int)byteLength, &jsobj);
+        _CHECK(JsCreateArrayBuffer((unsigned int)byteLength, &jsobj));
         ChakraBytePtr buffer = nullptr;
         unsigned int bufferLength = 0;
         if (JsNoError == JsGetArrayBufferStorage(jsobj, &buffer, &bufferLength))
@@ -139,7 +139,7 @@ namespace se {
         if (_isRooted)
         {
             unsigned int count = 0;
-            JsAddRef(_obj, &count);
+            _CHECK(JsAddRef(_obj, &count));
         }
         return true;
     }
@@ -172,7 +172,7 @@ namespace se {
         if (_isRooted)
         {
             unsigned int count = 0;
-            JsRelease(_obj, &count);
+            _CHECK(JsRelease(_obj, &count));
         }
 
         _isCleanup = true;
@@ -189,7 +189,7 @@ namespace se {
     {
         assert(data != nullptr);
         JsPropertyIdRef propertyId;
-        JsCreatePropertyId(name, strlen(name), &propertyId);
+        _CHECK(JsCreatePropertyId(name, strlen(name), &propertyId));
 
         bool exist = false;
         JsHasProperty(_obj, propertyId, &exist);
@@ -197,7 +197,7 @@ namespace se {
         if (exist)
         {
             JsValueRef jsValue;
-            JsGetProperty(_obj, propertyId, &jsValue);
+            _CHECK(JsGetProperty(_obj, propertyId, &jsValue));
             internal::jsToSeValue(jsValue, data);
         }
 
@@ -209,8 +209,13 @@ namespace se {
         JsValueRef jsValue = JS_INVALID_REFERENCE;
         internal::seToJsValue(v, &jsValue);
         JsPropertyIdRef propertyId;
-        JsCreatePropertyId(name, strlen(name), &propertyId);
-        JsSetProperty(_obj, propertyId, jsValue, true);
+        _CHECK(JsCreatePropertyId(name, strlen(name), &propertyId));
+        _CHECK(JsSetProperty(_obj, propertyId, jsValue, true));
+    }
+
+    bool Object::defineProperty(const char *name, JsNativeFunction getter, JsNativeFunction setter)
+    {
+        return internal::defineProperty(_obj, name, getter, setter, true, true);
     }
 
     // --- call
@@ -253,12 +258,12 @@ namespace se {
     bool Object::defineFunction(const char* funcName, JsNativeFunction func)
     {
         JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
-        JsCreatePropertyId(funcName, strlen(funcName), &propertyId);
+        _CHECK(JsCreatePropertyId(funcName, strlen(funcName), &propertyId));
 
         JsValueRef funcVal = JS_INVALID_REFERENCE;
-        JsCreateFunction(func, nullptr, &funcVal);
+        _CHECK(JsCreateFunction(func, nullptr, &funcVal));
 
-        JsSetProperty(_obj, propertyId, funcVal, true);
+        _CHECK(JsSetProperty(_obj, propertyId, funcVal, true));
         return true;
     }
 
@@ -389,7 +394,7 @@ namespace se {
     bool Object::isFunction() const
     {
         JsValueType type;
-        JsGetValueType(_obj, &type);
+        _CHECK(JsGetValueType(_obj, &type));
         if (_obj != JS_INVALID_REFERENCE && type == JsFunction)
         {
             return true;
@@ -530,7 +535,7 @@ namespace se {
         assert(!_isRooted);
 
         unsigned int count = 0;
-        JsAddRef(_obj, &count);
+        _CHECK(JsAddRef(_obj, &count));
         _isRooted = true;
     }
 
@@ -540,7 +545,7 @@ namespace se {
         assert(_isRooted);
 
         unsigned int count = 0;
-        JsRelease(_obj, &count);
+        _CHECK(JsRelease(_obj, &count));
         _isRooted = false;
     }
     
@@ -552,7 +557,7 @@ namespace se {
     bool Object::isSame(Object* o) const
     {
         bool same = false;
-        JsStrictEquals(_obj, o->_obj, &same);
+        _CHECK(JsStrictEquals(_obj, o->_obj, &same));
         return same;
     }
 

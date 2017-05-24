@@ -1,7 +1,9 @@
 #include "Class.hpp"
-#include "Object.hpp"
 
 #ifdef SCRIPT_ENGINE_CHAKRACORE
+
+#include "Object.hpp"
+#include "Utils.hpp"
 
 namespace se {
 
@@ -13,41 +15,9 @@ namespace se {
     namespace {
         std::unordered_map<std::string, Class *> __clsMap;
 
-        bool _defineProperty(JsValueRef obj, const char* name, JsNativeFunction getter, JsNativeFunction setter, bool enumerable, bool configurable)
+        JsValueRef emptyContructor(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
-            bool result = false;
-
-            JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
-            JsCreatePropertyId(name, strlen(name), &propertyId);
-            JsValueRef propertyDescriptor;
-            JsCreateObject(&propertyDescriptor);
-
-            const char* tmp = "get";
-            JsValueRef jsValue = JS_INVALID_REFERENCE;
-            JsPropertyIdRef id = JS_INVALID_REFERENCE;
-
-            JsCreateFunction(getter, nullptr, &jsValue);
-            JsCreatePropertyId(tmp, strlen(tmp), &id);
-            JsSetProperty(propertyDescriptor, id, jsValue, true);
-
-            tmp = "set";
-            JsCreateFunction(setter, nullptr, &jsValue);
-            JsCreatePropertyId(tmp, strlen(tmp), &id);
-            JsSetProperty(propertyDescriptor, id, jsValue, true);
-
-            JsValueRef trueValue;
-            JsGetTrueValue(&trueValue);
-
-            tmp = "enumerable";
-            JsCreatePropertyId(tmp, strlen(tmp), &id);
-            JsSetProperty(propertyDescriptor, id, trueValue, true);
-
-            tmp = "configurable";
-            JsCreatePropertyId(tmp, strlen(tmp), &id);
-            JsSetProperty(propertyDescriptor, id, trueValue, true);
-
-            JsDefineProperty(obj, propertyId, propertyDescriptor, &result);
-            return result;
+            return JS_INVALID_REFERENCE;
         }
     }
 
@@ -100,16 +70,19 @@ namespace se {
         __clsMap.emplace(_name, this);
 
         JsValueRef funcName;
-        JsCreateString(_name.c_str(), _name.length(), &funcName);
+        _CHECK(JsCreateString(_name.c_str(), _name.length(), &funcName));
         JsValueRef jsConstructor;
-        JsCreateNamedFunction(funcName, _ctor, nullptr, &jsConstructor);
+        if (_ctor == nullptr)
+        {
+            _ctor = emptyContructor;
+        }
+        _CHECK(JsCreateNamedFunction(funcName, _ctor, nullptr, &jsConstructor));
 
         Object* ctorObj = Object::_createJSObject(nullptr, jsConstructor, false);
 
-
         // create class's prototype and project its member functions
         JsValueRef prototype;
-        JsCreateObject(&prototype);
+        _CHECK(JsCreateObject(&prototype));
 
         Object* prototypeObj = Object::_createJSObject(nullptr, prototype, true);
 
@@ -120,13 +93,13 @@ namespace se {
 
         for (const auto& property : _properties)
         {
-            _defineProperty(prototype, property.name, property.getter, property.setter, true, true);
+            internal::defineProperty(prototype, property.name, property.getter, property.setter, true, true);
         }
 
         ctorObj->setProperty("prototype", Value(prototypeObj));
         if (_parentProto != nullptr)
         {
-            JsSetPrototype(prototype, _parentProto->_getJSObject());
+            _CHECK(JsSetPrototype(prototype, _parentProto->_getJSObject()));
         }
 
         for (const auto& sfunc : _staticFuncs)
@@ -136,7 +109,7 @@ namespace se {
 
         for (const auto& property : _staticProperties)
         {
-            _defineProperty(jsConstructor, property.name, property.getter, property.setter, true, true);
+            internal::defineProperty(jsConstructor, property.name, property.getter, property.setter, true, true);
         }
 
         _proto = prototypeObj;
@@ -198,9 +171,9 @@ namespace se {
     JsValueRef Class::_createJSObjectWithClass(Class* cls)
     {
         JsValueRef obj;
-        JsCreateExternalObject(nullptr, cls->_finalizeOp, &obj);
+        _CHECK(JsCreateExternalObject(nullptr, cls->_finalizeOp, &obj));
 
-        JsSetPrototype(obj, cls->getProto()->_getJSObject());
+        _CHECK(JsSetPrototype(obj, cls->getProto()->_getJSObject()));
         return obj;
     }
 

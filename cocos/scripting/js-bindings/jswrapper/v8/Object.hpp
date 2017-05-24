@@ -35,6 +35,7 @@ namespace se {
         // --- Getter/Setter
         bool getProperty(const char *name, Value* data);
         void setProperty(const char *name, const Value& data);
+        bool defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
 
         // --- Function
         bool isFunction() const;

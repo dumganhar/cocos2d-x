@@ -55,6 +55,9 @@
 #define SE_FINALIZE_FUNC_END \
     }
 
+#define SE_DECLARE_FINALIZE_FUNC(funcName) \
+    void funcName(void* nativeThisObject);
+
 // v8 doesn't need to create a new JSObject in SE_CTOR_BEGIN while SpiderMonkey needs.
 #define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
     void funcName(const v8::FunctionCallbackInfo<v8::Value>& _v8args) \

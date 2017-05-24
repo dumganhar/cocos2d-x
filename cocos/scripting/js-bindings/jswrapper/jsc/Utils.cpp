@@ -29,6 +29,56 @@ namespace se {
         __cx = cx;
     }
 
+    bool defineProperty(Object* obj, const char* name, JSObjectCallAsFunctionCallback jsGetter, JSObjectCallAsFunctionCallback jsSetter)
+    {
+        bool ok = true;
+        Object* globalObject = ScriptEngine::getInstance()->getGlobalObject();
+        Value v;
+        ok = globalObject->getProperty("__defineProperty", &v);
+        if (!ok)
+        {
+            return false;
+        }
+
+        Object* definePropertyFunc = v.toObject();
+
+        ValueArray args;
+        args.reserve(4);
+        args.push_back(Value(obj));
+        args.push_back(Value(name));
+
+        JSObjectRef getter = nullptr;
+        if (jsGetter != nullptr)
+        {
+            getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, jsGetter);
+        }
+        JSObjectRef setter = nullptr;
+
+        if (jsSetter != nullptr)
+        {
+            setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, jsSetter);
+        }
+
+        assert(getter != nullptr);
+
+        if (getter != nullptr)
+        {
+            Object* getterObj = Object::_createJSObject(nullptr, getter, false);
+            args.push_back(Value(getterObj));
+            getterObj->release();
+        }
+
+        if (setter != nullptr)
+        {
+            Object* setterObj = Object::_createJSObject(nullptr, setter, false);
+            args.push_back(Value(setterObj));
+            setterObj->release();
+        }
+        
+        definePropertyFunc->call(args, nullptr);
+        return true;
+    }
+
     void jsToSeArgs(JSContextRef cx, unsigned short argc, const JSValueRef* argv, ValueArray* outArr)
     {
         outArr->reserve(argc);

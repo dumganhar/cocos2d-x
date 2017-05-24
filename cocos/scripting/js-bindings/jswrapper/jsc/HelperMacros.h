@@ -66,6 +66,9 @@
         } \
     }
 
+#define SE_DECLARE_FINALIZE_FUNC(funcName) \
+    void funcName(JSObjectRef _obj);
+
 // --- Constructor
 #define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
     JSObjectRef funcName(JSContextRef _cx, JSObjectRef _constructor, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \

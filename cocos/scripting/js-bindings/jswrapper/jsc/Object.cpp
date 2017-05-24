@@ -225,6 +225,11 @@ namespace se {
         JSStringRelease(jsName);
     }
 
+    bool Object::defineProperty(const char *name, JSObjectCallAsFunctionCallback getter, JSObjectCallAsFunctionCallback setter)
+    {
+        return internal::defineProperty(this, name, getter, setter);
+    }
+
     // --- call
 
     bool Object::call(const ValueArray& args, Object* thisObject, Value* rval/* = nullptr*/)

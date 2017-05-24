@@ -20,7 +20,9 @@ namespace se {
             void* data;
             JsFinalizeCallback finalizeCb;
         };
-        
+
+        bool defineProperty(JsValueRef obj, const char* name, JsNativeFunction getter, JsNativeFunction setter, bool enumerable, bool configurable);
+
         void jsToSeArgs(int argc, const JsValueRef* argv, ValueArray* outArr);
         void seToJsArgs(const ValueArray& args, JsValueRef* outArr);
         void jsToSeValue(JsValueRef jsval, Value* v);
