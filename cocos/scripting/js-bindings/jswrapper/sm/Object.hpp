@@ -36,6 +36,7 @@ namespace se {
         // --- Getter/Setter
         bool getProperty(const char* name, Value* data);
         void setProperty(const char* name, const Value& v);
+        bool defineProperty(const char *name, JSNative getter, JSNative setter);
 
         JSObject* _getJSObject() const;
 

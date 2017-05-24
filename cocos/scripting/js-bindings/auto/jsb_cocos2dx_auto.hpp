@@ -1,7 +1,7 @@
-#include "base/ccConfig.h"
 #pragma once
+#include "base/ccConfig.h"
 
-#include "SeApi.h"
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
 extern se::Object* __jsb_Texture2D_proto;
 extern se::Class* __jsb_Texture2D_class;

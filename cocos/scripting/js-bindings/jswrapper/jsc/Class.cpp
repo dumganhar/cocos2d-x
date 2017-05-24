@@ -117,6 +117,7 @@ namespace se {
         _jsCls = JSClassCreate(&_jsClsDef);
 
         JSObjectRef jsCtor = JSObjectMakeConstructor(__cx, _jsCls, _ctor);
+        Object* ctorObj = Object::_createJSObject(this, jsCtor, true);
 
         for (const auto& staticfunc : _staticFuncs)
         {
@@ -131,11 +132,18 @@ namespace se {
         globalObject->getProperty("__defineProperty", &v);
         Object* definePropertyFunc = v.toObject();
 
-        _proto = Object::_createJSObject(this, jsCtor, true);
+        JSValueRef prototypeObj = nullptr;
+        JSStringRef prototypeName = JSStringCreateWithUTF8CString("prototype");
+        bool exist = JSObjectHasProperty(__cx, jsCtor, prototypeName);
+        if (exist)
+        {
+            prototypeObj = JSObjectGetProperty(__cx, jsCtor, prototypeName, nullptr);
+        }
+        JSStringRelease(prototypeName);
+        assert(prototypeObj != nullptr);
 
-        Value prototypeValue;
-        _proto->getProperty("prototype", &prototypeValue);
-        Object* prototypeObject = prototypeValue.toObject();
+        // FIXME: how to release ctor?
+        _proto = Object::_createJSObject(this, JSValueToObject(__cx, prototypeObj, nullptr), true); // FIXME: release me in cleanup method
 
         ValueArray args;
         args.reserve(4);
@@ -180,16 +188,18 @@ namespace se {
         // Set instance properties
         for (const auto& property : _properties)
         {
-            defineProperty(prototypeObject, property.name, property.getter, property.setter);
+            defineProperty(_proto, property.name, property.getter, property.setter);
         }
 
         // Set class properties
         for (const auto& property : _staticProperties)
         {
-            defineProperty(_proto, property.name, property.getter, property.setter);
+            defineProperty(ctorObj, property.name, property.getter, property.setter);
         }
 
-        _parent->setProperty(_name.c_str(), Value(_proto));
+        _parent->setProperty(_name.c_str(), Value(ctorObj));
+
+        ctorObj->release();
 
         return true;
     }

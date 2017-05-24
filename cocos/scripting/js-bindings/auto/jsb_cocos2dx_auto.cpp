@@ -662,7 +662,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Texture2D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Texture2D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Texture2D)", nativeThisObject);
     cocos2d::Texture2D* cobj = (cocos2d::Texture2D*)nativeThisObject;
     cobj->release();
 }
@@ -912,7 +912,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Touch_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Touch)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Touch)", nativeThisObject);
     cocos2d::Touch* cobj = (cocos2d::Touch*)nativeThisObject;
     cobj->release();
 }
@@ -1013,7 +1013,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Event_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Event)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Event)", nativeThisObject);
     cocos2d::Event* cobj = (cocos2d::Event*)nativeThisObject;
     cobj->release();
 }
@@ -1078,7 +1078,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventTouch_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventTouch)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventTouch)", nativeThisObject);
     cocos2d::EventTouch* cobj = (cocos2d::EventTouch*)nativeThisObject;
     cobj->release();
 }
@@ -1209,7 +1209,7 @@ SE_FUNC_BEGIN(js_cocos2dx_ComponentContainer_get, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ComponentContainer_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ComponentContainer)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ComponentContainer)", nativeThisObject);
     cocos2d::ComponentContainer* cobj = (cocos2d::ComponentContainer*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -1366,7 +1366,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Component_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Component)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Component)", nativeThisObject);
     cocos2d::Component* cobj = (cocos2d::Component*)nativeThisObject;
     cobj->release();
 }
@@ -3793,7 +3793,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Node_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Node)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Node)", nativeThisObject);
     cocos2d::Node* cobj = (cocos2d::Node*)nativeThisObject;
     cobj->release();
 }
@@ -3969,7 +3969,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx___NodeRGBA_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::__NodeRGBA)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::__NodeRGBA)", nativeThisObject);
     cocos2d::__NodeRGBA* cobj = (cocos2d::__NodeRGBA*)nativeThisObject;
     cobj->release();
 }
@@ -4162,7 +4162,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Scene_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Scene)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Scene)", nativeThisObject);
     cocos2d::Scene* cobj = (cocos2d::Scene*)nativeThisObject;
     cobj->release();
 }
@@ -4675,7 +4675,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GLView_getGLContextAttrs, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_GLView_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::GLView)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::GLView)", nativeThisObject);
     cocos2d::GLView* cobj = (cocos2d::GLView*)nativeThisObject;
     cobj->release();
 }
@@ -5705,7 +5705,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Director_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Director_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Director)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Director)", nativeThisObject);
     cocos2d::Director* cobj = (cocos2d::Director*)nativeThisObject;
     cobj->release();
 }
@@ -5939,7 +5939,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Scheduler_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Scheduler)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Scheduler)", nativeThisObject);
     cocos2d::Scheduler* cobj = (cocos2d::Scheduler*)nativeThisObject;
     cobj->release();
 }
@@ -6005,7 +6005,7 @@ SE_FUNC_BEGIN(js_cocos2dx_AsyncTaskPool_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_AsyncTaskPool_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::AsyncTaskPool)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::AsyncTaskPool)", nativeThisObject);
     cocos2d::AsyncTaskPool* cobj = (cocos2d::AsyncTaskPool*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -6238,7 +6238,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Action_reverse, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Action_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Action)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Action)", nativeThisObject);
     cocos2d::Action* cobj = (cocos2d::Action*)nativeThisObject;
     cobj->release();
 }
@@ -6304,7 +6304,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FiniteTimeAction_getDuration, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FiniteTimeAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FiniteTimeAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FiniteTimeAction)", nativeThisObject);
     cocos2d::FiniteTimeAction* cobj = (cocos2d::FiniteTimeAction*)nativeThisObject;
     cobj->release();
 }
@@ -6432,7 +6432,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Speed_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Speed)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Speed)", nativeThisObject);
     cocos2d::Speed* cobj = (cocos2d::Speed*)nativeThisObject;
     cobj->release();
 }
@@ -6634,7 +6634,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Follow_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Follow)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Follow)", nativeThisObject);
     cocos2d::Follow* cobj = (cocos2d::Follow*)nativeThisObject;
     cobj->release();
 }
@@ -6973,7 +6973,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Image_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Image)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Image)", nativeThisObject);
     cocos2d::Image* cobj = (cocos2d::Image*)nativeThisObject;
     cobj->release();
 }
@@ -7749,7 +7749,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GLProgramState_getOrCreateWithShaders, se::DONT_NEED_T
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_GLProgramState_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::GLProgramState)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::GLProgramState)", nativeThisObject);
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)nativeThisObject;
     cobj->release();
 }
@@ -8324,7 +8324,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SpriteFrame_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SpriteFrame)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SpriteFrame)", nativeThisObject);
     cocos2d::SpriteFrame* cobj = (cocos2d::SpriteFrame*)nativeThisObject;
     cobj->release();
 }
@@ -8546,7 +8546,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_AnimationFrame_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::AnimationFrame)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::AnimationFrame)", nativeThisObject);
     cocos2d::AnimationFrame* cobj = (cocos2d::AnimationFrame*)nativeThisObject;
     cobj->release();
 }
@@ -8961,7 +8961,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Animation_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Animation)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Animation)", nativeThisObject);
     cocos2d::Animation* cobj = (cocos2d::Animation*)nativeThisObject;
     cobj->release();
 }
@@ -9065,7 +9065,7 @@ SE_FUNC_BEGIN(js_cocos2dx_ActionInterval_getElapsed, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionInterval_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionInterval)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionInterval)", nativeThisObject);
     cocos2d::ActionInterval* cobj = (cocos2d::ActionInterval*)nativeThisObject;
     cobj->release();
 }
@@ -9145,7 +9145,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Sequence_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Sequence)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Sequence)", nativeThisObject);
     cocos2d::Sequence* cobj = (cocos2d::Sequence*)nativeThisObject;
     cobj->release();
 }
@@ -9255,7 +9255,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Repeat_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Repeat)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Repeat)", nativeThisObject);
     cocos2d::Repeat* cobj = (cocos2d::Repeat*)nativeThisObject;
     cobj->release();
 }
@@ -9363,7 +9363,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_RepeatForever_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::RepeatForever)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::RepeatForever)", nativeThisObject);
     cocos2d::RepeatForever* cobj = (cocos2d::RepeatForever*)nativeThisObject;
     cobj->release();
 }
@@ -9446,7 +9446,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Spawn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Spawn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Spawn)", nativeThisObject);
     cocos2d::Spawn* cobj = (cocos2d::Spawn*)nativeThisObject;
     cobj->release();
 }
@@ -9587,7 +9587,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_RotateTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::RotateTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::RotateTo)", nativeThisObject);
     cocos2d::RotateTo* cobj = (cocos2d::RotateTo*)nativeThisObject;
     cobj->release();
 }
@@ -9743,7 +9743,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_RotateBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::RotateBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::RotateBy)", nativeThisObject);
     cocos2d::RotateBy* cobj = (cocos2d::RotateBy*)nativeThisObject;
     cobj->release();
 }
@@ -9863,7 +9863,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MoveBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MoveBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MoveBy)", nativeThisObject);
     cocos2d::MoveBy* cobj = (cocos2d::MoveBy*)nativeThisObject;
     cobj->release();
 }
@@ -9983,7 +9983,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MoveTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MoveTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MoveTo)", nativeThisObject);
     cocos2d::MoveTo* cobj = (cocos2d::MoveTo*)nativeThisObject;
     cobj->release();
 }
@@ -10069,7 +10069,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SkewTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SkewTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SkewTo)", nativeThisObject);
     cocos2d::SkewTo* cobj = (cocos2d::SkewTo*)nativeThisObject;
     cobj->release();
 }
@@ -10155,7 +10155,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SkewBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SkewBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SkewBy)", nativeThisObject);
     cocos2d::SkewBy* cobj = (cocos2d::SkewBy*)nativeThisObject;
     cobj->release();
 }
@@ -10245,7 +10245,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_JumpBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::JumpBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::JumpBy)", nativeThisObject);
     cocos2d::JumpBy* cobj = (cocos2d::JumpBy*)nativeThisObject;
     cobj->release();
 }
@@ -10335,7 +10335,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_JumpTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::JumpTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::JumpTo)", nativeThisObject);
     cocos2d::JumpTo* cobj = (cocos2d::JumpTo*)nativeThisObject;
     cobj->release();
 }
@@ -10380,7 +10380,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_BezierBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::BezierBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::BezierBy)", nativeThisObject);
     cocos2d::BezierBy* cobj = (cocos2d::BezierBy*)nativeThisObject;
     cobj->release();
 }
@@ -10423,7 +10423,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_BezierTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::BezierTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::BezierTo)", nativeThisObject);
     cocos2d::BezierTo* cobj = (cocos2d::BezierTo*)nativeThisObject;
     cobj->release();
 }
@@ -10589,7 +10589,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ScaleTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ScaleTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ScaleTo)", nativeThisObject);
     cocos2d::ScaleTo* cobj = (cocos2d::ScaleTo*)nativeThisObject;
     cobj->release();
 }
@@ -10694,7 +10694,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ScaleBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ScaleBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ScaleBy)", nativeThisObject);
     cocos2d::ScaleBy* cobj = (cocos2d::ScaleBy*)nativeThisObject;
     cobj->release();
 }
@@ -10775,7 +10775,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Blink_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Blink)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Blink)", nativeThisObject);
     cocos2d::Blink* cobj = (cocos2d::Blink*)nativeThisObject;
     cobj->release();
 }
@@ -10857,7 +10857,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeTo)", nativeThisObject);
     cocos2d::FadeTo* cobj = (cocos2d::FadeTo*)nativeThisObject;
     cobj->release();
 }
@@ -10932,7 +10932,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeIn)", nativeThisObject);
     cocos2d::FadeIn* cobj = (cocos2d::FadeIn*)nativeThisObject;
     cobj->release();
 }
@@ -11007,7 +11007,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeOut)", nativeThisObject);
     cocos2d::FadeOut* cobj = (cocos2d::FadeOut*)nativeThisObject;
     cobj->release();
 }
@@ -11117,7 +11117,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TintTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TintTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TintTo)", nativeThisObject);
     cocos2d::TintTo* cobj = (cocos2d::TintTo*)nativeThisObject;
     cobj->release();
 }
@@ -11207,7 +11207,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TintBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TintBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TintBy)", nativeThisObject);
     cocos2d::TintBy* cobj = (cocos2d::TintBy*)nativeThisObject;
     cobj->release();
 }
@@ -11268,7 +11268,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_DelayTime_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::DelayTime)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::DelayTime)", nativeThisObject);
     cocos2d::DelayTime* cobj = (cocos2d::DelayTime*)nativeThisObject;
     cobj->release();
 }
@@ -11345,7 +11345,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ReverseTime_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ReverseTime)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ReverseTime)", nativeThisObject);
     cocos2d::ReverseTime* cobj = (cocos2d::ReverseTime*)nativeThisObject;
     cobj->release();
 }
@@ -11478,7 +11478,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Animate_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Animate)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Animate)", nativeThisObject);
     cocos2d::Animate* cobj = (cocos2d::Animate*)nativeThisObject;
     cobj->release();
 }
@@ -11604,7 +11604,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TargetedAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TargetedAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TargetedAction)", nativeThisObject);
     cocos2d::TargetedAction* cobj = (cocos2d::TargetedAction*)nativeThisObject;
     cobj->release();
 }
@@ -11752,7 +11752,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionFloat_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionFloat)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionFloat)", nativeThisObject);
     cocos2d::ActionFloat* cobj = (cocos2d::ActionFloat*)nativeThisObject;
     cobj->release();
 }
@@ -12177,7 +12177,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Configuration_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Configuration_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Configuration)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Configuration)", nativeThisObject);
     cocos2d::Configuration* cobj = (cocos2d::Configuration*)nativeThisObject;
     cobj->release();
 }
@@ -12799,7 +12799,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Properties_parseVec4, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Properties_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Properties)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Properties)", nativeThisObject);
     cocos2d::Properties* cobj = (cocos2d::Properties*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -14065,7 +14065,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FileUtils_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FileUtils)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FileUtils)", nativeThisObject);
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -14142,7 +14142,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventAcceleration_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventAcceleration)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventAcceleration)", nativeThisObject);
     cocos2d::EventAcceleration* cobj = (cocos2d::EventAcceleration*)nativeThisObject;
     cobj->release();
 }
@@ -14193,7 +14193,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventCustom_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventCustom)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventCustom)", nativeThisObject);
     cocos2d::EventCustom* cobj = (cocos2d::EventCustom*)nativeThisObject;
     cobj->release();
 }
@@ -14273,7 +14273,7 @@ SE_FUNC_BEGIN(js_cocos2dx_EventListener_checkAvailable, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListener_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListener)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListener)", nativeThisObject);
     cocos2d::EventListener* cobj = (cocos2d::EventListener*)nativeThisObject;
     cobj->release();
 }
@@ -14538,7 +14538,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventDispatcher_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventDispatcher)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventDispatcher)", nativeThisObject);
     cocos2d::EventDispatcher* cobj = (cocos2d::EventDispatcher*)nativeThisObject;
     cobj->release();
 }
@@ -14590,7 +14590,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventFocus_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventFocus)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventFocus)", nativeThisObject);
     cocos2d::EventFocus* cobj = (cocos2d::EventFocus*)nativeThisObject;
     cobj->release();
 }
@@ -14669,7 +14669,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerAcceleration_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerAcceleration)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerAcceleration)", nativeThisObject);
     cocos2d::EventListenerAcceleration* cobj = (cocos2d::EventListenerAcceleration*)nativeThisObject;
     cobj->release();
 }
@@ -14703,7 +14703,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerCustom_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerCustom)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerCustom)", nativeThisObject);
     cocos2d::EventListenerCustom* cobj = (cocos2d::EventListenerCustom*)nativeThisObject;
     cobj->release();
 }
@@ -14750,7 +14750,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerFocus_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerFocus)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerFocus)", nativeThisObject);
     cocos2d::EventListenerFocus* cobj = (cocos2d::EventListenerFocus*)nativeThisObject;
     cobj->release();
 }
@@ -14798,7 +14798,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerKeyboard_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerKeyboard)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerKeyboard)", nativeThisObject);
     cocos2d::EventListenerKeyboard* cobj = (cocos2d::EventListenerKeyboard*)nativeThisObject;
     cobj->release();
 }
@@ -15050,7 +15050,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventMouse_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventMouse)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventMouse)", nativeThisObject);
     cocos2d::EventMouse* cobj = (cocos2d::EventMouse*)nativeThisObject;
     cobj->release();
 }
@@ -15112,7 +15112,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerMouse_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerMouse)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerMouse)", nativeThisObject);
     cocos2d::EventListenerMouse* cobj = (cocos2d::EventListenerMouse*)nativeThisObject;
     cobj->release();
 }
@@ -15188,7 +15188,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerTouchOneByOne_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerTouchOneByOne)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerTouchOneByOne)", nativeThisObject);
     cocos2d::EventListenerTouchOneByOne* cobj = (cocos2d::EventListenerTouchOneByOne*)nativeThisObject;
     cobj->release();
 }
@@ -15238,7 +15238,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EventListenerTouchAllAtOnce_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EventListenerTouchAllAtOnce)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EventListenerTouchAllAtOnce)", nativeThisObject);
     cocos2d::EventListenerTouchAllAtOnce* cobj = (cocos2d::EventListenerTouchAllAtOnce*)nativeThisObject;
     cobj->release();
 }
@@ -15382,7 +15382,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionCamera_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionCamera)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionCamera)", nativeThisObject);
     cocos2d::ActionCamera* cobj = (cocos2d::ActionCamera*)nativeThisObject;
     cobj->release();
 }
@@ -15509,7 +15509,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_OrbitCamera_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::OrbitCamera)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::OrbitCamera)", nativeThisObject);
     cocos2d::OrbitCamera* cobj = (cocos2d::OrbitCamera*)nativeThisObject;
     cobj->release();
 }
@@ -15576,7 +15576,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CardinalSplineTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CardinalSplineTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CardinalSplineTo)", nativeThisObject);
     cocos2d::CardinalSplineTo* cobj = (cocos2d::CardinalSplineTo*)nativeThisObject;
     cobj->release();
 }
@@ -15611,7 +15611,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CardinalSplineBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CardinalSplineBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CardinalSplineBy)", nativeThisObject);
     cocos2d::CardinalSplineBy* cobj = (cocos2d::CardinalSplineBy*)nativeThisObject;
     cobj->release();
 }
@@ -15634,7 +15634,7 @@ se::Object* __jsb_CatmullRomTo_proto = nullptr;
 se::Class* __jsb_CatmullRomTo_class = nullptr;
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CatmullRomTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CatmullRomTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CatmullRomTo)", nativeThisObject);
     cocos2d::CatmullRomTo* cobj = (cocos2d::CatmullRomTo*)nativeThisObject;
     cobj->release();
 }
@@ -15657,7 +15657,7 @@ se::Object* __jsb_CatmullRomBy_proto = nullptr;
 se::Class* __jsb_CatmullRomBy_class = nullptr;
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CatmullRomBy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CatmullRomBy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CatmullRomBy)", nativeThisObject);
     cocos2d::CatmullRomBy* cobj = (cocos2d::CatmullRomBy*)nativeThisObject;
     cobj->release();
 }
@@ -15711,7 +15711,7 @@ SE_FUNC_BEGIN(js_cocos2dx_ActionEase_getInnerAction, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionEase_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionEase)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionEase)", nativeThisObject);
     cocos2d::ActionEase* cobj = (cocos2d::ActionEase*)nativeThisObject;
     cobj->release();
 }
@@ -15801,7 +15801,7 @@ SE_FUNC_BEGIN(js_cocos2dx_EaseRateAction_create, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseRateAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseRateAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseRateAction)", nativeThisObject);
     cocos2d::EaseRateAction* cobj = (cocos2d::EaseRateAction*)nativeThisObject;
     cobj->release();
 }
@@ -15861,7 +15861,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseExponentialIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseExponentialIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseExponentialIn)", nativeThisObject);
     cocos2d::EaseExponentialIn* cobj = (cocos2d::EaseExponentialIn*)nativeThisObject;
     cobj->release();
 }
@@ -15921,7 +15921,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseExponentialOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseExponentialOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseExponentialOut)", nativeThisObject);
     cocos2d::EaseExponentialOut* cobj = (cocos2d::EaseExponentialOut*)nativeThisObject;
     cobj->release();
 }
@@ -15981,7 +15981,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseExponentialInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseExponentialInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseExponentialInOut)", nativeThisObject);
     cocos2d::EaseExponentialInOut* cobj = (cocos2d::EaseExponentialInOut*)nativeThisObject;
     cobj->release();
 }
@@ -16041,7 +16041,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseSineIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseSineIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseSineIn)", nativeThisObject);
     cocos2d::EaseSineIn* cobj = (cocos2d::EaseSineIn*)nativeThisObject;
     cobj->release();
 }
@@ -16101,7 +16101,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseSineOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseSineOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseSineOut)", nativeThisObject);
     cocos2d::EaseSineOut* cobj = (cocos2d::EaseSineOut*)nativeThisObject;
     cobj->release();
 }
@@ -16161,7 +16161,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseSineInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseSineInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseSineInOut)", nativeThisObject);
     cocos2d::EaseSineInOut* cobj = (cocos2d::EaseSineInOut*)nativeThisObject;
     cobj->release();
 }
@@ -16188,7 +16188,7 @@ se::Object* __jsb_EaseBounce_proto = nullptr;
 se::Class* __jsb_EaseBounce_class = nullptr;
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBounce_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBounce)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBounce)", nativeThisObject);
     cocos2d::EaseBounce* cobj = (cocos2d::EaseBounce*)nativeThisObject;
     cobj->release();
 }
@@ -16244,7 +16244,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBounceIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBounceIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBounceIn)", nativeThisObject);
     cocos2d::EaseBounceIn* cobj = (cocos2d::EaseBounceIn*)nativeThisObject;
     cobj->release();
 }
@@ -16304,7 +16304,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBounceOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBounceOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBounceOut)", nativeThisObject);
     cocos2d::EaseBounceOut* cobj = (cocos2d::EaseBounceOut*)nativeThisObject;
     cobj->release();
 }
@@ -16364,7 +16364,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBounceInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBounceInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBounceInOut)", nativeThisObject);
     cocos2d::EaseBounceInOut* cobj = (cocos2d::EaseBounceInOut*)nativeThisObject;
     cobj->release();
 }
@@ -16424,7 +16424,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBackIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBackIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBackIn)", nativeThisObject);
     cocos2d::EaseBackIn* cobj = (cocos2d::EaseBackIn*)nativeThisObject;
     cobj->release();
 }
@@ -16484,7 +16484,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBackOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBackOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBackOut)", nativeThisObject);
     cocos2d::EaseBackOut* cobj = (cocos2d::EaseBackOut*)nativeThisObject;
     cobj->release();
 }
@@ -16544,7 +16544,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBackInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBackInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBackInOut)", nativeThisObject);
     cocos2d::EaseBackInOut* cobj = (cocos2d::EaseBackInOut*)nativeThisObject;
     cobj->release();
 }
@@ -16604,7 +16604,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuadraticActionIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuadraticActionIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuadraticActionIn)", nativeThisObject);
     cocos2d::EaseQuadraticActionIn* cobj = (cocos2d::EaseQuadraticActionIn*)nativeThisObject;
     cobj->release();
 }
@@ -16664,7 +16664,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuadraticActionOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuadraticActionOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuadraticActionOut)", nativeThisObject);
     cocos2d::EaseQuadraticActionOut* cobj = (cocos2d::EaseQuadraticActionOut*)nativeThisObject;
     cobj->release();
 }
@@ -16724,7 +16724,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuadraticActionInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuadraticActionInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuadraticActionInOut)", nativeThisObject);
     cocos2d::EaseQuadraticActionInOut* cobj = (cocos2d::EaseQuadraticActionInOut*)nativeThisObject;
     cobj->release();
 }
@@ -16784,7 +16784,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuarticActionIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuarticActionIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuarticActionIn)", nativeThisObject);
     cocos2d::EaseQuarticActionIn* cobj = (cocos2d::EaseQuarticActionIn*)nativeThisObject;
     cobj->release();
 }
@@ -16844,7 +16844,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuarticActionOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuarticActionOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuarticActionOut)", nativeThisObject);
     cocos2d::EaseQuarticActionOut* cobj = (cocos2d::EaseQuarticActionOut*)nativeThisObject;
     cobj->release();
 }
@@ -16904,7 +16904,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuarticActionInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuarticActionInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuarticActionInOut)", nativeThisObject);
     cocos2d::EaseQuarticActionInOut* cobj = (cocos2d::EaseQuarticActionInOut*)nativeThisObject;
     cobj->release();
 }
@@ -16964,7 +16964,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuinticActionIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuinticActionIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuinticActionIn)", nativeThisObject);
     cocos2d::EaseQuinticActionIn* cobj = (cocos2d::EaseQuinticActionIn*)nativeThisObject;
     cobj->release();
 }
@@ -17024,7 +17024,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuinticActionOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuinticActionOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuinticActionOut)", nativeThisObject);
     cocos2d::EaseQuinticActionOut* cobj = (cocos2d::EaseQuinticActionOut*)nativeThisObject;
     cobj->release();
 }
@@ -17084,7 +17084,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseQuinticActionInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseQuinticActionInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseQuinticActionInOut)", nativeThisObject);
     cocos2d::EaseQuinticActionInOut* cobj = (cocos2d::EaseQuinticActionInOut*)nativeThisObject;
     cobj->release();
 }
@@ -17144,7 +17144,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseCircleActionIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseCircleActionIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseCircleActionIn)", nativeThisObject);
     cocos2d::EaseCircleActionIn* cobj = (cocos2d::EaseCircleActionIn*)nativeThisObject;
     cobj->release();
 }
@@ -17204,7 +17204,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseCircleActionOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseCircleActionOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseCircleActionOut)", nativeThisObject);
     cocos2d::EaseCircleActionOut* cobj = (cocos2d::EaseCircleActionOut*)nativeThisObject;
     cobj->release();
 }
@@ -17264,7 +17264,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseCircleActionInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseCircleActionInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseCircleActionInOut)", nativeThisObject);
     cocos2d::EaseCircleActionInOut* cobj = (cocos2d::EaseCircleActionInOut*)nativeThisObject;
     cobj->release();
 }
@@ -17324,7 +17324,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseCubicActionIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseCubicActionIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseCubicActionIn)", nativeThisObject);
     cocos2d::EaseCubicActionIn* cobj = (cocos2d::EaseCubicActionIn*)nativeThisObject;
     cobj->release();
 }
@@ -17384,7 +17384,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseCubicActionOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseCubicActionOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseCubicActionOut)", nativeThisObject);
     cocos2d::EaseCubicActionOut* cobj = (cocos2d::EaseCubicActionOut*)nativeThisObject;
     cobj->release();
 }
@@ -17444,7 +17444,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseCubicActionInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseCubicActionInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseCubicActionInOut)", nativeThisObject);
     cocos2d::EaseCubicActionInOut* cobj = (cocos2d::EaseCubicActionInOut*)nativeThisObject;
     cobj->release();
 }
@@ -17506,7 +17506,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseIn)", nativeThisObject);
     cocos2d::EaseIn* cobj = (cocos2d::EaseIn*)nativeThisObject;
     cobj->release();
 }
@@ -17568,7 +17568,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseOut)", nativeThisObject);
     cocos2d::EaseOut* cobj = (cocos2d::EaseOut*)nativeThisObject;
     cobj->release();
 }
@@ -17630,7 +17630,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseInOut)", nativeThisObject);
     cocos2d::EaseInOut* cobj = (cocos2d::EaseInOut*)nativeThisObject;
     cobj->release();
 }
@@ -17713,7 +17713,7 @@ SE_FUNC_BEGIN(js_cocos2dx_EaseElastic_getPeriod, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseElastic_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseElastic)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseElastic)", nativeThisObject);
     cocos2d::EaseElastic* cobj = (cocos2d::EaseElastic*)nativeThisObject;
     cobj->release();
 }
@@ -17784,7 +17784,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseElasticIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseElasticIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseElasticIn)", nativeThisObject);
     cocos2d::EaseElasticIn* cobj = (cocos2d::EaseElasticIn*)nativeThisObject;
     cobj->release();
 }
@@ -17856,7 +17856,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseElasticOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseElasticOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseElasticOut)", nativeThisObject);
     cocos2d::EaseElasticOut* cobj = (cocos2d::EaseElasticOut*)nativeThisObject;
     cobj->release();
 }
@@ -17928,7 +17928,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseElasticInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseElasticInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseElasticInOut)", nativeThisObject);
     cocos2d::EaseElasticInOut* cobj = (cocos2d::EaseElasticInOut*)nativeThisObject;
     cobj->release();
 }
@@ -18008,7 +18008,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_EaseBezierAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::EaseBezierAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::EaseBezierAction)", nativeThisObject);
     cocos2d::EaseBezierAction* cobj = (cocos2d::EaseBezierAction*)nativeThisObject;
     cobj->release();
 }
@@ -18036,7 +18036,7 @@ se::Object* __jsb_ActionInstant_proto = nullptr;
 se::Class* __jsb_ActionInstant_class = nullptr;
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionInstant_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionInstant)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionInstant)", nativeThisObject);
     cocos2d::ActionInstant* cobj = (cocos2d::ActionInstant*)nativeThisObject;
     cobj->release();
 }
@@ -18089,7 +18089,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Show_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Show)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Show)", nativeThisObject);
     cocos2d::Show* cobj = (cocos2d::Show*)nativeThisObject;
     cobj->release();
 }
@@ -18146,7 +18146,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Hide_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Hide)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Hide)", nativeThisObject);
     cocos2d::Hide* cobj = (cocos2d::Hide*)nativeThisObject;
     cobj->release();
 }
@@ -18196,7 +18196,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ToggleVisibility_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ToggleVisibility)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ToggleVisibility)", nativeThisObject);
     cocos2d::ToggleVisibility* cobj = (cocos2d::ToggleVisibility*)nativeThisObject;
     cobj->release();
 }
@@ -18270,7 +18270,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_RemoveSelf_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::RemoveSelf)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::RemoveSelf)", nativeThisObject);
     cocos2d::RemoveSelf* cobj = (cocos2d::RemoveSelf*)nativeThisObject;
     cobj->release();
 }
@@ -18345,7 +18345,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FlipX_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FlipX)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FlipX)", nativeThisObject);
     cocos2d::FlipX* cobj = (cocos2d::FlipX*)nativeThisObject;
     cobj->release();
 }
@@ -18423,7 +18423,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FlipY_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FlipY)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FlipY)", nativeThisObject);
     cocos2d::FlipY* cobj = (cocos2d::FlipY*)nativeThisObject;
     cobj->release();
 }
@@ -18501,7 +18501,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Place_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Place)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Place)", nativeThisObject);
     cocos2d::Place* cobj = (cocos2d::Place*)nativeThisObject;
     cobj->release();
 }
@@ -18557,7 +18557,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CallFunc_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CallFunc)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CallFunc)", nativeThisObject);
     cocos2d::CallFunc* cobj = (cocos2d::CallFunc*)nativeThisObject;
     cobj->release();
 }
@@ -18576,7 +18576,7 @@ bool js_register_cocos2dx_CallFunc(se::Object* obj)
     __jsb_CallFunc_proto = cls->getProto();
     __jsb_CallFunc_class = cls;
 
-    se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc._CallFunc.extend = cc.Class.extend; })()");
+    se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.CallFunc.extend = cc.Class.extend; })()");
     return true;
 }
 
@@ -18601,7 +18601,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CallFuncN_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CallFuncN)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CallFuncN)", nativeThisObject);
     cocos2d::CallFuncN* cobj = (cocos2d::CallFuncN*)nativeThisObject;
     cobj->release();
 }
@@ -18660,7 +18660,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GridAction_initWithDuration, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_GridAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::GridAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::GridAction)", nativeThisObject);
     cocos2d::GridAction* cobj = (cocos2d::GridAction*)nativeThisObject;
     cobj->release();
 }
@@ -18699,7 +18699,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Grid3DAction_getGridRect, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Grid3DAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Grid3DAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Grid3DAction)", nativeThisObject);
     cocos2d::Grid3DAction* cobj = (cocos2d::Grid3DAction*)nativeThisObject;
     cobj->release();
 }
@@ -18723,7 +18723,7 @@ se::Object* __jsb_TiledGrid3DAction_proto = nullptr;
 se::Class* __jsb_TiledGrid3DAction_class = nullptr;
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TiledGrid3DAction_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TiledGrid3DAction)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TiledGrid3DAction)", nativeThisObject);
     cocos2d::TiledGrid3DAction* cobj = (cocos2d::TiledGrid3DAction*)nativeThisObject;
     cobj->release();
 }
@@ -18769,7 +18769,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_StopGrid_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::StopGrid)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::StopGrid)", nativeThisObject);
     cocos2d::StopGrid* cobj = (cocos2d::StopGrid*)nativeThisObject;
     cobj->release();
 }
@@ -18836,7 +18836,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ReuseGrid_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ReuseGrid)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ReuseGrid)", nativeThisObject);
     cocos2d::ReuseGrid* cobj = (cocos2d::ReuseGrid*)nativeThisObject;
     cobj->release();
 }
@@ -18972,7 +18972,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Waves3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Waves3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Waves3D)", nativeThisObject);
     cocos2d::Waves3D* cobj = (cocos2d::Waves3D*)nativeThisObject;
     cobj->release();
 }
@@ -19070,7 +19070,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FlipX3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FlipX3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FlipX3D)", nativeThisObject);
     cocos2d::FlipX3D* cobj = (cocos2d::FlipX3D*)nativeThisObject;
     cobj->release();
 }
@@ -19132,7 +19132,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FlipY3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FlipY3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FlipY3D)", nativeThisObject);
     cocos2d::FlipY3D* cobj = (cocos2d::FlipY3D*)nativeThisObject;
     cobj->release();
 }
@@ -19284,7 +19284,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Lens3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Lens3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Lens3D)", nativeThisObject);
     cocos2d::Lens3D* cobj = (cocos2d::Lens3D*)nativeThisObject;
     cobj->release();
 }
@@ -19461,7 +19461,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Ripple3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Ripple3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Ripple3D)", nativeThisObject);
     cocos2d::Ripple3D* cobj = (cocos2d::Ripple3D*)nativeThisObject;
     cobj->release();
 }
@@ -19547,7 +19547,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Shaky3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Shaky3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Shaky3D)", nativeThisObject);
     cocos2d::Shaky3D* cobj = (cocos2d::Shaky3D*)nativeThisObject;
     cobj->release();
 }
@@ -19683,7 +19683,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Liquid_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Liquid)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Liquid)", nativeThisObject);
     cocos2d::Liquid* cobj = (cocos2d::Liquid*)nativeThisObject;
     cobj->release();
 }
@@ -19831,7 +19831,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Waves_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Waves)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Waves)", nativeThisObject);
     cocos2d::Waves* cobj = (cocos2d::Waves*)nativeThisObject;
     cobj->release();
 }
@@ -20003,7 +20003,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Twirl_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Twirl)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Twirl)", nativeThisObject);
     cocos2d::Twirl* cobj = (cocos2d::Twirl*)nativeThisObject;
     cobj->release();
 }
@@ -20281,7 +20281,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionManager_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionManager)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionManager)", nativeThisObject);
     cocos2d::ActionManager* cobj = (cocos2d::ActionManager*)nativeThisObject;
     cobj->release();
 }
@@ -20340,7 +20340,7 @@ SE_FUNC_BEGIN(js_cocos2dx_PageTurn3D_create, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_PageTurn3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::PageTurn3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::PageTurn3D)", nativeThisObject);
     cocos2d::PageTurn3D* cobj = (cocos2d::PageTurn3D*)nativeThisObject;
     cobj->release();
 }
@@ -20418,7 +20418,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ProgressTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ProgressTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ProgressTo)", nativeThisObject);
     cocos2d::ProgressTo* cobj = (cocos2d::ProgressTo*)nativeThisObject;
     cobj->release();
 }
@@ -20504,7 +20504,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ProgressFromTo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ProgressFromTo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ProgressFromTo)", nativeThisObject);
     cocos2d::ProgressFromTo* cobj = (cocos2d::ProgressFromTo*)nativeThisObject;
     cobj->release();
 }
@@ -20587,7 +20587,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ShakyTiles3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ShakyTiles3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ShakyTiles3D)", nativeThisObject);
     cocos2d::ShakyTiles3D* cobj = (cocos2d::ShakyTiles3D*)nativeThisObject;
     cobj->release();
 }
@@ -20667,7 +20667,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ShatteredTiles3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ShatteredTiles3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ShatteredTiles3D)", nativeThisObject);
     cocos2d::ShatteredTiles3D* cobj = (cocos2d::ShatteredTiles3D*)nativeThisObject;
     cobj->release();
 }
@@ -20794,7 +20794,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ShuffleTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ShuffleTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ShuffleTiles)", nativeThisObject);
     cocos2d::ShuffleTiles* cobj = (cocos2d::ShuffleTiles*)nativeThisObject;
     cobj->release();
 }
@@ -20920,7 +20920,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeOutTRTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeOutTRTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeOutTRTiles)", nativeThisObject);
     cocos2d::FadeOutTRTiles* cobj = (cocos2d::FadeOutTRTiles*)nativeThisObject;
     cobj->release();
 }
@@ -20986,7 +20986,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeOutBLTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeOutBLTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeOutBLTiles)", nativeThisObject);
     cocos2d::FadeOutBLTiles* cobj = (cocos2d::FadeOutBLTiles*)nativeThisObject;
     cobj->release();
 }
@@ -21048,7 +21048,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeOutUpTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeOutUpTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeOutUpTiles)", nativeThisObject);
     cocos2d::FadeOutUpTiles* cobj = (cocos2d::FadeOutUpTiles*)nativeThisObject;
     cobj->release();
 }
@@ -21110,7 +21110,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_FadeOutDownTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::FadeOutDownTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::FadeOutDownTiles)", nativeThisObject);
     cocos2d::FadeOutDownTiles* cobj = (cocos2d::FadeOutDownTiles*)nativeThisObject;
     cobj->release();
 }
@@ -21252,7 +21252,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TurnOffTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TurnOffTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TurnOffTiles)", nativeThisObject);
     cocos2d::TurnOffTiles* cobj = (cocos2d::TurnOffTiles*)nativeThisObject;
     cobj->release();
 }
@@ -21391,7 +21391,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_WavesTiles3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::WavesTiles3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::WavesTiles3D)", nativeThisObject);
     cocos2d::WavesTiles3D* cobj = (cocos2d::WavesTiles3D*)nativeThisObject;
     cobj->release();
 }
@@ -21538,7 +21538,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_JumpTiles3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::JumpTiles3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::JumpTiles3D)", nativeThisObject);
     cocos2d::JumpTiles3D* cobj = (cocos2d::JumpTiles3D*)nativeThisObject;
     cobj->release();
 }
@@ -21617,7 +21617,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SplitRows_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SplitRows)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SplitRows)", nativeThisObject);
     cocos2d::SplitRows* cobj = (cocos2d::SplitRows*)nativeThisObject;
     cobj->release();
 }
@@ -21689,7 +21689,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SplitCols_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SplitCols)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SplitCols)", nativeThisObject);
     cocos2d::SplitCols* cobj = (cocos2d::SplitCols*)nativeThisObject;
     cobj->release();
 }
@@ -21759,7 +21759,7 @@ SE_FUNC_BEGIN(js_cocos2dx_ActionTween_create, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ActionTween_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ActionTween)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ActionTween)", nativeThisObject);
     cocos2d::ActionTween* cobj = (cocos2d::ActionTween*)nativeThisObject;
     cobj->release();
 }
@@ -21986,7 +21986,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_AtlasNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::AtlasNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::AtlasNode)", nativeThisObject);
     cocos2d::AtlasNode* cobj = (cocos2d::AtlasNode*)nativeThisObject;
     cobj->release();
 }
@@ -22156,7 +22156,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ClippingNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ClippingNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ClippingNode)", nativeThisObject);
     cocos2d::ClippingNode* cobj = (cocos2d::ClippingNode*)nativeThisObject;
     cobj->release();
 }
@@ -22783,7 +22783,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_DrawNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::DrawNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::DrawNode)", nativeThisObject);
     cocos2d::DrawNode* cobj = (cocos2d::DrawNode*)nativeThisObject;
     cobj->release();
 }
@@ -24234,7 +24234,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Label_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Label)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Label)", nativeThisObject);
     cocos2d::Label* cobj = (cocos2d::Label*)nativeThisObject;
     cobj->release();
 }
@@ -24500,7 +24500,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_LabelAtlas_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::LabelAtlas)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::LabelAtlas)", nativeThisObject);
     cocos2d::LabelAtlas* cobj = (cocos2d::LabelAtlas*)nativeThisObject;
     cobj->release();
 }
@@ -24852,7 +24852,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_LabelBMFont_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::LabelBMFont)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::LabelBMFont)", nativeThisObject);
     cocos2d::LabelBMFont* cobj = (cocos2d::LabelBMFont*)nativeThisObject;
     cobj->release();
 }
@@ -25482,7 +25482,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_LabelTTF_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::LabelTTF)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::LabelTTF)", nativeThisObject);
     cocos2d::LabelTTF* cobj = (cocos2d::LabelTTF*)nativeThisObject;
     cobj->release();
 }
@@ -25565,7 +25565,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Layer_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Layer)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Layer)", nativeThisObject);
     cocos2d::Layer* cobj = (cocos2d::Layer*)nativeThisObject;
     cobj->release();
 }
@@ -25615,7 +25615,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx___LayerRGBA_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::__LayerRGBA)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::__LayerRGBA)", nativeThisObject);
     cocos2d::__LayerRGBA* cobj = (cocos2d::__LayerRGBA*)nativeThisObject;
     cobj->release();
 }
@@ -25812,7 +25812,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_LayerColor_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::LayerColor)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::LayerColor)", nativeThisObject);
     cocos2d::LayerColor* cobj = (cocos2d::LayerColor*)nativeThisObject;
     cobj->release();
 }
@@ -26120,7 +26120,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_LayerGradient_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::LayerGradient)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::LayerGradient)", nativeThisObject);
     cocos2d::LayerGradient* cobj = (cocos2d::LayerGradient*)nativeThisObject;
     cobj->release();
 }
@@ -26236,7 +26236,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_LayerMultiplex_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::LayerMultiplex)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::LayerMultiplex)", nativeThisObject);
     cocos2d::LayerMultiplex* cobj = (cocos2d::LayerMultiplex*)nativeThisObject;
     cobj->release();
 }
@@ -26459,7 +26459,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItem_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItem)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItem)", nativeThisObject);
     cocos2d::MenuItem* cobj = (cocos2d::MenuItem*)nativeThisObject;
     cobj->release();
 }
@@ -26642,7 +26642,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItemLabel_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItemLabel)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItemLabel)", nativeThisObject);
     cocos2d::MenuItemLabel* cobj = (cocos2d::MenuItemLabel*)nativeThisObject;
     cobj->release();
 }
@@ -26747,7 +26747,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItemAtlasFont_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItemAtlasFont)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItemAtlasFont)", nativeThisObject);
     cocos2d::MenuItemAtlasFont* cobj = (cocos2d::MenuItemAtlasFont*)nativeThisObject;
     cobj->release();
 }
@@ -26815,7 +26815,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItemFont_setFontSizeObj, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-SE_FUNC_BEGIN(js_cocos2dx_MenuItemFont_initWithString, se::DONT_NEED_THIS)
+SE_FUNC_BEGIN(js_cocos2dx_MenuItemFont_initWithString, se::NEED_THIS)
 {
     bool ok = true;
     cocos2d::MenuItemFont* cobj = (cocos2d::MenuItemFont*)nativeThisObject;
@@ -26942,7 +26942,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItemFont_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItemFont)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItemFont)", nativeThisObject);
     cocos2d::MenuItemFont* cobj = (cocos2d::MenuItemFont*)nativeThisObject;
     cobj->release();
 }
@@ -27165,7 +27165,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItemSprite_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItemSprite)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItemSprite)", nativeThisObject);
     cocos2d::MenuItemSprite* cobj = (cocos2d::MenuItemSprite*)nativeThisObject;
     cobj->release();
 }
@@ -27325,7 +27325,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItemImage_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItemImage)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItemImage)", nativeThisObject);
     cocos2d::MenuItemImage* cobj = (cocos2d::MenuItemImage*)nativeThisObject;
     cobj->release();
 }
@@ -27460,7 +27460,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MenuItemToggle_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MenuItemToggle)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MenuItemToggle)", nativeThisObject);
     cocos2d::MenuItemToggle* cobj = (cocos2d::MenuItemToggle*)nativeThisObject;
     cobj->release();
 }
@@ -27604,7 +27604,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Menu_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Menu)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Menu)", nativeThisObject);
     cocos2d::Menu* cobj = (cocos2d::Menu*)nativeThisObject;
     cobj->release();
 }
@@ -27930,7 +27930,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_MotionStreak_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::MotionStreak)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::MotionStreak)", nativeThisObject);
     cocos2d::MotionStreak* cobj = (cocos2d::MotionStreak*)nativeThisObject;
     cobj->release();
 }
@@ -28062,7 +28062,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_NodeGrid_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::NodeGrid)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::NodeGrid)", nativeThisObject);
     cocos2d::NodeGrid* cobj = (cocos2d::NodeGrid*)nativeThisObject;
     cobj->release();
 }
@@ -28344,7 +28344,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleBatchNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleBatchNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleBatchNode)", nativeThisObject);
     cocos2d::ParticleBatchNode* cobj = (cocos2d::ParticleBatchNode*)nativeThisObject;
     cobj->release();
 }
@@ -28452,7 +28452,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleData_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleData)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleData)", nativeThisObject);
     cocos2d::ParticleData* cobj = (cocos2d::ParticleData*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -29985,7 +29985,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleSystem_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleSystem)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleSystem)", nativeThisObject);
     cocos2d::ParticleSystem* cobj = (cocos2d::ParticleSystem*)nativeThisObject;
     cobj->release();
 }
@@ -30226,7 +30226,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleSystemQuad_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleSystemQuad)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleSystemQuad)", nativeThisObject);
     cocos2d::ParticleSystemQuad* cobj = (cocos2d::ParticleSystemQuad*)nativeThisObject;
     cobj->release();
 }
@@ -30293,7 +30293,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleFire_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleFire)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleFire)", nativeThisObject);
     cocos2d::ParticleFire* cobj = (cocos2d::ParticleFire*)nativeThisObject;
     cobj->release();
 }
@@ -30388,7 +30388,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleFireworks_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleFireworks)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleFireworks)", nativeThisObject);
     cocos2d::ParticleFireworks* cobj = (cocos2d::ParticleFireworks*)nativeThisObject;
     cobj->release();
 }
@@ -30485,7 +30485,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleSun_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleSun)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleSun)", nativeThisObject);
     cocos2d::ParticleSun* cobj = (cocos2d::ParticleSun*)nativeThisObject;
     cobj->release();
 }
@@ -30582,7 +30582,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleGalaxy_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleGalaxy)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleGalaxy)", nativeThisObject);
     cocos2d::ParticleGalaxy* cobj = (cocos2d::ParticleGalaxy*)nativeThisObject;
     cobj->release();
 }
@@ -30679,7 +30679,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleFlower_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleFlower)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleFlower)", nativeThisObject);
     cocos2d::ParticleFlower* cobj = (cocos2d::ParticleFlower*)nativeThisObject;
     cobj->release();
 }
@@ -30776,7 +30776,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleMeteor_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleMeteor)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleMeteor)", nativeThisObject);
     cocos2d::ParticleMeteor* cobj = (cocos2d::ParticleMeteor*)nativeThisObject;
     cobj->release();
 }
@@ -30873,7 +30873,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleSpiral_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleSpiral)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleSpiral)", nativeThisObject);
     cocos2d::ParticleSpiral* cobj = (cocos2d::ParticleSpiral*)nativeThisObject;
     cobj->release();
 }
@@ -30970,7 +30970,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleExplosion_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleExplosion)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleExplosion)", nativeThisObject);
     cocos2d::ParticleExplosion* cobj = (cocos2d::ParticleExplosion*)nativeThisObject;
     cobj->release();
 }
@@ -31067,7 +31067,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleSmoke_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleSmoke)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleSmoke)", nativeThisObject);
     cocos2d::ParticleSmoke* cobj = (cocos2d::ParticleSmoke*)nativeThisObject;
     cobj->release();
 }
@@ -31164,7 +31164,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleSnow_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleSnow)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleSnow)", nativeThisObject);
     cocos2d::ParticleSnow* cobj = (cocos2d::ParticleSnow*)nativeThisObject;
     cobj->release();
 }
@@ -31261,7 +31261,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParticleRain_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParticleRain)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParticleRain)", nativeThisObject);
     cocos2d::ParticleRain* cobj = (cocos2d::ParticleRain*)nativeThisObject;
     cobj->release();
 }
@@ -31506,7 +31506,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ProgressTimer_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ProgressTimer)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ProgressTimer)", nativeThisObject);
     cocos2d::ProgressTimer* cobj = (cocos2d::ProgressTimer*)nativeThisObject;
     cobj->release();
 }
@@ -31749,7 +31749,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ProtectedNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ProtectedNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ProtectedNode)", nativeThisObject);
     cocos2d::ProtectedNode* cobj = (cocos2d::ProtectedNode*)nativeThisObject;
     cobj->release();
 }
@@ -32476,7 +32476,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Sprite_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Sprite)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Sprite)", nativeThisObject);
     cocos2d::Sprite* cobj = (cocos2d::Sprite*)nativeThisObject;
     cobj->release();
 }
@@ -33032,7 +33032,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_RenderTexture_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::RenderTexture)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::RenderTexture)", nativeThisObject);
     cocos2d::RenderTexture* cobj = (cocos2d::RenderTexture*)nativeThisObject;
     cobj->release();
 }
@@ -33098,7 +33098,7 @@ SE_FUNC_BEGIN(js_cocos2dx_TransitionEaseScene_easeActionWithAction, se::DONT_NEE
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionEaseScene_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionEaseScene)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionEaseScene)", nativeThisObject);
     cocos2d::TransitionEaseScene* cobj = (cocos2d::TransitionEaseScene*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -33226,7 +33226,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionScene_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionScene)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionScene)", nativeThisObject);
     cocos2d::TransitionScene* cobj = (cocos2d::TransitionScene*)nativeThisObject;
     cobj->release();
 }
@@ -33316,7 +33316,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSceneOriented_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSceneOriented)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSceneOriented)", nativeThisObject);
     cocos2d::TransitionSceneOriented* cobj = (cocos2d::TransitionSceneOriented*)nativeThisObject;
     cobj->release();
 }
@@ -33379,7 +33379,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionRotoZoom_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionRotoZoom)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionRotoZoom)", nativeThisObject);
     cocos2d::TransitionRotoZoom* cobj = (cocos2d::TransitionRotoZoom*)nativeThisObject;
     cobj->release();
 }
@@ -33441,7 +33441,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionJumpZoom_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionJumpZoom)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionJumpZoom)", nativeThisObject);
     cocos2d::TransitionJumpZoom* cobj = (cocos2d::TransitionJumpZoom*)nativeThisObject;
     cobj->release();
 }
@@ -33534,7 +33534,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionMoveInL_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInL)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInL)", nativeThisObject);
     cocos2d::TransitionMoveInL* cobj = (cocos2d::TransitionMoveInL*)nativeThisObject;
     cobj->release();
 }
@@ -33598,7 +33598,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionMoveInR_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInR)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInR)", nativeThisObject);
     cocos2d::TransitionMoveInR* cobj = (cocos2d::TransitionMoveInR*)nativeThisObject;
     cobj->release();
 }
@@ -33660,7 +33660,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionMoveInT_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInT)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInT)", nativeThisObject);
     cocos2d::TransitionMoveInT* cobj = (cocos2d::TransitionMoveInT*)nativeThisObject;
     cobj->release();
 }
@@ -33722,7 +33722,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionMoveInB_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInB)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionMoveInB)", nativeThisObject);
     cocos2d::TransitionMoveInB* cobj = (cocos2d::TransitionMoveInB*)nativeThisObject;
     cobj->release();
 }
@@ -33815,7 +33815,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSlideInL_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInL)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInL)", nativeThisObject);
     cocos2d::TransitionSlideInL* cobj = (cocos2d::TransitionSlideInL*)nativeThisObject;
     cobj->release();
 }
@@ -33879,7 +33879,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSlideInR_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInR)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInR)", nativeThisObject);
     cocos2d::TransitionSlideInR* cobj = (cocos2d::TransitionSlideInR*)nativeThisObject;
     cobj->release();
 }
@@ -33941,7 +33941,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSlideInB_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInB)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInB)", nativeThisObject);
     cocos2d::TransitionSlideInB* cobj = (cocos2d::TransitionSlideInB*)nativeThisObject;
     cobj->release();
 }
@@ -34003,7 +34003,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSlideInT_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInT)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSlideInT)", nativeThisObject);
     cocos2d::TransitionSlideInT* cobj = (cocos2d::TransitionSlideInT*)nativeThisObject;
     cobj->release();
 }
@@ -34082,7 +34082,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionShrinkGrow_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionShrinkGrow)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionShrinkGrow)", nativeThisObject);
     cocos2d::TransitionShrinkGrow* cobj = (cocos2d::TransitionShrinkGrow*)nativeThisObject;
     cobj->release();
 }
@@ -34166,7 +34166,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFlipX_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFlipX)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFlipX)", nativeThisObject);
     cocos2d::TransitionFlipX* cobj = (cocos2d::TransitionFlipX*)nativeThisObject;
     cobj->release();
 }
@@ -34249,7 +34249,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFlipY_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFlipY)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFlipY)", nativeThisObject);
     cocos2d::TransitionFlipY* cobj = (cocos2d::TransitionFlipY*)nativeThisObject;
     cobj->release();
 }
@@ -34332,7 +34332,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFlipAngular_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFlipAngular)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFlipAngular)", nativeThisObject);
     cocos2d::TransitionFlipAngular* cobj = (cocos2d::TransitionFlipAngular*)nativeThisObject;
     cobj->release();
 }
@@ -34415,7 +34415,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionZoomFlipX_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionZoomFlipX)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionZoomFlipX)", nativeThisObject);
     cocos2d::TransitionZoomFlipX* cobj = (cocos2d::TransitionZoomFlipX*)nativeThisObject;
     cobj->release();
 }
@@ -34498,7 +34498,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionZoomFlipY_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionZoomFlipY)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionZoomFlipY)", nativeThisObject);
     cocos2d::TransitionZoomFlipY* cobj = (cocos2d::TransitionZoomFlipY*)nativeThisObject;
     cobj->release();
 }
@@ -34581,7 +34581,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionZoomFlipAngular_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionZoomFlipAngular)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionZoomFlipAngular)", nativeThisObject);
     cocos2d::TransitionZoomFlipAngular* cobj = (cocos2d::TransitionZoomFlipAngular*)nativeThisObject;
     cobj->release();
 }
@@ -34706,7 +34706,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFade_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFade)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFade)", nativeThisObject);
     cocos2d::TransitionFade* cobj = (cocos2d::TransitionFade*)nativeThisObject;
     cobj->release();
 }
@@ -34769,7 +34769,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionCrossFade_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionCrossFade)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionCrossFade)", nativeThisObject);
     cocos2d::TransitionCrossFade* cobj = (cocos2d::TransitionCrossFade*)nativeThisObject;
     cobj->release();
 }
@@ -34848,7 +34848,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionTurnOffTiles_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionTurnOffTiles)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionTurnOffTiles)", nativeThisObject);
     cocos2d::TransitionTurnOffTiles* cobj = (cocos2d::TransitionTurnOffTiles*)nativeThisObject;
     cobj->release();
 }
@@ -34942,7 +34942,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSplitCols_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSplitCols)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSplitCols)", nativeThisObject);
     cocos2d::TransitionSplitCols* cobj = (cocos2d::TransitionSplitCols*)nativeThisObject;
     cobj->release();
 }
@@ -35006,7 +35006,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionSplitRows_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionSplitRows)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionSplitRows)", nativeThisObject);
     cocos2d::TransitionSplitRows* cobj = (cocos2d::TransitionSplitRows*)nativeThisObject;
     cobj->release();
 }
@@ -35102,7 +35102,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFadeTR_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeTR)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeTR)", nativeThisObject);
     cocos2d::TransitionFadeTR* cobj = (cocos2d::TransitionFadeTR*)nativeThisObject;
     cobj->release();
 }
@@ -35166,7 +35166,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFadeBL_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeBL)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeBL)", nativeThisObject);
     cocos2d::TransitionFadeBL* cobj = (cocos2d::TransitionFadeBL*)nativeThisObject;
     cobj->release();
 }
@@ -35228,7 +35228,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFadeUp_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeUp)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeUp)", nativeThisObject);
     cocos2d::TransitionFadeUp* cobj = (cocos2d::TransitionFadeUp*)nativeThisObject;
     cobj->release();
 }
@@ -35290,7 +35290,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionFadeDown_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeDown)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionFadeDown)", nativeThisObject);
     cocos2d::TransitionFadeDown* cobj = (cocos2d::TransitionFadeDown*)nativeThisObject;
     cobj->release();
 }
@@ -35392,7 +35392,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionPageTurn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionPageTurn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionPageTurn)", nativeThisObject);
     cocos2d::TransitionPageTurn* cobj = (cocos2d::TransitionPageTurn*)nativeThisObject;
     cobj->release();
 }
@@ -35456,7 +35456,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgress_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgress)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgress)", nativeThisObject);
     cocos2d::TransitionProgress* cobj = (cocos2d::TransitionProgress*)nativeThisObject;
     cobj->release();
 }
@@ -35518,7 +35518,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgressRadialCCW_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressRadialCCW)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressRadialCCW)", nativeThisObject);
     cocos2d::TransitionProgressRadialCCW* cobj = (cocos2d::TransitionProgressRadialCCW*)nativeThisObject;
     cobj->release();
 }
@@ -35580,7 +35580,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgressRadialCW_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressRadialCW)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressRadialCW)", nativeThisObject);
     cocos2d::TransitionProgressRadialCW* cobj = (cocos2d::TransitionProgressRadialCW*)nativeThisObject;
     cobj->release();
 }
@@ -35642,7 +35642,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgressHorizontal_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressHorizontal)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressHorizontal)", nativeThisObject);
     cocos2d::TransitionProgressHorizontal* cobj = (cocos2d::TransitionProgressHorizontal*)nativeThisObject;
     cobj->release();
 }
@@ -35704,7 +35704,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgressVertical_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressVertical)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressVertical)", nativeThisObject);
     cocos2d::TransitionProgressVertical* cobj = (cocos2d::TransitionProgressVertical*)nativeThisObject;
     cobj->release();
 }
@@ -35766,7 +35766,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgressInOut_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressInOut)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressInOut)", nativeThisObject);
     cocos2d::TransitionProgressInOut* cobj = (cocos2d::TransitionProgressInOut*)nativeThisObject;
     cobj->release();
 }
@@ -35828,7 +35828,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TransitionProgressOutIn_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressOutIn)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TransitionProgressOutIn)", nativeThisObject);
     cocos2d::TransitionProgressOutIn* cobj = (cocos2d::TransitionProgressOutIn*)nativeThisObject;
     cobj->release();
 }
@@ -36448,7 +36448,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Camera_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Camera)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Camera)", nativeThisObject);
     cocos2d::Camera* cobj = (cocos2d::Camera*)nativeThisObject;
     cobj->release();
 }
@@ -36657,7 +36657,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CameraBackgroundBrush_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundBrush)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundBrush)", nativeThisObject);
     cocos2d::CameraBackgroundBrush* cobj = (cocos2d::CameraBackgroundBrush*)nativeThisObject;
     cobj->release();
 }
@@ -36728,7 +36728,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CameraBackgroundDepthBrush_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundDepthBrush)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundDepthBrush)", nativeThisObject);
     cocos2d::CameraBackgroundDepthBrush* cobj = (cocos2d::CameraBackgroundDepthBrush*)nativeThisObject;
     cobj->release();
 }
@@ -36795,7 +36795,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CameraBackgroundColorBrush_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundColorBrush)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundColorBrush)", nativeThisObject);
     cocos2d::CameraBackgroundColorBrush* cobj = (cocos2d::CameraBackgroundColorBrush*)nativeThisObject;
     cobj->release();
 }
@@ -36928,7 +36928,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundSkyBoxBrush)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::CameraBackgroundSkyBoxBrush)", nativeThisObject);
     cocos2d::CameraBackgroundSkyBoxBrush* cobj = (cocos2d::CameraBackgroundSkyBoxBrush*)nativeThisObject;
     cobj->release();
 }
@@ -37324,7 +37324,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GridBase_create, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_GridBase_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::GridBase)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::GridBase)", nativeThisObject);
     cocos2d::GridBase* cobj = (cocos2d::GridBase*)nativeThisObject;
     cobj->release();
 }
@@ -37487,7 +37487,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Grid3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Grid3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Grid3D)", nativeThisObject);
     cocos2d::Grid3D* cobj = (cocos2d::Grid3D*)nativeThisObject;
     cobj->release();
 }
@@ -37605,7 +37605,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TiledGrid3D_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TiledGrid3D)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TiledGrid3D)", nativeThisObject);
     cocos2d::TiledGrid3D* cobj = (cocos2d::TiledGrid3D*)nativeThisObject;
     cobj->release();
 }
@@ -37730,7 +37730,7 @@ SE_FUNC_BEGIN(js_cocos2dx_BaseLight_getLightFlag, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_BaseLight_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::BaseLight)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::BaseLight)", nativeThisObject);
     cocos2d::BaseLight* cobj = (cocos2d::BaseLight*)nativeThisObject;
     cobj->release();
 }
@@ -37830,7 +37830,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_DirectionLight_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::DirectionLight)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::DirectionLight)", nativeThisObject);
     cocos2d::DirectionLight* cobj = (cocos2d::DirectionLight*)nativeThisObject;
     cobj->release();
 }
@@ -37915,7 +37915,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_PointLight_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::PointLight)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::PointLight)", nativeThisObject);
     cocos2d::PointLight* cobj = (cocos2d::PointLight*)nativeThisObject;
     cobj->release();
 }
@@ -38131,7 +38131,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SpotLight_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SpotLight)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SpotLight)", nativeThisObject);
     cocos2d::SpotLight* cobj = (cocos2d::SpotLight*)nativeThisObject;
     cobj->release();
 }
@@ -38192,7 +38192,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_AmbientLight_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::AmbientLight)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::AmbientLight)", nativeThisObject);
     cocos2d::AmbientLight* cobj = (cocos2d::AmbientLight*)nativeThisObject;
     cobj->release();
 }
@@ -38845,7 +38845,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_GLProgram_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::GLProgram)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::GLProgram)", nativeThisObject);
     cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)nativeThisObject;
     cobj->release();
 }
@@ -39004,7 +39004,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_GLProgramCache_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::GLProgramCache)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::GLProgramCache)", nativeThisObject);
     cocos2d::GLProgramCache* cobj = (cocos2d::GLProgramCache*)nativeThisObject;
     cobj->release();
 }
@@ -39153,7 +39153,7 @@ SE_FUNC_BEGIN(js_cocos2dx_RenderState_finalize, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_RenderState_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::RenderState)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::RenderState)", nativeThisObject);
     cocos2d::RenderState* cobj = (cocos2d::RenderState*)nativeThisObject;
     cobj->release();
 }
@@ -39329,7 +39329,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Pass_createWithGLProgramState, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Pass_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Pass)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Pass)", nativeThisObject);
     cocos2d::Pass* cobj = (cocos2d::Pass*)nativeThisObject;
     cobj->release();
 }
@@ -39482,7 +39482,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Technique_createWithGLProgramState, se::DONT_NEED_THIS
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Technique_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Technique)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Technique)", nativeThisObject);
     cocos2d::Technique* cobj = (cocos2d::Technique*)nativeThisObject;
     cobj->release();
 }
@@ -39707,7 +39707,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Material_createWithProperties, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Material_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Material)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Material)", nativeThisObject);
     cocos2d::Material* cobj = (cocos2d::Material*)nativeThisObject;
     cobj->release();
 }
@@ -40086,7 +40086,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TextureCache_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TextureCache)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TextureCache)", nativeThisObject);
     cocos2d::TextureCache* cobj = (cocos2d::TextureCache*)nativeThisObject;
     cobj->release();
 }
@@ -40186,7 +40186,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Device_getDPI, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Device_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Device)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Device)", nativeThisObject);
     cocos2d::Device* cobj = (cocos2d::Device*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -40231,7 +40231,7 @@ SE_FUNC_BEGIN(js_cocos2dx_SAXParser_init, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SAXParser_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SAXParser)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SAXParser)", nativeThisObject);
     cocos2d::SAXParser* cobj = (cocos2d::SAXParser*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -40326,7 +40326,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Application_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_Application_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::Application)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::Application)", nativeThisObject);
     cocos2d::Application* cobj = (cocos2d::Application*)nativeThisObject;
     //FIXME: delete cobj;
 }
@@ -40493,7 +40493,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_AnimationCache_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::AnimationCache)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::AnimationCache)", nativeThisObject);
     cocos2d::AnimationCache* cobj = (cocos2d::AnimationCache*)nativeThisObject;
     cobj->release();
 }
@@ -40932,7 +40932,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SpriteBatchNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SpriteBatchNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SpriteBatchNode)", nativeThisObject);
     cocos2d::SpriteBatchNode* cobj = (cocos2d::SpriteBatchNode*)nativeThisObject;
     cobj->release();
 }
@@ -41228,7 +41228,7 @@ SE_FUNC_BEGIN(js_cocos2dx_SpriteFrameCache_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SpriteFrameCache_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::SpriteFrameCache)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::SpriteFrameCache)", nativeThisObject);
     cocos2d::SpriteFrameCache* cobj = (cocos2d::SpriteFrameCache*)nativeThisObject;
     cobj->release();
 }
@@ -41621,7 +41621,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TextFieldTTF_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TextFieldTTF)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TextFieldTTF)", nativeThisObject);
     cocos2d::TextFieldTTF* cobj = (cocos2d::TextFieldTTF*)nativeThisObject;
     cobj->release();
 }
@@ -41771,7 +41771,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_ParallaxNode_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::ParallaxNode)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::ParallaxNode)", nativeThisObject);
     cocos2d::ParallaxNode* cobj = (cocos2d::ParallaxNode*)nativeThisObject;
     cobj->release();
 }
@@ -41984,7 +41984,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TMXObjectGroup_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TMXObjectGroup)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TMXObjectGroup)", nativeThisObject);
     cocos2d::TMXObjectGroup* cobj = (cocos2d::TMXObjectGroup*)nativeThisObject;
     cobj->release();
 }
@@ -42055,7 +42055,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TMXLayerInfo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TMXLayerInfo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TMXLayerInfo)", nativeThisObject);
     cocos2d::TMXLayerInfo* cobj = (cocos2d::TMXLayerInfo*)nativeThisObject;
     cobj->release();
 }
@@ -42107,7 +42107,7 @@ SE_CTOR_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TMXTilesetInfo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TMXTilesetInfo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TMXTilesetInfo)", nativeThisObject);
     cocos2d::TMXTilesetInfo* cobj = (cocos2d::TMXTilesetInfo*)nativeThisObject;
     cobj->release();
 }
@@ -42794,7 +42794,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TMXMapInfo_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TMXMapInfo)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TMXMapInfo)", nativeThisObject);
     cocos2d::TMXMapInfo* cobj = (cocos2d::TMXMapInfo*)nativeThisObject;
     cobj->release();
 }
@@ -43266,7 +43266,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TMXLayer_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TMXLayer)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TMXLayer)", nativeThisObject);
     cocos2d::TMXLayer* cobj = (cocos2d::TMXLayer*)nativeThisObject;
     cobj->release();
 }
@@ -43670,7 +43670,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TMXTiledMap_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TMXTiledMap)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TMXTiledMap)", nativeThisObject);
     cocos2d::TMXTiledMap* cobj = (cocos2d::TMXTiledMap*)nativeThisObject;
     cobj->release();
 }
@@ -43851,7 +43851,7 @@ SE_CTOR2_END
 
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_TileMapAtlas_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (cocos2d::TileMapAtlas)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (cocos2d::TileMapAtlas)", nativeThisObject);
     cocos2d::TileMapAtlas* cobj = (cocos2d::TileMapAtlas*)nativeThisObject;
     cobj->release();
 }
@@ -44251,7 +44251,7 @@ SE_FUNC_BEGIN(js_cocos2dx_SimpleAudioEngine_getInstance, se::DONT_NEED_THIS)
 SE_FUNC_END
 SE_FINALIZE_FUNC_BEGIN(js_cocos2dx_SimpleAudioEngine_finalize)
 {
-    CCLOGINFO("jsbindings: finalizing JS object %p (CocosDenshion::SimpleAudioEngine)", nativeThisObject);
+    CCLOG("jsbindings: finalizing JS object %p (CocosDenshion::SimpleAudioEngine)", nativeThisObject);
     CocosDenshion::SimpleAudioEngine* cobj = (CocosDenshion::SimpleAudioEngine*)nativeThisObject;
     //FIXME: delete cobj;
 }

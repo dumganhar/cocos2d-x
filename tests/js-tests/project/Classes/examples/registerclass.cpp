@@ -1,7 +1,10 @@
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
 #include "cocos/scripting/js-bindings/manual/jsb_register_all.h"
+#include "cocos/scripting/js-bindings/manual/jsb_global.h"
+#include "cocos/scripting/js-bindings/manual/jsb_Node.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_conversions.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
 
 #include <unistd.h>
 #include <iostream>
@@ -9,6 +12,7 @@
 
 using namespace cocos2d;
 
+bool register_all_cocos2dx(se::Object* obj);
 
 int main_register_class(int argc, char** argv)
 {
@@ -20,8 +24,17 @@ int main_register_class(int argc, char** argv)
 
     se::AutoHandleScope hs;
 
-    jsb_register_all();
+    se::Object* global = se->getGlobalObject();
+    jsb_register_global_variables();
 
+    se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/new-jsb-prepare.js");
+
+//    jsb_register_all();
+    register_all_cocos2dx(global);
+
+    jsb_register_Node_manual();
+
+    se->executeScriptFile("/Users/james/Project/cocos2d-x/cocos/scripting/js-bindings/script/jsb_create_apis.js");
     se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
 
     // conversion unit test

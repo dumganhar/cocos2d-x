@@ -114,9 +114,9 @@ function iterateObject(obj, indent) {
   }
 }
 
-log("before1");
-iterateObject(cc.Scene.prototype);
-log("after1");
+// log("before1");
+// iterateObject(cc.Scene.prototype);
+// log("after1");
 
 
 // log("before1");
@@ -140,9 +140,6 @@ log("after1");
 // iterateObject(cc.Node.__proto__);
 // log("after2");
 
-var initializing = false;
-var fnTest;
-
 var window = window || this;
 var cc = cc || {};
 /**
@@ -154,123 +151,6 @@ var jsb = jsb || {};
 var arr = [];
 var a_arr = [];
 
-var ClassManager = {
-  id: (0 | (Math.random() * 998)),
-
-  instanceId: (0 | (Math.random() * 998)),
-
-  getNewID: function() {
-    return this.id++;
-  },
-
-  getNewInstanceId: function() {
-    return this.instanceId++;
-  }
-};
-//
-// 2) Using "extend" subclassing
-// Simple JavaScript Inheritance By John Resig http://ejohn.org/
-//
-cc.Class = function() {};
-cc.Class.extend = function(prop) {
-  var _super = this.prototype,
-    prototype, Class, classId,
-    className = prop._className || "",
-    name, desc;
-
-  // Instantiate a base class (but only create the instance,
-  // don't run the init constructor)
-  initializing = true;
-  prototype = Object.create(_super);
-  initializing = false;
-  fnTest = /xyz/.test(function() {
-    xyz;
-  }) ? /\b_super\b/ : /.*/;
-
-  // Copy the properties over onto the new prototype
-  // log("---------------");
-  for (name in prop) {
-    // log("[" + name + "]");
-    // Check if we're overwriting an existing function
-    prototype[name] = typeof prop[name] == "function" &&
-      typeof _super[name] == "function" && fnTest.test(prop[name]) ?
-      (function(name, fn) {
-        return function() {
-          var tmp = this._super;
-
-          // Add a new ._super() method that is the same method
-          // but on the super-class
-          this._super = _super[name];
-
-          // The method only need to be bound temporarily, so we
-          // remove it when we're done executing
-          var ret = fn.apply(this, arguments);
-          this._super = tmp;
-
-          return ret;
-        };
-      })(name, prop[name]) :
-      prop[name];
-  }
-
-  Class = function() {
-    if (!initializing) {
-      this.__instanceId = ClassManager.getNewInstanceId();
-      this.ctor && this.ctor.apply(this, arguments);
-    }
-  };
-  // Populate our constructed prototype object
-  Class.prototype = prototype;
-  // Enforce the constructor to be what we expect
-  Class.prototype.constructor = Class;
-  // And make this class extendable
-  Class.extend = cc.Class.extend;
-
-  classId = ClassManager.getNewID();
-  ClassManager[classId] = _super;
-  desc = {
-    writable: true,
-    enumerable: false,
-    configurable: true
-  };
-  Class.id = classId;
-  desc.value = classId;
-  Object.defineProperty(prototype, '__pid', desc);
-
-  return Class;
-};
-
-jsb.registerNativeRef = function(owner, target) {
-  // log("jsb.registerNativeRef ... owner: " + owner + ", target: " + target);
-  if (owner && target && owner !== target) {
-    var refs = owner.__nativeRefs;
-    if (!refs) {
-      refs = owner.__nativeRefs = [];
-    }
-    var index = refs.indexOf(target);
-    if (index === -1) {
-      owner.__nativeRefs.push(target);
-    } else {
-      log("jsb.registerNativeRef, found target, don't push.");
-    }
-  }
-};
-
-jsb.unregisterNativeRef = function(owner, target) {
-  log("jsb.unregisterNativeRef ... owner: " + owner + ", target: " + target);
-  if (owner && target && owner !== target) {
-    var refs = owner.__nativeRefs;
-    if (!refs) {
-      return;
-    }
-    var index = refs.indexOf(target);
-    if (index !== -1) {
-      log("jsb.unregisterNativeRef, splice ...");
-      owner.__nativeRefs.splice(index, 1);
-    }
-  }
-};
-
 cc.Node.extend = cc.Class.extend;
 cc.Sprite.extend = cc.Class.extend;
 cc.Scene.extend = cc.Class.extend;
@@ -278,17 +158,23 @@ cc.Scene.extend = cc.Class.extend;
 var __sceneIndex = 0;
 var __spriteId = 0;
 
-cc.Sprite.prototype._ctor = function(filePath) {
-  log("cc.Sprite.prototype._ctor: file: " + filePath);
-  var ok = this.initWithFile(filePath);
-  log(ok);
-}
+// cc.Sprite.prototype._ctor = function(filePath) {
+//   log("cc.Sprite.prototype._ctor: file: " + filePath);
+//   var ok = this.initWithFile(filePath);
+//   log(ok);
+// }
 
-cc.Scene.prototype._ctor = function() {
-  log("cc.Scene.prototype._ctor");
-  var ok = this.init();
-  log(ok);
-}
+// cc.Scene.prototype._ctor = function() {
+//   log("cc.Scene.prototype._ctor");
+//   var ok = this.init();
+//   log(ok);
+// }
+
+// cc.MenuItemFont.prototype._ctor = function() {
+//   log("cc.Scene.prototype._ctor");
+//   var ok = this.init();
+//   log(ok);
+// }
 
 var MyScene = cc.Scene.extend({
   ctor: function() {
@@ -361,7 +247,7 @@ cc.p = function(x, y) {
     cc.assert(Math.abs(result.y - 26.1) < 0.000001);
 
     var scene = new cc.Scene();
-    log(">>>>> " + scene.foo() + ", var1: " + scene.var1 + ", var2=" + scene.var2);
+    // log(">>>>> " + scene.foo() + ", var1: " + scene.var1 + ", var2=" + scene.var2);
     // var sp = cc.Sprite.create("res/Images/arrows.png");
 
     // log("before get x");
@@ -417,9 +303,9 @@ cc.p = function(x, y) {
     log("after sp3.x:" + sp3.x + ", y:" + sp3.y);
     log("native ------ test ");
 
-    log("before iterate scene ...");
-    iterateObject(scene);
-    log("after iterate scene ...");
+    // log("before iterate scene ...");
+    // iterateObject(scene);
+    // log("after iterate scene ...");
 
     // scene.onEnter = function() {
     //   log("JS onEnter, this: " + scene);
@@ -460,12 +346,12 @@ cc.p = function(x, y) {
 
 
 
-    var menu = cc.Menu.create();
+    var menu = new cc.Menu();
     scene.addChild(menu);
 
     var item = null;
 
-    item = cc.MenuItemFont.create("unschedule1", function(sender) {
+    item = new cc.MenuItemFont("unschedule1", function(sender) {
       log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn);
       var aaa = cc.Node.create();
@@ -475,7 +361,7 @@ cc.p = function(x, y) {
     item.id = "item1:" + __sceneIndex;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("schedule1", function(sender) {
+    item = new cc.MenuItemFont("schedule1", function(sender) {
       log("click schedule1 scene: " + scene);
       scene.schedule(fn, 1);
     }, scene);
@@ -483,7 +369,7 @@ cc.p = function(x, y) {
     item.y += 100;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("unschedule2", function(sender) {
+    item = new cc.MenuItemFont("unschedule2", function(sender) {
       // log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn2);
       // XHRTest();
@@ -492,7 +378,7 @@ cc.p = function(x, y) {
     item.x -= 200;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("schedule2", function(sender) {
+    item = new cc.MenuItemFont("schedule2", function(sender) {
       scene.schedule(fn2, 1);
     }, scene);
     item.id = "item1:" + __sceneIndex;
@@ -500,7 +386,7 @@ cc.p = function(x, y) {
     item.y += 100;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("New Scene " + __sceneIndex, function(sender) {
+    item = new cc.MenuItemFont("New Scene " + __sceneIndex, function(sender) {
       log("New Scene clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       runScene();
     }, scene);
@@ -508,10 +394,10 @@ cc.p = function(x, y) {
     item.y -= 100;
     menu.addChild(item);
 
-    var children = scene.getChildren();
-    log("iterate children begin");
-    iterateObject(children);
-    log("iterate children end");
+    // var children = scene.getChildren();
+    // log("iterate children begin");
+    // iterateObject(children);
+    // log("iterate children end");
 
     var director = cc.Director.getInstance();
     if (__sceneIndex == 0) {

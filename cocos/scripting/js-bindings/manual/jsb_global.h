@@ -5,7 +5,7 @@
 #ifndef COCOS2D_JS_BINDINGS_JSB_GLOBAL_H
 #define COCOS2D_JS_BINDINGS_JSB_GLOBAL_H
 
-#include "SeApi.h"
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
 extern se::Object* __ccObj;
 extern se::Object* __jsbObj;

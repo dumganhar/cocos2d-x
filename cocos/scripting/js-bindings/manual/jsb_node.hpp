@@ -9,12 +9,8 @@
 #ifndef jsb_node_hpp
 #define jsb_node_hpp
 
-#include "SeApi.h"
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
-extern se::Object* __jsb_Node_proto;
-
-SE_DECLARE_FUNC(Node_onEnter);
-
-bool jsb_register_Node();
+bool jsb_register_Node_manual();
 
 #endif /* jsb_node_hpp */

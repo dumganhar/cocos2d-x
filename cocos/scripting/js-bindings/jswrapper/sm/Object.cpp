@@ -207,6 +207,12 @@ namespace se {
         JS_SetProperty(__cx, object, name, value);
     }
 
+    bool Object::defineProperty(const char *name, JSNative getter, JSNative setter)
+    {
+        JS::RootedObject jsObj(__cx, _getJSObject());
+        return JS_DefineProperty(__cx, jsObj, name, JS::UndefinedHandleValue, JSPROP_PERMANENT | JSPROP_ENUMERATE | JSPROP_SHARED, getter, setter);
+    }
+
     // --- call
 
     bool Object::call(const ValueArray& args, Object* thisObject, Value* rval/* = nullptr*/)

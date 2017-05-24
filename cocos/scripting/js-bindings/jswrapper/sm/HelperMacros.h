@@ -38,6 +38,9 @@
         return ret; \
     }
 
+#define SE_DECLARE_FINALIZE_FUNC(funcName) \
+    void funcName(JSFreeOp* _fop, JSObject* _obj);
+
 #define SE_FINALIZE_FUNC_BEGIN(funcName) \
     void funcName(JSFreeOp* _fop, JSObject* _obj) \
     { \

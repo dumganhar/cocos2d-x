@@ -15,8 +15,11 @@
 
 using namespace cocos2d;
 
-se::Object* __jsb_Node_proto = nullptr;
-se::Class* __jsb_Node_class = nullptr;
+extern se::Object* __jsb_Node_proto;
+extern se::Class* __jsb_Node_class;
+
+//se::Object* __jsb_Node_proto = nullptr;
+//se::Class* __jsb_Node_class = nullptr;
 
 SE_FINALIZE_FUNC_BEGIN(Node_finalized)
 {
@@ -343,15 +346,17 @@ SE_GET_PROPERTY_BEGIN(Node_get_y, se::DONT_NEED_THIS)
 }
 SE_GET_PROPERTY_END
 
-bool jsb_register_Node()
+bool jsb_register_Node_manual()
 {
-    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
-    cls->defineStaticFunction("create", Node_create);
+//    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
+//    cls->defineStaticFunction("create", Node_create);
+
+    auto cls = __jsb_Node_proto;
 
     cls->defineProperty("x", Node_get_x, Node_set_x);
     cls->defineProperty("y", Node_get_y, Node_set_y);
 
-    cls->defineFunction("ctor", Node_ctor);
+//    cls->defineFunction("ctor", Node_ctor);
     cls->defineFunction("onEnter", Node_onEnter);
     cls->defineFunction("onExit", Node_onExit);
     cls->defineFunction("onEnterTransitionDidFinish", Node_onEnterTransitionDidFinish);
@@ -360,18 +365,18 @@ bool jsb_register_Node()
     cls->defineFunction("schedule", Node_schedule);
     cls->defineFunction("unschedule", Node_unschedule);
 
-    cls->defineFunction("addChild", Node_addChild);
-    cls->defineFunction("getChildren", Node_getChildren);
-    cls->defineFinalizedFunction(Node_finalized);
+//    cls->defineFunction("addChild", Node_addChild);
+//    cls->defineFunction("getChildren", Node_getChildren);
+//    cls->defineFinalizedFunction(Node_finalized);
 
-    cls->install();
-
-    __jsb_Node_proto = cls->getProto();
-    __jsb_Node_class = cls;
-
-    __jsb_Node_proto->defineFunction("foo", Node_foo);
-    __jsb_Node_proto->setProperty("var1", se::Value("I'm var1"));
-    __jsb_Node_proto->setProperty("var2", se::Value(10000.323));
+//    cls->install();
+//
+//    __jsb_Node_proto = cls->getProto();
+//    __jsb_Node_class = cls;
+//
+//    __jsb_Node_proto->defineFunction("foo", Node_foo);
+//    __jsb_Node_proto->setProperty("var1", se::Value("I'm var1"));
+//    __jsb_Node_proto->setProperty("var2", se::Value(10000.323));
 
     return true;
 }

@@ -12,6 +12,11 @@ namespace se {
         std::unordered_map<std::string, Class *> __clsMap;
         JSContext* __cx = nullptr;
 
+        bool empty_contructor(JSContext* cx, uint32_t argc, JS::Value* vp)
+        {
+            return true;
+        }
+
 //        std::string _JSStringToStdString(JSContext* cx, JSString* jsStr)
 //        {
 //            char* str = JS_EncodeString(cx, jsStr);
@@ -132,7 +137,12 @@ namespace se {
 
         if (_parentProto != nullptr)
             _parentProto->addRef();
+
         _ctor = ctor;
+        if (_ctor == nullptr)
+        {
+            _ctor = empty_contructor;
+        }
 
         return true;
     }
