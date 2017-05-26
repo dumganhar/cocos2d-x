@@ -3,6 +3,7 @@
 #include "cocos/scripting/js-bindings/manual/jsb_register_all.h"
 #include "cocos/scripting/js-bindings/manual/jsb_global.h"
 #include "cocos/scripting/js-bindings/manual/jsb_node.hpp"
+#include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_conversions.hpp"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
 
@@ -33,6 +34,7 @@ int main_register_class(int argc, char** argv)
     register_all_cocos2dx(global);
 
     jsb_register_Node_manual();
+    register_all_cocos2dx_manual(global);
 
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb.js"));

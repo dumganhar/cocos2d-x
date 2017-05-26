@@ -182,7 +182,22 @@ template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Class* cls, se::Value* ret)
 {
     assert(ret != nullptr);
+    se::Object* obj = nullptr;
+    auto iter = se::__nativePtrToObjectMap.find(v);
+    if (iter == se::__nativePtrToObjectMap.end())
+    { // If we couldn't find native object in map, then the native object is created from native code. e.g. TMXLayer::getTileAt
+        CCLOGWARN("WARNING: type: (%s) isn't catched!", typeid(*v).name());
+        //        ret->setUndefined();
+        //        return false;
+        obj = se::Object::createObjectWithClass(cls, true);
+        obj->setPrivateData(v);
+    }
+    else
+    {
+        obj = iter->second;
+    }
 
+    ret->setObject(obj);
     return true;
 }
 

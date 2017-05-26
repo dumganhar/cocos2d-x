@@ -15,48 +15,48 @@
 
 using namespace cocos2d;
 
-extern se::Object* __jsb_Node_proto;
-extern se::Class* __jsb_Node_class;
+extern se::Object* __jsb_cocos2dx_Node_proto;
+extern se::Class* __jsb_cocos2dx__Node_class;
 
 //se::Object* __jsb_Node_proto = nullptr;
 //se::Class* __jsb_Node_class = nullptr;
 
-SE_FINALIZE_FUNC_BEGIN(Node_finalized)
-{
-    if (nativeThisObject)
-    {
-        Node* thiz = (Node*) nativeThisObject;
-        printf("Node_finalized %p ...\n", thiz->getUserData());
-        SAFE_RELEASE(thiz);
-    }
-}
-SE_FINALIZE_FUNC_END
+//SE_FINALIZE_FUNC_BEGIN(Node_finalized)
+//{
+//    if (nativeThisObject)
+//    {
+//        Node* thiz = (Node*) nativeThisObject;
+//        printf("Node_finalized %p ...\n", thiz->getUserData());
+//        SAFE_RELEASE(thiz);
+//    }
+//}
+//SE_FINALIZE_FUNC_END
 
-SE_CTOR_BEGIN(Node_constructor, Node, Node_finalized)
-{
-    printf("Node_constructor ...\n");
-    Node* obj = new Node();
-    thisObject->setPrivateData(obj);
-}
-SE_CTOR_END
-
-SE_CTOR2_BEGIN(Node_ctor, Node, Node_finalized)
-{
-    printf("Node_ctor ...\n");
-    Node* obj = new Node();
-    thisObject->setPrivateData(obj);
-}
-SE_CTOR2_END
-
-SE_FUNC_BEGIN(Node_create, se::DONT_NEED_THIS)
-{
-    Node* node = Node::create();
-    node->retain();
-    auto obj = se::Object::createObjectWithClass(__jsb_Node_class, false);
-    obj->setPrivateData(node);
-    SE_SET_RVAL(se::Value(obj));
-}
-SE_FUNC_END
+//SE_CTOR_BEGIN(Node_constructor, Node, Node_finalized)
+//{
+//    printf("Node_constructor ...\n");
+//    Node* obj = new Node();
+//    thisObject->setPrivateData(obj);
+//}
+//SE_CTOR_END
+//
+//SE_CTOR2_BEGIN(Node_ctor, Node, Node_finalized)
+//{
+//    printf("Node_ctor ...\n");
+//    Node* obj = new Node();
+//    thisObject->setPrivateData(obj);
+//}
+//SE_CTOR2_END
+//
+//SE_FUNC_BEGIN(Node_create, se::DONT_NEED_THIS)
+//{
+//    Node* node = Node::create();
+//    node->retain();
+//    auto obj = se::Object::createObjectWithClass(__jsb_Node_class, false);
+//    obj->setPrivateData(node);
+//    SE_SET_RVAL(se::Value(obj));
+//}
+//SE_FUNC_END
 
 SE_FUNC_BEGIN(Node_onEnter, se::DONT_NEED_THIS)
 {
@@ -351,10 +351,10 @@ bool jsb_register_Node_manual()
 //    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
 //    cls->defineStaticFunction("create", Node_create);
 
-    auto cls = __jsb_Node_proto;
+    auto cls = __jsb_cocos2dx_Node_proto;
 
-    cls->defineProperty("x", Node_get_x, Node_set_x);
-    cls->defineProperty("y", Node_get_y, Node_set_y);
+//    cls->defineProperty("x", Node_get_x, Node_set_x);
+//    cls->defineProperty("y", Node_get_y, Node_set_y);
 
 //    cls->defineFunction("ctor", Node_ctor);
     cls->defineFunction("onEnter", Node_onEnter);

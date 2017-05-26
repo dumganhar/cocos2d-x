@@ -58,14 +58,14 @@
     }
 
 // --- Constructor
-#define SE_CTOR_BEGIN(funcName, clsName, finalizeCb) \
+#define SE_CTOR_BEGIN(funcName, cls, finalizeCb) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
-        se::Object* thisObject = se::Object::createObjectWithClass(__jsb_##clsName##_class, false); \
+        se::Object* thisObject = se::Object::createObjectWithClass(cls, false); \
         _argv.rval().setObject(*thisObject->_getJSObject());
 
 
@@ -84,7 +84,7 @@
         return ret; \
     }
 
-#define SE_CTOR2_BEGIN(funcName, clsName, finalizeCb) \
+#define SE_CTOR2_BEGIN(funcName, cls, finalizeCb) \
     bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
         bool ret = true; \
@@ -92,7 +92,7 @@
         JS::Value _thiz = _argv.computeThis(_cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
-        se::Object* thisObject = se::Object::_createJSObject(__jsb_##clsName##_class, _thiz.toObjectOrNull(), false); \
+        se::Object* thisObject = se::Object::_createJSObject(cls, _thiz.toObjectOrNull(), false); \
         thisObject->_setFinalizeCallback(finalizeCb);
 
 

@@ -7,6 +7,7 @@
 
 using namespace cocos2d;
 
+se::Object* __jscObj = nullptr;
 se::Object* __ccObj = nullptr;
 se::Object* __jsbObj = nullptr;
 
@@ -451,6 +452,119 @@ namespace {
     }
 }
 
+SE_FUNC_BEGIN(jsc_garbageCollect, se::DONT_NEED_THIS)
+{
+    se::ScriptEngine::getInstance()->gc();
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(jsc_dumpRoot, se::DONT_NEED_THIS)
+{
+    assert(false);
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSBCore_platform, se::DONT_NEED_THIS)
+{
+    if (argc!=0)
+    {
+        SE_REPORT_ERROR("Invalid number of arguments in __getPlatform");
+    }
+    else
+    {
+        Application::Platform platform;
+
+        // config.deviceType: Device Type
+        // 'mobile' for any kind of mobile devices, 'desktop' for PCs, 'browser' for Web Browsers
+        // #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+        //     platform = JS_InternString(_cx, "desktop");
+        // #else
+        platform = Application::getInstance()->getTargetPlatform();
+        // #endif
+
+        SE_SET_RVAL(se::Value((int32_t)platform));
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSBCore_version, se::DONT_NEED_THIS)
+{
+    if (argc!=0)
+    {
+        SE_REPORT_ERROR("Invalid number of arguments in __getVersion");
+    }
+    else
+    {
+        char version[256];
+        snprintf(version, sizeof(version)-1, "%s", cocos2dVersion());
+
+        SE_SET_RVAL(se::Value(version));
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSBCore_os, se::DONT_NEED_THIS)
+{
+    if (argc!=0)
+    {
+        SE_REPORT_ERROR("Invalid number of arguments in __getOS");
+        return false;
+    }
+
+    se::Value os;
+
+    // osx, ios, android, windows, linux, etc..
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    os.setString("iOS");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    os.setString("Android");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    os.setString("Windows");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
+    os.setString("Marmalade");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+    os.setString("Linux");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_BADA)
+    os.setString("Bada");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY)
+    os.setString("Blackberry");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    os.setString("OS X");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    os.setString("WINRT");
+#else
+    os.setString("Unknown");
+#endif
+
+    SE_SET_RVAL(os);
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_cleanScript, se::DONT_NEED_THIS)
+{
+    assert(false);
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_core_restartVM, se::DONT_NEED_THIS)
+{
+    assert(false);
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_closeWindow, se::DONT_NEED_THIS)
+{
+    assert(false);
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_isObjectValid, se::DONT_NEED_THIS)
+{
+    SE_SET_RVAL(se::Value(true));
+}
+SE_FUNC_END
+
+
 bool jsb_register_global_variables()
 {
     auto global = se::ScriptEngine::getInstance()->getGlobalObject();
@@ -464,6 +578,21 @@ bool jsb_register_global_variables()
 
     __jsbObj = se::Object::createPlainObject(false);
     global->setProperty("jsb", se::Value(__jsbObj));
+
+    __jscObj = se::Object::createPlainObject(false);
+    global->setProperty("__jsc__", se::Value(__jscObj));
+
+    __jscObj->defineFunction("garbageCollect", jsc_garbageCollect);
+
+
+
+    global->defineFunction("__getPlatform", JSBCore_platform);
+    global->defineFunction("__getOS", JSBCore_os);
+    global->defineFunction("__getVersion", JSBCore_version);
+    global->defineFunction("__restartVM", JSB_core_restartVM);
+    global->defineFunction("__cleanScript", JSB_cleanScript);
+    global->defineFunction("__isObjectValid", JSB_isObjectValid);
+    global->defineFunction("close", JSB_closeWindow);
 
     return true;
 }

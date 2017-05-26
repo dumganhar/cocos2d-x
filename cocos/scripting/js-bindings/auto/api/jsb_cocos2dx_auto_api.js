@@ -1480,16 +1480,6 @@ getRotation : function (
 },
 
 /**
- * @method getPhysicsBody
- * @return {cc.PhysicsBody}
- */
-getPhysicsBody : function (
-)
-{
-    return cc.PhysicsBody;
-},
-
-/**
  * @method getAnchorPointInPoints
  * @return {vec2_object}
  */
@@ -2398,16 +2388,6 @@ setIMEKeyboardState : function (
 bool 
 )
 {
-},
-
-/**
- * @method getVR
- * @return {cc.VRIRenderer}
- */
-getVR : function (
-)
-{
-    return cc.VRIRenderer;
 },
 
 /**
@@ -8335,16 +8315,6 @@ OrbitCamera : function (
 cc.CardinalSplineTo = {
 
 /**
- * @method getPoints
- * @return {point_object}
- */
-getPoints : function (
-)
-{
-    return cc.PointArray;
-},
-
-/**
  * @method updatePosition
  * @param {vec2_object} arg0
  */
@@ -11775,16 +11745,6 @@ blendfunc
 },
 
 /**
- * @method getTextureAtlas
- * @return {cc.TextureAtlas}
- */
-getTextureAtlas : function (
-)
-{
-    return cc.TextureAtlas;
-},
-
-/**
  * @method getBlendFunc
  * @return {cc.BlendFunc}
  */
@@ -15065,16 +15025,6 @@ bool
 },
 
 /**
- * @method getTextureAtlas
- * @return {cc.TextureAtlas}
- */
-getTextureAtlas : function (
-)
-{
-    return cc.TextureAtlas;
-},
-
-/**
  * @method getBlendFunc
  * @return {cc.BlendFunc}
  */
@@ -15148,67 +15098,9 @@ ParticleBatchNode : function (
 };
 
 /**
- * @class ParticleData
- */
-cc.ParticleData = {
-
-/**
- * @method release
- */
-release : function (
-)
-{
-},
-
-/**
- * @method getMaxCount
- * @return {unsigned int}
- */
-getMaxCount : function (
-)
-{
-    return 0;
-},
-
-/**
- * @method init
- * @param {int} arg0
- * @return {bool}
- */
-init : function (
-int 
-)
-{
-    return false;
-},
-
-/**
- * @method copyParticle
- * @param {int} arg0
- * @param {int} arg1
- */
-copyParticle : function (
-int, 
-int 
-)
-{
-},
-
-/**
- * @method ParticleData
- * @constructor
- */
-ParticleData : function (
-)
-{
-},
-
-};
-
-/**
  * @class ParticleSystem
  */
-cc.ParticleSystem = {
+cc._ParticleSystem = {
 
 /**
  * @method getStartSizeVar
@@ -17648,16 +17540,6 @@ setBlendFunc : function (
 blendfunc 
 )
 {
-},
-
-/**
- * @method getTextureAtlas
- * @return {cc.TextureAtlas}
- */
-getTextureAtlas : function (
-)
-{
-    return cc.TextureAtlas;
 },
 
 /**
@@ -21216,16 +21098,6 @@ getName : function (
 },
 
 /**
- * @method getStateBlock
- * @return {cc.RenderState::StateBlock}
- */
-getStateBlock : function (
-)
-{
-    return cc.RenderState::StateBlock;
-},
-
-/**
  * @method setParent
  * @param {cc.RenderState} arg0
  */
@@ -21296,16 +21168,6 @@ getGLProgramState : function (
 )
 {
     return cc.GLProgramState;
-},
-
-/**
- * @method getVertexAttributeBinding
- * @return {cc.VertexAttribBinding}
- */
-getVertexAttributeBinding : function (
-)
-{
-    return cc.VertexAttribBinding;
 },
 
 /**
@@ -22236,16 +22098,6 @@ int
 )
 {
     return 0;
-},
-
-/**
- * @method getTextureAtlas
- * @return {cc.TextureAtlas}
- */
-getTextureAtlas : function (
-)
-{
-    return cc.TextureAtlas;
 },
 
 /**
