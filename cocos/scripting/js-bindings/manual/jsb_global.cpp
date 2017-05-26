@@ -17,7 +17,8 @@ namespace {
         assert(argc >= 1);
         assert(args[0].isString());
         se::Value rval;
-        se::ScriptEngine::getInstance()->executeScriptFile(args[0].toString(), &rval);
+        std::string fullPath = FileUtils::getInstance()->fullPathForFilename(args[0].toString());
+        se::ScriptEngine::getInstance()->executeScriptFile(fullPath, &rval);
         SE_SET_RVAL(rval);
     }
     SE_FUNC_END

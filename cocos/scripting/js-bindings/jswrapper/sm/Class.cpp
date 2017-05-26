@@ -154,10 +154,16 @@ namespace se {
         __clsMap.emplace(_name, this);
 
         _jsCls.name = _name;
-        _jsCls.flags = JSCLASS_HAS_PRIVATE | JSCLASS_FOREGROUND_FINALIZE; //FIXME: Use JSCLASS_BACKGROUND_FINALIZE to improve GC performance
+        if (_finalizeOp != nullptr)
+        {
+            _jsCls.flags = JSCLASS_HAS_PRIVATE | JSCLASS_FOREGROUND_FINALIZE; //FIXME: Use JSCLASS_BACKGROUND_FINALIZE to improve GC performance
+            _classOps.finalize = _finalizeOp;
+        }
+        else
+        {
+            _jsCls.flags = JSCLASS_HAS_PRIVATE;
+        }
 
-        _classOps.finalize = _finalizeOp;
-        _classOps.trace = nullptr;
         _jsCls.cOps = &_classOps;
 
         JSObject* parentObj = _parentProto != nullptr ? _parentProto->_getJSObject() : nullptr;

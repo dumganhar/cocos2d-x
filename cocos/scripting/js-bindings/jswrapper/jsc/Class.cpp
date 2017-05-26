@@ -117,7 +117,7 @@ namespace se {
         _jsCls = JSClassCreate(&_jsClsDef);
 
         JSObjectRef jsCtor = JSObjectMakeConstructor(__cx, _jsCls, _ctor);
-        Object* ctorObj = Object::_createJSObject(this, jsCtor, true);
+        Object* ctorObj = Object::_createJSObject(this, jsCtor, false);
 
         for (const auto& staticfunc : _staticFuncs)
         {
