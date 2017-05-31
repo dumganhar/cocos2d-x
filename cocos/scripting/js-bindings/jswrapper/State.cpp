@@ -11,18 +11,9 @@
 
 namespace se {
 
-/*
- void* _nativeThisObject;  //weak ref
- const ValueArray* _args; //weak ref
- uint16_t _argc;
- Object* _thisObject; //weak ref
- Value _retVal; //weak ref
- */
-
     State::State()
     : _nativeThisObject(nullptr)
     , _thisObject(nullptr)
-    , _argc(0)
     , _args(nullptr)
     {
         
@@ -36,17 +27,13 @@ namespace se {
     State::State(void* nativeThisObject)
     : _nativeThisObject(nativeThisObject)
     , _thisObject(nullptr)
-    , _argc(0)
     , _args(nullptr)
     {
     }
     
-    State::State(void* nativeThisObject,
-                 const ValueArray& args,
-                 uint16_t argc)
+    State::State(void* nativeThisObject, const ValueArray& args)
     : _nativeThisObject(nativeThisObject)
     , _thisObject(nullptr)
-    , _argc(argc)
     , _args(&args)
     {
     }
@@ -54,7 +41,6 @@ namespace se {
     State::State(Object* thisObject, const ValueArray& args)
     : _nativeThisObject(nullptr)
     , _thisObject(thisObject)
-    , _argc(0)
     , _args(&args)
     {
     }
@@ -66,7 +52,11 @@ namespace se {
 
     const ValueArray& State::args() const
     {
-        return *(_args);
+        if (_args != nullptr)
+        {
+            return *(_args);
+        }
+        return EmptyValueArray;
     }
 
     Object* State::thisObject()
@@ -77,11 +67,6 @@ namespace se {
         }
         assert(_thisObject != nullptr);
         return _thisObject;
-    }
-    
-    uint16_t State::argc() const
-    {
-        return _argc;
     }
     
     Value& State::rval()

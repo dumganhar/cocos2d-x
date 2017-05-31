@@ -10,7 +10,6 @@
 
 #include "jsb_global.h"
 #include "jsb_node.hpp"
-
 #include "cocos2d.h"
 
 using namespace cocos2d;
@@ -20,76 +19,83 @@ se::Class* __jsb_MenuItem_class = nullptr;
 se::Class* __jsb_MenuItemLabel_class = nullptr;
 se::Class* __jsb_MenuItemFont_class = nullptr;
 
-SE_FINALIZE_FUNC_BEGIN(MenuItem_finalized)
+static bool MenuItem_finalized(se::State& s)
 {
-    if (nativeThisObject)
+    if (s.nativeThisObject())
     {
         printf("MenuItem_finalized ...\n");
     }
+    return true;
 }
-SE_FINALIZE_FUNC_END
+SE_BIND_FINALIZE_FUNC(MenuItem_finalized)
 
-SE_FUNC_BEGIN(MenuItem_create, se::DONT_NEED_THIS)
+static bool MenuItem_create(se::State& s)
 {
     MenuItem* nativeObj = MenuItem::create();
     nativeObj->retain();
     auto obj = se::Object::createObjectWithClass(__jsb_MenuItem_class, false);
     obj->setPrivateData(nativeObj);
-    SE_SET_RVAL(se::Value(obj));
+    s.rval().setObject(obj);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(MenuItem_create)
 
-SE_CTOR_BEGIN(MenuItem_ctor, __jsb_MenuItem_class, MenuItem_finalized)
+static bool MenuItem_ctor(se::State& s)
 {
-
+    return true;
 }
-SE_CTOR_END
+SE_BIND_CTOR2(MenuItem_ctor, __jsb_MenuItem_class, MenuItem_finalized);
+
 
 ///
 
 se::Object* __jsb_MenuItemLabel_proto = nullptr;
 
-SE_FINALIZE_FUNC_BEGIN(MenuItemLabel_finalized)
+static bool MenuItemLabel_finalized(se::State& s)
 {
-    if (nativeThisObject)
+    if (s.nativeThisObject())
     {
         printf("MenuItemLabel_finalized ...\n");
     }
+    return true;
 }
-SE_FINALIZE_FUNC_END
+SE_BIND_FINALIZE_FUNC(MenuItemLabel_finalized)
 
-SE_FUNC_BEGIN(MenuItemLabel_create, se::DONT_NEED_THIS)
+static bool MenuItemLabel_create(se::State& s)
 {
 //    MenuItemLabel* nativeObj = MenuItemLabel::create();
 //    nativeObj->retain();
 //    auto obj = se::Object::createObjectWithClass(__jsb_MenuItemLabel_class, false);
 //    obj->setPrivateData(nativeObj);
 //    SE_SET_RVAL(se::Value(obj));
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(MenuItemLabel_create)
 
-SE_CTOR_BEGIN(MenuItemLabel_ctor, __jsb_MenuItemLabel_class, MenuItemLabel_finalized)
+static bool MenuItemLabel_ctor(se::State& s)
 {
-
+    return true;
 }
-SE_CTOR_END
+SE_BIND_CTOR2(MenuItemLabel_ctor, __jsb_MenuItemLabel_class, MenuItemLabel_finalized)
 
 ///
 se::Object* __jsb_MenuItemFont_proto = nullptr;
 
-SE_FINALIZE_FUNC_BEGIN(MenuItemFont_finalized)
+static bool MenuItemFont_finalized(se::State& s)
 {
-    if (nativeThisObject)
+    if (s.nativeThisObject())
     {
         printf("MenuItemFont_finalized...\n");
-        Node* thiz = (Node*) nativeThisObject;
+        Node* thiz = (Node*) s.nativeThisObject();
         SAFE_RELEASE(thiz);
     }
+    return true;
 }
-SE_FINALIZE_FUNC_END
+SE_BIND_FINALIZE_FUNC(MenuItemFont_finalized)
 
-SE_FUNC_BEGIN(MenuItemFont_create, se::DONT_NEED_THIS)
+static bool MenuItemFont_create(se::State& s)
 {
+    const auto& args = s.args();
     std::string str = args[0].toString();
     se::Value func(args[1]);
     se::Value target(args[2]);
@@ -107,33 +113,34 @@ SE_FUNC_BEGIN(MenuItemFont_create, se::DONT_NEED_THIS)
     nativeObj->retain();
     item->setPrivateData(nativeObj);
     nativeObj->_scriptObject = item;
-    SE_SET_RVAL(se::Value(item));
+    s.rval().setObject(item);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(MenuItemFont_create)
 
-SE_CTOR_BEGIN(MenuItemFont_ctor, __jsb_MenuItemFont_class, MenuItemFont_finalized)
+static bool MenuItemFont_ctor(se::State& s)
 {
-
+    return true;
 }
-SE_CTOR_END
+SE_BIND_CTOR2(MenuItemFont_ctor, __jsb_MenuItemFont_class, MenuItemFont_finalized)
 
 bool jsb_register_MenuItem()
 {
-    auto cls = se::Class::create("MenuItem", __ccObj, __jsb_Node_proto, MenuItem_ctor);
-    cls->defineFinalizedFunction(MenuItem_finalized);
+    auto cls = se::Class::create("MenuItem", __ccObj, __jsb_Node_proto, _SE(MenuItem_ctor));
+    cls->defineFinalizedFunction(_SE(MenuItem_finalized));
     cls->install();
     __jsb_MenuItem_proto = cls->getProto();
     __jsb_MenuItem_class = cls;
     //
-    cls = se::Class::create("MenuItemLabel", __ccObj, __jsb_MenuItem_proto, MenuItemLabel_ctor);
-    cls->defineFinalizedFunction(MenuItemLabel_finalized);
+    cls = se::Class::create("MenuItemLabel", __ccObj, __jsb_MenuItem_proto, _SE(MenuItemLabel_ctor));
+    cls->defineFinalizedFunction(_SE(MenuItemLabel_finalized));
     cls->install();
     __jsb_MenuItemLabel_proto = cls->getProto();
     __jsb_MenuItemLabel_class = cls;
     //
-    cls = se::Class::create("MenuItemFont", __ccObj, __jsb_MenuItemLabel_proto, MenuItemFont_ctor);
-    cls->defineStaticFunction("create", MenuItemFont_create);
-    cls->defineFinalizedFunction(MenuItemFont_finalized);
+    cls = se::Class::create("MenuItemFont", __ccObj, __jsb_MenuItemLabel_proto, _SE(MenuItemFont_ctor));
+    cls->defineStaticFunction("create", _SE(MenuItemFont_create));
+    cls->defineFinalizedFunction(_SE(MenuItemFont_finalized));
     cls->install();
     __jsb_MenuItemFont_proto = cls->getProto();
     __jsb_MenuItemFont_class = cls;

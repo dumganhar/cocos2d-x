@@ -12,6 +12,7 @@
 #include "jsb_menuitem.hpp"
 #include "jsb_xmlhttprequest.hpp"
 
+
 bool jsb_register_all()
 {
     jsb_register_global_variables();

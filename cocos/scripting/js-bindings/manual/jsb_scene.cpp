@@ -10,6 +10,7 @@
 #include "jsb_global.h"
 #include "jsb_node.hpp"
 
+
 #include "cocos2d.h"
 
 using namespace cocos2d;
@@ -17,55 +18,60 @@ using namespace cocos2d;
 se::Object* __jsb_Scene_proto = nullptr;
 se::Class* __jsb_Scene_class = nullptr;
 
-SE_FINALIZE_FUNC_BEGIN(Scene_finalized)
+static bool Scene_finalized(se::State& s)
 {
     printf("Scene_finalized ...\n");
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     SAFE_RELEASE(thiz);
+    return true;
 }
-SE_FINALIZE_FUNC_END
+SE_BIND_FINALIZE_FUNC(Scene_finalized)
 
-SE_FUNC_BEGIN(Scene_create, se::DONT_NEED_THIS)
+static bool Scene_create(se::State& s)
 {
     Scene* scene = Scene::create();
     scene->retain();
     auto obj = se::Object::createObjectWithClass(__jsb_Scene_class, false);
     obj->setPrivateData(scene);
-    SE_SET_RVAL(se::Value(obj));
+    s.rval().setObject(obj);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Scene_create)
 
-SE_FUNC_BEGIN(Scene_init, se::DONT_NEED_THIS)
+static bool Scene_init(se::State& s)
 {
-    auto scene = (Scene*)nativeThisObject;
+    auto scene = (Scene*)s.nativeThisObject();
     bool ok = scene->init();
-    SE_SET_RVAL(se::Value(ok));
+    s.rval().setBoolean(ok);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Scene_init)
 
-SE_CTOR_BEGIN(Scene_constructor, __jsb_Scene_class, Scene_finalized)
+static bool Scene_constructor(se::State& s)
 {
     printf("Scene constructor\n");
     Scene* obj = new Scene();
-    thisObject->setPrivateData(obj);
+    s.thisObject()->setPrivateData(obj);
+    return true;
 }
-SE_CTOR_END
+SE_BIND_CTOR(Scene_constructor, __jsb_Scene_class, Scene_finalized)
 
-SE_CTOR2_BEGIN(Scene_ctor, __jsb_Scene_class, Scene_finalized)
+static bool Scene_ctor(se::State& s)
 {
     Scene* obj = new Scene();
-    thisObject->setPrivateData(obj);
+    s.thisObject()->setPrivateData(obj);
+    return true;
 }
-SE_CTOR2_END
+SE_BIND_CTOR2(Scene_ctor, __jsb_Scene_class, Scene_finalized)
 
 bool jsb_register_Scene()
 {
-    auto cls = se::Class::create("Scene", __ccObj, __jsb_Node_proto, Scene_constructor);
-    cls->defineStaticFunction("create", Scene_create);
-    cls->defineFunction("init", Scene_init);
-    cls->defineFunction("ctor", Scene_ctor);
+    auto cls = se::Class::create("Scene", __ccObj, __jsb_Node_proto, _SE(Scene_constructor));
+    cls->defineStaticFunction("create", _SE(Scene_create));
+    cls->defineFunction("init", _SE(Scene_init));
+    cls->defineFunction("ctor", _SE(Scene_ctor));
 
-    cls->defineFinalizedFunction(Scene_finalized);
+    cls->defineFinalizedFunction(_SE(Scene_finalized));
 
     cls->install();
 

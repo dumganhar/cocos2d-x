@@ -298,7 +298,7 @@ cc.p = function(x, y) {
 
 
     var sp3 = new MySprite("res/Images/arrows.png");
-    log('after create sp3');
+    log('after create sp3: ' + sp3);
     scene.addChild(sp3);
     log('after addChild sp3');
     // log("before iterate MySprite ...");
@@ -422,68 +422,5 @@ cc.p = function(x, y) {
 
   forceGC();
   log("after gc");
-
-
-  // iterateObject(this, 0);
-
-  // var _id = 0;
-  // // log("h22222");
-  // // var dog = new Dog(100, "hello");
-  // // dog.name = "Snickers";
-  // // dog.age = 100;
-  // // dog.testFunc();
-  // // dog.eat();
-
-  // function A(animal) {
-  //   this.animal = animal;
-  //   this.id = animal.id;
-  // }
-
-  // A.prototype = {
-  //   onTimeout: function() {
-  //     log("onTimeout, id = " + this.id + ", animalid: " + this.animal.id);
-
-  //     {
-
-  //       // for (var i = 0; i < 100; ++i) {
-  //       //   var animal = new Animal();
-  //       //   var bbb = new A(animal);
-  //       //   bbb.id = _id++;
-  //       //   animal.id = bbb.id;
-  //       //   log("new Animal: id: " + animal.id);
-  //       //   // animal.setTimeout(0.1, bbb.onTimeout, bbb);
-  //       //   if (this.id % 10 == 0) {
-  //       //     // forceGC();
-  //       //   }
-  //       // }
-  //       this.animal.setTimeout(1, A.prototype.onTimeout, this, this.animal);
-  //       // forceGC();
-  //     }
-  //   },
-
-  //   id: 0,
-  //   animal: 0
-  // };
-
-  // for (var i = 0; i < 50; ++i) {
-  //   var animal = new Animal();
-
-  //   animal.id = _id++;
-  //   var aaa = new A(animal);
-
-  //   if (animal.id % 2 == 0) {
-  //     // arr.push(animal);
-  //     // a_arr.push(aaa);
-  //     aaa.id = animal.id;
-  //     animal.setTimeout(2, aaa.onTimeout, aaa, animal);
-  //   } else {
-  //     animal.eat();
-  //   }
-  //   //var a = new Animal();
-  //   //a.id = animal.id + 10000;
-
-  // }
-  // forceGC();
-  // log("test end...");
 
 })();

@@ -5,6 +5,7 @@
 #include "jsb_global.h"
 #include "jsb_conversions.hpp"
 
+
 using namespace cocos2d;
 
 se::Object* __jscObj = nullptr;
@@ -13,401 +14,376 @@ se::Object* __jsbObj = nullptr;
 
 namespace {
 
-    SE_FUNC_BEGIN(require, se::DONT_NEED_THIS)
+    static bool require(se::State& s)
     {
-        assert(argc >= 1);
-        assert(args[0].isString());
-        se::Value rval;
-        std::string fullPath = FileUtils::getInstance()->fullPathForFilename(args[0].toString());
-        se::ScriptEngine::getInstance()->executeScriptFile(fullPath, &rval);
-        SE_SET_RVAL(rval);
+        assert(s.args().size() >= 1);
+        assert(s.args()[0].isString());
+        std::string fullPath = FileUtils::getInstance()->fullPathForFilename(s.args()[0].toString());
+        se::ScriptEngine::getInstance()->executeScriptFile(fullPath, &s.rval());
+        return true;
     }
-    SE_FUNC_END
+    SE_BIND_FUNC(require)
 
-    SE_FUNC_BEGIN(ccpAdd, se::DONT_NEED_THIS)
+    static bool ccpAdd(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size() == 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt1 + pt2;
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpDistanceSQ, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpAdd)
+
+    static bool ccpDistanceSQ(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             float result = pt1.getDistanceSq(pt2);
-            SE_SET_RVAL(se::Value(result));
+            s.rval().setFloat(result);
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
     }
-    SE_FUNC_END
+    SE_BIND_FUNC(ccpDistanceSQ)
 
-    SE_FUNC_BEGIN(ccpDistance, se::DONT_NEED_THIS)
+    static bool ccpDistance(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             float result = pt1.getDistance(pt2);
-            SE_SET_RVAL(se::Value(result));
+            s.rval().setFloat(result);
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpSub, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpDistance)
+
+    static bool ccpSub(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt1 - pt2;
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpNeg, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpSub)
+
+    static bool ccpNeg(se::State& s)
     {
-        if (argc == 1)
+        if (s.args().size()== 1)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             pt = -pt;
-            se::Value seVal;
-            ok = Vec2_to_seval(pt, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(pt, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpMult, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
+    }
+    SE_BIND_FUNC(ccpNeg)
+
+    static bool ccpMult(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             SE_ASSERT(args[1].isNumber(), "Error processing arguments");
             Vec2 result = pt * args[1].toFloat();
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpMidpoint, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpMult)
+
+    static bool ccpMidpoint(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt1.getMidpoint(pt2);
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpDot, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpMidpoint)
+
+    static bool ccpDot(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             float result = pt1.dot(pt2);
-            SE_SET_RVAL(se::Value(result));
+            s.rval().setFloat(result);
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpCross, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpDot)
+
+    static bool ccpCross(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             float result = pt1.cross(pt2);
-            SE_SET_RVAL(se::Value(result));
+            s.rval().setFloat(result);
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpPerp, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpCross)
+
+    static bool ccpPerp(se::State& s)
     {
-        if (argc == 1)
+        if (s.args().size()== 1)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt.getPerp();
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpRPerp, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
+    }
+    SE_BIND_FUNC(ccpPerp)
+
+    static bool ccpRPerp(se::State& s)
     {
-        if (argc == 1)
+        if (s.args().size()== 1)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt.getRPerp();
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpProject, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
+    }
+    SE_BIND_FUNC(ccpRPerp)
+
+    static bool ccpProject(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt1.project(pt2);
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpRotate, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpProject)
+
+    static bool ccpRotate(se::State& s)
     {
-        if (argc == 2)
+        if (s.args().size()== 2)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt1.rotate(pt2);
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpNormalize, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 2);
+        return false;
+    }
+    SE_BIND_FUNC(ccpRotate)
+
+    static bool ccpNormalize(se::State& s)
     {
-        if (argc == 1)
+        if (s.args().size()== 1)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             pt.normalize();
-            se::Value seVal;
-            ok = Vec2_to_seval(pt, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(pt, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpClamp, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
+    }
+    SE_BIND_FUNC(ccpNormalize)
+
+    static bool ccpClamp(se::State& s)
     {
-        if (argc == 3)
+        if (s.args().size()== 3)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt1, pt2, pt3;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt1);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt2);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             ok = seval_to_Vec2(args[1], &pt3);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             Vec2 result = pt1.getClampPoint(pt2, pt3);
-            se::Value seVal;
-            ok = Vec2_to_seval(result, &seVal);
-            SE_ASSERT(ok, "Error processing arguments");
-            SE_SET_RVAL(seVal);
+            ok = Vec2_to_seval(result, &s.rval());
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 3);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpLengthSQ, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 3);
+        return false;
+    }
+    SE_BIND_FUNC(ccpClamp)
+
+    static bool ccpLengthSQ(se::State& s)
     {
-        if (argc == 1)
+        if (s.args().size()== 1)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             float result = pt.getLengthSq();
-            SE_SET_RVAL(se::Value(result));
+            s.rval().setFloat(result);
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
-    }
-    SE_FUNC_END
 
-    SE_FUNC_BEGIN(ccpLength, se::DONT_NEED_THIS)
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
+    }
+    SE_BIND_FUNC(ccpLengthSQ)
+
+    static bool ccpLength(se::State& s)
     {
-        if (argc == 1)
+        if (s.args().size()== 1)
         {
+            const se::ValueArray& args = s.args();
             Vec2 pt;
             bool ok = false;
             ok = seval_to_Vec2(args[0], &pt);
-            SE_ASSERT(ok, "Error processing arguments");
+            JSB_PRECONDITION3(ok, false, "Error processing arguments");
             float result = pt.getLength();
-            SE_SET_RVAL(se::Value(result));
+            s.rval().setFloat(result);
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
     }
-    SE_FUNC_END
+    SE_BIND_FUNC(ccpLength)
 
-    SE_FUNC_BEGIN(ccassert, se::DONT_NEED_THIS)
+    static bool ccassert(se::State& s)
     {
-        if (argc >= 1)
+        if (s.args().size() >= 1)
         {
-            if (argc == 1)
+            const se::ValueArray& args = s.args();
+            if (s.args().size() == 1)
             {
                 SE_ASSERT(args[0].toBoolean(), "NO MESSAGE");
             }
@@ -415,97 +391,98 @@ namespace {
             {
                 SE_ASSERT(args[0].toBoolean(), "%s", args[1].toString().c_str());
             }
+            return true;
         }
-        else
-        {
-            SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
-            ret = false;
-        }
+
+        SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)s.args().size(), 1);
+        return false;
     }
-    SE_FUNC_END
+    SE_BIND_FUNC(ccassert)
 
     bool jsb_register_var_under_cc()
     {
         // Vec2 Math
-        __ccObj->defineFunction("pAdd", ccpAdd);
-        __ccObj->defineFunction("pDistanceSQ", ccpDistanceSQ);
-        __ccObj->defineFunction("pDistance", ccpDistance);
-        __ccObj->defineFunction("pSub", ccpSub);
-        __ccObj->defineFunction("pNeg", ccpNeg);
-        __ccObj->defineFunction("pMult", ccpMult);
-        __ccObj->defineFunction("pMidpoint", ccpMidpoint);
-        __ccObj->defineFunction("pDot", ccpDot);
-        __ccObj->defineFunction("pCross", ccpCross);
-        __ccObj->defineFunction("pPerp", ccpPerp);
-        __ccObj->defineFunction("pRPerp", ccpRPerp);
-        __ccObj->defineFunction("pProject", ccpProject);
-        __ccObj->defineFunction("pRotate", ccpRotate);
-        __ccObj->defineFunction("pNormalize", ccpNormalize);
-        __ccObj->defineFunction("pClamp", ccpClamp);
-        __ccObj->defineFunction("pLengthSQ", ccpLengthSQ);
-        __ccObj->defineFunction("pLength", ccpLength);
+        __ccObj->defineFunction("pAdd", _SE(ccpAdd));
+        __ccObj->defineFunction("pDistanceSQ", _SE(ccpDistanceSQ));
+        __ccObj->defineFunction("pDistance", _SE(ccpDistance));
+        __ccObj->defineFunction("pSub", _SE(ccpSub));
+        __ccObj->defineFunction("pNeg", _SE(ccpNeg));
+        __ccObj->defineFunction("pMult", _SE(ccpMult));
+        __ccObj->defineFunction("pMidpoint", _SE(ccpMidpoint));
+        __ccObj->defineFunction("pDot", _SE(ccpDot));
+        __ccObj->defineFunction("pCross", _SE(ccpCross));
+        __ccObj->defineFunction("pPerp", _SE(ccpPerp));
+        __ccObj->defineFunction("pRPerp", _SE(ccpRPerp));
+        __ccObj->defineFunction("pProject", _SE(ccpProject));
+        __ccObj->defineFunction("pRotate", _SE(ccpRotate));
+        __ccObj->defineFunction("pNormalize", _SE(ccpNormalize));
+        __ccObj->defineFunction("pClamp", _SE(ccpClamp));
+        __ccObj->defineFunction("pLengthSQ", _SE(ccpLengthSQ));
+        __ccObj->defineFunction("pLength", _SE(ccpLength));
 
         //
-        __ccObj->defineFunction("assert", ccassert);
+        __ccObj->defineFunction("assert", _SE(ccassert));
 
         return true;
     }
 }
 
-SE_FUNC_BEGIN(jsc_garbageCollect, se::DONT_NEED_THIS)
+static bool jsc_garbageCollect(se::State& s)
 {
     se::ScriptEngine::getInstance()->gc();
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(jsc_garbageCollect)
 
-SE_FUNC_BEGIN(jsc_dumpRoot, se::DONT_NEED_THIS)
+static bool jsc_dumpRoot(se::State& s)
 {
     assert(false);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(jsc_dumpRoot)
 
-SE_FUNC_BEGIN(JSBCore_platform, se::DONT_NEED_THIS)
+static bool JSBCore_platform(se::State& s)
 {
-    if (argc!=0)
+    if (s.args().size() != 0)
     {
         SE_REPORT_ERROR("Invalid number of arguments in __getPlatform");
+        return false;
     }
-    else
-    {
-        Application::Platform platform;
 
-        // config.deviceType: Device Type
-        // 'mobile' for any kind of mobile devices, 'desktop' for PCs, 'browser' for Web Browsers
-        // #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-        //     platform = JS_InternString(_cx, "desktop");
-        // #else
-        platform = Application::getInstance()->getTargetPlatform();
-        // #endif
+    Application::Platform platform;
 
-        SE_SET_RVAL(se::Value((int32_t)platform));
-    }
+    // config.deviceType: Device Type
+    // 'mobile' for any kind of mobile devices, 'desktop' for PCs, 'browser' for Web Browsers
+    // #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    //     platform = JS_InternString(_cx, "desktop");
+    // #else
+    platform = Application::getInstance()->getTargetPlatform();
+    // #endif
+
+    s.rval().setInt32((int32_t)platform);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSBCore_platform)
 
-SE_FUNC_BEGIN(JSBCore_version, se::DONT_NEED_THIS)
+static bool JSBCore_version(se::State& s)
 {
-    if (argc!=0)
+    if (s.args().size() != 0)
     {
         SE_REPORT_ERROR("Invalid number of arguments in __getVersion");
+        return false;
     }
-    else
-    {
-        char version[256];
-        snprintf(version, sizeof(version)-1, "%s", cocos2dVersion());
 
-        SE_SET_RVAL(se::Value(version));
-    }
+    char version[256];
+    snprintf(version, sizeof(version)-1, "%s", cocos2dVersion());
+
+    s.rval().setString(version);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSBCore_version)
 
-SE_FUNC_BEGIN(JSBCore_os, se::DONT_NEED_THIS)
+static bool JSBCore_os(se::State& s)
 {
-    if (argc!=0)
+    if (s.args().size() != 0)
     {
         SE_REPORT_ERROR("Invalid number of arguments in __getOS");
         return false;
@@ -536,33 +513,38 @@ SE_FUNC_BEGIN(JSBCore_os, se::DONT_NEED_THIS)
     os.setString("Unknown");
 #endif
 
-    SE_SET_RVAL(os);
+    s.rval() = os;
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSBCore_os)
 
-SE_FUNC_BEGIN(JSB_cleanScript, se::DONT_NEED_THIS)
+static bool JSB_cleanScript(se::State& s)
 {
     assert(false);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSB_cleanScript)
 
-SE_FUNC_BEGIN(JSB_core_restartVM, se::DONT_NEED_THIS)
+static bool JSB_core_restartVM(se::State& s)
 {
     assert(false);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSB_core_restartVM)
 
-SE_FUNC_BEGIN(JSB_closeWindow, se::DONT_NEED_THIS)
+static bool JSB_closeWindow(se::State& s)
 {
     assert(false);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSB_closeWindow)
 
-SE_FUNC_BEGIN(JSB_isObjectValid, se::DONT_NEED_THIS)
+static bool JSB_isObjectValid(se::State& s)
 {
-    SE_SET_RVAL(se::Value(true));
+    s.rval().setBoolean(true);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSB_isObjectValid)
 
 static bool getOrCreatePlainObject_r(const char* name, se::Object* parent, se::Object** outObj)
 {
@@ -588,7 +570,7 @@ bool jsb_register_global_variables()
 {
     auto global = se::ScriptEngine::getInstance()->getGlobalObject();
 
-    global->defineFunction("require", require);
+    global->defineFunction("require", _SE(require));
 
     getOrCreatePlainObject_r("cc", global, &__ccObj);
 
@@ -597,15 +579,15 @@ bool jsb_register_global_variables()
     getOrCreatePlainObject_r("jsb", global, &__jsbObj);
     getOrCreatePlainObject_r("__jsc__", global, &__jscObj);
 
-    __jscObj->defineFunction("garbageCollect", jsc_garbageCollect);
+    __jscObj->defineFunction("garbageCollect", _SE(jsc_garbageCollect));
 
-    global->defineFunction("__getPlatform", JSBCore_platform);
-    global->defineFunction("__getOS", JSBCore_os);
-    global->defineFunction("__getVersion", JSBCore_version);
-    global->defineFunction("__restartVM", JSB_core_restartVM);
-    global->defineFunction("__cleanScript", JSB_cleanScript);
-    global->defineFunction("__isObjectValid", JSB_isObjectValid);
-    global->defineFunction("close", JSB_closeWindow);
+    global->defineFunction("__getPlatform", _SE(JSBCore_platform));
+    global->defineFunction("__getOS", _SE(JSBCore_os));
+    global->defineFunction("__getVersion", _SE(JSBCore_version));
+    global->defineFunction("__restartVM", _SE(JSB_core_restartVM));
+    global->defineFunction("__cleanScript", _SE(JSB_cleanScript));
+    global->defineFunction("__isObjectValid", _SE(JSB_isObjectValid));
+    global->defineFunction("close", _SE(JSB_closeWindow));
 
     return true;
 }

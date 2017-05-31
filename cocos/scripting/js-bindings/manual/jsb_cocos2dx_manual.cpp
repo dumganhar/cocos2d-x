@@ -14,7 +14,6 @@
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
 
 #include "storage/local-storage/LocalStorage.h"
-
 #include "cocos2d.h"
 
 using namespace cocos2d;
@@ -51,22 +50,24 @@ private:
 };
 
 // cc.PlistParser.getInstance()
-SE_FUNC_BEGIN(js_PlistParser_getInstance, se::DONT_NEED_THIS)
+static bool js_PlistParser_getInstance(se::State& s)
 {
     __JSPlistDelegator* delegator = __JSPlistDelegator::getInstance();
     SAXParser* parser = delegator->getParser();
 
     if (parser) {
-        se::Value jsval;
-        native_ptr_to_seval<SAXParser>(parser, __jsb_cocos2dx_SAXParser_class, &jsval);
-        SE_SET_RVAL(jsval);
+        native_ptr_to_seval<SAXParser>(parser, __jsb_cocos2dx_SAXParser_class, &s.rval());
+        return true;
     }
+    return false;
 }
-SE_FUNC_END
+SE_BIND_FUNC(js_PlistParser_getInstance)
 
 // cc.PlistParser.getInstance().parse(text)
-SE_FUNC_BEGIN(js_PlistParser_parse, se::DONT_NEED_THIS)
+static bool js_PlistParser_parse(se::State& s)
 {
+    const auto& args = s.args();
+    size_t argc = args.size();
     __JSPlistDelegator* delegator = __JSPlistDelegator::getInstance();
 
     bool ok = true;
@@ -82,14 +83,13 @@ SE_FUNC_BEGIN(js_PlistParser_parse, se::DONT_NEED_THIS)
         std_string_to_seval(parsedStr, &strVal);
 
         se::Object* robj = se::Object::createJSONObject(strVal.toString(), false);
-        SE_SET_RVAL(se::Value(robj));
+        s.rval().setObject(robj);
+        return true;
     }
-    else
-    {
-        SE_REPORT_ERROR("js_PlistParser_parse : wrong number of arguments: %d, was expecting %d", argc, 1);
-    }
+    SE_REPORT_ERROR("js_PlistParser_parse : wrong number of arguments: %d, was expecting %d", (int)argc, 1);
+    return false;
 }
-SE_FUNC_END
+SE_BIND_FUNC(js_PlistParser_parse)
 
 cocos2d::SAXParser* __JSPlistDelegator::getParser() {
     return &_parser;
@@ -179,8 +179,10 @@ void __JSPlistDelegator::textHandler(void* /*ctx*/, const char *ch, size_t len) 
 
 // cc.sys.localStorage
 
-SE_FUNC_BEGIN(JSB_localStorageGetItem, se::DONT_NEED_THIS)
+static bool JSB_localStorageGetItem(se::State& s)
 {
+    const auto& args = s.args();
+    size_t argc = args.size();
     if (argc == 1)
     {
         std::string ret_val;
@@ -188,21 +190,22 @@ SE_FUNC_BEGIN(JSB_localStorageGetItem, se::DONT_NEED_THIS)
         std::string key;
         ok = seval_to_std_string(args[0], &key);
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
-        ok = localStorageGetItem(key, &ret_val);
-        if (ok)
-        {
-            SE_SET_RVAL(se::Value(ret_val));
-        }
+        std::string value;
+        ok = localStorageGetItem(key, &value);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        s.rval().setString(value);
+        return true;
     }
-    else
-    {
-        SE_REPORT_ERROR("Invalid number of arguments");
-    }
-}
-SE_FUNC_END
 
-SE_FUNC_BEGIN(JSB_localStorageRemoveItem, se::DONT_NEED_THIS)
+    SE_REPORT_ERROR("Invalid number of arguments");
+    return false;
+}
+SE_BIND_FUNC(JSB_localStorageGetItem)
+
+static bool JSB_localStorageRemoveItem(se::State& s)
 {
+    const auto& args = s.args();
+    size_t argc = args.size();
     if (argc == 1)
     {
         bool ok = true;
@@ -210,16 +213,18 @@ SE_FUNC_BEGIN(JSB_localStorageRemoveItem, se::DONT_NEED_THIS)
         ok = seval_to_std_string(args[0], &key);
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
         localStorageRemoveItem(key);
+        return true;
     }
-    else
-    {
-        SE_REPORT_ERROR("Invalid number of arguments");
-    }
-}
-SE_FUNC_END
 
-SE_FUNC_BEGIN(JSB_localStorageSetItem, se::DONT_NEED_THIS)
+    SE_REPORT_ERROR("Invalid number of arguments");
+    return false;
+}
+SE_BIND_FUNC(JSB_localStorageRemoveItem)
+
+static bool JSB_localStorageSetItem(se::State& s)
 {
+    const auto& args = s.args();
+    size_t argc = args.size();
     if (argc == 2)
     {
         bool ok = true;
@@ -231,26 +236,28 @@ SE_FUNC_BEGIN(JSB_localStorageSetItem, se::DONT_NEED_THIS)
         ok = seval_to_std_string(args[0], &value);
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
         localStorageSetItem(key, value);
+        return true;
     }
-    else
-    {
-        SE_REPORT_ERROR("Invalid number of arguments");
-    }
-}
-SE_FUNC_END
 
-SE_FUNC_BEGIN(JSB_localStorageClear, se::DONT_NEED_THIS)
+    SE_REPORT_ERROR("Invalid number of arguments");
+    return false;
+}
+SE_BIND_FUNC(JSB_localStorageSetItem)
+
+static bool JSB_localStorageClear(se::State& s)
 {
+    const auto& args = s.args();
+    size_t argc = args.size();
     if (argc == 0)
     {
         localStorageClear();
+        return true;
     }
-    else
-    {
-        SE_REPORT_ERROR("Invalid number of arguments");
-    }
+
+    SE_REPORT_ERROR("Invalid number of arguments");
+    return false;
 }
-SE_FUNC_END
+SE_BIND_FUNC(JSB_localStorageClear)
 
 
 static bool register_sys_localStorage(se::Object* obj)
@@ -266,10 +273,10 @@ static bool register_sys_localStorage(se::Object* obj)
     se::Object* localStorageObj = se::Object::createPlainObject(false);
     sys.toObject()->setProperty("localStorage", se::Value(localStorageObj));
 
-    localStorageObj->defineFunction("getItem", JSB_localStorageGetItem);
-    localStorageObj->defineFunction("removeItem", JSB_localStorageRemoveItem);
-    localStorageObj->defineFunction("setItem", JSB_localStorageSetItem);
-    localStorageObj->defineFunction("clear", JSB_localStorageClear);
+    localStorageObj->defineFunction("getItem", _SE(JSB_localStorageGetItem));
+    localStorageObj->defineFunction("removeItem", _SE(JSB_localStorageRemoveItem));
+    localStorageObj->defineFunction("setItem", _SE(JSB_localStorageSetItem));
+    localStorageObj->defineFunction("clear", _SE(JSB_localStorageClear));
 
     std::string strFilePath = cocos2d::FileUtils::getInstance()->getWritablePath();
     strFilePath += "/jsb.sqlite";
@@ -283,9 +290,9 @@ bool register_all_cocos2dx_manual(se::Object* obj)
     se::Value v;
     __ccObj->getProperty("PlistParser", &v);
     assert(v.isObject());
-    v.toObject()->defineFunction("getInstance", js_PlistParser_getInstance);
+    v.toObject()->defineFunction("getInstance", _SE(js_PlistParser_getInstance));
 
-    __jsb_cocos2dx_SAXParser_proto->defineFunction("parse", js_PlistParser_parse);
+    __jsb_cocos2dx_SAXParser_proto->defineFunction("parse", _SE(js_PlistParser_parse));
 
     register_sys_localStorage(obj);
 

@@ -7,142 +7,139 @@
 #define SAFE_ADD_REF(obj) if (obj != nullptr) obj->addRef()
 #define SAFE_RELEASE(obj) if (obj != nullptr) obj->release()
 
-#define SE_DECLARE_FUNC(funcName) \
-    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp)
+#define _SE(name) name##Registry
 
-#define SE_FUNC_BEGIN(funcName, needThisObject) \
-    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
+
+#define SE_DECLARE_FUNC(funcName) \
+    bool funcName##Registry(JSContext* _cx, unsigned argc, JS::Value* _vp)
+
+#define SE_BIND_FUNC(funcName) \
+    bool funcName##Registry(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
-        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
-        se::Object* thisObject = nullptr; \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
-        if (nativeThisObject != nullptr && needThisObject) \
+        se::State state(nativeThisObject, args); \
+        if (funcName(state)) \
         { \
-            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-        }
-
-#define SE_FUNC_END \
-        for (auto& v : args) \
-        { \
-            if (v.isObject() && v.toObject()->isRooted()) \
+            if (!state.rval().isUndefined()) \
+                se::internal::setReturnValue(_cx, state.rval(), _argv); \
+            for (auto& v : args) \
             { \
-                v.toObject()->switchToUnrooted(); \
+                if (v.isObject() && v.toObject()->isRooted()) \
+                { \
+                    v.toObject()->switchToUnrooted(); \
+                } \
             } \
+            return true; \
         } \
-        SAFE_RELEASE(thisObject); \
-        return ret; \
+        return false; \
     }
 
 #define SE_DECLARE_FINALIZE_FUNC(funcName) \
-    void funcName(JSFreeOp* _fop, JSObject* _obj);
+    void funcName##Registry(JSFreeOp* _fop, JSObject* _obj);
 
-#define SE_FINALIZE_FUNC_BEGIN(funcName) \
-    void funcName(JSFreeOp* _fop, JSObject* _obj) \
+#define SE_BIND_FINALIZE_FUNC(funcName) \
+    void funcName##Registry(JSFreeOp* _fop, JSObject* _obj) \
     { \
         void* nativeThisObject = JS_GetPrivate(_obj); \
-        se::Object* thisObject = nullptr; \
-        if (nativeThisObject != nullptr) \
-        { \
-            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-        }
-
-// Should release twice since getObjectWithPtr will addRef.
-#define SE_FINALIZE_FUNC_END \
-        SAFE_RELEASE(thisObject); \
-        SAFE_RELEASE(thisObject); \
+        se::State state(nativeThisObject); \
+        if (!funcName(state)) \
+            return; \
     }
 
-// --- Constructor
-#define SE_CTOR_BEGIN(funcName, cls, finalizeCb) \
-    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
+
+#define SE_BIND_CTOR(funcName, cls, finalizeCb) \
+    bool funcName##Registry(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
-        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = se::Object::createObjectWithClass(cls, false); \
-        _argv.rval().setObject(*thisObject->_getJSObject());
-
-
-#define SE_CTOR_END \
-        se::Value _property; \
-        bool _found = false; \
-        _found = thisObject->getProperty("_ctor", &_property); \
-        if (_found) _property.toObject()->call(args, thisObject); \
-        for (auto& v : args) \
+        _argv.rval().setObject(*thisObject->_getJSObject()); \
+        se::State state(thisObject, args); \
+        if (funcName(state)) \
         { \
-            if (v.isObject() && v.toObject()->isRooted()) \
+            se::Value _property; \
+            bool _found = false; \
+            _found = thisObject->getProperty("_ctor", &_property); \
+            if (_found) _property.toObject()->call(args, thisObject); \
+            for (auto& v : args) \
             { \
-                v.toObject()->switchToUnrooted(); \
+                if (v.isObject() && v.toObject()->isRooted()) \
+                { \
+                    v.toObject()->switchToUnrooted(); \
+                } \
             } \
+            return true; \
         } \
-        return ret; \
+        return false; \
     }
 
-#define SE_CTOR2_BEGIN(funcName, cls, finalizeCb) \
-    bool funcName(JSContext* _cx, unsigned argc, JS::Value* _vp) \
+
+#define SE_BIND_CTOR2(funcName, cls, finalizeCb) \
+    bool funcName##Registry(JSContext* _cx, unsigned argc, JS::Value* _vp) \
     { \
-        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         se::Object* thisObject = se::Object::_createJSObject(cls, _thiz.toObjectOrNull(), false); \
-        thisObject->_setFinalizeCallback(finalizeCb);
+        thisObject->_setFinalizeCallback(finalizeCb##Registry); \
+        se::State state(thisObject, args); \
+        if (funcName(state)) \
+        { \
+            se::Value _property; \
+            bool _found = false; \
+            _found = thisObject->getProperty("_ctor", &_property); \
+            if (_found) _property.toObject()->call(args, thisObject); \
+            for (auto& v : args) \
+            { \
+                if (v.isObject() && v.toObject()->isRooted()) \
+                { \
+                    v.toObject()->switchToUnrooted(); \
+                } \
+            } \
+            return true; \
+        } \
+        return false; \
+    }
 
 
-#define SE_CTOR2_END SE_CTOR_END
-
-// --- Get Property
-
-#define SE_GET_PROPERTY_BEGIN(funcName, needThisObject) \
-    bool funcName(JSContext *_cx, unsigned argc, JS::Value* _vp) \
+#define SE_BIND_PROP_GET(funcName) \
+    bool funcName##Registry(JSContext *_cx, unsigned argc, JS::Value* _vp) \
     { \
-        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
-        se::Object* thisObject = nullptr; \
-        if (nativeThisObject != nullptr && needThisObject) \
+        se::State state(nativeThisObject); \
+        if (funcName(state)) \
         { \
-            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-        }
-
-#define SE_GET_PROPERTY_END \
-        SAFE_RELEASE(thisObject); \
-        return ret; \
+            if (!state.rval().isUndefined()) \
+                se::internal::setReturnValue(_cx, state.rval(), _argv); \
+            return true; \
+        } \
+        return false; \
     }
 
-#define SE_SET_RVAL(data) \
-    se::internal::setReturnValue(_cx, data, _argv);
 
-// --- Set Property
-
-#define SE_SET_PROPERTY_BEGIN(funcName, needThisObject) \
-    bool funcName(JSContext *_cx, unsigned _argc, JS::Value *_vp) \
+#define SE_BIND_PROP_SET(funcName) \
+    bool funcName##Registry(JSContext *_cx, unsigned _argc, JS::Value *_vp) \
     { \
-        bool ret = true; \
         JS::CallArgs _argv = JS::CallArgsFromVp(_argc, _vp); \
         JS::Value _thiz = _argv.computeThis(_cx); \
         JS::RootedObject _thizObj(_cx, _thiz.toObjectOrNull()); \
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
-        se::Object* thisObject = nullptr; \
-        if (nativeThisObject != nullptr && needThisObject) \
-        { \
-            thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-        } \
         se::Value data; \
-        se::internal::jsToSeValue(_cx, _argv[0], &data);
-
-#define SE_SET_PROPERTY_END \
-        SAFE_RELEASE(thisObject); \
-        return ret; \
+        se::internal::jsToSeValue(_cx, _argv[0], &data); \
+        se::ValueArray args; \
+        args.push_back(std::move(data)); \
+        se::State state(nativeThisObject, args); \
+        return funcName(state); \
     }
 
 

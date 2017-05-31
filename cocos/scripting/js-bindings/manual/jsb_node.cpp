@@ -23,90 +23,101 @@ extern se::Class* __jsb_cocos2dx__Node_class;
 se::Object* __jsb_Node_proto = nullptr;
 se::Class* __jsb_Node_class = nullptr;
 
-SE_FINALIZE_FUNC_BEGIN(Node_finalized)
+static bool Node_finalized(se::State& s)
 {
-    if (nativeThisObject)
+    if (s.nativeThisObject())
     {
-        Node* thiz = (Node*) nativeThisObject;
+        Node* thiz = (Node*) s.nativeThisObject();
         printf("Node_finalized %p ...\n", thiz->getUserData());
         SAFE_RELEASE(thiz);
     }
+    return true;
 }
-SE_FINALIZE_FUNC_END
+SE_BIND_FINALIZE_FUNC(Node_finalized)
 
-SE_CTOR_BEGIN(Node_constructor, __jsb_Node_class, Node_finalized)
+static bool Node_constructor(se::State& s)
 {
     printf("Node_constructor ...\n");
     Node* obj = new Node();
-    thisObject->setPrivateData(obj);
+    s.thisObject()->setPrivateData(obj);
+    return true;
 }
-SE_CTOR_END
+SE_BIND_CTOR(Node_constructor, __jsb_Node_class, Node_finalized);
 
-SE_CTOR2_BEGIN(Node_ctor, __jsb_Node_class, Node_finalized)
+static bool Node_ctor(se::State& s)
 {
     printf("Node_ctor ...\n");
     Node* obj = new Node();
-    thisObject->setPrivateData(obj);
+    s.thisObject()->setPrivateData(obj);
+    return true;
 }
-SE_CTOR2_END
+SE_BIND_CTOR2(Node_ctor, __jsb_Node_class, Node_finalized)
 
-SE_FUNC_BEGIN(Node_create, se::DONT_NEED_THIS)
+static bool Node_create(se::State& s)
 {
     Node* node = Node::create();
     node->retain();
     auto obj = se::Object::createObjectWithClass(__jsb_Node_class, false);
     obj->setPrivateData(node);
-    SE_SET_RVAL(se::Value(obj));
+    s.rval().setObject(obj);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_create)
 
-SE_FUNC_BEGIN(Node_onEnter, se::DONT_NEED_THIS)
+static bool Node_onEnter(se::State& s)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     thiz->onEnter();
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_onEnter)
 
-SE_FUNC_BEGIN(Node_onExit, se::DONT_NEED_THIS)
+static bool Node_onExit(se::State& s)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     thiz->onExit();
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_onExit)
 
-SE_FUNC_BEGIN(Node_onEnterTransitionDidFinish, se::DONT_NEED_THIS)
+static bool Node_onEnterTransitionDidFinish(se::State& s)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     thiz->onEnterTransitionDidFinish();
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_onEnterTransitionDidFinish)
 
-SE_FUNC_BEGIN(Node_onExitTransitionDidStart, se::DONT_NEED_THIS)
+static bool Node_onExitTransitionDidStart(se::State& s)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*) nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     thiz->onExitTransitionDidStart();
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_onExitTransitionDidStart)
 
-SE_FUNC_BEGIN(Node_cleanup, se::DONT_NEED_THIS)
+static bool Node_cleanup(se::State& s)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     thiz->cleanup();
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_cleanup)
 
-SE_FUNC_BEGIN(Node_addChild, se::DONT_NEED_THIS)
+static bool Node_addChild(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
+    const auto& args = s.args();
+    Node* thiz = (Node*)s.nativeThisObject();
     Node* child = (Node*)args[0].toObject()->getPrivateData();
     thiz->addChild(child);
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_addChild)
 
 static std::unordered_map<se::Object*, std::unordered_map<se::Object*, std::string>> __jsthis_schedulekey_map;
 
@@ -221,8 +232,10 @@ private:
     std::string _key;
 };
 
-SE_FUNC_BEGIN(Node_schedule, se::NEED_THIS)
+static bool Node_schedule(se::State& s)
 {
+    const auto& args = s.args();
+    size_t argc = args.size();
     printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
     for (const auto& e1 : __jsthis_schedulekey_map)
     {
@@ -230,8 +243,8 @@ SE_FUNC_BEGIN(Node_schedule, se::NEED_THIS)
     }
     printf("-------------------------- \n");
     static uint32_t __idx = 0;
-    Node* thiz = (Node*)nativeThisObject;
-    se::Value jsThis(thisObject);
+    Node* thiz = (Node*)s.nativeThisObject();
+    se::Value jsThis(s.thisObject());
     se::Value jsFunc(args[0]);
     jsThis.toObject()->attachChild(jsFunc.toObject());
 
@@ -272,13 +285,16 @@ SE_FUNC_BEGIN(Node_schedule, se::NEED_THIS)
         funcObj->call(args, thisObj);
 
     }, interval, repeat, delay, key);
-}
-SE_FUNC_END
 
-SE_FUNC_BEGIN(Node_unschedule, se::NEED_THIS)
+    return true;
+}
+SE_BIND_FUNC(Node_schedule)
+
+static bool Node_unschedule(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
-    se::Value jsThis(thisObject);
+    const auto& args = s.args();
+    Node* thiz = (Node*)s.nativeThisObject();
+    se::Value jsThis(s.thisObject());
     se::Value jsFunc(args[0]);
     se::Object* foundThisObj = nullptr;
     se::Object* foundFuncObj = nullptr;
@@ -295,62 +311,69 @@ SE_FUNC_BEGIN(Node_unschedule, se::NEED_THIS)
     {
         printf("Node_unschedule not found\n");
     }
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_unschedule)
 
-SE_FUNC_BEGIN(Node_getChildren, se::DONT_NEED_THIS)
+static bool Node_getChildren(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)s.nativeThisObject();
     const auto& children = thiz->getChildren();
-    se::Value v;
-    if (Vector_to_seval(children, &v))
-    {
-        SE_SET_RVAL(v);
-    }
+    bool ok = Vector_to_seval(children, &s.rval());
+    return ok;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_getChildren)
 
-SE_FUNC_BEGIN(Node_foo, se::DONT_NEED_THIS)
+static bool Node_foo(se::State& s)
 {
-    SE_SET_RVAL(se::Value("hello world"));
+    s.rval().setString("hello world");
+    return true;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_foo)
 
-SE_SET_PROPERTY_BEGIN(Node_set_x, se::DONT_NEED_THIS)
+static bool Node_set_x(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
-    float x = data.toNumber();
+    const auto& args = s.args();
+    Node* thiz = (Node*)s.nativeThisObject();
+    float x = args[0].toNumber();
     printf("cc.Node set_x (%f) native obj: %p\n", x, thiz);
     thiz->setPositionX(x);
+    return true;
 }
-SE_SET_PROPERTY_END
+SE_BIND_PROP_SET(Node_set_x)
 
-SE_GET_PROPERTY_BEGIN(Node_get_x, se::DONT_NEED_THIS)
+static bool Node_get_x(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
-    SE_SET_RVAL(se::Value(thiz->getPositionX()));
+    Node* thiz = (Node*)s.nativeThisObject();
+    s.rval().setFloat(thiz->getPositionX());
+    return true;
 }
-SE_GET_PROPERTY_END
+SE_BIND_PROP_GET(Node_get_x)
 
-SE_SET_PROPERTY_BEGIN(Node_set_y, se::DONT_NEED_THIS)
+static bool Node_set_y(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
-    float y = data.toNumber();
+    const auto& args = s.args();
+    Node* thiz = (Node*)s.nativeThisObject();
+    float y = args[0].toNumber();
     printf("cc.Node set_y (%f) native obj: %p\n", y, thiz);
     thiz->setPositionY(y);
+    return true;
 }
-SE_SET_PROPERTY_END
+SE_BIND_PROP_SET(Node_set_y)
 
-SE_GET_PROPERTY_BEGIN(Node_get_y, se::DONT_NEED_THIS)
+static bool Node_get_y(se::State& s)
 {
-    Node* thiz = (Node*)nativeThisObject;
-    SE_SET_RVAL(se::Value(thiz->getPositionY()));
+    Node* thiz = (Node*)s.nativeThisObject();
+    s.rval().setFloat(thiz->getPositionY());
+    return true;
 }
-SE_GET_PROPERTY_END
+SE_BIND_PROP_GET(Node_get_y)
 
-SE_FUNC_BEGIN(Node_setContentSize, se::DONT_NEED_THIS)
+static bool Node_setContentSize(se::State& s)
 {
-    Node* cobj = (Node*)nativeThisObject;
+    const auto& args = s.args();
+    size_t argc = args.size();
+    Node* cobj = (Node*)s.nativeThisObject();
     bool ok = true;
     if (argc == 1)
     {
@@ -358,6 +381,7 @@ SE_FUNC_BEGIN(Node_setContentSize, se::DONT_NEED_THIS)
         ok &= seval_to_Size(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
         cobj->setContentSize(arg0);
+        return true;
     }
     else if (argc == 2)
     {
@@ -366,13 +390,18 @@ SE_FUNC_BEGIN(Node_setContentSize, se::DONT_NEED_THIS)
         ok &= seval_to_float(args[0], &width);
         ok &= seval_to_float(args[1], &height);
         cobj->setContentSize(cocos2d::Size(width, height));
+        return true;
     }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
+    return false;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_setContentSize)
 
-SE_FUNC_BEGIN(Node_setAnchorPoint, se::DONT_NEED_THIS)
+static bool Node_setAnchorPoint(se::State& s)
 {
-    Node* cobj = (Node*)nativeThisObject;
+    const auto& args = s.args();
+    size_t argc = args.size();
+    Node* cobj = (Node*)s.nativeThisObject();
     bool ok = true;
     if (argc == 1)
     {
@@ -380,6 +409,7 @@ SE_FUNC_BEGIN(Node_setAnchorPoint, se::DONT_NEED_THIS)
         ok &= seval_to_Vec2(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
         cobj->setAnchorPoint(arg0);
+        return true;
     }
     else if (argc == 2)
     {
@@ -388,43 +418,47 @@ SE_FUNC_BEGIN(Node_setAnchorPoint, se::DONT_NEED_THIS)
         ok &= seval_to_float(args[0], &x);
         ok &= seval_to_float(args[1], &y);
         cobj->setAnchorPoint(cocos2d::Vec2(x, y));
+        return true;
     }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
+    return false;
 }
-SE_FUNC_END
+SE_BIND_FUNC(Node_setAnchorPoint)
 
 bool jsb_register_Node_manual()
 {
 #if STANDALONE_TEST
-    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
-    cls->defineStaticFunction("create", Node_create);
-    cls->defineProperty("x", Node_get_x, Node_set_x);
-    cls->defineProperty("y", Node_get_y, Node_set_y);
-    cls->defineFunction("ctor", Node_ctor);
+    auto cls = se::Class::create("Node", __ccObj, nullptr, _SE(Node_constructor));
+    cls->defineStaticFunction("create", _SE(Node_create));
+    cls->defineProperty("x", _SE(Node_get_x), _SE(Node_set_x));
+    cls->defineProperty("y", _SE(Node_get_y), _SE(Node_set_y));
+    cls->defineFunction("ctor", _SE(Node_ctor));
 #else
     auto cls = __jsb_cocos2dx_Node_proto;
 #endif
 
-    cls->defineFunction("onEnter", Node_onEnter);
-    cls->defineFunction("onExit", Node_onExit);
-    cls->defineFunction("onEnterTransitionDidFinish", Node_onEnterTransitionDidFinish);
-    cls->defineFunction("onExitTransitionDidStart", Node_onExitTransitionDidStart);
-    cls->defineFunction("cleanup", Node_cleanup);
-    cls->defineFunction("schedule", Node_schedule);
-    cls->defineFunction("unschedule", Node_unschedule);
-    cls->defineFunction("setContentSize", Node_setContentSize);
-    cls->defineFunction("setAnchorPoint", Node_setAnchorPoint);
+    cls->defineFunction("onEnter", _SE(Node_onEnter));
+    cls->defineFunction("onExit", _SE(Node_onExit));
+    cls->defineFunction("onEnterTransitionDidFinish", _SE(Node_onEnterTransitionDidFinish));
+    cls->defineFunction("onExitTransitionDidStart", _SE(Node_onExitTransitionDidStart));
+    cls->defineFunction("cleanup", _SE(Node_cleanup));
+    cls->defineFunction("schedule", _SE(Node_schedule));
+    cls->defineFunction("unschedule", _SE(Node_unschedule));
+    cls->defineFunction("setContentSize", _SE(Node_setContentSize));
+    cls->defineFunction("setAnchorPoint", _SE(Node_setAnchorPoint));
 
 #if STANDALONE_TEST
-    cls->defineFunction("addChild", Node_addChild);
-    cls->defineFunction("getChildren", Node_getChildren);
-    cls->defineFinalizedFunction(Node_finalized);
+    cls->defineFunction("addChild", _SE(Node_addChild));
+    cls->defineFunction("getChildren", _SE(Node_getChildren));
+    cls->defineFinalizedFunction(_SE(Node_finalized));
 
     cls->install();
 
     __jsb_Node_proto = cls->getProto();
     __jsb_Node_class = cls;
 
-    __jsb_Node_proto->defineFunction("foo", Node_foo);
+    __jsb_Node_proto->defineFunction("foo", _SE(Node_foo));
     __jsb_Node_proto->setProperty("var1", se::Value("I'm var1"));
     __jsb_Node_proto->setProperty("var2", se::Value(10000.323));
 #endif

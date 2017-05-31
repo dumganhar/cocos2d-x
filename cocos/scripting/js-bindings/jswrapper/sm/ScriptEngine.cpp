@@ -383,27 +383,27 @@ namespace se {
         if (type == NodeEventType::ENTER)
         {
             funcName = "onEnter";
-            func = Node_onEnter;
+            func = _SE(Node_onEnter);
         }
         else if (type == NodeEventType::EXIT)
         {
             funcName = "onExit";
-            func = Node_onExit;
+            func = _SE(Node_onExit);
         }
         else if (type == NodeEventType::ENTER_TRANSITION_DID_FINISH)
         {
             funcName = "onEnterTransitionDidFinish";
-            func = Node_onEnterTransitionDidFinish;
+            func = _SE(Node_onEnterTransitionDidFinish);
         }
         else if (type == NodeEventType::EXIT_TRANSITION_DID_START)
         {
             funcName = "onExitTransitionDidStart";
-            func = Node_onExitTransitionDidStart;
+            func = _SE(Node_onExitTransitionDidStart);
         }
         else if (type == NodeEventType::CLEANUP)
         {
             funcName = "cleanup";
-            func = Node_cleanup;
+            func = _SE(Node_cleanup);
         }
         else
         {
