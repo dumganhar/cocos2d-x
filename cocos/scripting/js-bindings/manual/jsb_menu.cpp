@@ -45,7 +45,7 @@ static bool Menu_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR2(Menu_ctor, __jsb_Menu_class, Menu_finalized)
+SE_BIND_SUB_CLS_CTOR(Menu_ctor, __jsb_Menu_class, Menu_finalized)
 
 static bool Menu_create(se::State& s)
 {

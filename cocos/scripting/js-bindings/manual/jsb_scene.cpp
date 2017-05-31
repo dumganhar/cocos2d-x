@@ -64,7 +64,7 @@ static bool Scene_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR2(Scene_ctor, __jsb_Scene_class, Scene_finalized)
+SE_BIND_SUB_CLS_CTOR(Scene_ctor, __jsb_Scene_class, Scene_finalized)
 
 bool jsb_register_Scene()
 {

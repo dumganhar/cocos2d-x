@@ -44,7 +44,7 @@ static bool MenuItem_ctor(se::State& s)
 {
     return true;
 }
-SE_BIND_CTOR2(MenuItem_ctor, __jsb_MenuItem_class, MenuItem_finalized);
+SE_BIND_SUB_CLS_CTOR(MenuItem_ctor, __jsb_MenuItem_class, MenuItem_finalized);
 
 
 ///
@@ -76,7 +76,7 @@ static bool MenuItemLabel_ctor(se::State& s)
 {
     return true;
 }
-SE_BIND_CTOR2(MenuItemLabel_ctor, __jsb_MenuItemLabel_class, MenuItemLabel_finalized)
+SE_BIND_SUB_CLS_CTOR(MenuItemLabel_ctor, __jsb_MenuItemLabel_class, MenuItemLabel_finalized)
 
 ///
 se::Object* __jsb_MenuItemFont_proto = nullptr;
@@ -122,7 +122,7 @@ static bool MenuItemFont_ctor(se::State& s)
 {
     return true;
 }
-SE_BIND_CTOR2(MenuItemFont_ctor, __jsb_MenuItemFont_class, MenuItemFont_finalized)
+SE_BIND_SUB_CLS_CTOR(MenuItemFont_ctor, __jsb_MenuItemFont_class, MenuItemFont_finalized)
 
 bool jsb_register_MenuItem()
 {

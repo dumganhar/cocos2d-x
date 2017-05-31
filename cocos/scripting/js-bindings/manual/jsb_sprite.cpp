@@ -77,7 +77,7 @@ static bool Sprite_ctor(se::State& s)
 //    printf("cc.Sprite native obj: %p\n", obj);
     return true;
 }
-SE_BIND_CTOR2(Sprite_ctor, __jsb_Sprite_class, Sprite_finalized)
+SE_BIND_SUB_CLS_CTOR(Sprite_ctor, __jsb_Sprite_class, Sprite_finalized)
 
 static double __test_static_property = 100.0;
 

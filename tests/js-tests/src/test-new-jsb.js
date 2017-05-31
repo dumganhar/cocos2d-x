@@ -1,5 +1,6 @@
 "use strict"
 log("test-new-jsb begin ...");
+require("script/jsb.js")
 
 var window = window || this;
 var cc = cc || {};
@@ -165,23 +166,23 @@ cc.Scene.extend = cc.Class.extend;
 var __sceneIndex = 0;
 var __spriteId = 0;
 
-cc.Sprite.prototype._ctor = function(filePath) {
-  log("cc.Sprite.prototype._ctor: file: " + filePath);
-  var ok = this.initWithFile(filePath);
-  log(ok);
-}
+// cc.Sprite.prototype._ctor = function(filePath) {
+//   log("cc.Sprite.prototype._ctor: file: " + filePath);
+//   var ok = this.initWithFile(filePath);
+//   log(ok);
+// }
 
-cc.Scene.prototype._ctor = function() {
-  log("cc.Scene.prototype._ctor");
-  var ok = this.init();
-  log(ok);
-}
+// cc.Scene.prototype._ctor = function() {
+//   log("cc.Scene.prototype._ctor");
+//   var ok = this.init();
+//   log(ok);
+// }
 
-cc.MenuItemFont.prototype._ctor = function() {
-  log("cc.Scene.prototype._ctor");
-  var ok = this.init();
-  log(ok);
-}
+// cc.MenuItemFont.prototype._ctor = function() {
+//   log("cc.Scene.prototype._ctor");
+//   var ok = this.init();
+//   log(ok);
+// }
 
 var MyScene = cc.Scene.extend({
   ctor: function() {
@@ -253,7 +254,7 @@ cc.p = function(x, y) {
     cc.assert(Math.abs(result.x - 12.34) < 0.000001);
     cc.assert(Math.abs(result.y - 26.1) < 0.000001);
 
-    var scene = cc.Scene.create();
+    var scene = new cc.Scene();
     // log(">>>>> " + scene.foo() + ", var1: " + scene.var1 + ", var2=" + scene.var2);
     // var sp = cc.Sprite.create("res/Images/arrows.png");
 
@@ -353,22 +354,22 @@ cc.p = function(x, y) {
 
 
 
-    var menu = cc.Menu.create();
+    var menu = new cc.Menu();
     scene.addChild(menu);
 
     var item = null;
 
-    item = cc.MenuItemFont.create("unschedule1", function(sender) {
+    item = new cc.MenuItemFont("unschedule1", function(sender) {
       log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn);
-      var aaa = cc.Node.create();
+      var aaa = new cc.Node();
       forceGC();
       // perfTest();
     }, scene);
     item.id = "item1:" + __sceneIndex;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("schedule1", function(sender) {
+    item = new cc.MenuItemFont("schedule1", function(sender) {
       log("click schedule1 scene: " + scene);
       scene.schedule(fn, 1);
     }, scene);
@@ -376,7 +377,7 @@ cc.p = function(x, y) {
     item.y += 100;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("unschedule2", function(sender) {
+    item = new cc.MenuItemFont("unschedule2", function(sender) {
       // log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn2);
       // XHRTest();
@@ -385,7 +386,7 @@ cc.p = function(x, y) {
     item.x -= 200;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("schedule2", function(sender) {
+    item = new cc.MenuItemFont("schedule2", function(sender) {
       scene.schedule(fn2, 1);
     }, scene);
     item.id = "item1:" + __sceneIndex;
@@ -393,7 +394,7 @@ cc.p = function(x, y) {
     item.y += 100;
     menu.addChild(item);
 
-    item = cc.MenuItemFont.create("New Scene " + __sceneIndex, function(sender) {
+    item = new cc.MenuItemFont("New Scene " + __sceneIndex, function(sender) {
       log("New Scene clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       runScene();
     }, scene);

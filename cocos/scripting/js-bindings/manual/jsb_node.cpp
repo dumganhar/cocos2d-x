@@ -15,7 +15,7 @@
 
 using namespace cocos2d;
 
-#define STANDALONE_TEST 1
+#define STANDALONE_TEST 0
 
 extern se::Object* __jsb_cocos2dx_Node_proto;
 extern se::Class* __jsb_cocos2dx__Node_class;
@@ -43,7 +43,7 @@ static bool Node_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(Node_constructor, __jsb_Node_class, Node_finalized);
+SE_BIND_CTOR(Node_constructor, __jsb_Node_class, Node_finalized)
 
 static bool Node_ctor(se::State& s)
 {
@@ -53,7 +53,7 @@ static bool Node_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR2(Node_ctor, __jsb_Node_class, Node_finalized)
+SE_BIND_SUB_CLS_CTOR(Node_ctor, __jsb_Node_class, Node_finalized)
 
 static bool Node_create(se::State& s)
 {
