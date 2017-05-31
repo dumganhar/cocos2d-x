@@ -32,6 +32,7 @@ static bool Menu_constructor(se::State& s)
 {
     Menu* obj = new Menu();
     s.thisObject()->setPrivateData(obj);
+    s.thisObject()->addRef();
     return true;
 }
 SE_BIND_CTOR(Menu_constructor, __jsb_Menu_class, Menu_finalized)
@@ -41,6 +42,7 @@ static bool Menu_ctor(se::State& s)
 {
     Menu* obj = new Menu();
     s.thisObject()->setPrivateData(obj);
+    s.thisObject()->addRef();
     return true;
 }
 SE_BIND_CTOR2(Menu_ctor, __jsb_Menu_class, Menu_finalized)

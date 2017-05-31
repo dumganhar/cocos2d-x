@@ -52,6 +52,7 @@ static bool Scene_constructor(se::State& s)
     printf("Scene constructor\n");
     Scene* obj = new Scene();
     s.thisObject()->setPrivateData(obj);
+    s.thisObject()->addRef();
     return true;
 }
 SE_BIND_CTOR(Scene_constructor, __jsb_Scene_class, Scene_finalized)
@@ -60,6 +61,7 @@ static bool Scene_ctor(se::State& s)
 {
     Scene* obj = new Scene();
     s.thisObject()->setPrivateData(obj);
+    s.thisObject()->addRef();
     return true;
 }
 SE_BIND_CTOR2(Scene_ctor, __jsb_Scene_class, Scene_finalized)
