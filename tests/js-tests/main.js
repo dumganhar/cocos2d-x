@@ -91,6 +91,8 @@ if (cc.sys && cc.sys.isNative) {
         jsb.fileUtils.setSearchPaths(JSON.parse(scene3SearchPaths));
 }
 
+log("cjh test main.js 01");
+
 cc.game.onStart = function(){
     cc.view.enableRetina(false);
     if (cc.sys.isNative) {
@@ -136,14 +138,17 @@ cc.game.onStart = function(){
             document.getElementById("cocosbanner").src = "res/Images/cocos2dbanner.png";
         }
     }
-
+    log("cjh 01");
     cc.LoaderScene.preload(g_resources, function () {
+                           log("cjh 04");
         if(window.sideIndexBar && typeof sideIndexBar.start === 'function'){
             sideIndexBar.start();
         }else{
+                           log("cjh 02");
             var scene = new cc.Scene();
             scene.addChild(new TestController());
             cc.director.runScene(scene);
+                           log("cjh 03");
         }
     }, this);
 };

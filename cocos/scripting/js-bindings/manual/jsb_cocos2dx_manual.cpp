@@ -13,6 +13,8 @@
 #include "cocos/scripting/js-bindings/manual/jsb_global.h"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
 
+#include "storage/local-storage/LocalStorage.h"
+
 #include "cocos2d.h"
 
 using namespace cocos2d;
@@ -175,7 +177,106 @@ void __JSPlistDelegator::textHandler(void* /*ctx*/, const char *ch, size_t len) 
     }
 }
 
+// cc.sys.localStorage
 
+SE_FUNC_BEGIN(JSB_localStorageGetItem, se::DONT_NEED_THIS)
+{
+    if (argc == 1)
+    {
+        std::string ret_val;
+        bool ok = true;
+        std::string key;
+        ok = seval_to_std_string(args[0], &key);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        ok = localStorageGetItem(key, &ret_val);
+        if (ok)
+        {
+            SE_SET_RVAL(se::Value(ret_val));
+        }
+    }
+    else
+    {
+        SE_REPORT_ERROR("Invalid number of arguments");
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_localStorageRemoveItem, se::DONT_NEED_THIS)
+{
+    if (argc == 1)
+    {
+        bool ok = true;
+        std::string key;
+        ok = seval_to_std_string(args[0], &key);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        localStorageRemoveItem(key);
+    }
+    else
+    {
+        SE_REPORT_ERROR("Invalid number of arguments");
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_localStorageSetItem, se::DONT_NEED_THIS)
+{
+    if (argc == 2)
+    {
+        bool ok = true;
+        std::string key;
+        ok = seval_to_std_string(args[0], &key);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        std::string value;
+        ok = seval_to_std_string(args[0], &value);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        localStorageSetItem(key, value);
+    }
+    else
+    {
+        SE_REPORT_ERROR("Invalid number of arguments");
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(JSB_localStorageClear, se::DONT_NEED_THIS)
+{
+    if (argc == 0)
+    {
+        localStorageClear();
+    }
+    else
+    {
+        SE_REPORT_ERROR("Invalid number of arguments");
+    }
+}
+SE_FUNC_END
+
+
+static bool register_sys_localStorage(se::Object* obj)
+{
+    se::Value sys;
+    if (!obj->getProperty("sys", &sys))
+    {
+        se::Object* sysObj = se::Object::createPlainObject(false);
+        obj->setProperty("sys", se::Value(sysObj));
+        sys.setObject(sysObj);
+    }
+
+    se::Object* localStorageObj = se::Object::createPlainObject(false);
+    sys.toObject()->setProperty("localStorage", se::Value(localStorageObj));
+
+    localStorageObj->defineFunction("getItem", JSB_localStorageGetItem);
+    localStorageObj->defineFunction("removeItem", JSB_localStorageRemoveItem);
+    localStorageObj->defineFunction("setItem", JSB_localStorageSetItem);
+    localStorageObj->defineFunction("clear", JSB_localStorageClear);
+
+    std::string strFilePath = cocos2d::FileUtils::getInstance()->getWritablePath();
+    strFilePath += "/jsb.sqlite";
+    localStorageInit(strFilePath);
+
+    return true;
+}
 
 bool register_all_cocos2dx_manual(se::Object* obj)
 {
@@ -185,6 +286,8 @@ bool register_all_cocos2dx_manual(se::Object* obj)
     v.toObject()->defineFunction("getInstance", js_PlistParser_getInstance);
 
     __jsb_cocos2dx_SAXParser_proto->defineFunction("parse", js_PlistParser_parse);
+
+    register_sys_localStorage(obj);
 
     return true;
 }

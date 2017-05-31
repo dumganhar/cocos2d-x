@@ -1589,9 +1589,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setOnExitCallback, se::NEED_THIS) //FIXME: bindin
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -1629,6 +1627,23 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setActionManager, se::NEED_THIS) //FIXME: binding
         ok &= seval_to_native_ptr(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setActionManager : Error processing arguments");
         cobj->setActionManager(arg0);
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(js_cocos2dx_Node_convertToWorldSpaceAR, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
+{
+    bool ok = true;
+    cocos2d::Node* cobj = (cocos2d::Node*)nativeThisObject;
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertToWorldSpaceAR : Invalid Native Object");
+    if (argc == 1) {
+        cocos2d::Vec2 arg0;
+        ok &= seval_to_Vec2(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_convertToWorldSpaceAR : Error processing arguments");
+        cocos2d::Vec2 result = cobj->convertToWorldSpaceAR(arg0);
+        se::Value jsret;
+        ok &= Vec2_to_seval(result, &jsret);
+        SE_SET_RVAL(jsret);
     }
 }
 SE_FUNC_END
@@ -1784,9 +1799,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setonEnterTransitionDidFinishCallback, se::NEED_T
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -1939,6 +1952,23 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_removeChild, se::NEED_THIS) //FIXME: bindings-gen
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(js_cocos2dx_Node_convertToWorldSpace, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
+{
+    bool ok = true;
+    cocos2d::Node* cobj = (cocos2d::Node*)nativeThisObject;
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertToWorldSpace : Invalid Native Object");
+    if (argc == 1) {
+        cocos2d::Vec2 arg0;
+        ok &= seval_to_Vec2(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_convertToWorldSpace : Error processing arguments");
+        cocos2d::Vec2 result = cobj->convertToWorldSpace(arg0);
+        se::Value jsret;
+        ok &= Vec2_to_seval(result, &jsret);
+        SE_SET_RVAL(jsret);
+    }
+}
+SE_FUNC_END
+
 SE_FUNC_BEGIN(js_cocos2dx_Node_getScene, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
 {
     bool ok = true;
@@ -2003,9 +2033,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setOnEnterCallback, se::NEED_THIS) //FIXME: bindi
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -2069,9 +2097,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setonExitTransitionDidStartCallback, se::NEED_THI
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -2223,6 +2249,17 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_getName, se::NEED_THIS) //FIXME: bindings-generat
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(js_cocos2dx_Node_resume, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
+{
+    bool ok = true;
+    cocos2d::Node* cobj = (cocos2d::Node*)nativeThisObject;
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_resume : Invalid Native Object");
+    if (argc == 0) {
+        cobj->resume();
+    }
+}
+SE_FUNC_END
+
 SE_FUNC_BEGIN(js_cocos2dx_Node_getRotation3D, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
 {
     bool ok = true;
@@ -2312,6 +2349,17 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setPositionNormalized, se::NEED_THIS) //FIXME: bi
 }
 SE_FUNC_END
 
+SE_FUNC_BEGIN(js_cocos2dx_Node_pause, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
+{
+    bool ok = true;
+    cocos2d::Node* cobj = (cocos2d::Node*)nativeThisObject;
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_pause : Invalid Native Object");
+    if (argc == 0) {
+        cobj->pause();
+    }
+}
+SE_FUNC_END
+
 SE_FUNC_BEGIN(js_cocos2dx_Node_isOpacityModifyRGB, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
 {
     bool ok = true;
@@ -2366,6 +2414,20 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_setSkewY, se::NEED_THIS) //FIXME: bindings-genera
         ok &= seval_to_float(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setSkewY : Error processing arguments");
         cobj->setSkewY(arg0);
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(js_cocos2dx_Node_setColor, se::NEED_THIS) //FIXME: bindings-generator should support configrue NEED_THIS flag
+{
+    bool ok = true;
+    cocos2d::Node* cobj = (cocos2d::Node*)nativeThisObject;
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setColor : Invalid Native Object");
+    if (argc == 1) {
+        cocos2d::Color3B arg0;
+        ok &= seval_to_Color3B(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setColor : Error processing arguments");
+        cobj->setColor(arg0);
     }
 }
 SE_FUNC_END
@@ -3443,9 +3505,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Node_enumerateChildren, se::NEED_THIS) //FIXME: bindin
         std::function<bool (cocos2d::Node *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    assert(args[1].isObject());
-		    se::Object* obj = args[1].toObject();
-		    if (obj->isFunction())
+		    if (args[1].isObject() && args[1].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[1]);
@@ -3792,6 +3852,7 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("getChildren", js_cocos2dx_Node_getChildren);
     cls->defineFunction("setOnExitCallback", js_cocos2dx_Node_setOnExitCallback);
     cls->defineFunction("setActionManager", js_cocos2dx_Node_setActionManager);
+    cls->defineFunction("convertToWorldSpaceAR", js_cocos2dx_Node_convertToWorldSpaceAR);
     cls->defineFunction("isIgnoreAnchorPointForPosition", js_cocos2dx_Node_isIgnoreAnchorPointForPosition);
     cls->defineFunction("getChildByName", js_cocos2dx_Node_getChildByName);
     cls->defineFunction("updateDisplayedOpacity", js_cocos2dx_Node_updateDisplayedOpacity);
@@ -3811,6 +3872,7 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("getNodeToWorldTransform", js_cocos2dx_Node_getNodeToWorldAffineTransform);
     cls->defineFunction("getPosition3D", js_cocos2dx_Node_getPosition3D);
     cls->defineFunction("removeChild", js_cocos2dx_Node_removeChild);
+    cls->defineFunction("convertToWorldSpace", js_cocos2dx_Node_convertToWorldSpace);
     cls->defineFunction("getScene", js_cocos2dx_Node_getScene);
     cls->defineFunction("getEventDispatcher", js_cocos2dx_Node_getEventDispatcher);
     cls->defineFunction("setSkewX", js_cocos2dx_Node_setSkewX);
@@ -3827,15 +3889,18 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("isCascadeOpacityEnabled", js_cocos2dx_Node_isCascadeOpacityEnabled);
     cls->defineFunction("setParent", js_cocos2dx_Node_setParent);
     cls->defineFunction("getName", js_cocos2dx_Node_getName);
+    cls->defineFunction("resume", js_cocos2dx_Node_resume);
     cls->defineFunction("getRotation3D", js_cocos2dx_Node_getRotation3D);
     cls->defineFunction("getNodeToParentTransform", js_cocos2dx_Node_getNodeToParentAffineTransform);
     cls->defineFunction("convertTouchToNodeSpaceAR", js_cocos2dx_Node_convertTouchToNodeSpaceAR);
     cls->defineFunction("getOnEnterCallback", js_cocos2dx_Node_getOnEnterCallback);
     cls->defineFunction("setPositionNormalized", js_cocos2dx_Node_setPositionNormalized);
+    cls->defineFunction("pause", js_cocos2dx_Node_pause);
     cls->defineFunction("isOpacityModifyRGB", js_cocos2dx_Node_isOpacityModifyRGB);
     cls->defineFunction("stopActionByTag", js_cocos2dx_Node_stopActionByTag);
     cls->defineFunction("reorderChild", js_cocos2dx_Node_reorderChild);
     cls->defineFunction("setSkewY", js_cocos2dx_Node_setSkewY);
+    cls->defineFunction("setColor", js_cocos2dx_Node_setColor);
     cls->defineFunction("setRotation3D", js_cocos2dx_Node_setRotation3D);
     cls->defineFunction("setPositionX", js_cocos2dx_Node_setPositionX);
     cls->defineFunction("setNodeToParentTransform", js_cocos2dx_Node_setNodeToParentTransform);
@@ -5808,9 +5873,7 @@ SE_FUNC_BEGIN(js_cocos2dx_Scheduler_performFunctionInCocosThread, se::NEED_THIS)
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -6948,9 +7011,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GLProgramState_setUniformCallback, se::NEED_THIS) //FI
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::GLProgram *, cocos2d::Uniform *)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -6989,9 +7050,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GLProgramState_setUniformCallback, se::NEED_THIS) //FI
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::GLProgram *, cocos2d::Uniform *)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -7132,9 +7191,7 @@ SE_FUNC_BEGIN(js_cocos2dx_GLProgramState_setVertexAttribCallback, se::NEED_THIS)
         std::function<void (cocos2d::VertexAttrib *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    assert(args[1].isObject());
-		    se::Object* obj = args[1].toObject();
-		    if (obj->isFunction())
+		    if (args[1].isObject() && args[1].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[1]);
@@ -11553,9 +11610,7 @@ SE_FUNC_BEGIN(js_cocos2dx_ActionFloat_initWithDuration, se::NEED_THIS) //FIXME: 
         ok &= seval_to_float(args[1], &arg1);
         ok &= seval_to_float(args[2], &arg2);
         do {
-		    assert(args[3].isObject());
-		    se::Object* obj = args[3].toObject();
-		    if (obj->isFunction())
+		    if (args[3].isObject() && args[3].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[3]);
@@ -11602,9 +11657,7 @@ SE_FUNC_BEGIN(js_cocos2dx_ActionFloat_create, se::NEED_THIS) //FIXME: bindings-g
         ok &= seval_to_float(args[1], &arg1);
         ok &= seval_to_float(args[2], &arg2);
         do {
-		    assert(args[3].isObject());
-		    se::Object* obj = args[3].toObject();
-		    if (obj->isFunction())
+		    if (args[3].isObject() && args[3].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[3]);
@@ -12769,9 +12822,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_getStringFromFile, se::NEED_THIS) //FIXME: b
             if (!ok) { ok = true; break; }
             std::function<void (std::basic_string<char>)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -12830,9 +12881,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_removeFile, se::NEED_THIS) //FIXME: bindings
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -12914,9 +12963,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_renameFile, se::NEED_THIS) //FIXME: bindings
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg3;
             do {
-			    assert(args[3].isObject());
-			    se::Object* obj = args[3].toObject();
-			    if (obj->isFunction())
+			    if (args[3].isObject() && args[3].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[3]);
@@ -12990,9 +13037,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_renameFile, se::NEED_THIS) //FIXME: bindings
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    assert(args[2].isObject());
-			    se::Object* obj = args[2].toObject();
-			    if (obj->isFunction())
+			    if (args[2].isObject() && args[2].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[2]);
@@ -13196,9 +13241,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_getFileSize, se::NEED_THIS) //FIXME: binding
             if (!ok) { ok = true; break; }
             std::function<void (long)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -13276,9 +13319,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_removeDirectory, se::NEED_THIS) //FIXME: bin
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -13354,9 +13395,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_writeStringToFile, se::NEED_THIS) //FIXME: b
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    assert(args[2].isObject());
-			    se::Object* obj = args[2].toObject();
-			    if (obj->isFunction())
+			    if (args[2].isObject() && args[2].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[2]);
@@ -13479,9 +13518,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_writeValueVectorToFile, se::NEED_THIS) //FIX
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    assert(args[2].isObject());
-			    se::Object* obj = args[2].toObject();
-			    if (obj->isFunction())
+			    if (args[2].isObject() && args[2].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[2]);
@@ -13543,9 +13580,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_isFileExist, se::NEED_THIS) //FIXME: binding
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -13654,9 +13689,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_writeValueMapToFile, se::NEED_THIS) //FIXME:
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    assert(args[2].isObject());
-			    se::Object* obj = args[2].toObject();
-			    if (obj->isFunction())
+			    if (args[2].isObject() && args[2].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[2]);
@@ -13763,9 +13796,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_isDirectoryExist, se::NEED_THIS) //FIXME: bi
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -13852,9 +13883,7 @@ SE_FUNC_BEGIN(js_cocos2dx_FileUtils_createDirectory, se::NEED_THIS) //FIXME: bin
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -14494,9 +14523,7 @@ SE_FUNC_BEGIN(js_cocos2dx_EventListenerAcceleration_init, se::NEED_THIS) //FIXME
     if (argc == 1) {
         std::function<void (cocos2d::Acceleration *, cocos2d::Event *)> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -26046,9 +26073,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItem_initWithCallback, se::NEED_THIS) //FIXME: bin
     if (argc == 1) {
         std::function<void (cocos2d::Ref *)> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -26130,9 +26155,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItem_setCallback, se::NEED_THIS) //FIXME: bindings
     if (argc == 1) {
         std::function<void (cocos2d::Ref *)> arg0;
         do {
-		    assert(args[0].isObject());
-		    se::Object* obj = args[0].toObject();
-		    if (obj->isFunction())
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[0]);
@@ -26307,9 +26330,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItemLabel_initWithLabel, se::NEED_THIS) //FIXME: b
         std::function<void (cocos2d::Ref *)> arg1;
         ok &= seval_to_native_ptr(args[0], &arg0);
         do {
-		    assert(args[1].isObject());
-		    se::Object* obj = args[1].toObject();
-		    if (obj->isFunction())
+		    if (args[1].isObject() && args[1].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[1]);
@@ -26440,9 +26461,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItemAtlasFont_initWithString, se::NEED_THIS) //FIX
         ok &= seval_to_int32(args[3], (int32_t *)&arg3);
         ok &= seval_to_int8(args[4], &arg4);
         do {
-		    assert(args[5].isObject());
-		    se::Object* obj = args[5].toObject();
-		    if (obj->isFunction())
+		    if (args[5].isObject() && args[5].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[5]);
@@ -26573,9 +26592,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItemFont_initWithString, se::NEED_THIS) //FIXME: b
         std::function<void (cocos2d::Ref *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    assert(args[1].isObject());
-		    se::Object* obj = args[1].toObject();
-		    if (obj->isFunction())
+		    if (args[1].isObject() && args[1].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[1]);
@@ -26791,9 +26808,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItemSprite_initWithNormalSprite, se::NEED_THIS) //
         ok &= seval_to_native_ptr(args[1], &arg1);
         ok &= seval_to_native_ptr(args[2], &arg2);
         do {
-		    assert(args[3].isObject());
-		    se::Object* obj = args[3].toObject();
-		    if (obj->isFunction())
+		    if (args[3].isObject() && args[3].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[3]);
@@ -27018,9 +27033,7 @@ SE_FUNC_BEGIN(js_cocos2dx_MenuItemImage_initWithNormalImage, se::NEED_THIS) //FI
         ok &= seval_to_std_string(args[1], &arg1);
         ok &= seval_to_std_string(args[2], &arg2);
         do {
-		    assert(args[3].isObject());
-		    se::Object* obj = args[3].toObject();
-		    if (obj->isFunction())
+		    if (args[3].isObject() && args[3].toObject()->isFunction())
 		    {
 		        se::Value jsThis(thisObject);
 		        se::Value jsFunc(args[3]);
@@ -39345,9 +39358,7 @@ SE_FUNC_BEGIN(js_cocos2dx_TextureCache_addImageAsync, se::NEED_THIS) //FIXME: bi
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::Texture2D *)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);
@@ -39388,9 +39399,7 @@ SE_FUNC_BEGIN(js_cocos2dx_TextureCache_addImageAsync, se::NEED_THIS) //FIXME: bi
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::Texture2D *)> arg1;
             do {
-			    assert(args[1].isObject());
-			    se::Object* obj = args[1].toObject();
-			    if (obj->isFunction())
+			    if (args[1].isObject() && args[1].toObject()->isFunction())
 			    {
 			        se::Value jsThis(thisObject);
 			        se::Value jsFunc(args[1]);

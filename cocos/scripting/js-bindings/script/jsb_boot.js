@@ -1537,6 +1537,8 @@ var _initSys = function () {
 };
 _initSys();
 
+var console = console || {};
+
 /**
  * Init Debug setting.
  * @function
@@ -1577,12 +1579,14 @@ cc._initDebugSetting = function (mode) {
 cc._engineLoaded = false;
 
 cc.initEngine = function (config, cb) {
+    log("cjh: cc.initEngine ...");
     require("script/jsb.js");
     cc._renderType = cc.game.RENDER_TYPE_OPENGL;
     cc._initDebugSetting(config[cc.game.CONFIG_KEY.debugMode]);
     cc._engineLoaded = true;
     cc.log(cc.ENGINE_VERSION);
     if (cb) cb();
+    log("cjh: cc.initEngine end ...");
 };
 
 //+++++++++++++++++++++++++something about CCGame begin+++++++++++++++++++++++++++

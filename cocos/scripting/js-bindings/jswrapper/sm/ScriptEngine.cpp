@@ -209,7 +209,7 @@ namespace se {
         JS::SetWarningReporter(_cx, reportWarning);
 
 #if defined(JS_GC_ZEAL) && defined(DEBUG)
-        JS_SetGCZeal(_cx, 2, JS_DEFAULT_ZEAL_FREQ);
+//        JS_SetGCZeal(_cx, 2, JS_DEFAULT_ZEAL_FREQ);
 #endif
 
         JS_SetDefaultLocale(_cx, "UTF-8");
@@ -321,6 +321,10 @@ namespace se {
             ret = executeScriptBuffer(buffer, fileSize, rval, filePath.c_str());
             free(buffer);
             fclose(fp);
+        }
+        else
+        {
+            assert(false);
         }
 
         return ret;

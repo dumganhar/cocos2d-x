@@ -346,6 +346,50 @@ SE_GET_PROPERTY_BEGIN(Node_get_y, se::DONT_NEED_THIS)
 }
 SE_GET_PROPERTY_END
 
+SE_FUNC_BEGIN(Node_setContentSize, se::DONT_NEED_THIS)
+{
+    Node* cobj = (Node*)nativeThisObject;
+    bool ok = true;
+    if (argc == 1)
+    {
+        cocos2d::Size arg0;
+        ok &= seval_to_Size(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        cobj->setContentSize(arg0);
+    }
+    else if (argc == 2)
+    {
+        float width = 0.0f;
+        float height = 0.0f;
+        ok &= seval_to_float(args[0], &width);
+        ok &= seval_to_float(args[1], &height);
+        cobj->setContentSize(cocos2d::Size(width, height));
+    }
+}
+SE_FUNC_END
+
+SE_FUNC_BEGIN(Node_setAnchorPoint, se::DONT_NEED_THIS)
+{
+    Node* cobj = (Node*)nativeThisObject;
+    bool ok = true;
+    if (argc == 1)
+    {
+        cocos2d::Vec2 arg0;
+        ok &= seval_to_Vec2(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        cobj->setAnchorPoint(arg0);
+    }
+    else if (argc == 2)
+    {
+        float x = 0.0f;
+        float y = 0.0f;
+        ok &= seval_to_float(args[0], &x);
+        ok &= seval_to_float(args[1], &y);
+        cobj->setAnchorPoint(cocos2d::Vec2(x, y));
+    }
+}
+SE_FUNC_END
+
 bool jsb_register_Node_manual()
 {
 //    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
@@ -364,6 +408,8 @@ bool jsb_register_Node_manual()
     cls->defineFunction("cleanup", Node_cleanup);
     cls->defineFunction("schedule", Node_schedule);
     cls->defineFunction("unschedule", Node_unschedule);
+    cls->defineFunction("setContentSize", Node_setContentSize);
+    cls->defineFunction("setAnchorPoint", Node_setAnchorPoint);
 
 //    cls->defineFunction("addChild", Node_addChild);
 //    cls->defineFunction("getChildren", Node_getChildren);

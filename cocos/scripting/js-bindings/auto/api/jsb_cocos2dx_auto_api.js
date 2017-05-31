@@ -868,6 +868,18 @@ actionmanager
 },
 
 /**
+ * @method convertToWorldSpaceAR
+ * @param {vec2_object} arg0
+ * @return {vec2_object}
+ */
+convertToWorldSpaceAR : function (
+vec2 
+)
+{
+    return cc.Vec2;
+},
+
+/**
  * @method isIgnoreAnchorPointForPosition
  * @return {bool}
  */
@@ -1062,6 +1074,18 @@ bool
 },
 
 /**
+ * @method convertToWorldSpace
+ * @param {vec2_object} arg0
+ * @return {vec2_object}
+ */
+convertToWorldSpace : function (
+vec2 
+)
+{
+    return cc.Vec2;
+},
+
+/**
  * @method getScene
  * @return {cc.Scene}
  */
@@ -1224,6 +1248,14 @@ getName : function (
 },
 
 /**
+ * @method resume
+ */
+resume : function (
+)
+{
+},
+
+/**
  * @method getRotation3D
  * @return {vec3_object}
  */
@@ -1278,6 +1310,14 @@ vec2
 },
 
 /**
+ * @method pause
+ */
+pause : function (
+)
+{
+},
+
+/**
  * @method isOpacityModifyRGB
  * @return {bool}
  */
@@ -1315,6 +1355,16 @@ int
  */
 setSkewY : function (
 float 
+)
+{
+},
+
+/**
+ * @method setColor
+ * @param {color3b_object} arg0
+ */
+setColor : function (
+color3b 
 )
 {
 },
