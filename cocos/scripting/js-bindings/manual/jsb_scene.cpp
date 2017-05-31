@@ -43,7 +43,7 @@ SE_FUNC_BEGIN(Scene_init, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(Scene_constructor, Scene, Scene_finalized)
+SE_CTOR_BEGIN(Scene_constructor, __jsb_Scene_class, Scene_finalized)
 {
     printf("Scene constructor\n");
     Scene* obj = new Scene();
@@ -51,7 +51,7 @@ SE_CTOR_BEGIN(Scene_constructor, Scene, Scene_finalized)
 }
 SE_CTOR_END
 
-SE_CTOR2_BEGIN(Scene_ctor, Scene, Scene_finalized)
+SE_CTOR2_BEGIN(Scene_ctor, __jsb_Scene_class, Scene_finalized)
 {
     Scene* obj = new Scene();
     thisObject->setPrivateData(obj);

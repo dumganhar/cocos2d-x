@@ -1,10 +1,38 @@
 "use strict"
 log("test-new-jsb begin ...");
 
+var window = window || this;
+var cc = cc || {};
+/**
+ * @namespace jsb
+ * @name jsb
+ */
+var jsb = jsb || {};
+
 var console = console || {};
 console.log = log;
-var cc = cc || {};
 cc.log = log;
+
+function iterateObject(obj, indent) {
+  indent = indent || 0;
+  for (var key in obj) {
+    if (!obj.hasOwnProperty(key)) {
+      continue;
+    }
+    var promote = " ";
+    for (var i = 0; i < indent; ++i) {
+      promote += "> ";
+    }
+    log(promote + "[" + key + "]=" + obj[key]);
+    if (obj[key] instanceof Object) {
+      iterateObject(obj[key], indent + 1);
+    }
+  }
+}
+
+// log("before iterate cc");
+// iterateObject(cc);
+// log("after iterate cc");
 
 function foo() {
   var a = {
@@ -97,22 +125,7 @@ function XHRTest() {
   // forceGC();
 }
 
-function iterateObject(obj, indent) {
-  indent = indent || 0;
-  for (var key in obj) {
-    if (!obj.hasOwnProperty(key)) {
-      continue;
-    }
-    var promote = " ";
-    for (var i = 0; i < indent; ++i) {
-      promote += "> ";
-    }
-    log(promote + "[" + key + "]=" + obj[key]);
-    if (obj[key] instanceof Object) {
-      iterateObject(obj[key], indent + 1);
-    }
-  }
-}
+
 
 // log("before1");
 // iterateObject(cc.Scene.prototype);
@@ -140,13 +153,7 @@ function iterateObject(obj, indent) {
 // iterateObject(cc.Node.__proto__);
 // log("after2");
 
-var window = window || this;
-var cc = cc || {};
-/**
- * @namespace jsb
- * @name jsb
- */
-var jsb = jsb || {};
+
 
 var arr = [];
 var a_arr = [];
@@ -158,23 +165,23 @@ cc.Scene.extend = cc.Class.extend;
 var __sceneIndex = 0;
 var __spriteId = 0;
 
-// cc.Sprite.prototype._ctor = function(filePath) {
-//   log("cc.Sprite.prototype._ctor: file: " + filePath);
-//   var ok = this.initWithFile(filePath);
-//   log(ok);
-// }
+cc.Sprite.prototype._ctor = function(filePath) {
+  log("cc.Sprite.prototype._ctor: file: " + filePath);
+  var ok = this.initWithFile(filePath);
+  log(ok);
+}
 
-// cc.Scene.prototype._ctor = function() {
-//   log("cc.Scene.prototype._ctor");
-//   var ok = this.init();
-//   log(ok);
-// }
+cc.Scene.prototype._ctor = function() {
+  log("cc.Scene.prototype._ctor");
+  var ok = this.init();
+  log(ok);
+}
 
-// cc.MenuItemFont.prototype._ctor = function() {
-//   log("cc.Scene.prototype._ctor");
-//   var ok = this.init();
-//   log(ok);
-// }
+cc.MenuItemFont.prototype._ctor = function() {
+  log("cc.Scene.prototype._ctor");
+  var ok = this.init();
+  log(ok);
+}
 
 var MyScene = cc.Scene.extend({
   ctor: function() {
@@ -246,7 +253,7 @@ cc.p = function(x, y) {
     cc.assert(Math.abs(result.x - 12.34) < 0.000001);
     cc.assert(Math.abs(result.y - 26.1) < 0.000001);
 
-    var scene = new cc.Scene();
+    var scene = cc.Scene.create();
     // log(">>>>> " + scene.foo() + ", var1: " + scene.var1 + ", var2=" + scene.var2);
     // var sp = cc.Sprite.create("res/Images/arrows.png");
 
@@ -346,12 +353,12 @@ cc.p = function(x, y) {
 
 
 
-    var menu = new cc.Menu();
+    var menu = cc.Menu.create();
     scene.addChild(menu);
 
     var item = null;
 
-    item = new cc.MenuItemFont("unschedule1", function(sender) {
+    item = cc.MenuItemFont.create("unschedule1", function(sender) {
       log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn);
       var aaa = cc.Node.create();
@@ -361,7 +368,7 @@ cc.p = function(x, y) {
     item.id = "item1:" + __sceneIndex;
     menu.addChild(item);
 
-    item = new cc.MenuItemFont("schedule1", function(sender) {
+    item = cc.MenuItemFont.create("schedule1", function(sender) {
       log("click schedule1 scene: " + scene);
       scene.schedule(fn, 1);
     }, scene);
@@ -369,7 +376,7 @@ cc.p = function(x, y) {
     item.y += 100;
     menu.addChild(item);
 
-    item = new cc.MenuItemFont("unschedule2", function(sender) {
+    item = cc.MenuItemFont.create("unschedule2", function(sender) {
       // log("menu item clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       scene.unschedule(fn2);
       // XHRTest();
@@ -378,7 +385,7 @@ cc.p = function(x, y) {
     item.x -= 200;
     menu.addChild(item);
 
-    item = new cc.MenuItemFont("schedule2", function(sender) {
+    item = cc.MenuItemFont.create("schedule2", function(sender) {
       scene.schedule(fn2, 1);
     }, scene);
     item.id = "item1:" + __sceneIndex;
@@ -386,7 +393,7 @@ cc.p = function(x, y) {
     item.y += 100;
     menu.addChild(item);
 
-    item = new cc.MenuItemFont("New Scene " + __sceneIndex, function(sender) {
+    item = cc.MenuItemFont.create("New Scene " + __sceneIndex, function(sender) {
       log("New Scene clicked!, sender: " + sender + ", this: " + this + ",id=" + sender.id);
       runScene();
     }, scene);

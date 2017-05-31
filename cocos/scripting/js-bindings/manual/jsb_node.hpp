@@ -11,6 +11,9 @@
 
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
+extern se::Object* __jsb_Node_proto;
+extern se::Class* __jsb_Node_class;
+
 bool jsb_register_Node_manual();
 
 #endif /* jsb_node_hpp */

@@ -15,48 +15,50 @@
 
 using namespace cocos2d;
 
+#define STANDALONE_TEST 1
+
 extern se::Object* __jsb_cocos2dx_Node_proto;
 extern se::Class* __jsb_cocos2dx__Node_class;
 
-//se::Object* __jsb_Node_proto = nullptr;
-//se::Class* __jsb_Node_class = nullptr;
+se::Object* __jsb_Node_proto = nullptr;
+se::Class* __jsb_Node_class = nullptr;
 
-//SE_FINALIZE_FUNC_BEGIN(Node_finalized)
-//{
-//    if (nativeThisObject)
-//    {
-//        Node* thiz = (Node*) nativeThisObject;
-//        printf("Node_finalized %p ...\n", thiz->getUserData());
-//        SAFE_RELEASE(thiz);
-//    }
-//}
-//SE_FINALIZE_FUNC_END
+SE_FINALIZE_FUNC_BEGIN(Node_finalized)
+{
+    if (nativeThisObject)
+    {
+        Node* thiz = (Node*) nativeThisObject;
+        printf("Node_finalized %p ...\n", thiz->getUserData());
+        SAFE_RELEASE(thiz);
+    }
+}
+SE_FINALIZE_FUNC_END
 
-//SE_CTOR_BEGIN(Node_constructor, Node, Node_finalized)
-//{
-//    printf("Node_constructor ...\n");
-//    Node* obj = new Node();
-//    thisObject->setPrivateData(obj);
-//}
-//SE_CTOR_END
-//
-//SE_CTOR2_BEGIN(Node_ctor, Node, Node_finalized)
-//{
-//    printf("Node_ctor ...\n");
-//    Node* obj = new Node();
-//    thisObject->setPrivateData(obj);
-//}
-//SE_CTOR2_END
-//
-//SE_FUNC_BEGIN(Node_create, se::DONT_NEED_THIS)
-//{
-//    Node* node = Node::create();
-//    node->retain();
-//    auto obj = se::Object::createObjectWithClass(__jsb_Node_class, false);
-//    obj->setPrivateData(node);
-//    SE_SET_RVAL(se::Value(obj));
-//}
-//SE_FUNC_END
+SE_CTOR_BEGIN(Node_constructor, __jsb_Node_class, Node_finalized)
+{
+    printf("Node_constructor ...\n");
+    Node* obj = new Node();
+    thisObject->setPrivateData(obj);
+}
+SE_CTOR_END
+
+SE_CTOR2_BEGIN(Node_ctor, __jsb_Node_class, Node_finalized)
+{
+    printf("Node_ctor ...\n");
+    Node* obj = new Node();
+    thisObject->setPrivateData(obj);
+}
+SE_CTOR2_END
+
+SE_FUNC_BEGIN(Node_create, se::DONT_NEED_THIS)
+{
+    Node* node = Node::create();
+    node->retain();
+    auto obj = se::Object::createObjectWithClass(__jsb_Node_class, false);
+    obj->setPrivateData(node);
+    SE_SET_RVAL(se::Value(obj));
+}
+SE_FUNC_END
 
 SE_FUNC_BEGIN(Node_onEnter, se::DONT_NEED_THIS)
 {
@@ -317,8 +319,8 @@ SE_FUNC_END
 SE_SET_PROPERTY_BEGIN(Node_set_x, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
-    printf("cc.Node set_x native obj: %p\n", thiz);
     float x = data.toNumber();
+    printf("cc.Node set_x (%f) native obj: %p\n", x, thiz);
     thiz->setPositionX(x);
 }
 SE_SET_PROPERTY_END
@@ -333,8 +335,8 @@ SE_GET_PROPERTY_END
 SE_SET_PROPERTY_BEGIN(Node_set_y, se::DONT_NEED_THIS)
 {
     Node* thiz = (Node*)nativeThisObject;
-    printf("cc.Node set_y native obj: %p\n", thiz);
     float y = data.toNumber();
+    printf("cc.Node set_y (%f) native obj: %p\n", y, thiz);
     thiz->setPositionY(y);
 }
 SE_SET_PROPERTY_END
@@ -392,15 +394,16 @@ SE_FUNC_END
 
 bool jsb_register_Node_manual()
 {
-//    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
-//    cls->defineStaticFunction("create", Node_create);
-
+#if STANDALONE_TEST
+    auto cls = se::Class::create("Node", __ccObj, nullptr, Node_constructor);
+    cls->defineStaticFunction("create", Node_create);
+    cls->defineProperty("x", Node_get_x, Node_set_x);
+    cls->defineProperty("y", Node_get_y, Node_set_y);
+    cls->defineFunction("ctor", Node_ctor);
+#else
     auto cls = __jsb_cocos2dx_Node_proto;
+#endif
 
-//    cls->defineProperty("x", Node_get_x, Node_set_x);
-//    cls->defineProperty("y", Node_get_y, Node_set_y);
-
-//    cls->defineFunction("ctor", Node_ctor);
     cls->defineFunction("onEnter", Node_onEnter);
     cls->defineFunction("onExit", Node_onExit);
     cls->defineFunction("onEnterTransitionDidFinish", Node_onEnterTransitionDidFinish);
@@ -411,18 +414,20 @@ bool jsb_register_Node_manual()
     cls->defineFunction("setContentSize", Node_setContentSize);
     cls->defineFunction("setAnchorPoint", Node_setAnchorPoint);
 
-//    cls->defineFunction("addChild", Node_addChild);
-//    cls->defineFunction("getChildren", Node_getChildren);
-//    cls->defineFinalizedFunction(Node_finalized);
+#if STANDALONE_TEST
+    cls->defineFunction("addChild", Node_addChild);
+    cls->defineFunction("getChildren", Node_getChildren);
+    cls->defineFinalizedFunction(Node_finalized);
 
-//    cls->install();
-//
-//    __jsb_Node_proto = cls->getProto();
-//    __jsb_Node_class = cls;
-//
-//    __jsb_Node_proto->defineFunction("foo", Node_foo);
-//    __jsb_Node_proto->setProperty("var1", se::Value("I'm var1"));
-//    __jsb_Node_proto->setProperty("var2", se::Value(10000.323));
+    cls->install();
+
+    __jsb_Node_proto = cls->getProto();
+    __jsb_Node_class = cls;
+
+    __jsb_Node_proto->defineFunction("foo", Node_foo);
+    __jsb_Node_proto->setProperty("var1", se::Value("I'm var1"));
+    __jsb_Node_proto->setProperty("var2", se::Value(10000.323));
+#endif
 
     return true;
 }

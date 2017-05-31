@@ -39,7 +39,7 @@ SE_FUNC_BEGIN(MenuItem_create, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(MenuItem_ctor, MenuItem, MenuItem_finalized)
+SE_CTOR_BEGIN(MenuItem_ctor, __jsb_MenuItem_class, MenuItem_finalized)
 {
 
 }
@@ -68,7 +68,7 @@ SE_FUNC_BEGIN(MenuItemLabel_create, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(MenuItemLabel_ctor, MenuItemLabel, MenuItemLabel_finalized)
+SE_CTOR_BEGIN(MenuItemLabel_ctor, __jsb_MenuItemLabel_class, MenuItemLabel_finalized)
 {
 
 }
@@ -111,7 +111,7 @@ SE_FUNC_BEGIN(MenuItemFont_create, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(MenuItemFont_ctor, MenuItemFont, MenuItemFont_finalized)
+SE_CTOR_BEGIN(MenuItemFont_ctor, __jsb_MenuItemFont_class, MenuItemFont_finalized)
 {
 
 }

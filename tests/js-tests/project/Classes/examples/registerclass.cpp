@@ -30,18 +30,16 @@ int main_register_class(int argc, char** argv)
 
     se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/new-jsb-prepare.js");
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_prepare.js"));
-//    jsb_register_all();
-    register_all_cocos2dx(global);
+    jsb_register_all();
+//    register_all_cocos2dx(global);
 
-    jsb_register_Node_manual();
-    register_all_cocos2dx_manual(global);
+//    jsb_register_Node_manual();
+//    register_all_cocos2dx_manual(global);
 
-    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
-//    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb.js"));
-//    se->executeScriptFile("/Users/james/Project/cocos2d-x/cocos/scripting/js-bindings/script/jsb_create_apis.js");
+        se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
 
-//    se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
-    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("main.js"));
+//    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
+//    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("main.js"));
 
     // conversion unit test
     {

@@ -16,7 +16,7 @@ bool jsb_register_all()
 {
     jsb_register_global_variables();
     jsb_register_Director();
-    jsb_register_Node();
+    jsb_register_Node_manual();
     jsb_register_Sprite();
     jsb_register_Scene();
     jsb_register_Menu();

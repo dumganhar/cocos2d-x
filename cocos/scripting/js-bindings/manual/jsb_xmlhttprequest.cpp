@@ -362,7 +362,7 @@ SE_FINALIZE_FUNC_BEGIN(XMLHttpRequest_finalize)
 SE_FINALIZE_FUNC_END
 
 
-SE_CTOR_BEGIN(XMLHttpRequest_constructor, XMLHttpRequest, XMLHttpRequest_finalize)
+SE_CTOR_BEGIN(XMLHttpRequest_constructor, __jsb_XMLHttpRequest_class, XMLHttpRequest_finalize)
 {
     XMLHttpRequest* request = new XMLHttpRequest();
     thisObject->setPrivateData(request);

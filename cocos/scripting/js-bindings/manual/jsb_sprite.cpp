@@ -50,7 +50,7 @@ SE_FUNC_BEGIN(Sprite_initWithFile, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
-SE_CTOR_BEGIN(Sprite_constructor, Sprite, Sprite_finalized)
+SE_CTOR_BEGIN(Sprite_constructor, __jsb_Sprite_class, Sprite_finalized)
 {
 //    printf("Sprite_constructor1: %p, jsret: %p\n", _constructor, _jsRet);
     Sprite* obj = new Sprite();
@@ -59,7 +59,7 @@ SE_CTOR_BEGIN(Sprite_constructor, Sprite, Sprite_finalized)
 }
 SE_CTOR_END
 
-SE_CTOR2_BEGIN(Sprite_ctor, Sprite, Sprite_finalized)
+SE_CTOR2_BEGIN(Sprite_ctor, __jsb_Sprite_class, Sprite_finalized)
 {
 //    printf("Sprite_ctor: %p\n", _thisObject);
     Sprite* obj = new Sprite();

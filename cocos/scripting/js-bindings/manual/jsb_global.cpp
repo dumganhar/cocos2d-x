@@ -564,6 +564,25 @@ SE_FUNC_BEGIN(JSB_isObjectValid, se::DONT_NEED_THIS)
 }
 SE_FUNC_END
 
+static bool getOrCreatePlainObject_r(const char* name, se::Object* parent, se::Object** outObj)
+{
+    assert(parent != nullptr);
+    assert(outObj != nullptr);
+    se::Value tmp;
+
+    if (parent->getProperty(name, &tmp) && tmp.isObject())
+    {
+        *outObj = tmp.toObject();
+        (*outObj)->addRef();
+    }
+    else
+    {
+        *outObj = se::Object::createPlainObject(false);
+        parent->setProperty(name, se::Value(*outObj));
+    }
+
+    return true;
+}
 
 bool jsb_register_global_variables()
 {
@@ -571,20 +590,14 @@ bool jsb_register_global_variables()
 
     global->defineFunction("require", require);
 
-    __ccObj = se::Object::createPlainObject(false);
-    global->setProperty("cc", se::Value(__ccObj));
+    getOrCreatePlainObject_r("cc", global, &__ccObj);
 
     jsb_register_var_under_cc();
 
-    __jsbObj = se::Object::createPlainObject(false);
-    global->setProperty("jsb", se::Value(__jsbObj));
-
-    __jscObj = se::Object::createPlainObject(false);
-    global->setProperty("__jsc__", se::Value(__jscObj));
+    getOrCreatePlainObject_r("jsb", global, &__jsbObj);
+    getOrCreatePlainObject_r("__jsc__", global, &__jscObj);
 
     __jscObj->defineFunction("garbageCollect", jsc_garbageCollect);
-
-
 
     global->defineFunction("__getPlatform", JSBCore_platform);
     global->defineFunction("__getOS", JSBCore_os);

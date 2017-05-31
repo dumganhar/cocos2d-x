@@ -59,7 +59,7 @@ SE_FINALIZE_FUNC_BEGIN(Director_finalize)
 }
 SE_FINALIZE_FUNC_END
 
-SE_CTOR_BEGIN(Director_ctor, Director, Director_finalize)
+SE_CTOR_BEGIN(Director_ctor, __jsb_Director_class, Director_finalize)
 {
 
 }
