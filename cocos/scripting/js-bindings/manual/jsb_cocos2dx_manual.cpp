@@ -287,6 +287,500 @@ static bool register_sys_localStorage(se::Object* obj)
     return true;
 }
 
+//
+
+static bool js_EventListenerMouse_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 0) {
+        auto ret = EventListenerMouse::create();
+        ret->retain();
+
+        ret->onMouseDown = [ret](Event* event) {
+//FIXME:            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_DOWN, event);
+        };
+
+        ret->onMouseUp = [ret](Event* event) {
+//            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_UP, event);
+        };
+
+        ret->onMouseMove = [ret](Event* event) {
+//            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_MOVE, event);
+        };
+
+        ret->onMouseScroll = [ret](Event* event) {
+//            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_SCROLL, event);
+        };
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerMouse_create)
+
+static bool register_eventlistener(se::Object* obj)
+{
+    se::Value v;
+    __ccObj->getProperty("EventListenerMouse", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerMouse_create));
+
+    return true;
+}
+
+//
+
+static bool js_cocos2dx_Sequence_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    bool ok = true;
+
+    if (argc > 0)
+    {
+        Vector<FiniteTimeAction*> array;
+
+        if (argc == 1 && args[0].isObject() && args[0].toObject()->isArray())
+        {
+            ok &= seval_to_Vector(args[0], &array);
+            JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        }
+        else
+        {
+            uint32_t i = 0;
+            while (i < argc)
+            {
+                assert(args[i].isObject());
+                FiniteTimeAction* item = (FiniteTimeAction*)args[i].toObject()->getPrivateData();
+
+                array.pushBack(item);
+                i++;
+            }
+        }
+        auto ret = new (std::nothrow) Sequence();
+        ok = ret->init(array);
+        if (ok)
+        {
+            se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Sequence_class, false);
+            obj->setPrivateData(ret);
+            s.rval().setObject(obj);
+        }
+        return ok;
+    }
+    SE_REPORT_ERROR("wrong number of arguments");
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Sequence_create)
+
+// ActionInterval
+
+static void rebindNativeObject(se::Object* seObj, cocos2d::Ref* oldRef, cocos2d::Ref* newRef)
+{
+    // Release the old reference as it have been retained by 'action' previously,
+    // and the 'action' won't have any chance to release it in the future
+    oldRef->release();
+    seObj->clearPrivateData();
+    seObj->setPrivateData(newRef);
+}
+
+static bool js_cocos2dx_ActionInterval_repeat(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    cocos2d::ActionInterval* cobj = (cocos2d::ActionInterval *)s.nativeThisObject();
+    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ActionInterval_repeat : Invalid Native Object");
+
+    if (argc == 1)
+    {
+        double times;
+        if( !seval_to_double(args[0], &times) ) {
+            return false;
+        }
+        int timesInt = (int)times;
+        if (timesInt <= 0) {
+            SE_REPORT_ERROR("js_cocos2dx_ActionInterval_repeat : Repeat times must be greater than 0");
+        }
+
+        cocos2d::Repeat* action = new (std::nothrow) cocos2d::Repeat;
+        bool ok = action->initWithAction(cobj, timesInt);
+        if (ok)
+        {
+            rebindNativeObject(s.thisObject(), cobj, action);
+            s.rval().setObject(s.thisObject());
+        }
+        return ok;
+    }
+
+    SE_REPORT_ERROR("js_cocos2dx_ActionInterval_repeat : wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_ActionInterval_repeat)
+
+static bool js_cocos2dx_ActionInterval_repeatForever(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    cocos2d::ActionInterval* cobj = (cocos2d::ActionInterval *)s.nativeThisObject();
+    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ActionInterval_repeatForever : Invalid Native Object");
+
+    if (argc == 0) {
+        cocos2d::RepeatForever* action = new (std::nothrow) cocos2d::RepeatForever;
+        bool ok = action->initWithAction(cobj);
+        if (ok)
+        {
+            rebindNativeObject(s.thisObject(), cobj, action);
+            s.rval().setObject(s.thisObject());
+        }
+        return ok;
+    }
+
+    SE_REPORT_ERROR("js_cocos2dx_ActionInterval_repeatForever : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_ActionInterval_repeatForever)
+
+static bool js_cocos2dx_ActionInterval_speed(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    cocos2d::ActionInterval* cobj = (cocos2d::ActionInterval *)s.nativeThisObject();
+    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ActionInterval_speed : Invalid Native Object");
+
+    if (argc == 1)
+    {
+        double speed;
+        if( !seval_to_double(args[0], &speed) ) {
+            return false;
+        }
+        if (speed < 0) {
+            SE_REPORT_ERROR("js_cocos2dx_ActionInterval_speed : Speed must not be negative");
+            return false;
+        }
+
+        cocos2d::Speed* action = new (std::nothrow) cocos2d::Speed;
+        bool ok = action->initWithAction(cobj, speed);
+        if (ok)
+        {
+            rebindNativeObject(s.thisObject(), cobj, action);
+            s.rval().setObject(s.thisObject());
+        }
+        return ok;
+    }
+
+    SE_REPORT_ERROR("js_cocos2dx_ActionInterval_speed : wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_ActionInterval_speed)
+
+enum ACTION_TAG {
+    EASE_IN = 0,
+    EASE_OUT,
+    EASE_INOUT,
+    EASE_EXPONENTIAL_IN,
+    EASE_EXPONENTIAL_OUT,
+    EASE_EXPONENTIAL_INOUT,
+    EASE_SINE_IN,
+    EASE_SINE_OUT,
+    EASE_SINE_INOUT,
+    EASE_ELASTIC_IN,
+    EASE_ELASTIC_OUT,
+    EASE_ELASTIC_INOUT,
+    EASE_BOUNCE_IN,
+    EASE_BOUNCE_OUT,
+    EASE_BOUNCE_INOUT,
+    EASE_BACK_IN,
+    EASE_BACK_OUT,
+    EASE_BACK_INOUT,
+
+    EASE_BEZIER_ACTION,
+    EASE_QUADRATIC_IN,
+    EASE_QUADRATIC_OUT,
+    EASE_QUADRATIC_INOUT,
+    EASE_QUARTIC_IN,
+    EASE_QUARTIC_OUT,
+    EASE_QUARTIC_INOUT,
+    EASE_QUINTIC_IN,
+    EASE_QUINTIC_OUT,
+    EASE_QUINTIC_INOUT,
+    EASE_CIRCLE_IN,
+    EASE_CIRCLE_OUT,
+    EASE_CIRCLE_INOUT,
+    EASE_CUBIC_IN,
+    EASE_CUBIC_OUT,
+    EASE_CUBIC_INOUT
+};
+
+static bool js_cocos2dx_ActionInterval_easing(se::State& s)
+{
+    const auto& args = s.args();
+    uint32_t argc = (uint32_t)args.size();
+    cocos2d::ActionInterval* oldAction = (cocos2d::ActionInterval *)s.nativeThisObject();
+    JSB_PRECONDITION2 (oldAction, false, "js_cocos2dx_ActionInterval_easing : Invalid Native Object");
+
+    cocos2d::ActionInterval* newAction = nullptr;
+    se::Value jsTag;
+    se::Value jsParam;
+    double tag = 0.0;
+    double parameter = 0.0;
+
+    for (uint32_t i = 0; i < argc; i++)
+    {
+        const auto& vpi = args[i];
+        bool ok = vpi.isObject() && vpi.toObject()->getProperty("tag", &jsTag) && seval_to_double(jsTag, &tag);
+        if (vpi.toObject()->getProperty("param", &jsParam))
+            seval_to_double(jsParam, &parameter);
+
+        bool hasParam = (parameter == parameter);
+        if (!ok) continue;
+
+        ok = true;
+        if (tag == EASE_IN)
+        {
+            if (!hasParam) ok = false;
+            auto tmpaction = new (std::nothrow) cocos2d::EaseIn;
+            tmpaction->initWithAction(oldAction, parameter);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_OUT)
+        {
+            if (!hasParam) ok = false;
+            auto tmpaction = new (std::nothrow) cocos2d::EaseOut;
+            tmpaction->initWithAction(oldAction, parameter);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_INOUT)
+        {
+            if (!hasParam) ok = false;
+            auto tmpaction = new (std::nothrow) cocos2d::EaseInOut;
+            tmpaction->initWithAction(oldAction, parameter);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_EXPONENTIAL_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseExponentialIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_EXPONENTIAL_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseExponentialOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_EXPONENTIAL_INOUT)
+        {
+            auto tmpaction = new (std::nothrow)cocos2d::EaseExponentialInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_SINE_IN)
+        {
+            auto tmpaction = new (std::nothrow)cocos2d::EaseSineIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_SINE_OUT)
+        {
+            auto tmpaction = new (std::nothrow)cocos2d::EaseSineOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_SINE_INOUT)
+        {
+            auto tmpaction = new (std::nothrow)cocos2d::EaseSineInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_ELASTIC_IN)
+        {
+            if (!hasParam) parameter = 0.3;
+            auto tmpaction = new (std::nothrow)cocos2d::EaseElasticIn;
+            tmpaction->initWithAction(oldAction, parameter);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_ELASTIC_OUT)
+        {
+            if (!hasParam) parameter = 0.3;
+            auto tmpaction = new (std::nothrow)cocos2d::EaseElasticOut;
+            tmpaction->initWithAction(oldAction, parameter);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_ELASTIC_INOUT)
+        {
+            if (!hasParam) parameter = 0.3;
+            auto tmpaction = new (std::nothrow)cocos2d::EaseElasticInOut;
+            tmpaction->initWithAction(oldAction, parameter);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BOUNCE_IN)
+        {
+            auto tmpaction = new (std::nothrow)cocos2d::EaseBounceIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BOUNCE_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseBounceOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BOUNCE_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseBounceInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BACK_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseBackIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BACK_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseBackOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BACK_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseBackInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUADRATIC_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuadraticActionIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUADRATIC_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuadraticActionOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUADRATIC_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuadraticActionInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUARTIC_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuarticActionIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUARTIC_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuarticActionOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUARTIC_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuarticActionInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUINTIC_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuinticActionIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUINTIC_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuinticActionOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_QUINTIC_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseQuinticActionInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_CIRCLE_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseCircleActionIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_CIRCLE_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseCircleActionOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_CIRCLE_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseCircleActionInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_CUBIC_IN)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseCubicActionIn;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_CUBIC_OUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseCubicActionOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_CUBIC_INOUT)
+        {
+            auto tmpaction = new (std::nothrow) cocos2d::EaseCubicActionInOut;
+            tmpaction->initWithAction(oldAction);
+            newAction = tmpaction;
+        }
+        else if (tag == EASE_BEZIER_ACTION)
+        {
+            se::Value jsParam2;
+            se::Value jsParam3;
+            se::Value jsParam4;
+            double parameter2, parameter3, parameter4;
+            ok &= vpi.toObject()->getProperty("param2", &jsParam2);
+            ok &=seval_to_double(jsParam2, &parameter2);
+            ok &= vpi.toObject()->getProperty("param3", &jsParam3);
+            ok &=seval_to_double(jsParam3, &parameter3);
+            ok &= vpi.toObject()->getProperty("param4", &jsParam4);
+            ok &=seval_to_double(jsParam4, &parameter4);
+            if (!ok) continue;
+
+            auto tmpaction = new (std::nothrow) cocos2d::EaseBezierAction;
+            tmpaction->initWithAction(oldAction);
+            tmpaction->setBezierParamer(parameter, parameter2, parameter3, parameter4);
+            newAction = tmpaction;
+        }
+        else
+            continue;
+
+        if (!ok || !newAction) {
+            SE_REPORT_ERROR("js_cocos2dx_ActionInterval_easing : Invalid action: At least one action was expecting parameter");
+            return false;
+        }
+    }
+
+    rebindNativeObject(s.thisObject(), oldAction, newAction);
+    s.rval().setObject(s.thisObject());
+
+    return true;
+}
+SE_BIND_FUNC(js_cocos2dx_ActionInterval_easing)
+
 bool register_all_cocos2dx_manual(se::Object* obj)
 {
     se::Value v;
@@ -297,6 +791,17 @@ bool register_all_cocos2dx_manual(se::Object* obj)
     __jsb_cocos2dx_SAXParser_proto->defineFunction("parse", _SE(js_PlistParser_parse));
 
     register_sys_localStorage(obj);
+    register_eventlistener(obj);
+
+    __ccObj->getProperty("Sequence", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_cocos2dx_Sequence_create));
+
+    se::Object* proto = __jsb_cocos2dx_ActionInterval_proto;
+    proto->defineFunction("repeat", _SE(js_cocos2dx_ActionInterval_repeat));
+    proto->defineFunction("repeatForever", _SE(js_cocos2dx_ActionInterval_repeatForever));
+    proto->defineFunction("_speed", _SE(js_cocos2dx_ActionInterval_speed));
+    proto->defineFunction("easing", _SE(js_cocos2dx_ActionInterval_easing));
 
     return true;
 }

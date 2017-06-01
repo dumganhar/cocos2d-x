@@ -26,8 +26,6 @@ namespace se {
 
         static Class* create(const std::string& className, Object* obj, Object* parentProto, JSObjectCallAsConstructorCallback ctor);
 
-        bool init(const std::string& clsName, Object* obj, Object* parentProto, JSObjectCallAsConstructorCallback ctor);
-
         bool install();
         Object* getProto();
 
@@ -38,6 +36,7 @@ namespace se {
         bool defineFinalizedFunction(JSObjectFinalizeCallback func);
 
     private:
+        bool init(const std::string& clsName, Object* obj, Object* parentProto, JSObjectCallAsConstructorCallback ctor);
 
         static JSObjectRef _createJSObject(const std::string &clsName, Class** outCls);
         static JSObjectRef _createJSObjectWithClass(Class* cls);

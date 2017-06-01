@@ -781,7 +781,7 @@ void EventDispatcher::dispatchEventToListeners(EventListenerVector* listeners, c
     }
     
     if (fixedPriorityListeners)
-    {
+    { 
         if (!shouldStopPropagation)
         {
             // priority > 0

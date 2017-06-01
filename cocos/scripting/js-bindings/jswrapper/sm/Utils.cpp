@@ -230,6 +230,27 @@ namespace se {
         }
     }
 
+    void clearPrivate(JSContext* cx, JS::HandleObject obj)
+    {
+        bool found = false;
+        const JSClass* cls = JS_GetClass(obj);
+        found = !!(cls->flags & JSCLASS_HAS_PRIVATE);
+
+        if (found)
+        {
+            JS_SetPrivate(obj, nullptr);
+        }
+        else if (JS_HasProperty(cx, obj, KEY_PRIVATE_DATE, &found) && found)
+        {
+            JS::RootedValue jsData(cx);
+            assert(JS_GetProperty(cx, obj, KEY_PRIVATE_DATE, &jsData));
+
+            internal::PrivateData* privateData = (internal::PrivateData*)JS_GetPrivate(jsData.toObjectOrNull());
+            free(privateData);
+            JS_SetPrivate(jsData.toObjectOrNull(), nullptr);
+            JS_DeleteProperty(cx, obj, KEY_PRIVATE_DATE);
+        }
+    }
 
 }} // namespace se { namespace internal {
 

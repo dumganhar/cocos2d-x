@@ -3,20 +3,19 @@
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 #include "cocos2d.h"
 
-#define JSB_PRECONDITION2( condition, ret_value, ...) do { \
-    if( ! (condition) ) { \
-        cocos2d::log("jsb: ERROR: File %s: Line: %d, Function: %s", __FILE__, __LINE__, __FUNCTION__ ); \
-        cocos2d::log(__VA_ARGS__); \
-        } \
-    } while(0)
-
-
-#define JSB_PRECONDITION3( condition, ret_value, ...) do { \
-        if( ! (condition) ) { \
+#define JSB_PRECONDITION2(condition, ret_value, ...) \
+    do { \
+        if ( ! (condition) ) { \
             cocos2d::log("jsb: ERROR: File %s: Line: %d, Function: %s", __FILE__, __LINE__, __FUNCTION__ ); \
             cocos2d::log(__VA_ARGS__); \
             return (ret_value); \
         } \
+    } while(0)
+
+
+#define JSB_PRECONDITION3(condition, ret_value, ...) \
+    do { \
+        if (!(condition)) return (ret_value); \
     } while(0)
 
 

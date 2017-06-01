@@ -38,8 +38,8 @@ int main_register_class(int argc, char** argv)
 
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
 
-    se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
-//    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("main.js"));
+//    se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
+    se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("main.js"));
 
     // conversion unit test
     {

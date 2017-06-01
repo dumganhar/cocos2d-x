@@ -71,6 +71,7 @@ namespace se {
         // --- Private
         void setPrivateData(void* data);
         void* getPrivateData();
+        void clearPrivateData();
 
         typedef void (*DestroyNotify)(JS::HandleObject thing, void *data);
 

@@ -18,8 +18,6 @@ namespace se {
 
         static Class* create(const char* className, Object* obj, Object* parentProto, JSNative ctor);
 
-        bool init(const char* clsName, Object* obj, Object* parentProto, JSNative ctor);
-
         bool install();
         Object* getProto();
         JSFinalizeOp _getFinalizeCb() const;
@@ -31,6 +29,7 @@ namespace se {
         bool defineFinalizedFunction(JSFinalizeOp func);
 
     private:
+        bool init(const char* clsName, Object* obj, Object* parentProto, JSNative ctor);
 
         static JSObject* _createJSObject(const std::string &clsName, Class** outCls);
         static JSObject* _createJSObjectWithClass(Class* cls);

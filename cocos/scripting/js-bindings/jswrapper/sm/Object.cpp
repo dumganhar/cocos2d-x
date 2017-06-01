@@ -463,11 +463,24 @@ namespace se {
 
     void Object::setPrivateData(void* data)
     {
+        assert(!_hasPrivateData);
         JS::RootedObject obj(__cx, _getJSObject());
         internal::setPrivate(__cx, obj, data, _finalizeCb);
 
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
+    }
+
+    void Object::clearPrivateData()
+    {
+        if (_hasPrivateData)
+        {
+            void* data = getPrivateData();
+            __nativePtrToObjectMap.erase(data);
+            JS::RootedObject obj(__cx, _getJSObject());
+            internal::clearPrivate(__cx, obj);
+            _hasPrivateData = false;
+        }
     }
 
     void Object::setContext(JSContext *cx)

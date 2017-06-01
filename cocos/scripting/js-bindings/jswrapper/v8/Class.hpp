@@ -18,7 +18,6 @@ namespace se {
 
         static Class* create(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor);
 
-        bool init(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor);
 		bool install();
 
         bool defineFunction(const char *name, v8::FunctionCallback func);
@@ -32,6 +31,7 @@ namespace se {
         V8FinalizeFunc _getFinalizeFunction() const;
 
 	private:
+        bool init(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor);
         static void cleanup();
         static v8::Local<v8::Object> _createJSObject(const std::string &clsName, Class** outCls);
         static v8::Local<v8::Object> _createJSObjectWithClass(Class* cls);

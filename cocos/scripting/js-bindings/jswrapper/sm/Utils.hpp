@@ -35,6 +35,7 @@ namespace se {
         bool hasPrivate(JSContext* cx, JS::HandleObject obj);
         void* getPrivate(JSContext* cx, JS::HandleObject obj);
         void setPrivate(JSContext* cx, JS::HandleObject obj, void* data, JSFinalizeOp finalizeCb);
+        void clearPrivate(JSContext* cx, JS::HandleObject obj);
 
     } // namespace internal {
 
