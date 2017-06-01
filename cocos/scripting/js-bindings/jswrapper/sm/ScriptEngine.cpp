@@ -281,19 +281,22 @@ namespace se {
         return _globalObj;
     }
 
-    bool ScriptEngine::executeScriptBuffer(const char *string, Value *data, const char *fileName)
+    bool ScriptEngine::executeScriptBuffer(const char* string, Value* data, const char* fileName)
     {
         return executeScriptBuffer(string, strlen(string), data, fileName);
     }
 
-    bool ScriptEngine::executeScriptBuffer(const char *script, size_t length, Value *data, const char *fileName)
+    bool ScriptEngine::executeScriptBuffer(const char* script, size_t length, Value* data, const char* fileName)
     {
-        JS::CompileOptions options( _cx );
-        options.setFile( fileName )
+        if (fileName == nullptr)
+            fileName = "(no filename)";
+        JS::CompileOptions options(_cx);
+        options.setFile(fileName)
+               .setUTF8(true)
                .setVersion(JSVERSION_LATEST);
 
-        JS::RootedValue rcValue( _cx );
-        bool ok = JS::Evaluate( _cx, options, script, length, &rcValue);
+        JS::RootedValue rcValue(_cx);
+        bool ok = JS::Evaluate(_cx, options, script, length, &rcValue);
         if (!ok)
         {
             clearException();

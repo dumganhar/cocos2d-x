@@ -93,7 +93,7 @@
         se::Object* thisObject = se::Object::_createJSObject(cls, _thiz.toObjectOrNull(), false); \
         thisObject->_setFinalizeCallback(finalizeCb##Registry); \
         se::State state(thisObject, args); \
-        ret = funcName(state) \
+        ret = funcName(state); \
         if (ret) \
         { \
             se::Value _property; \
@@ -149,7 +149,7 @@
         { \
             args[0].toObject()->switchToUnrooted(); \
         } \
-        return ret;
+        return ret; \
     }
 
 

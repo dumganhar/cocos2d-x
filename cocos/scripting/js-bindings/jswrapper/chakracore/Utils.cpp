@@ -176,6 +176,16 @@ namespace se {
 
     bool hasPrivate(JsValueRef obj)
     {
+        JsValueType type;
+        _CHECK(JsGetValueType(obj, &type));
+        if (type != JsObject && type != JsFunction
+            && type != JsArray && type != JsSymbol
+            && type != JsArrayBuffer && type != JsTypedArray
+            && type != JsDataView)
+        {
+            return nullptr;
+        }
+
         bool isExist = false;
         JsErrorCode err = JsHasExternalData(obj, &isExist);
         assert(err == JsNoError);
@@ -214,6 +224,16 @@ namespace se {
 
     void* getPrivate(JsValueRef obj)
     {
+        JsValueType type;
+        _CHECK(JsGetValueType(obj, &type));
+        if (type != JsObject && type != JsFunction
+            && type != JsArray && type != JsSymbol
+            && type != JsArrayBuffer && type != JsTypedArray
+            && type != JsDataView)
+        {
+            return nullptr;
+        }
+
         void* data = nullptr;
         bool isExist = false;
         _CHECK(JsHasExternalData(obj, &isExist));

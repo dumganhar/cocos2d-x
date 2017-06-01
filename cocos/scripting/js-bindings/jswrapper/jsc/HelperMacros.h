@@ -48,10 +48,10 @@
 #define SE_BIND_FINALIZE_FUNC(funcName) \
     void funcName##Registry(JSObjectRef _obj) \
     { \
-        bool ret = false; \
         void* nativeThisObject = JSObjectGetPrivate(_obj); \
         if (nativeThisObject != nullptr) \
         { \
+            bool ret = false; \
             se::State state(nativeThisObject); \
             se::Object* _thisObject = state.thisObject(); \
             if (_thisObject) _thisObject->_cleanup(nativeThisObject); \

@@ -380,10 +380,11 @@ namespace {
 
     static bool ccassert(se::State& s)
     {
-        if (s.args().size() >= 1)
+        const se::ValueArray& args = s.args();
+        size_t argc = args.size();
+        if (argc >= 1)
         {
-            const se::ValueArray& args = s.args();
-            if (s.args().size() == 1)
+            if (argc == 1)
             {
                 SE_ASSERT(args[0].toBoolean(), "NO MESSAGE");
             }

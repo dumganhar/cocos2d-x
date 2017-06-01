@@ -268,6 +268,7 @@ static bool register_sys_localStorage(se::Object* obj)
         se::Object* sysObj = se::Object::createPlainObject(false);
         obj->setProperty("sys", se::Value(sysObj));
         sys.setObject(sysObj);
+        sysObj->release();
     }
 
     se::Object* localStorageObj = se::Object::createPlainObject(false);
@@ -277,6 +278,7 @@ static bool register_sys_localStorage(se::Object* obj)
     localStorageObj->defineFunction("removeItem", _SE(JSB_localStorageRemoveItem));
     localStorageObj->defineFunction("setItem", _SE(JSB_localStorageSetItem));
     localStorageObj->defineFunction("clear", _SE(JSB_localStorageClear));
+    localStorageObj->release();
 
     std::string strFilePath = cocos2d::FileUtils::getInstance()->getWritablePath();
     strFilePath += "/jsb.sqlite";
