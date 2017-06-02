@@ -255,6 +255,7 @@ namespace se {
 
     void Object::setPrivateData(void* data)
     {
+        assert(!_hasPrivateData);
         internal::setPrivate(__isolate, _obj, data);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
@@ -263,6 +264,17 @@ namespace se {
     void* Object::getPrivateData() const
     {
         return internal::getPrivate(__isolate, const_cast<Object*>(this)->_obj.handle(__isolate));
+    }
+
+    void Object::clearPrivateData()
+    {
+        if (_hasPrivateData)
+        {
+            void* data = getPrivateData();
+            __nativePtrToObjectMap.erase(data);
+            internal::clearPrivate(__isolate, _obj);
+            _hasPrivateData = false;
+        }
     }
 
     v8::Local<v8::Object> Object::_getJSObject() const

@@ -666,8 +666,13 @@ namespace se {
     bool Object::attachChild(Object* child)
     {
         assert(child);
-        JS::RootedValue valOwner(__cx, JS::ObjectValue(*_getJSObject()));
-        JS::RootedValue valTarget(__cx, JS::ObjectValue(*child->_getJSObject()));
+        JSObject* ownerObj = _getJSObject();
+        JSObject* targetObj = child->_getJSObject();
+        if (ownerObj == nullptr || targetObj == nullptr)
+            return false;
+
+        JS::RootedValue valOwner(__cx, JS::ObjectValue(*ownerObj));
+        JS::RootedValue valTarget(__cx, JS::ObjectValue(*targetObj));
 
         JS::RootedObject jsbObj(__cx);
         JS::RootedObject globalObj(__cx, ScriptEngine::getInstance()->getGlobalObject()->_getJSObject());
@@ -686,8 +691,13 @@ namespace se {
     bool Object::detachChild(Object* child)
     {
         assert(child);
-        JS::RootedValue valOwner(__cx, JS::ObjectValue(*_getJSObject()));
-        JS::RootedValue valTarget(__cx, JS::ObjectValue(*child->_getJSObject()));
+        JSObject* ownerObj = _getJSObject();
+        JSObject* targetObj = child->_getJSObject();
+        if (ownerObj == nullptr || targetObj == nullptr)
+            return false;
+
+        JS::RootedValue valOwner(__cx, JS::ObjectValue(*ownerObj));
+        JS::RootedValue valTarget(__cx, JS::ObjectValue(*targetObj));
 
         JS::RootedObject jsbObj(__cx);
         JS::RootedObject globalObj(__cx, ScriptEngine::getInstance()->getGlobalObject()->_getJSObject());

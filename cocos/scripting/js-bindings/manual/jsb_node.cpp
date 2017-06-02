@@ -234,20 +234,10 @@ private:
     std::string _key;
 };
 
-static bool Node_schedule(se::State& s)
+static uint32_t __idx = 0;
+
+static bool Node_scheduleCommon(Node* thiz, const se::Value& jsThis, const se::Value& jsFunc, float interval, unsigned int repeat, float delay)
 {
-    const auto& args = s.args();
-    size_t argc = args.size();
-    printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
-    for (const auto& e1 : __jsthis_schedulekey_map)
-    {
-        printf("target: %p, functions: %d\n", e1.first, (int)e1.second.size());
-    }
-    printf("-------------------------- \n");
-    static uint32_t __idx = 0;
-    Node* thiz = (Node*)s.nativeThisObject();
-    se::Value jsThis(s.thisObject());
-    se::Value jsFunc(args[0]);
     jsThis.toObject()->attachChild(jsFunc.toObject());
 
     se::Object* foundThisObj = nullptr;
@@ -261,19 +251,7 @@ static bool Node_schedule(se::State& s)
         thiz->unschedule(key);
     }
 
-    float interval = 0.0f;
-    unsigned int repeat = CC_REPEAT_FOREVER;
-    float delay = 0.0f;
     key = StringUtils::format("__node_schedule_key:%u", __idx++);
-
-    if (argc >= 2)
-        interval = args[1].toNumber();
-
-    if (argc >= 3)
-        repeat = args[2].toNumber();
-
-    if (argc >= 4)
-        delay = args[3].toNumber();
 
     insertSchedule(jsFunc.toObject(), jsThis.toObject(), key);
     std::shared_ptr<UnscheduleNotifier> unscheduleNotifier = std::make_shared<UnscheduleNotifier>(thiz, key);
@@ -285,12 +263,140 @@ static bool Node_schedule(se::State& s)
         se::ValueArray args;
         args.push_back(se::Value((double)dt));
         funcObj->call(args, thisObj);
-
+        
     }, interval, repeat, delay, key);
 
     return true;
 }
+
+static bool Node_schedule(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
+    for (const auto& e1 : __jsthis_schedulekey_map)
+    {
+        printf("target: %p, functions: %d\n", e1.first, (int)e1.second.size());
+    }
+    printf("-------------------------- \n");
+
+    Node* thiz = (Node*)s.nativeThisObject();
+    se::Value jsThis(s.thisObject());
+    se::Value jsFunc(args[0]);
+
+    float interval = 0.0f;
+    unsigned int repeat = CC_REPEAT_FOREVER;
+    float delay = 0.0f;
+
+    if (argc >= 2)
+        interval = args[1].toNumber();
+
+    if (argc >= 3)
+        repeat = args[2].toNumber();
+
+    if (argc >= 4)
+        delay = args[3].toNumber();
+
+    return Node_scheduleCommon(thiz, jsThis, jsFunc, interval, repeat, delay);
+}
 SE_BIND_FUNC(Node_schedule)
+
+static bool Node_scheduleOnce(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
+    for (const auto& e1 : __jsthis_schedulekey_map)
+    {
+        printf("target: %p, functions: %d\n", e1.first, (int)e1.second.size());
+    }
+    printf("-------------------------- \n");
+
+    Node* thiz = (Node*)s.nativeThisObject();
+    se::Value jsThis(s.thisObject());
+    se::Value jsFunc(args[0]);
+
+    float delay = 0.0f;
+
+    if (argc >= 2)
+        delay = args[1].toNumber();
+
+    return Node_scheduleCommon(thiz, jsThis, jsFunc, 0.0f, 0, delay);
+}
+SE_BIND_FUNC(Node_scheduleOnce)
+
+static bool Node_scheduleUpdateCommon(Node* thiz, const se::Value& jsThis, int priority)
+{
+    assert(false);
+//    se::Object* foundThisObj = nullptr;
+//    se::Object* foundFuncObj = nullptr;
+//    std::string key;
+//
+//    bool found = isScheduleExist(jsFunc.toObject(), jsThis.toObject(), &foundFuncObj, &foundThisObj, &key);
+//    if (found && !key.empty())
+//    {
+//        removeSchedule(foundFuncObj, foundThisObj);
+//        thiz->unschedule(key);
+//    }
+//
+//    key = StringUtils::format("__node_schedule_key:%u", __idx++);
+//
+//    insertSchedule(jsFunc.toObject(), jsThis.toObject(), key);
+//    std::shared_ptr<UnscheduleNotifier> unscheduleNotifier = std::make_shared<UnscheduleNotifier>(thiz, key);
+//
+//    thiz->getScheduler()->scheduleUpdate(this, priority, !_running);
+//    
+//    thiz->scheduleUpdate([jsThis, jsFunc, unscheduleNotifier](float dt){
+//        se::Object* thisObj = jsThis.toObject();
+//        se::Object* funcObj = jsFunc.toObject();
+//
+//        se::ValueArray args;
+//        args.push_back(se::Value((double)dt));
+//        funcObj->call(args, thisObj);
+//
+//    }, interval, repeat, delay, key);
+
+    return true;
+}
+
+static bool Node_scheduleUpdate(se::State& s)
+{
+    printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
+    for (const auto& e1 : __jsthis_schedulekey_map)
+    {
+        printf("target: %p, functions: %d\n", e1.first, (int)e1.second.size());
+    }
+    printf("-------------------------- \n");
+
+    Node* thiz = (Node*)s.nativeThisObject();
+    se::Value jsThis(s.thisObject());
+
+    return Node_scheduleUpdateCommon(thiz, jsThis, 0);
+}
+SE_BIND_FUNC(Node_scheduleUpdate)
+
+static bool Node_scheduleUpdateWithPriority(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    printf("--------------------------\ntarget count: %d\n", (int)__jsthis_schedulekey_map.size());
+    for (const auto& e1 : __jsthis_schedulekey_map)
+    {
+        printf("target: %p, functions: %d\n", e1.first, (int)e1.second.size());
+    }
+    printf("-------------------------- \n");
+
+    Node* thiz = (Node*)s.nativeThisObject();
+    se::Value jsThis(s.thisObject());
+
+    int priority = 0;
+
+    if (argc >= 1)
+        priority = args[0].toInt32();
+
+    return Node_scheduleUpdateCommon(thiz, jsThis, priority);
+}
+SE_BIND_FUNC(Node_scheduleUpdateWithPriority)
 
 static bool Node_unschedule(se::State& s)
 {
@@ -316,6 +422,22 @@ static bool Node_unschedule(se::State& s)
     return true;
 }
 SE_BIND_FUNC(Node_unschedule)
+
+static bool Node_unscheduleAllCallbacks(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    Node* thiz = (Node*)s.nativeThisObject();
+    if (argc == 0)
+    {
+        thiz->unscheduleAllCallbacks();
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(Node_unscheduleAllCallbacks)
 
 static bool Node_getChildren(se::State& s)
 {
@@ -428,6 +550,35 @@ static bool Node_setAnchorPoint(se::State& s)
 }
 SE_BIND_FUNC(Node_setAnchorPoint)
 
+static bool Node_setPosition(se::State& s)
+{
+    const auto& args = s.args();
+    size_t argc = args.size();
+    Node* cobj = (Node*)s.nativeThisObject();
+    bool ok = true;
+    if (argc == 1)
+    {
+        cocos2d::Vec2 arg0;
+        ok &= seval_to_Vec2(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        cobj->setAnchorPoint(arg0);
+        return true;
+    }
+    else if (argc == 2)
+    {
+        float x = 0.0f;
+        float y = 0.0f;
+        ok &= seval_to_float(args[0], &x);
+        ok &= seval_to_float(args[1], &y);
+        cobj->setPosition(cocos2d::Vec2(x, y));
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
+    return false;
+}
+SE_BIND_FUNC(Node_setPosition)
+
 bool jsb_register_Node_manual()
 {
 #if STANDALONE_TEST
@@ -446,9 +597,14 @@ bool jsb_register_Node_manual()
     cls->defineFunction("onExitTransitionDidStart", _SE(Node_onExitTransitionDidStart));
     cls->defineFunction("cleanup", _SE(Node_cleanup));
     cls->defineFunction("schedule", _SE(Node_schedule));
+    cls->defineFunction("scheduleOnce", _SE(Node_scheduleOnce));
+    cls->defineFunction("scheduleUpdateWithPriority", _SE(Node_scheduleUpdateWithPriority));
+    cls->defineFunction("scheduleUpdate", _SE(Node_scheduleUpdate));
     cls->defineFunction("unschedule", _SE(Node_unschedule));
+    cls->defineFunction("unscheduleAllCallbacks", _SE(Node_unscheduleAllCallbacks));
     cls->defineFunction("setContentSize", _SE(Node_setContentSize));
     cls->defineFunction("setAnchorPoint", _SE(Node_setAnchorPoint));
+    cls->defineFunction("setPosition", _SE(Node_setPosition));
 
 #if STANDALONE_TEST
     cls->defineFunction("addChild", _SE(Node_addChild));

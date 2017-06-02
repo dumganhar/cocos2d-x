@@ -32,6 +32,7 @@ namespace se {
         bool hasPrivate(v8::Isolate* isolate, v8::Local<v8::Value> value);
         void setPrivate(v8::Isolate* isolate, ObjectWrap& wrap, void* data);
         void* getPrivate(v8::Isolate* isolate, v8::Local<v8::Value> value);
+        void clearPrivate(v8::Isolate* isolate, ObjectWrap& wrap);
 
     } // namespace internal {
 } // namespace se {

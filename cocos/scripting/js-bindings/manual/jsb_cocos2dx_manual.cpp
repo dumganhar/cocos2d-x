@@ -326,6 +326,217 @@ static bool js_EventListenerMouse_create(se::State& s)
 }
 SE_BIND_FUNC(js_EventListenerMouse_create)
 
+static bool js_EventListenerTouchOneByOne_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 0) {
+        auto ret = EventListenerTouchOneByOne::create();
+        ret->retain();
+
+        ret->onTouchBegan = [ret](Touch* touch, Event* event) -> bool {
+//FIXME:            JS::RootedValue jsret(cx);
+//            bool ok = ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::BEGAN, touch, event, &jsret);
+//
+//            // Not found the method, just return false.
+//            if (!ok)
+//                return false;
+//
+//            if (jsret.isBoolean()) {
+//                return jsret.toBoolean();
+//            }
+            return false;
+        };
+
+        ret->onTouchMoved = [ret](Touch* touch, Event* event) {
+//            ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::MOVED, touch, event);
+        };
+
+        ret->onTouchEnded = [ret](Touch* touch, Event* event) {
+//            ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::ENDED, touch, event);
+        };
+
+        ret->onTouchCancelled = [ret](Touch* touch, Event* event) {
+//            ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::CANCELLED, touch, event);
+        };
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerTouchOneByOne_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerTouchOneByOne_create)
+
+static bool js_EventListenerTouchAllAtOnce_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 0) {
+        auto ret = EventListenerTouchAllAtOnce::create();
+        ret->retain();
+
+        ret->onTouchesBegan = [ret](const std::vector<Touch*>& touches, Event* event) {
+//FIXME:            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::BEGAN, touches, event);
+        };
+
+        ret->onTouchesMoved = [ret](const std::vector<Touch*>& touches, Event* event) {
+//            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::MOVED, touches, event);
+        };
+
+        ret->onTouchesEnded = [ret](const std::vector<Touch*>& touches, Event* event) {
+//            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::ENDED, touches, event);
+        };
+
+        ret->onTouchesCancelled = [ret](const std::vector<Touch*>& touches, Event* event) {
+//            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::CANCELLED, touches, event);
+        };
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerTouchAllAtOnce_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerTouchAllAtOnce_create)
+
+static bool js_EventListenerKeyboard_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 0) {
+        auto ret = EventListenerKeyboard::create();
+        ret->retain();
+
+        ret->onKeyPressed = [ret](EventKeyboard::KeyCode keyCode, Event* event) {
+//FIXME:            ScriptingCore::getInstance()->handleKeyboardEvent(ret, keyCode, true, event);
+        };
+
+        ret->onKeyReleased = [ret](EventKeyboard::KeyCode keyCode, Event* event) {
+//            ScriptingCore::getInstance()->handleKeyboardEvent(ret, keyCode, false, event);
+        };
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerKeyboard_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerKeyboard_create)
+
+static bool js_EventListenerAcceleration_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 1) {
+
+        std::function<void (Acceleration*, Event*)> arg0;
+        do {
+            if (args[0].isObject() && args[0].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[0]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](Acceleration* acc, Event* event) -> void {
+                    bool ok = true;
+                    se::ValueArray args;
+                    args.resize(2);
+                    ok = Acceleration_to_seval(acc, &args[0]);
+                    ok = native_ptr_to_seval<Event>(event, &args[1]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.toObject();
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg0 = lambda;
+            }
+            else
+            {
+                arg0 = nullptr;
+            }
+        } while(false);
+
+        auto ret = EventListenerAcceleration::create(arg0);
+        ret->retain();
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerAcceleration_create)
+
+static bool js_EventListenerFocus_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 0) {
+        auto ret = EventListenerFocus::create();
+        ret->retain();
+
+        assert(false);
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerFocus_create)
+
+static bool js_EventListenerCustom_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 2) {
+        assert(false);
+        auto ret = nullptr;//EventListenerCustom::create();
+//        ret->retain();
+
+
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+        obj->setPrivateData(ret);
+        s.rval().setObject(obj);
+
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
+    return false;
+}
+SE_BIND_FUNC(js_EventListenerCustom_create)
+
 static bool register_eventlistener(se::Object* obj)
 {
     se::Value v;
@@ -333,12 +544,36 @@ static bool register_eventlistener(se::Object* obj)
     assert(v.isObject());
     v.toObject()->defineFunction("create", _SE(js_EventListenerMouse_create));
 
+    __ccObj->getProperty("EventListenerTouchOneByOne", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerTouchOneByOne_create));
+
+    __ccObj->getProperty("EventListenerTouchAllAtOnce", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerTouchAllAtOnce_create));
+
+    __ccObj->getProperty("EventListenerKeyboard", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerKeyboard_create));
+
+    __ccObj->getProperty("EventListenerAcceleration", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerAcceleration_create));
+
+    __ccObj->getProperty("EventListenerFocus", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerFocus_create));
+
+    __ccObj->getProperty("EventListenerCustom", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_EventListenerCustom_create));
+
     return true;
 }
 
 //
 
-static bool js_cocos2dx_Sequence_create(se::State& s)
+static bool js_cocos2dx_Sequence_or_Spawn_create(se::State& s, se::Class* cls)
 {
     const auto& args = s.args();
     int argc = (int)args.size();
@@ -369,7 +604,7 @@ static bool js_cocos2dx_Sequence_create(se::State& s)
         ok = ret->init(array);
         if (ok)
         {
-            se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Sequence_class, false);
+            se::Object* obj = se::Object::createObjectWithClass(cls, false);
             obj->setPrivateData(ret);
             s.rval().setObject(obj);
         }
@@ -378,7 +613,18 @@ static bool js_cocos2dx_Sequence_create(se::State& s)
     SE_REPORT_ERROR("wrong number of arguments");
     return false;
 }
+
+static bool js_cocos2dx_Sequence_create(se::State& s)
+{
+    return js_cocos2dx_Sequence_or_Spawn_create(s, __jsb_cocos2dx_Sequence_class);
+}
 SE_BIND_FUNC(js_cocos2dx_Sequence_create)
+
+static bool js_cocos2dx_Spawn_create(se::State& s)
+{
+    return js_cocos2dx_Sequence_or_Spawn_create(s, __jsb_cocos2dx_Spawn_class);
+}
+SE_BIND_FUNC(js_cocos2dx_Spawn_create)
 
 // ActionInterval
 
@@ -781,6 +1027,119 @@ static bool js_cocos2dx_ActionInterval_easing(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ActionInterval_easing)
 
+//
+
+static bool js_cocos2dx_CallFunc_init(cocos2d::CallFuncN* nativeObj, se::Object* jsobj, const se::ValueArray& args)
+{
+    int argc = (int)args.size();
+
+    se::Value funcVal = args[0];
+    se::Value thisVal;
+    se::Value dataVal;
+
+    if (!funcVal.isObject() || !funcVal.toObject()->isFunction())
+    {
+        JSB_PRECONDITION2(false, false, "js_cocos2dx_CallFunc_create, args[0](func) isn't a function object");
+    }
+
+    jsobj->attachChild(funcVal.toObject());
+
+    if (argc >= 2)
+    {
+        thisVal = args[1];
+        if (!thisVal.isObject())
+        {
+            JSB_PRECONDITION2(false, false, "js_cocos2dx_CallFunc_create, args[1](this) isn't an object");
+        }
+        jsobj->attachChild(thisVal.toObject());
+    }
+
+    if (argc >= 3)
+    {
+        dataVal = args[2];
+        jsobj->attachChild(dataVal.toObject());
+    }
+
+    bool ok = nativeObj->initWithFunction([=](Node* sender){
+
+        se::ScriptEngine::getInstance()->clearException();
+
+        if (sender == nullptr)
+        {
+            sender = nativeObj->getTarget();
+        }
+
+        se::Value senderVal;
+        if (sender != nullptr)
+        {
+            native_ptr_to_seval<Node>(sender, &senderVal);
+        }
+
+        if (!funcVal.isNullOrUndefined())
+        {
+            se::ValueArray valArr;
+            valArr.reserve(2);
+            valArr.push_back(senderVal);
+            valArr.push_back(dataVal);
+
+            funcVal.toObject()->call(valArr, thisVal.toObject());
+        }
+        else
+        {
+            JSB_PRECONDITION2_VOID(false, "js_cocos2dx_CallFunc_create, funcVal is null or undefined!");
+        }
+    });
+
+    return ok;
+}
+
+// cc.CallFunc.create( func, this, [data])
+// cc.CallFunc.create( func )
+static bool js_cocos2dx_CallFunc_create(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    if (argc >= 1 && argc <= 3)
+    {
+        CallFuncN* ret = new (std::nothrow) CallFuncN;
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_CallFuncN_class, false);
+        jsobj->setPrivateData(ret);
+
+        if (js_cocos2dx_CallFunc_init(ret, jsobj, args))
+        {
+            s.rval().setObject(jsobj);
+            return true;
+        }
+        SE_REPORT_ERROR("js_cocos2dx_CallFunc_create: initWithFunction failed!");
+        return false;
+    }
+    SE_REPORT_ERROR("js_cocos2dx_CallFunc_create: Invalid number of arguments");
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_CallFunc_create)
+
+// callFunc.initWithFunction( func, this, [data])
+// callFunc.initWithFunction( func )
+static bool js_cocos2dx_CallFunc_initWithFunction(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    if (argc >= 1 && argc <= 3)
+    {
+        se::Object* jsobj = s.thisObject();
+        if (js_cocos2dx_CallFunc_init((CallFuncN*)s.nativeThisObject(), jsobj, args))
+        {
+            s.rval().setBoolean(true);
+            return true;
+        }
+        SE_REPORT_ERROR("js_cocos2dx_CallFunc_initWithFunction: initWithFunction failed!");
+        return false;
+    }
+    SE_REPORT_ERROR("js_cocos2dx_CallFunc_initWithFunction: Invalid number of arguments");
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_CallFunc_initWithFunction)
+
 bool register_all_cocos2dx_manual(se::Object* obj)
 {
     se::Value v;
@@ -797,11 +1156,22 @@ bool register_all_cocos2dx_manual(se::Object* obj)
     assert(v.isObject());
     v.toObject()->defineFunction("create", _SE(js_cocos2dx_Sequence_create));
 
+    __ccObj->getProperty("Spawn", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_cocos2dx_Spawn_create));
+
     se::Object* proto = __jsb_cocos2dx_ActionInterval_proto;
     proto->defineFunction("repeat", _SE(js_cocos2dx_ActionInterval_repeat));
     proto->defineFunction("repeatForever", _SE(js_cocos2dx_ActionInterval_repeatForever));
     proto->defineFunction("_speed", _SE(js_cocos2dx_ActionInterval_speed));
     proto->defineFunction("easing", _SE(js_cocos2dx_ActionInterval_easing));
+
+    __ccObj->getProperty("CallFunc", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("create", _SE(js_cocos2dx_CallFunc_create));
+
+    proto = __jsb_cocos2dx_CallFuncN_proto;
+    proto->defineFunction("initWithFunction", _SE(js_cocos2dx_CallFunc_initWithFunction));
 
     return true;
 }

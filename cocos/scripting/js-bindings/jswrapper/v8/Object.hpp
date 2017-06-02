@@ -69,6 +69,7 @@ namespace se {
         // --- Private
         void setPrivateData(void* data);
         void* getPrivateData() const;
+        void clearPrivateData();
 
         void switchToRooted();
         void switchToUnrooted();

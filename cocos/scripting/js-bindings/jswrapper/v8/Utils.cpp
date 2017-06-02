@@ -178,6 +178,28 @@ namespace se {
             return nullptr;
         }
 
+        void clearPrivate(v8::Isolate* isolate, ObjectWrap& wrap)
+        {
+            v8::Local<v8::Object> obj = wrap.handle(isolate);
+            int c =  obj->InternalFieldCount();
+            if (c > 0)
+            {
+                wrap.wrap(nullptr);
+            }
+            else
+            {
+                // Pure JS subclass object doesn't have a internal field
+                v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
+                if (obj->Has(key))
+                {
+                    v8::Local<v8::Object> privateObj = obj->Get(key)->ToObject(isolate);
+                    internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj);
+                    free(privateData);
+                    assert(obj->Delete(key));
+                }
+            }
+        }
+
     } // namespace internal {
 } // namespace se {
 
