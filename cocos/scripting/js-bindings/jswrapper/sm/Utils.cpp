@@ -248,7 +248,8 @@ namespace se {
             internal::PrivateData* privateData = (internal::PrivateData*)JS_GetPrivate(jsData.toObjectOrNull());
             free(privateData);
             JS_SetPrivate(jsData.toObjectOrNull(), nullptr);
-            JS_DeleteProperty(cx, obj, KEY_PRIVATE_DATE);
+            bool ok = JS_DeleteProperty(cx, obj, KEY_PRIVATE_DATE);
+            assert(ok);
         }
     }
 

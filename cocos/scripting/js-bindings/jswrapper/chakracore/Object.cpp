@@ -508,9 +508,21 @@ namespace se {
 
     void Object::setPrivateData(void *data)
     {
+        assert(!_hasPrivateData);
         internal::setPrivate(_obj, data, _finalizeCb);
         __nativePtrToObjectMap.emplace(data, this);
         _hasPrivateData = true;
+    }
+
+    void Object::clearPrivateData()
+    {
+        if (_hasPrivateData)
+        {
+            void* data = getPrivateData();
+            __nativePtrToObjectMap.erase(data);
+            internal::clearPrivate(_obj);
+            _hasPrivateData = false;
+        }
     }
 
     void Object::debug(const char *what)

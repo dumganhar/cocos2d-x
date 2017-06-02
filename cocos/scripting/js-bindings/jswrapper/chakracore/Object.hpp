@@ -72,7 +72,7 @@ namespace se {
         // --- Private
         void setPrivateData(void* data);
         void* getPrivateData();
-
+        void clearPrivateData();
 
         void switchToRooted();
         void switchToUnrooted();

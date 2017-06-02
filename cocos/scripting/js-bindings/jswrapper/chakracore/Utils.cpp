@@ -260,6 +260,42 @@ namespace se {
         return data;
     }
 
+    void clearPrivate(JsValueRef obj)
+    {
+        JsValueType type;
+        _CHECK(JsGetValueType(obj, &type));
+        if (type != JsObject && type != JsFunction
+            && type != JsArray && type != JsSymbol
+            && type != JsArrayBuffer && type != JsTypedArray
+            && type != JsDataView)
+        {
+            return;
+        }
+
+        bool isExist = false;
+        JsErrorCode err = JsHasExternalData(obj, &isExist);
+        assert(err == JsNoError);
+        if (isExist)
+        {
+            _CHECK(JsSetExternalData(obj, nullptr));
+        }
+        else
+        {
+            JsPropertyIdRef propertyId = JS_INVALID_REFERENCE;
+            _CHECK(JsCreatePropertyId(KEY_PRIVATE_DATE, strlen(KEY_PRIVATE_DATE), &propertyId));
+            _CHECK(JsHasProperty(obj, propertyId, &isExist));
+            if (isExist)
+            {
+                void* data = nullptr;
+                _CHECK(JsGetExternalData(obj, &data));
+                internal::PrivateData* privateData = (internal::PrivateData*)data;
+                free(privateData);
+                JsSetExternalData(obj, nullptr);
+                _CHECK(JsDeleteProperty(obj, propertyId, true, nullptr));
+            }
+        }
+    }
+
 }} // namespace se { namespace internal {
 
 #endif // #ifdef SCRIPT_ENGINE_CHAKRACORE

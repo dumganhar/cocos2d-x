@@ -36,6 +36,7 @@ namespace se {
         bool hasPrivate(JSObjectRef obj);
         void setPrivate(JSObjectRef obj, void* data, JSObjectFinalizeCallback finalizeCb);
         void* getPrivate(JSObjectRef obj);
+        void clearPrivate(JSObjectRef obj);
 
     } // namespace internal {
 } // namespace se {

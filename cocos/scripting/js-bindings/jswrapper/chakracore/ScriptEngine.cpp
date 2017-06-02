@@ -15,9 +15,7 @@ namespace se {
 
         JsValueRef __forceGC(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
-            printf("GC begin ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
             ScriptEngine::getInstance()->gc();
-            printf("GC end ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
             return JS_INVALID_REFERENCE;
         }
 
@@ -186,7 +184,9 @@ namespace se {
 
     void ScriptEngine::gc()
     {
+        printf("GC begin ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
         _CHECK(JsCollectGarbage(_rt));
+        printf("GC end ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
     }
 
     bool ScriptEngine::executeScriptBuffer(const char *string, Value *data, const char *fileName)

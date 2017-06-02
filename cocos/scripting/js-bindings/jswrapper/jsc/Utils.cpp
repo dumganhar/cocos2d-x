@@ -241,6 +241,30 @@ namespace se {
         return data;
     }
 
+    void clearPrivate(JSObjectRef obj)
+    {
+        void* data = JSObjectGetPrivate(obj);
+        if (data != nullptr)
+        {
+            JSObjectSetPrivate(obj, nullptr);
+        }
+        else
+        {
+            JSStringRef key = JSStringCreateWithUTF8CString(KEY_PRIVATE_DATE);
+            if (JSObjectHasProperty(__cx, obj, key))
+            {
+                JSValueRef value = JSObjectGetProperty(__cx, obj, key, nullptr);
+                JSObjectRef propertyObj = JSValueToObject(__cx, value, nullptr);
+                internal::PrivateData* privateData = (internal::PrivateData*)JSObjectGetPrivate(propertyObj);
+                free(privateData);
+                JSObjectSetPrivate(propertyObj, nullptr);
+                bool ok = JSObjectDeleteProperty(__cx, obj, key, nullptr);
+                assert(ok);
+            }
+
+            JSStringRelease(key);
+        }
+    }
 
 }} // namespace se { namespace internal {
 

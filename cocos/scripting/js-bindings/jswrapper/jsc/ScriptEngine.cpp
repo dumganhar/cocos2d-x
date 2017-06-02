@@ -111,7 +111,7 @@ namespace se {
         __jsb_CCPrivateData_class = Class::create("__CCPrivateData", _globalObj, nullptr, privateDataContructor);
         __jsb_CCPrivateData_class->defineFinalizedFunction(privateDataFinalize);
         __jsb_CCPrivateData_class->install();
-        
+
         _isValid = true;
 
         return true;
@@ -177,7 +177,10 @@ namespace se {
 
     void ScriptEngine::gc()
     {
-        JSGarbageCollect(_cx);
+        printf("GC begin ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
+        // JSGarbageCollect(_cx);
+        JSSynchronousGarbageCollectForDebugging(_cx);
+        printf("GC end ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
     }
 
     bool ScriptEngine::executeScriptBuffer(const char *string, Value *data, const char *fileName)

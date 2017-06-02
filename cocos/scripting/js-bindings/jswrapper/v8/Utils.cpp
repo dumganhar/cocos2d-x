@@ -195,7 +195,8 @@ namespace se {
                     v8::Local<v8::Object> privateObj = obj->Get(key)->ToObject(isolate);
                     internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj);
                     free(privateData);
-                    assert(obj->Delete(key));
+                    bool ok = obj->Delete(key);
+                    assert(ok);
                 }
             }
         }
