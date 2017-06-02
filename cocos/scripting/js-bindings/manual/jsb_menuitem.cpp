@@ -102,6 +102,9 @@ static bool MenuItemFont_create(se::State& s)
     auto item = se::Object::createObjectWithClass(__jsb_MenuItemFont_class, false);
     item->attachChild(func.toObject());
     MenuItemFont* nativeObj = MenuItemFont::create(str, [func, target](Ref* sender){
+        se::ScriptEngine::getInstance()->clearException();
+        se::AutoHandleScope hs;
+
         se::Object* funcObj = func.toObject();
         se::Object* targetObj = target.toObject();
         se::Object* senderObj = se::Object::getObjectWithPtr(sender);

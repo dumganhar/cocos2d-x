@@ -571,6 +571,7 @@ var ActionJump = ActionsDemo.extend({
 
     onEnter:function () {
         //----start7----onEnter
+        cc.log("ActionJump onEnter");
         this._super();
         this.centerSprites(3);
 
@@ -624,7 +625,7 @@ var ActionJump = ActionsDemo.extend({
 var ActionBezier = ActionsDemo.extend({
     onEnter:function () {
         //----start8----onEnter
-
+        cc.log("ActionBezier onEnter");
         this._super();
         var s = director.getWinSize();
 
@@ -2659,6 +2660,7 @@ var ActionCustomTest = ActionsDemo.extend({
     _layer:null,
     onEnter:function () {
         //----start47----onEnter
+        log("ActionCustomTest onEnter");
         this._super();
 
         this.centerSprites(0);
@@ -2787,8 +2789,10 @@ var ActionCustomTest = ActionsDemo.extend({
          * group 5
          */
         spriteTemp = this.addandCreateSpriteTemp("cc.BezierBy");
-        var bezierBy = new (createCustomAction(cc.BezierBy))(5, [spriteTemp.getPosition(), cc.p(0, spriteTemp.getPosition().y),
-            cc.p(cc.winSize.x, spriteTemp.getPosition().y), spriteTemp.getPosition()]);
+        var bezierByConfig = [spriteTemp.getPosition(), cc.p(0, spriteTemp.getPosition().y),
+            cc.p(cc.winSize.x, spriteTemp.getPosition().y), spriteTemp.getPosition()];
+        log("bezierByConfig: " + bezierByConfig);
+        var bezierBy = new (createCustomAction(cc.BezierBy))(5, bezierByConfig);
         spriteTemp.runAction(bezierBy);
 
         spriteTemp = this.addandCreateSpriteTemp("cc.BezierTo");
@@ -2876,6 +2880,7 @@ var ActionCustomTest = ActionsDemo.extend({
         return spriteTemp;
     },
     title:function () {
+        cc.log("get title of ActionCustomTest");
         return "ActionCustomTest";
     },
 

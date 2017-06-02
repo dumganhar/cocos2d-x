@@ -308,61 +308,59 @@ namespace se {
 
     int8_t Value::toInt8() const
     {
-        assert(_type == Type::Number);
-        return static_cast<int8_t>(_u._number);
+        return static_cast<int8_t>(toNumber());
     }
 
     uint8_t Value::toUint8() const
     {
-        assert(_type == Type::Number);
-        return static_cast<uint8_t>(_u._number);
+        return static_cast<uint8_t>(toNumber());
     }
 
     int16_t Value::toInt16() const
     {
-        assert(_type == Type::Number);
-        return static_cast<int16_t>(_u._number);
+        return static_cast<int16_t>(toNumber());
     }
 
     uint16_t Value::toUint16() const
     {
-        assert(_type == Type::Number);
-        return static_cast<uint16_t>(_u._number);
+        return static_cast<uint16_t>(toNumber());
     }
 
     int32_t Value::toInt32() const
     {
-        assert(_type == Type::Number);
-        return static_cast<int32_t>(_u._number);
+        return static_cast<int32_t>(toNumber());
     }
 
     uint32_t Value::toUint32() const
     {
-        assert(_type == Type::Number);
-        return static_cast<uint32_t>(_u._number);
+        return static_cast<uint32_t>(toNumber());
     }
 
     long Value::toLong() const
     {
-        assert(_type == Type::Number);
-        return static_cast<long>(_u._number);
+        return static_cast<long>(toNumber());
     }
 
     unsigned long Value::toUlong() const
     {
-        assert(_type == Type::Number);
-        return static_cast<unsigned long>(_u._number);
+        return static_cast<unsigned long>(toNumber());
     }
 
     float Value::toFloat() const
     {
-        assert(_type == Type::Number);
-        return static_cast<float>(_u._number);
+        return static_cast<float>(toNumber());
     }
 
    	double Value::toNumber() const
     {
-        assert(_type == Type::Number);
+        assert(_type == Type::Number || _type == Type::Boolean);
+        if (_type == Type::Boolean)
+        {
+            if (_u._boolean)
+                return 1.0;
+            else
+                return 0.0;
+        }
         return _u._number;
     }
 

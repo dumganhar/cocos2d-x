@@ -218,13 +218,22 @@ public:
     {
         printf("~UnscheduleNotifier, node: %p, key: %s\n", _node, _key.c_str());
 
+        se::ScriptEngine::getInstance()->clearException();
+        se::AutoHandleScope hs;
+
         Node* node = _node;
         std::string key = _key;
-        Director::getInstance()->getScheduler()->performFunctionInCocosThread([node, key](){
-            removeScheduleByKey(key);
-            if (node->isScheduled(key))
-                node->unschedule(key);
 
+        if (node->isScheduled(key))
+            node->unschedule(key);
+
+        // Delay one frame to release node since it's probably in garbage collection which invoking any JS api may cause crash.
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([node, key](){
+
+            se::ScriptEngine::getInstance()->clearException();
+            se::AutoHandleScope hs;
+
+            removeScheduleByKey(key);
             node->release();
         });
     }
@@ -257,6 +266,9 @@ static bool Node_scheduleCommon(Node* thiz, const se::Value& jsThis, const se::V
     std::shared_ptr<UnscheduleNotifier> unscheduleNotifier = std::make_shared<UnscheduleNotifier>(thiz, key);
 
     thiz->schedule([jsThis, jsFunc, unscheduleNotifier](float dt){
+        se::ScriptEngine::getInstance()->clearException();
+        se::AutoHandleScope hs;
+
         se::Object* thisObj = jsThis.toObject();
         se::Object* funcObj = jsFunc.toObject();
 
@@ -292,7 +304,7 @@ static bool Node_schedule(se::State& s)
         interval = args[1].toNumber();
 
     if (argc >= 3)
-        repeat = args[2].toNumber();
+        repeat = args[2].toUint32();
 
     if (argc >= 4)
         delay = args[3].toNumber();
@@ -347,6 +359,8 @@ static bool Node_scheduleUpdateCommon(Node* thiz, const se::Value& jsThis, int p
 //    thiz->getScheduler()->scheduleUpdate(this, priority, !_running);
 //    
 //    thiz->scheduleUpdate([jsThis, jsFunc, unscheduleNotifier](float dt){
+            // se::ScriptEngine::getInstance()->clearException();
+        // se::AutoHandleScope hs;
 //        se::Object* thisObj = jsThis.toObject();
 //        se::Object* funcObj = jsFunc.toObject();
 //

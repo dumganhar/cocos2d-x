@@ -45,8 +45,9 @@ namespace se {
             }
             else
             {
-                assert(obj->_getClass());
-                obj->_getClass()->_finalizeFunc(nativeObj);
+                assert(obj->_getClass() != nullptr);
+                if (obj->_getClass()->_finalizeFunc != nullptr)
+                    obj->_getClass()->_finalizeFunc(nativeObj);
             }
             obj->release();
             __nativePtrToObjectMap.erase(iter);
@@ -291,7 +292,6 @@ namespace se {
 
     bool Object::call(const ValueArray& args, Object* thisObject, Value* rval/* = nullptr*/)
     {
-        AutoHandleScope hs;
         size_t argc = 0;
         std::vector<v8::Local<v8::Value>> argv;
         argc = args.size();
@@ -466,6 +466,7 @@ namespace se {
 
     void Object::_setFinalizeCallback(V8FinalizeFunc finalizeCb)
     {
+        assert(finalizeCb != nullptr);
         _finalizeCb = finalizeCb;
     }
 

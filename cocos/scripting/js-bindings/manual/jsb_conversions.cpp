@@ -1231,7 +1231,7 @@ namespace {
     bool std_vector_T_to_seval(const std::vector<T>& v, se::Value* ret)
     {
         assert(ret != nullptr);
-        se::Object* obj = se::Object::createArrayObject(v.size(), false);
+        se::Object* obj = se::Object::createArrayObject(v.size(), true);
         bool ok = true;
 
         uint32_t i = 0;
@@ -1246,7 +1246,7 @@ namespace {
         }
 
         ret->setObject(obj);
-        
+        obj->switchToUnrooted();
         obj->release();
         return ok;
     }

@@ -18,6 +18,11 @@
 
 using namespace cocos2d;
 
+static bool jsb_empty_func(se::State& s)
+{
+    return true;
+}
+SE_BIND_FUNC(jsb_empty_func)
 
 class __JSPlistDelegator: public cocos2d::SAXDelegator
 {
@@ -177,6 +182,18 @@ void __JSPlistDelegator::textHandler(void* /*ctx*/, const char *ch, size_t len) 
     }
 }
 
+static bool register_plist_parser(se::Object* obj)
+{
+    se::Value v;
+    __ccObj->getProperty("PlistParser", &v);
+    assert(v.isObject());
+    v.toObject()->defineFunction("getInstance", _SE(js_PlistParser_getInstance));
+
+    __jsb_cocos2dx_SAXParser_proto->defineFunction("parse", _SE(js_PlistParser_parse));
+
+    return true;
+}
+
 // cc.sys.localStorage
 
 static bool JSB_localStorageGetItem(se::State& s)
@@ -293,6 +310,7 @@ template<typename T, typename ARG1>
 static bool invokeJSCallbackWithOneArg(T* listener, const char* funcName, ARG1* arg1, se::Value* retVal)
 {
     se::ScriptEngine::getInstance()->clearException();
+    se::AutoHandleScope hs;
     bool ok = true;
     se::Value listenerVal;
     native_ptr_to_seval<T>(listener, &listenerVal);
@@ -321,6 +339,8 @@ template<typename T, typename ARG1, typename ARG2>
 static bool invokeJSCallbackWithTwoArgs(T* listener, const char* funcName, ARG1* arg1, ARG2* arg2, se::Value* retVal)
 {
     se::ScriptEngine::getInstance()->clearException();
+    se::AutoHandleScope hs;
+
     bool ok = true;
     se::Value listenerVal;
     native_ptr_to_seval<T>(listener, &listenerVal);
@@ -511,6 +531,9 @@ static bool js_EventListenerAcceleration_create(se::State& s)
                 se::Value jsFunc(args[0]);
                 jsThis.toObject()->attachChild(jsFunc.toObject());
                 auto lambda = [=](Acceleration* acc, Event* event) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+
                     bool ok = true;
                     se::ValueArray args;
                     args.resize(2);
@@ -1114,12 +1137,14 @@ static bool js_cocos2dx_CallFunc_init(cocos2d::CallFuncN* nativeObj, se::Object*
     if (argc >= 3)
     {
         dataVal = args[2];
-        jsobj->attachChild(dataVal.toObject());
+        if (dataVal.isObject())
+            jsobj->attachChild(dataVal.toObject());
     }
 
     bool ok = nativeObj->initWithFunction([=](Node* sender){
 
         se::ScriptEngine::getInstance()->clearException();
+        se::AutoHandleScope hs;
 
         if (sender == nullptr)
         {
@@ -1204,24 +1229,251 @@ static bool js_cocos2dx_CallFunc_initWithFunction(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CallFunc_initWithFunction)
 
-bool register_all_cocos2dx_manual(se::Object* obj)
+template<typename T>
+static bool js_BezierActions_init(se::State& s, T* nativeObj)
 {
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    if (argc == 2)
+    {
+        bool ok = false;
+        double t = 0.0;
+        ok = seval_to_double(args[0], &t);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        std::vector<Vec2> arr;
+        ok = seval_to_std_vector_Vec2(args[1], &arr);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+        JSB_PRECONDITION2(arr.size() >= 3, false, "args[1] isn't an array with 3 elements");
+
+        ccBezierConfig config;
+        config.controlPoint_1 = arr[0];
+        config.controlPoint_2 = arr[1];
+        config.endPosition = arr[2];
+
+        ok = nativeObj->initWithDuration(t, config);
+        JSB_PRECONDITION2(ok, false, "initWithDuration failed!");
+
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+
+
+static bool js_cocos2dx_BezierBy_create(se::State& s)
+{
+    cocos2d::BezierBy* nativeObj = new (std::nothrow) cocos2d::BezierBy();
+    bool ok = js_BezierActions_init(s, nativeObj);
+    if (ok)
+    {
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_BezierBy_class, false);
+        jsobj->setPrivateData(nativeObj);
+        s.rval().setObject(jsobj);
+    }
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_BezierBy_create)
+
+static bool js_cocos2dx_BezierBy_initWithDuration(se::State& s)
+{
+    bool ok = js_BezierActions_init(s, (cocos2d::BezierBy*)s.nativeThisObject());
+    s.rval().setBoolean(ok);
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_BezierBy_initWithDuration)
+
+static bool js_cocos2dx_BezierTo_create(se::State& s)
+{
+    cocos2d::BezierTo* nativeObj = new (std::nothrow) cocos2d::BezierTo();
+    bool ok = js_BezierActions_init(s, nativeObj);
+    if (ok)
+    {
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_BezierTo_class, false);
+        jsobj->setPrivateData(nativeObj);
+        s.rval().setObject(jsobj);
+    }
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_BezierTo_create)
+
+static bool js_cocos2dx_BezierTo_initWithDuration(se::State& s)
+{
+    bool ok = js_BezierActions_init(s, (cocos2d::BezierTo*)s.nativeThisObject());
+    s.rval().setBoolean(ok);
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_BezierTo_initWithDuration)
+
+template<typename T>
+static bool js_CardinalSplineActions_init(se::State& s, T* nativeObj)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    bool ok = true;
+    if (argc == 3)
+    {
+        double dur = 0.0;
+        ok = seval_to_double(args[0], &dur);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        std::vector<Vec2> arr;
+        ok = seval_to_std_vector_Vec2(args[1], &arr);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        double ten = 0.0;
+        ok = seval_to_double(args[2], &ten);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        PointArray* points = PointArray::create(arr.size());
+
+        for(const auto& pt : arr)
+        {
+            points->addControlPoint(pt);
+        }
+
+        ok = nativeObj->initWithDuration(dur, points, ten);
+        JSB_PRECONDITION2(ok, false, "initWithDuration failed!");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+
+static bool js_cocos2dx_CardinalSplineBy_create(se::State& s)
+{
+    cocos2d::CardinalSplineBy* nativeObj = new (std::nothrow) cocos2d::CardinalSplineBy();
+    bool ok = js_CardinalSplineActions_init(s, nativeObj);
+    if (ok)
+    {
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_CardinalSplineBy_class, false);
+        jsobj->setPrivateData(nativeObj);
+        s.rval().setObject(jsobj);
+    }
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CardinalSplineBy_create)
+
+static bool js_cocos2dx_CardinalSplineBy_initWithDuration(se::State& s)
+{
+    bool ok = js_CardinalSplineActions_init(s, (cocos2d::CardinalSplineBy*)s.nativeThisObject());
+    s.rval().setBoolean(ok);
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CardinalSplineBy_initWithDuration)
+
+static bool js_cocos2dx_CardinalSplineTo_create(se::State& s)
+{
+    cocos2d::CardinalSplineTo* nativeObj = new (std::nothrow) cocos2d::CardinalSplineTo();
+    bool ok = js_CardinalSplineActions_init(s, nativeObj);
+    if (ok)
+    {
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_CardinalSplineTo_class, false);
+        jsobj->setPrivateData(nativeObj);
+        s.rval().setObject(jsobj);
+    }
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CardinalSplineTo_create)
+
+static bool js_cocos2dx_CardinalSplineTo_initWithDuration(se::State& s)
+{
+    bool ok = js_CardinalSplineActions_init(s, (cocos2d::CardinalSplineTo*)s.nativeThisObject());
+    s.rval().setBoolean(ok);
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CardinalSplineTo_initWithDuration)
+
+template<typename T>
+static bool js_CatmullRomActions_init(se::State& s, T* nativeObj)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    bool ok = true;
+    if (argc == 2)
+    {
+        double dur = 0.0;
+        ok = seval_to_double(args[0], &dur);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        std::vector<Vec2> arr;
+        ok = seval_to_std_vector_Vec2(args[1], &arr);
+        JSB_PRECONDITION2(ok, false, "Error processing arguments");
+
+        PointArray* points = PointArray::create(arr.size());
+
+        for(const auto& pt : arr)
+        {
+            points->addControlPoint(pt);
+        }
+
+        ok = nativeObj->initWithDuration(dur, points);
+        JSB_PRECONDITION2(ok, false, "initWithDuration failed!");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+
+static bool js_cocos2dx_CatmullRomBy_create(se::State& s)
+{
+    cocos2d::CatmullRomBy* nativeObj = new (std::nothrow) cocos2d::CatmullRomBy();
+    bool ok = js_CatmullRomActions_init(s, nativeObj);
+    if (ok)
+    {
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_CatmullRomBy_class, false);
+        jsobj->setPrivateData(nativeObj);
+        s.rval().setObject(jsobj);
+    }
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CatmullRomBy_create)
+
+static bool js_cocos2dx_CatmullRomBy_initWithDuration(se::State& s)
+{
+    bool ok = js_CatmullRomActions_init(s, (cocos2d::CatmullRomBy*)s.nativeThisObject());
+    s.rval().setBoolean(ok);
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CatmullRomBy_initWithDuration)
+
+static bool js_cocos2dx_CatmullRomTo_create(se::State& s)
+{
+    cocos2d::CatmullRomTo* nativeObj = new (std::nothrow) cocos2d::CatmullRomTo();
+    bool ok = js_CatmullRomActions_init(s, nativeObj);
+    if (ok)
+    {
+        se::Object* jsobj = se::Object::createObjectWithClass(__jsb_cocos2dx_CatmullRomTo_class, false);
+        jsobj->setPrivateData(nativeObj);
+        s.rval().setObject(jsobj);
+    }
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CatmullRomTo_create)
+
+static bool js_cocos2dx_CatmullRomTo_initWithDuration(se::State& s)
+{
+    bool ok = js_CatmullRomActions_init(s, (cocos2d::CatmullRomTo*)s.nativeThisObject());
+    s.rval().setBoolean(ok);
+    return ok;
+}
+SE_BIND_FUNC(js_cocos2dx_CatmullRomTo_initWithDuration)
+
+//
+
+static bool register_actions(se::Object* obj)
+{
+    #define JSB_BIND_ACTION(clsName, proto, initFuncName) \
+        __ccObj->getProperty(#clsName, &v); \
+        v.toObject()->defineFunction("create", _SE(js_cocos2dx_##clsName##_create)); \
+        proto->defineFunction(#initFuncName, _SE(js_cocos2dx_##clsName##_##initFuncName));
+
     se::Value v;
-    __ccObj->getProperty("PlistParser", &v);
-    assert(v.isObject());
-    v.toObject()->defineFunction("getInstance", _SE(js_PlistParser_getInstance));
-
-    __jsb_cocos2dx_SAXParser_proto->defineFunction("parse", _SE(js_PlistParser_parse));
-
-    register_sys_localStorage(obj);
-    register_eventlistener(obj);
 
     __ccObj->getProperty("Sequence", &v);
-    assert(v.isObject());
     v.toObject()->defineFunction("create", _SE(js_cocos2dx_Sequence_create));
 
     __ccObj->getProperty("Spawn", &v);
-    assert(v.isObject());
     v.toObject()->defineFunction("create", _SE(js_cocos2dx_Spawn_create));
 
     se::Object* proto = __jsb_cocos2dx_ActionInterval_proto;
@@ -1230,12 +1482,45 @@ bool register_all_cocos2dx_manual(se::Object* obj)
     proto->defineFunction("_speed", _SE(js_cocos2dx_ActionInterval_speed));
     proto->defineFunction("easing", _SE(js_cocos2dx_ActionInterval_easing));
 
-    __ccObj->getProperty("CallFunc", &v);
-    assert(v.isObject());
-    v.toObject()->defineFunction("create", _SE(js_cocos2dx_CallFunc_create));
+    JSB_BIND_ACTION(CallFunc, __jsb_cocos2dx_CallFuncN_proto, initWithFunction)
+    JSB_BIND_ACTION(BezierBy, __jsb_cocos2dx_BezierBy_proto, initWithDuration)
+    JSB_BIND_ACTION(BezierTo, __jsb_cocos2dx_BezierTo_proto, initWithDuration)
+    JSB_BIND_ACTION(CardinalSplineBy, __jsb_cocos2dx_CardinalSplineBy_proto, initWithDuration)
+    JSB_BIND_ACTION(CardinalSplineTo, __jsb_cocos2dx_CardinalSplineTo_proto, initWithDuration)
+    JSB_BIND_ACTION(CatmullRomBy, __jsb_cocos2dx_CatmullRomBy_proto, initWithDuration)
+    JSB_BIND_ACTION(CatmullRomTo, __jsb_cocos2dx_CatmullRomTo_proto, initWithDuration)
 
-    proto = __jsb_cocos2dx_CallFuncN_proto;
-    proto->defineFunction("initWithFunction", _SE(js_cocos2dx_CallFunc_initWithFunction));
+    return true;
+}
+
+bool register_all_cocos2dx_manual(se::Object* obj)
+{
+    register_plist_parser(obj);
+    register_sys_localStorage(obj);
+    register_eventlistener(obj);
+    register_actions(obj);
+
+    // empty 'retain' 'release' implementation
+
+    se::Object* protosNeedEmptyRetainRelease[] = {
+        __jsb_cocos2dx_Action_proto,
+        __jsb_cocos2dx_Animation_proto,
+        __jsb_cocos2dx_SpriteFrame_proto,
+        __jsb_cocos2dx_Node_proto,
+        __jsb_cocos2dx_EventListener_proto,
+        __jsb_cocos2dx_GLProgram_proto,
+        __jsb_cocos2dx_Scheduler_proto,
+        __jsb_cocos2dx_ActionManager_proto,
+        __jsb_cocos2dx_Texture2D_proto,
+        __jsb_cocos2dx_Touch_proto,
+    };
+
+    for (const auto& e : protosNeedEmptyRetainRelease)
+    {
+        e->defineFunction("retain", _SE(jsb_empty_func));
+        e->defineFunction("release", _SE(jsb_empty_func));
+    }
+
 
     return true;
 }

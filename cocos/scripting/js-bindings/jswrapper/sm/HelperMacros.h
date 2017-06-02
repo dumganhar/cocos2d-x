@@ -145,12 +145,14 @@
     }
 
 
-#define SE_REPORT_ERROR(format, ...)  JS_ReportErrorUTF8(se::ScriptEngine::getInstance()->_getContext(), format, ##__VA_ARGS__)
-
 #define SE_TYPE_NAME(t) typeid(t).name()
 
 #define SE_QUOTEME_(x) #x
 #define SE_QUOTEME(x) SE_QUOTEME_(x)
+
+#define SE_REPORT_ERROR(fmt, ...)  \
+    printf("ERROR (" __FILE__ ", " SE_QUOTEME(__LINE__) "): " fmt "\n", ##__VA_ARGS__); \
+    JS_ReportErrorUTF8(se::ScriptEngine::getInstance()->_getContext(), fmt, ##__VA_ARGS__)
 
 #if COCOS2D_DEBUG > 0
 

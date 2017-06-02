@@ -374,6 +374,9 @@ static bool XMLHttpRequest_constructor(se::State& s)
     se::Value thiz(s.thisObject());
 
     auto cb = [thiz](const char* eventName){
+        se::ScriptEngine::getInstance()->clearException();
+        se::AutoHandleScope hs;
+        
         se::Object* thizObj = thiz.toObject();
 
         se::Value func;

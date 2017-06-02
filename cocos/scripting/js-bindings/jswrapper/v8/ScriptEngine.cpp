@@ -230,6 +230,7 @@ namespace se {
         }
 
         clearException();
+        AutoHandleScope hs;
         iterOwner->second->attachChild(iterTarget->second);
     }
 
@@ -248,6 +249,7 @@ namespace se {
         }
 
         clearException();
+        AutoHandleScope hs;
         iterOwner->second->detachChild(iterTarget->second);
     }
 
@@ -260,6 +262,7 @@ namespace se {
             return false;
 
         clearException();
+        AutoHandleScope hs;
         Object* target = iter->second;
         const char* funcName = nullptr;
         if (type == NodeEventType::ENTER)
@@ -286,8 +289,6 @@ namespace se {
         {
             assert(false);
         }
-
-        AutoHandleScope hs;
 
         bool ret = false;
         Value funcVal;

@@ -1902,6 +1902,9 @@ static bool js_cocos2dx_Node_setOnExitCallback(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=]() -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            se::Value rval;
 		            se::Object* thisObj = jsThis.toObject();
 		            se::Object* funcObj = jsFunc.toObject();
@@ -2171,6 +2174,9 @@ static bool js_cocos2dx_Node_setonEnterTransitionDidFinishCallback(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=]() -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            se::Value rval;
 		            se::Object* thisObj = jsThis.toObject();
 		            se::Object* funcObj = jsFunc.toObject();
@@ -2469,6 +2475,9 @@ static bool js_cocos2dx_Node_setOnEnterCallback(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=]() -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            se::Value rval;
 		            se::Object* thisObj = jsThis.toObject();
 		            se::Object* funcObj = jsFunc.toObject();
@@ -2548,6 +2557,9 @@ static bool js_cocos2dx_Node_setonExitTransitionDidStartCallback(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=]() -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            se::Value rval;
 		            se::Object* thisObj = jsThis.toObject();
 		            se::Object* funcObj = jsFunc.toObject();
@@ -4336,6 +4348,9 @@ static bool js_cocos2dx_Node_enumerateChildren(se::State& s)
 		        se::Value jsFunc(args[1]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Node* larg0) -> bool {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -7342,6 +7357,9 @@ static bool js_cocos2dx_Scheduler_performFunctionInCocosThread(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=]() -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            se::Value rval;
 		            se::Object* thisObj = jsThis.toObject();
 		            se::Object* funcObj = jsFunc.toObject();
@@ -8774,6 +8792,9 @@ static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](cocos2d::GLProgram* larg0, cocos2d::Uniform* larg1) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(2);
@@ -8814,6 +8835,9 @@ static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](cocos2d::GLProgram* larg0, cocos2d::Uniform* larg1) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(2);
@@ -8979,6 +9003,9 @@ static bool js_cocos2dx_GLProgramState_setVertexAttribCallback(se::State& s)
 		        se::Value jsFunc(args[1]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::VertexAttrib* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -14388,6 +14415,9 @@ static bool js_cocos2dx_ActionFloat_initWithDuration(se::State& s)
 		        se::Value jsFunc(args[3]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](float larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -14439,6 +14469,9 @@ static bool js_cocos2dx_ActionFloat_create(se::State& s)
 		        se::Value jsFunc(args[3]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](float larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -15852,6 +15885,9 @@ static bool js_cocos2dx_FileUtils_getStringFromFile(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](std::basic_string<char> larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -15915,6 +15951,9 @@ static bool js_cocos2dx_FileUtils_removeFile(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16005,6 +16044,9 @@ static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
 			        se::Value jsFunc(args[3]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16080,6 +16122,9 @@ static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
 			        se::Value jsFunc(args[2]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16329,6 +16374,9 @@ static bool js_cocos2dx_FileUtils_getFileSize(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](long larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16415,6 +16463,9 @@ static bool js_cocos2dx_FileUtils_removeDirectory(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16500,6 +16551,9 @@ static bool js_cocos2dx_FileUtils_writeStringToFile(se::State& s)
 			        se::Value jsFunc(args[2]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16644,6 +16698,9 @@ static bool js_cocos2dx_FileUtils_writeValueVectorToFile(se::State& s)
 			        se::Value jsFunc(args[2]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16710,6 +16767,9 @@ static bool js_cocos2dx_FileUtils_isFileExist(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16835,6 +16895,9 @@ static bool js_cocos2dx_FileUtils_writeValueMapToFile(se::State& s)
 			        se::Value jsFunc(args[2]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -16960,6 +17023,9 @@ static bool js_cocos2dx_FileUtils_isDirectoryExist(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -17060,6 +17126,9 @@ static bool js_cocos2dx_FileUtils_createDirectory(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](bool larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -17768,6 +17837,9 @@ static bool js_cocos2dx_EventListenerAcceleration_init(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Acceleration* larg0, cocos2d::Event* larg1) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(2);
@@ -32322,6 +32394,9 @@ static bool js_cocos2dx_MenuItem_initWithCallback(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -32420,6 +32495,9 @@ static bool js_cocos2dx_MenuItem_setCallback(se::State& s)
 		        se::Value jsFunc(args[0]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -32640,6 +32718,9 @@ static bool js_cocos2dx_MenuItemLabel_initWithLabel(se::State& s)
 		        se::Value jsFunc(args[1]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -32798,6 +32879,9 @@ static bool js_cocos2dx_MenuItemAtlasFont_initWithString(se::State& s)
 		        se::Value jsFunc(args[5]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -32961,6 +33045,9 @@ static bool js_cocos2dx_MenuItemFont_initWithString(se::State& s)
 		        se::Value jsFunc(args[1]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -33236,6 +33323,9 @@ static bool js_cocos2dx_MenuItemSprite_initWithNormalSprite(se::State& s)
 		        se::Value jsFunc(args[3]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -33519,6 +33609,9 @@ static bool js_cocos2dx_MenuItemImage_initWithNormalImage(se::State& s)
 		        se::Value jsFunc(args[3]);
 		        jsThis.toObject()->attachChild(jsFunc.toObject());
 		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
 		            bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
@@ -49120,6 +49213,9 @@ static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](cocos2d::Texture2D* larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
@@ -49162,6 +49258,9 @@ static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
 			        se::Value jsFunc(args[1]);
 			        jsThis.toObject()->attachChild(jsFunc.toObject());
 			        auto lambda = [=](cocos2d::Texture2D* larg0) -> void {
+			            se::ScriptEngine::getInstance()->clearException();
+			            se::AutoHandleScope hs;
+			
 			            bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
