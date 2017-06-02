@@ -189,6 +189,22 @@ namespace se {
         printf("GC end ..., (Native -> JS map) count: %d\n", (int)__nativePtrToObjectMap.size());
     }
 
+    void ScriptEngine::clearException()
+    {
+        bool hasException = false;
+        _CHECK(JsHasException(&hasException));
+
+        if (hasException)
+        {
+            JsValueRef exception;
+            _CHECK(JsGetAndClearException(&exception));
+
+            std::string exceptionMsg = formatException(exception);
+            printf("%s\n", exceptionMsg.c_str());
+
+        }
+    }
+
     bool ScriptEngine::executeScriptBuffer(const char *string, Value *data, const char *fileName)
     {
         return executeScriptBuffer(string, strlen(string), data, fileName);
@@ -213,18 +229,7 @@ namespace se {
 
         if (errCode != JsNoError)
         {
-            bool hasException = false;
-            _CHECK(JsHasException(&hasException));
-
-            if (hasException)
-            {
-                JsValueRef exception;
-                _CHECK(JsGetAndClearException(&exception));
-
-                std::string exceptionMsg = formatException(exception);
-                printf("%s\n", exceptionMsg.c_str());
-                
-            }
+            clearException();
             return false;
         }
 
@@ -278,6 +283,7 @@ namespace se {
             return;
         }
 
+        clearException();
         iterOwner->second->attachChild(iterTarget->second);
     }
 
@@ -295,6 +301,7 @@ namespace se {
             return;
         }
 
+        clearException();
         iterOwner->second->detachChild(iterTarget->second);
     }
 
@@ -305,6 +312,8 @@ namespace se {
         auto iter = __nativePtrToObjectMap.find(node);
         if (iter  == __nativePtrToObjectMap.end())
             return false;
+
+        clearException();
 
         Object* target = iter->second;
         const char* funcName = nullptr;

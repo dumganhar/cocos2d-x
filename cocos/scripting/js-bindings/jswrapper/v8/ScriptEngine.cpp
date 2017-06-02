@@ -229,6 +229,7 @@ namespace se {
             return;
         }
 
+        clearException();
         iterOwner->second->attachChild(iterTarget->second);
     }
 
@@ -246,6 +247,7 @@ namespace se {
             return;
         }
 
+        clearException();
         iterOwner->second->detachChild(iterTarget->second);
     }
 
@@ -257,6 +259,7 @@ namespace se {
         if (iter  == __nativePtrToObjectMap.end())
             return false;
 
+        clearException();
         Object* target = iter->second;
         const char* funcName = nullptr;
         if (type == NodeEventType::ENTER)
@@ -294,6 +297,11 @@ namespace se {
             ret = funcVal.toObject()->call(EmptyValueArray, target);
         }
         return ret;
+    }
+
+    void ScriptEngine::clearException()
+    {
+        //FIXME:
     }
 
 } // namespace se {

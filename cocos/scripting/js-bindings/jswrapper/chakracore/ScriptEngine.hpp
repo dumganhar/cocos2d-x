@@ -44,7 +44,7 @@ namespace se {
 
         bool isValid() { return _isValid; }
 
-        void clearException() {}
+        void clearException();
 
         void _retainScriptObject(void* owner, void* target);
         void _releaseScriptObject(void* owner, void* target);
