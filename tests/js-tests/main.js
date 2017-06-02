@@ -87,6 +87,7 @@
 
 if (cc.sys && cc.sys.isNative) {
     var scene3SearchPaths = cc.sys.localStorage.getItem("Scene3SearchPaths");
+    log("scene3SearchPaths: " + scene3SearchPaths);
     if (scene3SearchPaths)
         jsb.fileUtils.setSearchPaths(JSON.parse(scene3SearchPaths));
 }

@@ -31,11 +31,7 @@
         void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
         se::State state(nativeThisObject, args); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::setReturnValue(state.rval(), _v8args); \
-        } \
+        se::internal::setReturnValue(state.rval(), _v8args); \
         for (auto& v : args) \
         { \
             if (v.isObject() && v.toObject()->isRooted()) \
@@ -94,11 +90,7 @@
         void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
         se::State state(nativeThisObject); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::setReturnValue(state.rval(), _v8args); \
-        } \
+        se::internal::setReturnValue(state.rval(), _v8args); \
     }
 
 

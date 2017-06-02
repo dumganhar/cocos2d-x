@@ -25,11 +25,7 @@
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
         se::State state(nativeThisObject, args); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::setReturnValue(_cx, state.rval(), _argv); \
-        } \
+        se::internal::setReturnValue(_cx, state.rval(), _argv); \
         for (auto& v : args) \
         { \
             if (v.isObject() && v.toObject()->isRooted()) \
@@ -122,11 +118,7 @@
         void* nativeThisObject = se::internal::getPrivate(_cx, _thizObj); \
         se::State state(nativeThisObject); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::setReturnValue(_cx, state.rval(), _argv); \
-        } \
+        se::internal::setReturnValue(_cx, state.rval(), _argv); \
         return ret; \
     }
 

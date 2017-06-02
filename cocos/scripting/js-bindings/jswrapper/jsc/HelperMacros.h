@@ -23,18 +23,14 @@
     JSValueRef funcName##Registry(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t _argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         unsigned short argc = (unsigned short) _argc; \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = nullptr; \
         bool ret = true; \
         se::ValueArray args; \
         se::internal::jsToSeArgs(_cx, argc, _argv, &args); \
         void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         se::State state(nativeThisObject, args); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::seToJsValue(_cx, state.rval(), &_jsRet); \
-        } \
+        se::internal::seToJsValue(_cx, state.rval(), &_jsRet); \
         for (auto& v : args) \
         { \
             if (v.isObject() && v.toObject()->isRooted()) \
@@ -127,16 +123,12 @@
     JSValueRef funcName##Registry(JSContextRef _cx, JSObjectRef _function, JSObjectRef _thisObject, size_t argc, const JSValueRef _argv[], JSValueRef* _exception) \
     { \
         assert(argc == 0); \
-        JSValueRef _jsRet = JSValueMakeUndefined(_cx); \
+        JSValueRef _jsRet = nullptr; \
         bool ret = true; \
         void* nativeThisObject = se::internal::getPrivate(_thisObject); \
         se::State state(nativeThisObject); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::seToJsValue(_cx, state.rval(), &_jsRet); \
-        } \
+        se::internal::seToJsValue(_cx, state.rval(), &_jsRet); \
         return _jsRet; \
     }
 

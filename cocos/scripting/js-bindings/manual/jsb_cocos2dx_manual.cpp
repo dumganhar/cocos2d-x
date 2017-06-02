@@ -192,8 +192,9 @@ static bool JSB_localStorageGetItem(se::State& s)
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
         std::string value;
         ok = localStorageGetItem(key, &value);
-        JSB_PRECONDITION2(ok, false, "Error processing arguments");
-        s.rval().setString(value);
+        if (ok)
+            s.rval().setString(value);
+
         return true;
     }
 
@@ -288,6 +289,66 @@ static bool register_sys_localStorage(se::Object* obj)
 }
 
 //
+template<typename T, typename ARG1>
+static bool invokeJSCallbackWithOneArg(T* listener, const char* funcName, ARG1* arg1, se::Value* retVal)
+{
+    se::ScriptEngine::getInstance()->clearException();
+    bool ok = true;
+    se::Value listenerVal;
+    native_ptr_to_seval<T>(listener, &listenerVal);
+    assert(listenerVal.isObject());
+    se::Object* listenerObj = listenerVal.toObject();
+    se::Value funcVal;
+    ok = listenerObj->getProperty(funcName, &funcVal);
+    if (!ok)
+        return false;
+
+    assert(funcVal.isObject() && funcVal.toObject()->isFunction());
+    se::ValueArray argArr;
+    argArr.reserve(1);
+    se::Value arg1Val;
+    ok = native_ptr_to_seval<ARG1>(arg1, &arg1Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithOneArg convert arg1 failed!");
+    argArr.push_back(std::move(arg1Val));
+
+    ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
+    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithOneArg call function failed!");
+
+    return true;
+}
+
+template<typename T, typename ARG1, typename ARG2>
+static bool invokeJSCallbackWithTwoArgs(T* listener, const char* funcName, ARG1* arg1, ARG2* arg2, se::Value* retVal)
+{
+    se::ScriptEngine::getInstance()->clearException();
+    bool ok = true;
+    se::Value listenerVal;
+    native_ptr_to_seval<T>(listener, &listenerVal);
+    assert(listenerVal.isObject());
+    se::Object* listenerObj = listenerVal.toObject();
+    se::Value funcVal;
+    ok = listenerObj->getProperty(funcName, &funcVal);
+    if (!ok)
+        return false;
+
+    assert(funcVal.isObject() && funcVal.toObject()->isFunction());
+    se::ValueArray argArr;
+    argArr.reserve(2);
+    se::Value arg1Val;
+    ok = native_ptr_to_seval<ARG1>(arg1, &arg1Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithTwoArgs convert arg1 failed!");
+    argArr.push_back(std::move(arg1Val));
+
+    se::Value arg2Val;
+    ok = native_ptr_to_seval<ARG2>(arg2, &arg2Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithTwoArgs convert arg2 failed!");
+    argArr.push_back(std::move(arg2Val));
+
+    ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
+    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithTwoArgs call function failed!");
+
+    return true;
+}
 
 static bool js_EventListenerMouse_create(se::State& s)
 {
@@ -298,20 +359,20 @@ static bool js_EventListenerMouse_create(se::State& s)
         auto ret = EventListenerMouse::create();
         ret->retain();
 
-        ret->onMouseDown = [ret](Event* event) {
-//FIXME:            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_DOWN, event);
+        ret->onMouseDown = [ret](EventMouse* event) {
+            invokeJSCallbackWithOneArg(ret, "onMouseDown", event, nullptr);
         };
 
-        ret->onMouseUp = [ret](Event* event) {
-//            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_UP, event);
+        ret->onMouseUp = [ret](EventMouse* event) {
+            invokeJSCallbackWithOneArg(ret, "onMouseUp", event, nullptr);
         };
 
-        ret->onMouseMove = [ret](Event* event) {
-//            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_MOVE, event);
+        ret->onMouseMove = [ret](EventMouse* event) {
+            invokeJSCallbackWithOneArg(ret, "onMouseMove", event, nullptr);
         };
 
-        ret->onMouseScroll = [ret](Event* event) {
-//            ScriptingCore::getInstance()->handleMouseEvent(ret, EventMouse::MouseEventType::MOUSE_SCROLL, event);
+        ret->onMouseScroll = [ret](EventMouse* event) {
+            invokeJSCallbackWithOneArg(ret, "onMouseScroll", event, nullptr);
         };
 
         se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
@@ -336,29 +397,25 @@ static bool js_EventListenerTouchOneByOne_create(se::State& s)
         ret->retain();
 
         ret->onTouchBegan = [ret](Touch* touch, Event* event) -> bool {
-//FIXME:            JS::RootedValue jsret(cx);
-//            bool ok = ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::BEGAN, touch, event, &jsret);
-//
-//            // Not found the method, just return false.
-//            if (!ok)
-//                return false;
-//
-//            if (jsret.isBoolean()) {
-//                return jsret.toBoolean();
-//            }
+
+            se::Value retVal;
+            invokeJSCallbackWithTwoArgs(ret, "onTouchBegan", touch, event, &retVal);
+            if (retVal.isBoolean())
+                return retVal.toBoolean();
+
             return false;
         };
 
         ret->onTouchMoved = [ret](Touch* touch, Event* event) {
-//            ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::MOVED, touch, event);
+            invokeJSCallbackWithTwoArgs(ret, "onTouchMoved", touch, event, nullptr);
         };
 
         ret->onTouchEnded = [ret](Touch* touch, Event* event) {
-//            ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::ENDED, touch, event);
+            invokeJSCallbackWithTwoArgs(ret, "onTouchEnded", touch, event, nullptr);
         };
 
         ret->onTouchCancelled = [ret](Touch* touch, Event* event) {
-//            ScriptingCore::getInstance()->handleTouchEvent(ret, EventTouch::EventCode::CANCELLED, touch, event);
+            invokeJSCallbackWithTwoArgs(ret, "onTouchCancelled", touch, event, nullptr);
         };
 
         se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerTouchOneByOne_class, false);
@@ -383,19 +440,19 @@ static bool js_EventListenerTouchAllAtOnce_create(se::State& s)
         ret->retain();
 
         ret->onTouchesBegan = [ret](const std::vector<Touch*>& touches, Event* event) {
-//FIXME:            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::BEGAN, touches, event);
+//            invokeJSCallbackWithTwoArgs(ret, "onTouchesBegan", touches, event, nullptr);
         };
 
         ret->onTouchesMoved = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::MOVED, touches, event);
+//            invokeJSCallbackWithTwoArgs(ret, "onTouchesMoved", touches, event, nullptr);
         };
 
         ret->onTouchesEnded = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::ENDED, touches, event);
+//            invokeJSCallbackWithTwoArgs(ret, "onTouchesEnded", touches, event, nullptr);
         };
 
         ret->onTouchesCancelled = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            ScriptingCore::getInstance()->handleTouchesEvent(ret, EventTouch::EventCode::CANCELLED, touches, event);
+//            invokeJSCallbackWithTwoArgs(ret, "onTouchesCancelled", touches, event, nullptr);
         };
 
         se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerTouchAllAtOnce_class, false);
@@ -1082,7 +1139,14 @@ static bool js_cocos2dx_CallFunc_init(cocos2d::CallFuncN* nativeObj, se::Object*
             valArr.push_back(senderVal);
             valArr.push_back(dataVal);
 
-            funcVal.toObject()->call(valArr, thisVal.toObject());
+            if (!thisVal.isUndefined())
+            {
+                funcVal.toObject()->call(valArr, thisVal.toObject());
+            }
+            else
+            {
+                funcVal.toObject()->call(valArr, nullptr);
+            }
         }
         else
         {

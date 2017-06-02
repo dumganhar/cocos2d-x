@@ -423,6 +423,7 @@ namespace se {
 
     Object* Value::toObject() const
     {
+        assert(isObject());
         return _u._object;
     }
 

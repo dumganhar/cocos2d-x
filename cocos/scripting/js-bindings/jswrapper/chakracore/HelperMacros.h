@@ -31,11 +31,7 @@
         void* nativeThisObject = se::internal::getPrivate(_argv[0]); \
         se::State state(nativeThisObject, args); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::seToJsValue(state.rval(), &_jsRet); \
-        } \
+        se::internal::seToJsValue(state.rval(), &_jsRet); \
         for (auto& v : args) \
         { \
             if (v.isObject() && v.toObject()->isRooted()) \
@@ -133,11 +129,7 @@
         void* nativeThisObject = se::internal::getPrivate(_argv[0]); \
         se::State state(nativeThisObject); \
         ret = funcName(state); \
-        if (ret) \
-        { \
-            if (!state.rval().isUndefined()) \
-                se::internal::seToJsValue(state.rval(), &_jsRet); \
-        } \
+        se::internal::seToJsValue(state.rval(), &_jsRet); \
         return _jsRet; \
     }
 

@@ -228,10 +228,6 @@ namespace se {
         {
             contextObject.set(thisObject->_getJSObject());
         }
-        else
-        {
-            contextObject.set(JS::CurrentGlobalOrNull(__cx));
-        }
 
         JSObject* funcObj = _getJSObject();
         JS::RootedValue func(__cx, JS::ObjectValue(*funcObj));

@@ -191,7 +191,7 @@ bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Value* ret)
 {
-    assert(ret != nullptr);
+    assert(v != nullptr && ret != nullptr);
     se::Object* obj = nullptr;
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())
@@ -214,7 +214,7 @@ bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Value* ret)
 {
-    assert(ret != nullptr);
+    assert(v != nullptr && ret != nullptr);
     se::Object* obj = nullptr;
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())
@@ -238,7 +238,7 @@ bool native_ptr_to_seval(typename std::enable_if<std::is_base_of<cocos2d::Ref,T>
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Class* cls, se::Value* ret)
 {
-    assert(ret != nullptr);
+    assert(v != nullptr && ret != nullptr);
     se::Object* obj = nullptr;
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())

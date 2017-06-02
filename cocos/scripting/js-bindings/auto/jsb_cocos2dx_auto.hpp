@@ -69,16 +69,14 @@ SE_DECLARE_FUNC(js_cocos2dx_Event_isStopped);
 SE_DECLARE_FUNC(js_cocos2dx_Event_getType);
 SE_DECLARE_FUNC(js_cocos2dx_Event_getCurrentTarget);
 SE_DECLARE_FUNC(js_cocos2dx_Event_stopPropagation);
-SE_DECLARE_FUNC(js_cocos2dx_Event_Event);
 
 extern se::Object* __jsb_cocos2dx_EventTouch_proto;
 extern se::Class* __jsb_cocos2dx_EventTouch_class;
 
 bool js_register_cocos2dx_EventTouch(se::Object* obj);
 
-SE_DECLARE_FUNC(js_cocos2dx_EventTouch_getEventCode);
 SE_DECLARE_FUNC(js_cocos2dx_EventTouch_setEventCode);
-SE_DECLARE_FUNC(js_cocos2dx_EventTouch_EventTouch);
+SE_DECLARE_FUNC(js_cocos2dx_EventTouch_getEventCode);
 
 extern se::Object* __jsb_cocos2dx_ComponentContainer_proto;
 extern se::Class* __jsb_cocos2dx_ComponentContainer_class;
@@ -984,7 +982,6 @@ extern se::Class* __jsb_cocos2dx_EventAcceleration_class;
 
 bool js_register_cocos2dx_EventAcceleration(se::Object* obj);
 
-SE_DECLARE_FUNC(js_cocos2dx_EventAcceleration_EventAcceleration);
 
 extern se::Object* __jsb_cocos2dx_EventCustom_proto;
 extern se::Class* __jsb_cocos2dx_EventCustom_class;
@@ -992,7 +989,6 @@ extern se::Class* __jsb_cocos2dx_EventCustom_class;
 bool js_register_cocos2dx_EventCustom(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventCustom_getEventName);
-SE_DECLARE_FUNC(js_cocos2dx_EventCustom_EventCustom);
 
 extern se::Object* __jsb_cocos2dx_EventListener_proto;
 extern se::Class* __jsb_cocos2dx_EventListener_class;
@@ -1029,7 +1025,6 @@ extern se::Class* __jsb_cocos2dx_EventFocus_class;
 
 bool js_register_cocos2dx_EventFocus(se::Object* obj);
 
-SE_DECLARE_FUNC(js_cocos2dx_EventFocus_EventFocus);
 
 extern se::Object* __jsb_cocos2dx_EventListenerAcceleration_proto;
 extern se::Class* __jsb_cocos2dx_EventListenerAcceleration_class;
@@ -1082,7 +1077,6 @@ SE_DECLARE_FUNC(js_cocos2dx_EventMouse_setCursorPosition);
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getScrollX);
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getPreviousLocation);
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getStartLocationInView);
-SE_DECLARE_FUNC(js_cocos2dx_EventMouse_EventMouse);
 
 extern se::Object* __jsb_cocos2dx_EventListenerMouse_proto;
 extern se::Class* __jsb_cocos2dx_EventListenerMouse_class;

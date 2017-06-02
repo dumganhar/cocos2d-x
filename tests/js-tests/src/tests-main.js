@@ -166,6 +166,7 @@ var TestController = cc.LayerGradient.extend({
         // 'browser' can use touches or mouse.
         // The benefit of using 'touches' in a browser, is that it works both with mouse events or touches events
         if ('touches' in cc.sys.capabilities) {
+            cc.log("add touch listener");
             cc.eventManager.addListener({
                 event: cc.EventListener.TOUCH_ALL_AT_ONCE,
                 onTouchesMoved: function (touches, event) {
@@ -177,6 +178,7 @@ var TestController = cc.LayerGradient.extend({
             }, this);
         }
         else if ('mouse' in cc.sys.capabilities) {
+            cc.log("add mouse listener");
             cc.eventManager.addListener({
                 event: cc.EventListener.MOUSE,
                 onMouseMove: function (event) {
