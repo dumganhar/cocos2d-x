@@ -450,6 +450,41 @@ static bool js_EventListenerTouchOneByOne_create(se::State& s)
 }
 SE_BIND_FUNC(js_EventListenerTouchOneByOne_create)
 
+static bool invokeJSTouchAllAtOnceCallback(EventListenerTouchAllAtOnce* listener, const char* funcName, const std::vector<Touch*>& touches, Event* event, se::Value* retVal)
+{
+    se::ScriptEngine::getInstance()->clearException();
+    se::AutoHandleScope hs;
+
+    bool ok = true;
+    se::Value listenerVal;
+    native_ptr_to_seval<EventListenerTouchAllAtOnce>(listener, &listenerVal);
+    assert(listenerVal.isObject());
+    se::Object* listenerObj = listenerVal.toObject();
+    se::Value funcVal;
+    ok = listenerObj->getProperty(funcName, &funcVal);
+    if (!ok)
+        return false;
+
+    assert(funcVal.isObject() && funcVal.toObject()->isFunction());
+    se::ValueArray argArr;
+    argArr.reserve(2);
+
+    se::Value arg1Val;
+    ok = std_vector_Touch_to_seval(touches, &arg1Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSTouchAllAtOnceCallback convert arg1 failed!");
+    argArr.push_back(std::move(arg1Val));
+
+    se::Value arg2Val;
+    ok = native_ptr_to_seval<Event>(event, &arg2Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSTouchAllAtOnceCallback convert arg2 failed!");
+    argArr.push_back(std::move(arg2Val));
+
+    ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
+    JSB_PRECONDITION3(ok, false, "invokeJSTouchAllAtOnceCallback call function failed!");
+
+    return true;
+}
+
 static bool js_EventListenerTouchAllAtOnce_create(se::State& s)
 {
     const auto& args = s.args();
@@ -460,19 +495,19 @@ static bool js_EventListenerTouchAllAtOnce_create(se::State& s)
         ret->retain();
 
         ret->onTouchesBegan = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            invokeJSCallbackWithTwoArgs(ret, "onTouchesBegan", touches, event, nullptr);
+            invokeJSTouchAllAtOnceCallback(ret, "onTouchesBegan", touches, event, nullptr);
         };
 
         ret->onTouchesMoved = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            invokeJSCallbackWithTwoArgs(ret, "onTouchesMoved", touches, event, nullptr);
+            invokeJSTouchAllAtOnceCallback(ret, "onTouchesMoved", touches, event, nullptr);
         };
 
         ret->onTouchesEnded = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            invokeJSCallbackWithTwoArgs(ret, "onTouchesEnded", touches, event, nullptr);
+            invokeJSTouchAllAtOnceCallback(ret, "onTouchesEnded", touches, event, nullptr);
         };
 
         ret->onTouchesCancelled = [ret](const std::vector<Touch*>& touches, Event* event) {
-//            invokeJSCallbackWithTwoArgs(ret, "onTouchesCancelled", touches, event, nullptr);
+            invokeJSTouchAllAtOnceCallback(ret, "onTouchesCancelled", touches, event, nullptr);
         };
 
         se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerTouchAllAtOnce_class, false);
@@ -558,7 +593,7 @@ static bool js_EventListenerAcceleration_create(se::State& s)
         auto ret = EventListenerAcceleration::create(arg0);
         ret->retain();
 
-        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerAcceleration_class, false);
         obj->setPrivateData(ret);
         s.rval().setObject(obj);
 
@@ -581,7 +616,7 @@ static bool js_EventListenerFocus_create(se::State& s)
 
         assert(false);
 
-        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerFocus_class, false);
         obj->setPrivateData(ret);
         s.rval().setObject(obj);
 
@@ -599,15 +634,39 @@ static bool js_EventListenerCustom_create(se::State& s)
     int argc = (int)args.size();
 
     if (argc == 2) {
-        assert(false);
-        auto ret = nullptr;//EventListenerCustom::create();
-//        ret->retain();
 
+        bool ok = false;
+        std::string eventName;
+        ok = seval_to_std_string(args[0], &eventName);
+        JSB_PRECONDITION2(ok && !eventName.empty(), false, "Convert event name failed!");
 
+        se::Value funcVal = args[1];
+        assert(funcVal.isObject() && funcVal.toObject()->isFunction());
+        auto ret = EventListenerCustom::create(eventName, [funcVal](EventCustom* event){
 
-        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerMouse_class, false);
+            bool ok = false;
+            se::ScriptEngine::getInstance()->clearException();
+            se::AutoHandleScope hs;
+
+            assert(funcVal.isObject() && funcVal.toObject()->isFunction());
+            se::ValueArray argArr;
+            argArr.reserve(1);
+
+            se::Value arg1Val;
+            ok = native_ptr_to_seval<EventCustom>(event, &arg1Val);
+            JSB_PRECONDITION2_VOID(ok, "EventListenerCustom::create callback: convert arg1 failed!");
+
+            argArr.push_back(std::move(arg1Val));
+            funcVal.toObject()->call(argArr, nullptr);
+
+        });
+        ret->retain();
+
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerCustom_class, false);
         obj->setPrivateData(ret);
         s.rval().setObject(obj);
+
+        obj->attachChild(funcVal.toObject());
 
         return true;
     }

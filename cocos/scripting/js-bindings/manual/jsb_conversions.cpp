@@ -1268,6 +1268,30 @@ bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret)
     return std_vector_T_to_seval(v, ret);
 }
 
+bool std_vector_Touch_to_seval(const std::vector<cocos2d::Touch*>& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* arr = se::Object::createArrayObject(v.size(), true);
+
+    uint32_t i = 0;
+    se::Value tmp;
+    for (const auto& touch : v)
+    {
+        if (!native_ptr_to_seval<cocos2d::Touch>(touch, &tmp))
+        {
+            ret->setUndefined();
+            arr->release();
+            return false;
+        }
+        arr->setArrayElement(i, tmp);
+        ++i;
+    }
+    ret->setObject(arr);
+    arr->switchToUnrooted();
+    arr->release();
+    return true;
+}
+
 //FIXME: why v has to be a pointer?
 bool uniform_to_seval(const cocos2d::Uniform* v, se::Value* ret)
 {

@@ -4,6 +4,7 @@
 
 #include "Object.hpp"
 #include "Utils.hpp"
+#include "State.hpp"
 
 namespace se {
 
@@ -18,6 +19,17 @@ namespace se {
         JsValueRef emptyContructor(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
             return JS_INVALID_REFERENCE;
+        }
+
+        void defaultFinalizeCallback(void* nativeThisObject)
+        {
+            if (nativeThisObject != nullptr)
+            {
+                State state(nativeThisObject);
+                Object* _thisObject = state.thisObject();
+                if (_thisObject) _thisObject->_cleanup(nativeThisObject);
+                SAFE_RELEASE(_thisObject);
+            }
         }
     }
 
@@ -171,7 +183,9 @@ namespace se {
     JsValueRef Class::_createJSObjectWithClass(Class* cls)
     {
         JsValueRef obj;
-        _CHECK(JsCreateExternalObject(nullptr, cls->_finalizeOp, &obj));
+
+        JsFinalizeCallback finalizeCb = cls->_finalizeOp == nullptr ? defaultFinalizeCallback : cls->_finalizeOp;
+        _CHECK(JsCreateExternalObject(nullptr, finalizeCb, &obj));
 
         _CHECK(JsSetPrototype(obj, cls->getProto()->_getJSObject()));
         return obj;

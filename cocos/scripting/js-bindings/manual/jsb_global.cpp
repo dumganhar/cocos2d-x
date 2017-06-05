@@ -457,8 +457,8 @@ static bool JSBCore_platform(se::State& s)
     // #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     //     platform = JS_InternString(_cx, "desktop");
     // #else
-//    platform = Application::Platform::OS_IPHONE; // FIXME:
-    platform = Application::getInstance()->getTargetPlatform();
+    platform = Application::Platform::OS_IPHONE; // FIXME:
+//    platform = Application::getInstance()->getTargetPlatform();
     // #endif
 
     s.rval().setInt32((int32_t)platform);

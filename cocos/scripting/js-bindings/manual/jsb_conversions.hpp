@@ -156,6 +156,7 @@ bool blendfunc_to_seval(const cocos2d::BlendFunc& v, se::Value* ret);
 bool std_vector_string_to_seval(const std::vector<std::string>& v, se::Value* ret);
 bool std_vector_int_to_seval(const std::vector<int>& v, se::Value* ret);
 bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret);
+bool std_vector_Touch_to_seval(const std::vector<cocos2d::Touch*>& v, se::Value* ret);
 bool uniform_to_seval(const cocos2d::Uniform* v, se::Value* ret);
 bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
 bool Acceleration_to_seval(const cocos2d::Acceleration* v, se::Value* ret);

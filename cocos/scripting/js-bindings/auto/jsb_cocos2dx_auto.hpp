@@ -51,14 +51,13 @@ SE_DECLARE_FUNC(js_cocos2dx_Touch_getPreviousLocationInView);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getLocation);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getDelta);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getStartLocationInView);
-SE_DECLARE_FUNC(js_cocos2dx_Touch_getCurrentForce);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getStartLocation);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getID);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_setTouchInfo);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getMaxForce);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getLocationInView);
+SE_DECLARE_FUNC(js_cocos2dx_Touch_getCurrentForce);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getPreviousLocation);
-SE_DECLARE_FUNC(js_cocos2dx_Touch_Touch);
 
 extern se::Object* __jsb_cocos2dx_Event_proto;
 extern se::Class* __jsb_cocos2dx_Event_class;
@@ -989,6 +988,7 @@ extern se::Class* __jsb_cocos2dx_EventCustom_class;
 bool js_register_cocos2dx_EventCustom(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventCustom_getEventName);
+SE_DECLARE_FUNC(js_cocos2dx_EventCustom_EventCustom);
 
 extern se::Object* __jsb_cocos2dx_EventListener_proto;
 extern se::Class* __jsb_cocos2dx_EventListener_class;

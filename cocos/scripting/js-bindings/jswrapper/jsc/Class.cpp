@@ -5,6 +5,7 @@
 #include "Object.hpp"
 #include "Utils.hpp"
 #include "ScriptEngine.hpp"
+#include "State.hpp"
 
 namespace se {
 
@@ -43,6 +44,19 @@ namespace se {
             printf("propertyName: %s\n", name.c_str());
 //            assert(false);
             return true;
+        }
+
+        void defaultFinalizeCallback(JSObjectRef _obj)
+        {
+            void* nativeThisObject = JSObjectGetPrivate(_obj);
+            if (nativeThisObject != nullptr)
+            {
+                State state(nativeThisObject);
+                Object* _thisObject = state.thisObject();
+                if (_thisObject) _thisObject->_cleanup(nativeThisObject);
+                JSObjectSetPrivate(_obj, nullptr);
+                SAFE_RELEASE(_thisObject);
+            }
         }
     }
 
@@ -112,7 +126,10 @@ namespace se {
 //        _jsClsDef.setProperty = _setPropertyCallback;
 //        _jsClsDef.hasProperty = _hasPropertyCallback;
 
-        _jsClsDef.finalize = _finalizeOp;
+        if (_finalizeOp != nullptr)
+            _jsClsDef.finalize = _finalizeOp;
+        else
+            _jsClsDef.finalize = defaultFinalizeCallback;
 
         _jsCls = JSClassCreate(&_jsClsDef);
 
