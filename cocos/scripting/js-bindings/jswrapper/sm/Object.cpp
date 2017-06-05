@@ -434,7 +434,8 @@ namespace se {
 
             if (JSID_IS_STRING(id))
             {
-                allKeys->push_back(internal::jsToStdString(__cx, keyVal.toString()));
+                JS::RootedString rootedKeyVal(__cx, keyVal.toString());
+                allKeys->push_back(internal::jsToStdString(__cx, rootedKeyVal));
             }
             else if (JSID_IS_INT(id))
             {

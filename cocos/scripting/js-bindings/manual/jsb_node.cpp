@@ -158,12 +158,13 @@ static bool isScheduleExist(se::Object* jsFunc, se::Object* jsThis, se::Object**
     return found;
 }
 
-static void removeSchedule(se::Object* jsFunc, se::Object* jsThis)
+static void removeSchedule(se::Object* jsFunc, se::Object* jsThis, bool needDetachChild)
 {
     auto funcObjKeyMapIter = __jsthis_schedulekey_map.find(jsThis);
     if (funcObjKeyMapIter != __jsthis_schedulekey_map.end())
     {
-        jsThis->detachChild(jsFunc);
+        if (needDetachChild)
+            jsThis->detachChild(jsFunc);
         funcObjKeyMapIter->second.erase(jsFunc);
         if (funcObjKeyMapIter->second.empty())
             __jsthis_schedulekey_map.erase(funcObjKeyMapIter);
@@ -173,7 +174,7 @@ static void removeSchedule(se::Object* jsFunc, se::Object* jsThis)
     }
 }
 
-static void removeScheduleByKey(const std::string& key)
+static void removeScheduleByKey(const std::string& key, bool needDetachChild)
 {
     se::Object* jsFunc = nullptr;
     se::Object* jsThis = nullptr;
@@ -194,7 +195,7 @@ static void removeScheduleByKey(const std::string& key)
             break;
     }
 
-    removeSchedule(jsFunc, jsThis);
+    removeSchedule(jsFunc, jsThis, needDetachChild);
 }
 
 static void insertSchedule(se::Object* jsFunc, se::Object* jsThis, const std::string& key)
@@ -227,15 +228,22 @@ public:
         if (node->isScheduled(key))
             node->unschedule(key);
 
-        // Delay one frame to release node since it's probably in garbage collection which invoking any JS api may cause crash.
-        Director::getInstance()->getScheduler()->performFunctionInCocosThread([node, key](){
+        removeScheduleByKey(key, false);
 
-            se::ScriptEngine::getInstance()->clearException();
-            se::AutoHandleScope hs;
-
-            removeScheduleByKey(key);
+        if (node->getReferenceCount() == 1)
+            node->autorelease();
+        else
             node->release();
-        });
+
+        // Delay one frame to release node since it's probably in garbage collection which invoking any JS api may cause crash.
+//        Director::getInstance()->getScheduler()->performFunctionInCocosThread([node, key](){
+//
+//            se::ScriptEngine::getInstance()->clearException();
+//            se::AutoHandleScope hs;
+//
+//            removeScheduleByKey(key);
+//            node->release();
+//        });
     }
 
 private:
@@ -256,7 +264,7 @@ static bool Node_scheduleCommon(Node* thiz, const se::Value& jsThis, const se::V
     bool found = isScheduleExist(jsFunc.toObject(), jsThis.toObject(), &foundFuncObj, &foundThisObj, &key);
     if (found && !key.empty())
     {
-        removeSchedule(foundFuncObj, foundThisObj);
+        removeSchedule(foundFuncObj, foundThisObj, true);
         thiz->unschedule(key);
     }
 
@@ -347,7 +355,7 @@ static bool Node_scheduleUpdateCommon(Node* thiz, const se::Value& jsThis, int p
 //    bool found = isScheduleExist(jsFunc.toObject(), jsThis.toObject(), &foundFuncObj, &foundThisObj, &key);
 //    if (found && !key.empty())
 //    {
-//        removeSchedule(foundFuncObj, foundThisObj);
+//        removeSchedule(foundFuncObj, foundThisObj, true);
 //        thiz->unschedule(key);
 //    }
 //
@@ -426,7 +434,7 @@ static bool Node_unschedule(se::State& s)
 
     if (found && !key.empty())
     {
-        removeSchedule(foundFuncObj, foundThisObj);
+        removeSchedule(foundFuncObj, foundThisObj, true);
         thiz->unschedule(key);
     }
     else

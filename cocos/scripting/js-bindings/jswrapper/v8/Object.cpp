@@ -292,6 +292,11 @@ namespace se {
 
     bool Object::call(const ValueArray& args, Object* thisObject, Value* rval/* = nullptr*/)
     {
+        if (_obj.persistent().IsEmpty())
+        {
+            printf("Function object is released!\n");
+            return false;
+        }
         size_t argc = 0;
         std::vector<v8::Local<v8::Value>> argv;
         argc = args.size();
@@ -300,17 +305,19 @@ namespace se {
         v8::Local<v8::Object> thiz = v8::Local<v8::Object>::Cast(v8::Undefined(__isolate));
         if (thisObject != nullptr)
         {
-            assert(!thisObject->_obj.persistent().IsEmpty());
+            if (thisObject->_obj.persistent().IsEmpty())
+            {
+                printf("This object is released!\n");
+                return false;
+            }
             thiz = thisObject->_obj.handle(__isolate);
         }
-
-        assert(!_obj.persistent().IsEmpty());
 
         for (size_t i = 0; i < argc; ++i)
         {
             if (argv[i].IsEmpty())
             {
-                printf("%s argv[%d] is removed!\n", __FUNCTION__, (int)i);
+                printf("%s argv[%d] is released!\n", __FUNCTION__, (int)i);
                 return false;
             }
         }

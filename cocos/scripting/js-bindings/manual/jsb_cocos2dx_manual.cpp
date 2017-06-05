@@ -522,6 +522,41 @@ static bool js_EventListenerTouchAllAtOnce_create(se::State& s)
 }
 SE_BIND_FUNC(js_EventListenerTouchAllAtOnce_create)
 
+static bool invokeJSKeyboardCallback(EventListenerKeyboard* listener, const char* funcName, EventKeyboard::KeyCode keyCode, Event* event, se::Value* retVal)
+{
+    se::ScriptEngine::getInstance()->clearException();
+    se::AutoHandleScope hs;
+    bool ok = true;
+    se::Value listenerVal;
+    native_ptr_to_seval<EventListenerKeyboard>(listener, &listenerVal);
+    assert(listenerVal.isObject());
+    se::Object* listenerObj = listenerVal.toObject();
+    se::Value funcVal;
+    ok = listenerObj->getProperty(funcName, &funcVal);
+    if (!ok)
+        return false;
+
+    assert(funcVal.isObject() && funcVal.toObject()->isFunction());
+    se::ValueArray argArr;
+    argArr.reserve(2);
+
+    se::Value arg1Val;
+    ok = int32_to_seval((int32_t)keyCode, &arg1Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSKeyboardCallback convert arg1 failed!");
+    argArr.push_back(std::move(arg1Val));
+
+
+    se::Value arg2Val;
+    ok = native_ptr_to_seval<Event>(event, &arg2Val);
+    JSB_PRECONDITION3(ok, false, "invokeJSKeyboardCallback convert arg2 failed!");
+    argArr.push_back(std::move(arg2Val));
+
+    ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
+    JSB_PRECONDITION3(ok, false, "invokeJSKeyboardCallback call function failed!");
+
+    return true;
+}
+
 static bool js_EventListenerKeyboard_create(se::State& s)
 {
     const auto& args = s.args();
@@ -532,11 +567,11 @@ static bool js_EventListenerKeyboard_create(se::State& s)
         ret->retain();
 
         ret->onKeyPressed = [ret](EventKeyboard::KeyCode keyCode, Event* event) {
-//FIXME:            ScriptingCore::getInstance()->handleKeyboardEvent(ret, keyCode, true, event);
+            invokeJSKeyboardCallback(ret, "onKeyPressed", keyCode, event, nullptr);
         };
 
         ret->onKeyReleased = [ret](EventKeyboard::KeyCode keyCode, Event* event) {
-//            ScriptingCore::getInstance()->handleKeyboardEvent(ret, keyCode, false, event);
+            invokeJSKeyboardCallback(ret, "onKeyReleased", keyCode, event, nullptr);
         };
 
         se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerKeyboard_class, false);
@@ -558,11 +593,14 @@ static bool js_EventListenerAcceleration_create(se::State& s)
 
     if (argc == 1) {
 
+        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerAcceleration_class, false);
+        s.rval().setObject(obj);
+
         std::function<void (Acceleration*, Event*)> arg0;
         do {
             if (args[0].isObject() && args[0].toObject()->isFunction())
             {
-                se::Value jsThis(s.thisObject());
+                se::Value jsThis(obj);
                 se::Value jsFunc(args[0]);
                 jsThis.toObject()->attachChild(jsFunc.toObject());
                 auto lambda = [=](Acceleration* acc, Event* event) -> void {
@@ -593,9 +631,7 @@ static bool js_EventListenerAcceleration_create(se::State& s)
         auto ret = EventListenerAcceleration::create(arg0);
         ret->retain();
 
-        se::Object* obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EventListenerAcceleration_class, false);
         obj->setPrivateData(ret);
-        s.rval().setObject(obj);
 
         return true;
     }

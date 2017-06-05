@@ -21,9 +21,9 @@ namespace se {
 
     namespace internal {
 
-    std::string jsToStdString(JSContext* cx, JSString* jsStr)
+    std::string jsToStdString(JSContext* cx, JS::HandleString jsStr)
     {
-        char* str = JS_EncodeString(cx, jsStr);
+        char* str = JS_EncodeStringToUTF8(cx, jsStr);
         std::string ret(str);
         JS_free(cx, str);
         return ret;
@@ -64,7 +64,8 @@ namespace se {
 
             case Value::Type::String:
             {
-                JSString* string = JS_NewStringCopyN(cx, arg.toString().c_str(), arg.toString().length());
+                JS::UTF8Chars utf8Str(arg.toString().c_str(), arg.toString().length());
+                JSString* string = JS_NewStringCopyUTF8N(cx, utf8Str);
                 JS::RootedValue value(cx);
                 value.setString(string);
                 outVal.set(value);
@@ -107,7 +108,7 @@ namespace se {
         }
     }
 
-    void jsToSeValue(JSContext *cx, JS::HandleValue jsval, Value* v)
+    void jsToSeValue(JSContext* cx, JS::HandleValue jsval, Value* v)
     {
         if (jsval.isNumber())
         {
@@ -115,7 +116,7 @@ namespace se {
         }
         else if (jsval.isString())
         {
-            JSString* jsstr = jsval.toString();
+            JS::RootedString jsstr(cx, jsval.toString());
             v->setString(jsToStdString(cx, jsstr));
         }
         else if (jsval.isBoolean())

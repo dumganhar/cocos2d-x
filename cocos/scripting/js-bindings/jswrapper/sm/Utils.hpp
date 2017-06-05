@@ -23,7 +23,7 @@ namespace se {
             JSFinalizeOp finalizeCb;
         };
 
-        std::string jsToStdString(JSContext* cx, JSString* jsStr);
+        std::string jsToStdString(JSContext* cx, JS::HandleString jsStr);
 
         void jsToSeArgs(JSContext* cx, int argc, const JS::CallArgs& argv, ValueArray* outArr);
         void jsToSeValue(JSContext *cx, JS::HandleValue jsval, Value* v);
