@@ -352,10 +352,10 @@ bool seval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
     JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
     ok = obj->getProperty("a", &a);
     JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
-    color->r = r.toFloat();
-    color->g = g.toFloat();
-    color->b = b.toFloat();
-    color->a = a.toFloat();
+    color->r = r.toFloat() / 255.0f;
+    color->g = g.toFloat() / 255.0f;
+    color->b = b.toFloat() / 255.0f;
+    color->a = a.toFloat() / 255.0f;
     return true;
 }
 
