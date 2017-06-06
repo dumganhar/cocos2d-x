@@ -18398,7 +18398,13 @@ bool register_all_cocos2dx_ui(se::Object* obj)
 {
     // Get the ns
     se::Value nsVal;
-    obj->getProperty("ccui", &nsVal);
+    if (!obj->getProperty("ccui", &nsVal))
+    {
+        se::Object* jsobj = se::Object::createPlainObject(false);
+        nsVal.setObject(jsobj);
+        obj->setProperty("ccui", nsVal);
+        jsobj->release();
+    }
     se::Object* ns = nsVal.toObject();
 
     js_register_cocos2dx_ui_Widget(ns);

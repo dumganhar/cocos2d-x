@@ -14,6 +14,7 @@
 using namespace cocos2d;
 
 bool register_all_cocos2dx(se::Object* obj);
+bool register_all_cocos2dx_ui(se::Object* obj);
 
 int main_register_class(int argc, char** argv)
 {
@@ -32,6 +33,7 @@ int main_register_class(int argc, char** argv)
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_prepare.js"));
 //    jsb_register_all();
     register_all_cocos2dx(global);
+    register_all_cocos2dx_ui(global);
 
     jsb_register_Node_manual();
     register_all_cocos2dx_manual(global);
