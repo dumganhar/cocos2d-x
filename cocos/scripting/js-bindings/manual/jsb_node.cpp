@@ -140,13 +140,13 @@ static bool isScheduleExist(se::Object* jsFunc, se::Object* jsThis, se::Object**
                     *outJsThis = e.first;
                     *outJsFunc = e2.first;
                     *outKey = e2.second;
+                    found = true;
                     break;
                 }
             }
         }
-        if (!(*outKey).empty())
+        if (found)
         {
-            found = true;
             break;
         }
     }
@@ -327,7 +327,6 @@ static bool Scheduler_scheduleCommon(Scheduler* scheduler, const se::Value& jsTh
 {
     jsThis.toObject()->attachChild(jsFunc.toObject());
 
-    void* target = jsThis.toObject();
     se::Object* foundThisObj = nullptr;
     se::Object* foundFuncObj = nullptr;
     std::string key;
@@ -346,7 +345,7 @@ static bool Scheduler_scheduleCommon(Scheduler* scheduler, const se::Value& jsTh
     if (found && !key.empty())
     {
         removeSchedule(foundFuncObj, foundThisObj, true);
-        scheduler->unschedule(key, target);
+        scheduler->unschedule(key, foundThisObj);
     }
 
     if (!aKey.empty())
@@ -354,7 +353,8 @@ static bool Scheduler_scheduleCommon(Scheduler* scheduler, const se::Value& jsTh
     else
         key = StringUtils::format("__node_schedule_key:%u", __idx++);
 
-    insertSchedule(jsFunc.toObject(), jsThis.toObject(), key);
+    se::Object* target = jsThis.toObject();
+    insertSchedule(jsFunc.toObject(), target, key);
     std::shared_ptr<UnscheduleNotifier> unscheduleNotifier = std::make_shared<UnscheduleNotifier>(target, key);
 
     scheduler->schedule([jsThis, jsFunc, unscheduleNotifier](float dt){
@@ -507,12 +507,14 @@ static void removeScheduleUpdate(se::Object* jsThis)
     if (iter != __jsthis_schedule_update_map.end())
     {
         __jsthis_schedule_update_map.erase(iter);
+        jsThis->release();
     }
 }
 
 static void insertScheduleUpdate(se::Object* jsThis)
 {
     __jsthis_schedule_update_map[jsThis] = true;
+    jsThis->addRef();
 }
 
 class ScheduleUpdateWrapper : public cocos2d::Ref
@@ -634,7 +636,6 @@ SE_BIND_FUNC(Node_unscheduleUpdate)
 
 static bool Scheduler_unscheduleCommon(Scheduler* scheduler, const se::Value& jsThis, const se::Value& jsFuncOrKey)
 {
-    void* target = jsThis.toObject();
     se::Object* foundThisObj = nullptr;
     se::Object* foundFuncObj = nullptr;
     std::string key;
@@ -658,7 +659,7 @@ static bool Scheduler_unscheduleCommon(Scheduler* scheduler, const se::Value& js
     if (found && !key.empty())
     {
         removeSchedule(foundFuncObj, foundThisObj, true);
-        scheduler->unschedule(key, target);
+        scheduler->unschedule(key, foundThisObj);
     }
     else
     {
@@ -686,10 +687,8 @@ static bool Scheduler_unscheduleAllCallbacksCommon(Scheduler* scheduler, se::Obj
         removeScheduleForThis(foundTarget, needDetachChild);
         removeScheduleUpdate(foundTarget);
         scheduler->unscheduleAllForTarget(foundTarget);
-        return true;
     }
-    SE_REPORT_ERROR("%s: Could not find the target: %p\n", __FUNCTION__, jsThis);
-    return false;
+    return true;
 }
 
 static bool Node_unscheduleAllCallbacks(se::State& s)

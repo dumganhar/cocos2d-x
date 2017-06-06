@@ -1545,7 +1545,7 @@ var console = console || {};
  */
 cc._initDebugSetting = function (mode) {
     var ccGame = cc.game;
-    var bakLog = cc._cocosplayerLog || console.log || log;
+    var bakLog = log;
     cc.log = cc.warn = cc.error = cc.assert = function () {};
     if (mode > ccGame.DEBUG_MODE_NONE) {
         console.log = function () {
