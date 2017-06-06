@@ -51,13 +51,14 @@ SE_DECLARE_FUNC(js_cocos2dx_Touch_getPreviousLocationInView);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getLocation);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getDelta);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getStartLocationInView);
+SE_DECLARE_FUNC(js_cocos2dx_Touch_getCurrentForce);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getStartLocation);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getID);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_setTouchInfo);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getMaxForce);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getLocationInView);
-SE_DECLARE_FUNC(js_cocos2dx_Touch_getCurrentForce);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getPreviousLocation);
+SE_DECLARE_FUNC(js_cocos2dx_Touch_Touch);
 
 extern se::Object* __jsb_cocos2dx_Event_proto;
 extern se::Class* __jsb_cocos2dx_Event_class;

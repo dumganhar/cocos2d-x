@@ -932,6 +932,24 @@ static bool js_cocos2dx_Touch_getStartLocationInView(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Touch_getStartLocationInView)
 
+static bool js_cocos2dx_Touch_getCurrentForce(se::State& s)
+{
+    cocos2d::Touch* cobj = (cocos2d::Touch*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getCurrentForce : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    bool ok = true;
+    if (argc == 0) {
+        float result = cobj->getCurrentForce();
+        ok &= float_to_seval(result, &s.rval());
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Touch_getCurrentForce : Error processing arguments");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Touch_getCurrentForce)
+
 static bool js_cocos2dx_Touch_getStartLocation(se::State& s)
 {
     cocos2d::Touch* cobj = (cocos2d::Touch*)s.nativeThisObject();
@@ -1054,24 +1072,6 @@ static bool js_cocos2dx_Touch_getLocationInView(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Touch_getLocationInView)
 
-static bool js_cocos2dx_Touch_getCurrentForce(se::State& s)
-{
-    cocos2d::Touch* cobj = (cocos2d::Touch*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getCurrentForce : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        float result = cobj->getCurrentForce();
-        ok &= float_to_seval(result, &s.rval());
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Touch_getCurrentForce : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Touch_getCurrentForce)
-
 static bool js_cocos2dx_Touch_getPreviousLocation(se::State& s)
 {
     cocos2d::Touch* cobj = (cocos2d::Touch*)s.nativeThisObject();
@@ -1090,23 +1090,50 @@ static bool js_cocos2dx_Touch_getPreviousLocation(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Touch_getPreviousLocation)
 
+SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Touch_finalize)
 
+static bool js_cocos2dx_Touch_constructor(se::State& s)
+{
+    cocos2d::Touch* cobj = new (std::nothrow) cocos2d::Touch();
+    s.thisObject()->setPrivateData(cobj);
+    s.thisObject()->addRef();
+    return true;
+}
+SE_BIND_CTOR(js_cocos2dx_Touch_constructor, __jsb_cocos2dx_Touch_class, js_cocos2dx_Touch_finalize)
+
+
+
+bool js_cocos2dx_Touch_finalize(se::State& s)
+{
+    if (s.nativeThisObject() != nullptr)
+    {
+        cocos2d::log("jsbindings: finalizing JS object %p (cocos2d::Touch)", s.nativeThisObject());
+        cocos2d::Touch* cobj = (cocos2d::Touch*)s.nativeThisObject();
+        if (cobj->getReferenceCount() == 1)
+            cobj->autorelease();
+        else
+            cobj->release();
+    }
+    return true;
+}
+SE_BIND_FINALIZE_FUNC(js_cocos2dx_Touch_finalize)
 
 bool js_register_cocos2dx_Touch(se::Object* obj)
 {
-    auto cls = se::Class::create("Touch", obj, nullptr, nullptr);
+    auto cls = se::Class::create("Touch", obj, nullptr, _SE(js_cocos2dx_Touch_constructor));
 
     cls->defineFunction("getPreviousLocationInView", _SE(js_cocos2dx_Touch_getPreviousLocationInView));
     cls->defineFunction("getLocation", _SE(js_cocos2dx_Touch_getLocation));
     cls->defineFunction("getDelta", _SE(js_cocos2dx_Touch_getDelta));
     cls->defineFunction("getStartLocationInView", _SE(js_cocos2dx_Touch_getStartLocationInView));
+    cls->defineFunction("getCurrentForce", _SE(js_cocos2dx_Touch_getCurrentForce));
     cls->defineFunction("getStartLocation", _SE(js_cocos2dx_Touch_getStartLocation));
     cls->defineFunction("getID", _SE(js_cocos2dx_Touch_getID));
     cls->defineFunction("setTouchInfo", _SE(js_cocos2dx_Touch_setTouchInfo));
     cls->defineFunction("getMaxForce", _SE(js_cocos2dx_Touch_getMaxForce));
     cls->defineFunction("getLocationInView", _SE(js_cocos2dx_Touch_getLocationInView));
-    cls->defineFunction("getCurrentForce", _SE(js_cocos2dx_Touch_getCurrentForce));
     cls->defineFunction("getPreviousLocation", _SE(js_cocos2dx_Touch_getPreviousLocation));
+    cls->defineFinalizedFunction(_SE(js_cocos2dx_Touch_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Touch>(cls);
 

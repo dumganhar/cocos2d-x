@@ -409,6 +409,16 @@ getStartLocationInView : function (
 },
 
 /**
+ * @method getCurrentForce
+ * @return {float}
+ */
+getCurrentForce : function (
+)
+{
+    return 0;
+},
+
+/**
  * @method getStartLocation
  * @return {vec2_object}
  */
@@ -467,16 +477,6 @@ getLocationInView : function (
 },
 
 /**
- * @method getCurrentForce
- * @return {float}
- */
-getCurrentForce : function (
-)
-{
-    return 0;
-},
-
-/**
  * @method getPreviousLocation
  * @return {vec2_object}
  */
@@ -484,6 +484,15 @@ getPreviousLocation : function (
 )
 {
     return cc.Vec2;
+},
+
+/**
+ * @method Touch
+ * @constructor
+ */
+Touch : function (
+)
+{
 },
 
 };
