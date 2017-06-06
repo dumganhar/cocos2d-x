@@ -940,7 +940,7 @@ static bool Node_setPosition(se::State& s)
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "Error processing arguments");
-        cobj->setAnchorPoint(arg0);
+        cobj->setPosition(arg0);
         return true;
     }
     else if (argc == 2)
