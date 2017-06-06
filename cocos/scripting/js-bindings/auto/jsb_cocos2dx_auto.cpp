@@ -5,8 +5,8 @@
 #include "2d/CCProtectedNode.h"
 #include "base/CCAsyncTaskPool.h"
 
-se::Object* __jsb_cocos2dx_Texture2D_proto = nullptr;
-se::Class* __jsb_cocos2dx_Texture2D_class = nullptr;
+se::Object* __jsb_cocos2d_Texture2D_proto = nullptr;
+se::Class* __jsb_cocos2d_Texture2D_class = nullptr;
 
 static bool js_cocos2dx_Texture2D_getGLProgram(se::State& s)
 {
@@ -783,7 +783,7 @@ static bool js_cocos2dx_Texture2D_getDefaultAlphaPixelFormat(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Texture2D_getDefaultAlphaPixelFormat)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Texture2D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Texture2D_finalize)
 
 static bool js_cocos2dx_Texture2D_constructor(se::State& s)
 {
@@ -792,11 +792,12 @@ static bool js_cocos2dx_Texture2D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Texture2D_constructor, __jsb_cocos2dx_Texture2D_class, js_cocos2dx_Texture2D_finalize)
+SE_BIND_CTOR(js_cocos2dx_Texture2D_constructor, __jsb_cocos2d_Texture2D_class, js_cocos2d_Texture2D_finalize)
 
 
 
-bool js_cocos2dx_Texture2D_finalize(se::State& s)
+
+bool js_cocos2d_Texture2D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -809,7 +810,7 @@ bool js_cocos2dx_Texture2D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Texture2D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Texture2D_finalize)
 
 bool js_register_cocos2dx_Texture2D(se::Object* obj)
 {
@@ -847,18 +848,18 @@ bool js_register_cocos2dx_Texture2D(se::Object* obj)
     cls->defineFunction("setMaxS", _SE(js_cocos2dx_Texture2D_setMaxS));
     cls->defineStaticFunction("setDefaultAlphaPixelFormat", _SE(js_cocos2dx_Texture2D_setDefaultAlphaPixelFormat));
     cls->defineStaticFunction("getDefaultAlphaPixelFormat", _SE(js_cocos2dx_Texture2D_getDefaultAlphaPixelFormat));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Texture2D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Texture2D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Texture2D>(cls);
 
-    __jsb_cocos2dx_Texture2D_proto = cls->getProto();
-    __jsb_cocos2dx_Texture2D_class = cls;
+    __jsb_cocos2d_Texture2D_proto = cls->getProto();
+    __jsb_cocos2d_Texture2D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Touch_proto = nullptr;
-se::Class* __jsb_cocos2dx_Touch_class = nullptr;
+se::Object* __jsb_cocos2d_Touch_proto = nullptr;
+se::Class* __jsb_cocos2d_Touch_class = nullptr;
 
 static bool js_cocos2dx_Touch_getPreviousLocationInView(se::State& s)
 {
@@ -1090,7 +1091,7 @@ static bool js_cocos2dx_Touch_getPreviousLocation(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Touch_getPreviousLocation)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Touch_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Touch_finalize)
 
 static bool js_cocos2dx_Touch_constructor(se::State& s)
 {
@@ -1099,11 +1100,12 @@ static bool js_cocos2dx_Touch_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Touch_constructor, __jsb_cocos2dx_Touch_class, js_cocos2dx_Touch_finalize)
+SE_BIND_CTOR(js_cocos2dx_Touch_constructor, __jsb_cocos2d_Touch_class, js_cocos2d_Touch_finalize)
 
 
 
-bool js_cocos2dx_Touch_finalize(se::State& s)
+
+bool js_cocos2d_Touch_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -1116,7 +1118,7 @@ bool js_cocos2dx_Touch_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Touch_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Touch_finalize)
 
 bool js_register_cocos2dx_Touch(se::Object* obj)
 {
@@ -1133,18 +1135,18 @@ bool js_register_cocos2dx_Touch(se::Object* obj)
     cls->defineFunction("getMaxForce", _SE(js_cocos2dx_Touch_getMaxForce));
     cls->defineFunction("getLocationInView", _SE(js_cocos2dx_Touch_getLocationInView));
     cls->defineFunction("getPreviousLocation", _SE(js_cocos2dx_Touch_getPreviousLocation));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Touch_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Touch_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Touch>(cls);
 
-    __jsb_cocos2dx_Touch_proto = cls->getProto();
-    __jsb_cocos2dx_Touch_class = cls;
+    __jsb_cocos2d_Touch_proto = cls->getProto();
+    __jsb_cocos2d_Touch_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Event_proto = nullptr;
-se::Class* __jsb_cocos2dx_Event_class = nullptr;
+se::Object* __jsb_cocos2d_Event_proto = nullptr;
+se::Class* __jsb_cocos2d_Event_class = nullptr;
 
 static bool js_cocos2dx_Event_isStopped(se::State& s)
 {
@@ -1217,6 +1219,7 @@ SE_BIND_FUNC(js_cocos2dx_Event_stopPropagation)
 
 
 
+
 bool js_register_cocos2dx_Event(se::Object* obj)
 {
     auto cls = se::Class::create("Event", obj, nullptr, nullptr);
@@ -1228,14 +1231,14 @@ bool js_register_cocos2dx_Event(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Event>(cls);
 
-    __jsb_cocos2dx_Event_proto = cls->getProto();
-    __jsb_cocos2dx_Event_class = cls;
+    __jsb_cocos2d_Event_proto = cls->getProto();
+    __jsb_cocos2d_Event_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventTouch_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventTouch_class = nullptr;
+se::Object* __jsb_cocos2d_EventTouch_proto = nullptr;
+se::Class* __jsb_cocos2d_EventTouch_class = nullptr;
 
 static bool js_cocos2dx_EventTouch_setEventCode(se::State& s)
 {
@@ -1275,24 +1278,26 @@ static bool js_cocos2dx_EventTouch_getEventCode(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_EventTouch_getEventCode)
 
 
+extern se::Object* __jsb_cocos2d_Event_proto;
+
 
 bool js_register_cocos2dx_EventTouch(se::Object* obj)
 {
-    auto cls = se::Class::create("EventTouch", obj, __jsb_cocos2dx_Event_proto, nullptr);
+    auto cls = se::Class::create("EventTouch", obj, __jsb_cocos2d_Event_proto, nullptr);
 
     cls->defineFunction("setEventCode", _SE(js_cocos2dx_EventTouch_setEventCode));
     cls->defineFunction("getEventCode", _SE(js_cocos2dx_EventTouch_getEventCode));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventTouch>(cls);
 
-    __jsb_cocos2dx_EventTouch_proto = cls->getProto();
-    __jsb_cocos2dx_EventTouch_class = cls;
+    __jsb_cocos2d_EventTouch_proto = cls->getProto();
+    __jsb_cocos2d_EventTouch_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ComponentContainer_proto = nullptr;
-se::Class* __jsb_cocos2dx_ComponentContainer_class = nullptr;
+se::Object* __jsb_cocos2d_ComponentContainer_proto = nullptr;
+se::Class* __jsb_cocos2d_ComponentContainer_class = nullptr;
 
 static bool js_cocos2dx_ComponentContainer_visit(se::State& s)
 {
@@ -1426,6 +1431,7 @@ SE_BIND_FUNC(js_cocos2dx_ComponentContainer_get)
 
 
 
+
 bool js_register_cocos2dx_ComponentContainer(se::Object* obj)
 {
     auto cls = se::Class::create("ComponentContainer", obj, nullptr, nullptr);
@@ -1439,14 +1445,14 @@ bool js_register_cocos2dx_ComponentContainer(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::ComponentContainer>(cls);
 
-    __jsb_cocos2dx_ComponentContainer_proto = cls->getProto();
-    __jsb_cocos2dx_ComponentContainer_class = cls;
+    __jsb_cocos2d_ComponentContainer_proto = cls->getProto();
+    __jsb_cocos2d_ComponentContainer_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Component_proto = nullptr;
-se::Class* __jsb_cocos2dx_Component_class = nullptr;
+se::Object* __jsb_cocos2d_Component_proto = nullptr;
+se::Class* __jsb_cocos2d_Component_class = nullptr;
 
 static bool js_cocos2dx_Component_setEnabled(se::State& s)
 {
@@ -1585,7 +1591,7 @@ static bool js_cocos2dx_Component_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Component::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Component_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Component_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -1595,7 +1601,7 @@ static bool js_cocos2dx_Component_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Component_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Component_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Component_finalize)
 
 static bool js_cocos2dx_Component_constructor(se::State& s)
 {
@@ -1604,7 +1610,7 @@ static bool js_cocos2dx_Component_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Component_constructor, __jsb_cocos2dx_Component_class, js_cocos2dx_Component_finalize)
+SE_BIND_CTOR(js_cocos2dx_Component_constructor, __jsb_cocos2d_Component_class, js_cocos2d_Component_finalize)
 
 static bool js_cocos2dx_Component_ctor(se::State& s)
 {
@@ -1613,12 +1619,13 @@ static bool js_cocos2dx_Component_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Component_ctor, __jsb_cocos2dx_Component_class, js_cocos2dx_Component_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Component_ctor, __jsb_cocos2d_Component_class, js_cocos2d_Component_finalize)
 
 
     
 
-bool js_cocos2dx_Component_finalize(se::State& s)
+
+bool js_cocos2d_Component_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -1631,7 +1638,7 @@ bool js_cocos2dx_Component_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Component_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Component_finalize)
 
 bool js_register_cocos2dx_Component(se::Object* obj)
 {
@@ -1646,19 +1653,19 @@ bool js_register_cocos2dx_Component(se::Object* obj)
     cls->defineFunction("getName", _SE(js_cocos2dx_Component_getName));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Component_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Component_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Component_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Component_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Component>(cls);
 
-    __jsb_cocos2dx_Component_proto = cls->getProto();
-    __jsb_cocos2dx_Component_class = cls;
+    __jsb_cocos2d_Component_proto = cls->getProto();
+    __jsb_cocos2d_Component_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Component.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Node_proto = nullptr;
-se::Class* __jsb_cocos2dx_Node_class = nullptr;
+se::Object* __jsb_cocos2d_Node_proto = nullptr;
+se::Class* __jsb_cocos2d_Node_class = nullptr;
 
 static bool js_cocos2dx_Node_addChild(se::State& s)
 {
@@ -4702,7 +4709,7 @@ static bool js_cocos2dx_Node_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Node::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Node_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Node_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -4712,7 +4719,7 @@ static bool js_cocos2dx_Node_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Node_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Node_finalize)
 
 static bool js_cocos2dx_Node_constructor(se::State& s)
 {
@@ -4721,7 +4728,7 @@ static bool js_cocos2dx_Node_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Node_constructor, __jsb_cocos2dx_Node_class, js_cocos2dx_Node_finalize)
+SE_BIND_CTOR(js_cocos2dx_Node_constructor, __jsb_cocos2d_Node_class, js_cocos2d_Node_finalize)
 
 static bool js_cocos2dx_Node_ctor(se::State& s)
 {
@@ -4730,12 +4737,13 @@ static bool js_cocos2dx_Node_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Node_ctor, __jsb_cocos2dx_Node_class, js_cocos2dx_Node_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Node_ctor, __jsb_cocos2d_Node_class, js_cocos2d_Node_finalize)
 
 
     
 
-bool js_cocos2dx_Node_finalize(se::State& s)
+
+bool js_cocos2d_Node_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -4748,7 +4756,7 @@ bool js_cocos2dx_Node_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Node_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Node_finalize)
 
 bool js_register_cocos2dx_Node(se::Object* obj)
 {
@@ -4898,21 +4906,21 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("getActionManager", _SE(js_cocos2dx_Node_getActionManager));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Node_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Node_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Node_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Node_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Node>(cls);
 
-    __jsb_cocos2dx_Node_proto = cls->getProto();
-    __jsb_cocos2dx_Node_class = cls;
+    __jsb_cocos2d_Node_proto = cls->getProto();
+    __jsb_cocos2d_Node_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Node.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx___NodeRGBA_proto = nullptr;
-se::Class* __jsb_cocos2dx___NodeRGBA_class = nullptr;
+se::Object* __jsb_cocos2d___NodeRGBA_proto = nullptr;
+se::Class* __jsb_cocos2d___NodeRGBA_class = nullptr;
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx___NodeRGBA_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d___NodeRGBA_finalize)
 
 static bool js_cocos2dx___NodeRGBA_constructor(se::State& s)
 {
@@ -4921,11 +4929,13 @@ static bool js_cocos2dx___NodeRGBA_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx___NodeRGBA_constructor, __jsb_cocos2dx___NodeRGBA_class, js_cocos2dx___NodeRGBA_finalize)
+SE_BIND_CTOR(js_cocos2dx___NodeRGBA_constructor, __jsb_cocos2d___NodeRGBA_class, js_cocos2d___NodeRGBA_finalize)
 
 
 
-bool js_cocos2dx___NodeRGBA_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d___NodeRGBA_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -4938,24 +4948,24 @@ bool js_cocos2dx___NodeRGBA_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx___NodeRGBA_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d___NodeRGBA_finalize)
 
 bool js_register_cocos2dx___NodeRGBA(se::Object* obj)
 {
-    auto cls = se::Class::create("__NodeRGBA", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx___NodeRGBA_constructor));
+    auto cls = se::Class::create("__NodeRGBA", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx___NodeRGBA_constructor));
 
-    cls->defineFinalizedFunction(_SE(js_cocos2dx___NodeRGBA_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d___NodeRGBA_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::__NodeRGBA>(cls);
 
-    __jsb_cocos2dx___NodeRGBA_proto = cls->getProto();
-    __jsb_cocos2dx___NodeRGBA_class = cls;
+    __jsb_cocos2d___NodeRGBA_proto = cls->getProto();
+    __jsb_cocos2d___NodeRGBA_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Scene_proto = nullptr;
-se::Class* __jsb_cocos2dx_Scene_class = nullptr;
+se::Object* __jsb_cocos2d_Scene_proto = nullptr;
+se::Class* __jsb_cocos2d_Scene_class = nullptr;
 
 static bool js_cocos2dx_Scene_setCameraOrderDirty(se::State& s)
 {
@@ -5120,7 +5130,7 @@ static bool js_cocos2dx_Scene_createWithSize(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Scene_createWithSize : Error processing arguments");
         auto result = cocos2d::Scene::createWithSize(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Scene_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Scene_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -5138,7 +5148,7 @@ static bool js_cocos2dx_Scene_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Scene::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Scene_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Scene_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -5148,7 +5158,7 @@ static bool js_cocos2dx_Scene_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Scene_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Scene_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Scene_finalize)
 
 static bool js_cocos2dx_Scene_constructor(se::State& s)
 {
@@ -5157,7 +5167,7 @@ static bool js_cocos2dx_Scene_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Scene_constructor, __jsb_cocos2dx_Scene_class, js_cocos2dx_Scene_finalize)
+SE_BIND_CTOR(js_cocos2dx_Scene_constructor, __jsb_cocos2d_Scene_class, js_cocos2d_Scene_finalize)
 
 static bool js_cocos2dx_Scene_ctor(se::State& s)
 {
@@ -5166,12 +5176,14 @@ static bool js_cocos2dx_Scene_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Scene_ctor, __jsb_cocos2dx_Scene_class, js_cocos2dx_Scene_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Scene_ctor, __jsb_cocos2d_Scene_class, js_cocos2d_Scene_finalize)
 
 
     
 
-bool js_cocos2dx_Scene_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_Scene_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -5184,11 +5196,11 @@ bool js_cocos2dx_Scene_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Scene_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Scene_finalize)
 
 bool js_register_cocos2dx_Scene(se::Object* obj)
 {
-    auto cls = se::Class::create("Scene", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_Scene_constructor));
+    auto cls = se::Class::create("Scene", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_Scene_constructor));
 
     cls->defineFunction("setCameraOrderDirty", _SE(js_cocos2dx_Scene_setCameraOrderDirty));
     cls->defineFunction("render", _SE(js_cocos2dx_Scene_render));
@@ -5199,19 +5211,19 @@ bool js_register_cocos2dx_Scene(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_Scene_ctor));
     cls->defineStaticFunction("createWithSize", _SE(js_cocos2dx_Scene_createWithSize));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Scene_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Scene_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Scene_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Scene>(cls);
 
-    __jsb_cocos2dx_Scene_proto = cls->getProto();
-    __jsb_cocos2dx_Scene_class = cls;
+    __jsb_cocos2d_Scene_proto = cls->getProto();
+    __jsb_cocos2d_Scene_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Scene.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_GLView_proto = nullptr;
-se::Class* __jsb_cocos2dx_GLView_class = nullptr;
+se::Object* __jsb_cocos2d_GLView_proto = nullptr;
+se::Class* __jsb_cocos2d_GLView_class = nullptr;
 
 static bool js_cocos2dx_GLView_setFrameSize(se::State& s)
 {
@@ -5819,6 +5831,7 @@ SE_BIND_FUNC(js_cocos2dx_GLView_getGLContextAttrs)
 
 
 
+
 bool js_register_cocos2dx_GLView(se::Object* obj)
 {
     auto cls = se::Class::create("GLView", obj, nullptr, nullptr);
@@ -5858,14 +5871,14 @@ bool js_register_cocos2dx_GLView(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::GLView>(cls);
 
-    __jsb_cocos2dx_GLView_proto = cls->getProto();
-    __jsb_cocos2dx_GLView_class = cls;
+    __jsb_cocos2d_GLView_proto = cls->getProto();
+    __jsb_cocos2d_GLView_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Director_proto = nullptr;
-se::Class* __jsb_cocos2dx_Director_class = nullptr;
+se::Object* __jsb_cocos2d_Director_proto = nullptr;
+se::Class* __jsb_cocos2d_Director_class = nullptr;
 
 static bool js_cocos2dx_Director_pause(se::State& s)
 {
@@ -7137,7 +7150,7 @@ static bool js_cocos2dx_Director_getInstance(se::State& s)
         se::Object* obj = nullptr;
         if (result->_scriptObject == nullptr)
         {
-            obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Director_class, true);
+            obj = se::Object::createObjectWithClass(__jsb_cocos2d_Director_class, true);
             obj->setPrivateData(result);
             result->_scriptObject = obj;
         }
@@ -7153,6 +7166,7 @@ static bool js_cocos2dx_Director_getInstance(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Director_getInstance)
+
 
 
 
@@ -7234,14 +7248,14 @@ bool js_register_cocos2dx_Director(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Director>(cls);
 
-    __jsb_cocos2dx_Director_proto = cls->getProto();
-    __jsb_cocos2dx_Director_class = cls;
+    __jsb_cocos2d_Director_proto = cls->getProto();
+    __jsb_cocos2d_Director_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Scheduler_proto = nullptr;
-se::Class* __jsb_cocos2dx_Scheduler_class = nullptr;
+se::Object* __jsb_cocos2d_Scheduler_proto = nullptr;
+se::Class* __jsb_cocos2d_Scheduler_class = nullptr;
 
 static bool js_cocos2dx_Scheduler_setTimeScale(se::State& s)
 {
@@ -7411,7 +7425,7 @@ static bool js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread(s
 }
 SE_BIND_FUNC(js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Scheduler_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Scheduler_finalize)
 
 static bool js_cocos2dx_Scheduler_constructor(se::State& s)
 {
@@ -7420,11 +7434,12 @@ static bool js_cocos2dx_Scheduler_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Scheduler_constructor, __jsb_cocos2dx_Scheduler_class, js_cocos2dx_Scheduler_finalize)
+SE_BIND_CTOR(js_cocos2dx_Scheduler_constructor, __jsb_cocos2d_Scheduler_class, js_cocos2d_Scheduler_finalize)
 
 
 
-bool js_cocos2dx_Scheduler_finalize(se::State& s)
+
+bool js_cocos2d_Scheduler_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -7437,7 +7452,7 @@ bool js_cocos2dx_Scheduler_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Scheduler_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Scheduler_finalize)
 
 bool js_register_cocos2dx_Scheduler(se::Object* obj)
 {
@@ -7451,18 +7466,18 @@ bool js_register_cocos2dx_Scheduler(se::Object* obj)
     cls->defineFunction("unscheduleAllWithMinPriority", _SE(js_cocos2dx_Scheduler_unscheduleAllWithMinPriority));
     cls->defineFunction("performFunctionInCocosThread", _SE(js_cocos2dx_Scheduler_performFunctionInCocosThread));
     cls->defineFunction("removeAllFunctionsToBePerformedInCocosThread", _SE(js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Scheduler_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Scheduler_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Scheduler>(cls);
 
-    __jsb_cocos2dx_Scheduler_proto = cls->getProto();
-    __jsb_cocos2dx_Scheduler_class = cls;
+    __jsb_cocos2d_Scheduler_proto = cls->getProto();
+    __jsb_cocos2d_Scheduler_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_AsyncTaskPool_proto = nullptr;
-se::Class* __jsb_cocos2dx_AsyncTaskPool_class = nullptr;
+se::Object* __jsb_cocos2d_AsyncTaskPool_proto = nullptr;
+se::Class* __jsb_cocos2d_AsyncTaskPool_class = nullptr;
 
 static bool js_cocos2dx_AsyncTaskPool_stopTasks(se::State& s)
 {
@@ -7514,6 +7529,7 @@ SE_BIND_FUNC(js_cocos2dx_AsyncTaskPool_getInstance)
 
 
 
+
 bool js_register_cocos2dx_AsyncTaskPool(se::Object* obj)
 {
     auto cls = se::Class::create("AsyncTaskPool", obj, nullptr, nullptr);
@@ -7524,14 +7540,14 @@ bool js_register_cocos2dx_AsyncTaskPool(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::AsyncTaskPool>(cls);
 
-    __jsb_cocos2dx_AsyncTaskPool_proto = cls->getProto();
-    __jsb_cocos2dx_AsyncTaskPool_class = cls;
+    __jsb_cocos2d_AsyncTaskPool_proto = cls->getProto();
+    __jsb_cocos2d_AsyncTaskPool_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Action_proto = nullptr;
-se::Class* __jsb_cocos2dx_Action_class = nullptr;
+se::Object* __jsb_cocos2d_Action_proto = nullptr;
+se::Class* __jsb_cocos2d_Action_class = nullptr;
 
 static bool js_cocos2dx_Action_startWithTarget(se::State& s)
 {
@@ -7809,6 +7825,7 @@ SE_BIND_FUNC(js_cocos2dx_Action_reverse)
 
 
 
+
 bool js_register_cocos2dx_Action(se::Object* obj)
 {
     auto cls = se::Class::create("Action", obj, nullptr, nullptr);
@@ -7831,14 +7848,14 @@ bool js_register_cocos2dx_Action(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Action>(cls);
 
-    __jsb_cocos2dx_Action_proto = cls->getProto();
-    __jsb_cocos2dx_Action_class = cls;
+    __jsb_cocos2d_Action_proto = cls->getProto();
+    __jsb_cocos2d_Action_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FiniteTimeAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_FiniteTimeAction_class = nullptr;
+se::Object* __jsb_cocos2d_FiniteTimeAction_proto = nullptr;
+se::Class* __jsb_cocos2d_FiniteTimeAction_class = nullptr;
 
 static bool js_cocos2dx_FiniteTimeAction_setDuration(se::State& s)
 {
@@ -7878,24 +7895,26 @@ static bool js_cocos2dx_FiniteTimeAction_getDuration(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_FiniteTimeAction_getDuration)
 
 
+extern se::Object* __jsb_cocos2d_Action_proto;
+
 
 bool js_register_cocos2dx_FiniteTimeAction(se::Object* obj)
 {
-    auto cls = se::Class::create("FiniteTimeAction", obj, __jsb_cocos2dx_Action_proto, nullptr);
+    auto cls = se::Class::create("FiniteTimeAction", obj, __jsb_cocos2d_Action_proto, nullptr);
 
     cls->defineFunction("setDuration", _SE(js_cocos2dx_FiniteTimeAction_setDuration));
     cls->defineFunction("getDuration", _SE(js_cocos2dx_FiniteTimeAction_getDuration));
     cls->install();
     JSBClassType::registerClass<cocos2d::FiniteTimeAction>(cls);
 
-    __jsb_cocos2dx_FiniteTimeAction_proto = cls->getProto();
-    __jsb_cocos2dx_FiniteTimeAction_class = cls;
+    __jsb_cocos2d_FiniteTimeAction_proto = cls->getProto();
+    __jsb_cocos2d_FiniteTimeAction_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Speed_proto = nullptr;
-se::Class* __jsb_cocos2dx_Speed_class = nullptr;
+se::Object* __jsb_cocos2d_Speed_proto = nullptr;
+se::Class* __jsb_cocos2d_Speed_class = nullptr;
 
 static bool js_cocos2dx_Speed_setInnerAction(se::State& s)
 {
@@ -8007,7 +8026,7 @@ static bool js_cocos2dx_Speed_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Speed_create : Error processing arguments");
         auto result = cocos2d::Speed::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Speed_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Speed_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -8017,7 +8036,7 @@ static bool js_cocos2dx_Speed_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Speed_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Speed_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Speed_finalize)
 
 static bool js_cocos2dx_Speed_constructor(se::State& s)
 {
@@ -8026,11 +8045,13 @@ static bool js_cocos2dx_Speed_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Speed_constructor, __jsb_cocos2dx_Speed_class, js_cocos2dx_Speed_finalize)
+SE_BIND_CTOR(js_cocos2dx_Speed_constructor, __jsb_cocos2d_Speed_class, js_cocos2d_Speed_finalize)
 
 
 
-bool js_cocos2dx_Speed_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Action_proto;
+
+bool js_cocos2d_Speed_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -8043,11 +8064,11 @@ bool js_cocos2dx_Speed_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Speed_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Speed_finalize)
 
 bool js_register_cocos2dx_Speed(se::Object* obj)
 {
-    auto cls = se::Class::create("Speed", obj, __jsb_cocos2dx_Action_proto, _SE(js_cocos2dx_Speed_constructor));
+    auto cls = se::Class::create("Speed", obj, __jsb_cocos2d_Action_proto, _SE(js_cocos2dx_Speed_constructor));
 
     cls->defineFunction("setInnerAction", _SE(js_cocos2dx_Speed_setInnerAction));
     cls->defineFunction("_getSpeed", _SE(js_cocos2dx_Speed_getSpeed));
@@ -8055,18 +8076,18 @@ bool js_register_cocos2dx_Speed(se::Object* obj)
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_Speed_initWithAction));
     cls->defineFunction("getInnerAction", _SE(js_cocos2dx_Speed_getInnerAction));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Speed_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Speed_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Speed_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Speed>(cls);
 
-    __jsb_cocos2dx_Speed_proto = cls->getProto();
-    __jsb_cocos2dx_Speed_class = cls;
+    __jsb_cocos2d_Speed_proto = cls->getProto();
+    __jsb_cocos2d_Speed_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Follow_proto = nullptr;
-se::Class* __jsb_cocos2dx_Follow_class = nullptr;
+se::Object* __jsb_cocos2d_Follow_proto = nullptr;
+se::Class* __jsb_cocos2d_Follow_class = nullptr;
 
 static bool js_cocos2dx_Follow_setBoundarySet(se::State& s)
 {
@@ -8188,7 +8209,7 @@ static bool js_cocos2dx_Follow_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Follow_create : Error processing arguments");
         auto result = cocos2d::Follow::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Follow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Follow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -8201,7 +8222,7 @@ static bool js_cocos2dx_Follow_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Follow_create : Error processing arguments");
         auto result = cocos2d::Follow::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Follow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Follow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -8226,7 +8247,7 @@ static bool js_cocos2dx_Follow_createWithOffset(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Follow_createWithOffset : Error processing arguments");
         auto result = cocos2d::Follow::createWithOffset(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Follow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Follow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -8243,7 +8264,7 @@ static bool js_cocos2dx_Follow_createWithOffset(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Follow_createWithOffset : Error processing arguments");
         auto result = cocos2d::Follow::createWithOffset(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Follow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Follow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -8253,7 +8274,7 @@ static bool js_cocos2dx_Follow_createWithOffset(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Follow_createWithOffset)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Follow_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Follow_finalize)
 
 static bool js_cocos2dx_Follow_constructor(se::State& s)
 {
@@ -8262,7 +8283,7 @@ static bool js_cocos2dx_Follow_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Follow_constructor, __jsb_cocos2dx_Follow_class, js_cocos2dx_Follow_finalize)
+SE_BIND_CTOR(js_cocos2dx_Follow_constructor, __jsb_cocos2d_Follow_class, js_cocos2d_Follow_finalize)
 
 static bool js_cocos2dx_Follow_ctor(se::State& s)
 {
@@ -8271,12 +8292,14 @@ static bool js_cocos2dx_Follow_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Follow_ctor, __jsb_cocos2dx_Follow_class, js_cocos2dx_Follow_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Follow_ctor, __jsb_cocos2d_Follow_class, js_cocos2d_Follow_finalize)
 
 
     
 
-bool js_cocos2dx_Follow_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Action_proto;
+
+bool js_cocos2d_Follow_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -8289,11 +8312,11 @@ bool js_cocos2dx_Follow_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Follow_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Follow_finalize)
 
 bool js_register_cocos2dx_Follow(se::Object* obj)
 {
-    auto cls = se::Class::create("Follow", obj, __jsb_cocos2dx_Action_proto, _SE(js_cocos2dx_Follow_constructor));
+    auto cls = se::Class::create("Follow", obj, __jsb_cocos2d_Action_proto, _SE(js_cocos2dx_Follow_constructor));
 
     cls->defineFunction("setBoundarySet", _SE(js_cocos2dx_Follow_setBoundarySet));
     cls->defineFunction("initWithTarget", _SE(js_cocos2dx_Follow_initWithTarget));
@@ -8302,19 +8325,19 @@ bool js_register_cocos2dx_Follow(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_Follow_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Follow_create));
     cls->defineStaticFunction("createWithOffset", _SE(js_cocos2dx_Follow_createWithOffset));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Follow_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Follow_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Follow>(cls);
 
-    __jsb_cocos2dx_Follow_proto = cls->getProto();
-    __jsb_cocos2dx_Follow_class = cls;
+    __jsb_cocos2d_Follow_proto = cls->getProto();
+    __jsb_cocos2d_Follow_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Follow.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Image_proto = nullptr;
-se::Class* __jsb_cocos2dx_Image_class = nullptr;
+se::Object* __jsb_cocos2d_Image_proto = nullptr;
+se::Class* __jsb_cocos2d_Image_class = nullptr;
 
 static bool js_cocos2dx_Image_hasPremultipliedAlpha(se::State& s)
 {
@@ -8687,7 +8710,7 @@ static bool js_cocos2dx_Image_setPNGPremultipliedAlphaEnabled(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Image_setPNGPremultipliedAlphaEnabled)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Image_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Image_finalize)
 
 static bool js_cocos2dx_Image_constructor(se::State& s)
 {
@@ -8696,11 +8719,12 @@ static bool js_cocos2dx_Image_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Image_constructor, __jsb_cocos2dx_Image_class, js_cocos2dx_Image_finalize)
+SE_BIND_CTOR(js_cocos2dx_Image_constructor, __jsb_cocos2d_Image_class, js_cocos2d_Image_finalize)
 
 
 
-bool js_cocos2dx_Image_finalize(se::State& s)
+
+bool js_cocos2d_Image_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -8713,7 +8737,7 @@ bool js_cocos2dx_Image_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Image_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Image_finalize)
 
 bool js_register_cocos2dx_Image(se::Object* obj)
 {
@@ -8737,18 +8761,18 @@ bool js_register_cocos2dx_Image(se::Object* obj)
     cls->defineFunction("initWithRawData", _SE(js_cocos2dx_Image_initWithRawData));
     cls->defineStaticFunction("setPVRImagesHavePremultipliedAlpha", _SE(js_cocos2dx_Image_setPVRImagesHavePremultipliedAlpha));
     cls->defineStaticFunction("setPNGPremultipliedAlphaEnabled", _SE(js_cocos2dx_Image_setPNGPremultipliedAlphaEnabled));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Image_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Image_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Image>(cls);
 
-    __jsb_cocos2dx_Image_proto = cls->getProto();
-    __jsb_cocos2dx_Image_class = cls;
+    __jsb_cocos2d_Image_proto = cls->getProto();
+    __jsb_cocos2d_Image_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_GLProgramState_proto = nullptr;
-se::Class* __jsb_cocos2dx_GLProgramState_class = nullptr;
+se::Object* __jsb_cocos2d_GLProgramState_proto = nullptr;
+se::Class* __jsb_cocos2d_GLProgramState_class = nullptr;
 
 static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
 {
@@ -9535,7 +9559,7 @@ static bool js_cocos2dx_GLProgramState_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLProgramState_create : Error processing arguments");
         auto result = cocos2d::GLProgramState::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_GLProgramState_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_GLProgramState_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -9624,6 +9648,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_getOrCreateWithShaders)
 
 
 
+
 bool js_register_cocos2dx_GLProgramState(se::Object* obj)
 {
     auto cls = se::Class::create("GLProgramState", obj, nullptr, nullptr);
@@ -9660,14 +9685,14 @@ bool js_register_cocos2dx_GLProgramState(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::GLProgramState>(cls);
 
-    __jsb_cocos2dx_GLProgramState_proto = cls->getProto();
-    __jsb_cocos2dx_GLProgramState_class = cls;
+    __jsb_cocos2d_GLProgramState_proto = cls->getProto();
+    __jsb_cocos2d_GLProgramState_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SpriteFrame_proto = nullptr;
-se::Class* __jsb_cocos2dx_SpriteFrame_class = nullptr;
+se::Object* __jsb_cocos2d_SpriteFrame_proto = nullptr;
+se::Class* __jsb_cocos2d_SpriteFrame_class = nullptr;
 
 static bool js_cocos2dx_SpriteFrame_setAnchorPoint(se::State& s)
 {
@@ -10287,7 +10312,7 @@ static bool js_cocos2dx_SpriteFrame_createWithTexture(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SpriteFrame_createWithTexture)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SpriteFrame_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SpriteFrame_finalize)
 
 static bool js_cocos2dx_SpriteFrame_constructor(se::State& s)
 {
@@ -10296,7 +10321,7 @@ static bool js_cocos2dx_SpriteFrame_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SpriteFrame_constructor, __jsb_cocos2dx_SpriteFrame_class, js_cocos2dx_SpriteFrame_finalize)
+SE_BIND_CTOR(js_cocos2dx_SpriteFrame_constructor, __jsb_cocos2d_SpriteFrame_class, js_cocos2d_SpriteFrame_finalize)
 
 static bool js_cocos2dx_SpriteFrame_ctor(se::State& s)
 {
@@ -10305,12 +10330,13 @@ static bool js_cocos2dx_SpriteFrame_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SpriteFrame_ctor, __jsb_cocos2dx_SpriteFrame_class, js_cocos2dx_SpriteFrame_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SpriteFrame_ctor, __jsb_cocos2d_SpriteFrame_class, js_cocos2d_SpriteFrame_finalize)
 
 
     
 
-bool js_cocos2dx_SpriteFrame_finalize(se::State& s)
+
+bool js_cocos2d_SpriteFrame_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -10323,7 +10349,7 @@ bool js_cocos2dx_SpriteFrame_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SpriteFrame_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SpriteFrame_finalize)
 
 bool js_register_cocos2dx_SpriteFrame(se::Object* obj)
 {
@@ -10357,19 +10383,19 @@ bool js_register_cocos2dx_SpriteFrame(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_SpriteFrame_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SpriteFrame_create));
     cls->defineStaticFunction("createWithTexture", _SE(js_cocos2dx_SpriteFrame_createWithTexture));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SpriteFrame_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SpriteFrame_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SpriteFrame>(cls);
 
-    __jsb_cocos2dx_SpriteFrame_proto = cls->getProto();
-    __jsb_cocos2dx_SpriteFrame_class = cls;
+    __jsb_cocos2d_SpriteFrame_proto = cls->getProto();
+    __jsb_cocos2d_SpriteFrame_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.SpriteFrame.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_AnimationFrame_proto = nullptr;
-se::Class* __jsb_cocos2dx_AnimationFrame_class = nullptr;
+se::Object* __jsb_cocos2d_AnimationFrame_proto = nullptr;
+se::Class* __jsb_cocos2d_AnimationFrame_class = nullptr;
 
 static bool js_cocos2dx_AnimationFrame_setSpriteFrame(se::State& s)
 {
@@ -10552,7 +10578,7 @@ static bool js_cocos2dx_AnimationFrame_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_AnimationFrame_create : Error processing arguments");
         auto result = cocos2d::AnimationFrame::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_AnimationFrame_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_AnimationFrame_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -10562,7 +10588,7 @@ static bool js_cocos2dx_AnimationFrame_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_AnimationFrame_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_AnimationFrame_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_AnimationFrame_finalize)
 
 static bool js_cocos2dx_AnimationFrame_constructor(se::State& s)
 {
@@ -10571,7 +10597,7 @@ static bool js_cocos2dx_AnimationFrame_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_AnimationFrame_constructor, __jsb_cocos2dx_AnimationFrame_class, js_cocos2dx_AnimationFrame_finalize)
+SE_BIND_CTOR(js_cocos2dx_AnimationFrame_constructor, __jsb_cocos2d_AnimationFrame_class, js_cocos2d_AnimationFrame_finalize)
 
 static bool js_cocos2dx_AnimationFrame_ctor(se::State& s)
 {
@@ -10580,12 +10606,13 @@ static bool js_cocos2dx_AnimationFrame_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_AnimationFrame_ctor, __jsb_cocos2dx_AnimationFrame_class, js_cocos2dx_AnimationFrame_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_AnimationFrame_ctor, __jsb_cocos2d_AnimationFrame_class, js_cocos2d_AnimationFrame_finalize)
 
 
     
 
-bool js_cocos2dx_AnimationFrame_finalize(se::State& s)
+
+bool js_cocos2d_AnimationFrame_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -10598,7 +10625,7 @@ bool js_cocos2dx_AnimationFrame_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_AnimationFrame_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_AnimationFrame_finalize)
 
 bool js_register_cocos2dx_AnimationFrame(se::Object* obj)
 {
@@ -10614,19 +10641,19 @@ bool js_register_cocos2dx_AnimationFrame(se::Object* obj)
     cls->defineFunction("initWithSpriteFrame", _SE(js_cocos2dx_AnimationFrame_initWithSpriteFrame));
     cls->defineFunction("ctor", _SE(js_cocos2dx_AnimationFrame_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_AnimationFrame_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_AnimationFrame_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_AnimationFrame_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::AnimationFrame>(cls);
 
-    __jsb_cocos2dx_AnimationFrame_proto = cls->getProto();
-    __jsb_cocos2dx_AnimationFrame_class = cls;
+    __jsb_cocos2d_AnimationFrame_proto = cls->getProto();
+    __jsb_cocos2d_AnimationFrame_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.AnimationFrame.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Animation_proto = nullptr;
-se::Class* __jsb_cocos2dx_Animation_class = nullptr;
+se::Object* __jsb_cocos2d_Animation_proto = nullptr;
+se::Class* __jsb_cocos2d_Animation_class = nullptr;
 
 static bool js_cocos2dx_Animation_getLoops(se::State& s)
 {
@@ -11037,7 +11064,7 @@ static bool js_cocos2dx_Animation_createWithSpriteFrames(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Animation_createWithSpriteFrames : Error processing arguments");
         auto result = cocos2d::Animation::createWithSpriteFrames(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Animation_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Animation_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -11050,7 +11077,7 @@ static bool js_cocos2dx_Animation_createWithSpriteFrames(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Animation_createWithSpriteFrames : Error processing arguments");
         auto result = cocos2d::Animation::createWithSpriteFrames(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Animation_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Animation_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -11065,7 +11092,7 @@ static bool js_cocos2dx_Animation_createWithSpriteFrames(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Animation_createWithSpriteFrames : Error processing arguments");
         auto result = cocos2d::Animation::createWithSpriteFrames(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Animation_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Animation_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -11075,7 +11102,7 @@ static bool js_cocos2dx_Animation_createWithSpriteFrames(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Animation_createWithSpriteFrames)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Animation_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Animation_finalize)
 
 static bool js_cocos2dx_Animation_constructor(se::State& s)
 {
@@ -11084,7 +11111,7 @@ static bool js_cocos2dx_Animation_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Animation_constructor, __jsb_cocos2dx_Animation_class, js_cocos2dx_Animation_finalize)
+SE_BIND_CTOR(js_cocos2dx_Animation_constructor, __jsb_cocos2d_Animation_class, js_cocos2d_Animation_finalize)
 
 static bool js_cocos2dx_Animation_ctor(se::State& s)
 {
@@ -11093,12 +11120,13 @@ static bool js_cocos2dx_Animation_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Animation_ctor, __jsb_cocos2dx_Animation_class, js_cocos2dx_Animation_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Animation_ctor, __jsb_cocos2d_Animation_class, js_cocos2d_Animation_finalize)
 
 
     
 
-bool js_cocos2dx_Animation_finalize(se::State& s)
+
+bool js_cocos2d_Animation_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -11111,7 +11139,7 @@ bool js_cocos2dx_Animation_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Animation_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Animation_finalize)
 
 bool js_register_cocos2dx_Animation(se::Object* obj)
 {
@@ -11137,19 +11165,19 @@ bool js_register_cocos2dx_Animation(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_Animation_ctor));
     cls->defineStaticFunction("createWithAnimationFrames", _SE(js_cocos2dx_Animation_create));
     cls->defineStaticFunction("createWithSpriteFrames", _SE(js_cocos2dx_Animation_createWithSpriteFrames));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Animation_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Animation_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Animation>(cls);
 
-    __jsb_cocos2dx_Animation_proto = cls->getProto();
-    __jsb_cocos2dx_Animation_class = cls;
+    __jsb_cocos2d_Animation_proto = cls->getProto();
+    __jsb_cocos2d_Animation_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Animation.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionInterval_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionInterval_class = nullptr;
+se::Object* __jsb_cocos2d_ActionInterval_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionInterval_class = nullptr;
 
 static bool js_cocos2dx_ActionInterval_getAmplitudeRate(se::State& s)
 {
@@ -11228,10 +11256,12 @@ static bool js_cocos2dx_ActionInterval_getElapsed(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_ActionInterval_getElapsed)
 
 
+extern se::Object* __jsb_cocos2d_FiniteTimeAction_proto;
+
 
 bool js_register_cocos2dx_ActionInterval(se::Object* obj)
 {
-    auto cls = se::Class::create("ActionInterval", obj, __jsb_cocos2dx_FiniteTimeAction_proto, nullptr);
+    auto cls = se::Class::create("ActionInterval", obj, __jsb_cocos2d_FiniteTimeAction_proto, nullptr);
 
     cls->defineFunction("getAmplitudeRate", _SE(js_cocos2dx_ActionInterval_getAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ActionInterval_initWithDuration));
@@ -11240,14 +11270,14 @@ bool js_register_cocos2dx_ActionInterval(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionInterval>(cls);
 
-    __jsb_cocos2dx_ActionInterval_proto = cls->getProto();
-    __jsb_cocos2dx_ActionInterval_class = cls;
+    __jsb_cocos2d_ActionInterval_proto = cls->getProto();
+    __jsb_cocos2d_ActionInterval_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Sequence_proto = nullptr;
-se::Class* __jsb_cocos2dx_Sequence_class = nullptr;
+se::Object* __jsb_cocos2d_Sequence_proto = nullptr;
+se::Class* __jsb_cocos2d_Sequence_class = nullptr;
 
 static bool js_cocos2dx_Sequence_init(se::State& s)
 {
@@ -11293,7 +11323,7 @@ static bool js_cocos2dx_Sequence_initWithTwoActions(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Sequence_initWithTwoActions)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Sequence_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Sequence_finalize)
 
 static bool js_cocos2dx_Sequence_constructor(se::State& s)
 {
@@ -11302,7 +11332,7 @@ static bool js_cocos2dx_Sequence_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Sequence_constructor, __jsb_cocos2dx_Sequence_class, js_cocos2dx_Sequence_finalize)
+SE_BIND_CTOR(js_cocos2dx_Sequence_constructor, __jsb_cocos2d_Sequence_class, js_cocos2d_Sequence_finalize)
 
 static bool js_cocos2dx_Sequence_ctor(se::State& s)
 {
@@ -11311,12 +11341,14 @@ static bool js_cocos2dx_Sequence_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Sequence_ctor, __jsb_cocos2dx_Sequence_class, js_cocos2dx_Sequence_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Sequence_ctor, __jsb_cocos2d_Sequence_class, js_cocos2d_Sequence_finalize)
 
 
     
 
-bool js_cocos2dx_Sequence_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_Sequence_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -11329,28 +11361,28 @@ bool js_cocos2dx_Sequence_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Sequence_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Sequence_finalize)
 
 bool js_register_cocos2dx_Sequence(se::Object* obj)
 {
-    auto cls = se::Class::create("Sequence", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_Sequence_constructor));
+    auto cls = se::Class::create("Sequence", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_Sequence_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_Sequence_init));
     cls->defineFunction("initWithTwoActions", _SE(js_cocos2dx_Sequence_initWithTwoActions));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Sequence_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Sequence_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Sequence_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Sequence>(cls);
 
-    __jsb_cocos2dx_Sequence_proto = cls->getProto();
-    __jsb_cocos2dx_Sequence_class = cls;
+    __jsb_cocos2d_Sequence_proto = cls->getProto();
+    __jsb_cocos2d_Sequence_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Sequence.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Repeat_proto = nullptr;
-se::Class* __jsb_cocos2dx_Repeat_class = nullptr;
+se::Object* __jsb_cocos2d_Repeat_proto = nullptr;
+se::Class* __jsb_cocos2d_Repeat_class = nullptr;
 
 static bool js_cocos2dx_Repeat_setInnerAction(se::State& s)
 {
@@ -11425,7 +11457,7 @@ static bool js_cocos2dx_Repeat_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Repeat_create : Error processing arguments");
         auto result = cocos2d::Repeat::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Repeat_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Repeat_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -11435,7 +11467,7 @@ static bool js_cocos2dx_Repeat_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Repeat_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Repeat_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Repeat_finalize)
 
 static bool js_cocos2dx_Repeat_constructor(se::State& s)
 {
@@ -11444,7 +11476,7 @@ static bool js_cocos2dx_Repeat_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Repeat_constructor, __jsb_cocos2dx_Repeat_class, js_cocos2dx_Repeat_finalize)
+SE_BIND_CTOR(js_cocos2dx_Repeat_constructor, __jsb_cocos2d_Repeat_class, js_cocos2d_Repeat_finalize)
 
 static bool js_cocos2dx_Repeat_ctor(se::State& s)
 {
@@ -11453,12 +11485,14 @@ static bool js_cocos2dx_Repeat_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Repeat_ctor, __jsb_cocos2dx_Repeat_class, js_cocos2dx_Repeat_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Repeat_ctor, __jsb_cocos2d_Repeat_class, js_cocos2d_Repeat_finalize)
 
 
     
 
-bool js_cocos2dx_Repeat_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_Repeat_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -11471,30 +11505,30 @@ bool js_cocos2dx_Repeat_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Repeat_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Repeat_finalize)
 
 bool js_register_cocos2dx_Repeat(se::Object* obj)
 {
-    auto cls = se::Class::create("Repeat", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_Repeat_constructor));
+    auto cls = se::Class::create("Repeat", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_Repeat_constructor));
 
     cls->defineFunction("setInnerAction", _SE(js_cocos2dx_Repeat_setInnerAction));
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_Repeat_initWithAction));
     cls->defineFunction("getInnerAction", _SE(js_cocos2dx_Repeat_getInnerAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Repeat_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Repeat_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Repeat_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Repeat_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Repeat>(cls);
 
-    __jsb_cocos2dx_Repeat_proto = cls->getProto();
-    __jsb_cocos2dx_Repeat_class = cls;
+    __jsb_cocos2d_Repeat_proto = cls->getProto();
+    __jsb_cocos2d_Repeat_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Repeat.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_RepeatForever_proto = nullptr;
-se::Class* __jsb_cocos2dx_RepeatForever_class = nullptr;
+se::Object* __jsb_cocos2d_RepeatForever_proto = nullptr;
+se::Class* __jsb_cocos2d_RepeatForever_class = nullptr;
 
 static bool js_cocos2dx_RepeatForever_setInnerAction(se::State& s)
 {
@@ -11565,7 +11599,7 @@ static bool js_cocos2dx_RepeatForever_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_RepeatForever_create : Error processing arguments");
         auto result = cocos2d::RepeatForever::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_RepeatForever_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_RepeatForever_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -11575,7 +11609,7 @@ static bool js_cocos2dx_RepeatForever_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_RepeatForever_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_RepeatForever_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_RepeatForever_finalize)
 
 static bool js_cocos2dx_RepeatForever_constructor(se::State& s)
 {
@@ -11584,7 +11618,7 @@ static bool js_cocos2dx_RepeatForever_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_RepeatForever_constructor, __jsb_cocos2dx_RepeatForever_class, js_cocos2dx_RepeatForever_finalize)
+SE_BIND_CTOR(js_cocos2dx_RepeatForever_constructor, __jsb_cocos2d_RepeatForever_class, js_cocos2d_RepeatForever_finalize)
 
 static bool js_cocos2dx_RepeatForever_ctor(se::State& s)
 {
@@ -11593,12 +11627,14 @@ static bool js_cocos2dx_RepeatForever_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RepeatForever_ctor, __jsb_cocos2dx_RepeatForever_class, js_cocos2dx_RepeatForever_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RepeatForever_ctor, __jsb_cocos2d_RepeatForever_class, js_cocos2d_RepeatForever_finalize)
 
 
     
 
-bool js_cocos2dx_RepeatForever_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_RepeatForever_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -11611,30 +11647,30 @@ bool js_cocos2dx_RepeatForever_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_RepeatForever_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_RepeatForever_finalize)
 
 bool js_register_cocos2dx_RepeatForever(se::Object* obj)
 {
-    auto cls = se::Class::create("RepeatForever", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_RepeatForever_constructor));
+    auto cls = se::Class::create("RepeatForever", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_RepeatForever_constructor));
 
     cls->defineFunction("setInnerAction", _SE(js_cocos2dx_RepeatForever_setInnerAction));
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_RepeatForever_initWithAction));
     cls->defineFunction("getInnerAction", _SE(js_cocos2dx_RepeatForever_getInnerAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_RepeatForever_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_RepeatForever_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_RepeatForever_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_RepeatForever_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::RepeatForever>(cls);
 
-    __jsb_cocos2dx_RepeatForever_proto = cls->getProto();
-    __jsb_cocos2dx_RepeatForever_class = cls;
+    __jsb_cocos2d_RepeatForever_proto = cls->getProto();
+    __jsb_cocos2d_RepeatForever_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.RepeatForever.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Spawn_proto = nullptr;
-se::Class* __jsb_cocos2dx_Spawn_class = nullptr;
+se::Object* __jsb_cocos2d_Spawn_proto = nullptr;
+se::Class* __jsb_cocos2d_Spawn_class = nullptr;
 
 static bool js_cocos2dx_Spawn_init(se::State& s)
 {
@@ -11680,7 +11716,7 @@ static bool js_cocos2dx_Spawn_initWithTwoActions(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Spawn_initWithTwoActions)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Spawn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Spawn_finalize)
 
 static bool js_cocos2dx_Spawn_constructor(se::State& s)
 {
@@ -11689,7 +11725,7 @@ static bool js_cocos2dx_Spawn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Spawn_constructor, __jsb_cocos2dx_Spawn_class, js_cocos2dx_Spawn_finalize)
+SE_BIND_CTOR(js_cocos2dx_Spawn_constructor, __jsb_cocos2d_Spawn_class, js_cocos2d_Spawn_finalize)
 
 static bool js_cocos2dx_Spawn_ctor(se::State& s)
 {
@@ -11698,12 +11734,14 @@ static bool js_cocos2dx_Spawn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Spawn_ctor, __jsb_cocos2dx_Spawn_class, js_cocos2dx_Spawn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Spawn_ctor, __jsb_cocos2d_Spawn_class, js_cocos2d_Spawn_finalize)
 
 
     
 
-bool js_cocos2dx_Spawn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_Spawn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -11716,28 +11754,28 @@ bool js_cocos2dx_Spawn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Spawn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Spawn_finalize)
 
 bool js_register_cocos2dx_Spawn(se::Object* obj)
 {
-    auto cls = se::Class::create("Spawn", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_Spawn_constructor));
+    auto cls = se::Class::create("Spawn", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_Spawn_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_Spawn_init));
     cls->defineFunction("initWithTwoActions", _SE(js_cocos2dx_Spawn_initWithTwoActions));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Spawn_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Spawn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Spawn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Spawn>(cls);
 
-    __jsb_cocos2dx_Spawn_proto = cls->getProto();
-    __jsb_cocos2dx_Spawn_class = cls;
+    __jsb_cocos2d_Spawn_proto = cls->getProto();
+    __jsb_cocos2d_Spawn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Spawn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_RotateTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_RotateTo_class = nullptr;
+se::Object* __jsb_cocos2d_RotateTo_proto = nullptr;
+se::Class* __jsb_cocos2d_RotateTo_class = nullptr;
 
 static bool js_cocos2dx_RotateTo_initWithDuration(se::State& s)
 {
@@ -11839,7 +11877,7 @@ static bool js_cocos2dx_RotateTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_RotateTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_RotateTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_RotateTo_finalize)
 
 static bool js_cocos2dx_RotateTo_constructor(se::State& s)
 {
@@ -11848,7 +11886,7 @@ static bool js_cocos2dx_RotateTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_RotateTo_constructor, __jsb_cocos2dx_RotateTo_class, js_cocos2dx_RotateTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_RotateTo_constructor, __jsb_cocos2d_RotateTo_class, js_cocos2d_RotateTo_finalize)
 
 static bool js_cocos2dx_RotateTo_ctor(se::State& s)
 {
@@ -11857,12 +11895,14 @@ static bool js_cocos2dx_RotateTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RotateTo_ctor, __jsb_cocos2dx_RotateTo_class, js_cocos2dx_RotateTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RotateTo_ctor, __jsb_cocos2d_RotateTo_class, js_cocos2d_RotateTo_finalize)
 
 
     
 
-bool js_cocos2dx_RotateTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_RotateTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -11875,28 +11915,28 @@ bool js_cocos2dx_RotateTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_RotateTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_RotateTo_finalize)
 
 bool js_register_cocos2dx_RotateTo(se::Object* obj)
 {
-    auto cls = se::Class::create("RotateTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_RotateTo_constructor));
+    auto cls = se::Class::create("RotateTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_RotateTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_RotateTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_RotateTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_RotateTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_RotateTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_RotateTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::RotateTo>(cls);
 
-    __jsb_cocos2dx_RotateTo_proto = cls->getProto();
-    __jsb_cocos2dx_RotateTo_class = cls;
+    __jsb_cocos2d_RotateTo_proto = cls->getProto();
+    __jsb_cocos2d_RotateTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.RotateTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_RotateBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_RotateBy_class = nullptr;
+se::Object* __jsb_cocos2d_RotateBy_proto = nullptr;
+se::Class* __jsb_cocos2d_RotateBy_class = nullptr;
 
 static bool js_cocos2dx_RotateBy_initWithDuration(se::State& s)
 {
@@ -12013,7 +12053,7 @@ static bool js_cocos2dx_RotateBy_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_RotateBy_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_RotateBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_RotateBy_finalize)
 
 static bool js_cocos2dx_RotateBy_constructor(se::State& s)
 {
@@ -12022,7 +12062,7 @@ static bool js_cocos2dx_RotateBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_RotateBy_constructor, __jsb_cocos2dx_RotateBy_class, js_cocos2dx_RotateBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_RotateBy_constructor, __jsb_cocos2d_RotateBy_class, js_cocos2d_RotateBy_finalize)
 
 static bool js_cocos2dx_RotateBy_ctor(se::State& s)
 {
@@ -12031,12 +12071,14 @@ static bool js_cocos2dx_RotateBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RotateBy_ctor, __jsb_cocos2dx_RotateBy_class, js_cocos2dx_RotateBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RotateBy_ctor, __jsb_cocos2d_RotateBy_class, js_cocos2d_RotateBy_finalize)
 
 
     
 
-bool js_cocos2dx_RotateBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_RotateBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12049,28 +12091,28 @@ bool js_cocos2dx_RotateBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_RotateBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_RotateBy_finalize)
 
 bool js_register_cocos2dx_RotateBy(se::Object* obj)
 {
-    auto cls = se::Class::create("RotateBy", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_RotateBy_constructor));
+    auto cls = se::Class::create("RotateBy", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_RotateBy_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_RotateBy_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_RotateBy_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_RotateBy_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_RotateBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_RotateBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::RotateBy>(cls);
 
-    __jsb_cocos2dx_RotateBy_proto = cls->getProto();
-    __jsb_cocos2dx_RotateBy_class = cls;
+    __jsb_cocos2d_RotateBy_proto = cls->getProto();
+    __jsb_cocos2d_RotateBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.RotateBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MoveBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_MoveBy_class = nullptr;
+se::Object* __jsb_cocos2d_MoveBy_proto = nullptr;
+se::Class* __jsb_cocos2d_MoveBy_class = nullptr;
 
 static bool js_cocos2dx_MoveBy_initWithDuration(se::State& s)
 {
@@ -12152,7 +12194,7 @@ static bool js_cocos2dx_MoveBy_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MoveBy_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MoveBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MoveBy_finalize)
 
 static bool js_cocos2dx_MoveBy_constructor(se::State& s)
 {
@@ -12161,7 +12203,7 @@ static bool js_cocos2dx_MoveBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MoveBy_constructor, __jsb_cocos2dx_MoveBy_class, js_cocos2dx_MoveBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_MoveBy_constructor, __jsb_cocos2d_MoveBy_class, js_cocos2d_MoveBy_finalize)
 
 static bool js_cocos2dx_MoveBy_ctor(se::State& s)
 {
@@ -12170,12 +12212,14 @@ static bool js_cocos2dx_MoveBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MoveBy_ctor, __jsb_cocos2dx_MoveBy_class, js_cocos2dx_MoveBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MoveBy_ctor, __jsb_cocos2d_MoveBy_class, js_cocos2d_MoveBy_finalize)
 
 
     
 
-bool js_cocos2dx_MoveBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_MoveBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12188,28 +12232,28 @@ bool js_cocos2dx_MoveBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MoveBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MoveBy_finalize)
 
 bool js_register_cocos2dx_MoveBy(se::Object* obj)
 {
-    auto cls = se::Class::create("MoveBy", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_MoveBy_constructor));
+    auto cls = se::Class::create("MoveBy", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_MoveBy_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_MoveBy_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MoveBy_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_MoveBy_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MoveBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MoveBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MoveBy>(cls);
 
-    __jsb_cocos2dx_MoveBy_proto = cls->getProto();
-    __jsb_cocos2dx_MoveBy_class = cls;
+    __jsb_cocos2d_MoveBy_proto = cls->getProto();
+    __jsb_cocos2d_MoveBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MoveBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MoveTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_MoveTo_class = nullptr;
+se::Object* __jsb_cocos2d_MoveTo_proto = nullptr;
+se::Class* __jsb_cocos2d_MoveTo_class = nullptr;
 
 static bool js_cocos2dx_MoveTo_initWithDuration(se::State& s)
 {
@@ -12291,7 +12335,7 @@ static bool js_cocos2dx_MoveTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MoveTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MoveTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MoveTo_finalize)
 
 static bool js_cocos2dx_MoveTo_constructor(se::State& s)
 {
@@ -12300,7 +12344,7 @@ static bool js_cocos2dx_MoveTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MoveTo_constructor, __jsb_cocos2dx_MoveTo_class, js_cocos2dx_MoveTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_MoveTo_constructor, __jsb_cocos2d_MoveTo_class, js_cocos2d_MoveTo_finalize)
 
 static bool js_cocos2dx_MoveTo_ctor(se::State& s)
 {
@@ -12309,12 +12353,14 @@ static bool js_cocos2dx_MoveTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MoveTo_ctor, __jsb_cocos2dx_MoveTo_class, js_cocos2dx_MoveTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MoveTo_ctor, __jsb_cocos2d_MoveTo_class, js_cocos2d_MoveTo_finalize)
 
 
     
 
-bool js_cocos2dx_MoveTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MoveBy_proto;
+
+bool js_cocos2d_MoveTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12327,28 +12373,28 @@ bool js_cocos2dx_MoveTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MoveTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MoveTo_finalize)
 
 bool js_register_cocos2dx_MoveTo(se::Object* obj)
 {
-    auto cls = se::Class::create("MoveTo", obj, __jsb_cocos2dx_MoveBy_proto, _SE(js_cocos2dx_MoveTo_constructor));
+    auto cls = se::Class::create("MoveTo", obj, __jsb_cocos2d_MoveBy_proto, _SE(js_cocos2dx_MoveTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_MoveTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MoveTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_MoveTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MoveTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MoveTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MoveTo>(cls);
 
-    __jsb_cocos2dx_MoveTo_proto = cls->getProto();
-    __jsb_cocos2dx_MoveTo_class = cls;
+    __jsb_cocos2d_MoveTo_proto = cls->getProto();
+    __jsb_cocos2d_MoveTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MoveTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SkewTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_SkewTo_class = nullptr;
+se::Object* __jsb_cocos2d_SkewTo_proto = nullptr;
+se::Class* __jsb_cocos2d_SkewTo_class = nullptr;
 
 static bool js_cocos2dx_SkewTo_initWithDuration(se::State& s)
 {
@@ -12390,7 +12436,7 @@ static bool js_cocos2dx_SkewTo_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SkewTo_create : Error processing arguments");
         auto result = cocos2d::SkewTo::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SkewTo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SkewTo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -12400,7 +12446,7 @@ static bool js_cocos2dx_SkewTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SkewTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SkewTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SkewTo_finalize)
 
 static bool js_cocos2dx_SkewTo_constructor(se::State& s)
 {
@@ -12409,7 +12455,7 @@ static bool js_cocos2dx_SkewTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SkewTo_constructor, __jsb_cocos2dx_SkewTo_class, js_cocos2dx_SkewTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_SkewTo_constructor, __jsb_cocos2d_SkewTo_class, js_cocos2d_SkewTo_finalize)
 
 static bool js_cocos2dx_SkewTo_ctor(se::State& s)
 {
@@ -12418,12 +12464,14 @@ static bool js_cocos2dx_SkewTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SkewTo_ctor, __jsb_cocos2dx_SkewTo_class, js_cocos2dx_SkewTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SkewTo_ctor, __jsb_cocos2d_SkewTo_class, js_cocos2d_SkewTo_finalize)
 
 
     
 
-bool js_cocos2dx_SkewTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_SkewTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12436,28 +12484,28 @@ bool js_cocos2dx_SkewTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SkewTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SkewTo_finalize)
 
 bool js_register_cocos2dx_SkewTo(se::Object* obj)
 {
-    auto cls = se::Class::create("SkewTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_SkewTo_constructor));
+    auto cls = se::Class::create("SkewTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_SkewTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_SkewTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_SkewTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SkewTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SkewTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SkewTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SkewTo>(cls);
 
-    __jsb_cocos2dx_SkewTo_proto = cls->getProto();
-    __jsb_cocos2dx_SkewTo_class = cls;
+    __jsb_cocos2d_SkewTo_proto = cls->getProto();
+    __jsb_cocos2d_SkewTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.SkewTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SkewBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_SkewBy_class = nullptr;
+se::Object* __jsb_cocos2d_SkewBy_proto = nullptr;
+se::Class* __jsb_cocos2d_SkewBy_class = nullptr;
 
 static bool js_cocos2dx_SkewBy_initWithDuration(se::State& s)
 {
@@ -12499,7 +12547,7 @@ static bool js_cocos2dx_SkewBy_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SkewBy_create : Error processing arguments");
         auto result = cocos2d::SkewBy::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SkewBy_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SkewBy_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -12509,7 +12557,7 @@ static bool js_cocos2dx_SkewBy_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SkewBy_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SkewBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SkewBy_finalize)
 
 static bool js_cocos2dx_SkewBy_constructor(se::State& s)
 {
@@ -12518,7 +12566,7 @@ static bool js_cocos2dx_SkewBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SkewBy_constructor, __jsb_cocos2dx_SkewBy_class, js_cocos2dx_SkewBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_SkewBy_constructor, __jsb_cocos2d_SkewBy_class, js_cocos2d_SkewBy_finalize)
 
 static bool js_cocos2dx_SkewBy_ctor(se::State& s)
 {
@@ -12527,12 +12575,14 @@ static bool js_cocos2dx_SkewBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SkewBy_ctor, __jsb_cocos2dx_SkewBy_class, js_cocos2dx_SkewBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SkewBy_ctor, __jsb_cocos2d_SkewBy_class, js_cocos2d_SkewBy_finalize)
 
 
     
 
-bool js_cocos2dx_SkewBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_SkewTo_proto;
+
+bool js_cocos2d_SkewBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12545,28 +12595,28 @@ bool js_cocos2dx_SkewBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SkewBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SkewBy_finalize)
 
 bool js_register_cocos2dx_SkewBy(se::Object* obj)
 {
-    auto cls = se::Class::create("SkewBy", obj, __jsb_cocos2dx_SkewTo_proto, _SE(js_cocos2dx_SkewBy_constructor));
+    auto cls = se::Class::create("SkewBy", obj, __jsb_cocos2d_SkewTo_proto, _SE(js_cocos2dx_SkewBy_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_SkewBy_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_SkewBy_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SkewBy_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SkewBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SkewBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SkewBy>(cls);
 
-    __jsb_cocos2dx_SkewBy_proto = cls->getProto();
-    __jsb_cocos2dx_SkewBy_class = cls;
+    __jsb_cocos2d_SkewBy_proto = cls->getProto();
+    __jsb_cocos2d_SkewBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.SkewBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_JumpBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_JumpBy_class = nullptr;
+se::Object* __jsb_cocos2d_JumpBy_proto = nullptr;
+se::Class* __jsb_cocos2d_JumpBy_class = nullptr;
 
 static bool js_cocos2dx_JumpBy_initWithDuration(se::State& s)
 {
@@ -12612,7 +12662,7 @@ static bool js_cocos2dx_JumpBy_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_JumpBy_create : Error processing arguments");
         auto result = cocos2d::JumpBy::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_JumpBy_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_JumpBy_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -12622,7 +12672,7 @@ static bool js_cocos2dx_JumpBy_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_JumpBy_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_JumpBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_JumpBy_finalize)
 
 static bool js_cocos2dx_JumpBy_constructor(se::State& s)
 {
@@ -12631,7 +12681,7 @@ static bool js_cocos2dx_JumpBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_JumpBy_constructor, __jsb_cocos2dx_JumpBy_class, js_cocos2dx_JumpBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_JumpBy_constructor, __jsb_cocos2d_JumpBy_class, js_cocos2d_JumpBy_finalize)
 
 static bool js_cocos2dx_JumpBy_ctor(se::State& s)
 {
@@ -12640,12 +12690,14 @@ static bool js_cocos2dx_JumpBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_JumpBy_ctor, __jsb_cocos2dx_JumpBy_class, js_cocos2dx_JumpBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_JumpBy_ctor, __jsb_cocos2d_JumpBy_class, js_cocos2d_JumpBy_finalize)
 
 
     
 
-bool js_cocos2dx_JumpBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_JumpBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12658,28 +12710,28 @@ bool js_cocos2dx_JumpBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_JumpBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_JumpBy_finalize)
 
 bool js_register_cocos2dx_JumpBy(se::Object* obj)
 {
-    auto cls = se::Class::create("JumpBy", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_JumpBy_constructor));
+    auto cls = se::Class::create("JumpBy", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_JumpBy_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_JumpBy_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_JumpBy_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_JumpBy_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_JumpBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_JumpBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::JumpBy>(cls);
 
-    __jsb_cocos2dx_JumpBy_proto = cls->getProto();
-    __jsb_cocos2dx_JumpBy_class = cls;
+    __jsb_cocos2d_JumpBy_proto = cls->getProto();
+    __jsb_cocos2d_JumpBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.JumpBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_JumpTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_JumpTo_class = nullptr;
+se::Object* __jsb_cocos2d_JumpTo_proto = nullptr;
+se::Class* __jsb_cocos2d_JumpTo_class = nullptr;
 
 static bool js_cocos2dx_JumpTo_initWithDuration(se::State& s)
 {
@@ -12725,7 +12777,7 @@ static bool js_cocos2dx_JumpTo_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_JumpTo_create : Error processing arguments");
         auto result = cocos2d::JumpTo::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_JumpTo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_JumpTo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -12735,7 +12787,7 @@ static bool js_cocos2dx_JumpTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_JumpTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_JumpTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_JumpTo_finalize)
 
 static bool js_cocos2dx_JumpTo_constructor(se::State& s)
 {
@@ -12744,7 +12796,7 @@ static bool js_cocos2dx_JumpTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_JumpTo_constructor, __jsb_cocos2dx_JumpTo_class, js_cocos2dx_JumpTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_JumpTo_constructor, __jsb_cocos2d_JumpTo_class, js_cocos2d_JumpTo_finalize)
 
 static bool js_cocos2dx_JumpTo_ctor(se::State& s)
 {
@@ -12753,12 +12805,14 @@ static bool js_cocos2dx_JumpTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_JumpTo_ctor, __jsb_cocos2dx_JumpTo_class, js_cocos2dx_JumpTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_JumpTo_ctor, __jsb_cocos2d_JumpTo_class, js_cocos2d_JumpTo_finalize)
 
 
     
 
-bool js_cocos2dx_JumpTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_JumpBy_proto;
+
+bool js_cocos2d_JumpTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12771,30 +12825,30 @@ bool js_cocos2dx_JumpTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_JumpTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_JumpTo_finalize)
 
 bool js_register_cocos2dx_JumpTo(se::Object* obj)
 {
-    auto cls = se::Class::create("JumpTo", obj, __jsb_cocos2dx_JumpBy_proto, _SE(js_cocos2dx_JumpTo_constructor));
+    auto cls = se::Class::create("JumpTo", obj, __jsb_cocos2d_JumpBy_proto, _SE(js_cocos2dx_JumpTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_JumpTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_JumpTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_JumpTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_JumpTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_JumpTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::JumpTo>(cls);
 
-    __jsb_cocos2dx_JumpTo_proto = cls->getProto();
-    __jsb_cocos2dx_JumpTo_class = cls;
+    __jsb_cocos2d_JumpTo_proto = cls->getProto();
+    __jsb_cocos2d_JumpTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.JumpTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_BezierBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_BezierBy_class = nullptr;
+se::Object* __jsb_cocos2d_BezierBy_proto = nullptr;
+se::Class* __jsb_cocos2d_BezierBy_class = nullptr;
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_BezierBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_BezierBy_finalize)
 
 static bool js_cocos2dx_BezierBy_constructor(se::State& s)
 {
@@ -12803,7 +12857,7 @@ static bool js_cocos2dx_BezierBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_BezierBy_constructor, __jsb_cocos2dx_BezierBy_class, js_cocos2dx_BezierBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_BezierBy_constructor, __jsb_cocos2d_BezierBy_class, js_cocos2d_BezierBy_finalize)
 
 static bool js_cocos2dx_BezierBy_ctor(se::State& s)
 {
@@ -12812,12 +12866,14 @@ static bool js_cocos2dx_BezierBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_BezierBy_ctor, __jsb_cocos2dx_BezierBy_class, js_cocos2dx_BezierBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_BezierBy_ctor, __jsb_cocos2d_BezierBy_class, js_cocos2d_BezierBy_finalize)
 
 
     
 
-bool js_cocos2dx_BezierBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_BezierBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12830,28 +12886,28 @@ bool js_cocos2dx_BezierBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_BezierBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_BezierBy_finalize)
 
 bool js_register_cocos2dx_BezierBy(se::Object* obj)
 {
-    auto cls = se::Class::create("BezierBy", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_BezierBy_constructor));
+    auto cls = se::Class::create("BezierBy", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_BezierBy_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_BezierBy_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_BezierBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_BezierBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::BezierBy>(cls);
 
-    __jsb_cocos2dx_BezierBy_proto = cls->getProto();
-    __jsb_cocos2dx_BezierBy_class = cls;
+    __jsb_cocos2d_BezierBy_proto = cls->getProto();
+    __jsb_cocos2d_BezierBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.BezierBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_BezierTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_BezierTo_class = nullptr;
+se::Object* __jsb_cocos2d_BezierTo_proto = nullptr;
+se::Class* __jsb_cocos2d_BezierTo_class = nullptr;
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_BezierTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_BezierTo_finalize)
 
 static bool js_cocos2dx_BezierTo_constructor(se::State& s)
 {
@@ -12860,7 +12916,7 @@ static bool js_cocos2dx_BezierTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_BezierTo_constructor, __jsb_cocos2dx_BezierTo_class, js_cocos2dx_BezierTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_BezierTo_constructor, __jsb_cocos2d_BezierTo_class, js_cocos2d_BezierTo_finalize)
 
 static bool js_cocos2dx_BezierTo_ctor(se::State& s)
 {
@@ -12869,12 +12925,14 @@ static bool js_cocos2dx_BezierTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_BezierTo_ctor, __jsb_cocos2dx_BezierTo_class, js_cocos2dx_BezierTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_BezierTo_ctor, __jsb_cocos2d_BezierTo_class, js_cocos2d_BezierTo_finalize)
 
 
     
 
-bool js_cocos2dx_BezierTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_BezierBy_proto;
+
+bool js_cocos2d_BezierTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -12887,26 +12945,26 @@ bool js_cocos2dx_BezierTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_BezierTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_BezierTo_finalize)
 
 bool js_register_cocos2dx_BezierTo(se::Object* obj)
 {
-    auto cls = se::Class::create("BezierTo", obj, __jsb_cocos2dx_BezierBy_proto, _SE(js_cocos2dx_BezierTo_constructor));
+    auto cls = se::Class::create("BezierTo", obj, __jsb_cocos2d_BezierBy_proto, _SE(js_cocos2dx_BezierTo_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_BezierTo_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_BezierTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_BezierTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::BezierTo>(cls);
 
-    __jsb_cocos2dx_BezierTo_proto = cls->getProto();
-    __jsb_cocos2dx_BezierTo_class = cls;
+    __jsb_cocos2d_BezierTo_proto = cls->getProto();
+    __jsb_cocos2d_BezierTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.BezierTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ScaleTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_ScaleTo_class = nullptr;
+se::Object* __jsb_cocos2d_ScaleTo_proto = nullptr;
+se::Class* __jsb_cocos2d_ScaleTo_class = nullptr;
 
 static bool js_cocos2dx_ScaleTo_initWithDuration(se::State& s)
 {
@@ -13035,7 +13093,7 @@ static bool js_cocos2dx_ScaleTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ScaleTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ScaleTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ScaleTo_finalize)
 
 static bool js_cocos2dx_ScaleTo_constructor(se::State& s)
 {
@@ -13044,7 +13102,7 @@ static bool js_cocos2dx_ScaleTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ScaleTo_constructor, __jsb_cocos2dx_ScaleTo_class, js_cocos2dx_ScaleTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_ScaleTo_constructor, __jsb_cocos2d_ScaleTo_class, js_cocos2d_ScaleTo_finalize)
 
 static bool js_cocos2dx_ScaleTo_ctor(se::State& s)
 {
@@ -13053,12 +13111,14 @@ static bool js_cocos2dx_ScaleTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ScaleTo_ctor, __jsb_cocos2dx_ScaleTo_class, js_cocos2dx_ScaleTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ScaleTo_ctor, __jsb_cocos2d_ScaleTo_class, js_cocos2d_ScaleTo_finalize)
 
 
     
 
-bool js_cocos2dx_ScaleTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_ScaleTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13071,28 +13131,28 @@ bool js_cocos2dx_ScaleTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ScaleTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ScaleTo_finalize)
 
 bool js_register_cocos2dx_ScaleTo(se::Object* obj)
 {
-    auto cls = se::Class::create("ScaleTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_ScaleTo_constructor));
+    auto cls = se::Class::create("ScaleTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_ScaleTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ScaleTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ScaleTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ScaleTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ScaleTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ScaleTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ScaleTo>(cls);
 
-    __jsb_cocos2dx_ScaleTo_proto = cls->getProto();
-    __jsb_cocos2dx_ScaleTo_class = cls;
+    __jsb_cocos2d_ScaleTo_proto = cls->getProto();
+    __jsb_cocos2d_ScaleTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ScaleTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ScaleBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_ScaleBy_class = nullptr;
+se::Object* __jsb_cocos2d_ScaleBy_proto = nullptr;
+se::Class* __jsb_cocos2d_ScaleBy_class = nullptr;
 
 static bool js_cocos2dx_ScaleBy_create(se::State& s)
 {
@@ -13155,7 +13215,7 @@ static bool js_cocos2dx_ScaleBy_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ScaleBy_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ScaleBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ScaleBy_finalize)
 
 static bool js_cocos2dx_ScaleBy_constructor(se::State& s)
 {
@@ -13164,7 +13224,7 @@ static bool js_cocos2dx_ScaleBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ScaleBy_constructor, __jsb_cocos2dx_ScaleBy_class, js_cocos2dx_ScaleBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_ScaleBy_constructor, __jsb_cocos2d_ScaleBy_class, js_cocos2d_ScaleBy_finalize)
 
 static bool js_cocos2dx_ScaleBy_ctor(se::State& s)
 {
@@ -13173,12 +13233,14 @@ static bool js_cocos2dx_ScaleBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ScaleBy_ctor, __jsb_cocos2dx_ScaleBy_class, js_cocos2dx_ScaleBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ScaleBy_ctor, __jsb_cocos2d_ScaleBy_class, js_cocos2d_ScaleBy_finalize)
 
 
     
 
-bool js_cocos2dx_ScaleBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ScaleTo_proto;
+
+bool js_cocos2d_ScaleBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13191,27 +13253,27 @@ bool js_cocos2dx_ScaleBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ScaleBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ScaleBy_finalize)
 
 bool js_register_cocos2dx_ScaleBy(se::Object* obj)
 {
-    auto cls = se::Class::create("ScaleBy", obj, __jsb_cocos2dx_ScaleTo_proto, _SE(js_cocos2dx_ScaleBy_constructor));
+    auto cls = se::Class::create("ScaleBy", obj, __jsb_cocos2d_ScaleTo_proto, _SE(js_cocos2dx_ScaleBy_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_ScaleBy_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ScaleBy_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ScaleBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ScaleBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ScaleBy>(cls);
 
-    __jsb_cocos2dx_ScaleBy_proto = cls->getProto();
-    __jsb_cocos2dx_ScaleBy_class = cls;
+    __jsb_cocos2d_ScaleBy_proto = cls->getProto();
+    __jsb_cocos2d_ScaleBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ScaleBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Blink_proto = nullptr;
-se::Class* __jsb_cocos2dx_Blink_class = nullptr;
+se::Object* __jsb_cocos2d_Blink_proto = nullptr;
+se::Class* __jsb_cocos2d_Blink_class = nullptr;
 
 static bool js_cocos2dx_Blink_initWithDuration(se::State& s)
 {
@@ -13249,7 +13311,7 @@ static bool js_cocos2dx_Blink_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Blink_create : Error processing arguments");
         auto result = cocos2d::Blink::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Blink_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Blink_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13259,7 +13321,7 @@ static bool js_cocos2dx_Blink_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Blink_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Blink_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Blink_finalize)
 
 static bool js_cocos2dx_Blink_constructor(se::State& s)
 {
@@ -13268,7 +13330,7 @@ static bool js_cocos2dx_Blink_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Blink_constructor, __jsb_cocos2dx_Blink_class, js_cocos2dx_Blink_finalize)
+SE_BIND_CTOR(js_cocos2dx_Blink_constructor, __jsb_cocos2d_Blink_class, js_cocos2d_Blink_finalize)
 
 static bool js_cocos2dx_Blink_ctor(se::State& s)
 {
@@ -13277,12 +13339,14 @@ static bool js_cocos2dx_Blink_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Blink_ctor, __jsb_cocos2dx_Blink_class, js_cocos2dx_Blink_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Blink_ctor, __jsb_cocos2d_Blink_class, js_cocos2d_Blink_finalize)
 
 
     
 
-bool js_cocos2dx_Blink_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_Blink_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13295,28 +13359,28 @@ bool js_cocos2dx_Blink_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Blink_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Blink_finalize)
 
 bool js_register_cocos2dx_Blink(se::Object* obj)
 {
-    auto cls = se::Class::create("Blink", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_Blink_constructor));
+    auto cls = se::Class::create("Blink", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_Blink_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Blink_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Blink_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Blink_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Blink_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Blink_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Blink>(cls);
 
-    __jsb_cocos2dx_Blink_proto = cls->getProto();
-    __jsb_cocos2dx_Blink_class = cls;
+    __jsb_cocos2d_Blink_proto = cls->getProto();
+    __jsb_cocos2d_Blink_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Blink.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeTo_class = nullptr;
+se::Object* __jsb_cocos2d_FadeTo_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeTo_class = nullptr;
 
 static bool js_cocos2dx_FadeTo_initWithDuration(se::State& s)
 {
@@ -13354,7 +13418,7 @@ static bool js_cocos2dx_FadeTo_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeTo_create : Error processing arguments");
         auto result = cocos2d::FadeTo::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeTo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeTo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13364,7 +13428,7 @@ static bool js_cocos2dx_FadeTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeTo_finalize)
 
 static bool js_cocos2dx_FadeTo_constructor(se::State& s)
 {
@@ -13373,7 +13437,7 @@ static bool js_cocos2dx_FadeTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeTo_constructor, __jsb_cocos2dx_FadeTo_class, js_cocos2dx_FadeTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeTo_constructor, __jsb_cocos2d_FadeTo_class, js_cocos2d_FadeTo_finalize)
 
 static bool js_cocos2dx_FadeTo_ctor(se::State& s)
 {
@@ -13382,12 +13446,14 @@ static bool js_cocos2dx_FadeTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeTo_ctor, __jsb_cocos2dx_FadeTo_class, js_cocos2dx_FadeTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeTo_ctor, __jsb_cocos2d_FadeTo_class, js_cocos2d_FadeTo_finalize)
 
 
     
 
-bool js_cocos2dx_FadeTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_FadeTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13400,28 +13466,28 @@ bool js_cocos2dx_FadeTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeTo_finalize)
 
 bool js_register_cocos2dx_FadeTo(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_FadeTo_constructor));
+    auto cls = se::Class::create("FadeTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_FadeTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_FadeTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeTo>(cls);
 
-    __jsb_cocos2dx_FadeTo_proto = cls->getProto();
-    __jsb_cocos2dx_FadeTo_class = cls;
+    __jsb_cocos2d_FadeTo_proto = cls->getProto();
+    __jsb_cocos2d_FadeTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeIn_class = nullptr;
+se::Object* __jsb_cocos2d_FadeIn_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeIn_class = nullptr;
 
 static bool js_cocos2dx_FadeIn_setReverseAction(se::State& s)
 {
@@ -13453,7 +13519,7 @@ static bool js_cocos2dx_FadeIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeIn_create : Error processing arguments");
         auto result = cocos2d::FadeIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13463,7 +13529,7 @@ static bool js_cocos2dx_FadeIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeIn_finalize)
 
 static bool js_cocos2dx_FadeIn_constructor(se::State& s)
 {
@@ -13472,7 +13538,7 @@ static bool js_cocos2dx_FadeIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeIn_constructor, __jsb_cocos2dx_FadeIn_class, js_cocos2dx_FadeIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeIn_constructor, __jsb_cocos2d_FadeIn_class, js_cocos2d_FadeIn_finalize)
 
 static bool js_cocos2dx_FadeIn_ctor(se::State& s)
 {
@@ -13481,12 +13547,14 @@ static bool js_cocos2dx_FadeIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeIn_ctor, __jsb_cocos2dx_FadeIn_class, js_cocos2dx_FadeIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeIn_ctor, __jsb_cocos2d_FadeIn_class, js_cocos2d_FadeIn_finalize)
 
 
     
 
-bool js_cocos2dx_FadeIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_FadeTo_proto;
+
+bool js_cocos2d_FadeIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13499,28 +13567,28 @@ bool js_cocos2dx_FadeIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeIn_finalize)
 
 bool js_register_cocos2dx_FadeIn(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeIn", obj, __jsb_cocos2dx_FadeTo_proto, _SE(js_cocos2dx_FadeIn_constructor));
+    auto cls = se::Class::create("FadeIn", obj, __jsb_cocos2d_FadeTo_proto, _SE(js_cocos2dx_FadeIn_constructor));
 
     cls->defineFunction("setReverseAction", _SE(js_cocos2dx_FadeIn_setReverseAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeIn>(cls);
 
-    __jsb_cocos2dx_FadeIn_proto = cls->getProto();
-    __jsb_cocos2dx_FadeIn_class = cls;
+    __jsb_cocos2d_FadeIn_proto = cls->getProto();
+    __jsb_cocos2d_FadeIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeOut_class = nullptr;
+se::Object* __jsb_cocos2d_FadeOut_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeOut_class = nullptr;
 
 static bool js_cocos2dx_FadeOut_setReverseAction(se::State& s)
 {
@@ -13552,7 +13620,7 @@ static bool js_cocos2dx_FadeOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeOut_create : Error processing arguments");
         auto result = cocos2d::FadeOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13562,7 +13630,7 @@ static bool js_cocos2dx_FadeOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeOut_finalize)
 
 static bool js_cocos2dx_FadeOut_constructor(se::State& s)
 {
@@ -13571,7 +13639,7 @@ static bool js_cocos2dx_FadeOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeOut_constructor, __jsb_cocos2dx_FadeOut_class, js_cocos2dx_FadeOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeOut_constructor, __jsb_cocos2d_FadeOut_class, js_cocos2d_FadeOut_finalize)
 
 static bool js_cocos2dx_FadeOut_ctor(se::State& s)
 {
@@ -13580,12 +13648,14 @@ static bool js_cocos2dx_FadeOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOut_ctor, __jsb_cocos2dx_FadeOut_class, js_cocos2dx_FadeOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOut_ctor, __jsb_cocos2d_FadeOut_class, js_cocos2d_FadeOut_finalize)
 
 
     
 
-bool js_cocos2dx_FadeOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_FadeTo_proto;
+
+bool js_cocos2d_FadeOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13598,28 +13668,28 @@ bool js_cocos2dx_FadeOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeOut_finalize)
 
 bool js_register_cocos2dx_FadeOut(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeOut", obj, __jsb_cocos2dx_FadeTo_proto, _SE(js_cocos2dx_FadeOut_constructor));
+    auto cls = se::Class::create("FadeOut", obj, __jsb_cocos2d_FadeTo_proto, _SE(js_cocos2dx_FadeOut_constructor));
 
     cls->defineFunction("setReverseAction", _SE(js_cocos2dx_FadeOut_setReverseAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeOut>(cls);
 
-    __jsb_cocos2dx_FadeOut_proto = cls->getProto();
-    __jsb_cocos2dx_FadeOut_class = cls;
+    __jsb_cocos2d_FadeOut_proto = cls->getProto();
+    __jsb_cocos2d_FadeOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TintTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_TintTo_class = nullptr;
+se::Object* __jsb_cocos2d_TintTo_proto = nullptr;
+se::Class* __jsb_cocos2d_TintTo_class = nullptr;
 
 static bool js_cocos2dx_TintTo_initWithDuration(se::State& s)
 {
@@ -13692,7 +13762,7 @@ static bool js_cocos2dx_TintTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TintTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TintTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TintTo_finalize)
 
 static bool js_cocos2dx_TintTo_constructor(se::State& s)
 {
@@ -13701,7 +13771,7 @@ static bool js_cocos2dx_TintTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TintTo_constructor, __jsb_cocos2dx_TintTo_class, js_cocos2dx_TintTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_TintTo_constructor, __jsb_cocos2d_TintTo_class, js_cocos2d_TintTo_finalize)
 
 static bool js_cocos2dx_TintTo_ctor(se::State& s)
 {
@@ -13710,12 +13780,14 @@ static bool js_cocos2dx_TintTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TintTo_ctor, __jsb_cocos2dx_TintTo_class, js_cocos2dx_TintTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TintTo_ctor, __jsb_cocos2d_TintTo_class, js_cocos2d_TintTo_finalize)
 
 
     
 
-bool js_cocos2dx_TintTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_TintTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13728,28 +13800,28 @@ bool js_cocos2dx_TintTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TintTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TintTo_finalize)
 
 bool js_register_cocos2dx_TintTo(se::Object* obj)
 {
-    auto cls = se::Class::create("TintTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_TintTo_constructor));
+    auto cls = se::Class::create("TintTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_TintTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_TintTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TintTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TintTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TintTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TintTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TintTo>(cls);
 
-    __jsb_cocos2dx_TintTo_proto = cls->getProto();
-    __jsb_cocos2dx_TintTo_class = cls;
+    __jsb_cocos2d_TintTo_proto = cls->getProto();
+    __jsb_cocos2d_TintTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TintTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TintBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_TintBy_class = nullptr;
+se::Object* __jsb_cocos2d_TintBy_proto = nullptr;
+se::Class* __jsb_cocos2d_TintBy_class = nullptr;
 
 static bool js_cocos2dx_TintBy_initWithDuration(se::State& s)
 {
@@ -13795,7 +13867,7 @@ static bool js_cocos2dx_TintBy_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TintBy_create : Error processing arguments");
         auto result = cocos2d::TintBy::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TintBy_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TintBy_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13805,7 +13877,7 @@ static bool js_cocos2dx_TintBy_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TintBy_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TintBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TintBy_finalize)
 
 static bool js_cocos2dx_TintBy_constructor(se::State& s)
 {
@@ -13814,7 +13886,7 @@ static bool js_cocos2dx_TintBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TintBy_constructor, __jsb_cocos2dx_TintBy_class, js_cocos2dx_TintBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_TintBy_constructor, __jsb_cocos2d_TintBy_class, js_cocos2d_TintBy_finalize)
 
 static bool js_cocos2dx_TintBy_ctor(se::State& s)
 {
@@ -13823,12 +13895,14 @@ static bool js_cocos2dx_TintBy_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TintBy_ctor, __jsb_cocos2dx_TintBy_class, js_cocos2dx_TintBy_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TintBy_ctor, __jsb_cocos2d_TintBy_class, js_cocos2d_TintBy_finalize)
 
 
     
 
-bool js_cocos2dx_TintBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_TintBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13841,28 +13915,28 @@ bool js_cocos2dx_TintBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TintBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TintBy_finalize)
 
 bool js_register_cocos2dx_TintBy(se::Object* obj)
 {
-    auto cls = se::Class::create("TintBy", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_TintBy_constructor));
+    auto cls = se::Class::create("TintBy", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_TintBy_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_TintBy_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TintBy_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TintBy_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TintBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TintBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TintBy>(cls);
 
-    __jsb_cocos2dx_TintBy_proto = cls->getProto();
-    __jsb_cocos2dx_TintBy_class = cls;
+    __jsb_cocos2d_TintBy_proto = cls->getProto();
+    __jsb_cocos2d_TintBy_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TintBy.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_DelayTime_proto = nullptr;
-se::Class* __jsb_cocos2dx_DelayTime_class = nullptr;
+se::Object* __jsb_cocos2d_DelayTime_proto = nullptr;
+se::Class* __jsb_cocos2d_DelayTime_class = nullptr;
 
 static bool js_cocos2dx_DelayTime_create(se::State& s)
 {
@@ -13875,7 +13949,7 @@ static bool js_cocos2dx_DelayTime_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_DelayTime_create : Error processing arguments");
         auto result = cocos2d::DelayTime::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_DelayTime_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_DelayTime_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13885,7 +13959,7 @@ static bool js_cocos2dx_DelayTime_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_DelayTime_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_DelayTime_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_DelayTime_finalize)
 
 static bool js_cocos2dx_DelayTime_constructor(se::State& s)
 {
@@ -13894,7 +13968,7 @@ static bool js_cocos2dx_DelayTime_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_DelayTime_constructor, __jsb_cocos2dx_DelayTime_class, js_cocos2dx_DelayTime_finalize)
+SE_BIND_CTOR(js_cocos2dx_DelayTime_constructor, __jsb_cocos2d_DelayTime_class, js_cocos2d_DelayTime_finalize)
 
 static bool js_cocos2dx_DelayTime_ctor(se::State& s)
 {
@@ -13903,12 +13977,14 @@ static bool js_cocos2dx_DelayTime_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_DelayTime_ctor, __jsb_cocos2dx_DelayTime_class, js_cocos2dx_DelayTime_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_DelayTime_ctor, __jsb_cocos2d_DelayTime_class, js_cocos2d_DelayTime_finalize)
 
 
     
 
-bool js_cocos2dx_DelayTime_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_DelayTime_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -13921,27 +13997,27 @@ bool js_cocos2dx_DelayTime_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_DelayTime_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_DelayTime_finalize)
 
 bool js_register_cocos2dx_DelayTime(se::Object* obj)
 {
-    auto cls = se::Class::create("DelayTime", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_DelayTime_constructor));
+    auto cls = se::Class::create("DelayTime", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_DelayTime_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_DelayTime_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_DelayTime_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_DelayTime_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_DelayTime_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::DelayTime>(cls);
 
-    __jsb_cocos2dx_DelayTime_proto = cls->getProto();
-    __jsb_cocos2dx_DelayTime_class = cls;
+    __jsb_cocos2d_DelayTime_proto = cls->getProto();
+    __jsb_cocos2d_DelayTime_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.DelayTime.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ReverseTime_proto = nullptr;
-se::Class* __jsb_cocos2dx_ReverseTime_class = nullptr;
+se::Object* __jsb_cocos2d_ReverseTime_proto = nullptr;
+se::Class* __jsb_cocos2d_ReverseTime_class = nullptr;
 
 static bool js_cocos2dx_ReverseTime_initWithAction(se::State& s)
 {
@@ -13975,7 +14051,7 @@ static bool js_cocos2dx_ReverseTime_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ReverseTime_create : Error processing arguments");
         auto result = cocos2d::ReverseTime::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ReverseTime_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ReverseTime_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -13985,7 +14061,7 @@ static bool js_cocos2dx_ReverseTime_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ReverseTime_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ReverseTime_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ReverseTime_finalize)
 
 static bool js_cocos2dx_ReverseTime_constructor(se::State& s)
 {
@@ -13994,7 +14070,7 @@ static bool js_cocos2dx_ReverseTime_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ReverseTime_constructor, __jsb_cocos2dx_ReverseTime_class, js_cocos2dx_ReverseTime_finalize)
+SE_BIND_CTOR(js_cocos2dx_ReverseTime_constructor, __jsb_cocos2d_ReverseTime_class, js_cocos2d_ReverseTime_finalize)
 
 static bool js_cocos2dx_ReverseTime_ctor(se::State& s)
 {
@@ -14003,12 +14079,14 @@ static bool js_cocos2dx_ReverseTime_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ReverseTime_ctor, __jsb_cocos2dx_ReverseTime_class, js_cocos2dx_ReverseTime_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ReverseTime_ctor, __jsb_cocos2d_ReverseTime_class, js_cocos2d_ReverseTime_finalize)
 
 
     
 
-bool js_cocos2dx_ReverseTime_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_ReverseTime_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -14021,28 +14099,28 @@ bool js_cocos2dx_ReverseTime_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ReverseTime_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ReverseTime_finalize)
 
 bool js_register_cocos2dx_ReverseTime(se::Object* obj)
 {
-    auto cls = se::Class::create("ReverseTime", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_ReverseTime_constructor));
+    auto cls = se::Class::create("ReverseTime", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_ReverseTime_constructor));
 
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_ReverseTime_initWithAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ReverseTime_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ReverseTime_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ReverseTime_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ReverseTime_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ReverseTime>(cls);
 
-    __jsb_cocos2dx_ReverseTime_proto = cls->getProto();
-    __jsb_cocos2dx_ReverseTime_class = cls;
+    __jsb_cocos2d_ReverseTime_proto = cls->getProto();
+    __jsb_cocos2d_ReverseTime_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ReverseTime.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Animate_proto = nullptr;
-se::Class* __jsb_cocos2dx_Animate_class = nullptr;
+se::Object* __jsb_cocos2d_Animate_proto = nullptr;
+se::Class* __jsb_cocos2d_Animate_class = nullptr;
 
 static bool js_cocos2dx_Animate_initWithAnimation(se::State& s)
 {
@@ -14143,7 +14221,7 @@ static bool js_cocos2dx_Animate_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Animate_create : Error processing arguments");
         auto result = cocos2d::Animate::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Animate_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Animate_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -14153,7 +14231,7 @@ static bool js_cocos2dx_Animate_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Animate_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Animate_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Animate_finalize)
 
 static bool js_cocos2dx_Animate_constructor(se::State& s)
 {
@@ -14162,7 +14240,7 @@ static bool js_cocos2dx_Animate_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Animate_constructor, __jsb_cocos2dx_Animate_class, js_cocos2dx_Animate_finalize)
+SE_BIND_CTOR(js_cocos2dx_Animate_constructor, __jsb_cocos2d_Animate_class, js_cocos2d_Animate_finalize)
 
 static bool js_cocos2dx_Animate_ctor(se::State& s)
 {
@@ -14171,12 +14249,14 @@ static bool js_cocos2dx_Animate_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Animate_ctor, __jsb_cocos2dx_Animate_class, js_cocos2dx_Animate_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Animate_ctor, __jsb_cocos2d_Animate_class, js_cocos2d_Animate_finalize)
 
 
     
 
-bool js_cocos2dx_Animate_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_Animate_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -14189,11 +14269,11 @@ bool js_cocos2dx_Animate_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Animate_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Animate_finalize)
 
 bool js_register_cocos2dx_Animate(se::Object* obj)
 {
-    auto cls = se::Class::create("Animate", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_Animate_constructor));
+    auto cls = se::Class::create("Animate", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_Animate_constructor));
 
     cls->defineFunction("initWithAnimation", _SE(js_cocos2dx_Animate_initWithAnimation));
     cls->defineFunction("getAnimation", _SE(js_cocos2dx_Animate_getAnimation));
@@ -14201,19 +14281,19 @@ bool js_register_cocos2dx_Animate(se::Object* obj)
     cls->defineFunction("setAnimation", _SE(js_cocos2dx_Animate_setAnimation));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Animate_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Animate_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Animate_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Animate_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Animate>(cls);
 
-    __jsb_cocos2dx_Animate_proto = cls->getProto();
-    __jsb_cocos2dx_Animate_class = cls;
+    __jsb_cocos2d_Animate_proto = cls->getProto();
+    __jsb_cocos2d_Animate_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Animate.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TargetedAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_TargetedAction_class = nullptr;
+se::Object* __jsb_cocos2d_TargetedAction_proto = nullptr;
+se::Class* __jsb_cocos2d_TargetedAction_class = nullptr;
 
 static bool js_cocos2dx_TargetedAction_getForcedTarget(se::State& s)
 {
@@ -14300,7 +14380,7 @@ static bool js_cocos2dx_TargetedAction_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TargetedAction_create : Error processing arguments");
         auto result = cocos2d::TargetedAction::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TargetedAction_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TargetedAction_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -14310,7 +14390,7 @@ static bool js_cocos2dx_TargetedAction_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TargetedAction_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TargetedAction_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TargetedAction_finalize)
 
 static bool js_cocos2dx_TargetedAction_constructor(se::State& s)
 {
@@ -14319,7 +14399,7 @@ static bool js_cocos2dx_TargetedAction_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TargetedAction_constructor, __jsb_cocos2dx_TargetedAction_class, js_cocos2dx_TargetedAction_finalize)
+SE_BIND_CTOR(js_cocos2dx_TargetedAction_constructor, __jsb_cocos2d_TargetedAction_class, js_cocos2d_TargetedAction_finalize)
 
 static bool js_cocos2dx_TargetedAction_ctor(se::State& s)
 {
@@ -14328,12 +14408,14 @@ static bool js_cocos2dx_TargetedAction_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TargetedAction_ctor, __jsb_cocos2dx_TargetedAction_class, js_cocos2dx_TargetedAction_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TargetedAction_ctor, __jsb_cocos2d_TargetedAction_class, js_cocos2d_TargetedAction_finalize)
 
 
     
 
-bool js_cocos2dx_TargetedAction_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_TargetedAction_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -14346,30 +14428,30 @@ bool js_cocos2dx_TargetedAction_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TargetedAction_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TargetedAction_finalize)
 
 bool js_register_cocos2dx_TargetedAction(se::Object* obj)
 {
-    auto cls = se::Class::create("TargetedAction", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_TargetedAction_constructor));
+    auto cls = se::Class::create("TargetedAction", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_TargetedAction_constructor));
 
     cls->defineFunction("getForcedTarget", _SE(js_cocos2dx_TargetedAction_getForcedTarget));
     cls->defineFunction("initWithTarget", _SE(js_cocos2dx_TargetedAction_initWithTarget));
     cls->defineFunction("setForcedTarget", _SE(js_cocos2dx_TargetedAction_setForcedTarget));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TargetedAction_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TargetedAction_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TargetedAction_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TargetedAction_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TargetedAction>(cls);
 
-    __jsb_cocos2dx_TargetedAction_proto = cls->getProto();
-    __jsb_cocos2dx_TargetedAction_class = cls;
+    __jsb_cocos2d_TargetedAction_proto = cls->getProto();
+    __jsb_cocos2d_TargetedAction_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TargetedAction.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionFloat_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionFloat_class = nullptr;
+se::Object* __jsb_cocos2d_ActionFloat_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionFloat_class = nullptr;
 
 static bool js_cocos2dx_ActionFloat_initWithDuration(se::State& s)
 {
@@ -14473,7 +14555,7 @@ static bool js_cocos2dx_ActionFloat_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ActionFloat_create : Error processing arguments");
         auto result = cocos2d::ActionFloat::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ActionFloat_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ActionFloat_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -14483,7 +14565,7 @@ static bool js_cocos2dx_ActionFloat_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ActionFloat_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ActionFloat_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ActionFloat_finalize)
 
 static bool js_cocos2dx_ActionFloat_constructor(se::State& s)
 {
@@ -14492,7 +14574,7 @@ static bool js_cocos2dx_ActionFloat_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ActionFloat_constructor, __jsb_cocos2dx_ActionFloat_class, js_cocos2dx_ActionFloat_finalize)
+SE_BIND_CTOR(js_cocos2dx_ActionFloat_constructor, __jsb_cocos2d_ActionFloat_class, js_cocos2d_ActionFloat_finalize)
 
 static bool js_cocos2dx_ActionFloat_ctor(se::State& s)
 {
@@ -14501,12 +14583,14 @@ static bool js_cocos2dx_ActionFloat_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ActionFloat_ctor, __jsb_cocos2dx_ActionFloat_class, js_cocos2dx_ActionFloat_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ActionFloat_ctor, __jsb_cocos2d_ActionFloat_class, js_cocos2d_ActionFloat_finalize)
 
 
     
 
-bool js_cocos2dx_ActionFloat_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_ActionFloat_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -14519,28 +14603,28 @@ bool js_cocos2dx_ActionFloat_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ActionFloat_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ActionFloat_finalize)
 
 bool js_register_cocos2dx_ActionFloat(se::Object* obj)
 {
-    auto cls = se::Class::create("ActionFloat", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_ActionFloat_constructor));
+    auto cls = se::Class::create("ActionFloat", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_ActionFloat_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ActionFloat_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ActionFloat_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ActionFloat_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ActionFloat_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ActionFloat_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionFloat>(cls);
 
-    __jsb_cocos2dx_ActionFloat_proto = cls->getProto();
-    __jsb_cocos2dx_ActionFloat_class = cls;
+    __jsb_cocos2d_ActionFloat_proto = cls->getProto();
+    __jsb_cocos2d_ActionFloat_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ActionFloat.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Configuration_proto = nullptr;
-se::Class* __jsb_cocos2dx_Configuration_class = nullptr;
+se::Object* __jsb_cocos2d_Configuration_proto = nullptr;
+se::Class* __jsb_cocos2d_Configuration_class = nullptr;
 
 static bool js_cocos2dx_Configuration_supportsPVRTC(se::State& s)
 {
@@ -15033,7 +15117,7 @@ static bool js_cocos2dx_Configuration_getInstance(se::State& s)
         se::Object* obj = nullptr;
         if (result->_scriptObject == nullptr)
         {
-            obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Configuration_class, true);
+            obj = se::Object::createObjectWithClass(__jsb_cocos2d_Configuration_class, true);
             obj->setPrivateData(result);
             result->_scriptObject = obj;
         }
@@ -15049,6 +15133,7 @@ static bool js_cocos2dx_Configuration_getInstance(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Configuration_getInstance)
+
 
 
 
@@ -15086,14 +15171,14 @@ bool js_register_cocos2dx_Configuration(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Configuration>(cls);
 
-    __jsb_cocos2dx_Configuration_proto = cls->getProto();
-    __jsb_cocos2dx_Configuration_class = cls;
+    __jsb_cocos2d_Configuration_proto = cls->getProto();
+    __jsb_cocos2d_Configuration_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Properties_proto = nullptr;
-se::Class* __jsb_cocos2dx_Properties_class = nullptr;
+se::Object* __jsb_cocos2d_Properties_proto = nullptr;
+se::Class* __jsb_cocos2d_Properties_class = nullptr;
 
 static bool js_cocos2dx_Properties_getVariable(se::State& s)
 {
@@ -15778,6 +15863,7 @@ SE_BIND_FUNC(js_cocos2dx_Properties_parseVec4)
 
 
 
+
 bool js_register_cocos2dx_Properties(se::Object* obj)
 {
     auto cls = se::Class::create("Properties", obj, nullptr, nullptr);
@@ -15813,14 +15899,14 @@ bool js_register_cocos2dx_Properties(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Properties>(cls);
 
-    __jsb_cocos2dx_Properties_proto = cls->getProto();
-    __jsb_cocos2dx_Properties_class = cls;
+    __jsb_cocos2d_Properties_proto = cls->getProto();
+    __jsb_cocos2d_Properties_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FileUtils_proto = nullptr;
-se::Class* __jsb_cocos2dx_FileUtils_class = nullptr;
+se::Object* __jsb_cocos2d_FileUtils_proto = nullptr;
+se::Class* __jsb_cocos2d_FileUtils_class = nullptr;
 
 static bool js_cocos2dx_FileUtils_fullPathForFilename(se::State& s)
 {
@@ -17224,6 +17310,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_getInstance)
 
 
 
+
 bool js_register_cocos2dx_FileUtils(se::Object* obj)
 {
     auto cls = se::Class::create("FileUtils", obj, nullptr, nullptr);
@@ -17271,32 +17358,34 @@ bool js_register_cocos2dx_FileUtils(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::FileUtils>(cls);
 
-    __jsb_cocos2dx_FileUtils_proto = cls->getProto();
-    __jsb_cocos2dx_FileUtils_class = cls;
+    __jsb_cocos2d_FileUtils_proto = cls->getProto();
+    __jsb_cocos2d_FileUtils_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventAcceleration_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventAcceleration_class = nullptr;
+se::Object* __jsb_cocos2d_EventAcceleration_proto = nullptr;
+se::Class* __jsb_cocos2d_EventAcceleration_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_Event_proto;
 
 
 bool js_register_cocos2dx_EventAcceleration(se::Object* obj)
 {
-    auto cls = se::Class::create("EventAcceleration", obj, __jsb_cocos2dx_Event_proto, nullptr);
+    auto cls = se::Class::create("EventAcceleration", obj, __jsb_cocos2d_Event_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::EventAcceleration>(cls);
 
-    __jsb_cocos2dx_EventAcceleration_proto = cls->getProto();
-    __jsb_cocos2dx_EventAcceleration_class = cls;
+    __jsb_cocos2d_EventAcceleration_proto = cls->getProto();
+    __jsb_cocos2d_EventAcceleration_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventCustom_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventCustom_class = nullptr;
+se::Object* __jsb_cocos2d_EventCustom_proto = nullptr;
+se::Class* __jsb_cocos2d_EventCustom_class = nullptr;
 
 static bool js_cocos2dx_EventCustom_getEventName(se::State& s)
 {
@@ -17316,7 +17405,7 @@ static bool js_cocos2dx_EventCustom_getEventName(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventCustom_getEventName)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventCustom_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventCustom_finalize)
 
 static bool js_cocos2dx_EventCustom_constructor(se::State& s)
 {
@@ -17330,11 +17419,13 @@ static bool js_cocos2dx_EventCustom_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventCustom_constructor, __jsb_cocos2dx_EventCustom_class, js_cocos2dx_EventCustom_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventCustom_constructor, __jsb_cocos2d_EventCustom_class, js_cocos2d_EventCustom_finalize)
 
 
 
-bool js_cocos2dx_EventCustom_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Event_proto;
+
+bool js_cocos2d_EventCustom_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -17347,25 +17438,25 @@ bool js_cocos2dx_EventCustom_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventCustom_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventCustom_finalize)
 
 bool js_register_cocos2dx_EventCustom(se::Object* obj)
 {
-    auto cls = se::Class::create("EventCustom", obj, __jsb_cocos2dx_Event_proto, _SE(js_cocos2dx_EventCustom_constructor));
+    auto cls = se::Class::create("EventCustom", obj, __jsb_cocos2d_Event_proto, _SE(js_cocos2dx_EventCustom_constructor));
 
     cls->defineFunction("getEventName", _SE(js_cocos2dx_EventCustom_getEventName));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventCustom_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventCustom_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventCustom>(cls);
 
-    __jsb_cocos2dx_EventCustom_proto = cls->getProto();
-    __jsb_cocos2dx_EventCustom_class = cls;
+    __jsb_cocos2d_EventCustom_proto = cls->getProto();
+    __jsb_cocos2d_EventCustom_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListener_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListener_class = nullptr;
+se::Object* __jsb_cocos2d_EventListener_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListener_class = nullptr;
 
 static bool js_cocos2dx_EventListener_setEnabled(se::State& s)
 {
@@ -17442,6 +17533,7 @@ SE_BIND_FUNC(js_cocos2dx_EventListener_checkAvailable)
 
 
 
+
 bool js_register_cocos2dx_EventListener(se::Object* obj)
 {
     auto cls = se::Class::create("EventListener", obj, nullptr, nullptr);
@@ -17453,14 +17545,14 @@ bool js_register_cocos2dx_EventListener(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListener>(cls);
 
-    __jsb_cocos2dx_EventListener_proto = cls->getProto();
-    __jsb_cocos2dx_EventListener_class = cls;
+    __jsb_cocos2d_EventListener_proto = cls->getProto();
+    __jsb_cocos2d_EventListener_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventDispatcher_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventDispatcher_class = nullptr;
+se::Object* __jsb_cocos2d_EventDispatcher_proto = nullptr;
+se::Class* __jsb_cocos2d_EventDispatcher_class = nullptr;
 
 static bool js_cocos2dx_EventDispatcher_setEnabled(se::State& s)
 {
@@ -17755,7 +17847,7 @@ static bool js_cocos2dx_EventDispatcher_isEnabled(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventDispatcher_isEnabled)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventDispatcher_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventDispatcher_finalize)
 
 static bool js_cocos2dx_EventDispatcher_constructor(se::State& s)
 {
@@ -17764,11 +17856,12 @@ static bool js_cocos2dx_EventDispatcher_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventDispatcher_constructor, __jsb_cocos2dx_EventDispatcher_class, js_cocos2dx_EventDispatcher_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventDispatcher_constructor, __jsb_cocos2d_EventDispatcher_class, js_cocos2d_EventDispatcher_finalize)
 
 
 
-bool js_cocos2dx_EventDispatcher_finalize(se::State& s)
+
+bool js_cocos2d_EventDispatcher_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -17781,7 +17874,7 @@ bool js_cocos2dx_EventDispatcher_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventDispatcher_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventDispatcher_finalize)
 
 bool js_register_cocos2dx_EventDispatcher(se::Object* obj)
 {
@@ -17800,36 +17893,38 @@ bool js_register_cocos2dx_EventDispatcher(se::Object* obj)
     cls->defineFunction("removeCustomListeners", _SE(js_cocos2dx_EventDispatcher_removeCustomEventListeners));
     cls->defineFunction("removeListener", _SE(js_cocos2dx_EventDispatcher_removeEventListener));
     cls->defineFunction("isEnabled", _SE(js_cocos2dx_EventDispatcher_isEnabled));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventDispatcher_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventDispatcher_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventDispatcher>(cls);
 
-    __jsb_cocos2dx_EventDispatcher_proto = cls->getProto();
-    __jsb_cocos2dx_EventDispatcher_class = cls;
+    __jsb_cocos2d_EventDispatcher_proto = cls->getProto();
+    __jsb_cocos2d_EventDispatcher_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventFocus_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventFocus_class = nullptr;
+se::Object* __jsb_cocos2d_EventFocus_proto = nullptr;
+se::Class* __jsb_cocos2d_EventFocus_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_Event_proto;
 
 
 bool js_register_cocos2dx_EventFocus(se::Object* obj)
 {
-    auto cls = se::Class::create("EventFocus", obj, __jsb_cocos2dx_Event_proto, nullptr);
+    auto cls = se::Class::create("EventFocus", obj, __jsb_cocos2d_Event_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::EventFocus>(cls);
 
-    __jsb_cocos2dx_EventFocus_proto = cls->getProto();
-    __jsb_cocos2dx_EventFocus_class = cls;
+    __jsb_cocos2d_EventFocus_proto = cls->getProto();
+    __jsb_cocos2d_EventFocus_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerAcceleration_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerAcceleration_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerAcceleration_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerAcceleration_class = nullptr;
 
 static bool js_cocos2dx_EventListenerAcceleration_init(se::State& s)
 {
@@ -17882,7 +17977,7 @@ static bool js_cocos2dx_EventListenerAcceleration_init(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventListenerAcceleration_init)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerAcceleration_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerAcceleration_finalize)
 
 static bool js_cocos2dx_EventListenerAcceleration_constructor(se::State& s)
 {
@@ -17891,11 +17986,13 @@ static bool js_cocos2dx_EventListenerAcceleration_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerAcceleration_constructor, __jsb_cocos2dx_EventListenerAcceleration_class, js_cocos2dx_EventListenerAcceleration_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerAcceleration_constructor, __jsb_cocos2d_EventListenerAcceleration_class, js_cocos2d_EventListenerAcceleration_finalize)
 
 
 
-bool js_cocos2dx_EventListenerAcceleration_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerAcceleration_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -17908,27 +18005,27 @@ bool js_cocos2dx_EventListenerAcceleration_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerAcceleration_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerAcceleration_finalize)
 
 bool js_register_cocos2dx_EventListenerAcceleration(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerAcceleration", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerAcceleration_constructor));
+    auto cls = se::Class::create("EventListenerAcceleration", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerAcceleration_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_EventListenerAcceleration_init));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerAcceleration_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerAcceleration_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerAcceleration>(cls);
 
-    __jsb_cocos2dx_EventListenerAcceleration_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerAcceleration_class = cls;
+    __jsb_cocos2d_EventListenerAcceleration_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerAcceleration_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerCustom_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerCustom_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerCustom_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerCustom_class = nullptr;
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerCustom_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerCustom_finalize)
 
 static bool js_cocos2dx_EventListenerCustom_constructor(se::State& s)
 {
@@ -17937,11 +18034,13 @@ static bool js_cocos2dx_EventListenerCustom_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerCustom_constructor, __jsb_cocos2dx_EventListenerCustom_class, js_cocos2dx_EventListenerCustom_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerCustom_constructor, __jsb_cocos2d_EventListenerCustom_class, js_cocos2d_EventListenerCustom_finalize)
 
 
 
-bool js_cocos2dx_EventListenerCustom_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerCustom_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -17954,24 +18053,24 @@ bool js_cocos2dx_EventListenerCustom_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerCustom_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerCustom_finalize)
 
 bool js_register_cocos2dx_EventListenerCustom(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerCustom", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerCustom_constructor));
+    auto cls = se::Class::create("EventListenerCustom", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerCustom_constructor));
 
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerCustom_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerCustom_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerCustom>(cls);
 
-    __jsb_cocos2dx_EventListenerCustom_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerCustom_class = cls;
+    __jsb_cocos2d_EventListenerCustom_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerCustom_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerFocus_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerFocus_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerFocus_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerFocus_class = nullptr;
 
 static bool js_cocos2dx_EventListenerFocus_init(se::State& s)
 {
@@ -17991,7 +18090,7 @@ static bool js_cocos2dx_EventListenerFocus_init(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventListenerFocus_init)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerFocus_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerFocus_finalize)
 
 static bool js_cocos2dx_EventListenerFocus_constructor(se::State& s)
 {
@@ -18000,11 +18099,13 @@ static bool js_cocos2dx_EventListenerFocus_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerFocus_constructor, __jsb_cocos2dx_EventListenerFocus_class, js_cocos2dx_EventListenerFocus_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerFocus_constructor, __jsb_cocos2d_EventListenerFocus_class, js_cocos2d_EventListenerFocus_finalize)
 
 
 
-bool js_cocos2dx_EventListenerFocus_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerFocus_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18017,25 +18118,25 @@ bool js_cocos2dx_EventListenerFocus_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerFocus_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerFocus_finalize)
 
 bool js_register_cocos2dx_EventListenerFocus(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerFocus", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerFocus_constructor));
+    auto cls = se::Class::create("EventListenerFocus", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerFocus_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_EventListenerFocus_init));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerFocus_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerFocus_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerFocus>(cls);
 
-    __jsb_cocos2dx_EventListenerFocus_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerFocus_class = cls;
+    __jsb_cocos2d_EventListenerFocus_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerFocus_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerKeyboard_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerKeyboard_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerKeyboard_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerKeyboard_class = nullptr;
 
 static bool js_cocos2dx_EventListenerKeyboard_init(se::State& s)
 {
@@ -18055,7 +18156,7 @@ static bool js_cocos2dx_EventListenerKeyboard_init(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventListenerKeyboard_init)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerKeyboard_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerKeyboard_finalize)
 
 static bool js_cocos2dx_EventListenerKeyboard_constructor(se::State& s)
 {
@@ -18064,11 +18165,13 @@ static bool js_cocos2dx_EventListenerKeyboard_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerKeyboard_constructor, __jsb_cocos2dx_EventListenerKeyboard_class, js_cocos2dx_EventListenerKeyboard_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerKeyboard_constructor, __jsb_cocos2d_EventListenerKeyboard_class, js_cocos2d_EventListenerKeyboard_finalize)
 
 
 
-bool js_cocos2dx_EventListenerKeyboard_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerKeyboard_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18081,25 +18184,25 @@ bool js_cocos2dx_EventListenerKeyboard_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerKeyboard_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerKeyboard_finalize)
 
 bool js_register_cocos2dx_EventListenerKeyboard(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerKeyboard", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerKeyboard_constructor));
+    auto cls = se::Class::create("EventListenerKeyboard", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerKeyboard_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_EventListenerKeyboard_init));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerKeyboard_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerKeyboard_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerKeyboard>(cls);
 
-    __jsb_cocos2dx_EventListenerKeyboard_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerKeyboard_class = cls;
+    __jsb_cocos2d_EventListenerKeyboard_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerKeyboard_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventMouse_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventMouse_class = nullptr;
+se::Object* __jsb_cocos2d_EventMouse_proto = nullptr;
+se::Class* __jsb_cocos2d_EventMouse_class = nullptr;
 
 static bool js_cocos2dx_EventMouse_getMouseButton(se::State& s)
 {
@@ -18379,10 +18482,12 @@ static bool js_cocos2dx_EventMouse_getStartLocationInView(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_EventMouse_getStartLocationInView)
 
 
+extern se::Object* __jsb_cocos2d_Event_proto;
+
 
 bool js_register_cocos2dx_EventMouse(se::Object* obj)
 {
-    auto cls = se::Class::create("EventMouse", obj, __jsb_cocos2dx_Event_proto, nullptr);
+    auto cls = se::Class::create("EventMouse", obj, __jsb_cocos2d_Event_proto, nullptr);
 
     cls->defineFunction("getButton", _SE(js_cocos2dx_EventMouse_getMouseButton));
     cls->defineFunction("getLocation", _SE(js_cocos2dx_EventMouse_getLocation));
@@ -18402,14 +18507,14 @@ bool js_register_cocos2dx_EventMouse(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::EventMouse>(cls);
 
-    __jsb_cocos2dx_EventMouse_proto = cls->getProto();
-    __jsb_cocos2dx_EventMouse_class = cls;
+    __jsb_cocos2d_EventMouse_proto = cls->getProto();
+    __jsb_cocos2d_EventMouse_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerMouse_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerMouse_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerMouse_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerMouse_class = nullptr;
 
 static bool js_cocos2dx_EventListenerMouse_init(se::State& s)
 {
@@ -18429,7 +18534,7 @@ static bool js_cocos2dx_EventListenerMouse_init(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventListenerMouse_init)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerMouse_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerMouse_finalize)
 
 static bool js_cocos2dx_EventListenerMouse_constructor(se::State& s)
 {
@@ -18438,11 +18543,13 @@ static bool js_cocos2dx_EventListenerMouse_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerMouse_constructor, __jsb_cocos2dx_EventListenerMouse_class, js_cocos2dx_EventListenerMouse_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerMouse_constructor, __jsb_cocos2d_EventListenerMouse_class, js_cocos2d_EventListenerMouse_finalize)
 
 
 
-bool js_cocos2dx_EventListenerMouse_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerMouse_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18455,25 +18562,25 @@ bool js_cocos2dx_EventListenerMouse_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerMouse_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerMouse_finalize)
 
 bool js_register_cocos2dx_EventListenerMouse(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerMouse", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerMouse_constructor));
+    auto cls = se::Class::create("EventListenerMouse", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerMouse_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_EventListenerMouse_init));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerMouse_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerMouse_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerMouse>(cls);
 
-    __jsb_cocos2dx_EventListenerMouse_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerMouse_class = cls;
+    __jsb_cocos2d_EventListenerMouse_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerMouse_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerTouchOneByOne_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerTouchOneByOne_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerTouchOneByOne_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerTouchOneByOne_class = nullptr;
 
 static bool js_cocos2dx_EventListenerTouchOneByOne_isSwallowTouches(se::State& s)
 {
@@ -18530,7 +18637,7 @@ static bool js_cocos2dx_EventListenerTouchOneByOne_init(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventListenerTouchOneByOne_init)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerTouchOneByOne_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerTouchOneByOne_finalize)
 
 static bool js_cocos2dx_EventListenerTouchOneByOne_constructor(se::State& s)
 {
@@ -18539,11 +18646,13 @@ static bool js_cocos2dx_EventListenerTouchOneByOne_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerTouchOneByOne_constructor, __jsb_cocos2dx_EventListenerTouchOneByOne_class, js_cocos2dx_EventListenerTouchOneByOne_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerTouchOneByOne_constructor, __jsb_cocos2d_EventListenerTouchOneByOne_class, js_cocos2d_EventListenerTouchOneByOne_finalize)
 
 
 
-bool js_cocos2dx_EventListenerTouchOneByOne_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerTouchOneByOne_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18556,27 +18665,27 @@ bool js_cocos2dx_EventListenerTouchOneByOne_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerTouchOneByOne_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerTouchOneByOne_finalize)
 
 bool js_register_cocos2dx_EventListenerTouchOneByOne(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerTouchOneByOne", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerTouchOneByOne_constructor));
+    auto cls = se::Class::create("EventListenerTouchOneByOne", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerTouchOneByOne_constructor));
 
     cls->defineFunction("isSwallowTouches", _SE(js_cocos2dx_EventListenerTouchOneByOne_isSwallowTouches));
     cls->defineFunction("setSwallowTouches", _SE(js_cocos2dx_EventListenerTouchOneByOne_setSwallowTouches));
     cls->defineFunction("init", _SE(js_cocos2dx_EventListenerTouchOneByOne_init));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerTouchOneByOne_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerTouchOneByOne_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerTouchOneByOne>(cls);
 
-    __jsb_cocos2dx_EventListenerTouchOneByOne_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerTouchOneByOne_class = cls;
+    __jsb_cocos2d_EventListenerTouchOneByOne_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerTouchOneByOne_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EventListenerTouchAllAtOnce_proto = nullptr;
-se::Class* __jsb_cocos2dx_EventListenerTouchAllAtOnce_class = nullptr;
+se::Object* __jsb_cocos2d_EventListenerTouchAllAtOnce_proto = nullptr;
+se::Class* __jsb_cocos2d_EventListenerTouchAllAtOnce_class = nullptr;
 
 static bool js_cocos2dx_EventListenerTouchAllAtOnce_init(se::State& s)
 {
@@ -18596,7 +18705,7 @@ static bool js_cocos2dx_EventListenerTouchAllAtOnce_init(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EventListenerTouchAllAtOnce_init)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EventListenerTouchAllAtOnce_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventListenerTouchAllAtOnce_finalize)
 
 static bool js_cocos2dx_EventListenerTouchAllAtOnce_constructor(se::State& s)
 {
@@ -18605,11 +18714,13 @@ static bool js_cocos2dx_EventListenerTouchAllAtOnce_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EventListenerTouchAllAtOnce_constructor, __jsb_cocos2dx_EventListenerTouchAllAtOnce_class, js_cocos2dx_EventListenerTouchAllAtOnce_finalize)
+SE_BIND_CTOR(js_cocos2dx_EventListenerTouchAllAtOnce_constructor, __jsb_cocos2d_EventListenerTouchAllAtOnce_class, js_cocos2d_EventListenerTouchAllAtOnce_finalize)
 
 
 
-bool js_cocos2dx_EventListenerTouchAllAtOnce_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+
+bool js_cocos2d_EventListenerTouchAllAtOnce_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18622,25 +18733,25 @@ bool js_cocos2dx_EventListenerTouchAllAtOnce_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EventListenerTouchAllAtOnce_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EventListenerTouchAllAtOnce_finalize)
 
 bool js_register_cocos2dx_EventListenerTouchAllAtOnce(se::Object* obj)
 {
-    auto cls = se::Class::create("EventListenerTouchAllAtOnce", obj, __jsb_cocos2dx_EventListener_proto, _SE(js_cocos2dx_EventListenerTouchAllAtOnce_constructor));
+    auto cls = se::Class::create("EventListenerTouchAllAtOnce", obj, __jsb_cocos2d_EventListener_proto, _SE(js_cocos2dx_EventListenerTouchAllAtOnce_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_EventListenerTouchAllAtOnce_init));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EventListenerTouchAllAtOnce_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EventListenerTouchAllAtOnce_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EventListenerTouchAllAtOnce>(cls);
 
-    __jsb_cocos2dx_EventListenerTouchAllAtOnce_proto = cls->getProto();
-    __jsb_cocos2dx_EventListenerTouchAllAtOnce_class = cls;
+    __jsb_cocos2d_EventListenerTouchAllAtOnce_proto = cls->getProto();
+    __jsb_cocos2d_EventListenerTouchAllAtOnce_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionCamera_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionCamera_class = nullptr;
+se::Object* __jsb_cocos2d_ActionCamera_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionCamera_class = nullptr;
 
 static bool js_cocos2dx_ActionCamera_setEye(se::State& s)
 {
@@ -18772,7 +18883,7 @@ static bool js_cocos2dx_ActionCamera_getUp(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ActionCamera_getUp)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ActionCamera_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ActionCamera_finalize)
 
 static bool js_cocos2dx_ActionCamera_constructor(se::State& s)
 {
@@ -18781,7 +18892,7 @@ static bool js_cocos2dx_ActionCamera_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ActionCamera_constructor, __jsb_cocos2dx_ActionCamera_class, js_cocos2dx_ActionCamera_finalize)
+SE_BIND_CTOR(js_cocos2dx_ActionCamera_constructor, __jsb_cocos2d_ActionCamera_class, js_cocos2d_ActionCamera_finalize)
 
 static bool js_cocos2dx_ActionCamera_ctor(se::State& s)
 {
@@ -18790,12 +18901,14 @@ static bool js_cocos2dx_ActionCamera_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ActionCamera_ctor, __jsb_cocos2dx_ActionCamera_class, js_cocos2dx_ActionCamera_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ActionCamera_ctor, __jsb_cocos2d_ActionCamera_class, js_cocos2d_ActionCamera_finalize)
 
 
     
 
-bool js_cocos2dx_ActionCamera_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_ActionCamera_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18808,11 +18921,11 @@ bool js_cocos2dx_ActionCamera_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ActionCamera_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ActionCamera_finalize)
 
 bool js_register_cocos2dx_ActionCamera(se::Object* obj)
 {
-    auto cls = se::Class::create("ActionCamera", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_ActionCamera_constructor));
+    auto cls = se::Class::create("ActionCamera", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_ActionCamera_constructor));
 
     cls->defineFunction("setEye", _SE(js_cocos2dx_ActionCamera_setEye));
     cls->defineFunction("getEye", _SE(js_cocos2dx_ActionCamera_getEye));
@@ -18821,19 +18934,19 @@ bool js_register_cocos2dx_ActionCamera(se::Object* obj)
     cls->defineFunction("setCenter", _SE(js_cocos2dx_ActionCamera_setCenter));
     cls->defineFunction("getUp", _SE(js_cocos2dx_ActionCamera_getUp));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ActionCamera_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ActionCamera_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ActionCamera_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionCamera>(cls);
 
-    __jsb_cocos2dx_ActionCamera_proto = cls->getProto();
-    __jsb_cocos2dx_ActionCamera_class = cls;
+    __jsb_cocos2d_ActionCamera_proto = cls->getProto();
+    __jsb_cocos2d_ActionCamera_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ActionCamera.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_OrbitCamera_proto = nullptr;
-se::Class* __jsb_cocos2dx_OrbitCamera_class = nullptr;
+se::Object* __jsb_cocos2d_OrbitCamera_proto = nullptr;
+se::Class* __jsb_cocos2d_OrbitCamera_class = nullptr;
 
 static bool js_cocos2dx_OrbitCamera_sphericalRadius(se::State& s)
 {
@@ -18917,7 +19030,7 @@ static bool js_cocos2dx_OrbitCamera_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_OrbitCamera_create : Error processing arguments");
         auto result = cocos2d::OrbitCamera::create(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_OrbitCamera_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_OrbitCamera_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -18927,7 +19040,7 @@ static bool js_cocos2dx_OrbitCamera_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_OrbitCamera_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_OrbitCamera_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_OrbitCamera_finalize)
 
 static bool js_cocos2dx_OrbitCamera_constructor(se::State& s)
 {
@@ -18936,7 +19049,7 @@ static bool js_cocos2dx_OrbitCamera_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_OrbitCamera_constructor, __jsb_cocos2dx_OrbitCamera_class, js_cocos2dx_OrbitCamera_finalize)
+SE_BIND_CTOR(js_cocos2dx_OrbitCamera_constructor, __jsb_cocos2d_OrbitCamera_class, js_cocos2d_OrbitCamera_finalize)
 
 static bool js_cocos2dx_OrbitCamera_ctor(se::State& s)
 {
@@ -18945,12 +19058,14 @@ static bool js_cocos2dx_OrbitCamera_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_OrbitCamera_ctor, __jsb_cocos2dx_OrbitCamera_class, js_cocos2dx_OrbitCamera_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_OrbitCamera_ctor, __jsb_cocos2d_OrbitCamera_class, js_cocos2d_OrbitCamera_finalize)
 
 
     
 
-bool js_cocos2dx_OrbitCamera_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionCamera_proto;
+
+bool js_cocos2d_OrbitCamera_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -18963,29 +19078,29 @@ bool js_cocos2dx_OrbitCamera_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_OrbitCamera_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_OrbitCamera_finalize)
 
 bool js_register_cocos2dx_OrbitCamera(se::Object* obj)
 {
-    auto cls = se::Class::create("OrbitCamera", obj, __jsb_cocos2dx_ActionCamera_proto, _SE(js_cocos2dx_OrbitCamera_constructor));
+    auto cls = se::Class::create("OrbitCamera", obj, __jsb_cocos2d_ActionCamera_proto, _SE(js_cocos2dx_OrbitCamera_constructor));
 
     cls->defineFunction("sphericalRadius", _SE(js_cocos2dx_OrbitCamera_sphericalRadius));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_OrbitCamera_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_OrbitCamera_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_OrbitCamera_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_OrbitCamera_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_OrbitCamera_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::OrbitCamera>(cls);
 
-    __jsb_cocos2dx_OrbitCamera_proto = cls->getProto();
-    __jsb_cocos2dx_OrbitCamera_class = cls;
+    __jsb_cocos2d_OrbitCamera_proto = cls->getProto();
+    __jsb_cocos2d_OrbitCamera_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.OrbitCamera.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CardinalSplineTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_CardinalSplineTo_class = nullptr;
+se::Object* __jsb_cocos2d_CardinalSplineTo_proto = nullptr;
+se::Class* __jsb_cocos2d_CardinalSplineTo_class = nullptr;
 
 static bool js_cocos2dx_CardinalSplineTo_updatePosition(se::State& s)
 {
@@ -19006,7 +19121,7 @@ static bool js_cocos2dx_CardinalSplineTo_updatePosition(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CardinalSplineTo_updatePosition)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CardinalSplineTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CardinalSplineTo_finalize)
 
 static bool js_cocos2dx_CardinalSplineTo_constructor(se::State& s)
 {
@@ -19015,11 +19130,13 @@ static bool js_cocos2dx_CardinalSplineTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CardinalSplineTo_constructor, __jsb_cocos2dx_CardinalSplineTo_class, js_cocos2dx_CardinalSplineTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_CardinalSplineTo_constructor, __jsb_cocos2d_CardinalSplineTo_class, js_cocos2d_CardinalSplineTo_finalize)
 
 
 
-bool js_cocos2dx_CardinalSplineTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_CardinalSplineTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19032,27 +19149,27 @@ bool js_cocos2dx_CardinalSplineTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CardinalSplineTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CardinalSplineTo_finalize)
 
 bool js_register_cocos2dx_CardinalSplineTo(se::Object* obj)
 {
-    auto cls = se::Class::create("CardinalSplineTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_CardinalSplineTo_constructor));
+    auto cls = se::Class::create("CardinalSplineTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_CardinalSplineTo_constructor));
 
     cls->defineFunction("updatePosition", _SE(js_cocos2dx_CardinalSplineTo_updatePosition));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CardinalSplineTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CardinalSplineTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CardinalSplineTo>(cls);
 
-    __jsb_cocos2dx_CardinalSplineTo_proto = cls->getProto();
-    __jsb_cocos2dx_CardinalSplineTo_class = cls;
+    __jsb_cocos2d_CardinalSplineTo_proto = cls->getProto();
+    __jsb_cocos2d_CardinalSplineTo_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CardinalSplineBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_CardinalSplineBy_class = nullptr;
+se::Object* __jsb_cocos2d_CardinalSplineBy_proto = nullptr;
+se::Class* __jsb_cocos2d_CardinalSplineBy_class = nullptr;
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CardinalSplineBy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CardinalSplineBy_finalize)
 
 static bool js_cocos2dx_CardinalSplineBy_constructor(se::State& s)
 {
@@ -19061,11 +19178,13 @@ static bool js_cocos2dx_CardinalSplineBy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CardinalSplineBy_constructor, __jsb_cocos2dx_CardinalSplineBy_class, js_cocos2dx_CardinalSplineBy_finalize)
+SE_BIND_CTOR(js_cocos2dx_CardinalSplineBy_constructor, __jsb_cocos2d_CardinalSplineBy_class, js_cocos2d_CardinalSplineBy_finalize)
 
 
 
-bool js_cocos2dx_CardinalSplineBy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_CardinalSplineTo_proto;
+
+bool js_cocos2d_CardinalSplineBy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19078,60 +19197,64 @@ bool js_cocos2dx_CardinalSplineBy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CardinalSplineBy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CardinalSplineBy_finalize)
 
 bool js_register_cocos2dx_CardinalSplineBy(se::Object* obj)
 {
-    auto cls = se::Class::create("CardinalSplineBy", obj, __jsb_cocos2dx_CardinalSplineTo_proto, _SE(js_cocos2dx_CardinalSplineBy_constructor));
+    auto cls = se::Class::create("CardinalSplineBy", obj, __jsb_cocos2d_CardinalSplineTo_proto, _SE(js_cocos2dx_CardinalSplineBy_constructor));
 
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CardinalSplineBy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CardinalSplineBy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CardinalSplineBy>(cls);
 
-    __jsb_cocos2dx_CardinalSplineBy_proto = cls->getProto();
-    __jsb_cocos2dx_CardinalSplineBy_class = cls;
+    __jsb_cocos2d_CardinalSplineBy_proto = cls->getProto();
+    __jsb_cocos2d_CardinalSplineBy_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CatmullRomTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_CatmullRomTo_class = nullptr;
+se::Object* __jsb_cocos2d_CatmullRomTo_proto = nullptr;
+se::Class* __jsb_cocos2d_CatmullRomTo_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_CardinalSplineTo_proto;
 
 
 bool js_register_cocos2dx_CatmullRomTo(se::Object* obj)
 {
-    auto cls = se::Class::create("CatmullRomTo", obj, __jsb_cocos2dx_CardinalSplineTo_proto, nullptr);
+    auto cls = se::Class::create("CatmullRomTo", obj, __jsb_cocos2d_CardinalSplineTo_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::CatmullRomTo>(cls);
 
-    __jsb_cocos2dx_CatmullRomTo_proto = cls->getProto();
-    __jsb_cocos2dx_CatmullRomTo_class = cls;
+    __jsb_cocos2d_CatmullRomTo_proto = cls->getProto();
+    __jsb_cocos2d_CatmullRomTo_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CatmullRomBy_proto = nullptr;
-se::Class* __jsb_cocos2dx_CatmullRomBy_class = nullptr;
+se::Object* __jsb_cocos2d_CatmullRomBy_proto = nullptr;
+se::Class* __jsb_cocos2d_CatmullRomBy_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_CardinalSplineBy_proto;
 
 
 bool js_register_cocos2dx_CatmullRomBy(se::Object* obj)
 {
-    auto cls = se::Class::create("CatmullRomBy", obj, __jsb_cocos2dx_CardinalSplineBy_proto, nullptr);
+    auto cls = se::Class::create("CatmullRomBy", obj, __jsb_cocos2d_CardinalSplineBy_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::CatmullRomBy>(cls);
 
-    __jsb_cocos2dx_CatmullRomBy_proto = cls->getProto();
-    __jsb_cocos2dx_CatmullRomBy_class = cls;
+    __jsb_cocos2d_CatmullRomBy_proto = cls->getProto();
+    __jsb_cocos2d_CatmullRomBy_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionEase_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionEase_class = nullptr;
+se::Object* __jsb_cocos2d_ActionEase_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionEase_class = nullptr;
 
 static bool js_cocos2dx_ActionEase_initWithAction(se::State& s)
 {
@@ -19173,24 +19296,26 @@ static bool js_cocos2dx_ActionEase_getInnerAction(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_ActionEase_getInnerAction)
 
 
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
 
 bool js_register_cocos2dx_ActionEase(se::Object* obj)
 {
-    auto cls = se::Class::create("ActionEase", obj, __jsb_cocos2dx_ActionInterval_proto, nullptr);
+    auto cls = se::Class::create("ActionEase", obj, __jsb_cocos2d_ActionInterval_proto, nullptr);
 
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_ActionEase_initWithAction));
     cls->defineFunction("getInnerAction", _SE(js_cocos2dx_ActionEase_getInnerAction));
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionEase>(cls);
 
-    __jsb_cocos2dx_ActionEase_proto = cls->getProto();
-    __jsb_cocos2dx_ActionEase_class = cls;
+    __jsb_cocos2d_ActionEase_proto = cls->getProto();
+    __jsb_cocos2d_ActionEase_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseRateAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseRateAction_class = nullptr;
+se::Object* __jsb_cocos2d_EaseRateAction_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseRateAction_class = nullptr;
 
 static bool js_cocos2dx_EaseRateAction_setRate(se::State& s)
 {
@@ -19265,7 +19390,7 @@ static bool js_cocos2dx_EaseRateAction_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseRateAction_create : Error processing arguments");
         auto result = cocos2d::EaseRateAction::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseRateAction_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseRateAction_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19276,10 +19401,12 @@ static bool js_cocos2dx_EaseRateAction_create(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_EaseRateAction_create)
 
 
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
 
 bool js_register_cocos2dx_EaseRateAction(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseRateAction", obj, __jsb_cocos2dx_ActionEase_proto, nullptr);
+    auto cls = se::Class::create("EaseRateAction", obj, __jsb_cocos2d_ActionEase_proto, nullptr);
 
     cls->defineFunction("setRate", _SE(js_cocos2dx_EaseRateAction_setRate));
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_EaseRateAction_initWithAction));
@@ -19288,14 +19415,14 @@ bool js_register_cocos2dx_EaseRateAction(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseRateAction>(cls);
 
-    __jsb_cocos2dx_EaseRateAction_proto = cls->getProto();
-    __jsb_cocos2dx_EaseRateAction_class = cls;
+    __jsb_cocos2d_EaseRateAction_proto = cls->getProto();
+    __jsb_cocos2d_EaseRateAction_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseExponentialIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseExponentialIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseExponentialIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseExponentialIn_class = nullptr;
 
 static bool js_cocos2dx_EaseExponentialIn_create(se::State& s)
 {
@@ -19308,7 +19435,7 @@ static bool js_cocos2dx_EaseExponentialIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseExponentialIn_create : Error processing arguments");
         auto result = cocos2d::EaseExponentialIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseExponentialIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseExponentialIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19318,7 +19445,7 @@ static bool js_cocos2dx_EaseExponentialIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseExponentialIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseExponentialIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseExponentialIn_finalize)
 
 static bool js_cocos2dx_EaseExponentialIn_constructor(se::State& s)
 {
@@ -19327,7 +19454,7 @@ static bool js_cocos2dx_EaseExponentialIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseExponentialIn_constructor, __jsb_cocos2dx_EaseExponentialIn_class, js_cocos2dx_EaseExponentialIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseExponentialIn_constructor, __jsb_cocos2d_EaseExponentialIn_class, js_cocos2d_EaseExponentialIn_finalize)
 
 static bool js_cocos2dx_EaseExponentialIn_ctor(se::State& s)
 {
@@ -19336,12 +19463,14 @@ static bool js_cocos2dx_EaseExponentialIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseExponentialIn_ctor, __jsb_cocos2dx_EaseExponentialIn_class, js_cocos2dx_EaseExponentialIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseExponentialIn_ctor, __jsb_cocos2d_EaseExponentialIn_class, js_cocos2d_EaseExponentialIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseExponentialIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseExponentialIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19354,27 +19483,27 @@ bool js_cocos2dx_EaseExponentialIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseExponentialIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseExponentialIn_finalize)
 
 bool js_register_cocos2dx_EaseExponentialIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseExponentialIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseExponentialIn_constructor));
+    auto cls = se::Class::create("EaseExponentialIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseExponentialIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseExponentialIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseExponentialIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseExponentialIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseExponentialIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseExponentialIn>(cls);
 
-    __jsb_cocos2dx_EaseExponentialIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseExponentialIn_class = cls;
+    __jsb_cocos2d_EaseExponentialIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseExponentialIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseExponentialIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseExponentialOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseExponentialOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseExponentialOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseExponentialOut_class = nullptr;
 
 static bool js_cocos2dx_EaseExponentialOut_create(se::State& s)
 {
@@ -19387,7 +19516,7 @@ static bool js_cocos2dx_EaseExponentialOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseExponentialOut_create : Error processing arguments");
         auto result = cocos2d::EaseExponentialOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseExponentialOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseExponentialOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19397,7 +19526,7 @@ static bool js_cocos2dx_EaseExponentialOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseExponentialOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseExponentialOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseExponentialOut_finalize)
 
 static bool js_cocos2dx_EaseExponentialOut_constructor(se::State& s)
 {
@@ -19406,7 +19535,7 @@ static bool js_cocos2dx_EaseExponentialOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseExponentialOut_constructor, __jsb_cocos2dx_EaseExponentialOut_class, js_cocos2dx_EaseExponentialOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseExponentialOut_constructor, __jsb_cocos2d_EaseExponentialOut_class, js_cocos2d_EaseExponentialOut_finalize)
 
 static bool js_cocos2dx_EaseExponentialOut_ctor(se::State& s)
 {
@@ -19415,12 +19544,14 @@ static bool js_cocos2dx_EaseExponentialOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseExponentialOut_ctor, __jsb_cocos2dx_EaseExponentialOut_class, js_cocos2dx_EaseExponentialOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseExponentialOut_ctor, __jsb_cocos2d_EaseExponentialOut_class, js_cocos2d_EaseExponentialOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseExponentialOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseExponentialOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19433,27 +19564,27 @@ bool js_cocos2dx_EaseExponentialOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseExponentialOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseExponentialOut_finalize)
 
 bool js_register_cocos2dx_EaseExponentialOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseExponentialOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseExponentialOut_constructor));
+    auto cls = se::Class::create("EaseExponentialOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseExponentialOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseExponentialOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseExponentialOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseExponentialOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseExponentialOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseExponentialOut>(cls);
 
-    __jsb_cocos2dx_EaseExponentialOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseExponentialOut_class = cls;
+    __jsb_cocos2d_EaseExponentialOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseExponentialOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseExponentialOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseExponentialInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseExponentialInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseExponentialInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseExponentialInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseExponentialInOut_create(se::State& s)
 {
@@ -19466,7 +19597,7 @@ static bool js_cocos2dx_EaseExponentialInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseExponentialInOut_create : Error processing arguments");
         auto result = cocos2d::EaseExponentialInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseExponentialInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseExponentialInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19476,7 +19607,7 @@ static bool js_cocos2dx_EaseExponentialInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseExponentialInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseExponentialInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseExponentialInOut_finalize)
 
 static bool js_cocos2dx_EaseExponentialInOut_constructor(se::State& s)
 {
@@ -19485,7 +19616,7 @@ static bool js_cocos2dx_EaseExponentialInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseExponentialInOut_constructor, __jsb_cocos2dx_EaseExponentialInOut_class, js_cocos2dx_EaseExponentialInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseExponentialInOut_constructor, __jsb_cocos2d_EaseExponentialInOut_class, js_cocos2d_EaseExponentialInOut_finalize)
 
 static bool js_cocos2dx_EaseExponentialInOut_ctor(se::State& s)
 {
@@ -19494,12 +19625,14 @@ static bool js_cocos2dx_EaseExponentialInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseExponentialInOut_ctor, __jsb_cocos2dx_EaseExponentialInOut_class, js_cocos2dx_EaseExponentialInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseExponentialInOut_ctor, __jsb_cocos2d_EaseExponentialInOut_class, js_cocos2d_EaseExponentialInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseExponentialInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseExponentialInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19512,27 +19645,27 @@ bool js_cocos2dx_EaseExponentialInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseExponentialInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseExponentialInOut_finalize)
 
 bool js_register_cocos2dx_EaseExponentialInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseExponentialInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseExponentialInOut_constructor));
+    auto cls = se::Class::create("EaseExponentialInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseExponentialInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseExponentialInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseExponentialInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseExponentialInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseExponentialInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseExponentialInOut>(cls);
 
-    __jsb_cocos2dx_EaseExponentialInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseExponentialInOut_class = cls;
+    __jsb_cocos2d_EaseExponentialInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseExponentialInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseExponentialInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseSineIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseSineIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseSineIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseSineIn_class = nullptr;
 
 static bool js_cocos2dx_EaseSineIn_create(se::State& s)
 {
@@ -19545,7 +19678,7 @@ static bool js_cocos2dx_EaseSineIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseSineIn_create : Error processing arguments");
         auto result = cocos2d::EaseSineIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseSineIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseSineIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19555,7 +19688,7 @@ static bool js_cocos2dx_EaseSineIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseSineIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseSineIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseSineIn_finalize)
 
 static bool js_cocos2dx_EaseSineIn_constructor(se::State& s)
 {
@@ -19564,7 +19697,7 @@ static bool js_cocos2dx_EaseSineIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseSineIn_constructor, __jsb_cocos2dx_EaseSineIn_class, js_cocos2dx_EaseSineIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseSineIn_constructor, __jsb_cocos2d_EaseSineIn_class, js_cocos2d_EaseSineIn_finalize)
 
 static bool js_cocos2dx_EaseSineIn_ctor(se::State& s)
 {
@@ -19573,12 +19706,14 @@ static bool js_cocos2dx_EaseSineIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseSineIn_ctor, __jsb_cocos2dx_EaseSineIn_class, js_cocos2dx_EaseSineIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseSineIn_ctor, __jsb_cocos2d_EaseSineIn_class, js_cocos2d_EaseSineIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseSineIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseSineIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19591,27 +19726,27 @@ bool js_cocos2dx_EaseSineIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseSineIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseSineIn_finalize)
 
 bool js_register_cocos2dx_EaseSineIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseSineIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseSineIn_constructor));
+    auto cls = se::Class::create("EaseSineIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseSineIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseSineIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseSineIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseSineIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseSineIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseSineIn>(cls);
 
-    __jsb_cocos2dx_EaseSineIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseSineIn_class = cls;
+    __jsb_cocos2d_EaseSineIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseSineIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseSineIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseSineOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseSineOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseSineOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseSineOut_class = nullptr;
 
 static bool js_cocos2dx_EaseSineOut_create(se::State& s)
 {
@@ -19624,7 +19759,7 @@ static bool js_cocos2dx_EaseSineOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseSineOut_create : Error processing arguments");
         auto result = cocos2d::EaseSineOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseSineOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseSineOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19634,7 +19769,7 @@ static bool js_cocos2dx_EaseSineOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseSineOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseSineOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseSineOut_finalize)
 
 static bool js_cocos2dx_EaseSineOut_constructor(se::State& s)
 {
@@ -19643,7 +19778,7 @@ static bool js_cocos2dx_EaseSineOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseSineOut_constructor, __jsb_cocos2dx_EaseSineOut_class, js_cocos2dx_EaseSineOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseSineOut_constructor, __jsb_cocos2d_EaseSineOut_class, js_cocos2d_EaseSineOut_finalize)
 
 static bool js_cocos2dx_EaseSineOut_ctor(se::State& s)
 {
@@ -19652,12 +19787,14 @@ static bool js_cocos2dx_EaseSineOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseSineOut_ctor, __jsb_cocos2dx_EaseSineOut_class, js_cocos2dx_EaseSineOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseSineOut_ctor, __jsb_cocos2d_EaseSineOut_class, js_cocos2d_EaseSineOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseSineOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseSineOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19670,27 +19807,27 @@ bool js_cocos2dx_EaseSineOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseSineOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseSineOut_finalize)
 
 bool js_register_cocos2dx_EaseSineOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseSineOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseSineOut_constructor));
+    auto cls = se::Class::create("EaseSineOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseSineOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseSineOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseSineOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseSineOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseSineOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseSineOut>(cls);
 
-    __jsb_cocos2dx_EaseSineOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseSineOut_class = cls;
+    __jsb_cocos2d_EaseSineOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseSineOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseSineOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseSineInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseSineInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseSineInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseSineInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseSineInOut_create(se::State& s)
 {
@@ -19703,7 +19840,7 @@ static bool js_cocos2dx_EaseSineInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseSineInOut_create : Error processing arguments");
         auto result = cocos2d::EaseSineInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseSineInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseSineInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19713,7 +19850,7 @@ static bool js_cocos2dx_EaseSineInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseSineInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseSineInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseSineInOut_finalize)
 
 static bool js_cocos2dx_EaseSineInOut_constructor(se::State& s)
 {
@@ -19722,7 +19859,7 @@ static bool js_cocos2dx_EaseSineInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseSineInOut_constructor, __jsb_cocos2dx_EaseSineInOut_class, js_cocos2dx_EaseSineInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseSineInOut_constructor, __jsb_cocos2d_EaseSineInOut_class, js_cocos2d_EaseSineInOut_finalize)
 
 static bool js_cocos2dx_EaseSineInOut_ctor(se::State& s)
 {
@@ -19731,12 +19868,14 @@ static bool js_cocos2dx_EaseSineInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseSineInOut_ctor, __jsb_cocos2dx_EaseSineInOut_class, js_cocos2dx_EaseSineInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseSineInOut_ctor, __jsb_cocos2d_EaseSineInOut_class, js_cocos2d_EaseSineInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseSineInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseSineInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19749,45 +19888,47 @@ bool js_cocos2dx_EaseSineInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseSineInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseSineInOut_finalize)
 
 bool js_register_cocos2dx_EaseSineInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseSineInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseSineInOut_constructor));
+    auto cls = se::Class::create("EaseSineInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseSineInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseSineInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseSineInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseSineInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseSineInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseSineInOut>(cls);
 
-    __jsb_cocos2dx_EaseSineInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseSineInOut_class = cls;
+    __jsb_cocos2d_EaseSineInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseSineInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseSineInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBounce_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBounce_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBounce_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBounce_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
 
 
 bool js_register_cocos2dx_EaseBounce(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBounce", obj, __jsb_cocos2dx_ActionEase_proto, nullptr);
+    auto cls = se::Class::create("EaseBounce", obj, __jsb_cocos2d_ActionEase_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBounce>(cls);
 
-    __jsb_cocos2dx_EaseBounce_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBounce_class = cls;
+    __jsb_cocos2d_EaseBounce_proto = cls->getProto();
+    __jsb_cocos2d_EaseBounce_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBounceIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBounceIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBounceIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBounceIn_class = nullptr;
 
 static bool js_cocos2dx_EaseBounceIn_create(se::State& s)
 {
@@ -19800,7 +19941,7 @@ static bool js_cocos2dx_EaseBounceIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBounceIn_create : Error processing arguments");
         auto result = cocos2d::EaseBounceIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBounceIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBounceIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19810,7 +19951,7 @@ static bool js_cocos2dx_EaseBounceIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBounceIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBounceIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBounceIn_finalize)
 
 static bool js_cocos2dx_EaseBounceIn_constructor(se::State& s)
 {
@@ -19819,7 +19960,7 @@ static bool js_cocos2dx_EaseBounceIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBounceIn_constructor, __jsb_cocos2dx_EaseBounceIn_class, js_cocos2dx_EaseBounceIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBounceIn_constructor, __jsb_cocos2d_EaseBounceIn_class, js_cocos2d_EaseBounceIn_finalize)
 
 static bool js_cocos2dx_EaseBounceIn_ctor(se::State& s)
 {
@@ -19828,12 +19969,14 @@ static bool js_cocos2dx_EaseBounceIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBounceIn_ctor, __jsb_cocos2dx_EaseBounceIn_class, js_cocos2dx_EaseBounceIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBounceIn_ctor, __jsb_cocos2d_EaseBounceIn_class, js_cocos2d_EaseBounceIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBounceIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBounceIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19846,27 +19989,27 @@ bool js_cocos2dx_EaseBounceIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBounceIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBounceIn_finalize)
 
 bool js_register_cocos2dx_EaseBounceIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBounceIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBounceIn_constructor));
+    auto cls = se::Class::create("EaseBounceIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBounceIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBounceIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBounceIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBounceIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBounceIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBounceIn>(cls);
 
-    __jsb_cocos2dx_EaseBounceIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBounceIn_class = cls;
+    __jsb_cocos2d_EaseBounceIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseBounceIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBounceIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBounceOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBounceOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBounceOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBounceOut_class = nullptr;
 
 static bool js_cocos2dx_EaseBounceOut_create(se::State& s)
 {
@@ -19879,7 +20022,7 @@ static bool js_cocos2dx_EaseBounceOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBounceOut_create : Error processing arguments");
         auto result = cocos2d::EaseBounceOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBounceOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBounceOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19889,7 +20032,7 @@ static bool js_cocos2dx_EaseBounceOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBounceOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBounceOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBounceOut_finalize)
 
 static bool js_cocos2dx_EaseBounceOut_constructor(se::State& s)
 {
@@ -19898,7 +20041,7 @@ static bool js_cocos2dx_EaseBounceOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBounceOut_constructor, __jsb_cocos2dx_EaseBounceOut_class, js_cocos2dx_EaseBounceOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBounceOut_constructor, __jsb_cocos2d_EaseBounceOut_class, js_cocos2d_EaseBounceOut_finalize)
 
 static bool js_cocos2dx_EaseBounceOut_ctor(se::State& s)
 {
@@ -19907,12 +20050,14 @@ static bool js_cocos2dx_EaseBounceOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBounceOut_ctor, __jsb_cocos2dx_EaseBounceOut_class, js_cocos2dx_EaseBounceOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBounceOut_ctor, __jsb_cocos2d_EaseBounceOut_class, js_cocos2d_EaseBounceOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBounceOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBounceOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -19925,27 +20070,27 @@ bool js_cocos2dx_EaseBounceOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBounceOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBounceOut_finalize)
 
 bool js_register_cocos2dx_EaseBounceOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBounceOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBounceOut_constructor));
+    auto cls = se::Class::create("EaseBounceOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBounceOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBounceOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBounceOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBounceOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBounceOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBounceOut>(cls);
 
-    __jsb_cocos2dx_EaseBounceOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBounceOut_class = cls;
+    __jsb_cocos2d_EaseBounceOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseBounceOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBounceOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBounceInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBounceInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBounceInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBounceInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseBounceInOut_create(se::State& s)
 {
@@ -19958,7 +20103,7 @@ static bool js_cocos2dx_EaseBounceInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBounceInOut_create : Error processing arguments");
         auto result = cocos2d::EaseBounceInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBounceInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBounceInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -19968,7 +20113,7 @@ static bool js_cocos2dx_EaseBounceInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBounceInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBounceInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBounceInOut_finalize)
 
 static bool js_cocos2dx_EaseBounceInOut_constructor(se::State& s)
 {
@@ -19977,7 +20122,7 @@ static bool js_cocos2dx_EaseBounceInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBounceInOut_constructor, __jsb_cocos2dx_EaseBounceInOut_class, js_cocos2dx_EaseBounceInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBounceInOut_constructor, __jsb_cocos2d_EaseBounceInOut_class, js_cocos2d_EaseBounceInOut_finalize)
 
 static bool js_cocos2dx_EaseBounceInOut_ctor(se::State& s)
 {
@@ -19986,12 +20131,14 @@ static bool js_cocos2dx_EaseBounceInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBounceInOut_ctor, __jsb_cocos2dx_EaseBounceInOut_class, js_cocos2dx_EaseBounceInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBounceInOut_ctor, __jsb_cocos2d_EaseBounceInOut_class, js_cocos2d_EaseBounceInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBounceInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBounceInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20004,27 +20151,27 @@ bool js_cocos2dx_EaseBounceInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBounceInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBounceInOut_finalize)
 
 bool js_register_cocos2dx_EaseBounceInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBounceInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBounceInOut_constructor));
+    auto cls = se::Class::create("EaseBounceInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBounceInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBounceInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBounceInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBounceInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBounceInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBounceInOut>(cls);
 
-    __jsb_cocos2dx_EaseBounceInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBounceInOut_class = cls;
+    __jsb_cocos2d_EaseBounceInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseBounceInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBounceInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBackIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBackIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBackIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBackIn_class = nullptr;
 
 static bool js_cocos2dx_EaseBackIn_create(se::State& s)
 {
@@ -20037,7 +20184,7 @@ static bool js_cocos2dx_EaseBackIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBackIn_create : Error processing arguments");
         auto result = cocos2d::EaseBackIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBackIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBackIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20047,7 +20194,7 @@ static bool js_cocos2dx_EaseBackIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBackIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBackIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBackIn_finalize)
 
 static bool js_cocos2dx_EaseBackIn_constructor(se::State& s)
 {
@@ -20056,7 +20203,7 @@ static bool js_cocos2dx_EaseBackIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBackIn_constructor, __jsb_cocos2dx_EaseBackIn_class, js_cocos2dx_EaseBackIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBackIn_constructor, __jsb_cocos2d_EaseBackIn_class, js_cocos2d_EaseBackIn_finalize)
 
 static bool js_cocos2dx_EaseBackIn_ctor(se::State& s)
 {
@@ -20065,12 +20212,14 @@ static bool js_cocos2dx_EaseBackIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBackIn_ctor, __jsb_cocos2dx_EaseBackIn_class, js_cocos2dx_EaseBackIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBackIn_ctor, __jsb_cocos2d_EaseBackIn_class, js_cocos2d_EaseBackIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBackIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBackIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20083,27 +20232,27 @@ bool js_cocos2dx_EaseBackIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBackIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBackIn_finalize)
 
 bool js_register_cocos2dx_EaseBackIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBackIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBackIn_constructor));
+    auto cls = se::Class::create("EaseBackIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBackIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBackIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBackIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBackIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBackIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBackIn>(cls);
 
-    __jsb_cocos2dx_EaseBackIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBackIn_class = cls;
+    __jsb_cocos2d_EaseBackIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseBackIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBackIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBackOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBackOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBackOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBackOut_class = nullptr;
 
 static bool js_cocos2dx_EaseBackOut_create(se::State& s)
 {
@@ -20116,7 +20265,7 @@ static bool js_cocos2dx_EaseBackOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBackOut_create : Error processing arguments");
         auto result = cocos2d::EaseBackOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBackOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBackOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20126,7 +20275,7 @@ static bool js_cocos2dx_EaseBackOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBackOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBackOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBackOut_finalize)
 
 static bool js_cocos2dx_EaseBackOut_constructor(se::State& s)
 {
@@ -20135,7 +20284,7 @@ static bool js_cocos2dx_EaseBackOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBackOut_constructor, __jsb_cocos2dx_EaseBackOut_class, js_cocos2dx_EaseBackOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBackOut_constructor, __jsb_cocos2d_EaseBackOut_class, js_cocos2d_EaseBackOut_finalize)
 
 static bool js_cocos2dx_EaseBackOut_ctor(se::State& s)
 {
@@ -20144,12 +20293,14 @@ static bool js_cocos2dx_EaseBackOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBackOut_ctor, __jsb_cocos2dx_EaseBackOut_class, js_cocos2dx_EaseBackOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBackOut_ctor, __jsb_cocos2d_EaseBackOut_class, js_cocos2d_EaseBackOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBackOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBackOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20162,27 +20313,27 @@ bool js_cocos2dx_EaseBackOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBackOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBackOut_finalize)
 
 bool js_register_cocos2dx_EaseBackOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBackOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBackOut_constructor));
+    auto cls = se::Class::create("EaseBackOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBackOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBackOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBackOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBackOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBackOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBackOut>(cls);
 
-    __jsb_cocos2dx_EaseBackOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBackOut_class = cls;
+    __jsb_cocos2d_EaseBackOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseBackOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBackOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBackInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBackInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBackInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBackInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseBackInOut_create(se::State& s)
 {
@@ -20195,7 +20346,7 @@ static bool js_cocos2dx_EaseBackInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBackInOut_create : Error processing arguments");
         auto result = cocos2d::EaseBackInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBackInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBackInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20205,7 +20356,7 @@ static bool js_cocos2dx_EaseBackInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBackInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBackInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBackInOut_finalize)
 
 static bool js_cocos2dx_EaseBackInOut_constructor(se::State& s)
 {
@@ -20214,7 +20365,7 @@ static bool js_cocos2dx_EaseBackInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBackInOut_constructor, __jsb_cocos2dx_EaseBackInOut_class, js_cocos2dx_EaseBackInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBackInOut_constructor, __jsb_cocos2d_EaseBackInOut_class, js_cocos2d_EaseBackInOut_finalize)
 
 static bool js_cocos2dx_EaseBackInOut_ctor(se::State& s)
 {
@@ -20223,12 +20374,14 @@ static bool js_cocos2dx_EaseBackInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBackInOut_ctor, __jsb_cocos2dx_EaseBackInOut_class, js_cocos2dx_EaseBackInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBackInOut_ctor, __jsb_cocos2d_EaseBackInOut_class, js_cocos2d_EaseBackInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBackInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBackInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20241,27 +20394,27 @@ bool js_cocos2dx_EaseBackInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBackInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBackInOut_finalize)
 
 bool js_register_cocos2dx_EaseBackInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBackInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBackInOut_constructor));
+    auto cls = se::Class::create("EaseBackInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBackInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBackInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBackInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBackInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBackInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBackInOut>(cls);
 
-    __jsb_cocos2dx_EaseBackInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBackInOut_class = cls;
+    __jsb_cocos2d_EaseBackInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseBackInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBackInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuadraticActionIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuadraticActionIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuadraticActionIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuadraticActionIn_class = nullptr;
 
 static bool js_cocos2dx_EaseQuadraticActionIn_create(se::State& s)
 {
@@ -20274,7 +20427,7 @@ static bool js_cocos2dx_EaseQuadraticActionIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuadraticActionIn_create : Error processing arguments");
         auto result = cocos2d::EaseQuadraticActionIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuadraticActionIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuadraticActionIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20284,7 +20437,7 @@ static bool js_cocos2dx_EaseQuadraticActionIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuadraticActionIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuadraticActionIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuadraticActionIn_finalize)
 
 static bool js_cocos2dx_EaseQuadraticActionIn_constructor(se::State& s)
 {
@@ -20293,7 +20446,7 @@ static bool js_cocos2dx_EaseQuadraticActionIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuadraticActionIn_constructor, __jsb_cocos2dx_EaseQuadraticActionIn_class, js_cocos2dx_EaseQuadraticActionIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuadraticActionIn_constructor, __jsb_cocos2d_EaseQuadraticActionIn_class, js_cocos2d_EaseQuadraticActionIn_finalize)
 
 static bool js_cocos2dx_EaseQuadraticActionIn_ctor(se::State& s)
 {
@@ -20302,12 +20455,14 @@ static bool js_cocos2dx_EaseQuadraticActionIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuadraticActionIn_ctor, __jsb_cocos2dx_EaseQuadraticActionIn_class, js_cocos2dx_EaseQuadraticActionIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuadraticActionIn_ctor, __jsb_cocos2d_EaseQuadraticActionIn_class, js_cocos2d_EaseQuadraticActionIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuadraticActionIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuadraticActionIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20320,27 +20475,27 @@ bool js_cocos2dx_EaseQuadraticActionIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuadraticActionIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuadraticActionIn_finalize)
 
 bool js_register_cocos2dx_EaseQuadraticActionIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuadraticActionIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuadraticActionIn_constructor));
+    auto cls = se::Class::create("EaseQuadraticActionIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuadraticActionIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuadraticActionIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuadraticActionIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuadraticActionIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuadraticActionIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuadraticActionIn>(cls);
 
-    __jsb_cocos2dx_EaseQuadraticActionIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuadraticActionIn_class = cls;
+    __jsb_cocos2d_EaseQuadraticActionIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuadraticActionIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuadraticActionIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuadraticActionOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuadraticActionOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuadraticActionOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuadraticActionOut_class = nullptr;
 
 static bool js_cocos2dx_EaseQuadraticActionOut_create(se::State& s)
 {
@@ -20353,7 +20508,7 @@ static bool js_cocos2dx_EaseQuadraticActionOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuadraticActionOut_create : Error processing arguments");
         auto result = cocos2d::EaseQuadraticActionOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuadraticActionOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuadraticActionOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20363,7 +20518,7 @@ static bool js_cocos2dx_EaseQuadraticActionOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuadraticActionOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuadraticActionOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuadraticActionOut_finalize)
 
 static bool js_cocos2dx_EaseQuadraticActionOut_constructor(se::State& s)
 {
@@ -20372,7 +20527,7 @@ static bool js_cocos2dx_EaseQuadraticActionOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuadraticActionOut_constructor, __jsb_cocos2dx_EaseQuadraticActionOut_class, js_cocos2dx_EaseQuadraticActionOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuadraticActionOut_constructor, __jsb_cocos2d_EaseQuadraticActionOut_class, js_cocos2d_EaseQuadraticActionOut_finalize)
 
 static bool js_cocos2dx_EaseQuadraticActionOut_ctor(se::State& s)
 {
@@ -20381,12 +20536,14 @@ static bool js_cocos2dx_EaseQuadraticActionOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuadraticActionOut_ctor, __jsb_cocos2dx_EaseQuadraticActionOut_class, js_cocos2dx_EaseQuadraticActionOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuadraticActionOut_ctor, __jsb_cocos2d_EaseQuadraticActionOut_class, js_cocos2d_EaseQuadraticActionOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuadraticActionOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuadraticActionOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20399,27 +20556,27 @@ bool js_cocos2dx_EaseQuadraticActionOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuadraticActionOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuadraticActionOut_finalize)
 
 bool js_register_cocos2dx_EaseQuadraticActionOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuadraticActionOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuadraticActionOut_constructor));
+    auto cls = se::Class::create("EaseQuadraticActionOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuadraticActionOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuadraticActionOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuadraticActionOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuadraticActionOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuadraticActionOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuadraticActionOut>(cls);
 
-    __jsb_cocos2dx_EaseQuadraticActionOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuadraticActionOut_class = cls;
+    __jsb_cocos2d_EaseQuadraticActionOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuadraticActionOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuadraticActionOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuadraticActionInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuadraticActionInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuadraticActionInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuadraticActionInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseQuadraticActionInOut_create(se::State& s)
 {
@@ -20432,7 +20589,7 @@ static bool js_cocos2dx_EaseQuadraticActionInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuadraticActionInOut_create : Error processing arguments");
         auto result = cocos2d::EaseQuadraticActionInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuadraticActionInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuadraticActionInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20442,7 +20599,7 @@ static bool js_cocos2dx_EaseQuadraticActionInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuadraticActionInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuadraticActionInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuadraticActionInOut_finalize)
 
 static bool js_cocos2dx_EaseQuadraticActionInOut_constructor(se::State& s)
 {
@@ -20451,7 +20608,7 @@ static bool js_cocos2dx_EaseQuadraticActionInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuadraticActionInOut_constructor, __jsb_cocos2dx_EaseQuadraticActionInOut_class, js_cocos2dx_EaseQuadraticActionInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuadraticActionInOut_constructor, __jsb_cocos2d_EaseQuadraticActionInOut_class, js_cocos2d_EaseQuadraticActionInOut_finalize)
 
 static bool js_cocos2dx_EaseQuadraticActionInOut_ctor(se::State& s)
 {
@@ -20460,12 +20617,14 @@ static bool js_cocos2dx_EaseQuadraticActionInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuadraticActionInOut_ctor, __jsb_cocos2dx_EaseQuadraticActionInOut_class, js_cocos2dx_EaseQuadraticActionInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuadraticActionInOut_ctor, __jsb_cocos2d_EaseQuadraticActionInOut_class, js_cocos2d_EaseQuadraticActionInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuadraticActionInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuadraticActionInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20478,27 +20637,27 @@ bool js_cocos2dx_EaseQuadraticActionInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuadraticActionInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuadraticActionInOut_finalize)
 
 bool js_register_cocos2dx_EaseQuadraticActionInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuadraticActionInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuadraticActionInOut_constructor));
+    auto cls = se::Class::create("EaseQuadraticActionInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuadraticActionInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuadraticActionInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuadraticActionInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuadraticActionInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuadraticActionInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuadraticActionInOut>(cls);
 
-    __jsb_cocos2dx_EaseQuadraticActionInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuadraticActionInOut_class = cls;
+    __jsb_cocos2d_EaseQuadraticActionInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuadraticActionInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuadraticActionInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuarticActionIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuarticActionIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuarticActionIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuarticActionIn_class = nullptr;
 
 static bool js_cocos2dx_EaseQuarticActionIn_create(se::State& s)
 {
@@ -20511,7 +20670,7 @@ static bool js_cocos2dx_EaseQuarticActionIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuarticActionIn_create : Error processing arguments");
         auto result = cocos2d::EaseQuarticActionIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuarticActionIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuarticActionIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20521,7 +20680,7 @@ static bool js_cocos2dx_EaseQuarticActionIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuarticActionIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuarticActionIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuarticActionIn_finalize)
 
 static bool js_cocos2dx_EaseQuarticActionIn_constructor(se::State& s)
 {
@@ -20530,7 +20689,7 @@ static bool js_cocos2dx_EaseQuarticActionIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuarticActionIn_constructor, __jsb_cocos2dx_EaseQuarticActionIn_class, js_cocos2dx_EaseQuarticActionIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuarticActionIn_constructor, __jsb_cocos2d_EaseQuarticActionIn_class, js_cocos2d_EaseQuarticActionIn_finalize)
 
 static bool js_cocos2dx_EaseQuarticActionIn_ctor(se::State& s)
 {
@@ -20539,12 +20698,14 @@ static bool js_cocos2dx_EaseQuarticActionIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuarticActionIn_ctor, __jsb_cocos2dx_EaseQuarticActionIn_class, js_cocos2dx_EaseQuarticActionIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuarticActionIn_ctor, __jsb_cocos2d_EaseQuarticActionIn_class, js_cocos2d_EaseQuarticActionIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuarticActionIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuarticActionIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20557,27 +20718,27 @@ bool js_cocos2dx_EaseQuarticActionIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuarticActionIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuarticActionIn_finalize)
 
 bool js_register_cocos2dx_EaseQuarticActionIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuarticActionIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuarticActionIn_constructor));
+    auto cls = se::Class::create("EaseQuarticActionIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuarticActionIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuarticActionIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuarticActionIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuarticActionIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuarticActionIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuarticActionIn>(cls);
 
-    __jsb_cocos2dx_EaseQuarticActionIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuarticActionIn_class = cls;
+    __jsb_cocos2d_EaseQuarticActionIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuarticActionIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuarticActionIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuarticActionOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuarticActionOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuarticActionOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuarticActionOut_class = nullptr;
 
 static bool js_cocos2dx_EaseQuarticActionOut_create(se::State& s)
 {
@@ -20590,7 +20751,7 @@ static bool js_cocos2dx_EaseQuarticActionOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuarticActionOut_create : Error processing arguments");
         auto result = cocos2d::EaseQuarticActionOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuarticActionOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuarticActionOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20600,7 +20761,7 @@ static bool js_cocos2dx_EaseQuarticActionOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuarticActionOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuarticActionOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuarticActionOut_finalize)
 
 static bool js_cocos2dx_EaseQuarticActionOut_constructor(se::State& s)
 {
@@ -20609,7 +20770,7 @@ static bool js_cocos2dx_EaseQuarticActionOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuarticActionOut_constructor, __jsb_cocos2dx_EaseQuarticActionOut_class, js_cocos2dx_EaseQuarticActionOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuarticActionOut_constructor, __jsb_cocos2d_EaseQuarticActionOut_class, js_cocos2d_EaseQuarticActionOut_finalize)
 
 static bool js_cocos2dx_EaseQuarticActionOut_ctor(se::State& s)
 {
@@ -20618,12 +20779,14 @@ static bool js_cocos2dx_EaseQuarticActionOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuarticActionOut_ctor, __jsb_cocos2dx_EaseQuarticActionOut_class, js_cocos2dx_EaseQuarticActionOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuarticActionOut_ctor, __jsb_cocos2d_EaseQuarticActionOut_class, js_cocos2d_EaseQuarticActionOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuarticActionOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuarticActionOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20636,27 +20799,27 @@ bool js_cocos2dx_EaseQuarticActionOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuarticActionOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuarticActionOut_finalize)
 
 bool js_register_cocos2dx_EaseQuarticActionOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuarticActionOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuarticActionOut_constructor));
+    auto cls = se::Class::create("EaseQuarticActionOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuarticActionOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuarticActionOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuarticActionOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuarticActionOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuarticActionOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuarticActionOut>(cls);
 
-    __jsb_cocos2dx_EaseQuarticActionOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuarticActionOut_class = cls;
+    __jsb_cocos2d_EaseQuarticActionOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuarticActionOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuarticActionOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuarticActionInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuarticActionInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuarticActionInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuarticActionInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseQuarticActionInOut_create(se::State& s)
 {
@@ -20669,7 +20832,7 @@ static bool js_cocos2dx_EaseQuarticActionInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuarticActionInOut_create : Error processing arguments");
         auto result = cocos2d::EaseQuarticActionInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuarticActionInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuarticActionInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20679,7 +20842,7 @@ static bool js_cocos2dx_EaseQuarticActionInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuarticActionInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuarticActionInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuarticActionInOut_finalize)
 
 static bool js_cocos2dx_EaseQuarticActionInOut_constructor(se::State& s)
 {
@@ -20688,7 +20851,7 @@ static bool js_cocos2dx_EaseQuarticActionInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuarticActionInOut_constructor, __jsb_cocos2dx_EaseQuarticActionInOut_class, js_cocos2dx_EaseQuarticActionInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuarticActionInOut_constructor, __jsb_cocos2d_EaseQuarticActionInOut_class, js_cocos2d_EaseQuarticActionInOut_finalize)
 
 static bool js_cocos2dx_EaseQuarticActionInOut_ctor(se::State& s)
 {
@@ -20697,12 +20860,14 @@ static bool js_cocos2dx_EaseQuarticActionInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuarticActionInOut_ctor, __jsb_cocos2dx_EaseQuarticActionInOut_class, js_cocos2dx_EaseQuarticActionInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuarticActionInOut_ctor, __jsb_cocos2d_EaseQuarticActionInOut_class, js_cocos2d_EaseQuarticActionInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuarticActionInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuarticActionInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20715,27 +20880,27 @@ bool js_cocos2dx_EaseQuarticActionInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuarticActionInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuarticActionInOut_finalize)
 
 bool js_register_cocos2dx_EaseQuarticActionInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuarticActionInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuarticActionInOut_constructor));
+    auto cls = se::Class::create("EaseQuarticActionInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuarticActionInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuarticActionInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuarticActionInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuarticActionInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuarticActionInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuarticActionInOut>(cls);
 
-    __jsb_cocos2dx_EaseQuarticActionInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuarticActionInOut_class = cls;
+    __jsb_cocos2d_EaseQuarticActionInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuarticActionInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuarticActionInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuinticActionIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuinticActionIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuinticActionIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuinticActionIn_class = nullptr;
 
 static bool js_cocos2dx_EaseQuinticActionIn_create(se::State& s)
 {
@@ -20748,7 +20913,7 @@ static bool js_cocos2dx_EaseQuinticActionIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuinticActionIn_create : Error processing arguments");
         auto result = cocos2d::EaseQuinticActionIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuinticActionIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuinticActionIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20758,7 +20923,7 @@ static bool js_cocos2dx_EaseQuinticActionIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuinticActionIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuinticActionIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuinticActionIn_finalize)
 
 static bool js_cocos2dx_EaseQuinticActionIn_constructor(se::State& s)
 {
@@ -20767,7 +20932,7 @@ static bool js_cocos2dx_EaseQuinticActionIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuinticActionIn_constructor, __jsb_cocos2dx_EaseQuinticActionIn_class, js_cocos2dx_EaseQuinticActionIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuinticActionIn_constructor, __jsb_cocos2d_EaseQuinticActionIn_class, js_cocos2d_EaseQuinticActionIn_finalize)
 
 static bool js_cocos2dx_EaseQuinticActionIn_ctor(se::State& s)
 {
@@ -20776,12 +20941,14 @@ static bool js_cocos2dx_EaseQuinticActionIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuinticActionIn_ctor, __jsb_cocos2dx_EaseQuinticActionIn_class, js_cocos2dx_EaseQuinticActionIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuinticActionIn_ctor, __jsb_cocos2d_EaseQuinticActionIn_class, js_cocos2d_EaseQuinticActionIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuinticActionIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuinticActionIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20794,27 +20961,27 @@ bool js_cocos2dx_EaseQuinticActionIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuinticActionIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuinticActionIn_finalize)
 
 bool js_register_cocos2dx_EaseQuinticActionIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuinticActionIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuinticActionIn_constructor));
+    auto cls = se::Class::create("EaseQuinticActionIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuinticActionIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuinticActionIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuinticActionIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuinticActionIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuinticActionIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuinticActionIn>(cls);
 
-    __jsb_cocos2dx_EaseQuinticActionIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuinticActionIn_class = cls;
+    __jsb_cocos2d_EaseQuinticActionIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuinticActionIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuinticActionIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuinticActionOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuinticActionOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuinticActionOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuinticActionOut_class = nullptr;
 
 static bool js_cocos2dx_EaseQuinticActionOut_create(se::State& s)
 {
@@ -20827,7 +20994,7 @@ static bool js_cocos2dx_EaseQuinticActionOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuinticActionOut_create : Error processing arguments");
         auto result = cocos2d::EaseQuinticActionOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuinticActionOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuinticActionOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20837,7 +21004,7 @@ static bool js_cocos2dx_EaseQuinticActionOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuinticActionOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuinticActionOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuinticActionOut_finalize)
 
 static bool js_cocos2dx_EaseQuinticActionOut_constructor(se::State& s)
 {
@@ -20846,7 +21013,7 @@ static bool js_cocos2dx_EaseQuinticActionOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuinticActionOut_constructor, __jsb_cocos2dx_EaseQuinticActionOut_class, js_cocos2dx_EaseQuinticActionOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuinticActionOut_constructor, __jsb_cocos2d_EaseQuinticActionOut_class, js_cocos2d_EaseQuinticActionOut_finalize)
 
 static bool js_cocos2dx_EaseQuinticActionOut_ctor(se::State& s)
 {
@@ -20855,12 +21022,14 @@ static bool js_cocos2dx_EaseQuinticActionOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuinticActionOut_ctor, __jsb_cocos2dx_EaseQuinticActionOut_class, js_cocos2dx_EaseQuinticActionOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuinticActionOut_ctor, __jsb_cocos2d_EaseQuinticActionOut_class, js_cocos2d_EaseQuinticActionOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuinticActionOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuinticActionOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20873,27 +21042,27 @@ bool js_cocos2dx_EaseQuinticActionOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuinticActionOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuinticActionOut_finalize)
 
 bool js_register_cocos2dx_EaseQuinticActionOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuinticActionOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuinticActionOut_constructor));
+    auto cls = se::Class::create("EaseQuinticActionOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuinticActionOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuinticActionOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuinticActionOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuinticActionOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuinticActionOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuinticActionOut>(cls);
 
-    __jsb_cocos2dx_EaseQuinticActionOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuinticActionOut_class = cls;
+    __jsb_cocos2d_EaseQuinticActionOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuinticActionOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuinticActionOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseQuinticActionInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseQuinticActionInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseQuinticActionInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseQuinticActionInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseQuinticActionInOut_create(se::State& s)
 {
@@ -20906,7 +21075,7 @@ static bool js_cocos2dx_EaseQuinticActionInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseQuinticActionInOut_create : Error processing arguments");
         auto result = cocos2d::EaseQuinticActionInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseQuinticActionInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseQuinticActionInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20916,7 +21085,7 @@ static bool js_cocos2dx_EaseQuinticActionInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseQuinticActionInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseQuinticActionInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseQuinticActionInOut_finalize)
 
 static bool js_cocos2dx_EaseQuinticActionInOut_constructor(se::State& s)
 {
@@ -20925,7 +21094,7 @@ static bool js_cocos2dx_EaseQuinticActionInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseQuinticActionInOut_constructor, __jsb_cocos2dx_EaseQuinticActionInOut_class, js_cocos2dx_EaseQuinticActionInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseQuinticActionInOut_constructor, __jsb_cocos2d_EaseQuinticActionInOut_class, js_cocos2d_EaseQuinticActionInOut_finalize)
 
 static bool js_cocos2dx_EaseQuinticActionInOut_ctor(se::State& s)
 {
@@ -20934,12 +21103,14 @@ static bool js_cocos2dx_EaseQuinticActionInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuinticActionInOut_ctor, __jsb_cocos2dx_EaseQuinticActionInOut_class, js_cocos2dx_EaseQuinticActionInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseQuinticActionInOut_ctor, __jsb_cocos2d_EaseQuinticActionInOut_class, js_cocos2d_EaseQuinticActionInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseQuinticActionInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseQuinticActionInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -20952,27 +21123,27 @@ bool js_cocos2dx_EaseQuinticActionInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseQuinticActionInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseQuinticActionInOut_finalize)
 
 bool js_register_cocos2dx_EaseQuinticActionInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseQuinticActionInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseQuinticActionInOut_constructor));
+    auto cls = se::Class::create("EaseQuinticActionInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseQuinticActionInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseQuinticActionInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseQuinticActionInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseQuinticActionInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseQuinticActionInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseQuinticActionInOut>(cls);
 
-    __jsb_cocos2dx_EaseQuinticActionInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseQuinticActionInOut_class = cls;
+    __jsb_cocos2d_EaseQuinticActionInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseQuinticActionInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseQuinticActionInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseCircleActionIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseCircleActionIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseCircleActionIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseCircleActionIn_class = nullptr;
 
 static bool js_cocos2dx_EaseCircleActionIn_create(se::State& s)
 {
@@ -20985,7 +21156,7 @@ static bool js_cocos2dx_EaseCircleActionIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseCircleActionIn_create : Error processing arguments");
         auto result = cocos2d::EaseCircleActionIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseCircleActionIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseCircleActionIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -20995,7 +21166,7 @@ static bool js_cocos2dx_EaseCircleActionIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseCircleActionIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseCircleActionIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseCircleActionIn_finalize)
 
 static bool js_cocos2dx_EaseCircleActionIn_constructor(se::State& s)
 {
@@ -21004,7 +21175,7 @@ static bool js_cocos2dx_EaseCircleActionIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseCircleActionIn_constructor, __jsb_cocos2dx_EaseCircleActionIn_class, js_cocos2dx_EaseCircleActionIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseCircleActionIn_constructor, __jsb_cocos2d_EaseCircleActionIn_class, js_cocos2d_EaseCircleActionIn_finalize)
 
 static bool js_cocos2dx_EaseCircleActionIn_ctor(se::State& s)
 {
@@ -21013,12 +21184,14 @@ static bool js_cocos2dx_EaseCircleActionIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCircleActionIn_ctor, __jsb_cocos2dx_EaseCircleActionIn_class, js_cocos2dx_EaseCircleActionIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCircleActionIn_ctor, __jsb_cocos2d_EaseCircleActionIn_class, js_cocos2d_EaseCircleActionIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseCircleActionIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseCircleActionIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21031,27 +21204,27 @@ bool js_cocos2dx_EaseCircleActionIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseCircleActionIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseCircleActionIn_finalize)
 
 bool js_register_cocos2dx_EaseCircleActionIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseCircleActionIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseCircleActionIn_constructor));
+    auto cls = se::Class::create("EaseCircleActionIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseCircleActionIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseCircleActionIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseCircleActionIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseCircleActionIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseCircleActionIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseCircleActionIn>(cls);
 
-    __jsb_cocos2dx_EaseCircleActionIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseCircleActionIn_class = cls;
+    __jsb_cocos2d_EaseCircleActionIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseCircleActionIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseCircleActionIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseCircleActionOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseCircleActionOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseCircleActionOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseCircleActionOut_class = nullptr;
 
 static bool js_cocos2dx_EaseCircleActionOut_create(se::State& s)
 {
@@ -21064,7 +21237,7 @@ static bool js_cocos2dx_EaseCircleActionOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseCircleActionOut_create : Error processing arguments");
         auto result = cocos2d::EaseCircleActionOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseCircleActionOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseCircleActionOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21074,7 +21247,7 @@ static bool js_cocos2dx_EaseCircleActionOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseCircleActionOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseCircleActionOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseCircleActionOut_finalize)
 
 static bool js_cocos2dx_EaseCircleActionOut_constructor(se::State& s)
 {
@@ -21083,7 +21256,7 @@ static bool js_cocos2dx_EaseCircleActionOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseCircleActionOut_constructor, __jsb_cocos2dx_EaseCircleActionOut_class, js_cocos2dx_EaseCircleActionOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseCircleActionOut_constructor, __jsb_cocos2d_EaseCircleActionOut_class, js_cocos2d_EaseCircleActionOut_finalize)
 
 static bool js_cocos2dx_EaseCircleActionOut_ctor(se::State& s)
 {
@@ -21092,12 +21265,14 @@ static bool js_cocos2dx_EaseCircleActionOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCircleActionOut_ctor, __jsb_cocos2dx_EaseCircleActionOut_class, js_cocos2dx_EaseCircleActionOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCircleActionOut_ctor, __jsb_cocos2d_EaseCircleActionOut_class, js_cocos2d_EaseCircleActionOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseCircleActionOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseCircleActionOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21110,27 +21285,27 @@ bool js_cocos2dx_EaseCircleActionOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseCircleActionOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseCircleActionOut_finalize)
 
 bool js_register_cocos2dx_EaseCircleActionOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseCircleActionOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseCircleActionOut_constructor));
+    auto cls = se::Class::create("EaseCircleActionOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseCircleActionOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseCircleActionOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseCircleActionOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseCircleActionOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseCircleActionOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseCircleActionOut>(cls);
 
-    __jsb_cocos2dx_EaseCircleActionOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseCircleActionOut_class = cls;
+    __jsb_cocos2d_EaseCircleActionOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseCircleActionOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseCircleActionOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseCircleActionInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseCircleActionInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseCircleActionInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseCircleActionInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseCircleActionInOut_create(se::State& s)
 {
@@ -21143,7 +21318,7 @@ static bool js_cocos2dx_EaseCircleActionInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseCircleActionInOut_create : Error processing arguments");
         auto result = cocos2d::EaseCircleActionInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseCircleActionInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseCircleActionInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21153,7 +21328,7 @@ static bool js_cocos2dx_EaseCircleActionInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseCircleActionInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseCircleActionInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseCircleActionInOut_finalize)
 
 static bool js_cocos2dx_EaseCircleActionInOut_constructor(se::State& s)
 {
@@ -21162,7 +21337,7 @@ static bool js_cocos2dx_EaseCircleActionInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseCircleActionInOut_constructor, __jsb_cocos2dx_EaseCircleActionInOut_class, js_cocos2dx_EaseCircleActionInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseCircleActionInOut_constructor, __jsb_cocos2d_EaseCircleActionInOut_class, js_cocos2d_EaseCircleActionInOut_finalize)
 
 static bool js_cocos2dx_EaseCircleActionInOut_ctor(se::State& s)
 {
@@ -21171,12 +21346,14 @@ static bool js_cocos2dx_EaseCircleActionInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCircleActionInOut_ctor, __jsb_cocos2dx_EaseCircleActionInOut_class, js_cocos2dx_EaseCircleActionInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCircleActionInOut_ctor, __jsb_cocos2d_EaseCircleActionInOut_class, js_cocos2d_EaseCircleActionInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseCircleActionInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseCircleActionInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21189,27 +21366,27 @@ bool js_cocos2dx_EaseCircleActionInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseCircleActionInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseCircleActionInOut_finalize)
 
 bool js_register_cocos2dx_EaseCircleActionInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseCircleActionInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseCircleActionInOut_constructor));
+    auto cls = se::Class::create("EaseCircleActionInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseCircleActionInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseCircleActionInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseCircleActionInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseCircleActionInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseCircleActionInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseCircleActionInOut>(cls);
 
-    __jsb_cocos2dx_EaseCircleActionInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseCircleActionInOut_class = cls;
+    __jsb_cocos2d_EaseCircleActionInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseCircleActionInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseCircleActionInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseCubicActionIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseCubicActionIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseCubicActionIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseCubicActionIn_class = nullptr;
 
 static bool js_cocos2dx_EaseCubicActionIn_create(se::State& s)
 {
@@ -21222,7 +21399,7 @@ static bool js_cocos2dx_EaseCubicActionIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseCubicActionIn_create : Error processing arguments");
         auto result = cocos2d::EaseCubicActionIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseCubicActionIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseCubicActionIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21232,7 +21409,7 @@ static bool js_cocos2dx_EaseCubicActionIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseCubicActionIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseCubicActionIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseCubicActionIn_finalize)
 
 static bool js_cocos2dx_EaseCubicActionIn_constructor(se::State& s)
 {
@@ -21241,7 +21418,7 @@ static bool js_cocos2dx_EaseCubicActionIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseCubicActionIn_constructor, __jsb_cocos2dx_EaseCubicActionIn_class, js_cocos2dx_EaseCubicActionIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseCubicActionIn_constructor, __jsb_cocos2d_EaseCubicActionIn_class, js_cocos2d_EaseCubicActionIn_finalize)
 
 static bool js_cocos2dx_EaseCubicActionIn_ctor(se::State& s)
 {
@@ -21250,12 +21427,14 @@ static bool js_cocos2dx_EaseCubicActionIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCubicActionIn_ctor, __jsb_cocos2dx_EaseCubicActionIn_class, js_cocos2dx_EaseCubicActionIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCubicActionIn_ctor, __jsb_cocos2d_EaseCubicActionIn_class, js_cocos2d_EaseCubicActionIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseCubicActionIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseCubicActionIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21268,27 +21447,27 @@ bool js_cocos2dx_EaseCubicActionIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseCubicActionIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseCubicActionIn_finalize)
 
 bool js_register_cocos2dx_EaseCubicActionIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseCubicActionIn", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseCubicActionIn_constructor));
+    auto cls = se::Class::create("EaseCubicActionIn", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseCubicActionIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseCubicActionIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseCubicActionIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseCubicActionIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseCubicActionIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseCubicActionIn>(cls);
 
-    __jsb_cocos2dx_EaseCubicActionIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseCubicActionIn_class = cls;
+    __jsb_cocos2d_EaseCubicActionIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseCubicActionIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseCubicActionIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseCubicActionOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseCubicActionOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseCubicActionOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseCubicActionOut_class = nullptr;
 
 static bool js_cocos2dx_EaseCubicActionOut_create(se::State& s)
 {
@@ -21301,7 +21480,7 @@ static bool js_cocos2dx_EaseCubicActionOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseCubicActionOut_create : Error processing arguments");
         auto result = cocos2d::EaseCubicActionOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseCubicActionOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseCubicActionOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21311,7 +21490,7 @@ static bool js_cocos2dx_EaseCubicActionOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseCubicActionOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseCubicActionOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseCubicActionOut_finalize)
 
 static bool js_cocos2dx_EaseCubicActionOut_constructor(se::State& s)
 {
@@ -21320,7 +21499,7 @@ static bool js_cocos2dx_EaseCubicActionOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseCubicActionOut_constructor, __jsb_cocos2dx_EaseCubicActionOut_class, js_cocos2dx_EaseCubicActionOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseCubicActionOut_constructor, __jsb_cocos2d_EaseCubicActionOut_class, js_cocos2d_EaseCubicActionOut_finalize)
 
 static bool js_cocos2dx_EaseCubicActionOut_ctor(se::State& s)
 {
@@ -21329,12 +21508,14 @@ static bool js_cocos2dx_EaseCubicActionOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCubicActionOut_ctor, __jsb_cocos2dx_EaseCubicActionOut_class, js_cocos2dx_EaseCubicActionOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCubicActionOut_ctor, __jsb_cocos2d_EaseCubicActionOut_class, js_cocos2d_EaseCubicActionOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseCubicActionOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseCubicActionOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21347,27 +21528,27 @@ bool js_cocos2dx_EaseCubicActionOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseCubicActionOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseCubicActionOut_finalize)
 
 bool js_register_cocos2dx_EaseCubicActionOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseCubicActionOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseCubicActionOut_constructor));
+    auto cls = se::Class::create("EaseCubicActionOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseCubicActionOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseCubicActionOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseCubicActionOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseCubicActionOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseCubicActionOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseCubicActionOut>(cls);
 
-    __jsb_cocos2dx_EaseCubicActionOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseCubicActionOut_class = cls;
+    __jsb_cocos2d_EaseCubicActionOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseCubicActionOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseCubicActionOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseCubicActionInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseCubicActionInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseCubicActionInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseCubicActionInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseCubicActionInOut_create(se::State& s)
 {
@@ -21380,7 +21561,7 @@ static bool js_cocos2dx_EaseCubicActionInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseCubicActionInOut_create : Error processing arguments");
         auto result = cocos2d::EaseCubicActionInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseCubicActionInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseCubicActionInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21390,7 +21571,7 @@ static bool js_cocos2dx_EaseCubicActionInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseCubicActionInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseCubicActionInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseCubicActionInOut_finalize)
 
 static bool js_cocos2dx_EaseCubicActionInOut_constructor(se::State& s)
 {
@@ -21399,7 +21580,7 @@ static bool js_cocos2dx_EaseCubicActionInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseCubicActionInOut_constructor, __jsb_cocos2dx_EaseCubicActionInOut_class, js_cocos2dx_EaseCubicActionInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseCubicActionInOut_constructor, __jsb_cocos2d_EaseCubicActionInOut_class, js_cocos2d_EaseCubicActionInOut_finalize)
 
 static bool js_cocos2dx_EaseCubicActionInOut_ctor(se::State& s)
 {
@@ -21408,12 +21589,14 @@ static bool js_cocos2dx_EaseCubicActionInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCubicActionInOut_ctor, __jsb_cocos2dx_EaseCubicActionInOut_class, js_cocos2dx_EaseCubicActionInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseCubicActionInOut_ctor, __jsb_cocos2d_EaseCubicActionInOut_class, js_cocos2d_EaseCubicActionInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseCubicActionInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseCubicActionInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21426,27 +21609,27 @@ bool js_cocos2dx_EaseCubicActionInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseCubicActionInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseCubicActionInOut_finalize)
 
 bool js_register_cocos2dx_EaseCubicActionInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseCubicActionInOut", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseCubicActionInOut_constructor));
+    auto cls = se::Class::create("EaseCubicActionInOut", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseCubicActionInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseCubicActionInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseCubicActionInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseCubicActionInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseCubicActionInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseCubicActionInOut>(cls);
 
-    __jsb_cocos2dx_EaseCubicActionInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseCubicActionInOut_class = cls;
+    __jsb_cocos2d_EaseCubicActionInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseCubicActionInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseCubicActionInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseIn_class = nullptr;
 
 static bool js_cocos2dx_EaseIn_create(se::State& s)
 {
@@ -21461,7 +21644,7 @@ static bool js_cocos2dx_EaseIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseIn_create : Error processing arguments");
         auto result = cocos2d::EaseIn::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21471,7 +21654,7 @@ static bool js_cocos2dx_EaseIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseIn_finalize)
 
 static bool js_cocos2dx_EaseIn_constructor(se::State& s)
 {
@@ -21480,7 +21663,7 @@ static bool js_cocos2dx_EaseIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseIn_constructor, __jsb_cocos2dx_EaseIn_class, js_cocos2dx_EaseIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseIn_constructor, __jsb_cocos2d_EaseIn_class, js_cocos2d_EaseIn_finalize)
 
 static bool js_cocos2dx_EaseIn_ctor(se::State& s)
 {
@@ -21489,12 +21672,14 @@ static bool js_cocos2dx_EaseIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseIn_ctor, __jsb_cocos2dx_EaseIn_class, js_cocos2dx_EaseIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseIn_ctor, __jsb_cocos2d_EaseIn_class, js_cocos2d_EaseIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EaseRateAction_proto;
+
+bool js_cocos2d_EaseIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21507,27 +21692,27 @@ bool js_cocos2dx_EaseIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseIn_finalize)
 
 bool js_register_cocos2dx_EaseIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseIn", obj, __jsb_cocos2dx_EaseRateAction_proto, _SE(js_cocos2dx_EaseIn_constructor));
+    auto cls = se::Class::create("EaseIn", obj, __jsb_cocos2d_EaseRateAction_proto, _SE(js_cocos2dx_EaseIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseIn>(cls);
 
-    __jsb_cocos2dx_EaseIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseIn_class = cls;
+    __jsb_cocos2d_EaseIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseOut_class = nullptr;
 
 static bool js_cocos2dx_EaseOut_create(se::State& s)
 {
@@ -21542,7 +21727,7 @@ static bool js_cocos2dx_EaseOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseOut_create : Error processing arguments");
         auto result = cocos2d::EaseOut::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21552,7 +21737,7 @@ static bool js_cocos2dx_EaseOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseOut_finalize)
 
 static bool js_cocos2dx_EaseOut_constructor(se::State& s)
 {
@@ -21561,7 +21746,7 @@ static bool js_cocos2dx_EaseOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseOut_constructor, __jsb_cocos2dx_EaseOut_class, js_cocos2dx_EaseOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseOut_constructor, __jsb_cocos2d_EaseOut_class, js_cocos2d_EaseOut_finalize)
 
 static bool js_cocos2dx_EaseOut_ctor(se::State& s)
 {
@@ -21570,12 +21755,14 @@ static bool js_cocos2dx_EaseOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseOut_ctor, __jsb_cocos2dx_EaseOut_class, js_cocos2dx_EaseOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseOut_ctor, __jsb_cocos2d_EaseOut_class, js_cocos2d_EaseOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EaseRateAction_proto;
+
+bool js_cocos2d_EaseOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21588,27 +21775,27 @@ bool js_cocos2dx_EaseOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseOut_finalize)
 
 bool js_register_cocos2dx_EaseOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseOut", obj, __jsb_cocos2dx_EaseRateAction_proto, _SE(js_cocos2dx_EaseOut_constructor));
+    auto cls = se::Class::create("EaseOut", obj, __jsb_cocos2d_EaseRateAction_proto, _SE(js_cocos2dx_EaseOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseOut>(cls);
 
-    __jsb_cocos2dx_EaseOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseOut_class = cls;
+    __jsb_cocos2d_EaseOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseInOut_create(se::State& s)
 {
@@ -21623,7 +21810,7 @@ static bool js_cocos2dx_EaseInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseInOut_create : Error processing arguments");
         auto result = cocos2d::EaseInOut::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21633,7 +21820,7 @@ static bool js_cocos2dx_EaseInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseInOut_finalize)
 
 static bool js_cocos2dx_EaseInOut_constructor(se::State& s)
 {
@@ -21642,7 +21829,7 @@ static bool js_cocos2dx_EaseInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseInOut_constructor, __jsb_cocos2dx_EaseInOut_class, js_cocos2dx_EaseInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseInOut_constructor, __jsb_cocos2d_EaseInOut_class, js_cocos2d_EaseInOut_finalize)
 
 static bool js_cocos2dx_EaseInOut_ctor(se::State& s)
 {
@@ -21651,12 +21838,14 @@ static bool js_cocos2dx_EaseInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseInOut_ctor, __jsb_cocos2dx_EaseInOut_class, js_cocos2dx_EaseInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseInOut_ctor, __jsb_cocos2d_EaseInOut_class, js_cocos2d_EaseInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EaseRateAction_proto;
+
+bool js_cocos2d_EaseInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21669,27 +21858,27 @@ bool js_cocos2dx_EaseInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseInOut_finalize)
 
 bool js_register_cocos2dx_EaseInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseInOut", obj, __jsb_cocos2dx_EaseRateAction_proto, _SE(js_cocos2dx_EaseInOut_constructor));
+    auto cls = se::Class::create("EaseInOut", obj, __jsb_cocos2d_EaseRateAction_proto, _SE(js_cocos2dx_EaseInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseInOut>(cls);
 
-    __jsb_cocos2dx_EaseInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseInOut_class = cls;
+    __jsb_cocos2d_EaseInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseElastic_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseElastic_class = nullptr;
+se::Object* __jsb_cocos2d_EaseElastic_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseElastic_class = nullptr;
 
 static bool js_cocos2dx_EaseElastic_setPeriod(se::State& s)
 {
@@ -21761,10 +21950,12 @@ static bool js_cocos2dx_EaseElastic_getPeriod(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_EaseElastic_getPeriod)
 
 
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
 
 bool js_register_cocos2dx_EaseElastic(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseElastic", obj, __jsb_cocos2dx_ActionEase_proto, nullptr);
+    auto cls = se::Class::create("EaseElastic", obj, __jsb_cocos2d_ActionEase_proto, nullptr);
 
     cls->defineFunction("setPeriod", _SE(js_cocos2dx_EaseElastic_setPeriod));
     cls->defineFunction("initWithAction", _SE(js_cocos2dx_EaseElastic_initWithAction));
@@ -21772,14 +21963,14 @@ bool js_register_cocos2dx_EaseElastic(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseElastic>(cls);
 
-    __jsb_cocos2dx_EaseElastic_proto = cls->getProto();
-    __jsb_cocos2dx_EaseElastic_class = cls;
+    __jsb_cocos2d_EaseElastic_proto = cls->getProto();
+    __jsb_cocos2d_EaseElastic_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseElasticIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseElasticIn_class = nullptr;
+se::Object* __jsb_cocos2d_EaseElasticIn_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseElasticIn_class = nullptr;
 
 static bool js_cocos2dx_EaseElasticIn_create(se::State& s)
 {
@@ -21792,7 +21983,7 @@ static bool js_cocos2dx_EaseElasticIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseElasticIn_create : Error processing arguments");
         auto result = cocos2d::EaseElasticIn::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseElasticIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseElasticIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21805,7 +21996,7 @@ static bool js_cocos2dx_EaseElasticIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseElasticIn_create : Error processing arguments");
         auto result = cocos2d::EaseElasticIn::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseElasticIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseElasticIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21815,7 +22006,7 @@ static bool js_cocos2dx_EaseElasticIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseElasticIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseElasticIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseElasticIn_finalize)
 
 static bool js_cocos2dx_EaseElasticIn_constructor(se::State& s)
 {
@@ -21824,7 +22015,7 @@ static bool js_cocos2dx_EaseElasticIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseElasticIn_constructor, __jsb_cocos2dx_EaseElasticIn_class, js_cocos2dx_EaseElasticIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseElasticIn_constructor, __jsb_cocos2d_EaseElasticIn_class, js_cocos2d_EaseElasticIn_finalize)
 
 static bool js_cocos2dx_EaseElasticIn_ctor(se::State& s)
 {
@@ -21833,12 +22024,14 @@ static bool js_cocos2dx_EaseElasticIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseElasticIn_ctor, __jsb_cocos2dx_EaseElasticIn_class, js_cocos2dx_EaseElasticIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseElasticIn_ctor, __jsb_cocos2d_EaseElasticIn_class, js_cocos2d_EaseElasticIn_finalize)
 
 
     
 
-bool js_cocos2dx_EaseElasticIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EaseElastic_proto;
+
+bool js_cocos2d_EaseElasticIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21851,27 +22044,27 @@ bool js_cocos2dx_EaseElasticIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseElasticIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseElasticIn_finalize)
 
 bool js_register_cocos2dx_EaseElasticIn(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseElasticIn", obj, __jsb_cocos2dx_EaseElastic_proto, _SE(js_cocos2dx_EaseElasticIn_constructor));
+    auto cls = se::Class::create("EaseElasticIn", obj, __jsb_cocos2d_EaseElastic_proto, _SE(js_cocos2dx_EaseElasticIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseElasticIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseElasticIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseElasticIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseElasticIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseElasticIn>(cls);
 
-    __jsb_cocos2dx_EaseElasticIn_proto = cls->getProto();
-    __jsb_cocos2dx_EaseElasticIn_class = cls;
+    __jsb_cocos2d_EaseElasticIn_proto = cls->getProto();
+    __jsb_cocos2d_EaseElasticIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseElasticIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseElasticOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseElasticOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseElasticOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseElasticOut_class = nullptr;
 
 static bool js_cocos2dx_EaseElasticOut_create(se::State& s)
 {
@@ -21884,7 +22077,7 @@ static bool js_cocos2dx_EaseElasticOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseElasticOut_create : Error processing arguments");
         auto result = cocos2d::EaseElasticOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseElasticOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseElasticOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21897,7 +22090,7 @@ static bool js_cocos2dx_EaseElasticOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseElasticOut_create : Error processing arguments");
         auto result = cocos2d::EaseElasticOut::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseElasticOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseElasticOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21907,7 +22100,7 @@ static bool js_cocos2dx_EaseElasticOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseElasticOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseElasticOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseElasticOut_finalize)
 
 static bool js_cocos2dx_EaseElasticOut_constructor(se::State& s)
 {
@@ -21916,7 +22109,7 @@ static bool js_cocos2dx_EaseElasticOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseElasticOut_constructor, __jsb_cocos2dx_EaseElasticOut_class, js_cocos2dx_EaseElasticOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseElasticOut_constructor, __jsb_cocos2d_EaseElasticOut_class, js_cocos2d_EaseElasticOut_finalize)
 
 static bool js_cocos2dx_EaseElasticOut_ctor(se::State& s)
 {
@@ -21925,12 +22118,14 @@ static bool js_cocos2dx_EaseElasticOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseElasticOut_ctor, __jsb_cocos2dx_EaseElasticOut_class, js_cocos2dx_EaseElasticOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseElasticOut_ctor, __jsb_cocos2d_EaseElasticOut_class, js_cocos2d_EaseElasticOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseElasticOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EaseElastic_proto;
+
+bool js_cocos2d_EaseElasticOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -21943,27 +22138,27 @@ bool js_cocos2dx_EaseElasticOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseElasticOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseElasticOut_finalize)
 
 bool js_register_cocos2dx_EaseElasticOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseElasticOut", obj, __jsb_cocos2dx_EaseElastic_proto, _SE(js_cocos2dx_EaseElasticOut_constructor));
+    auto cls = se::Class::create("EaseElasticOut", obj, __jsb_cocos2d_EaseElastic_proto, _SE(js_cocos2dx_EaseElasticOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseElasticOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseElasticOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseElasticOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseElasticOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseElasticOut>(cls);
 
-    __jsb_cocos2dx_EaseElasticOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseElasticOut_class = cls;
+    __jsb_cocos2d_EaseElasticOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseElasticOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseElasticOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseElasticInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseElasticInOut_class = nullptr;
+se::Object* __jsb_cocos2d_EaseElasticInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseElasticInOut_class = nullptr;
 
 static bool js_cocos2dx_EaseElasticInOut_create(se::State& s)
 {
@@ -21976,7 +22171,7 @@ static bool js_cocos2dx_EaseElasticInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseElasticInOut_create : Error processing arguments");
         auto result = cocos2d::EaseElasticInOut::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseElasticInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseElasticInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21989,7 +22184,7 @@ static bool js_cocos2dx_EaseElasticInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseElasticInOut_create : Error processing arguments");
         auto result = cocos2d::EaseElasticInOut::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseElasticInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseElasticInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -21999,7 +22194,7 @@ static bool js_cocos2dx_EaseElasticInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseElasticInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseElasticInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseElasticInOut_finalize)
 
 static bool js_cocos2dx_EaseElasticInOut_constructor(se::State& s)
 {
@@ -22008,7 +22203,7 @@ static bool js_cocos2dx_EaseElasticInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseElasticInOut_constructor, __jsb_cocos2dx_EaseElasticInOut_class, js_cocos2dx_EaseElasticInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseElasticInOut_constructor, __jsb_cocos2d_EaseElasticInOut_class, js_cocos2d_EaseElasticInOut_finalize)
 
 static bool js_cocos2dx_EaseElasticInOut_ctor(se::State& s)
 {
@@ -22017,12 +22212,14 @@ static bool js_cocos2dx_EaseElasticInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseElasticInOut_ctor, __jsb_cocos2dx_EaseElasticInOut_class, js_cocos2dx_EaseElasticInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseElasticInOut_ctor, __jsb_cocos2d_EaseElasticInOut_class, js_cocos2d_EaseElasticInOut_finalize)
 
 
     
 
-bool js_cocos2dx_EaseElasticInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_EaseElastic_proto;
+
+bool js_cocos2d_EaseElasticInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22035,27 +22232,27 @@ bool js_cocos2dx_EaseElasticInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseElasticInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseElasticInOut_finalize)
 
 bool js_register_cocos2dx_EaseElasticInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseElasticInOut", obj, __jsb_cocos2dx_EaseElastic_proto, _SE(js_cocos2dx_EaseElasticInOut_constructor));
+    auto cls = se::Class::create("EaseElasticInOut", obj, __jsb_cocos2d_EaseElastic_proto, _SE(js_cocos2dx_EaseElasticInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseElasticInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseElasticInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseElasticInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseElasticInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseElasticInOut>(cls);
 
-    __jsb_cocos2dx_EaseElasticInOut_proto = cls->getProto();
-    __jsb_cocos2dx_EaseElasticInOut_class = cls;
+    __jsb_cocos2d_EaseElasticInOut_proto = cls->getProto();
+    __jsb_cocos2d_EaseElasticInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseElasticInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_EaseBezierAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_EaseBezierAction_class = nullptr;
+se::Object* __jsb_cocos2d_EaseBezierAction_proto = nullptr;
+se::Class* __jsb_cocos2d_EaseBezierAction_class = nullptr;
 
 static bool js_cocos2dx_EaseBezierAction_setBezierParamer(se::State& s)
 {
@@ -22093,7 +22290,7 @@ static bool js_cocos2dx_EaseBezierAction_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EaseBezierAction_create : Error processing arguments");
         auto result = cocos2d::EaseBezierAction::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_EaseBezierAction_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_EaseBezierAction_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22103,7 +22300,7 @@ static bool js_cocos2dx_EaseBezierAction_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_EaseBezierAction_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_EaseBezierAction_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EaseBezierAction_finalize)
 
 static bool js_cocos2dx_EaseBezierAction_constructor(se::State& s)
 {
@@ -22112,7 +22309,7 @@ static bool js_cocos2dx_EaseBezierAction_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_EaseBezierAction_constructor, __jsb_cocos2dx_EaseBezierAction_class, js_cocos2dx_EaseBezierAction_finalize)
+SE_BIND_CTOR(js_cocos2dx_EaseBezierAction_constructor, __jsb_cocos2d_EaseBezierAction_class, js_cocos2d_EaseBezierAction_finalize)
 
 static bool js_cocos2dx_EaseBezierAction_ctor(se::State& s)
 {
@@ -22121,12 +22318,14 @@ static bool js_cocos2dx_EaseBezierAction_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBezierAction_ctor, __jsb_cocos2dx_EaseBezierAction_class, js_cocos2dx_EaseBezierAction_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_EaseBezierAction_ctor, __jsb_cocos2d_EaseBezierAction_class, js_cocos2d_EaseBezierAction_finalize)
 
 
     
 
-bool js_cocos2dx_EaseBezierAction_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+
+bool js_cocos2d_EaseBezierAction_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22139,46 +22338,48 @@ bool js_cocos2dx_EaseBezierAction_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_EaseBezierAction_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_EaseBezierAction_finalize)
 
 bool js_register_cocos2dx_EaseBezierAction(se::Object* obj)
 {
-    auto cls = se::Class::create("EaseBezierAction", obj, __jsb_cocos2dx_ActionEase_proto, _SE(js_cocos2dx_EaseBezierAction_constructor));
+    auto cls = se::Class::create("EaseBezierAction", obj, __jsb_cocos2d_ActionEase_proto, _SE(js_cocos2dx_EaseBezierAction_constructor));
 
     cls->defineFunction("setBezierParamer", _SE(js_cocos2dx_EaseBezierAction_setBezierParamer));
     cls->defineFunction("ctor", _SE(js_cocos2dx_EaseBezierAction_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_EaseBezierAction_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_EaseBezierAction_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_EaseBezierAction_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::EaseBezierAction>(cls);
 
-    __jsb_cocos2dx_EaseBezierAction_proto = cls->getProto();
-    __jsb_cocos2dx_EaseBezierAction_class = cls;
+    __jsb_cocos2d_EaseBezierAction_proto = cls->getProto();
+    __jsb_cocos2d_EaseBezierAction_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.EaseBezierAction.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionInstant_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionInstant_class = nullptr;
+se::Object* __jsb_cocos2d_ActionInstant_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionInstant_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_FiniteTimeAction_proto;
 
 
 bool js_register_cocos2dx_ActionInstant(se::Object* obj)
 {
-    auto cls = se::Class::create("ActionInstant", obj, __jsb_cocos2dx_FiniteTimeAction_proto, nullptr);
+    auto cls = se::Class::create("ActionInstant", obj, __jsb_cocos2d_FiniteTimeAction_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionInstant>(cls);
 
-    __jsb_cocos2dx_ActionInstant_proto = cls->getProto();
-    __jsb_cocos2dx_ActionInstant_class = cls;
+    __jsb_cocos2d_ActionInstant_proto = cls->getProto();
+    __jsb_cocos2d_ActionInstant_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Show_proto = nullptr;
-se::Class* __jsb_cocos2dx_Show_class = nullptr;
+se::Object* __jsb_cocos2d_Show_proto = nullptr;
+se::Class* __jsb_cocos2d_Show_class = nullptr;
 
 static bool js_cocos2dx_Show_create(se::State& s)
 {
@@ -22188,7 +22389,7 @@ static bool js_cocos2dx_Show_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Show::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Show_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Show_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22198,7 +22399,7 @@ static bool js_cocos2dx_Show_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Show_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Show_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Show_finalize)
 
 static bool js_cocos2dx_Show_constructor(se::State& s)
 {
@@ -22207,7 +22408,7 @@ static bool js_cocos2dx_Show_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Show_constructor, __jsb_cocos2dx_Show_class, js_cocos2dx_Show_finalize)
+SE_BIND_CTOR(js_cocos2dx_Show_constructor, __jsb_cocos2d_Show_class, js_cocos2d_Show_finalize)
 
 static bool js_cocos2dx_Show_ctor(se::State& s)
 {
@@ -22216,12 +22417,14 @@ static bool js_cocos2dx_Show_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Show_ctor, __jsb_cocos2dx_Show_class, js_cocos2dx_Show_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Show_ctor, __jsb_cocos2d_Show_class, js_cocos2d_Show_finalize)
 
 
     
 
-bool js_cocos2dx_Show_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_Show_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22234,27 +22437,27 @@ bool js_cocos2dx_Show_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Show_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Show_finalize)
 
 bool js_register_cocos2dx_Show(se::Object* obj)
 {
-    auto cls = se::Class::create("Show", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_Show_constructor));
+    auto cls = se::Class::create("Show", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_Show_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_Show_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Show_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Show_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Show_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Show>(cls);
 
-    __jsb_cocos2dx_Show_proto = cls->getProto();
-    __jsb_cocos2dx_Show_class = cls;
+    __jsb_cocos2d_Show_proto = cls->getProto();
+    __jsb_cocos2d_Show_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Show.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Hide_proto = nullptr;
-se::Class* __jsb_cocos2dx_Hide_class = nullptr;
+se::Object* __jsb_cocos2d_Hide_proto = nullptr;
+se::Class* __jsb_cocos2d_Hide_class = nullptr;
 
 static bool js_cocos2dx_Hide_create(se::State& s)
 {
@@ -22264,7 +22467,7 @@ static bool js_cocos2dx_Hide_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Hide::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Hide_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Hide_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22274,7 +22477,7 @@ static bool js_cocos2dx_Hide_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Hide_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Hide_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Hide_finalize)
 
 static bool js_cocos2dx_Hide_constructor(se::State& s)
 {
@@ -22283,7 +22486,7 @@ static bool js_cocos2dx_Hide_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Hide_constructor, __jsb_cocos2dx_Hide_class, js_cocos2dx_Hide_finalize)
+SE_BIND_CTOR(js_cocos2dx_Hide_constructor, __jsb_cocos2d_Hide_class, js_cocos2d_Hide_finalize)
 
 static bool js_cocos2dx_Hide_ctor(se::State& s)
 {
@@ -22292,12 +22495,14 @@ static bool js_cocos2dx_Hide_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Hide_ctor, __jsb_cocos2dx_Hide_class, js_cocos2dx_Hide_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Hide_ctor, __jsb_cocos2d_Hide_class, js_cocos2d_Hide_finalize)
 
 
     
 
-bool js_cocos2dx_Hide_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_Hide_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22310,27 +22515,27 @@ bool js_cocos2dx_Hide_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Hide_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Hide_finalize)
 
 bool js_register_cocos2dx_Hide(se::Object* obj)
 {
-    auto cls = se::Class::create("Hide", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_Hide_constructor));
+    auto cls = se::Class::create("Hide", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_Hide_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_Hide_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Hide_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Hide_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Hide_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Hide>(cls);
 
-    __jsb_cocos2dx_Hide_proto = cls->getProto();
-    __jsb_cocos2dx_Hide_class = cls;
+    __jsb_cocos2d_Hide_proto = cls->getProto();
+    __jsb_cocos2d_Hide_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Hide.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ToggleVisibility_proto = nullptr;
-se::Class* __jsb_cocos2dx_ToggleVisibility_class = nullptr;
+se::Object* __jsb_cocos2d_ToggleVisibility_proto = nullptr;
+se::Class* __jsb_cocos2d_ToggleVisibility_class = nullptr;
 
 static bool js_cocos2dx_ToggleVisibility_create(se::State& s)
 {
@@ -22340,7 +22545,7 @@ static bool js_cocos2dx_ToggleVisibility_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ToggleVisibility::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ToggleVisibility_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ToggleVisibility_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22350,7 +22555,7 @@ static bool js_cocos2dx_ToggleVisibility_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ToggleVisibility_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ToggleVisibility_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ToggleVisibility_finalize)
 
 static bool js_cocos2dx_ToggleVisibility_constructor(se::State& s)
 {
@@ -22359,11 +22564,13 @@ static bool js_cocos2dx_ToggleVisibility_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ToggleVisibility_constructor, __jsb_cocos2dx_ToggleVisibility_class, js_cocos2dx_ToggleVisibility_finalize)
+SE_BIND_CTOR(js_cocos2dx_ToggleVisibility_constructor, __jsb_cocos2d_ToggleVisibility_class, js_cocos2d_ToggleVisibility_finalize)
 
 
 
-bool js_cocos2dx_ToggleVisibility_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_ToggleVisibility_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22376,25 +22583,25 @@ bool js_cocos2dx_ToggleVisibility_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ToggleVisibility_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ToggleVisibility_finalize)
 
 bool js_register_cocos2dx_ToggleVisibility(se::Object* obj)
 {
-    auto cls = se::Class::create("ToggleVisibility", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_ToggleVisibility_constructor));
+    auto cls = se::Class::create("ToggleVisibility", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_ToggleVisibility_constructor));
 
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ToggleVisibility_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ToggleVisibility_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ToggleVisibility_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ToggleVisibility>(cls);
 
-    __jsb_cocos2dx_ToggleVisibility_proto = cls->getProto();
-    __jsb_cocos2dx_ToggleVisibility_class = cls;
+    __jsb_cocos2d_ToggleVisibility_proto = cls->getProto();
+    __jsb_cocos2d_ToggleVisibility_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_RemoveSelf_proto = nullptr;
-se::Class* __jsb_cocos2dx_RemoveSelf_class = nullptr;
+se::Object* __jsb_cocos2d_RemoveSelf_proto = nullptr;
+se::Class* __jsb_cocos2d_RemoveSelf_class = nullptr;
 
 static bool js_cocos2dx_RemoveSelf_init(se::State& s)
 {
@@ -22425,7 +22632,7 @@ static bool js_cocos2dx_RemoveSelf_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::RemoveSelf::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_RemoveSelf_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_RemoveSelf_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22436,7 +22643,7 @@ static bool js_cocos2dx_RemoveSelf_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_RemoveSelf_create : Error processing arguments");
         auto result = cocos2d::RemoveSelf::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_RemoveSelf_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_RemoveSelf_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22446,7 +22653,7 @@ static bool js_cocos2dx_RemoveSelf_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_RemoveSelf_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_RemoveSelf_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_RemoveSelf_finalize)
 
 static bool js_cocos2dx_RemoveSelf_constructor(se::State& s)
 {
@@ -22455,11 +22662,13 @@ static bool js_cocos2dx_RemoveSelf_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_RemoveSelf_constructor, __jsb_cocos2dx_RemoveSelf_class, js_cocos2dx_RemoveSelf_finalize)
+SE_BIND_CTOR(js_cocos2dx_RemoveSelf_constructor, __jsb_cocos2d_RemoveSelf_class, js_cocos2d_RemoveSelf_finalize)
 
 
 
-bool js_cocos2dx_RemoveSelf_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_RemoveSelf_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22472,26 +22681,26 @@ bool js_cocos2dx_RemoveSelf_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_RemoveSelf_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_RemoveSelf_finalize)
 
 bool js_register_cocos2dx_RemoveSelf(se::Object* obj)
 {
-    auto cls = se::Class::create("RemoveSelf", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_RemoveSelf_constructor));
+    auto cls = se::Class::create("RemoveSelf", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_RemoveSelf_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_RemoveSelf_init));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_RemoveSelf_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_RemoveSelf_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_RemoveSelf_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::RemoveSelf>(cls);
 
-    __jsb_cocos2dx_RemoveSelf_proto = cls->getProto();
-    __jsb_cocos2dx_RemoveSelf_class = cls;
+    __jsb_cocos2d_RemoveSelf_proto = cls->getProto();
+    __jsb_cocos2d_RemoveSelf_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FlipX_proto = nullptr;
-se::Class* __jsb_cocos2dx_FlipX_class = nullptr;
+se::Object* __jsb_cocos2d_FlipX_proto = nullptr;
+se::Class* __jsb_cocos2d_FlipX_class = nullptr;
 
 static bool js_cocos2dx_FlipX_initWithFlipX(se::State& s)
 {
@@ -22525,7 +22734,7 @@ static bool js_cocos2dx_FlipX_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FlipX_create : Error processing arguments");
         auto result = cocos2d::FlipX::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FlipX_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FlipX_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22535,7 +22744,7 @@ static bool js_cocos2dx_FlipX_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FlipX_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FlipX_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FlipX_finalize)
 
 static bool js_cocos2dx_FlipX_constructor(se::State& s)
 {
@@ -22544,7 +22753,7 @@ static bool js_cocos2dx_FlipX_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FlipX_constructor, __jsb_cocos2dx_FlipX_class, js_cocos2dx_FlipX_finalize)
+SE_BIND_CTOR(js_cocos2dx_FlipX_constructor, __jsb_cocos2d_FlipX_class, js_cocos2d_FlipX_finalize)
 
 static bool js_cocos2dx_FlipX_ctor(se::State& s)
 {
@@ -22553,12 +22762,14 @@ static bool js_cocos2dx_FlipX_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipX_ctor, __jsb_cocos2dx_FlipX_class, js_cocos2dx_FlipX_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipX_ctor, __jsb_cocos2d_FlipX_class, js_cocos2d_FlipX_finalize)
 
 
     
 
-bool js_cocos2dx_FlipX_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_FlipX_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22571,28 +22782,28 @@ bool js_cocos2dx_FlipX_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FlipX_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FlipX_finalize)
 
 bool js_register_cocos2dx_FlipX(se::Object* obj)
 {
-    auto cls = se::Class::create("FlipX", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_FlipX_constructor));
+    auto cls = se::Class::create("FlipX", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_FlipX_constructor));
 
     cls->defineFunction("initWithFlipX", _SE(js_cocos2dx_FlipX_initWithFlipX));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FlipX_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FlipX_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FlipX_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FlipX_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FlipX>(cls);
 
-    __jsb_cocos2dx_FlipX_proto = cls->getProto();
-    __jsb_cocos2dx_FlipX_class = cls;
+    __jsb_cocos2d_FlipX_proto = cls->getProto();
+    __jsb_cocos2d_FlipX_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FlipX.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FlipY_proto = nullptr;
-se::Class* __jsb_cocos2dx_FlipY_class = nullptr;
+se::Object* __jsb_cocos2d_FlipY_proto = nullptr;
+se::Class* __jsb_cocos2d_FlipY_class = nullptr;
 
 static bool js_cocos2dx_FlipY_initWithFlipY(se::State& s)
 {
@@ -22626,7 +22837,7 @@ static bool js_cocos2dx_FlipY_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FlipY_create : Error processing arguments");
         auto result = cocos2d::FlipY::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FlipY_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FlipY_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22636,7 +22847,7 @@ static bool js_cocos2dx_FlipY_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FlipY_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FlipY_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FlipY_finalize)
 
 static bool js_cocos2dx_FlipY_constructor(se::State& s)
 {
@@ -22645,7 +22856,7 @@ static bool js_cocos2dx_FlipY_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FlipY_constructor, __jsb_cocos2dx_FlipY_class, js_cocos2dx_FlipY_finalize)
+SE_BIND_CTOR(js_cocos2dx_FlipY_constructor, __jsb_cocos2d_FlipY_class, js_cocos2d_FlipY_finalize)
 
 static bool js_cocos2dx_FlipY_ctor(se::State& s)
 {
@@ -22654,12 +22865,14 @@ static bool js_cocos2dx_FlipY_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipY_ctor, __jsb_cocos2dx_FlipY_class, js_cocos2dx_FlipY_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipY_ctor, __jsb_cocos2d_FlipY_class, js_cocos2d_FlipY_finalize)
 
 
     
 
-bool js_cocos2dx_FlipY_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_FlipY_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22672,28 +22885,28 @@ bool js_cocos2dx_FlipY_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FlipY_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FlipY_finalize)
 
 bool js_register_cocos2dx_FlipY(se::Object* obj)
 {
-    auto cls = se::Class::create("FlipY", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_FlipY_constructor));
+    auto cls = se::Class::create("FlipY", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_FlipY_constructor));
 
     cls->defineFunction("initWithFlipY", _SE(js_cocos2dx_FlipY_initWithFlipY));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FlipY_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FlipY_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FlipY_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FlipY_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FlipY>(cls);
 
-    __jsb_cocos2dx_FlipY_proto = cls->getProto();
-    __jsb_cocos2dx_FlipY_class = cls;
+    __jsb_cocos2d_FlipY_proto = cls->getProto();
+    __jsb_cocos2d_FlipY_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FlipY.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Place_proto = nullptr;
-se::Class* __jsb_cocos2dx_Place_class = nullptr;
+se::Object* __jsb_cocos2d_Place_proto = nullptr;
+se::Class* __jsb_cocos2d_Place_class = nullptr;
 
 static bool js_cocos2dx_Place_initWithPosition(se::State& s)
 {
@@ -22727,7 +22940,7 @@ static bool js_cocos2dx_Place_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Place_create : Error processing arguments");
         auto result = cocos2d::Place::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Place_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Place_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -22737,7 +22950,7 @@ static bool js_cocos2dx_Place_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Place_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Place_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Place_finalize)
 
 static bool js_cocos2dx_Place_constructor(se::State& s)
 {
@@ -22746,7 +22959,7 @@ static bool js_cocos2dx_Place_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Place_constructor, __jsb_cocos2dx_Place_class, js_cocos2dx_Place_finalize)
+SE_BIND_CTOR(js_cocos2dx_Place_constructor, __jsb_cocos2d_Place_class, js_cocos2d_Place_finalize)
 
 static bool js_cocos2dx_Place_ctor(se::State& s)
 {
@@ -22755,12 +22968,14 @@ static bool js_cocos2dx_Place_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Place_ctor, __jsb_cocos2dx_Place_class, js_cocos2dx_Place_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Place_ctor, __jsb_cocos2d_Place_class, js_cocos2d_Place_finalize)
 
 
     
 
-bool js_cocos2dx_Place_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_Place_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22773,28 +22988,28 @@ bool js_cocos2dx_Place_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Place_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Place_finalize)
 
 bool js_register_cocos2dx_Place(se::Object* obj)
 {
-    auto cls = se::Class::create("Place", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_Place_constructor));
+    auto cls = se::Class::create("Place", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_Place_constructor));
 
     cls->defineFunction("initWithPosition", _SE(js_cocos2dx_Place_initWithPosition));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Place_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Place_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Place_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Place_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Place>(cls);
 
-    __jsb_cocos2dx_Place_proto = cls->getProto();
-    __jsb_cocos2dx_Place_class = cls;
+    __jsb_cocos2d_Place_proto = cls->getProto();
+    __jsb_cocos2d_Place_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Place.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CallFunc_proto = nullptr;
-se::Class* __jsb_cocos2dx_CallFunc_class = nullptr;
+se::Object* __jsb_cocos2d_CallFunc_proto = nullptr;
+se::Class* __jsb_cocos2d_CallFunc_class = nullptr;
 
 static bool js_cocos2dx_CallFunc_execute(se::State& s)
 {
@@ -22811,7 +23026,7 @@ static bool js_cocos2dx_CallFunc_execute(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CallFunc_execute)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CallFunc_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CallFunc_finalize)
 
 static bool js_cocos2dx_CallFunc_constructor(se::State& s)
 {
@@ -22820,7 +23035,7 @@ static bool js_cocos2dx_CallFunc_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CallFunc_constructor, __jsb_cocos2dx_CallFunc_class, js_cocos2dx_CallFunc_finalize)
+SE_BIND_CTOR(js_cocos2dx_CallFunc_constructor, __jsb_cocos2d_CallFunc_class, js_cocos2d_CallFunc_finalize)
 
 static bool js_cocos2dx_CallFunc_ctor(se::State& s)
 {
@@ -22829,12 +23044,14 @@ static bool js_cocos2dx_CallFunc_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_CallFunc_ctor, __jsb_cocos2dx_CallFunc_class, js_cocos2dx_CallFunc_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_CallFunc_ctor, __jsb_cocos2d_CallFunc_class, js_cocos2d_CallFunc_finalize)
 
 
     
 
-bool js_cocos2dx_CallFunc_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_CallFunc_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22847,29 +23064,29 @@ bool js_cocos2dx_CallFunc_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CallFunc_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CallFunc_finalize)
 
 bool js_register_cocos2dx_CallFunc(se::Object* obj)
 {
-    auto cls = se::Class::create("_CallFunc", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_CallFunc_constructor));
+    auto cls = se::Class::create("_CallFunc", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_CallFunc_constructor));
 
     cls->defineFunction("execute", _SE(js_cocos2dx_CallFunc_execute));
     cls->defineFunction("ctor", _SE(js_cocos2dx_CallFunc_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CallFunc_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CallFunc_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CallFunc>(cls);
 
-    __jsb_cocos2dx_CallFunc_proto = cls->getProto();
-    __jsb_cocos2dx_CallFunc_class = cls;
+    __jsb_cocos2d_CallFunc_proto = cls->getProto();
+    __jsb_cocos2d_CallFunc_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc._CallFunc.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CallFuncN_proto = nullptr;
-se::Class* __jsb_cocos2dx_CallFuncN_class = nullptr;
+se::Object* __jsb_cocos2d_CallFuncN_proto = nullptr;
+se::Class* __jsb_cocos2d_CallFuncN_class = nullptr;
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CallFuncN_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CallFuncN_finalize)
 
 static bool js_cocos2dx_CallFuncN_constructor(se::State& s)
 {
@@ -22878,7 +23095,7 @@ static bool js_cocos2dx_CallFuncN_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CallFuncN_constructor, __jsb_cocos2dx_CallFuncN_class, js_cocos2dx_CallFuncN_finalize)
+SE_BIND_CTOR(js_cocos2dx_CallFuncN_constructor, __jsb_cocos2d_CallFuncN_class, js_cocos2d_CallFuncN_finalize)
 
 static bool js_cocos2dx_CallFuncN_ctor(se::State& s)
 {
@@ -22887,12 +23104,14 @@ static bool js_cocos2dx_CallFuncN_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_CallFuncN_ctor, __jsb_cocos2dx_CallFuncN_class, js_cocos2dx_CallFuncN_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_CallFuncN_ctor, __jsb_cocos2d_CallFuncN_class, js_cocos2d_CallFuncN_finalize)
 
 
     
 
-bool js_cocos2dx_CallFuncN_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_CallFunc_proto;
+
+bool js_cocos2d_CallFuncN_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -22905,26 +23124,26 @@ bool js_cocos2dx_CallFuncN_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CallFuncN_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CallFuncN_finalize)
 
 bool js_register_cocos2dx_CallFuncN(se::Object* obj)
 {
-    auto cls = se::Class::create("CallFunc", obj, __jsb_cocos2dx_CallFunc_proto, _SE(js_cocos2dx_CallFuncN_constructor));
+    auto cls = se::Class::create("CallFunc", obj, __jsb_cocos2d_CallFunc_proto, _SE(js_cocos2dx_CallFuncN_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_CallFuncN_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CallFuncN_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CallFuncN_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CallFuncN>(cls);
 
-    __jsb_cocos2dx_CallFuncN_proto = cls->getProto();
-    __jsb_cocos2dx_CallFuncN_class = cls;
+    __jsb_cocos2d_CallFuncN_proto = cls->getProto();
+    __jsb_cocos2d_CallFuncN_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.CallFunc.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_GridAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_GridAction_class = nullptr;
+se::Object* __jsb_cocos2d_GridAction_proto = nullptr;
+se::Class* __jsb_cocos2d_GridAction_class = nullptr;
 
 static bool js_cocos2dx_GridAction_getGrid(se::State& s)
 {
@@ -22968,24 +23187,26 @@ static bool js_cocos2dx_GridAction_initWithDuration(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_GridAction_initWithDuration)
 
 
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
 
 bool js_register_cocos2dx_GridAction(se::Object* obj)
 {
-    auto cls = se::Class::create("GridAction", obj, __jsb_cocos2dx_ActionInterval_proto, nullptr);
+    auto cls = se::Class::create("GridAction", obj, __jsb_cocos2d_ActionInterval_proto, nullptr);
 
     cls->defineFunction("getGrid", _SE(js_cocos2dx_GridAction_getGrid));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_GridAction_initWithDuration));
     cls->install();
     JSBClassType::registerClass<cocos2d::GridAction>(cls);
 
-    __jsb_cocos2dx_GridAction_proto = cls->getProto();
-    __jsb_cocos2dx_GridAction_class = cls;
+    __jsb_cocos2d_GridAction_proto = cls->getProto();
+    __jsb_cocos2d_GridAction_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Grid3DAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_Grid3DAction_class = nullptr;
+se::Object* __jsb_cocos2d_Grid3DAction_proto = nullptr;
+se::Class* __jsb_cocos2d_Grid3DAction_class = nullptr;
 
 static bool js_cocos2dx_Grid3DAction_getGridRect(se::State& s)
 {
@@ -23006,41 +23227,45 @@ static bool js_cocos2dx_Grid3DAction_getGridRect(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_Grid3DAction_getGridRect)
 
 
+extern se::Object* __jsb_cocos2d_GridAction_proto;
+
 
 bool js_register_cocos2dx_Grid3DAction(se::Object* obj)
 {
-    auto cls = se::Class::create("Grid3DAction", obj, __jsb_cocos2dx_GridAction_proto, nullptr);
+    auto cls = se::Class::create("Grid3DAction", obj, __jsb_cocos2d_GridAction_proto, nullptr);
 
     cls->defineFunction("getGridRect", _SE(js_cocos2dx_Grid3DAction_getGridRect));
     cls->install();
     JSBClassType::registerClass<cocos2d::Grid3DAction>(cls);
 
-    __jsb_cocos2dx_Grid3DAction_proto = cls->getProto();
-    __jsb_cocos2dx_Grid3DAction_class = cls;
+    __jsb_cocos2d_Grid3DAction_proto = cls->getProto();
+    __jsb_cocos2d_Grid3DAction_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TiledGrid3DAction_proto = nullptr;
-se::Class* __jsb_cocos2dx_TiledGrid3DAction_class = nullptr;
+se::Object* __jsb_cocos2d_TiledGrid3DAction_proto = nullptr;
+se::Class* __jsb_cocos2d_TiledGrid3DAction_class = nullptr;
 
+
+extern se::Object* __jsb_cocos2d_GridAction_proto;
 
 
 bool js_register_cocos2dx_TiledGrid3DAction(se::Object* obj)
 {
-    auto cls = se::Class::create("TiledGrid3DAction", obj, __jsb_cocos2dx_GridAction_proto, nullptr);
+    auto cls = se::Class::create("TiledGrid3DAction", obj, __jsb_cocos2d_GridAction_proto, nullptr);
 
     cls->install();
     JSBClassType::registerClass<cocos2d::TiledGrid3DAction>(cls);
 
-    __jsb_cocos2dx_TiledGrid3DAction_proto = cls->getProto();
-    __jsb_cocos2dx_TiledGrid3DAction_class = cls;
+    __jsb_cocos2d_TiledGrid3DAction_proto = cls->getProto();
+    __jsb_cocos2d_TiledGrid3DAction_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_StopGrid_proto = nullptr;
-se::Class* __jsb_cocos2dx_StopGrid_class = nullptr;
+se::Object* __jsb_cocos2d_StopGrid_proto = nullptr;
+se::Class* __jsb_cocos2d_StopGrid_class = nullptr;
 
 static bool js_cocos2dx_StopGrid_create(se::State& s)
 {
@@ -23050,7 +23275,7 @@ static bool js_cocos2dx_StopGrid_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::StopGrid::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_StopGrid_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_StopGrid_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23060,7 +23285,7 @@ static bool js_cocos2dx_StopGrid_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_StopGrid_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_StopGrid_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_StopGrid_finalize)
 
 static bool js_cocos2dx_StopGrid_constructor(se::State& s)
 {
@@ -23069,11 +23294,13 @@ static bool js_cocos2dx_StopGrid_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_StopGrid_constructor, __jsb_cocos2dx_StopGrid_class, js_cocos2dx_StopGrid_finalize)
+SE_BIND_CTOR(js_cocos2dx_StopGrid_constructor, __jsb_cocos2d_StopGrid_class, js_cocos2d_StopGrid_finalize)
 
 
 
-bool js_cocos2dx_StopGrid_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_StopGrid_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23086,25 +23313,25 @@ bool js_cocos2dx_StopGrid_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_StopGrid_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_StopGrid_finalize)
 
 bool js_register_cocos2dx_StopGrid(se::Object* obj)
 {
-    auto cls = se::Class::create("StopGrid", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_StopGrid_constructor));
+    auto cls = se::Class::create("StopGrid", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_StopGrid_constructor));
 
     cls->defineStaticFunction("create", _SE(js_cocos2dx_StopGrid_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_StopGrid_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_StopGrid_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::StopGrid>(cls);
 
-    __jsb_cocos2dx_StopGrid_proto = cls->getProto();
-    __jsb_cocos2dx_StopGrid_class = cls;
+    __jsb_cocos2d_StopGrid_proto = cls->getProto();
+    __jsb_cocos2d_StopGrid_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ReuseGrid_proto = nullptr;
-se::Class* __jsb_cocos2dx_ReuseGrid_class = nullptr;
+se::Object* __jsb_cocos2d_ReuseGrid_proto = nullptr;
+se::Class* __jsb_cocos2d_ReuseGrid_class = nullptr;
 
 static bool js_cocos2dx_ReuseGrid_initWithTimes(se::State& s)
 {
@@ -23138,7 +23365,7 @@ static bool js_cocos2dx_ReuseGrid_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ReuseGrid_create : Error processing arguments");
         auto result = cocos2d::ReuseGrid::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ReuseGrid_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ReuseGrid_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23148,7 +23375,7 @@ static bool js_cocos2dx_ReuseGrid_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ReuseGrid_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ReuseGrid_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ReuseGrid_finalize)
 
 static bool js_cocos2dx_ReuseGrid_constructor(se::State& s)
 {
@@ -23157,11 +23384,13 @@ static bool js_cocos2dx_ReuseGrid_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ReuseGrid_constructor, __jsb_cocos2dx_ReuseGrid_class, js_cocos2dx_ReuseGrid_finalize)
+SE_BIND_CTOR(js_cocos2dx_ReuseGrid_constructor, __jsb_cocos2d_ReuseGrid_class, js_cocos2d_ReuseGrid_finalize)
 
 
 
-bool js_cocos2dx_ReuseGrid_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+
+bool js_cocos2d_ReuseGrid_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23174,26 +23403,26 @@ bool js_cocos2dx_ReuseGrid_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ReuseGrid_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ReuseGrid_finalize)
 
 bool js_register_cocos2dx_ReuseGrid(se::Object* obj)
 {
-    auto cls = se::Class::create("ReuseGrid", obj, __jsb_cocos2dx_ActionInstant_proto, _SE(js_cocos2dx_ReuseGrid_constructor));
+    auto cls = se::Class::create("ReuseGrid", obj, __jsb_cocos2d_ActionInstant_proto, _SE(js_cocos2dx_ReuseGrid_constructor));
 
     cls->defineFunction("initWithTimes", _SE(js_cocos2dx_ReuseGrid_initWithTimes));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ReuseGrid_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ReuseGrid_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ReuseGrid_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ReuseGrid>(cls);
 
-    __jsb_cocos2dx_ReuseGrid_proto = cls->getProto();
-    __jsb_cocos2dx_ReuseGrid_class = cls;
+    __jsb_cocos2d_ReuseGrid_proto = cls->getProto();
+    __jsb_cocos2d_ReuseGrid_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Waves3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_Waves3D_class = nullptr;
+se::Object* __jsb_cocos2d_Waves3D_proto = nullptr;
+se::Class* __jsb_cocos2d_Waves3D_class = nullptr;
 
 static bool js_cocos2dx_Waves3D_setAmplitudeRate(se::State& s)
 {
@@ -23313,7 +23542,7 @@ static bool js_cocos2dx_Waves3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Waves3D_create : Error processing arguments");
         auto result = cocos2d::Waves3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Waves3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Waves3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23323,7 +23552,7 @@ static bool js_cocos2dx_Waves3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Waves3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Waves3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Waves3D_finalize)
 
 static bool js_cocos2dx_Waves3D_constructor(se::State& s)
 {
@@ -23332,11 +23561,13 @@ static bool js_cocos2dx_Waves3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Waves3D_constructor, __jsb_cocos2dx_Waves3D_class, js_cocos2dx_Waves3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_Waves3D_constructor, __jsb_cocos2d_Waves3D_class, js_cocos2d_Waves3D_finalize)
 
 
 
-bool js_cocos2dx_Waves3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Waves3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23349,11 +23580,11 @@ bool js_cocos2dx_Waves3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Waves3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Waves3D_finalize)
 
 bool js_register_cocos2dx_Waves3D(se::Object* obj)
 {
-    auto cls = se::Class::create("Waves3D", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Waves3D_constructor));
+    auto cls = se::Class::create("Waves3D", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Waves3D_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_Waves3D_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Waves3D_initWithDuration));
@@ -23361,18 +23592,18 @@ bool js_register_cocos2dx_Waves3D(se::Object* obj)
     cls->defineFunction("getAmplitudeRate", _SE(js_cocos2dx_Waves3D_getAmplitudeRate));
     cls->defineFunction("setAmplitude", _SE(js_cocos2dx_Waves3D_setAmplitude));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Waves3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Waves3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Waves3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Waves3D>(cls);
 
-    __jsb_cocos2dx_Waves3D_proto = cls->getProto();
-    __jsb_cocos2dx_Waves3D_class = cls;
+    __jsb_cocos2d_Waves3D_proto = cls->getProto();
+    __jsb_cocos2d_Waves3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FlipX3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_FlipX3D_class = nullptr;
+se::Object* __jsb_cocos2d_FlipX3D_proto = nullptr;
+se::Class* __jsb_cocos2d_FlipX3D_class = nullptr;
 
 static bool js_cocos2dx_FlipX3D_initWithSize(se::State& s)
 {
@@ -23429,7 +23660,7 @@ static bool js_cocos2dx_FlipX3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FlipX3D_create : Error processing arguments");
         auto result = cocos2d::FlipX3D::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FlipX3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FlipX3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23439,7 +23670,7 @@ static bool js_cocos2dx_FlipX3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FlipX3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FlipX3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FlipX3D_finalize)
 
 static bool js_cocos2dx_FlipX3D_constructor(se::State& s)
 {
@@ -23448,7 +23679,7 @@ static bool js_cocos2dx_FlipX3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FlipX3D_constructor, __jsb_cocos2dx_FlipX3D_class, js_cocos2dx_FlipX3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_FlipX3D_constructor, __jsb_cocos2d_FlipX3D_class, js_cocos2d_FlipX3D_finalize)
 
 static bool js_cocos2dx_FlipX3D_ctor(se::State& s)
 {
@@ -23457,12 +23688,14 @@ static bool js_cocos2dx_FlipX3D_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipX3D_ctor, __jsb_cocos2dx_FlipX3D_class, js_cocos2dx_FlipX3D_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipX3D_ctor, __jsb_cocos2d_FlipX3D_class, js_cocos2d_FlipX3D_finalize)
 
 
     
 
-bool js_cocos2dx_FlipX3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_FlipX3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23475,29 +23708,29 @@ bool js_cocos2dx_FlipX3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FlipX3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FlipX3D_finalize)
 
 bool js_register_cocos2dx_FlipX3D(se::Object* obj)
 {
-    auto cls = se::Class::create("FlipX3D", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_FlipX3D_constructor));
+    auto cls = se::Class::create("FlipX3D", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_FlipX3D_constructor));
 
     cls->defineFunction("initWithSize", _SE(js_cocos2dx_FlipX3D_initWithSize));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_FlipX3D_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FlipX3D_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FlipX3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FlipX3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FlipX3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FlipX3D>(cls);
 
-    __jsb_cocos2dx_FlipX3D_proto = cls->getProto();
-    __jsb_cocos2dx_FlipX3D_class = cls;
+    __jsb_cocos2d_FlipX3D_proto = cls->getProto();
+    __jsb_cocos2d_FlipX3D_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FlipX3D.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FlipY3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_FlipY3D_class = nullptr;
+se::Object* __jsb_cocos2d_FlipY3D_proto = nullptr;
+se::Class* __jsb_cocos2d_FlipY3D_class = nullptr;
 
 static bool js_cocos2dx_FlipY3D_create(se::State& s)
 {
@@ -23510,7 +23743,7 @@ static bool js_cocos2dx_FlipY3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FlipY3D_create : Error processing arguments");
         auto result = cocos2d::FlipY3D::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FlipY3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FlipY3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23520,7 +23753,7 @@ static bool js_cocos2dx_FlipY3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FlipY3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FlipY3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FlipY3D_finalize)
 
 static bool js_cocos2dx_FlipY3D_constructor(se::State& s)
 {
@@ -23529,7 +23762,7 @@ static bool js_cocos2dx_FlipY3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FlipY3D_constructor, __jsb_cocos2dx_FlipY3D_class, js_cocos2dx_FlipY3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_FlipY3D_constructor, __jsb_cocos2d_FlipY3D_class, js_cocos2d_FlipY3D_finalize)
 
 static bool js_cocos2dx_FlipY3D_ctor(se::State& s)
 {
@@ -23538,12 +23771,14 @@ static bool js_cocos2dx_FlipY3D_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipY3D_ctor, __jsb_cocos2dx_FlipY3D_class, js_cocos2dx_FlipY3D_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FlipY3D_ctor, __jsb_cocos2d_FlipY3D_class, js_cocos2d_FlipY3D_finalize)
 
 
     
 
-bool js_cocos2dx_FlipY3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_FlipX3D_proto;
+
+bool js_cocos2d_FlipY3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23556,27 +23791,27 @@ bool js_cocos2dx_FlipY3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FlipY3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FlipY3D_finalize)
 
 bool js_register_cocos2dx_FlipY3D(se::Object* obj)
 {
-    auto cls = se::Class::create("FlipY3D", obj, __jsb_cocos2dx_FlipX3D_proto, _SE(js_cocos2dx_FlipY3D_constructor));
+    auto cls = se::Class::create("FlipY3D", obj, __jsb_cocos2d_FlipX3D_proto, _SE(js_cocos2dx_FlipY3D_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_FlipY3D_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FlipY3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FlipY3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FlipY3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FlipY3D>(cls);
 
-    __jsb_cocos2dx_FlipY3D_proto = cls->getProto();
-    __jsb_cocos2dx_FlipY3D_class = cls;
+    __jsb_cocos2d_FlipY3D_proto = cls->getProto();
+    __jsb_cocos2d_FlipY3D_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FlipY3D.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Lens3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_Lens3D_class = nullptr;
+se::Object* __jsb_cocos2d_Lens3D_proto = nullptr;
+se::Class* __jsb_cocos2d_Lens3D_class = nullptr;
 
 static bool js_cocos2dx_Lens3D_setConcave(se::State& s)
 {
@@ -23715,7 +23950,7 @@ static bool js_cocos2dx_Lens3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Lens3D_create : Error processing arguments");
         auto result = cocos2d::Lens3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Lens3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Lens3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23725,7 +23960,7 @@ static bool js_cocos2dx_Lens3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Lens3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Lens3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Lens3D_finalize)
 
 static bool js_cocos2dx_Lens3D_constructor(se::State& s)
 {
@@ -23734,11 +23969,13 @@ static bool js_cocos2dx_Lens3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Lens3D_constructor, __jsb_cocos2dx_Lens3D_class, js_cocos2dx_Lens3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_Lens3D_constructor, __jsb_cocos2d_Lens3D_class, js_cocos2d_Lens3D_finalize)
 
 
 
-bool js_cocos2dx_Lens3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Lens3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23751,11 +23988,11 @@ bool js_cocos2dx_Lens3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Lens3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Lens3D_finalize)
 
 bool js_register_cocos2dx_Lens3D(se::Object* obj)
 {
-    auto cls = se::Class::create("Lens3D", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Lens3D_constructor));
+    auto cls = se::Class::create("Lens3D", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Lens3D_constructor));
 
     cls->defineFunction("setConcave", _SE(js_cocos2dx_Lens3D_setConcave));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Lens3D_initWithDuration));
@@ -23764,18 +24001,18 @@ bool js_register_cocos2dx_Lens3D(se::Object* obj)
     cls->defineFunction("setPosition", _SE(js_cocos2dx_Lens3D_setPosition));
     cls->defineFunction("getPosition", _SE(js_cocos2dx_Lens3D_getPosition));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Lens3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Lens3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Lens3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Lens3D>(cls);
 
-    __jsb_cocos2dx_Lens3D_proto = cls->getProto();
-    __jsb_cocos2dx_Lens3D_class = cls;
+    __jsb_cocos2d_Lens3D_proto = cls->getProto();
+    __jsb_cocos2d_Lens3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Ripple3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_Ripple3D_class = nullptr;
+se::Object* __jsb_cocos2d_Ripple3D_proto = nullptr;
+se::Class* __jsb_cocos2d_Ripple3D_class = nullptr;
 
 static bool js_cocos2dx_Ripple3D_setAmplitudeRate(se::State& s)
 {
@@ -23940,7 +24177,7 @@ static bool js_cocos2dx_Ripple3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Ripple3D_create : Error processing arguments");
         auto result = cocos2d::Ripple3D::create(arg0, arg1, arg2, arg3, arg4, arg5);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Ripple3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Ripple3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -23950,7 +24187,7 @@ static bool js_cocos2dx_Ripple3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Ripple3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Ripple3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Ripple3D_finalize)
 
 static bool js_cocos2dx_Ripple3D_constructor(se::State& s)
 {
@@ -23959,11 +24196,13 @@ static bool js_cocos2dx_Ripple3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Ripple3D_constructor, __jsb_cocos2dx_Ripple3D_class, js_cocos2dx_Ripple3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_Ripple3D_constructor, __jsb_cocos2d_Ripple3D_class, js_cocos2d_Ripple3D_finalize)
 
 
 
-bool js_cocos2dx_Ripple3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Ripple3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -23976,11 +24215,11 @@ bool js_cocos2dx_Ripple3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Ripple3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Ripple3D_finalize)
 
 bool js_register_cocos2dx_Ripple3D(se::Object* obj)
 {
-    auto cls = se::Class::create("Ripple3D", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Ripple3D_constructor));
+    auto cls = se::Class::create("Ripple3D", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Ripple3D_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_Ripple3D_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Ripple3D_initWithDuration));
@@ -23990,18 +24229,18 @@ bool js_register_cocos2dx_Ripple3D(se::Object* obj)
     cls->defineFunction("setPosition", _SE(js_cocos2dx_Ripple3D_setPosition));
     cls->defineFunction("getPosition", _SE(js_cocos2dx_Ripple3D_getPosition));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Ripple3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Ripple3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Ripple3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Ripple3D>(cls);
 
-    __jsb_cocos2dx_Ripple3D_proto = cls->getProto();
-    __jsb_cocos2dx_Ripple3D_class = cls;
+    __jsb_cocos2d_Ripple3D_proto = cls->getProto();
+    __jsb_cocos2d_Ripple3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Shaky3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_Shaky3D_class = nullptr;
+se::Object* __jsb_cocos2d_Shaky3D_proto = nullptr;
+se::Class* __jsb_cocos2d_Shaky3D_class = nullptr;
 
 static bool js_cocos2dx_Shaky3D_initWithDuration(se::State& s)
 {
@@ -24047,7 +24286,7 @@ static bool js_cocos2dx_Shaky3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Shaky3D_create : Error processing arguments");
         auto result = cocos2d::Shaky3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Shaky3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Shaky3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -24057,7 +24296,7 @@ static bool js_cocos2dx_Shaky3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Shaky3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Shaky3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Shaky3D_finalize)
 
 static bool js_cocos2dx_Shaky3D_constructor(se::State& s)
 {
@@ -24066,11 +24305,13 @@ static bool js_cocos2dx_Shaky3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Shaky3D_constructor, __jsb_cocos2dx_Shaky3D_class, js_cocos2dx_Shaky3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_Shaky3D_constructor, __jsb_cocos2d_Shaky3D_class, js_cocos2d_Shaky3D_finalize)
 
 
 
-bool js_cocos2dx_Shaky3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Shaky3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -24083,26 +24324,26 @@ bool js_cocos2dx_Shaky3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Shaky3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Shaky3D_finalize)
 
 bool js_register_cocos2dx_Shaky3D(se::Object* obj)
 {
-    auto cls = se::Class::create("Shaky3D", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Shaky3D_constructor));
+    auto cls = se::Class::create("Shaky3D", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Shaky3D_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Shaky3D_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Shaky3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Shaky3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Shaky3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Shaky3D>(cls);
 
-    __jsb_cocos2dx_Shaky3D_proto = cls->getProto();
-    __jsb_cocos2dx_Shaky3D_class = cls;
+    __jsb_cocos2d_Shaky3D_proto = cls->getProto();
+    __jsb_cocos2d_Shaky3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Liquid_proto = nullptr;
-se::Class* __jsb_cocos2dx_Liquid_class = nullptr;
+se::Object* __jsb_cocos2d_Liquid_proto = nullptr;
+se::Class* __jsb_cocos2d_Liquid_class = nullptr;
 
 static bool js_cocos2dx_Liquid_setAmplitudeRate(se::State& s)
 {
@@ -24222,7 +24463,7 @@ static bool js_cocos2dx_Liquid_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Liquid_create : Error processing arguments");
         auto result = cocos2d::Liquid::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Liquid_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Liquid_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -24232,7 +24473,7 @@ static bool js_cocos2dx_Liquid_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Liquid_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Liquid_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Liquid_finalize)
 
 static bool js_cocos2dx_Liquid_constructor(se::State& s)
 {
@@ -24241,11 +24482,13 @@ static bool js_cocos2dx_Liquid_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Liquid_constructor, __jsb_cocos2dx_Liquid_class, js_cocos2dx_Liquid_finalize)
+SE_BIND_CTOR(js_cocos2dx_Liquid_constructor, __jsb_cocos2d_Liquid_class, js_cocos2d_Liquid_finalize)
 
 
 
-bool js_cocos2dx_Liquid_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Liquid_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -24258,11 +24501,11 @@ bool js_cocos2dx_Liquid_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Liquid_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Liquid_finalize)
 
 bool js_register_cocos2dx_Liquid(se::Object* obj)
 {
-    auto cls = se::Class::create("Liquid", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Liquid_constructor));
+    auto cls = se::Class::create("Liquid", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Liquid_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_Liquid_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Liquid_initWithDuration));
@@ -24270,18 +24513,18 @@ bool js_register_cocos2dx_Liquid(se::Object* obj)
     cls->defineFunction("getAmplitudeRate", _SE(js_cocos2dx_Liquid_getAmplitudeRate));
     cls->defineFunction("setAmplitude", _SE(js_cocos2dx_Liquid_setAmplitude));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Liquid_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Liquid_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Liquid_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Liquid>(cls);
 
-    __jsb_cocos2dx_Liquid_proto = cls->getProto();
-    __jsb_cocos2dx_Liquid_class = cls;
+    __jsb_cocos2d_Liquid_proto = cls->getProto();
+    __jsb_cocos2d_Liquid_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Waves_proto = nullptr;
-se::Class* __jsb_cocos2dx_Waves_class = nullptr;
+se::Object* __jsb_cocos2d_Waves_proto = nullptr;
+se::Class* __jsb_cocos2d_Waves_class = nullptr;
 
 static bool js_cocos2dx_Waves_setAmplitudeRate(se::State& s)
 {
@@ -24409,7 +24652,7 @@ static bool js_cocos2dx_Waves_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Waves_create : Error processing arguments");
         auto result = cocos2d::Waves::create(arg0, arg1, arg2, arg3, arg4, arg5);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Waves_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Waves_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -24419,7 +24662,7 @@ static bool js_cocos2dx_Waves_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Waves_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Waves_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Waves_finalize)
 
 static bool js_cocos2dx_Waves_constructor(se::State& s)
 {
@@ -24428,11 +24671,13 @@ static bool js_cocos2dx_Waves_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Waves_constructor, __jsb_cocos2dx_Waves_class, js_cocos2dx_Waves_finalize)
+SE_BIND_CTOR(js_cocos2dx_Waves_constructor, __jsb_cocos2d_Waves_class, js_cocos2d_Waves_finalize)
 
 
 
-bool js_cocos2dx_Waves_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Waves_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -24445,11 +24690,11 @@ bool js_cocos2dx_Waves_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Waves_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Waves_finalize)
 
 bool js_register_cocos2dx_Waves(se::Object* obj)
 {
-    auto cls = se::Class::create("Waves", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Waves_constructor));
+    auto cls = se::Class::create("Waves", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Waves_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_Waves_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Waves_initWithDuration));
@@ -24457,18 +24702,18 @@ bool js_register_cocos2dx_Waves(se::Object* obj)
     cls->defineFunction("getAmplitudeRate", _SE(js_cocos2dx_Waves_getAmplitudeRate));
     cls->defineFunction("setAmplitude", _SE(js_cocos2dx_Waves_setAmplitude));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Waves_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Waves_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Waves_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Waves>(cls);
 
-    __jsb_cocos2dx_Waves_proto = cls->getProto();
-    __jsb_cocos2dx_Waves_class = cls;
+    __jsb_cocos2d_Waves_proto = cls->getProto();
+    __jsb_cocos2d_Waves_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Twirl_proto = nullptr;
-se::Class* __jsb_cocos2dx_Twirl_class = nullptr;
+se::Object* __jsb_cocos2d_Twirl_proto = nullptr;
+se::Class* __jsb_cocos2d_Twirl_class = nullptr;
 
 static bool js_cocos2dx_Twirl_setAmplitudeRate(se::State& s)
 {
@@ -24629,7 +24874,7 @@ static bool js_cocos2dx_Twirl_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Twirl_create : Error processing arguments");
         auto result = cocos2d::Twirl::create(arg0, arg1, arg2, arg3, arg4);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Twirl_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Twirl_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -24639,7 +24884,7 @@ static bool js_cocos2dx_Twirl_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Twirl_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Twirl_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Twirl_finalize)
 
 static bool js_cocos2dx_Twirl_constructor(se::State& s)
 {
@@ -24648,11 +24893,13 @@ static bool js_cocos2dx_Twirl_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Twirl_constructor, __jsb_cocos2dx_Twirl_class, js_cocos2dx_Twirl_finalize)
+SE_BIND_CTOR(js_cocos2dx_Twirl_constructor, __jsb_cocos2d_Twirl_class, js_cocos2d_Twirl_finalize)
 
 
 
-bool js_cocos2dx_Twirl_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
+bool js_cocos2d_Twirl_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -24665,11 +24912,11 @@ bool js_cocos2dx_Twirl_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Twirl_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Twirl_finalize)
 
 bool js_register_cocos2dx_Twirl(se::Object* obj)
 {
-    auto cls = se::Class::create("Twirl", obj, __jsb_cocos2dx_Grid3DAction_proto, _SE(js_cocos2dx_Twirl_constructor));
+    auto cls = se::Class::create("Twirl", obj, __jsb_cocos2d_Grid3DAction_proto, _SE(js_cocos2dx_Twirl_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_Twirl_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_Twirl_initWithDuration));
@@ -24679,18 +24926,18 @@ bool js_register_cocos2dx_Twirl(se::Object* obj)
     cls->defineFunction("setPosition", _SE(js_cocos2dx_Twirl_setPosition));
     cls->defineFunction("getPosition", _SE(js_cocos2dx_Twirl_getPosition));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Twirl_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Twirl_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Twirl_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Twirl>(cls);
 
-    __jsb_cocos2dx_Twirl_proto = cls->getProto();
-    __jsb_cocos2dx_Twirl_class = cls;
+    __jsb_cocos2d_Twirl_proto = cls->getProto();
+    __jsb_cocos2d_Twirl_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionManager_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionManager_class = nullptr;
+se::Object* __jsb_cocos2d_ActionManager_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionManager_class = nullptr;
 
 static bool js_cocos2dx_ActionManager_getActionByTag(se::State& s)
 {
@@ -24992,7 +25239,7 @@ static bool js_cocos2dx_ActionManager_getNumberOfRunningActionsInTargetByTag(se:
 }
 SE_BIND_FUNC(js_cocos2dx_ActionManager_getNumberOfRunningActionsInTargetByTag)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ActionManager_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ActionManager_finalize)
 
 static bool js_cocos2dx_ActionManager_constructor(se::State& s)
 {
@@ -25001,7 +25248,7 @@ static bool js_cocos2dx_ActionManager_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ActionManager_constructor, __jsb_cocos2dx_ActionManager_class, js_cocos2dx_ActionManager_finalize)
+SE_BIND_CTOR(js_cocos2dx_ActionManager_constructor, __jsb_cocos2d_ActionManager_class, js_cocos2d_ActionManager_finalize)
 
 static bool js_cocos2dx_ActionManager_ctor(se::State& s)
 {
@@ -25010,12 +25257,13 @@ static bool js_cocos2dx_ActionManager_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ActionManager_ctor, __jsb_cocos2dx_ActionManager_class, js_cocos2dx_ActionManager_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ActionManager_ctor, __jsb_cocos2d_ActionManager_class, js_cocos2d_ActionManager_finalize)
 
 
     
 
-bool js_cocos2dx_ActionManager_finalize(se::State& s)
+
+bool js_cocos2d_ActionManager_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25028,7 +25276,7 @@ bool js_cocos2dx_ActionManager_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ActionManager_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ActionManager_finalize)
 
 bool js_register_cocos2dx_ActionManager(se::Object* obj)
 {
@@ -25050,19 +25298,19 @@ bool js_register_cocos2dx_ActionManager(se::Object* obj)
     cls->defineFunction("removeAllActionsByTag", _SE(js_cocos2dx_ActionManager_removeAllActionsByTag));
     cls->defineFunction("getNumberOfRunningActionsInTargetByTag", _SE(js_cocos2dx_ActionManager_getNumberOfRunningActionsInTargetByTag));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ActionManager_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ActionManager_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ActionManager_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionManager>(cls);
 
-    __jsb_cocos2dx_ActionManager_proto = cls->getProto();
-    __jsb_cocos2dx_ActionManager_class = cls;
+    __jsb_cocos2d_ActionManager_proto = cls->getProto();
+    __jsb_cocos2d_ActionManager_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ActionManager.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_PageTurn3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_PageTurn3D_class = nullptr;
+se::Object* __jsb_cocos2d_PageTurn3D_proto = nullptr;
+se::Class* __jsb_cocos2d_PageTurn3D_class = nullptr;
 
 static bool js_cocos2dx_PageTurn3D_create(se::State& s)
 {
@@ -25077,7 +25325,7 @@ static bool js_cocos2dx_PageTurn3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_PageTurn3D_create : Error processing arguments");
         auto result = cocos2d::PageTurn3D::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_PageTurn3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_PageTurn3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25088,23 +25336,25 @@ static bool js_cocos2dx_PageTurn3D_create(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_PageTurn3D_create)
 
 
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+
 
 bool js_register_cocos2dx_PageTurn3D(se::Object* obj)
 {
-    auto cls = se::Class::create("PageTurn3D", obj, __jsb_cocos2dx_Grid3DAction_proto, nullptr);
+    auto cls = se::Class::create("PageTurn3D", obj, __jsb_cocos2d_Grid3DAction_proto, nullptr);
 
     cls->defineStaticFunction("create", _SE(js_cocos2dx_PageTurn3D_create));
     cls->install();
     JSBClassType::registerClass<cocos2d::PageTurn3D>(cls);
 
-    __jsb_cocos2dx_PageTurn3D_proto = cls->getProto();
-    __jsb_cocos2dx_PageTurn3D_class = cls;
+    __jsb_cocos2d_PageTurn3D_proto = cls->getProto();
+    __jsb_cocos2d_PageTurn3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ProgressTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_ProgressTo_class = nullptr;
+se::Object* __jsb_cocos2d_ProgressTo_proto = nullptr;
+se::Class* __jsb_cocos2d_ProgressTo_class = nullptr;
 
 static bool js_cocos2dx_ProgressTo_initWithDuration(se::State& s)
 {
@@ -25142,7 +25392,7 @@ static bool js_cocos2dx_ProgressTo_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ProgressTo_create : Error processing arguments");
         auto result = cocos2d::ProgressTo::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ProgressTo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ProgressTo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25152,7 +25402,7 @@ static bool js_cocos2dx_ProgressTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ProgressTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ProgressTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ProgressTo_finalize)
 
 static bool js_cocos2dx_ProgressTo_constructor(se::State& s)
 {
@@ -25161,7 +25411,7 @@ static bool js_cocos2dx_ProgressTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ProgressTo_constructor, __jsb_cocos2dx_ProgressTo_class, js_cocos2dx_ProgressTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_ProgressTo_constructor, __jsb_cocos2d_ProgressTo_class, js_cocos2d_ProgressTo_finalize)
 
 static bool js_cocos2dx_ProgressTo_ctor(se::State& s)
 {
@@ -25170,12 +25420,14 @@ static bool js_cocos2dx_ProgressTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ProgressTo_ctor, __jsb_cocos2dx_ProgressTo_class, js_cocos2dx_ProgressTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ProgressTo_ctor, __jsb_cocos2d_ProgressTo_class, js_cocos2d_ProgressTo_finalize)
 
 
     
 
-bool js_cocos2dx_ProgressTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_ProgressTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25188,28 +25440,28 @@ bool js_cocos2dx_ProgressTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ProgressTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ProgressTo_finalize)
 
 bool js_register_cocos2dx_ProgressTo(se::Object* obj)
 {
-    auto cls = se::Class::create("ProgressTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_ProgressTo_constructor));
+    auto cls = se::Class::create("ProgressTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_ProgressTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ProgressTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ProgressTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ProgressTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ProgressTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ProgressTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ProgressTo>(cls);
 
-    __jsb_cocos2dx_ProgressTo_proto = cls->getProto();
-    __jsb_cocos2dx_ProgressTo_class = cls;
+    __jsb_cocos2d_ProgressTo_proto = cls->getProto();
+    __jsb_cocos2d_ProgressTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ProgressTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ProgressFromTo_proto = nullptr;
-se::Class* __jsb_cocos2dx_ProgressFromTo_class = nullptr;
+se::Object* __jsb_cocos2d_ProgressFromTo_proto = nullptr;
+se::Class* __jsb_cocos2d_ProgressFromTo_class = nullptr;
 
 static bool js_cocos2dx_ProgressFromTo_initWithDuration(se::State& s)
 {
@@ -25251,7 +25503,7 @@ static bool js_cocos2dx_ProgressFromTo_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ProgressFromTo_create : Error processing arguments");
         auto result = cocos2d::ProgressFromTo::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ProgressFromTo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ProgressFromTo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25261,7 +25513,7 @@ static bool js_cocos2dx_ProgressFromTo_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ProgressFromTo_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ProgressFromTo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ProgressFromTo_finalize)
 
 static bool js_cocos2dx_ProgressFromTo_constructor(se::State& s)
 {
@@ -25270,7 +25522,7 @@ static bool js_cocos2dx_ProgressFromTo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ProgressFromTo_constructor, __jsb_cocos2dx_ProgressFromTo_class, js_cocos2dx_ProgressFromTo_finalize)
+SE_BIND_CTOR(js_cocos2dx_ProgressFromTo_constructor, __jsb_cocos2d_ProgressFromTo_class, js_cocos2d_ProgressFromTo_finalize)
 
 static bool js_cocos2dx_ProgressFromTo_ctor(se::State& s)
 {
@@ -25279,12 +25531,14 @@ static bool js_cocos2dx_ProgressFromTo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ProgressFromTo_ctor, __jsb_cocos2dx_ProgressFromTo_class, js_cocos2dx_ProgressFromTo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ProgressFromTo_ctor, __jsb_cocos2d_ProgressFromTo_class, js_cocos2d_ProgressFromTo_finalize)
 
 
     
 
-bool js_cocos2dx_ProgressFromTo_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
+bool js_cocos2d_ProgressFromTo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25297,28 +25551,28 @@ bool js_cocos2dx_ProgressFromTo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ProgressFromTo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ProgressFromTo_finalize)
 
 bool js_register_cocos2dx_ProgressFromTo(se::Object* obj)
 {
-    auto cls = se::Class::create("ProgressFromTo", obj, __jsb_cocos2dx_ActionInterval_proto, _SE(js_cocos2dx_ProgressFromTo_constructor));
+    auto cls = se::Class::create("ProgressFromTo", obj, __jsb_cocos2d_ActionInterval_proto, _SE(js_cocos2dx_ProgressFromTo_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ProgressFromTo_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ProgressFromTo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ProgressFromTo_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ProgressFromTo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ProgressFromTo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ProgressFromTo>(cls);
 
-    __jsb_cocos2dx_ProgressFromTo_proto = cls->getProto();
-    __jsb_cocos2dx_ProgressFromTo_class = cls;
+    __jsb_cocos2d_ProgressFromTo_proto = cls->getProto();
+    __jsb_cocos2d_ProgressFromTo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ProgressFromTo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ShakyTiles3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_ShakyTiles3D_class = nullptr;
+se::Object* __jsb_cocos2d_ShakyTiles3D_proto = nullptr;
+se::Class* __jsb_cocos2d_ShakyTiles3D_class = nullptr;
 
 static bool js_cocos2dx_ShakyTiles3D_initWithDuration(se::State& s)
 {
@@ -25364,7 +25618,7 @@ static bool js_cocos2dx_ShakyTiles3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ShakyTiles3D_create : Error processing arguments");
         auto result = cocos2d::ShakyTiles3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ShakyTiles3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ShakyTiles3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25374,7 +25628,7 @@ static bool js_cocos2dx_ShakyTiles3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ShakyTiles3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ShakyTiles3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ShakyTiles3D_finalize)
 
 static bool js_cocos2dx_ShakyTiles3D_constructor(se::State& s)
 {
@@ -25383,11 +25637,13 @@ static bool js_cocos2dx_ShakyTiles3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ShakyTiles3D_constructor, __jsb_cocos2dx_ShakyTiles3D_class, js_cocos2dx_ShakyTiles3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_ShakyTiles3D_constructor, __jsb_cocos2d_ShakyTiles3D_class, js_cocos2d_ShakyTiles3D_finalize)
 
 
 
-bool js_cocos2dx_ShakyTiles3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_ShakyTiles3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25400,26 +25656,26 @@ bool js_cocos2dx_ShakyTiles3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ShakyTiles3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ShakyTiles3D_finalize)
 
 bool js_register_cocos2dx_ShakyTiles3D(se::Object* obj)
 {
-    auto cls = se::Class::create("ShakyTiles3D", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_ShakyTiles3D_constructor));
+    auto cls = se::Class::create("ShakyTiles3D", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_ShakyTiles3D_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ShakyTiles3D_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ShakyTiles3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ShakyTiles3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ShakyTiles3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ShakyTiles3D>(cls);
 
-    __jsb_cocos2dx_ShakyTiles3D_proto = cls->getProto();
-    __jsb_cocos2dx_ShakyTiles3D_class = cls;
+    __jsb_cocos2d_ShakyTiles3D_proto = cls->getProto();
+    __jsb_cocos2d_ShakyTiles3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ShatteredTiles3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_ShatteredTiles3D_class = nullptr;
+se::Object* __jsb_cocos2d_ShatteredTiles3D_proto = nullptr;
+se::Class* __jsb_cocos2d_ShatteredTiles3D_class = nullptr;
 
 static bool js_cocos2dx_ShatteredTiles3D_initWithDuration(se::State& s)
 {
@@ -25465,7 +25721,7 @@ static bool js_cocos2dx_ShatteredTiles3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ShatteredTiles3D_create : Error processing arguments");
         auto result = cocos2d::ShatteredTiles3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ShatteredTiles3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ShatteredTiles3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25475,7 +25731,7 @@ static bool js_cocos2dx_ShatteredTiles3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ShatteredTiles3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ShatteredTiles3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ShatteredTiles3D_finalize)
 
 static bool js_cocos2dx_ShatteredTiles3D_constructor(se::State& s)
 {
@@ -25484,11 +25740,13 @@ static bool js_cocos2dx_ShatteredTiles3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ShatteredTiles3D_constructor, __jsb_cocos2dx_ShatteredTiles3D_class, js_cocos2dx_ShatteredTiles3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_ShatteredTiles3D_constructor, __jsb_cocos2d_ShatteredTiles3D_class, js_cocos2d_ShatteredTiles3D_finalize)
 
 
 
-bool js_cocos2dx_ShatteredTiles3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_ShatteredTiles3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25501,26 +25759,26 @@ bool js_cocos2dx_ShatteredTiles3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ShatteredTiles3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ShatteredTiles3D_finalize)
 
 bool js_register_cocos2dx_ShatteredTiles3D(se::Object* obj)
 {
-    auto cls = se::Class::create("ShatteredTiles3D", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_ShatteredTiles3D_constructor));
+    auto cls = se::Class::create("ShatteredTiles3D", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_ShatteredTiles3D_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ShatteredTiles3D_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ShatteredTiles3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ShatteredTiles3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ShatteredTiles3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ShatteredTiles3D>(cls);
 
-    __jsb_cocos2dx_ShatteredTiles3D_proto = cls->getProto();
-    __jsb_cocos2dx_ShatteredTiles3D_class = cls;
+    __jsb_cocos2d_ShatteredTiles3D_proto = cls->getProto();
+    __jsb_cocos2d_ShatteredTiles3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ShuffleTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_ShuffleTiles_class = nullptr;
+se::Object* __jsb_cocos2d_ShuffleTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_ShuffleTiles_class = nullptr;
 
 static bool js_cocos2dx_ShuffleTiles_placeTile(se::State& s)
 {
@@ -25627,7 +25885,7 @@ static bool js_cocos2dx_ShuffleTiles_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ShuffleTiles_create : Error processing arguments");
         auto result = cocos2d::ShuffleTiles::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ShuffleTiles_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ShuffleTiles_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25637,7 +25895,7 @@ static bool js_cocos2dx_ShuffleTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ShuffleTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ShuffleTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ShuffleTiles_finalize)
 
 static bool js_cocos2dx_ShuffleTiles_constructor(se::State& s)
 {
@@ -25646,11 +25904,13 @@ static bool js_cocos2dx_ShuffleTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ShuffleTiles_constructor, __jsb_cocos2dx_ShuffleTiles_class, js_cocos2dx_ShuffleTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_ShuffleTiles_constructor, __jsb_cocos2d_ShuffleTiles_class, js_cocos2d_ShuffleTiles_finalize)
 
 
 
-bool js_cocos2dx_ShuffleTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_ShuffleTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25663,29 +25923,29 @@ bool js_cocos2dx_ShuffleTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ShuffleTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ShuffleTiles_finalize)
 
 bool js_register_cocos2dx_ShuffleTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("ShuffleTiles", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_ShuffleTiles_constructor));
+    auto cls = se::Class::create("ShuffleTiles", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_ShuffleTiles_constructor));
 
     cls->defineFunction("placeTile", _SE(js_cocos2dx_ShuffleTiles_placeTile));
     cls->defineFunction("shuffle", _SE(js_cocos2dx_ShuffleTiles_shuffle));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ShuffleTiles_initWithDuration));
     cls->defineFunction("getDelta", _SE(js_cocos2dx_ShuffleTiles_getDelta));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ShuffleTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ShuffleTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ShuffleTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ShuffleTiles>(cls);
 
-    __jsb_cocos2dx_ShuffleTiles_proto = cls->getProto();
-    __jsb_cocos2dx_ShuffleTiles_class = cls;
+    __jsb_cocos2d_ShuffleTiles_proto = cls->getProto();
+    __jsb_cocos2d_ShuffleTiles_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeOutTRTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeOutTRTiles_class = nullptr;
+se::Object* __jsb_cocos2d_FadeOutTRTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeOutTRTiles_class = nullptr;
 
 static bool js_cocos2dx_FadeOutTRTiles_turnOnTile(se::State& s)
 {
@@ -25782,7 +26042,7 @@ static bool js_cocos2dx_FadeOutTRTiles_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeOutTRTiles_create : Error processing arguments");
         auto result = cocos2d::FadeOutTRTiles::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeOutTRTiles_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeOutTRTiles_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25792,7 +26052,7 @@ static bool js_cocos2dx_FadeOutTRTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeOutTRTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeOutTRTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeOutTRTiles_finalize)
 
 static bool js_cocos2dx_FadeOutTRTiles_constructor(se::State& s)
 {
@@ -25801,7 +26061,7 @@ static bool js_cocos2dx_FadeOutTRTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeOutTRTiles_constructor, __jsb_cocos2dx_FadeOutTRTiles_class, js_cocos2dx_FadeOutTRTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeOutTRTiles_constructor, __jsb_cocos2d_FadeOutTRTiles_class, js_cocos2d_FadeOutTRTiles_finalize)
 
 static bool js_cocos2dx_FadeOutTRTiles_ctor(se::State& s)
 {
@@ -25810,12 +26070,14 @@ static bool js_cocos2dx_FadeOutTRTiles_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutTRTiles_ctor, __jsb_cocos2dx_FadeOutTRTiles_class, js_cocos2dx_FadeOutTRTiles_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutTRTiles_ctor, __jsb_cocos2d_FadeOutTRTiles_class, js_cocos2d_FadeOutTRTiles_finalize)
 
 
     
 
-bool js_cocos2dx_FadeOutTRTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_FadeOutTRTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25828,11 +26090,11 @@ bool js_cocos2dx_FadeOutTRTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeOutTRTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeOutTRTiles_finalize)
 
 bool js_register_cocos2dx_FadeOutTRTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeOutTRTiles", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_FadeOutTRTiles_constructor));
+    auto cls = se::Class::create("FadeOutTRTiles", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_FadeOutTRTiles_constructor));
 
     cls->defineFunction("turnOnTile", _SE(js_cocos2dx_FadeOutTRTiles_turnOnTile));
     cls->defineFunction("turnOffTile", _SE(js_cocos2dx_FadeOutTRTiles_turnOffTile));
@@ -25840,19 +26102,19 @@ bool js_register_cocos2dx_FadeOutTRTiles(se::Object* obj)
     cls->defineFunction("testFunc", _SE(js_cocos2dx_FadeOutTRTiles_testFunc));
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeOutTRTiles_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeOutTRTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeOutTRTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeOutTRTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeOutTRTiles>(cls);
 
-    __jsb_cocos2dx_FadeOutTRTiles_proto = cls->getProto();
-    __jsb_cocos2dx_FadeOutTRTiles_class = cls;
+    __jsb_cocos2d_FadeOutTRTiles_proto = cls->getProto();
+    __jsb_cocos2d_FadeOutTRTiles_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeOutTRTiles.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeOutBLTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeOutBLTiles_class = nullptr;
+se::Object* __jsb_cocos2d_FadeOutBLTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeOutBLTiles_class = nullptr;
 
 static bool js_cocos2dx_FadeOutBLTiles_create(se::State& s)
 {
@@ -25867,7 +26129,7 @@ static bool js_cocos2dx_FadeOutBLTiles_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeOutBLTiles_create : Error processing arguments");
         auto result = cocos2d::FadeOutBLTiles::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeOutBLTiles_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeOutBLTiles_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25877,7 +26139,7 @@ static bool js_cocos2dx_FadeOutBLTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeOutBLTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeOutBLTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeOutBLTiles_finalize)
 
 static bool js_cocos2dx_FadeOutBLTiles_constructor(se::State& s)
 {
@@ -25886,7 +26148,7 @@ static bool js_cocos2dx_FadeOutBLTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeOutBLTiles_constructor, __jsb_cocos2dx_FadeOutBLTiles_class, js_cocos2dx_FadeOutBLTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeOutBLTiles_constructor, __jsb_cocos2d_FadeOutBLTiles_class, js_cocos2d_FadeOutBLTiles_finalize)
 
 static bool js_cocos2dx_FadeOutBLTiles_ctor(se::State& s)
 {
@@ -25895,12 +26157,14 @@ static bool js_cocos2dx_FadeOutBLTiles_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutBLTiles_ctor, __jsb_cocos2dx_FadeOutBLTiles_class, js_cocos2dx_FadeOutBLTiles_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutBLTiles_ctor, __jsb_cocos2d_FadeOutBLTiles_class, js_cocos2d_FadeOutBLTiles_finalize)
 
 
     
 
-bool js_cocos2dx_FadeOutBLTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_FadeOutTRTiles_proto;
+
+bool js_cocos2d_FadeOutBLTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25913,27 +26177,27 @@ bool js_cocos2dx_FadeOutBLTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeOutBLTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeOutBLTiles_finalize)
 
 bool js_register_cocos2dx_FadeOutBLTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeOutBLTiles", obj, __jsb_cocos2dx_FadeOutTRTiles_proto, _SE(js_cocos2dx_FadeOutBLTiles_constructor));
+    auto cls = se::Class::create("FadeOutBLTiles", obj, __jsb_cocos2d_FadeOutTRTiles_proto, _SE(js_cocos2dx_FadeOutBLTiles_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeOutBLTiles_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeOutBLTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeOutBLTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeOutBLTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeOutBLTiles>(cls);
 
-    __jsb_cocos2dx_FadeOutBLTiles_proto = cls->getProto();
-    __jsb_cocos2dx_FadeOutBLTiles_class = cls;
+    __jsb_cocos2d_FadeOutBLTiles_proto = cls->getProto();
+    __jsb_cocos2d_FadeOutBLTiles_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeOutBLTiles.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeOutUpTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeOutUpTiles_class = nullptr;
+se::Object* __jsb_cocos2d_FadeOutUpTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeOutUpTiles_class = nullptr;
 
 static bool js_cocos2dx_FadeOutUpTiles_create(se::State& s)
 {
@@ -25948,7 +26212,7 @@ static bool js_cocos2dx_FadeOutUpTiles_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeOutUpTiles_create : Error processing arguments");
         auto result = cocos2d::FadeOutUpTiles::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeOutUpTiles_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeOutUpTiles_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -25958,7 +26222,7 @@ static bool js_cocos2dx_FadeOutUpTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeOutUpTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeOutUpTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeOutUpTiles_finalize)
 
 static bool js_cocos2dx_FadeOutUpTiles_constructor(se::State& s)
 {
@@ -25967,7 +26231,7 @@ static bool js_cocos2dx_FadeOutUpTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeOutUpTiles_constructor, __jsb_cocos2dx_FadeOutUpTiles_class, js_cocos2dx_FadeOutUpTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeOutUpTiles_constructor, __jsb_cocos2d_FadeOutUpTiles_class, js_cocos2d_FadeOutUpTiles_finalize)
 
 static bool js_cocos2dx_FadeOutUpTiles_ctor(se::State& s)
 {
@@ -25976,12 +26240,14 @@ static bool js_cocos2dx_FadeOutUpTiles_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutUpTiles_ctor, __jsb_cocos2dx_FadeOutUpTiles_class, js_cocos2dx_FadeOutUpTiles_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutUpTiles_ctor, __jsb_cocos2d_FadeOutUpTiles_class, js_cocos2d_FadeOutUpTiles_finalize)
 
 
     
 
-bool js_cocos2dx_FadeOutUpTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_FadeOutTRTiles_proto;
+
+bool js_cocos2d_FadeOutUpTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -25994,27 +26260,27 @@ bool js_cocos2dx_FadeOutUpTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeOutUpTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeOutUpTiles_finalize)
 
 bool js_register_cocos2dx_FadeOutUpTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeOutUpTiles", obj, __jsb_cocos2dx_FadeOutTRTiles_proto, _SE(js_cocos2dx_FadeOutUpTiles_constructor));
+    auto cls = se::Class::create("FadeOutUpTiles", obj, __jsb_cocos2d_FadeOutTRTiles_proto, _SE(js_cocos2dx_FadeOutUpTiles_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeOutUpTiles_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeOutUpTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeOutUpTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeOutUpTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeOutUpTiles>(cls);
 
-    __jsb_cocos2dx_FadeOutUpTiles_proto = cls->getProto();
-    __jsb_cocos2dx_FadeOutUpTiles_class = cls;
+    __jsb_cocos2d_FadeOutUpTiles_proto = cls->getProto();
+    __jsb_cocos2d_FadeOutUpTiles_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeOutUpTiles.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_FadeOutDownTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_FadeOutDownTiles_class = nullptr;
+se::Object* __jsb_cocos2d_FadeOutDownTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_FadeOutDownTiles_class = nullptr;
 
 static bool js_cocos2dx_FadeOutDownTiles_create(se::State& s)
 {
@@ -26029,7 +26295,7 @@ static bool js_cocos2dx_FadeOutDownTiles_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_FadeOutDownTiles_create : Error processing arguments");
         auto result = cocos2d::FadeOutDownTiles::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_FadeOutDownTiles_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_FadeOutDownTiles_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -26039,7 +26305,7 @@ static bool js_cocos2dx_FadeOutDownTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_FadeOutDownTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_FadeOutDownTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_FadeOutDownTiles_finalize)
 
 static bool js_cocos2dx_FadeOutDownTiles_constructor(se::State& s)
 {
@@ -26048,7 +26314,7 @@ static bool js_cocos2dx_FadeOutDownTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_FadeOutDownTiles_constructor, __jsb_cocos2dx_FadeOutDownTiles_class, js_cocos2dx_FadeOutDownTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_FadeOutDownTiles_constructor, __jsb_cocos2d_FadeOutDownTiles_class, js_cocos2d_FadeOutDownTiles_finalize)
 
 static bool js_cocos2dx_FadeOutDownTiles_ctor(se::State& s)
 {
@@ -26057,12 +26323,14 @@ static bool js_cocos2dx_FadeOutDownTiles_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutDownTiles_ctor, __jsb_cocos2dx_FadeOutDownTiles_class, js_cocos2dx_FadeOutDownTiles_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_FadeOutDownTiles_ctor, __jsb_cocos2d_FadeOutDownTiles_class, js_cocos2d_FadeOutDownTiles_finalize)
 
 
     
 
-bool js_cocos2dx_FadeOutDownTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_FadeOutUpTiles_proto;
+
+bool js_cocos2d_FadeOutDownTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -26075,27 +26343,27 @@ bool js_cocos2dx_FadeOutDownTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_FadeOutDownTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_FadeOutDownTiles_finalize)
 
 bool js_register_cocos2dx_FadeOutDownTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("FadeOutDownTiles", obj, __jsb_cocos2dx_FadeOutUpTiles_proto, _SE(js_cocos2dx_FadeOutDownTiles_constructor));
+    auto cls = se::Class::create("FadeOutDownTiles", obj, __jsb_cocos2d_FadeOutUpTiles_proto, _SE(js_cocos2dx_FadeOutDownTiles_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_FadeOutDownTiles_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_FadeOutDownTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_FadeOutDownTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_FadeOutDownTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::FadeOutDownTiles>(cls);
 
-    __jsb_cocos2dx_FadeOutDownTiles_proto = cls->getProto();
-    __jsb_cocos2dx_FadeOutDownTiles_class = cls;
+    __jsb_cocos2d_FadeOutDownTiles_proto = cls->getProto();
+    __jsb_cocos2d_FadeOutDownTiles_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.FadeOutDownTiles.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TurnOffTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_TurnOffTiles_class = nullptr;
+se::Object* __jsb_cocos2d_TurnOffTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_TurnOffTiles_class = nullptr;
 
 static bool js_cocos2dx_TurnOffTiles_turnOnTile(se::State& s)
 {
@@ -26223,7 +26491,7 @@ static bool js_cocos2dx_TurnOffTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TurnOffTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TurnOffTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TurnOffTiles_finalize)
 
 static bool js_cocos2dx_TurnOffTiles_constructor(se::State& s)
 {
@@ -26232,11 +26500,13 @@ static bool js_cocos2dx_TurnOffTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TurnOffTiles_constructor, __jsb_cocos2dx_TurnOffTiles_class, js_cocos2dx_TurnOffTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_TurnOffTiles_constructor, __jsb_cocos2d_TurnOffTiles_class, js_cocos2d_TurnOffTiles_finalize)
 
 
 
-bool js_cocos2dx_TurnOffTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_TurnOffTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -26249,29 +26519,29 @@ bool js_cocos2dx_TurnOffTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TurnOffTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TurnOffTiles_finalize)
 
 bool js_register_cocos2dx_TurnOffTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("TurnOffTiles", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_TurnOffTiles_constructor));
+    auto cls = se::Class::create("TurnOffTiles", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_TurnOffTiles_constructor));
 
     cls->defineFunction("turnOnTile", _SE(js_cocos2dx_TurnOffTiles_turnOnTile));
     cls->defineFunction("turnOffTile", _SE(js_cocos2dx_TurnOffTiles_turnOffTile));
     cls->defineFunction("shuffle", _SE(js_cocos2dx_TurnOffTiles_shuffle));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_TurnOffTiles_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TurnOffTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TurnOffTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TurnOffTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TurnOffTiles>(cls);
 
-    __jsb_cocos2dx_TurnOffTiles_proto = cls->getProto();
-    __jsb_cocos2dx_TurnOffTiles_class = cls;
+    __jsb_cocos2d_TurnOffTiles_proto = cls->getProto();
+    __jsb_cocos2d_TurnOffTiles_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_WavesTiles3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_WavesTiles3D_class = nullptr;
+se::Object* __jsb_cocos2d_WavesTiles3D_proto = nullptr;
+se::Class* __jsb_cocos2d_WavesTiles3D_class = nullptr;
 
 static bool js_cocos2dx_WavesTiles3D_setAmplitudeRate(se::State& s)
 {
@@ -26391,7 +26661,7 @@ static bool js_cocos2dx_WavesTiles3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_WavesTiles3D_create : Error processing arguments");
         auto result = cocos2d::WavesTiles3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_WavesTiles3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_WavesTiles3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -26401,7 +26671,7 @@ static bool js_cocos2dx_WavesTiles3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_WavesTiles3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_WavesTiles3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_WavesTiles3D_finalize)
 
 static bool js_cocos2dx_WavesTiles3D_constructor(se::State& s)
 {
@@ -26410,11 +26680,13 @@ static bool js_cocos2dx_WavesTiles3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_WavesTiles3D_constructor, __jsb_cocos2dx_WavesTiles3D_class, js_cocos2dx_WavesTiles3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_WavesTiles3D_constructor, __jsb_cocos2d_WavesTiles3D_class, js_cocos2d_WavesTiles3D_finalize)
 
 
 
-bool js_cocos2dx_WavesTiles3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_WavesTiles3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -26427,11 +26699,11 @@ bool js_cocos2dx_WavesTiles3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_WavesTiles3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_WavesTiles3D_finalize)
 
 bool js_register_cocos2dx_WavesTiles3D(se::Object* obj)
 {
-    auto cls = se::Class::create("WavesTiles3D", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_WavesTiles3D_constructor));
+    auto cls = se::Class::create("WavesTiles3D", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_WavesTiles3D_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_WavesTiles3D_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_WavesTiles3D_initWithDuration));
@@ -26439,18 +26711,18 @@ bool js_register_cocos2dx_WavesTiles3D(se::Object* obj)
     cls->defineFunction("getAmplitudeRate", _SE(js_cocos2dx_WavesTiles3D_getAmplitudeRate));
     cls->defineFunction("setAmplitude", _SE(js_cocos2dx_WavesTiles3D_setAmplitude));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_WavesTiles3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_WavesTiles3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_WavesTiles3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::WavesTiles3D>(cls);
 
-    __jsb_cocos2dx_WavesTiles3D_proto = cls->getProto();
-    __jsb_cocos2dx_WavesTiles3D_class = cls;
+    __jsb_cocos2d_WavesTiles3D_proto = cls->getProto();
+    __jsb_cocos2d_WavesTiles3D_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_JumpTiles3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_JumpTiles3D_class = nullptr;
+se::Object* __jsb_cocos2d_JumpTiles3D_proto = nullptr;
+se::Class* __jsb_cocos2d_JumpTiles3D_class = nullptr;
 
 static bool js_cocos2dx_JumpTiles3D_setAmplitudeRate(se::State& s)
 {
@@ -26570,7 +26842,7 @@ static bool js_cocos2dx_JumpTiles3D_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_JumpTiles3D_create : Error processing arguments");
         auto result = cocos2d::JumpTiles3D::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_JumpTiles3D_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_JumpTiles3D_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -26580,7 +26852,7 @@ static bool js_cocos2dx_JumpTiles3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_JumpTiles3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_JumpTiles3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_JumpTiles3D_finalize)
 
 static bool js_cocos2dx_JumpTiles3D_constructor(se::State& s)
 {
@@ -26589,7 +26861,7 @@ static bool js_cocos2dx_JumpTiles3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_JumpTiles3D_constructor, __jsb_cocos2dx_JumpTiles3D_class, js_cocos2dx_JumpTiles3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_JumpTiles3D_constructor, __jsb_cocos2d_JumpTiles3D_class, js_cocos2d_JumpTiles3D_finalize)
 
 static bool js_cocos2dx_JumpTiles3D_ctor(se::State& s)
 {
@@ -26598,12 +26870,14 @@ static bool js_cocos2dx_JumpTiles3D_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_JumpTiles3D_ctor, __jsb_cocos2dx_JumpTiles3D_class, js_cocos2dx_JumpTiles3D_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_JumpTiles3D_ctor, __jsb_cocos2d_JumpTiles3D_class, js_cocos2d_JumpTiles3D_finalize)
 
 
     
 
-bool js_cocos2dx_JumpTiles3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_JumpTiles3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -26616,11 +26890,11 @@ bool js_cocos2dx_JumpTiles3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_JumpTiles3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_JumpTiles3D_finalize)
 
 bool js_register_cocos2dx_JumpTiles3D(se::Object* obj)
 {
-    auto cls = se::Class::create("JumpTiles3D", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_JumpTiles3D_constructor));
+    auto cls = se::Class::create("JumpTiles3D", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_JumpTiles3D_constructor));
 
     cls->defineFunction("setAmplitudeRate", _SE(js_cocos2dx_JumpTiles3D_setAmplitudeRate));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_JumpTiles3D_initWithDuration));
@@ -26629,19 +26903,19 @@ bool js_register_cocos2dx_JumpTiles3D(se::Object* obj)
     cls->defineFunction("setAmplitude", _SE(js_cocos2dx_JumpTiles3D_setAmplitude));
     cls->defineFunction("ctor", _SE(js_cocos2dx_JumpTiles3D_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_JumpTiles3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_JumpTiles3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_JumpTiles3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::JumpTiles3D>(cls);
 
-    __jsb_cocos2dx_JumpTiles3D_proto = cls->getProto();
-    __jsb_cocos2dx_JumpTiles3D_class = cls;
+    __jsb_cocos2d_JumpTiles3D_proto = cls->getProto();
+    __jsb_cocos2d_JumpTiles3D_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.JumpTiles3D.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SplitRows_proto = nullptr;
-se::Class* __jsb_cocos2dx_SplitRows_class = nullptr;
+se::Object* __jsb_cocos2d_SplitRows_proto = nullptr;
+se::Class* __jsb_cocos2d_SplitRows_class = nullptr;
 
 static bool js_cocos2dx_SplitRows_initWithDuration(se::State& s)
 {
@@ -26679,7 +26953,7 @@ static bool js_cocos2dx_SplitRows_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SplitRows_create : Error processing arguments");
         auto result = cocos2d::SplitRows::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SplitRows_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SplitRows_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -26689,7 +26963,7 @@ static bool js_cocos2dx_SplitRows_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SplitRows_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SplitRows_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SplitRows_finalize)
 
 static bool js_cocos2dx_SplitRows_constructor(se::State& s)
 {
@@ -26698,11 +26972,13 @@ static bool js_cocos2dx_SplitRows_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SplitRows_constructor, __jsb_cocos2dx_SplitRows_class, js_cocos2dx_SplitRows_finalize)
+SE_BIND_CTOR(js_cocos2dx_SplitRows_constructor, __jsb_cocos2d_SplitRows_class, js_cocos2d_SplitRows_finalize)
 
 
 
-bool js_cocos2dx_SplitRows_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_SplitRows_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -26715,26 +26991,26 @@ bool js_cocos2dx_SplitRows_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SplitRows_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SplitRows_finalize)
 
 bool js_register_cocos2dx_SplitRows(se::Object* obj)
 {
-    auto cls = se::Class::create("SplitRows", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_SplitRows_constructor));
+    auto cls = se::Class::create("SplitRows", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_SplitRows_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_SplitRows_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SplitRows_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SplitRows_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SplitRows_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SplitRows>(cls);
 
-    __jsb_cocos2dx_SplitRows_proto = cls->getProto();
-    __jsb_cocos2dx_SplitRows_class = cls;
+    __jsb_cocos2d_SplitRows_proto = cls->getProto();
+    __jsb_cocos2d_SplitRows_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SplitCols_proto = nullptr;
-se::Class* __jsb_cocos2dx_SplitCols_class = nullptr;
+se::Object* __jsb_cocos2d_SplitCols_proto = nullptr;
+se::Class* __jsb_cocos2d_SplitCols_class = nullptr;
 
 static bool js_cocos2dx_SplitCols_initWithDuration(se::State& s)
 {
@@ -26772,7 +27048,7 @@ static bool js_cocos2dx_SplitCols_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SplitCols_create : Error processing arguments");
         auto result = cocos2d::SplitCols::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SplitCols_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SplitCols_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -26782,7 +27058,7 @@ static bool js_cocos2dx_SplitCols_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SplitCols_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SplitCols_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SplitCols_finalize)
 
 static bool js_cocos2dx_SplitCols_constructor(se::State& s)
 {
@@ -26791,11 +27067,13 @@ static bool js_cocos2dx_SplitCols_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SplitCols_constructor, __jsb_cocos2dx_SplitCols_class, js_cocos2dx_SplitCols_finalize)
+SE_BIND_CTOR(js_cocos2dx_SplitCols_constructor, __jsb_cocos2d_SplitCols_class, js_cocos2d_SplitCols_finalize)
 
 
 
-bool js_cocos2dx_SplitCols_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+
+bool js_cocos2d_SplitCols_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -26808,26 +27086,26 @@ bool js_cocos2dx_SplitCols_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SplitCols_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SplitCols_finalize)
 
 bool js_register_cocos2dx_SplitCols(se::Object* obj)
 {
-    auto cls = se::Class::create("SplitCols", obj, __jsb_cocos2dx_TiledGrid3DAction_proto, _SE(js_cocos2dx_SplitCols_constructor));
+    auto cls = se::Class::create("SplitCols", obj, __jsb_cocos2d_TiledGrid3DAction_proto, _SE(js_cocos2dx_SplitCols_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_SplitCols_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SplitCols_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SplitCols_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SplitCols_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SplitCols>(cls);
 
-    __jsb_cocos2dx_SplitCols_proto = cls->getProto();
-    __jsb_cocos2dx_SplitCols_class = cls;
+    __jsb_cocos2d_SplitCols_proto = cls->getProto();
+    __jsb_cocos2d_SplitCols_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ActionTween_proto = nullptr;
-se::Class* __jsb_cocos2dx_ActionTween_class = nullptr;
+se::Object* __jsb_cocos2d_ActionTween_proto = nullptr;
+se::Class* __jsb_cocos2d_ActionTween_class = nullptr;
 
 static bool js_cocos2dx_ActionTween_initWithDuration(se::State& s)
 {
@@ -26873,7 +27151,7 @@ static bool js_cocos2dx_ActionTween_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ActionTween_create : Error processing arguments");
         auto result = cocos2d::ActionTween::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ActionTween_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ActionTween_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -26884,25 +27162,27 @@ static bool js_cocos2dx_ActionTween_create(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_ActionTween_create)
 
 
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+
 
 bool js_register_cocos2dx_ActionTween(se::Object* obj)
 {
-    auto cls = se::Class::create("ActionTween", obj, __jsb_cocos2dx_ActionInterval_proto, nullptr);
+    auto cls = se::Class::create("ActionTween", obj, __jsb_cocos2d_ActionInterval_proto, nullptr);
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_ActionTween_initWithDuration));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ActionTween_create));
     cls->install();
     JSBClassType::registerClass<cocos2d::ActionTween>(cls);
 
-    __jsb_cocos2dx_ActionTween_proto = cls->getProto();
-    __jsb_cocos2dx_ActionTween_class = cls;
+    __jsb_cocos2d_ActionTween_proto = cls->getProto();
+    __jsb_cocos2d_ActionTween_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ActionTween.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_AtlasNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_AtlasNode_class = nullptr;
+se::Object* __jsb_cocos2d_AtlasNode_proto = nullptr;
+se::Class* __jsb_cocos2d_AtlasNode_class = nullptr;
 
 static bool js_cocos2dx_AtlasNode_updateAtlasValues(se::State& s)
 {
@@ -27120,7 +27400,7 @@ static bool js_cocos2dx_AtlasNode_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_AtlasNode_create : Error processing arguments");
         auto result = cocos2d::AtlasNode::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_AtlasNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_AtlasNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -27130,7 +27410,7 @@ static bool js_cocos2dx_AtlasNode_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_AtlasNode_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_AtlasNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_AtlasNode_finalize)
 
 static bool js_cocos2dx_AtlasNode_constructor(se::State& s)
 {
@@ -27139,11 +27419,13 @@ static bool js_cocos2dx_AtlasNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_AtlasNode_constructor, __jsb_cocos2dx_AtlasNode_class, js_cocos2dx_AtlasNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_AtlasNode_constructor, __jsb_cocos2d_AtlasNode_class, js_cocos2d_AtlasNode_finalize)
 
 
 
-bool js_cocos2dx_AtlasNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_AtlasNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -27156,11 +27438,11 @@ bool js_cocos2dx_AtlasNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_AtlasNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_AtlasNode_finalize)
 
 bool js_register_cocos2dx_AtlasNode(se::Object* obj)
 {
-    auto cls = se::Class::create("AtlasNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_AtlasNode_constructor));
+    auto cls = se::Class::create("AtlasNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_AtlasNode_constructor));
 
     cls->defineFunction("updateAtlasValues", _SE(js_cocos2dx_AtlasNode_updateAtlasValues));
     cls->defineFunction("initWithTileFile", _SE(js_cocos2dx_AtlasNode_initWithTileFile));
@@ -27173,18 +27455,18 @@ bool js_register_cocos2dx_AtlasNode(se::Object* obj)
     cls->defineFunction("initWithTexture", _SE(js_cocos2dx_AtlasNode_initWithTexture));
     cls->defineFunction("setQuadsToDraw", _SE(js_cocos2dx_AtlasNode_setQuadsToDraw));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_AtlasNode_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_AtlasNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_AtlasNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::AtlasNode>(cls);
 
-    __jsb_cocos2dx_AtlasNode_proto = cls->getProto();
-    __jsb_cocos2dx_AtlasNode_class = cls;
+    __jsb_cocos2d_AtlasNode_proto = cls->getProto();
+    __jsb_cocos2d_AtlasNode_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ClippingNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_ClippingNode_class = nullptr;
+se::Object* __jsb_cocos2d_ClippingNode_proto = nullptr;
+se::Class* __jsb_cocos2d_ClippingNode_class = nullptr;
 
 static bool js_cocos2dx_ClippingNode_hasContent(se::State& s)
 {
@@ -27344,7 +27626,7 @@ static bool js_cocos2dx_ClippingNode_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ClippingNode_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ClippingNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ClippingNode_finalize)
 
 static bool js_cocos2dx_ClippingNode_constructor(se::State& s)
 {
@@ -27353,11 +27635,13 @@ static bool js_cocos2dx_ClippingNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ClippingNode_constructor, __jsb_cocos2dx_ClippingNode_class, js_cocos2dx_ClippingNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_ClippingNode_constructor, __jsb_cocos2d_ClippingNode_class, js_cocos2d_ClippingNode_finalize)
 
 
 
-bool js_cocos2dx_ClippingNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_ClippingNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -27370,11 +27654,11 @@ bool js_cocos2dx_ClippingNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ClippingNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ClippingNode_finalize)
 
 bool js_register_cocos2dx_ClippingNode(se::Object* obj)
 {
-    auto cls = se::Class::create("ClippingNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_ClippingNode_constructor));
+    auto cls = se::Class::create("ClippingNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ClippingNode_constructor));
 
     cls->defineFunction("hasContent", _SE(js_cocos2dx_ClippingNode_hasContent));
     cls->defineFunction("setInverted", _SE(js_cocos2dx_ClippingNode_setInverted));
@@ -27384,18 +27668,18 @@ bool js_register_cocos2dx_ClippingNode(se::Object* obj)
     cls->defineFunction("setAlphaThreshold", _SE(js_cocos2dx_ClippingNode_setAlphaThreshold));
     cls->defineFunction("isInverted", _SE(js_cocos2dx_ClippingNode_isInverted));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ClippingNode_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ClippingNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ClippingNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ClippingNode>(cls);
 
-    __jsb_cocos2dx_ClippingNode_proto = cls->getProto();
-    __jsb_cocos2dx_ClippingNode_class = cls;
+    __jsb_cocos2d_ClippingNode_proto = cls->getProto();
+    __jsb_cocos2d_ClippingNode_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_DrawNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_DrawNode_class = nullptr;
+se::Object* __jsb_cocos2d_DrawNode_proto = nullptr;
+se::Class* __jsb_cocos2d_DrawNode_class = nullptr;
 
 static bool js_cocos2dx_DrawNode_drawLine(se::State& s)
 {
@@ -28078,7 +28362,7 @@ static bool js_cocos2dx_DrawNode_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::DrawNode::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_DrawNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_DrawNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -28089,7 +28373,7 @@ static bool js_cocos2dx_DrawNode_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_DrawNode_create : Error processing arguments");
         auto result = cocos2d::DrawNode::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_DrawNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_DrawNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -28099,7 +28383,7 @@ static bool js_cocos2dx_DrawNode_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_DrawNode_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_DrawNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_DrawNode_finalize)
 
 static bool js_cocos2dx_DrawNode_constructor(se::State& s)
 {
@@ -28108,7 +28392,7 @@ static bool js_cocos2dx_DrawNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_DrawNode_constructor, __jsb_cocos2dx_DrawNode_class, js_cocos2dx_DrawNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_DrawNode_constructor, __jsb_cocos2d_DrawNode_class, js_cocos2d_DrawNode_finalize)
 
 static bool js_cocos2dx_DrawNode_ctor(se::State& s)
 {
@@ -28117,12 +28401,14 @@ static bool js_cocos2dx_DrawNode_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_DrawNode_ctor, __jsb_cocos2dx_DrawNode_class, js_cocos2dx_DrawNode_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_DrawNode_ctor, __jsb_cocos2d_DrawNode_class, js_cocos2d_DrawNode_finalize)
 
 
     
 
-bool js_cocos2dx_DrawNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_DrawNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -28135,11 +28421,11 @@ bool js_cocos2dx_DrawNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_DrawNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_DrawNode_finalize)
 
 bool js_register_cocos2dx_DrawNode(se::Object* obj)
 {
-    auto cls = se::Class::create("DrawNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_DrawNode_constructor));
+    auto cls = se::Class::create("DrawNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_DrawNode_constructor));
 
     cls->defineFunction("drawLine", _SE(js_cocos2dx_DrawNode_drawLine));
     cls->defineFunction("drawPoints", _SE(js_cocos2dx_DrawNode_drawPoints));
@@ -28167,19 +28453,19 @@ bool js_register_cocos2dx_DrawNode(se::Object* obj)
     cls->defineFunction("drawCubicBezier", _SE(js_cocos2dx_DrawNode_drawCubicBezier));
     cls->defineFunction("ctor", _SE(js_cocos2dx_DrawNode_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_DrawNode_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_DrawNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_DrawNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::DrawNode>(cls);
 
-    __jsb_cocos2dx_DrawNode_proto = cls->getProto();
-    __jsb_cocos2dx_DrawNode_class = cls;
+    __jsb_cocos2d_DrawNode_proto = cls->getProto();
+    __jsb_cocos2d_DrawNode_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.DrawNode.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Label_proto = nullptr;
-se::Class* __jsb_cocos2dx_Label_class = nullptr;
+se::Object* __jsb_cocos2d_Label_proto = nullptr;
+se::Class* __jsb_cocos2d_Label_class = nullptr;
 
 static bool js_cocos2dx_Label_isClipMarginEnabled(se::State& s)
 {
@@ -29651,7 +29937,7 @@ static bool js_cocos2dx_Label_createWithBMFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithBMFont : Error processing arguments");
         auto result = cocos2d::Label::createWithBMFont(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29666,7 +29952,7 @@ static bool js_cocos2dx_Label_createWithBMFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithBMFont : Error processing arguments");
         auto result = cocos2d::Label::createWithBMFont(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29683,7 +29969,7 @@ static bool js_cocos2dx_Label_createWithBMFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithBMFont : Error processing arguments");
         auto result = cocos2d::Label::createWithBMFont(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29702,7 +29988,7 @@ static bool js_cocos2dx_Label_createWithBMFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithBMFont : Error processing arguments");
         auto result = cocos2d::Label::createWithBMFont(arg0, arg1, arg2, arg3, arg4);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29720,7 +30006,7 @@ static bool js_cocos2dx_Label_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Label::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29806,7 +30092,7 @@ static bool js_cocos2dx_Label_createWithSystemFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithSystemFont : Error processing arguments");
         auto result = cocos2d::Label::createWithSystemFont(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29823,7 +30109,7 @@ static bool js_cocos2dx_Label_createWithSystemFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithSystemFont : Error processing arguments");
         auto result = cocos2d::Label::createWithSystemFont(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29842,7 +30128,7 @@ static bool js_cocos2dx_Label_createWithSystemFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithSystemFont : Error processing arguments");
         auto result = cocos2d::Label::createWithSystemFont(arg0, arg1, arg2, arg3, arg4);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29863,7 +30149,7 @@ static bool js_cocos2dx_Label_createWithSystemFont(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Label_createWithSystemFont : Error processing arguments");
         auto result = cocos2d::Label::createWithSystemFont(arg0, arg1, arg2, arg3, arg4, arg5);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Label_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Label_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -29873,7 +30159,7 @@ static bool js_cocos2dx_Label_createWithSystemFont(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Label_createWithSystemFont)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Label_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Label_finalize)
 
 static bool js_cocos2dx_Label_constructor(se::State& s)
 {
@@ -29882,7 +30168,7 @@ static bool js_cocos2dx_Label_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Label_constructor, __jsb_cocos2dx_Label_class, js_cocos2dx_Label_finalize)
+SE_BIND_CTOR(js_cocos2dx_Label_constructor, __jsb_cocos2d_Label_class, js_cocos2d_Label_finalize)
 
 static bool js_cocos2dx_Label_ctor(se::State& s)
 {
@@ -29891,12 +30177,14 @@ static bool js_cocos2dx_Label_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Label_ctor, __jsb_cocos2dx_Label_class, js_cocos2dx_Label_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Label_ctor, __jsb_cocos2d_Label_class, js_cocos2d_Label_finalize)
 
 
     
 
-bool js_cocos2dx_Label_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_Label_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -29909,11 +30197,11 @@ bool js_cocos2dx_Label_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Label_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Label_finalize)
 
 bool js_register_cocos2dx_Label(se::Object* obj)
 {
-    auto cls = se::Class::create("Label", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_Label_constructor));
+    auto cls = se::Class::create("Label", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_Label_constructor));
 
     cls->defineFunction("isClipMarginEnabled", _SE(js_cocos2dx_Label_isClipMarginEnabled));
     cls->defineFunction("enableShadow", _SE(js_cocos2dx_Label_enableShadow));
@@ -29985,19 +30273,19 @@ bool js_register_cocos2dx_Label(se::Object* obj)
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Label_create));
     cls->defineStaticFunction("createWithCharMap", _SE(js_cocos2dx_Label_createWithCharMap));
     cls->defineStaticFunction("createWithSystemFont", _SE(js_cocos2dx_Label_createWithSystemFont));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Label_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Label_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Label>(cls);
 
-    __jsb_cocos2dx_Label_proto = cls->getProto();
-    __jsb_cocos2dx_Label_class = cls;
+    __jsb_cocos2d_Label_proto = cls->getProto();
+    __jsb_cocos2d_Label_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Label.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_LabelAtlas_proto = nullptr;
-se::Class* __jsb_cocos2dx_LabelAtlas_class = nullptr;
+se::Object* __jsb_cocos2d_LabelAtlas_proto = nullptr;
+se::Class* __jsb_cocos2d_LabelAtlas_class = nullptr;
 
 static bool js_cocos2dx_LabelAtlas_setString(se::State& s)
 {
@@ -30166,7 +30454,7 @@ static bool js_cocos2dx_LabelAtlas_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_LabelAtlas_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_LabelAtlas_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_LabelAtlas_finalize)
 
 static bool js_cocos2dx_LabelAtlas_constructor(se::State& s)
 {
@@ -30175,7 +30463,7 @@ static bool js_cocos2dx_LabelAtlas_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_LabelAtlas_constructor, __jsb_cocos2dx_LabelAtlas_class, js_cocos2dx_LabelAtlas_finalize)
+SE_BIND_CTOR(js_cocos2dx_LabelAtlas_constructor, __jsb_cocos2d_LabelAtlas_class, js_cocos2d_LabelAtlas_finalize)
 
 static bool js_cocos2dx_LabelAtlas_ctor(se::State& s)
 {
@@ -30184,12 +30472,14 @@ static bool js_cocos2dx_LabelAtlas_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LabelAtlas_ctor, __jsb_cocos2dx_LabelAtlas_class, js_cocos2dx_LabelAtlas_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LabelAtlas_ctor, __jsb_cocos2d_LabelAtlas_class, js_cocos2d_LabelAtlas_finalize)
 
 
     
 
-bool js_cocos2dx_LabelAtlas_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_AtlasNode_proto;
+
+bool js_cocos2d_LabelAtlas_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -30202,30 +30492,30 @@ bool js_cocos2dx_LabelAtlas_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_LabelAtlas_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_LabelAtlas_finalize)
 
 bool js_register_cocos2dx_LabelAtlas(se::Object* obj)
 {
-    auto cls = se::Class::create("LabelAtlas", obj, __jsb_cocos2dx_AtlasNode_proto, _SE(js_cocos2dx_LabelAtlas_constructor));
+    auto cls = se::Class::create("LabelAtlas", obj, __jsb_cocos2d_AtlasNode_proto, _SE(js_cocos2dx_LabelAtlas_constructor));
 
     cls->defineFunction("setString", _SE(js_cocos2dx_LabelAtlas_setString));
     cls->defineFunction("initWithString", _SE(js_cocos2dx_LabelAtlas_initWithString));
     cls->defineFunction("getString", _SE(js_cocos2dx_LabelAtlas_getString));
     cls->defineFunction("ctor", _SE(js_cocos2dx_LabelAtlas_ctor));
     cls->defineStaticFunction("_create", _SE(js_cocos2dx_LabelAtlas_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_LabelAtlas_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_LabelAtlas_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::LabelAtlas>(cls);
 
-    __jsb_cocos2dx_LabelAtlas_proto = cls->getProto();
-    __jsb_cocos2dx_LabelAtlas_class = cls;
+    __jsb_cocos2d_LabelAtlas_proto = cls->getProto();
+    __jsb_cocos2d_LabelAtlas_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.LabelAtlas.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_LabelBMFont_proto = nullptr;
-se::Class* __jsb_cocos2dx_LabelBMFont_class = nullptr;
+se::Object* __jsb_cocos2d_LabelBMFont_proto = nullptr;
+se::Class* __jsb_cocos2d_LabelBMFont_class = nullptr;
 
 static bool js_cocos2dx_LabelBMFont_setLineBreakWithoutSpace(se::State& s)
 {
@@ -30585,7 +30875,7 @@ static bool js_cocos2dx_LabelBMFont_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_LabelBMFont_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_LabelBMFont_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_LabelBMFont_finalize)
 
 static bool js_cocos2dx_LabelBMFont_constructor(se::State& s)
 {
@@ -30594,7 +30884,7 @@ static bool js_cocos2dx_LabelBMFont_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_LabelBMFont_constructor, __jsb_cocos2dx_LabelBMFont_class, js_cocos2dx_LabelBMFont_finalize)
+SE_BIND_CTOR(js_cocos2dx_LabelBMFont_constructor, __jsb_cocos2d_LabelBMFont_class, js_cocos2d_LabelBMFont_finalize)
 
 static bool js_cocos2dx_LabelBMFont_ctor(se::State& s)
 {
@@ -30603,12 +30893,14 @@ static bool js_cocos2dx_LabelBMFont_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LabelBMFont_ctor, __jsb_cocos2dx_LabelBMFont_class, js_cocos2dx_LabelBMFont_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LabelBMFont_ctor, __jsb_cocos2d_LabelBMFont_class, js_cocos2d_LabelBMFont_finalize)
 
 
     
 
-bool js_cocos2dx_LabelBMFont_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_LabelBMFont_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -30621,11 +30913,11 @@ bool js_cocos2dx_LabelBMFont_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_LabelBMFont_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_LabelBMFont_finalize)
 
 bool js_register_cocos2dx_LabelBMFont(se::Object* obj)
 {
-    auto cls = se::Class::create("LabelBMFont", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_LabelBMFont_constructor));
+    auto cls = se::Class::create("LabelBMFont", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_LabelBMFont_constructor));
 
     cls->defineFunction("setLineBreakWithoutSpace", _SE(js_cocos2dx_LabelBMFont_setLineBreakWithoutSpace));
     cls->defineFunction("getBlendFunc", _SE(js_cocos2dx_LabelBMFont_getBlendFunc));
@@ -30640,19 +30932,19 @@ bool js_register_cocos2dx_LabelBMFont(se::Object* obj)
     cls->defineFunction("setWidth", _SE(js_cocos2dx_LabelBMFont_setWidth));
     cls->defineFunction("ctor", _SE(js_cocos2dx_LabelBMFont_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_LabelBMFont_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_LabelBMFont_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_LabelBMFont_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::LabelBMFont>(cls);
 
-    __jsb_cocos2dx_LabelBMFont_proto = cls->getProto();
-    __jsb_cocos2dx_LabelBMFont_class = cls;
+    __jsb_cocos2d_LabelBMFont_proto = cls->getProto();
+    __jsb_cocos2d_LabelBMFont_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.LabelBMFont.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_LabelTTF_proto = nullptr;
-se::Class* __jsb_cocos2dx_LabelTTF_class = nullptr;
+se::Object* __jsb_cocos2d_LabelTTF_proto = nullptr;
+se::Class* __jsb_cocos2d_LabelTTF_class = nullptr;
 
 static bool js_cocos2dx_LabelTTF_enableShadow(se::State& s)
 {
@@ -31346,7 +31638,7 @@ static bool js_cocos2dx_LabelTTF_createWithFontDefinition(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_LabelTTF_createWithFontDefinition : Error processing arguments");
         auto result = cocos2d::LabelTTF::createWithFontDefinition(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_LabelTTF_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_LabelTTF_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -31356,7 +31648,7 @@ static bool js_cocos2dx_LabelTTF_createWithFontDefinition(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_LabelTTF_createWithFontDefinition)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_LabelTTF_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_LabelTTF_finalize)
 
 static bool js_cocos2dx_LabelTTF_constructor(se::State& s)
 {
@@ -31365,7 +31657,7 @@ static bool js_cocos2dx_LabelTTF_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_LabelTTF_constructor, __jsb_cocos2dx_LabelTTF_class, js_cocos2dx_LabelTTF_finalize)
+SE_BIND_CTOR(js_cocos2dx_LabelTTF_constructor, __jsb_cocos2d_LabelTTF_class, js_cocos2d_LabelTTF_finalize)
 
 static bool js_cocos2dx_LabelTTF_ctor(se::State& s)
 {
@@ -31374,12 +31666,14 @@ static bool js_cocos2dx_LabelTTF_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LabelTTF_ctor, __jsb_cocos2dx_LabelTTF_class, js_cocos2dx_LabelTTF_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LabelTTF_ctor, __jsb_cocos2d_LabelTTF_class, js_cocos2d_LabelTTF_finalize)
 
 
     
 
-bool js_cocos2dx_LabelTTF_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_LabelTTF_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -31392,11 +31686,11 @@ bool js_cocos2dx_LabelTTF_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_LabelTTF_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_LabelTTF_finalize)
 
 bool js_register_cocos2dx_LabelTTF(se::Object* obj)
 {
-    auto cls = se::Class::create("LabelTTF", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_LabelTTF_constructor));
+    auto cls = se::Class::create("LabelTTF", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_LabelTTF_constructor));
 
     cls->defineFunction("enableShadow", _SE(js_cocos2dx_LabelTTF_enableShadow));
     cls->defineFunction("setDimensions", _SE(js_cocos2dx_LabelTTF_setDimensions));
@@ -31426,19 +31720,19 @@ bool js_register_cocos2dx_LabelTTF(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_LabelTTF_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_LabelTTF_create));
     cls->defineStaticFunction("createWithFontDefinition", _SE(js_cocos2dx_LabelTTF_createWithFontDefinition));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_LabelTTF_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_LabelTTF_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::LabelTTF>(cls);
 
-    __jsb_cocos2dx_LabelTTF_proto = cls->getProto();
-    __jsb_cocos2dx_LabelTTF_class = cls;
+    __jsb_cocos2d_LabelTTF_proto = cls->getProto();
+    __jsb_cocos2d_LabelTTF_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.LabelTTF.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Layer_proto = nullptr;
-se::Class* __jsb_cocos2dx_Layer_class = nullptr;
+se::Object* __jsb_cocos2d_Layer_proto = nullptr;
+se::Class* __jsb_cocos2d_Layer_class = nullptr;
 
 static bool js_cocos2dx_Layer_create(se::State& s)
 {
@@ -31448,7 +31742,7 @@ static bool js_cocos2dx_Layer_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Layer::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Layer_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Layer_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -31458,7 +31752,7 @@ static bool js_cocos2dx_Layer_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Layer_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Layer_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Layer_finalize)
 
 static bool js_cocos2dx_Layer_constructor(se::State& s)
 {
@@ -31467,7 +31761,7 @@ static bool js_cocos2dx_Layer_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Layer_constructor, __jsb_cocos2dx_Layer_class, js_cocos2dx_Layer_finalize)
+SE_BIND_CTOR(js_cocos2dx_Layer_constructor, __jsb_cocos2d_Layer_class, js_cocos2d_Layer_finalize)
 
 static bool js_cocos2dx_Layer_ctor(se::State& s)
 {
@@ -31476,12 +31770,14 @@ static bool js_cocos2dx_Layer_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Layer_ctor, __jsb_cocos2dx_Layer_class, js_cocos2dx_Layer_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Layer_ctor, __jsb_cocos2d_Layer_class, js_cocos2d_Layer_finalize)
 
 
     
 
-bool js_cocos2dx_Layer_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_Layer_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -31494,27 +31790,27 @@ bool js_cocos2dx_Layer_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Layer_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Layer_finalize)
 
 bool js_register_cocos2dx_Layer(se::Object* obj)
 {
-    auto cls = se::Class::create("Layer", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_Layer_constructor));
+    auto cls = se::Class::create("Layer", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_Layer_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_Layer_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Layer_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Layer_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Layer_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Layer>(cls);
 
-    __jsb_cocos2dx_Layer_proto = cls->getProto();
-    __jsb_cocos2dx_Layer_class = cls;
+    __jsb_cocos2d_Layer_proto = cls->getProto();
+    __jsb_cocos2d_Layer_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Layer.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx___LayerRGBA_proto = nullptr;
-se::Class* __jsb_cocos2dx___LayerRGBA_class = nullptr;
+se::Object* __jsb_cocos2d___LayerRGBA_proto = nullptr;
+se::Class* __jsb_cocos2d___LayerRGBA_class = nullptr;
 
 static bool js_cocos2dx___LayerRGBA_create(se::State& s)
 {
@@ -31524,7 +31820,7 @@ static bool js_cocos2dx___LayerRGBA_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::__LayerRGBA::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx___LayerRGBA_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d___LayerRGBA_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -31534,7 +31830,7 @@ static bool js_cocos2dx___LayerRGBA_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx___LayerRGBA_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx___LayerRGBA_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d___LayerRGBA_finalize)
 
 static bool js_cocos2dx___LayerRGBA_constructor(se::State& s)
 {
@@ -31543,11 +31839,13 @@ static bool js_cocos2dx___LayerRGBA_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx___LayerRGBA_constructor, __jsb_cocos2dx___LayerRGBA_class, js_cocos2dx___LayerRGBA_finalize)
+SE_BIND_CTOR(js_cocos2dx___LayerRGBA_constructor, __jsb_cocos2d___LayerRGBA_class, js_cocos2d___LayerRGBA_finalize)
 
 
 
-bool js_cocos2dx___LayerRGBA_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Layer_proto;
+
+bool js_cocos2d___LayerRGBA_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -31560,25 +31858,25 @@ bool js_cocos2dx___LayerRGBA_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx___LayerRGBA_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d___LayerRGBA_finalize)
 
 bool js_register_cocos2dx___LayerRGBA(se::Object* obj)
 {
-    auto cls = se::Class::create("__LayerRGBA", obj, __jsb_cocos2dx_Layer_proto, _SE(js_cocos2dx___LayerRGBA_constructor));
+    auto cls = se::Class::create("__LayerRGBA", obj, __jsb_cocos2d_Layer_proto, _SE(js_cocos2dx___LayerRGBA_constructor));
 
     cls->defineStaticFunction("create", _SE(js_cocos2dx___LayerRGBA_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx___LayerRGBA_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d___LayerRGBA_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::__LayerRGBA>(cls);
 
-    __jsb_cocos2dx___LayerRGBA_proto = cls->getProto();
-    __jsb_cocos2dx___LayerRGBA_class = cls;
+    __jsb_cocos2d___LayerRGBA_proto = cls->getProto();
+    __jsb_cocos2d___LayerRGBA_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_LayerColor_proto = nullptr;
-se::Class* __jsb_cocos2dx_LayerColor_class = nullptr;
+se::Object* __jsb_cocos2d_LayerColor_proto = nullptr;
+se::Class* __jsb_cocos2d_LayerColor_class = nullptr;
 
 static bool js_cocos2dx_LayerColor_changeWidthAndHeight(se::State& s)
 {
@@ -31764,7 +32062,7 @@ static bool js_cocos2dx_LayerColor_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_LayerColor_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_LayerColor_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_LayerColor_finalize)
 
 static bool js_cocos2dx_LayerColor_constructor(se::State& s)
 {
@@ -31773,7 +32071,7 @@ static bool js_cocos2dx_LayerColor_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_LayerColor_constructor, __jsb_cocos2dx_LayerColor_class, js_cocos2dx_LayerColor_finalize)
+SE_BIND_CTOR(js_cocos2dx_LayerColor_constructor, __jsb_cocos2d_LayerColor_class, js_cocos2d_LayerColor_finalize)
 
 static bool js_cocos2dx_LayerColor_ctor(se::State& s)
 {
@@ -31782,12 +32080,14 @@ static bool js_cocos2dx_LayerColor_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LayerColor_ctor, __jsb_cocos2dx_LayerColor_class, js_cocos2dx_LayerColor_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LayerColor_ctor, __jsb_cocos2d_LayerColor_class, js_cocos2d_LayerColor_finalize)
 
 
     
 
-bool js_cocos2dx_LayerColor_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Layer_proto;
+
+bool js_cocos2d_LayerColor_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -31800,11 +32100,11 @@ bool js_cocos2dx_LayerColor_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_LayerColor_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_LayerColor_finalize)
 
 bool js_register_cocos2dx_LayerColor(se::Object* obj)
 {
-    auto cls = se::Class::create("LayerColor", obj, __jsb_cocos2dx_Layer_proto, _SE(js_cocos2dx_LayerColor_constructor));
+    auto cls = se::Class::create("LayerColor", obj, __jsb_cocos2d_Layer_proto, _SE(js_cocos2dx_LayerColor_constructor));
 
     cls->defineFunction("changeWidthAndHeight", _SE(js_cocos2dx_LayerColor_changeWidthAndHeight));
     cls->defineFunction("getBlendFunc", _SE(js_cocos2dx_LayerColor_getBlendFunc));
@@ -31814,19 +32114,19 @@ bool js_register_cocos2dx_LayerColor(se::Object* obj)
     cls->defineFunction("changeHeight", _SE(js_cocos2dx_LayerColor_changeHeight));
     cls->defineFunction("ctor", _SE(js_cocos2dx_LayerColor_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_LayerColor_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_LayerColor_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_LayerColor_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::LayerColor>(cls);
 
-    __jsb_cocos2dx_LayerColor_proto = cls->getProto();
-    __jsb_cocos2dx_LayerColor_class = cls;
+    __jsb_cocos2d_LayerColor_proto = cls->getProto();
+    __jsb_cocos2d_LayerColor_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.LayerColor.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_LayerGradient_proto = nullptr;
-se::Class* __jsb_cocos2dx_LayerGradient_class = nullptr;
+se::Object* __jsb_cocos2d_LayerGradient_proto = nullptr;
+se::Class* __jsb_cocos2d_LayerGradient_class = nullptr;
 
 static bool js_cocos2dx_LayerGradient_getStartColor(se::State& s)
 {
@@ -32144,7 +32444,7 @@ static bool js_cocos2dx_LayerGradient_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_LayerGradient_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_LayerGradient_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_LayerGradient_finalize)
 
 static bool js_cocos2dx_LayerGradient_constructor(se::State& s)
 {
@@ -32153,7 +32453,7 @@ static bool js_cocos2dx_LayerGradient_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_LayerGradient_constructor, __jsb_cocos2dx_LayerGradient_class, js_cocos2dx_LayerGradient_finalize)
+SE_BIND_CTOR(js_cocos2dx_LayerGradient_constructor, __jsb_cocos2d_LayerGradient_class, js_cocos2d_LayerGradient_finalize)
 
 static bool js_cocos2dx_LayerGradient_ctor(se::State& s)
 {
@@ -32162,12 +32462,14 @@ static bool js_cocos2dx_LayerGradient_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LayerGradient_ctor, __jsb_cocos2dx_LayerGradient_class, js_cocos2dx_LayerGradient_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LayerGradient_ctor, __jsb_cocos2d_LayerGradient_class, js_cocos2d_LayerGradient_finalize)
 
 
     
 
-bool js_cocos2dx_LayerGradient_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_LayerColor_proto;
+
+bool js_cocos2d_LayerGradient_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -32180,11 +32482,11 @@ bool js_cocos2dx_LayerGradient_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_LayerGradient_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_LayerGradient_finalize)
 
 bool js_register_cocos2dx_LayerGradient(se::Object* obj)
 {
-    auto cls = se::Class::create("LayerGradient", obj, __jsb_cocos2dx_LayerColor_proto, _SE(js_cocos2dx_LayerGradient_constructor));
+    auto cls = se::Class::create("LayerGradient", obj, __jsb_cocos2d_LayerColor_proto, _SE(js_cocos2dx_LayerGradient_constructor));
 
     cls->defineFunction("getStartColor", _SE(js_cocos2dx_LayerGradient_getStartColor));
     cls->defineFunction("isCompressedInterpolation", _SE(js_cocos2dx_LayerGradient_isCompressedInterpolation));
@@ -32201,19 +32503,19 @@ bool js_register_cocos2dx_LayerGradient(se::Object* obj)
     cls->defineFunction("setStartColor", _SE(js_cocos2dx_LayerGradient_setStartColor));
     cls->defineFunction("ctor", _SE(js_cocos2dx_LayerGradient_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_LayerGradient_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_LayerGradient_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_LayerGradient_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::LayerGradient>(cls);
 
-    __jsb_cocos2dx_LayerGradient_proto = cls->getProto();
-    __jsb_cocos2dx_LayerGradient_class = cls;
+    __jsb_cocos2d_LayerGradient_proto = cls->getProto();
+    __jsb_cocos2d_LayerGradient_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.LayerGradient.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_LayerMultiplex_proto = nullptr;
-se::Class* __jsb_cocos2dx_LayerMultiplex_class = nullptr;
+se::Object* __jsb_cocos2d_LayerMultiplex_proto = nullptr;
+se::Class* __jsb_cocos2d_LayerMultiplex_class = nullptr;
 
 static bool js_cocos2dx_LayerMultiplex_initWithArray(se::State& s)
 {
@@ -32293,7 +32595,7 @@ static bool js_cocos2dx_LayerMultiplex_switchTo(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_LayerMultiplex_switchTo)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_LayerMultiplex_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_LayerMultiplex_finalize)
 
 static bool js_cocos2dx_LayerMultiplex_constructor(se::State& s)
 {
@@ -32302,7 +32604,7 @@ static bool js_cocos2dx_LayerMultiplex_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_LayerMultiplex_constructor, __jsb_cocos2dx_LayerMultiplex_class, js_cocos2dx_LayerMultiplex_finalize)
+SE_BIND_CTOR(js_cocos2dx_LayerMultiplex_constructor, __jsb_cocos2d_LayerMultiplex_class, js_cocos2d_LayerMultiplex_finalize)
 
 static bool js_cocos2dx_LayerMultiplex_ctor(se::State& s)
 {
@@ -32311,12 +32613,14 @@ static bool js_cocos2dx_LayerMultiplex_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LayerMultiplex_ctor, __jsb_cocos2dx_LayerMultiplex_class, js_cocos2dx_LayerMultiplex_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_LayerMultiplex_ctor, __jsb_cocos2d_LayerMultiplex_class, js_cocos2d_LayerMultiplex_finalize)
 
 
     
 
-bool js_cocos2dx_LayerMultiplex_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Layer_proto;
+
+bool js_cocos2d_LayerMultiplex_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -32329,30 +32633,30 @@ bool js_cocos2dx_LayerMultiplex_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_LayerMultiplex_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_LayerMultiplex_finalize)
 
 bool js_register_cocos2dx_LayerMultiplex(se::Object* obj)
 {
-    auto cls = se::Class::create("LayerMultiplex", obj, __jsb_cocos2dx_Layer_proto, _SE(js_cocos2dx_LayerMultiplex_constructor));
+    auto cls = se::Class::create("LayerMultiplex", obj, __jsb_cocos2d_Layer_proto, _SE(js_cocos2dx_LayerMultiplex_constructor));
 
     cls->defineFunction("initWithArray", _SE(js_cocos2dx_LayerMultiplex_initWithArray));
     cls->defineFunction("switchToAndReleaseMe", _SE(js_cocos2dx_LayerMultiplex_switchToAndReleaseMe));
     cls->defineFunction("addLayer", _SE(js_cocos2dx_LayerMultiplex_addLayer));
     cls->defineFunction("switchTo", _SE(js_cocos2dx_LayerMultiplex_switchTo));
     cls->defineFunction("ctor", _SE(js_cocos2dx_LayerMultiplex_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_LayerMultiplex_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_LayerMultiplex_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::LayerMultiplex>(cls);
 
-    __jsb_cocos2dx_LayerMultiplex_proto = cls->getProto();
-    __jsb_cocos2dx_LayerMultiplex_class = cls;
+    __jsb_cocos2d_LayerMultiplex_proto = cls->getProto();
+    __jsb_cocos2d_LayerMultiplex_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.LayerMultiplex.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItem_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItem_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItem_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItem_class = nullptr;
 
 static bool js_cocos2dx_MenuItem_setEnabled(se::State& s)
 {
@@ -32570,7 +32874,7 @@ static bool js_cocos2dx_MenuItem_rect(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItem_rect)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItem_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItem_finalize)
 
 static bool js_cocos2dx_MenuItem_constructor(se::State& s)
 {
@@ -32579,7 +32883,7 @@ static bool js_cocos2dx_MenuItem_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItem_constructor, __jsb_cocos2dx_MenuItem_class, js_cocos2dx_MenuItem_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItem_constructor, __jsb_cocos2d_MenuItem_class, js_cocos2d_MenuItem_finalize)
 
 static bool js_cocos2dx_MenuItem_ctor(se::State& s)
 {
@@ -32588,12 +32892,14 @@ static bool js_cocos2dx_MenuItem_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItem_ctor, __jsb_cocos2dx_MenuItem_class, js_cocos2dx_MenuItem_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItem_ctor, __jsb_cocos2d_MenuItem_class, js_cocos2d_MenuItem_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItem_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_MenuItem_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -32606,11 +32912,11 @@ bool js_cocos2dx_MenuItem_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItem_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItem_finalize)
 
 bool js_register_cocos2dx_MenuItem(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItem", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_MenuItem_constructor));
+    auto cls = se::Class::create("MenuItem", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_MenuItem_constructor));
 
     cls->defineFunction("setEnabled", _SE(js_cocos2dx_MenuItem_setEnabled));
     cls->defineFunction("activate", _SE(js_cocos2dx_MenuItem_activate));
@@ -32622,19 +32928,19 @@ bool js_register_cocos2dx_MenuItem(se::Object* obj)
     cls->defineFunction("unselected", _SE(js_cocos2dx_MenuItem_unselected));
     cls->defineFunction("rect", _SE(js_cocos2dx_MenuItem_rect));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MenuItem_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItem_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItem_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItem>(cls);
 
-    __jsb_cocos2dx_MenuItem_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItem_class = cls;
+    __jsb_cocos2d_MenuItem_proto = cls->getProto();
+    __jsb_cocos2d_MenuItem_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItem.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItemLabel_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItemLabel_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItemLabel_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItemLabel_class = nullptr;
 
 static bool js_cocos2dx_MenuItemLabel_setLabel(se::State& s)
 {
@@ -32799,7 +33105,7 @@ static bool js_cocos2dx_MenuItemLabel_getLabel(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemLabel_getLabel)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItemLabel_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItemLabel_finalize)
 
 static bool js_cocos2dx_MenuItemLabel_constructor(se::State& s)
 {
@@ -32808,7 +33114,7 @@ static bool js_cocos2dx_MenuItemLabel_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItemLabel_constructor, __jsb_cocos2dx_MenuItemLabel_class, js_cocos2dx_MenuItemLabel_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItemLabel_constructor, __jsb_cocos2d_MenuItemLabel_class, js_cocos2d_MenuItemLabel_finalize)
 
 static bool js_cocos2dx_MenuItemLabel_ctor(se::State& s)
 {
@@ -32817,12 +33123,14 @@ static bool js_cocos2dx_MenuItemLabel_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemLabel_ctor, __jsb_cocos2dx_MenuItemLabel_class, js_cocos2dx_MenuItemLabel_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemLabel_ctor, __jsb_cocos2d_MenuItemLabel_class, js_cocos2d_MenuItemLabel_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItemLabel_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MenuItem_proto;
+
+bool js_cocos2d_MenuItemLabel_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -32835,11 +33143,11 @@ bool js_cocos2dx_MenuItemLabel_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItemLabel_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItemLabel_finalize)
 
 bool js_register_cocos2dx_MenuItemLabel(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItemLabel", obj, __jsb_cocos2dx_MenuItem_proto, _SE(js_cocos2dx_MenuItemLabel_constructor));
+    auto cls = se::Class::create("MenuItemLabel", obj, __jsb_cocos2d_MenuItem_proto, _SE(js_cocos2dx_MenuItemLabel_constructor));
 
     cls->defineFunction("setLabel", _SE(js_cocos2dx_MenuItemLabel_setLabel));
     cls->defineFunction("getString", _SE(js_cocos2dx_MenuItemLabel_getString));
@@ -32849,19 +33157,19 @@ bool js_register_cocos2dx_MenuItemLabel(se::Object* obj)
     cls->defineFunction("setDisabledColor", _SE(js_cocos2dx_MenuItemLabel_setDisabledColor));
     cls->defineFunction("getLabel", _SE(js_cocos2dx_MenuItemLabel_getLabel));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MenuItemLabel_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItemLabel_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItemLabel_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItemLabel>(cls);
 
-    __jsb_cocos2dx_MenuItemLabel_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItemLabel_class = cls;
+    __jsb_cocos2d_MenuItemLabel_proto = cls->getProto();
+    __jsb_cocos2d_MenuItemLabel_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItemLabel.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItemAtlasFont_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItemAtlasFont_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItemAtlasFont_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItemAtlasFont_class = nullptr;
 
 static bool js_cocos2dx_MenuItemAtlasFont_initWithString(se::State& s)
 {
@@ -32923,7 +33231,7 @@ static bool js_cocos2dx_MenuItemAtlasFont_initWithString(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemAtlasFont_initWithString)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItemAtlasFont_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItemAtlasFont_finalize)
 
 static bool js_cocos2dx_MenuItemAtlasFont_constructor(se::State& s)
 {
@@ -32932,7 +33240,7 @@ static bool js_cocos2dx_MenuItemAtlasFont_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItemAtlasFont_constructor, __jsb_cocos2dx_MenuItemAtlasFont_class, js_cocos2dx_MenuItemAtlasFont_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItemAtlasFont_constructor, __jsb_cocos2d_MenuItemAtlasFont_class, js_cocos2d_MenuItemAtlasFont_finalize)
 
 static bool js_cocos2dx_MenuItemAtlasFont_ctor(se::State& s)
 {
@@ -32941,12 +33249,14 @@ static bool js_cocos2dx_MenuItemAtlasFont_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemAtlasFont_ctor, __jsb_cocos2dx_MenuItemAtlasFont_class, js_cocos2dx_MenuItemAtlasFont_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemAtlasFont_ctor, __jsb_cocos2d_MenuItemAtlasFont_class, js_cocos2d_MenuItemAtlasFont_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItemAtlasFont_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MenuItemLabel_proto;
+
+bool js_cocos2d_MenuItemAtlasFont_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -32959,27 +33269,27 @@ bool js_cocos2dx_MenuItemAtlasFont_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItemAtlasFont_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItemAtlasFont_finalize)
 
 bool js_register_cocos2dx_MenuItemAtlasFont(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItemAtlasFont", obj, __jsb_cocos2dx_MenuItemLabel_proto, _SE(js_cocos2dx_MenuItemAtlasFont_constructor));
+    auto cls = se::Class::create("MenuItemAtlasFont", obj, __jsb_cocos2d_MenuItemLabel_proto, _SE(js_cocos2dx_MenuItemAtlasFont_constructor));
 
     cls->defineFunction("initWithString", _SE(js_cocos2dx_MenuItemAtlasFont_initWithString));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MenuItemAtlasFont_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItemAtlasFont_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItemAtlasFont_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItemAtlasFont>(cls);
 
-    __jsb_cocos2dx_MenuItemAtlasFont_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItemAtlasFont_class = cls;
+    __jsb_cocos2d_MenuItemAtlasFont_proto = cls->getProto();
+    __jsb_cocos2d_MenuItemAtlasFont_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItemAtlasFont.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItemFont_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItemFont_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItemFont_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItemFont_class = nullptr;
 
 static bool js_cocos2dx_MenuItemFont_setFontNameObj(se::State& s)
 {
@@ -33173,7 +33483,7 @@ static bool js_cocos2dx_MenuItemFont_setFontSize(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemFont_setFontSize)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItemFont_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItemFont_finalize)
 
 static bool js_cocos2dx_MenuItemFont_constructor(se::State& s)
 {
@@ -33182,7 +33492,7 @@ static bool js_cocos2dx_MenuItemFont_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItemFont_constructor, __jsb_cocos2dx_MenuItemFont_class, js_cocos2dx_MenuItemFont_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItemFont_constructor, __jsb_cocos2d_MenuItemFont_class, js_cocos2d_MenuItemFont_finalize)
 
 static bool js_cocos2dx_MenuItemFont_ctor(se::State& s)
 {
@@ -33191,12 +33501,14 @@ static bool js_cocos2dx_MenuItemFont_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemFont_ctor, __jsb_cocos2dx_MenuItemFont_class, js_cocos2dx_MenuItemFont_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemFont_ctor, __jsb_cocos2d_MenuItemFont_class, js_cocos2d_MenuItemFont_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItemFont_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MenuItemLabel_proto;
+
+bool js_cocos2d_MenuItemFont_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -33209,11 +33521,11 @@ bool js_cocos2dx_MenuItemFont_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItemFont_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItemFont_finalize)
 
 bool js_register_cocos2dx_MenuItemFont(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItemFont", obj, __jsb_cocos2dx_MenuItemLabel_proto, _SE(js_cocos2dx_MenuItemFont_constructor));
+    auto cls = se::Class::create("MenuItemFont", obj, __jsb_cocos2d_MenuItemLabel_proto, _SE(js_cocos2dx_MenuItemFont_constructor));
 
     cls->defineFunction("setFontName", _SE(js_cocos2dx_MenuItemFont_setFontNameObj));
     cls->defineFunction("getFontSize", _SE(js_cocos2dx_MenuItemFont_getFontSizeObj));
@@ -33225,19 +33537,19 @@ bool js_register_cocos2dx_MenuItemFont(se::Object* obj)
     cls->defineStaticFunction("getFontSize", _SE(js_cocos2dx_MenuItemFont_getFontSize));
     cls->defineStaticFunction("getFontName", _SE(js_cocos2dx_MenuItemFont_getFontName));
     cls->defineStaticFunction("setFontSize", _SE(js_cocos2dx_MenuItemFont_setFontSize));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItemFont_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItemFont_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItemFont>(cls);
 
-    __jsb_cocos2dx_MenuItemFont_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItemFont_class = cls;
+    __jsb_cocos2d_MenuItemFont_proto = cls->getProto();
+    __jsb_cocos2d_MenuItemFont_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItemFont.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItemSprite_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItemSprite_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItemSprite_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItemSprite_class = nullptr;
 
 static bool js_cocos2dx_MenuItemSprite_setEnabled(se::State& s)
 {
@@ -33455,7 +33767,7 @@ static bool js_cocos2dx_MenuItemSprite_unselected(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemSprite_unselected)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItemSprite_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItemSprite_finalize)
 
 static bool js_cocos2dx_MenuItemSprite_constructor(se::State& s)
 {
@@ -33464,7 +33776,7 @@ static bool js_cocos2dx_MenuItemSprite_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItemSprite_constructor, __jsb_cocos2dx_MenuItemSprite_class, js_cocos2dx_MenuItemSprite_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItemSprite_constructor, __jsb_cocos2d_MenuItemSprite_class, js_cocos2d_MenuItemSprite_finalize)
 
 static bool js_cocos2dx_MenuItemSprite_ctor(se::State& s)
 {
@@ -33473,12 +33785,14 @@ static bool js_cocos2dx_MenuItemSprite_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemSprite_ctor, __jsb_cocos2dx_MenuItemSprite_class, js_cocos2dx_MenuItemSprite_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemSprite_ctor, __jsb_cocos2d_MenuItemSprite_class, js_cocos2d_MenuItemSprite_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItemSprite_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MenuItem_proto;
+
+bool js_cocos2d_MenuItemSprite_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -33491,11 +33805,11 @@ bool js_cocos2dx_MenuItemSprite_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItemSprite_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItemSprite_finalize)
 
 bool js_register_cocos2dx_MenuItemSprite(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItemSprite", obj, __jsb_cocos2dx_MenuItem_proto, _SE(js_cocos2dx_MenuItemSprite_constructor));
+    auto cls = se::Class::create("MenuItemSprite", obj, __jsb_cocos2d_MenuItem_proto, _SE(js_cocos2dx_MenuItemSprite_constructor));
 
     cls->defineFunction("setEnabled", _SE(js_cocos2dx_MenuItemSprite_setEnabled));
     cls->defineFunction("selected", _SE(js_cocos2dx_MenuItemSprite_selected));
@@ -33508,19 +33822,19 @@ bool js_register_cocos2dx_MenuItemSprite(se::Object* obj)
     cls->defineFunction("getNormalImage", _SE(js_cocos2dx_MenuItemSprite_getNormalImage));
     cls->defineFunction("unselected", _SE(js_cocos2dx_MenuItemSprite_unselected));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MenuItemSprite_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItemSprite_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItemSprite_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItemSprite>(cls);
 
-    __jsb_cocos2dx_MenuItemSprite_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItemSprite_class = cls;
+    __jsb_cocos2d_MenuItemSprite_proto = cls->getProto();
+    __jsb_cocos2d_MenuItemSprite_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItemSprite.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItemImage_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItemImage_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItemImage_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItemImage_class = nullptr;
 
 static bool js_cocos2dx_MenuItemImage_setDisabledSpriteFrame(se::State& s)
 {
@@ -33653,7 +33967,7 @@ static bool js_cocos2dx_MenuItemImage_initWithNormalImage(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemImage_initWithNormalImage)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItemImage_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItemImage_finalize)
 
 static bool js_cocos2dx_MenuItemImage_constructor(se::State& s)
 {
@@ -33662,7 +33976,7 @@ static bool js_cocos2dx_MenuItemImage_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItemImage_constructor, __jsb_cocos2dx_MenuItemImage_class, js_cocos2dx_MenuItemImage_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItemImage_constructor, __jsb_cocos2d_MenuItemImage_class, js_cocos2d_MenuItemImage_finalize)
 
 static bool js_cocos2dx_MenuItemImage_ctor(se::State& s)
 {
@@ -33671,12 +33985,14 @@ static bool js_cocos2dx_MenuItemImage_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemImage_ctor, __jsb_cocos2dx_MenuItemImage_class, js_cocos2dx_MenuItemImage_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemImage_ctor, __jsb_cocos2d_MenuItemImage_class, js_cocos2d_MenuItemImage_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItemImage_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MenuItemSprite_proto;
+
+bool js_cocos2d_MenuItemImage_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -33689,11 +34005,11 @@ bool js_cocos2dx_MenuItemImage_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItemImage_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItemImage_finalize)
 
 bool js_register_cocos2dx_MenuItemImage(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItemImage", obj, __jsb_cocos2dx_MenuItemSprite_proto, _SE(js_cocos2dx_MenuItemImage_constructor));
+    auto cls = se::Class::create("MenuItemImage", obj, __jsb_cocos2d_MenuItemSprite_proto, _SE(js_cocos2dx_MenuItemImage_constructor));
 
     cls->defineFunction("setDisabledSpriteFrame", _SE(js_cocos2dx_MenuItemImage_setDisabledSpriteFrame));
     cls->defineFunction("setSelectedSpriteFrame", _SE(js_cocos2dx_MenuItemImage_setSelectedSpriteFrame));
@@ -33701,19 +34017,19 @@ bool js_register_cocos2dx_MenuItemImage(se::Object* obj)
     cls->defineFunction("init", _SE(js_cocos2dx_MenuItemImage_init));
     cls->defineFunction("initWithNormalImage", _SE(js_cocos2dx_MenuItemImage_initWithNormalImage));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MenuItemImage_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItemImage_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItemImage_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItemImage>(cls);
 
-    __jsb_cocos2dx_MenuItemImage_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItemImage_class = cls;
+    __jsb_cocos2d_MenuItemImage_proto = cls->getProto();
+    __jsb_cocos2d_MenuItemImage_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItemImage.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MenuItemToggle_proto = nullptr;
-se::Class* __jsb_cocos2dx_MenuItemToggle_class = nullptr;
+se::Object* __jsb_cocos2d_MenuItemToggle_proto = nullptr;
+se::Class* __jsb_cocos2d_MenuItemToggle_class = nullptr;
 
 static bool js_cocos2dx_MenuItemToggle_setSubItems(se::State& s)
 {
@@ -33829,7 +34145,7 @@ static bool js_cocos2dx_MenuItemToggle_setSelectedIndex(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemToggle_setSelectedIndex)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MenuItemToggle_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MenuItemToggle_finalize)
 
 static bool js_cocos2dx_MenuItemToggle_constructor(se::State& s)
 {
@@ -33838,7 +34154,7 @@ static bool js_cocos2dx_MenuItemToggle_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MenuItemToggle_constructor, __jsb_cocos2dx_MenuItemToggle_class, js_cocos2dx_MenuItemToggle_finalize)
+SE_BIND_CTOR(js_cocos2dx_MenuItemToggle_constructor, __jsb_cocos2d_MenuItemToggle_class, js_cocos2d_MenuItemToggle_finalize)
 
 static bool js_cocos2dx_MenuItemToggle_ctor(se::State& s)
 {
@@ -33847,12 +34163,14 @@ static bool js_cocos2dx_MenuItemToggle_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemToggle_ctor, __jsb_cocos2dx_MenuItemToggle_class, js_cocos2dx_MenuItemToggle_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MenuItemToggle_ctor, __jsb_cocos2d_MenuItemToggle_class, js_cocos2d_MenuItemToggle_finalize)
 
 
     
 
-bool js_cocos2dx_MenuItemToggle_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_MenuItem_proto;
+
+bool js_cocos2d_MenuItemToggle_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -33865,11 +34183,11 @@ bool js_cocos2dx_MenuItemToggle_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MenuItemToggle_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MenuItemToggle_finalize)
 
 bool js_register_cocos2dx_MenuItemToggle(se::Object* obj)
 {
-    auto cls = se::Class::create("MenuItemToggle", obj, __jsb_cocos2dx_MenuItem_proto, _SE(js_cocos2dx_MenuItemToggle_constructor));
+    auto cls = se::Class::create("MenuItemToggle", obj, __jsb_cocos2d_MenuItem_proto, _SE(js_cocos2dx_MenuItemToggle_constructor));
 
     cls->defineFunction("setSubItems", _SE(js_cocos2dx_MenuItemToggle_setSubItems));
     cls->defineFunction("initWithItem", _SE(js_cocos2dx_MenuItemToggle_initWithItem));
@@ -33878,19 +34196,19 @@ bool js_register_cocos2dx_MenuItemToggle(se::Object* obj)
     cls->defineFunction("getSelectedItem", _SE(js_cocos2dx_MenuItemToggle_getSelectedItem));
     cls->defineFunction("setSelectedIndex", _SE(js_cocos2dx_MenuItemToggle_setSelectedIndex));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MenuItemToggle_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MenuItemToggle_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MenuItemToggle_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MenuItemToggle>(cls);
 
-    __jsb_cocos2dx_MenuItemToggle_proto = cls->getProto();
-    __jsb_cocos2dx_MenuItemToggle_class = cls;
+    __jsb_cocos2d_MenuItemToggle_proto = cls->getProto();
+    __jsb_cocos2d_MenuItemToggle_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MenuItemToggle.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Menu_proto = nullptr;
-se::Class* __jsb_cocos2dx_Menu_class = nullptr;
+se::Object* __jsb_cocos2d_Menu_proto = nullptr;
+se::Class* __jsb_cocos2d_Menu_class = nullptr;
 
 static bool js_cocos2dx_Menu_initWithArray(se::State& s)
 {
@@ -34018,7 +34336,7 @@ static bool js_cocos2dx_Menu_alignItemsHorizontally(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Menu_alignItemsHorizontally)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Menu_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Menu_finalize)
 
 static bool js_cocos2dx_Menu_constructor(se::State& s)
 {
@@ -34027,7 +34345,7 @@ static bool js_cocos2dx_Menu_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Menu_constructor, __jsb_cocos2dx_Menu_class, js_cocos2dx_Menu_finalize)
+SE_BIND_CTOR(js_cocos2dx_Menu_constructor, __jsb_cocos2d_Menu_class, js_cocos2d_Menu_finalize)
 
 static bool js_cocos2dx_Menu_ctor(se::State& s)
 {
@@ -34036,12 +34354,14 @@ static bool js_cocos2dx_Menu_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Menu_ctor, __jsb_cocos2dx_Menu_class, js_cocos2dx_Menu_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Menu_ctor, __jsb_cocos2d_Menu_class, js_cocos2d_Menu_finalize)
 
 
     
 
-bool js_cocos2dx_Menu_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Layer_proto;
+
+bool js_cocos2d_Menu_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -34054,11 +34374,11 @@ bool js_cocos2dx_Menu_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Menu_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Menu_finalize)
 
 bool js_register_cocos2dx_Menu(se::Object* obj)
 {
-    auto cls = se::Class::create("Menu", obj, __jsb_cocos2dx_Layer_proto, _SE(js_cocos2dx_Menu_constructor));
+    auto cls = se::Class::create("Menu", obj, __jsb_cocos2d_Layer_proto, _SE(js_cocos2dx_Menu_constructor));
 
     cls->defineFunction("initWithArray", _SE(js_cocos2dx_Menu_initWithArray));
     cls->defineFunction("setEnabled", _SE(js_cocos2dx_Menu_setEnabled));
@@ -34068,19 +34388,19 @@ bool js_register_cocos2dx_Menu(se::Object* obj)
     cls->defineFunction("alignItemsVerticallyWithPadding", _SE(js_cocos2dx_Menu_alignItemsVerticallyWithPadding));
     cls->defineFunction("alignItemsHorizontally", _SE(js_cocos2dx_Menu_alignItemsHorizontally));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Menu_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Menu_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Menu_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Menu>(cls);
 
-    __jsb_cocos2dx_Menu_proto = cls->getProto();
-    __jsb_cocos2dx_Menu_class = cls;
+    __jsb_cocos2d_Menu_proto = cls->getProto();
+    __jsb_cocos2d_Menu_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Menu.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_MotionStreak_proto = nullptr;
-se::Class* __jsb_cocos2dx_MotionStreak_class = nullptr;
+se::Object* __jsb_cocos2d_MotionStreak_proto = nullptr;
+se::Class* __jsb_cocos2d_MotionStreak_class = nullptr;
 
 static bool js_cocos2dx_MotionStreak_reset(se::State& s)
 {
@@ -34417,7 +34737,7 @@ static bool js_cocos2dx_MotionStreak_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MotionStreak_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_MotionStreak_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_MotionStreak_finalize)
 
 static bool js_cocos2dx_MotionStreak_constructor(se::State& s)
 {
@@ -34426,7 +34746,7 @@ static bool js_cocos2dx_MotionStreak_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_MotionStreak_constructor, __jsb_cocos2dx_MotionStreak_class, js_cocos2dx_MotionStreak_finalize)
+SE_BIND_CTOR(js_cocos2dx_MotionStreak_constructor, __jsb_cocos2d_MotionStreak_class, js_cocos2d_MotionStreak_finalize)
 
 static bool js_cocos2dx_MotionStreak_ctor(se::State& s)
 {
@@ -34435,12 +34755,14 @@ static bool js_cocos2dx_MotionStreak_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MotionStreak_ctor, __jsb_cocos2dx_MotionStreak_class, js_cocos2dx_MotionStreak_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_MotionStreak_ctor, __jsb_cocos2d_MotionStreak_class, js_cocos2d_MotionStreak_finalize)
 
 
     
 
-bool js_cocos2dx_MotionStreak_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_MotionStreak_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -34453,11 +34775,11 @@ bool js_cocos2dx_MotionStreak_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_MotionStreak_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_MotionStreak_finalize)
 
 bool js_register_cocos2dx_MotionStreak(se::Object* obj)
 {
-    auto cls = se::Class::create("MotionStreak", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_MotionStreak_constructor));
+    auto cls = se::Class::create("MotionStreak", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_MotionStreak_constructor));
 
     cls->defineFunction("reset", _SE(js_cocos2dx_MotionStreak_reset));
     cls->defineFunction("setTexture", _SE(js_cocos2dx_MotionStreak_setTexture));
@@ -34474,19 +34796,19 @@ bool js_register_cocos2dx_MotionStreak(se::Object* obj)
     cls->defineFunction("setStroke", _SE(js_cocos2dx_MotionStreak_setStroke));
     cls->defineFunction("ctor", _SE(js_cocos2dx_MotionStreak_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_MotionStreak_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_MotionStreak_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_MotionStreak_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::MotionStreak>(cls);
 
-    __jsb_cocos2dx_MotionStreak_proto = cls->getProto();
-    __jsb_cocos2dx_MotionStreak_class = cls;
+    __jsb_cocos2d_MotionStreak_proto = cls->getProto();
+    __jsb_cocos2d_MotionStreak_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.MotionStreak.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_NodeGrid_proto = nullptr;
-se::Class* __jsb_cocos2dx_NodeGrid_class = nullptr;
+se::Object* __jsb_cocos2d_NodeGrid_proto = nullptr;
+se::Class* __jsb_cocos2d_NodeGrid_class = nullptr;
 
 static bool js_cocos2dx_NodeGrid_setTarget(se::State& s)
 {
@@ -34584,7 +34906,7 @@ static bool js_cocos2dx_NodeGrid_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_NodeGrid_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_NodeGrid_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_NodeGrid_finalize)
 
 static bool js_cocos2dx_NodeGrid_constructor(se::State& s)
 {
@@ -34593,11 +34915,13 @@ static bool js_cocos2dx_NodeGrid_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_NodeGrid_constructor, __jsb_cocos2dx_NodeGrid_class, js_cocos2dx_NodeGrid_finalize)
+SE_BIND_CTOR(js_cocos2dx_NodeGrid_constructor, __jsb_cocos2d_NodeGrid_class, js_cocos2d_NodeGrid_finalize)
 
 
 
-bool js_cocos2dx_NodeGrid_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_NodeGrid_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -34610,28 +34934,28 @@ bool js_cocos2dx_NodeGrid_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_NodeGrid_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_NodeGrid_finalize)
 
 bool js_register_cocos2dx_NodeGrid(se::Object* obj)
 {
-    auto cls = se::Class::create("NodeGrid", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_NodeGrid_constructor));
+    auto cls = se::Class::create("NodeGrid", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_NodeGrid_constructor));
 
     cls->defineFunction("setTarget", _SE(js_cocos2dx_NodeGrid_setTarget));
     cls->defineFunction("getGrid", _SE(js_cocos2dx_NodeGrid_getGrid));
     cls->defineFunction("getGridRect", _SE(js_cocos2dx_NodeGrid_getGridRect));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_NodeGrid_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_NodeGrid_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_NodeGrid_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::NodeGrid>(cls);
 
-    __jsb_cocos2dx_NodeGrid_proto = cls->getProto();
-    __jsb_cocos2dx_NodeGrid_class = cls;
+    __jsb_cocos2d_NodeGrid_proto = cls->getProto();
+    __jsb_cocos2d_NodeGrid_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleBatchNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleBatchNode_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleBatchNode_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleBatchNode_class = nullptr;
 
 static bool js_cocos2dx_ParticleBatchNode_setTexture(se::State& s)
 {
@@ -34863,7 +35187,7 @@ static bool js_cocos2dx_ParticleBatchNode_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleBatchNode_create : Error processing arguments");
         auto result = cocos2d::ParticleBatchNode::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -34876,7 +35200,7 @@ static bool js_cocos2dx_ParticleBatchNode_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleBatchNode_create : Error processing arguments");
         auto result = cocos2d::ParticleBatchNode::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -34897,7 +35221,7 @@ static bool js_cocos2dx_ParticleBatchNode_createWithTexture(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleBatchNode_createWithTexture : Error processing arguments");
         auto result = cocos2d::ParticleBatchNode::createWithTexture(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -34910,7 +35234,7 @@ static bool js_cocos2dx_ParticleBatchNode_createWithTexture(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleBatchNode_createWithTexture : Error processing arguments");
         auto result = cocos2d::ParticleBatchNode::createWithTexture(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -34920,7 +35244,7 @@ static bool js_cocos2dx_ParticleBatchNode_createWithTexture(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleBatchNode_createWithTexture)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleBatchNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleBatchNode_finalize)
 
 static bool js_cocos2dx_ParticleBatchNode_constructor(se::State& s)
 {
@@ -34929,7 +35253,7 @@ static bool js_cocos2dx_ParticleBatchNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleBatchNode_constructor, __jsb_cocos2dx_ParticleBatchNode_class, js_cocos2dx_ParticleBatchNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleBatchNode_constructor, __jsb_cocos2d_ParticleBatchNode_class, js_cocos2d_ParticleBatchNode_finalize)
 
 static bool js_cocos2dx_ParticleBatchNode_ctor(se::State& s)
 {
@@ -34938,12 +35262,14 @@ static bool js_cocos2dx_ParticleBatchNode_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ParticleBatchNode_ctor, __jsb_cocos2dx_ParticleBatchNode_class, js_cocos2dx_ParticleBatchNode_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ParticleBatchNode_ctor, __jsb_cocos2d_ParticleBatchNode_class, js_cocos2d_ParticleBatchNode_finalize)
 
 
     
 
-bool js_cocos2dx_ParticleBatchNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_ParticleBatchNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -34956,11 +35282,11 @@ bool js_cocos2dx_ParticleBatchNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleBatchNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleBatchNode_finalize)
 
 bool js_register_cocos2dx_ParticleBatchNode(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleBatchNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_ParticleBatchNode_constructor));
+    auto cls = se::Class::create("ParticleBatchNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ParticleBatchNode_constructor));
 
     cls->defineFunction("setTexture", _SE(js_cocos2dx_ParticleBatchNode_setTexture));
     cls->defineFunction("initWithTexture", _SE(js_cocos2dx_ParticleBatchNode_initWithTexture));
@@ -34976,19 +35302,19 @@ bool js_register_cocos2dx_ParticleBatchNode(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_ParticleBatchNode_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleBatchNode_create));
     cls->defineStaticFunction("createWithTexture", _SE(js_cocos2dx_ParticleBatchNode_createWithTexture));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleBatchNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleBatchNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleBatchNode>(cls);
 
-    __jsb_cocos2dx_ParticleBatchNode_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleBatchNode_class = cls;
+    __jsb_cocos2d_ParticleBatchNode_proto = cls->getProto();
+    __jsb_cocos2d_ParticleBatchNode_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ParticleBatchNode.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleSystem_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleSystem_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleSystem_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleSystem_class = nullptr;
 
 static bool js_cocos2dx_ParticleSystem_getStartSizeVar(se::State& s)
 {
@@ -36917,7 +37243,7 @@ static bool js_cocos2dx_ParticleSystem_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSystem_create : Error processing arguments");
         auto result = cocos2d::ParticleSystem::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSystem_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSystem_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -36938,7 +37264,7 @@ static bool js_cocos2dx_ParticleSystem_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSystem_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleSystem::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSystem_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSystem_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -36948,7 +37274,7 @@ static bool js_cocos2dx_ParticleSystem_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleSystem_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleSystem_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleSystem_finalize)
 
 static bool js_cocos2dx_ParticleSystem_constructor(se::State& s)
 {
@@ -36957,7 +37283,7 @@ static bool js_cocos2dx_ParticleSystem_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleSystem_constructor, __jsb_cocos2dx_ParticleSystem_class, js_cocos2dx_ParticleSystem_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleSystem_constructor, __jsb_cocos2d_ParticleSystem_class, js_cocos2d_ParticleSystem_finalize)
 
 static bool js_cocos2dx_ParticleSystem_ctor(se::State& s)
 {
@@ -36966,12 +37292,14 @@ static bool js_cocos2dx_ParticleSystem_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ParticleSystem_ctor, __jsb_cocos2dx_ParticleSystem_class, js_cocos2dx_ParticleSystem_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ParticleSystem_ctor, __jsb_cocos2d_ParticleSystem_class, js_cocos2d_ParticleSystem_finalize)
 
 
     
 
-bool js_cocos2dx_ParticleSystem_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_ParticleSystem_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -36984,11 +37312,11 @@ bool js_cocos2dx_ParticleSystem_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleSystem_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleSystem_finalize)
 
 bool js_register_cocos2dx_ParticleSystem(se::Object* obj)
 {
-    auto cls = se::Class::create("_ParticleSystem", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_ParticleSystem_constructor));
+    auto cls = se::Class::create("_ParticleSystem", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ParticleSystem_constructor));
 
     cls->defineFunction("getStartSizeVar", _SE(js_cocos2dx_ParticleSystem_getStartSizeVar));
     cls->defineFunction("getTexture", _SE(js_cocos2dx_ParticleSystem_getTexture));
@@ -37097,19 +37425,19 @@ bool js_register_cocos2dx_ParticleSystem(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_ParticleSystem_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleSystem_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleSystem_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleSystem_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleSystem_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleSystem>(cls);
 
-    __jsb_cocos2dx_ParticleSystem_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleSystem_class = cls;
+    __jsb_cocos2d_ParticleSystem_proto = cls->getProto();
+    __jsb_cocos2d_ParticleSystem_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc._ParticleSystem.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleSystemQuad_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleSystemQuad_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleSystemQuad_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleSystemQuad_class = nullptr;
 
 static bool js_cocos2dx_ParticleSystemQuad_setDisplayFrame(se::State& s)
 {
@@ -37221,7 +37549,7 @@ static bool js_cocos2dx_ParticleSystemQuad_createWithTotalParticles(se::State& s
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSystemQuad_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleSystemQuad::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSystemQuad_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSystemQuad_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37231,7 +37559,7 @@ static bool js_cocos2dx_ParticleSystemQuad_createWithTotalParticles(se::State& s
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleSystemQuad_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleSystemQuad_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleSystemQuad_finalize)
 
 static bool js_cocos2dx_ParticleSystemQuad_constructor(se::State& s)
 {
@@ -37240,11 +37568,13 @@ static bool js_cocos2dx_ParticleSystemQuad_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleSystemQuad_constructor, __jsb_cocos2dx_ParticleSystemQuad_class, js_cocos2dx_ParticleSystemQuad_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleSystemQuad_constructor, __jsb_cocos2d_ParticleSystemQuad_class, js_cocos2d_ParticleSystemQuad_finalize)
 
 
 
-bool js_cocos2dx_ParticleSystemQuad_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystem_proto;
+
+bool js_cocos2d_ParticleSystemQuad_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37257,29 +37587,29 @@ bool js_cocos2dx_ParticleSystemQuad_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleSystemQuad_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleSystemQuad_finalize)
 
 bool js_register_cocos2dx_ParticleSystemQuad(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleSystem", obj, __jsb_cocos2dx_ParticleSystem_proto, _SE(js_cocos2dx_ParticleSystemQuad_constructor));
+    auto cls = se::Class::create("ParticleSystem", obj, __jsb_cocos2d_ParticleSystem_proto, _SE(js_cocos2dx_ParticleSystemQuad_constructor));
 
     cls->defineFunction("setDisplayFrame", _SE(js_cocos2dx_ParticleSystemQuad_setDisplayFrame));
     cls->defineFunction("setTextureWithRect", _SE(js_cocos2dx_ParticleSystemQuad_setTextureWithRect));
     cls->defineFunction("listenRendererRecreated", _SE(js_cocos2dx_ParticleSystemQuad_listenRendererRecreated));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleSystemQuad_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleSystemQuad_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleSystemQuad_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleSystemQuad_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleSystemQuad>(cls);
 
-    __jsb_cocos2dx_ParticleSystemQuad_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleSystemQuad_class = cls;
+    __jsb_cocos2d_ParticleSystemQuad_proto = cls->getProto();
+    __jsb_cocos2d_ParticleSystemQuad_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleFire_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleFire_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleFire_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleFire_class = nullptr;
 
 static bool js_cocos2dx_ParticleFire_create(se::State& s)
 {
@@ -37289,7 +37619,7 @@ static bool js_cocos2dx_ParticleFire_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleFire::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleFire_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleFire_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37310,7 +37640,7 @@ static bool js_cocos2dx_ParticleFire_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleFire_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleFire::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleFire_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleFire_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37320,7 +37650,7 @@ static bool js_cocos2dx_ParticleFire_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleFire_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleFire_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleFire_finalize)
 
 static bool js_cocos2dx_ParticleFire_constructor(se::State& s)
 {
@@ -37329,11 +37659,13 @@ static bool js_cocos2dx_ParticleFire_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleFire_constructor, __jsb_cocos2dx_ParticleFire_class, js_cocos2dx_ParticleFire_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleFire_constructor, __jsb_cocos2d_ParticleFire_class, js_cocos2d_ParticleFire_finalize)
 
 
 
-bool js_cocos2dx_ParticleFire_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleFire_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37346,26 +37678,26 @@ bool js_cocos2dx_ParticleFire_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleFire_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleFire_finalize)
 
 bool js_register_cocos2dx_ParticleFire(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleFire", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleFire_constructor));
+    auto cls = se::Class::create("ParticleFire", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleFire_constructor));
 
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleFire_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleFire_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleFire_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleFire_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleFire>(cls);
 
-    __jsb_cocos2dx_ParticleFire_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleFire_class = cls;
+    __jsb_cocos2d_ParticleFire_proto = cls->getProto();
+    __jsb_cocos2d_ParticleFire_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleFireworks_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleFireworks_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleFireworks_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleFireworks_class = nullptr;
 
 static bool js_cocos2dx_ParticleFireworks_init(se::State& s)
 {
@@ -37414,7 +37746,7 @@ static bool js_cocos2dx_ParticleFireworks_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleFireworks::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleFireworks_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleFireworks_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37435,7 +37767,7 @@ static bool js_cocos2dx_ParticleFireworks_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleFireworks_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleFireworks::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleFireworks_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleFireworks_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37445,7 +37777,7 @@ static bool js_cocos2dx_ParticleFireworks_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleFireworks_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleFireworks_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleFireworks_finalize)
 
 static bool js_cocos2dx_ParticleFireworks_constructor(se::State& s)
 {
@@ -37454,11 +37786,13 @@ static bool js_cocos2dx_ParticleFireworks_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleFireworks_constructor, __jsb_cocos2dx_ParticleFireworks_class, js_cocos2dx_ParticleFireworks_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleFireworks_constructor, __jsb_cocos2d_ParticleFireworks_class, js_cocos2d_ParticleFireworks_finalize)
 
 
 
-bool js_cocos2dx_ParticleFireworks_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleFireworks_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37471,28 +37805,28 @@ bool js_cocos2dx_ParticleFireworks_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleFireworks_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleFireworks_finalize)
 
 bool js_register_cocos2dx_ParticleFireworks(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleFireworks", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleFireworks_constructor));
+    auto cls = se::Class::create("ParticleFireworks", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleFireworks_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleFireworks_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleFireworks_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleFireworks_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleFireworks_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleFireworks_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleFireworks_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleFireworks>(cls);
 
-    __jsb_cocos2dx_ParticleFireworks_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleFireworks_class = cls;
+    __jsb_cocos2d_ParticleFireworks_proto = cls->getProto();
+    __jsb_cocos2d_ParticleFireworks_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleSun_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleSun_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleSun_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleSun_class = nullptr;
 
 static bool js_cocos2dx_ParticleSun_init(se::State& s)
 {
@@ -37541,7 +37875,7 @@ static bool js_cocos2dx_ParticleSun_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleSun::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSun_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSun_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37562,7 +37896,7 @@ static bool js_cocos2dx_ParticleSun_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSun_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleSun::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSun_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSun_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37572,7 +37906,7 @@ static bool js_cocos2dx_ParticleSun_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleSun_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleSun_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleSun_finalize)
 
 static bool js_cocos2dx_ParticleSun_constructor(se::State& s)
 {
@@ -37581,11 +37915,13 @@ static bool js_cocos2dx_ParticleSun_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleSun_constructor, __jsb_cocos2dx_ParticleSun_class, js_cocos2dx_ParticleSun_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleSun_constructor, __jsb_cocos2d_ParticleSun_class, js_cocos2d_ParticleSun_finalize)
 
 
 
-bool js_cocos2dx_ParticleSun_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleSun_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37598,28 +37934,28 @@ bool js_cocos2dx_ParticleSun_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleSun_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleSun_finalize)
 
 bool js_register_cocos2dx_ParticleSun(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleSun", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSun_constructor));
+    auto cls = se::Class::create("ParticleSun", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSun_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleSun_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleSun_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleSun_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleSun_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleSun_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleSun_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleSun>(cls);
 
-    __jsb_cocos2dx_ParticleSun_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleSun_class = cls;
+    __jsb_cocos2d_ParticleSun_proto = cls->getProto();
+    __jsb_cocos2d_ParticleSun_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleGalaxy_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleGalaxy_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleGalaxy_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleGalaxy_class = nullptr;
 
 static bool js_cocos2dx_ParticleGalaxy_init(se::State& s)
 {
@@ -37668,7 +38004,7 @@ static bool js_cocos2dx_ParticleGalaxy_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleGalaxy::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleGalaxy_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleGalaxy_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37689,7 +38025,7 @@ static bool js_cocos2dx_ParticleGalaxy_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleGalaxy_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleGalaxy::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleGalaxy_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleGalaxy_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37699,7 +38035,7 @@ static bool js_cocos2dx_ParticleGalaxy_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleGalaxy_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleGalaxy_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleGalaxy_finalize)
 
 static bool js_cocos2dx_ParticleGalaxy_constructor(se::State& s)
 {
@@ -37708,11 +38044,13 @@ static bool js_cocos2dx_ParticleGalaxy_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleGalaxy_constructor, __jsb_cocos2dx_ParticleGalaxy_class, js_cocos2dx_ParticleGalaxy_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleGalaxy_constructor, __jsb_cocos2d_ParticleGalaxy_class, js_cocos2d_ParticleGalaxy_finalize)
 
 
 
-bool js_cocos2dx_ParticleGalaxy_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleGalaxy_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37725,28 +38063,28 @@ bool js_cocos2dx_ParticleGalaxy_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleGalaxy_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleGalaxy_finalize)
 
 bool js_register_cocos2dx_ParticleGalaxy(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleGalaxy", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleGalaxy_constructor));
+    auto cls = se::Class::create("ParticleGalaxy", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleGalaxy_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleGalaxy_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleGalaxy_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleGalaxy_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleGalaxy_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleGalaxy_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleGalaxy_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleGalaxy>(cls);
 
-    __jsb_cocos2dx_ParticleGalaxy_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleGalaxy_class = cls;
+    __jsb_cocos2d_ParticleGalaxy_proto = cls->getProto();
+    __jsb_cocos2d_ParticleGalaxy_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleFlower_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleFlower_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleFlower_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleFlower_class = nullptr;
 
 static bool js_cocos2dx_ParticleFlower_init(se::State& s)
 {
@@ -37795,7 +38133,7 @@ static bool js_cocos2dx_ParticleFlower_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleFlower::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleFlower_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleFlower_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37816,7 +38154,7 @@ static bool js_cocos2dx_ParticleFlower_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleFlower_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleFlower::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleFlower_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleFlower_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37826,7 +38164,7 @@ static bool js_cocos2dx_ParticleFlower_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleFlower_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleFlower_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleFlower_finalize)
 
 static bool js_cocos2dx_ParticleFlower_constructor(se::State& s)
 {
@@ -37835,11 +38173,13 @@ static bool js_cocos2dx_ParticleFlower_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleFlower_constructor, __jsb_cocos2dx_ParticleFlower_class, js_cocos2dx_ParticleFlower_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleFlower_constructor, __jsb_cocos2d_ParticleFlower_class, js_cocos2d_ParticleFlower_finalize)
 
 
 
-bool js_cocos2dx_ParticleFlower_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleFlower_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37852,28 +38192,28 @@ bool js_cocos2dx_ParticleFlower_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleFlower_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleFlower_finalize)
 
 bool js_register_cocos2dx_ParticleFlower(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleFlower", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleFlower_constructor));
+    auto cls = se::Class::create("ParticleFlower", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleFlower_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleFlower_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleFlower_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleFlower_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleFlower_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleFlower_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleFlower_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleFlower>(cls);
 
-    __jsb_cocos2dx_ParticleFlower_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleFlower_class = cls;
+    __jsb_cocos2d_ParticleFlower_proto = cls->getProto();
+    __jsb_cocos2d_ParticleFlower_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleMeteor_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleMeteor_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleMeteor_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleMeteor_class = nullptr;
 
 static bool js_cocos2dx_ParticleMeteor_init(se::State& s)
 {
@@ -37922,7 +38262,7 @@ static bool js_cocos2dx_ParticleMeteor_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleMeteor::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleMeteor_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleMeteor_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37943,7 +38283,7 @@ static bool js_cocos2dx_ParticleMeteor_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleMeteor_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleMeteor::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleMeteor_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleMeteor_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -37953,7 +38293,7 @@ static bool js_cocos2dx_ParticleMeteor_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleMeteor_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleMeteor_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleMeteor_finalize)
 
 static bool js_cocos2dx_ParticleMeteor_constructor(se::State& s)
 {
@@ -37962,11 +38302,13 @@ static bool js_cocos2dx_ParticleMeteor_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleMeteor_constructor, __jsb_cocos2dx_ParticleMeteor_class, js_cocos2dx_ParticleMeteor_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleMeteor_constructor, __jsb_cocos2d_ParticleMeteor_class, js_cocos2d_ParticleMeteor_finalize)
 
 
 
-bool js_cocos2dx_ParticleMeteor_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleMeteor_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -37979,28 +38321,28 @@ bool js_cocos2dx_ParticleMeteor_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleMeteor_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleMeteor_finalize)
 
 bool js_register_cocos2dx_ParticleMeteor(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleMeteor", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleMeteor_constructor));
+    auto cls = se::Class::create("ParticleMeteor", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleMeteor_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleMeteor_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleMeteor_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleMeteor_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleMeteor_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleMeteor_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleMeteor_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleMeteor>(cls);
 
-    __jsb_cocos2dx_ParticleMeteor_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleMeteor_class = cls;
+    __jsb_cocos2d_ParticleMeteor_proto = cls->getProto();
+    __jsb_cocos2d_ParticleMeteor_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleSpiral_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleSpiral_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleSpiral_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleSpiral_class = nullptr;
 
 static bool js_cocos2dx_ParticleSpiral_init(se::State& s)
 {
@@ -38049,7 +38391,7 @@ static bool js_cocos2dx_ParticleSpiral_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleSpiral::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSpiral_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSpiral_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38070,7 +38412,7 @@ static bool js_cocos2dx_ParticleSpiral_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSpiral_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleSpiral::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSpiral_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSpiral_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38080,7 +38422,7 @@ static bool js_cocos2dx_ParticleSpiral_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleSpiral_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleSpiral_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleSpiral_finalize)
 
 static bool js_cocos2dx_ParticleSpiral_constructor(se::State& s)
 {
@@ -38089,11 +38431,13 @@ static bool js_cocos2dx_ParticleSpiral_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleSpiral_constructor, __jsb_cocos2dx_ParticleSpiral_class, js_cocos2dx_ParticleSpiral_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleSpiral_constructor, __jsb_cocos2d_ParticleSpiral_class, js_cocos2d_ParticleSpiral_finalize)
 
 
 
-bool js_cocos2dx_ParticleSpiral_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleSpiral_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -38106,28 +38450,28 @@ bool js_cocos2dx_ParticleSpiral_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleSpiral_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleSpiral_finalize)
 
 bool js_register_cocos2dx_ParticleSpiral(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleSpiral", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSpiral_constructor));
+    auto cls = se::Class::create("ParticleSpiral", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSpiral_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleSpiral_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleSpiral_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleSpiral_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleSpiral_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleSpiral_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleSpiral_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleSpiral>(cls);
 
-    __jsb_cocos2dx_ParticleSpiral_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleSpiral_class = cls;
+    __jsb_cocos2d_ParticleSpiral_proto = cls->getProto();
+    __jsb_cocos2d_ParticleSpiral_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleExplosion_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleExplosion_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleExplosion_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleExplosion_class = nullptr;
 
 static bool js_cocos2dx_ParticleExplosion_init(se::State& s)
 {
@@ -38176,7 +38520,7 @@ static bool js_cocos2dx_ParticleExplosion_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleExplosion::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleExplosion_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleExplosion_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38197,7 +38541,7 @@ static bool js_cocos2dx_ParticleExplosion_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleExplosion_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleExplosion::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleExplosion_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleExplosion_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38207,7 +38551,7 @@ static bool js_cocos2dx_ParticleExplosion_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleExplosion_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleExplosion_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleExplosion_finalize)
 
 static bool js_cocos2dx_ParticleExplosion_constructor(se::State& s)
 {
@@ -38216,11 +38560,13 @@ static bool js_cocos2dx_ParticleExplosion_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleExplosion_constructor, __jsb_cocos2dx_ParticleExplosion_class, js_cocos2dx_ParticleExplosion_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleExplosion_constructor, __jsb_cocos2d_ParticleExplosion_class, js_cocos2d_ParticleExplosion_finalize)
 
 
 
-bool js_cocos2dx_ParticleExplosion_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleExplosion_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -38233,28 +38579,28 @@ bool js_cocos2dx_ParticleExplosion_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleExplosion_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleExplosion_finalize)
 
 bool js_register_cocos2dx_ParticleExplosion(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleExplosion", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleExplosion_constructor));
+    auto cls = se::Class::create("ParticleExplosion", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleExplosion_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleExplosion_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleExplosion_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleExplosion_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleExplosion_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleExplosion_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleExplosion_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleExplosion>(cls);
 
-    __jsb_cocos2dx_ParticleExplosion_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleExplosion_class = cls;
+    __jsb_cocos2d_ParticleExplosion_proto = cls->getProto();
+    __jsb_cocos2d_ParticleExplosion_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleSmoke_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleSmoke_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleSmoke_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleSmoke_class = nullptr;
 
 static bool js_cocos2dx_ParticleSmoke_init(se::State& s)
 {
@@ -38303,7 +38649,7 @@ static bool js_cocos2dx_ParticleSmoke_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleSmoke::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSmoke_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSmoke_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38324,7 +38670,7 @@ static bool js_cocos2dx_ParticleSmoke_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSmoke_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleSmoke::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSmoke_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSmoke_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38334,7 +38680,7 @@ static bool js_cocos2dx_ParticleSmoke_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleSmoke_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleSmoke_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleSmoke_finalize)
 
 static bool js_cocos2dx_ParticleSmoke_constructor(se::State& s)
 {
@@ -38343,11 +38689,13 @@ static bool js_cocos2dx_ParticleSmoke_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleSmoke_constructor, __jsb_cocos2dx_ParticleSmoke_class, js_cocos2dx_ParticleSmoke_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleSmoke_constructor, __jsb_cocos2d_ParticleSmoke_class, js_cocos2d_ParticleSmoke_finalize)
 
 
 
-bool js_cocos2dx_ParticleSmoke_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleSmoke_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -38360,28 +38708,28 @@ bool js_cocos2dx_ParticleSmoke_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleSmoke_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleSmoke_finalize)
 
 bool js_register_cocos2dx_ParticleSmoke(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleSmoke", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSmoke_constructor));
+    auto cls = se::Class::create("ParticleSmoke", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSmoke_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleSmoke_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleSmoke_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleSmoke_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleSmoke_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleSmoke_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleSmoke_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleSmoke>(cls);
 
-    __jsb_cocos2dx_ParticleSmoke_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleSmoke_class = cls;
+    __jsb_cocos2d_ParticleSmoke_proto = cls->getProto();
+    __jsb_cocos2d_ParticleSmoke_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleSnow_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleSnow_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleSnow_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleSnow_class = nullptr;
 
 static bool js_cocos2dx_ParticleSnow_init(se::State& s)
 {
@@ -38430,7 +38778,7 @@ static bool js_cocos2dx_ParticleSnow_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleSnow::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSnow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSnow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38451,7 +38799,7 @@ static bool js_cocos2dx_ParticleSnow_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleSnow_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleSnow::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleSnow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleSnow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38461,7 +38809,7 @@ static bool js_cocos2dx_ParticleSnow_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleSnow_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleSnow_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleSnow_finalize)
 
 static bool js_cocos2dx_ParticleSnow_constructor(se::State& s)
 {
@@ -38470,11 +38818,13 @@ static bool js_cocos2dx_ParticleSnow_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleSnow_constructor, __jsb_cocos2dx_ParticleSnow_class, js_cocos2dx_ParticleSnow_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleSnow_constructor, __jsb_cocos2d_ParticleSnow_class, js_cocos2d_ParticleSnow_finalize)
 
 
 
-bool js_cocos2dx_ParticleSnow_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleSnow_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -38487,28 +38837,28 @@ bool js_cocos2dx_ParticleSnow_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleSnow_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleSnow_finalize)
 
 bool js_register_cocos2dx_ParticleSnow(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleSnow", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSnow_constructor));
+    auto cls = se::Class::create("ParticleSnow", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleSnow_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleSnow_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleSnow_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleSnow_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleSnow_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleSnow_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleSnow_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleSnow>(cls);
 
-    __jsb_cocos2dx_ParticleSnow_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleSnow_class = cls;
+    __jsb_cocos2d_ParticleSnow_proto = cls->getProto();
+    __jsb_cocos2d_ParticleSnow_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParticleRain_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParticleRain_class = nullptr;
+se::Object* __jsb_cocos2d_ParticleRain_proto = nullptr;
+se::Class* __jsb_cocos2d_ParticleRain_class = nullptr;
 
 static bool js_cocos2dx_ParticleRain_init(se::State& s)
 {
@@ -38557,7 +38907,7 @@ static bool js_cocos2dx_ParticleRain_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParticleRain::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleRain_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleRain_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38578,7 +38928,7 @@ static bool js_cocos2dx_ParticleRain_createWithTotalParticles(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParticleRain_createWithTotalParticles : Error processing arguments");
         auto result = cocos2d::ParticleRain::createWithTotalParticles(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParticleRain_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParticleRain_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38588,7 +38938,7 @@ static bool js_cocos2dx_ParticleRain_createWithTotalParticles(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParticleRain_createWithTotalParticles)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParticleRain_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParticleRain_finalize)
 
 static bool js_cocos2dx_ParticleRain_constructor(se::State& s)
 {
@@ -38597,11 +38947,13 @@ static bool js_cocos2dx_ParticleRain_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParticleRain_constructor, __jsb_cocos2dx_ParticleRain_class, js_cocos2dx_ParticleRain_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParticleRain_constructor, __jsb_cocos2d_ParticleRain_class, js_cocos2d_ParticleRain_finalize)
 
 
 
-bool js_cocos2dx_ParticleRain_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+
+bool js_cocos2d_ParticleRain_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -38614,28 +38966,28 @@ bool js_cocos2dx_ParticleRain_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParticleRain_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParticleRain_finalize)
 
 bool js_register_cocos2dx_ParticleRain(se::Object* obj)
 {
-    auto cls = se::Class::create("ParticleRain", obj, __jsb_cocos2dx_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleRain_constructor));
+    auto cls = se::Class::create("ParticleRain", obj, __jsb_cocos2d_ParticleSystemQuad_proto, _SE(js_cocos2dx_ParticleRain_constructor));
 
     cls->defineFunction("init", _SE(js_cocos2dx_ParticleRain_init));
     cls->defineFunction("initWithTotalParticles", _SE(js_cocos2dx_ParticleRain_initWithTotalParticles));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParticleRain_create));
     cls->defineStaticFunction("createWithTotalParticles", _SE(js_cocos2dx_ParticleRain_createWithTotalParticles));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParticleRain_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParticleRain_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParticleRain>(cls);
 
-    __jsb_cocos2dx_ParticleRain_proto = cls->getProto();
-    __jsb_cocos2dx_ParticleRain_class = cls;
+    __jsb_cocos2d_ParticleRain_proto = cls->getProto();
+    __jsb_cocos2d_ParticleRain_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ProgressTimer_proto = nullptr;
-se::Class* __jsb_cocos2dx_ProgressTimer_class = nullptr;
+se::Object* __jsb_cocos2d_ProgressTimer_proto = nullptr;
+se::Class* __jsb_cocos2d_ProgressTimer_class = nullptr;
 
 static bool js_cocos2dx_ProgressTimer_initWithSprite(se::State& s)
 {
@@ -38891,7 +39243,7 @@ static bool js_cocos2dx_ProgressTimer_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ProgressTimer_create : Error processing arguments");
         auto result = cocos2d::ProgressTimer::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ProgressTimer_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ProgressTimer_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -38901,7 +39253,7 @@ static bool js_cocos2dx_ProgressTimer_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ProgressTimer_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ProgressTimer_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ProgressTimer_finalize)
 
 static bool js_cocos2dx_ProgressTimer_constructor(se::State& s)
 {
@@ -38910,7 +39262,7 @@ static bool js_cocos2dx_ProgressTimer_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ProgressTimer_constructor, __jsb_cocos2dx_ProgressTimer_class, js_cocos2dx_ProgressTimer_finalize)
+SE_BIND_CTOR(js_cocos2dx_ProgressTimer_constructor, __jsb_cocos2d_ProgressTimer_class, js_cocos2d_ProgressTimer_finalize)
 
 static bool js_cocos2dx_ProgressTimer_ctor(se::State& s)
 {
@@ -38919,12 +39271,14 @@ static bool js_cocos2dx_ProgressTimer_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ProgressTimer_ctor, __jsb_cocos2dx_ProgressTimer_class, js_cocos2dx_ProgressTimer_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ProgressTimer_ctor, __jsb_cocos2d_ProgressTimer_class, js_cocos2d_ProgressTimer_finalize)
 
 
     
 
-bool js_cocos2dx_ProgressTimer_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_ProgressTimer_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -38937,11 +39291,11 @@ bool js_cocos2dx_ProgressTimer_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ProgressTimer_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ProgressTimer_finalize)
 
 bool js_register_cocos2dx_ProgressTimer(se::Object* obj)
 {
-    auto cls = se::Class::create("ProgressTimer", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_ProgressTimer_constructor));
+    auto cls = se::Class::create("ProgressTimer", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ProgressTimer_constructor));
 
     cls->defineFunction("initWithSprite", _SE(js_cocos2dx_ProgressTimer_initWithSprite));
     cls->defineFunction("isReverseDirection", _SE(js_cocos2dx_ProgressTimer_isReverseDirection));
@@ -38958,19 +39312,19 @@ bool js_register_cocos2dx_ProgressTimer(se::Object* obj)
     cls->defineFunction("setType", _SE(js_cocos2dx_ProgressTimer_setType));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ProgressTimer_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ProgressTimer_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ProgressTimer_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ProgressTimer_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ProgressTimer>(cls);
 
-    __jsb_cocos2dx_ProgressTimer_proto = cls->getProto();
-    __jsb_cocos2dx_ProgressTimer_class = cls;
+    __jsb_cocos2d_ProgressTimer_proto = cls->getProto();
+    __jsb_cocos2d_ProgressTimer_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ProgressTimer.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ProtectedNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_ProtectedNode_class = nullptr;
+se::Object* __jsb_cocos2d_ProtectedNode_proto = nullptr;
+se::Class* __jsb_cocos2d_ProtectedNode_class = nullptr;
 
 static bool js_cocos2dx_ProtectedNode_addProtectedChild(se::State& s)
 {
@@ -39208,7 +39562,7 @@ static bool js_cocos2dx_ProtectedNode_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ProtectedNode::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ProtectedNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ProtectedNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -39218,7 +39572,7 @@ static bool js_cocos2dx_ProtectedNode_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ProtectedNode_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ProtectedNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ProtectedNode_finalize)
 
 static bool js_cocos2dx_ProtectedNode_constructor(se::State& s)
 {
@@ -39227,11 +39581,13 @@ static bool js_cocos2dx_ProtectedNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ProtectedNode_constructor, __jsb_cocos2dx_ProtectedNode_class, js_cocos2dx_ProtectedNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_ProtectedNode_constructor, __jsb_cocos2d_ProtectedNode_class, js_cocos2d_ProtectedNode_finalize)
 
 
 
-bool js_cocos2dx_ProtectedNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_ProtectedNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -39244,11 +39600,11 @@ bool js_cocos2dx_ProtectedNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ProtectedNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ProtectedNode_finalize)
 
 bool js_register_cocos2dx_ProtectedNode(se::Object* obj)
 {
-    auto cls = se::Class::create("ProtectedNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_ProtectedNode_constructor));
+    auto cls = se::Class::create("ProtectedNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ProtectedNode_constructor));
 
     cls->defineFunction("addProtectedChild", _SE(js_cocos2dx_ProtectedNode_addProtectedChild));
     cls->defineFunction("disableCascadeColor", _SE(js_cocos2dx_ProtectedNode_disableCascadeColor));
@@ -39261,18 +39617,18 @@ bool js_register_cocos2dx_ProtectedNode(se::Object* obj)
     cls->defineFunction("removeProtectedChild", _SE(js_cocos2dx_ProtectedNode_removeProtectedChild));
     cls->defineFunction("removeAllProtectedChildren", _SE(js_cocos2dx_ProtectedNode_removeAllProtectedChildren));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ProtectedNode_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ProtectedNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ProtectedNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ProtectedNode>(cls);
 
-    __jsb_cocos2dx_ProtectedNode_proto = cls->getProto();
-    __jsb_cocos2dx_ProtectedNode_class = cls;
+    __jsb_cocos2d_ProtectedNode_proto = cls->getProto();
+    __jsb_cocos2d_ProtectedNode_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Sprite_proto = nullptr;
-se::Class* __jsb_cocos2dx_Sprite_class = nullptr;
+se::Object* __jsb_cocos2d_Sprite_proto = nullptr;
+se::Class* __jsb_cocos2d_Sprite_class = nullptr;
 
 static bool js_cocos2dx_Sprite_setSpriteFrame(se::State& s)
 {
@@ -40108,7 +40464,7 @@ static bool js_cocos2dx_Sprite_setVertexRect(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Sprite_setVertexRect)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Sprite_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Sprite_finalize)
 
 static bool js_cocos2dx_Sprite_constructor(se::State& s)
 {
@@ -40117,7 +40473,7 @@ static bool js_cocos2dx_Sprite_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Sprite_constructor, __jsb_cocos2dx_Sprite_class, js_cocos2dx_Sprite_finalize)
+SE_BIND_CTOR(js_cocos2dx_Sprite_constructor, __jsb_cocos2d_Sprite_class, js_cocos2d_Sprite_finalize)
 
 static bool js_cocos2dx_Sprite_ctor(se::State& s)
 {
@@ -40126,12 +40482,14 @@ static bool js_cocos2dx_Sprite_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Sprite_ctor, __jsb_cocos2dx_Sprite_class, js_cocos2dx_Sprite_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Sprite_ctor, __jsb_cocos2d_Sprite_class, js_cocos2d_Sprite_finalize)
 
 
     
 
-bool js_cocos2dx_Sprite_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_Sprite_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -40144,11 +40502,11 @@ bool js_cocos2dx_Sprite_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Sprite_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Sprite_finalize)
 
 bool js_register_cocos2dx_Sprite(se::Object* obj)
 {
-    auto cls = se::Class::create("Sprite", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_Sprite_constructor));
+    auto cls = se::Class::create("Sprite", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_Sprite_constructor));
 
     cls->defineFunction("setSpriteFrame", _SE(js_cocos2dx_Sprite_setSpriteFrame));
     cls->defineFunction("setTexture", _SE(js_cocos2dx_Sprite_setTexture));
@@ -40190,19 +40548,19 @@ bool js_register_cocos2dx_Sprite(se::Object* obj)
     cls->defineFunction("isFlippedY", _SE(js_cocos2dx_Sprite_isFlippedY));
     cls->defineFunction("setVertexRect", _SE(js_cocos2dx_Sprite_setVertexRect));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Sprite_ctor));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Sprite_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Sprite_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Sprite>(cls);
 
-    __jsb_cocos2dx_Sprite_proto = cls->getProto();
-    __jsb_cocos2dx_Sprite_class = cls;
+    __jsb_cocos2d_Sprite_proto = cls->getProto();
+    __jsb_cocos2d_Sprite_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Sprite.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_RenderTexture_proto = nullptr;
-se::Class* __jsb_cocos2dx_RenderTexture_class = nullptr;
+se::Object* __jsb_cocos2d_RenderTexture_proto = nullptr;
+se::Class* __jsb_cocos2d_RenderTexture_class = nullptr;
 
 static bool js_cocos2dx_RenderTexture_setVirtualViewport(se::State& s)
 {
@@ -40778,7 +41136,7 @@ static bool js_cocos2dx_RenderTexture_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_RenderTexture_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_RenderTexture_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_RenderTexture_finalize)
 
 static bool js_cocos2dx_RenderTexture_constructor(se::State& s)
 {
@@ -40787,7 +41145,7 @@ static bool js_cocos2dx_RenderTexture_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_RenderTexture_constructor, __jsb_cocos2dx_RenderTexture_class, js_cocos2dx_RenderTexture_finalize)
+SE_BIND_CTOR(js_cocos2dx_RenderTexture_constructor, __jsb_cocos2d_RenderTexture_class, js_cocos2d_RenderTexture_finalize)
 
 static bool js_cocos2dx_RenderTexture_ctor(se::State& s)
 {
@@ -40796,12 +41154,14 @@ static bool js_cocos2dx_RenderTexture_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RenderTexture_ctor, __jsb_cocos2dx_RenderTexture_class, js_cocos2dx_RenderTexture_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_RenderTexture_ctor, __jsb_cocos2d_RenderTexture_class, js_cocos2d_RenderTexture_finalize)
 
 
     
 
-bool js_cocos2dx_RenderTexture_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_RenderTexture_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -40814,11 +41174,11 @@ bool js_cocos2dx_RenderTexture_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_RenderTexture_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_RenderTexture_finalize)
 
 bool js_register_cocos2dx_RenderTexture(se::Object* obj)
 {
-    auto cls = se::Class::create("RenderTexture", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_RenderTexture_constructor));
+    auto cls = se::Class::create("RenderTexture", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_RenderTexture_constructor));
 
     cls->defineFunction("setVirtualViewport", _SE(js_cocos2dx_RenderTexture_setVirtualViewport));
     cls->defineFunction("clearStencil", _SE(js_cocos2dx_RenderTexture_clearStencil));
@@ -40844,19 +41204,19 @@ bool js_register_cocos2dx_RenderTexture(se::Object* obj)
     cls->defineFunction("initWithWidthAndHeight", _SE(js_cocos2dx_RenderTexture_initWithWidthAndHeight));
     cls->defineFunction("ctor", _SE(js_cocos2dx_RenderTexture_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_RenderTexture_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_RenderTexture_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_RenderTexture_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::RenderTexture>(cls);
 
-    __jsb_cocos2dx_RenderTexture_proto = cls->getProto();
-    __jsb_cocos2dx_RenderTexture_class = cls;
+    __jsb_cocos2d_RenderTexture_proto = cls->getProto();
+    __jsb_cocos2d_RenderTexture_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.RenderTexture.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionEaseScene_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionEaseScene_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionEaseScene_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionEaseScene_class = nullptr;
 
 static bool js_cocos2dx_TransitionEaseScene_easeActionWithAction(se::State& s)
 {
@@ -40881,6 +41241,7 @@ SE_BIND_FUNC(js_cocos2dx_TransitionEaseScene_easeActionWithAction)
 
 
 
+
 bool js_register_cocos2dx_TransitionEaseScene(se::Object* obj)
 {
     auto cls = se::Class::create("TransitionEaseScene", obj, nullptr, nullptr);
@@ -40889,14 +41250,14 @@ bool js_register_cocos2dx_TransitionEaseScene(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionEaseScene>(cls);
 
-    __jsb_cocos2dx_TransitionEaseScene_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionEaseScene_class = cls;
+    __jsb_cocos2d_TransitionEaseScene_proto = cls->getProto();
+    __jsb_cocos2d_TransitionEaseScene_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionScene_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionScene_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionScene_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionScene_class = nullptr;
 
 static bool js_cocos2dx_TransitionScene_getInScene(se::State& s)
 {
@@ -41000,7 +41361,7 @@ static bool js_cocos2dx_TransitionScene_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionScene_create : Error processing arguments");
         auto result = cocos2d::TransitionScene::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionScene_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionScene_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41010,7 +41371,7 @@ static bool js_cocos2dx_TransitionScene_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionScene_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionScene_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionScene_finalize)
 
 static bool js_cocos2dx_TransitionScene_constructor(se::State& s)
 {
@@ -41019,7 +41380,7 @@ static bool js_cocos2dx_TransitionScene_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionScene_constructor, __jsb_cocos2dx_TransitionScene_class, js_cocos2dx_TransitionScene_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionScene_constructor, __jsb_cocos2d_TransitionScene_class, js_cocos2d_TransitionScene_finalize)
 
 static bool js_cocos2dx_TransitionScene_ctor(se::State& s)
 {
@@ -41028,12 +41389,14 @@ static bool js_cocos2dx_TransitionScene_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionScene_ctor, __jsb_cocos2dx_TransitionScene_class, js_cocos2dx_TransitionScene_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionScene_ctor, __jsb_cocos2d_TransitionScene_class, js_cocos2d_TransitionScene_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionScene_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Scene_proto;
+
+bool js_cocos2d_TransitionScene_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41046,11 +41409,11 @@ bool js_cocos2dx_TransitionScene_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionScene_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionScene_finalize)
 
 bool js_register_cocos2dx_TransitionScene(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionScene", obj, __jsb_cocos2dx_Scene_proto, _SE(js_cocos2dx_TransitionScene_constructor));
+    auto cls = se::Class::create("TransitionScene", obj, __jsb_cocos2d_Scene_proto, _SE(js_cocos2dx_TransitionScene_constructor));
 
     cls->defineFunction("getInScene", _SE(js_cocos2dx_TransitionScene_getInScene));
     cls->defineFunction("finish", _SE(js_cocos2dx_TransitionScene_finish));
@@ -41059,19 +41422,19 @@ bool js_register_cocos2dx_TransitionScene(se::Object* obj)
     cls->defineFunction("hideOutShowIn", _SE(js_cocos2dx_TransitionScene_hideOutShowIn));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionScene_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionScene_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionScene_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionScene_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionScene>(cls);
 
-    __jsb_cocos2dx_TransitionScene_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionScene_class = cls;
+    __jsb_cocos2d_TransitionScene_proto = cls->getProto();
+    __jsb_cocos2d_TransitionScene_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionScene.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSceneOriented_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSceneOriented_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSceneOriented_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSceneOriented_class = nullptr;
 
 static bool js_cocos2dx_TransitionSceneOriented_initWithDuration(se::State& s)
 {
@@ -41113,7 +41476,7 @@ static bool js_cocos2dx_TransitionSceneOriented_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSceneOriented_create : Error processing arguments");
         auto result = cocos2d::TransitionSceneOriented::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSceneOriented_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSceneOriented_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41123,7 +41486,7 @@ static bool js_cocos2dx_TransitionSceneOriented_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSceneOriented_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSceneOriented_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSceneOriented_finalize)
 
 static bool js_cocos2dx_TransitionSceneOriented_constructor(se::State& s)
 {
@@ -41132,7 +41495,7 @@ static bool js_cocos2dx_TransitionSceneOriented_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSceneOriented_constructor, __jsb_cocos2dx_TransitionSceneOriented_class, js_cocos2dx_TransitionSceneOriented_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSceneOriented_constructor, __jsb_cocos2d_TransitionSceneOriented_class, js_cocos2d_TransitionSceneOriented_finalize)
 
 static bool js_cocos2dx_TransitionSceneOriented_ctor(se::State& s)
 {
@@ -41141,12 +41504,14 @@ static bool js_cocos2dx_TransitionSceneOriented_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSceneOriented_ctor, __jsb_cocos2dx_TransitionSceneOriented_class, js_cocos2dx_TransitionSceneOriented_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSceneOriented_ctor, __jsb_cocos2d_TransitionSceneOriented_class, js_cocos2d_TransitionSceneOriented_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSceneOriented_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionSceneOriented_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41159,28 +41524,28 @@ bool js_cocos2dx_TransitionSceneOriented_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSceneOriented_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSceneOriented_finalize)
 
 bool js_register_cocos2dx_TransitionSceneOriented(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSceneOriented", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionSceneOriented_constructor));
+    auto cls = se::Class::create("TransitionSceneOriented", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionSceneOriented_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_TransitionSceneOriented_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSceneOriented_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSceneOriented_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSceneOriented_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSceneOriented_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSceneOriented>(cls);
 
-    __jsb_cocos2dx_TransitionSceneOriented_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSceneOriented_class = cls;
+    __jsb_cocos2d_TransitionSceneOriented_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSceneOriented_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSceneOriented.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionRotoZoom_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionRotoZoom_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionRotoZoom_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionRotoZoom_class = nullptr;
 
 static bool js_cocos2dx_TransitionRotoZoom_create(se::State& s)
 {
@@ -41195,7 +41560,7 @@ static bool js_cocos2dx_TransitionRotoZoom_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionRotoZoom_create : Error processing arguments");
         auto result = cocos2d::TransitionRotoZoom::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionRotoZoom_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionRotoZoom_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41205,7 +41570,7 @@ static bool js_cocos2dx_TransitionRotoZoom_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionRotoZoom_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionRotoZoom_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionRotoZoom_finalize)
 
 static bool js_cocos2dx_TransitionRotoZoom_constructor(se::State& s)
 {
@@ -41214,7 +41579,7 @@ static bool js_cocos2dx_TransitionRotoZoom_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionRotoZoom_constructor, __jsb_cocos2dx_TransitionRotoZoom_class, js_cocos2dx_TransitionRotoZoom_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionRotoZoom_constructor, __jsb_cocos2d_TransitionRotoZoom_class, js_cocos2d_TransitionRotoZoom_finalize)
 
 static bool js_cocos2dx_TransitionRotoZoom_ctor(se::State& s)
 {
@@ -41223,12 +41588,14 @@ static bool js_cocos2dx_TransitionRotoZoom_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionRotoZoom_ctor, __jsb_cocos2dx_TransitionRotoZoom_class, js_cocos2dx_TransitionRotoZoom_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionRotoZoom_ctor, __jsb_cocos2d_TransitionRotoZoom_class, js_cocos2d_TransitionRotoZoom_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionRotoZoom_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionRotoZoom_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41241,27 +41608,27 @@ bool js_cocos2dx_TransitionRotoZoom_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionRotoZoom_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionRotoZoom_finalize)
 
 bool js_register_cocos2dx_TransitionRotoZoom(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionRotoZoom", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionRotoZoom_constructor));
+    auto cls = se::Class::create("TransitionRotoZoom", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionRotoZoom_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionRotoZoom_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionRotoZoom_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionRotoZoom_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionRotoZoom_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionRotoZoom>(cls);
 
-    __jsb_cocos2dx_TransitionRotoZoom_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionRotoZoom_class = cls;
+    __jsb_cocos2d_TransitionRotoZoom_proto = cls->getProto();
+    __jsb_cocos2d_TransitionRotoZoom_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionRotoZoom.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionJumpZoom_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionJumpZoom_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionJumpZoom_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionJumpZoom_class = nullptr;
 
 static bool js_cocos2dx_TransitionJumpZoom_create(se::State& s)
 {
@@ -41276,7 +41643,7 @@ static bool js_cocos2dx_TransitionJumpZoom_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionJumpZoom_create : Error processing arguments");
         auto result = cocos2d::TransitionJumpZoom::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionJumpZoom_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionJumpZoom_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41286,7 +41653,7 @@ static bool js_cocos2dx_TransitionJumpZoom_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionJumpZoom_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionJumpZoom_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionJumpZoom_finalize)
 
 static bool js_cocos2dx_TransitionJumpZoom_constructor(se::State& s)
 {
@@ -41295,7 +41662,7 @@ static bool js_cocos2dx_TransitionJumpZoom_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionJumpZoom_constructor, __jsb_cocos2dx_TransitionJumpZoom_class, js_cocos2dx_TransitionJumpZoom_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionJumpZoom_constructor, __jsb_cocos2d_TransitionJumpZoom_class, js_cocos2d_TransitionJumpZoom_finalize)
 
 static bool js_cocos2dx_TransitionJumpZoom_ctor(se::State& s)
 {
@@ -41304,12 +41671,14 @@ static bool js_cocos2dx_TransitionJumpZoom_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionJumpZoom_ctor, __jsb_cocos2dx_TransitionJumpZoom_class, js_cocos2dx_TransitionJumpZoom_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionJumpZoom_ctor, __jsb_cocos2d_TransitionJumpZoom_class, js_cocos2d_TransitionJumpZoom_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionJumpZoom_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionJumpZoom_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41322,27 +41691,27 @@ bool js_cocos2dx_TransitionJumpZoom_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionJumpZoom_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionJumpZoom_finalize)
 
 bool js_register_cocos2dx_TransitionJumpZoom(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionJumpZoom", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionJumpZoom_constructor));
+    auto cls = se::Class::create("TransitionJumpZoom", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionJumpZoom_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionJumpZoom_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionJumpZoom_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionJumpZoom_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionJumpZoom_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionJumpZoom>(cls);
 
-    __jsb_cocos2dx_TransitionJumpZoom_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionJumpZoom_class = cls;
+    __jsb_cocos2d_TransitionJumpZoom_proto = cls->getProto();
+    __jsb_cocos2d_TransitionJumpZoom_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionJumpZoom.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionMoveInL_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionMoveInL_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionMoveInL_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionMoveInL_class = nullptr;
 
 static bool js_cocos2dx_TransitionMoveInL_action(se::State& s)
 {
@@ -41396,7 +41765,7 @@ static bool js_cocos2dx_TransitionMoveInL_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionMoveInL_create : Error processing arguments");
         auto result = cocos2d::TransitionMoveInL::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionMoveInL_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionMoveInL_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41406,7 +41775,7 @@ static bool js_cocos2dx_TransitionMoveInL_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionMoveInL_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInL_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionMoveInL_finalize)
 
 static bool js_cocos2dx_TransitionMoveInL_constructor(se::State& s)
 {
@@ -41415,7 +41784,7 @@ static bool js_cocos2dx_TransitionMoveInL_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionMoveInL_constructor, __jsb_cocos2dx_TransitionMoveInL_class, js_cocos2dx_TransitionMoveInL_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionMoveInL_constructor, __jsb_cocos2d_TransitionMoveInL_class, js_cocos2d_TransitionMoveInL_finalize)
 
 static bool js_cocos2dx_TransitionMoveInL_ctor(se::State& s)
 {
@@ -41424,12 +41793,14 @@ static bool js_cocos2dx_TransitionMoveInL_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInL_ctor, __jsb_cocos2dx_TransitionMoveInL_class, js_cocos2dx_TransitionMoveInL_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInL_ctor, __jsb_cocos2d_TransitionMoveInL_class, js_cocos2d_TransitionMoveInL_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionMoveInL_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionMoveInL_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41442,29 +41813,29 @@ bool js_cocos2dx_TransitionMoveInL_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInL_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionMoveInL_finalize)
 
 bool js_register_cocos2dx_TransitionMoveInL(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionMoveInL", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionMoveInL_constructor));
+    auto cls = se::Class::create("TransitionMoveInL", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionMoveInL_constructor));
 
     cls->defineFunction("action", _SE(js_cocos2dx_TransitionMoveInL_action));
     cls->defineFunction("easeActionWithAction", _SE(js_cocos2dx_TransitionMoveInL_easeActionWithAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionMoveInL_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionMoveInL_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionMoveInL_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionMoveInL_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionMoveInL>(cls);
 
-    __jsb_cocos2dx_TransitionMoveInL_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionMoveInL_class = cls;
+    __jsb_cocos2d_TransitionMoveInL_proto = cls->getProto();
+    __jsb_cocos2d_TransitionMoveInL_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionMoveInL.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionMoveInR_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionMoveInR_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionMoveInR_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionMoveInR_class = nullptr;
 
 static bool js_cocos2dx_TransitionMoveInR_create(se::State& s)
 {
@@ -41479,7 +41850,7 @@ static bool js_cocos2dx_TransitionMoveInR_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionMoveInR_create : Error processing arguments");
         auto result = cocos2d::TransitionMoveInR::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionMoveInR_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionMoveInR_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41489,7 +41860,7 @@ static bool js_cocos2dx_TransitionMoveInR_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionMoveInR_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInR_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionMoveInR_finalize)
 
 static bool js_cocos2dx_TransitionMoveInR_constructor(se::State& s)
 {
@@ -41498,7 +41869,7 @@ static bool js_cocos2dx_TransitionMoveInR_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionMoveInR_constructor, __jsb_cocos2dx_TransitionMoveInR_class, js_cocos2dx_TransitionMoveInR_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionMoveInR_constructor, __jsb_cocos2d_TransitionMoveInR_class, js_cocos2d_TransitionMoveInR_finalize)
 
 static bool js_cocos2dx_TransitionMoveInR_ctor(se::State& s)
 {
@@ -41507,12 +41878,14 @@ static bool js_cocos2dx_TransitionMoveInR_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInR_ctor, __jsb_cocos2dx_TransitionMoveInR_class, js_cocos2dx_TransitionMoveInR_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInR_ctor, __jsb_cocos2d_TransitionMoveInR_class, js_cocos2d_TransitionMoveInR_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionMoveInR_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionMoveInL_proto;
+
+bool js_cocos2d_TransitionMoveInR_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41525,27 +41898,27 @@ bool js_cocos2dx_TransitionMoveInR_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInR_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionMoveInR_finalize)
 
 bool js_register_cocos2dx_TransitionMoveInR(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionMoveInR", obj, __jsb_cocos2dx_TransitionMoveInL_proto, _SE(js_cocos2dx_TransitionMoveInR_constructor));
+    auto cls = se::Class::create("TransitionMoveInR", obj, __jsb_cocos2d_TransitionMoveInL_proto, _SE(js_cocos2dx_TransitionMoveInR_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionMoveInR_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionMoveInR_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionMoveInR_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionMoveInR_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionMoveInR>(cls);
 
-    __jsb_cocos2dx_TransitionMoveInR_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionMoveInR_class = cls;
+    __jsb_cocos2d_TransitionMoveInR_proto = cls->getProto();
+    __jsb_cocos2d_TransitionMoveInR_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionMoveInR.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionMoveInT_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionMoveInT_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionMoveInT_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionMoveInT_class = nullptr;
 
 static bool js_cocos2dx_TransitionMoveInT_create(se::State& s)
 {
@@ -41560,7 +41933,7 @@ static bool js_cocos2dx_TransitionMoveInT_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionMoveInT_create : Error processing arguments");
         auto result = cocos2d::TransitionMoveInT::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionMoveInT_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionMoveInT_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41570,7 +41943,7 @@ static bool js_cocos2dx_TransitionMoveInT_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionMoveInT_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInT_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionMoveInT_finalize)
 
 static bool js_cocos2dx_TransitionMoveInT_constructor(se::State& s)
 {
@@ -41579,7 +41952,7 @@ static bool js_cocos2dx_TransitionMoveInT_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionMoveInT_constructor, __jsb_cocos2dx_TransitionMoveInT_class, js_cocos2dx_TransitionMoveInT_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionMoveInT_constructor, __jsb_cocos2d_TransitionMoveInT_class, js_cocos2d_TransitionMoveInT_finalize)
 
 static bool js_cocos2dx_TransitionMoveInT_ctor(se::State& s)
 {
@@ -41588,12 +41961,14 @@ static bool js_cocos2dx_TransitionMoveInT_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInT_ctor, __jsb_cocos2dx_TransitionMoveInT_class, js_cocos2dx_TransitionMoveInT_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInT_ctor, __jsb_cocos2d_TransitionMoveInT_class, js_cocos2d_TransitionMoveInT_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionMoveInT_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionMoveInL_proto;
+
+bool js_cocos2d_TransitionMoveInT_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41606,27 +41981,27 @@ bool js_cocos2dx_TransitionMoveInT_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInT_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionMoveInT_finalize)
 
 bool js_register_cocos2dx_TransitionMoveInT(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionMoveInT", obj, __jsb_cocos2dx_TransitionMoveInL_proto, _SE(js_cocos2dx_TransitionMoveInT_constructor));
+    auto cls = se::Class::create("TransitionMoveInT", obj, __jsb_cocos2d_TransitionMoveInL_proto, _SE(js_cocos2dx_TransitionMoveInT_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionMoveInT_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionMoveInT_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionMoveInT_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionMoveInT_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionMoveInT>(cls);
 
-    __jsb_cocos2dx_TransitionMoveInT_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionMoveInT_class = cls;
+    __jsb_cocos2d_TransitionMoveInT_proto = cls->getProto();
+    __jsb_cocos2d_TransitionMoveInT_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionMoveInT.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionMoveInB_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionMoveInB_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionMoveInB_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionMoveInB_class = nullptr;
 
 static bool js_cocos2dx_TransitionMoveInB_create(se::State& s)
 {
@@ -41641,7 +42016,7 @@ static bool js_cocos2dx_TransitionMoveInB_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionMoveInB_create : Error processing arguments");
         auto result = cocos2d::TransitionMoveInB::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionMoveInB_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionMoveInB_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41651,7 +42026,7 @@ static bool js_cocos2dx_TransitionMoveInB_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionMoveInB_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInB_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionMoveInB_finalize)
 
 static bool js_cocos2dx_TransitionMoveInB_constructor(se::State& s)
 {
@@ -41660,7 +42035,7 @@ static bool js_cocos2dx_TransitionMoveInB_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionMoveInB_constructor, __jsb_cocos2dx_TransitionMoveInB_class, js_cocos2dx_TransitionMoveInB_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionMoveInB_constructor, __jsb_cocos2d_TransitionMoveInB_class, js_cocos2d_TransitionMoveInB_finalize)
 
 static bool js_cocos2dx_TransitionMoveInB_ctor(se::State& s)
 {
@@ -41669,12 +42044,14 @@ static bool js_cocos2dx_TransitionMoveInB_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInB_ctor, __jsb_cocos2dx_TransitionMoveInB_class, js_cocos2dx_TransitionMoveInB_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionMoveInB_ctor, __jsb_cocos2d_TransitionMoveInB_class, js_cocos2d_TransitionMoveInB_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionMoveInB_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionMoveInL_proto;
+
+bool js_cocos2d_TransitionMoveInB_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41687,27 +42064,27 @@ bool js_cocos2dx_TransitionMoveInB_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionMoveInB_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionMoveInB_finalize)
 
 bool js_register_cocos2dx_TransitionMoveInB(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionMoveInB", obj, __jsb_cocos2dx_TransitionMoveInL_proto, _SE(js_cocos2dx_TransitionMoveInB_constructor));
+    auto cls = se::Class::create("TransitionMoveInB", obj, __jsb_cocos2d_TransitionMoveInL_proto, _SE(js_cocos2dx_TransitionMoveInB_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionMoveInB_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionMoveInB_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionMoveInB_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionMoveInB_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionMoveInB>(cls);
 
-    __jsb_cocos2dx_TransitionMoveInB_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionMoveInB_class = cls;
+    __jsb_cocos2d_TransitionMoveInB_proto = cls->getProto();
+    __jsb_cocos2d_TransitionMoveInB_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionMoveInB.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSlideInL_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSlideInL_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSlideInL_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSlideInL_class = nullptr;
 
 static bool js_cocos2dx_TransitionSlideInL_action(se::State& s)
 {
@@ -41761,7 +42138,7 @@ static bool js_cocos2dx_TransitionSlideInL_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSlideInL_create : Error processing arguments");
         auto result = cocos2d::TransitionSlideInL::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSlideInL_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSlideInL_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41771,7 +42148,7 @@ static bool js_cocos2dx_TransitionSlideInL_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSlideInL_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInL_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSlideInL_finalize)
 
 static bool js_cocos2dx_TransitionSlideInL_constructor(se::State& s)
 {
@@ -41780,7 +42157,7 @@ static bool js_cocos2dx_TransitionSlideInL_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSlideInL_constructor, __jsb_cocos2dx_TransitionSlideInL_class, js_cocos2dx_TransitionSlideInL_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSlideInL_constructor, __jsb_cocos2d_TransitionSlideInL_class, js_cocos2d_TransitionSlideInL_finalize)
 
 static bool js_cocos2dx_TransitionSlideInL_ctor(se::State& s)
 {
@@ -41789,12 +42166,14 @@ static bool js_cocos2dx_TransitionSlideInL_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInL_ctor, __jsb_cocos2dx_TransitionSlideInL_class, js_cocos2dx_TransitionSlideInL_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInL_ctor, __jsb_cocos2d_TransitionSlideInL_class, js_cocos2d_TransitionSlideInL_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSlideInL_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionSlideInL_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41807,29 +42186,29 @@ bool js_cocos2dx_TransitionSlideInL_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInL_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSlideInL_finalize)
 
 bool js_register_cocos2dx_TransitionSlideInL(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSlideInL", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionSlideInL_constructor));
+    auto cls = se::Class::create("TransitionSlideInL", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionSlideInL_constructor));
 
     cls->defineFunction("action", _SE(js_cocos2dx_TransitionSlideInL_action));
     cls->defineFunction("easeActionWithAction", _SE(js_cocos2dx_TransitionSlideInL_easeActionWithAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSlideInL_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSlideInL_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSlideInL_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSlideInL_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSlideInL>(cls);
 
-    __jsb_cocos2dx_TransitionSlideInL_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSlideInL_class = cls;
+    __jsb_cocos2d_TransitionSlideInL_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSlideInL_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSlideInL.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSlideInR_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSlideInR_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSlideInR_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSlideInR_class = nullptr;
 
 static bool js_cocos2dx_TransitionSlideInR_create(se::State& s)
 {
@@ -41844,7 +42223,7 @@ static bool js_cocos2dx_TransitionSlideInR_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSlideInR_create : Error processing arguments");
         auto result = cocos2d::TransitionSlideInR::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSlideInR_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSlideInR_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41854,7 +42233,7 @@ static bool js_cocos2dx_TransitionSlideInR_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSlideInR_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInR_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSlideInR_finalize)
 
 static bool js_cocos2dx_TransitionSlideInR_constructor(se::State& s)
 {
@@ -41863,7 +42242,7 @@ static bool js_cocos2dx_TransitionSlideInR_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSlideInR_constructor, __jsb_cocos2dx_TransitionSlideInR_class, js_cocos2dx_TransitionSlideInR_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSlideInR_constructor, __jsb_cocos2d_TransitionSlideInR_class, js_cocos2d_TransitionSlideInR_finalize)
 
 static bool js_cocos2dx_TransitionSlideInR_ctor(se::State& s)
 {
@@ -41872,12 +42251,14 @@ static bool js_cocos2dx_TransitionSlideInR_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInR_ctor, __jsb_cocos2dx_TransitionSlideInR_class, js_cocos2dx_TransitionSlideInR_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInR_ctor, __jsb_cocos2d_TransitionSlideInR_class, js_cocos2d_TransitionSlideInR_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSlideInR_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSlideInL_proto;
+
+bool js_cocos2d_TransitionSlideInR_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41890,27 +42271,27 @@ bool js_cocos2dx_TransitionSlideInR_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInR_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSlideInR_finalize)
 
 bool js_register_cocos2dx_TransitionSlideInR(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSlideInR", obj, __jsb_cocos2dx_TransitionSlideInL_proto, _SE(js_cocos2dx_TransitionSlideInR_constructor));
+    auto cls = se::Class::create("TransitionSlideInR", obj, __jsb_cocos2d_TransitionSlideInL_proto, _SE(js_cocos2dx_TransitionSlideInR_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSlideInR_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSlideInR_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSlideInR_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSlideInR_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSlideInR>(cls);
 
-    __jsb_cocos2dx_TransitionSlideInR_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSlideInR_class = cls;
+    __jsb_cocos2d_TransitionSlideInR_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSlideInR_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSlideInR.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSlideInB_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSlideInB_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSlideInB_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSlideInB_class = nullptr;
 
 static bool js_cocos2dx_TransitionSlideInB_create(se::State& s)
 {
@@ -41925,7 +42306,7 @@ static bool js_cocos2dx_TransitionSlideInB_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSlideInB_create : Error processing arguments");
         auto result = cocos2d::TransitionSlideInB::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSlideInB_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSlideInB_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -41935,7 +42316,7 @@ static bool js_cocos2dx_TransitionSlideInB_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSlideInB_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInB_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSlideInB_finalize)
 
 static bool js_cocos2dx_TransitionSlideInB_constructor(se::State& s)
 {
@@ -41944,7 +42325,7 @@ static bool js_cocos2dx_TransitionSlideInB_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSlideInB_constructor, __jsb_cocos2dx_TransitionSlideInB_class, js_cocos2dx_TransitionSlideInB_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSlideInB_constructor, __jsb_cocos2d_TransitionSlideInB_class, js_cocos2d_TransitionSlideInB_finalize)
 
 static bool js_cocos2dx_TransitionSlideInB_ctor(se::State& s)
 {
@@ -41953,12 +42334,14 @@ static bool js_cocos2dx_TransitionSlideInB_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInB_ctor, __jsb_cocos2dx_TransitionSlideInB_class, js_cocos2dx_TransitionSlideInB_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInB_ctor, __jsb_cocos2d_TransitionSlideInB_class, js_cocos2d_TransitionSlideInB_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSlideInB_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSlideInL_proto;
+
+bool js_cocos2d_TransitionSlideInB_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -41971,27 +42354,27 @@ bool js_cocos2dx_TransitionSlideInB_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInB_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSlideInB_finalize)
 
 bool js_register_cocos2dx_TransitionSlideInB(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSlideInB", obj, __jsb_cocos2dx_TransitionSlideInL_proto, _SE(js_cocos2dx_TransitionSlideInB_constructor));
+    auto cls = se::Class::create("TransitionSlideInB", obj, __jsb_cocos2d_TransitionSlideInL_proto, _SE(js_cocos2dx_TransitionSlideInB_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSlideInB_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSlideInB_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSlideInB_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSlideInB_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSlideInB>(cls);
 
-    __jsb_cocos2dx_TransitionSlideInB_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSlideInB_class = cls;
+    __jsb_cocos2d_TransitionSlideInB_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSlideInB_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSlideInB.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSlideInT_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSlideInT_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSlideInT_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSlideInT_class = nullptr;
 
 static bool js_cocos2dx_TransitionSlideInT_create(se::State& s)
 {
@@ -42006,7 +42389,7 @@ static bool js_cocos2dx_TransitionSlideInT_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSlideInT_create : Error processing arguments");
         auto result = cocos2d::TransitionSlideInT::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSlideInT_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSlideInT_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -42016,7 +42399,7 @@ static bool js_cocos2dx_TransitionSlideInT_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSlideInT_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInT_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSlideInT_finalize)
 
 static bool js_cocos2dx_TransitionSlideInT_constructor(se::State& s)
 {
@@ -42025,7 +42408,7 @@ static bool js_cocos2dx_TransitionSlideInT_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSlideInT_constructor, __jsb_cocos2dx_TransitionSlideInT_class, js_cocos2dx_TransitionSlideInT_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSlideInT_constructor, __jsb_cocos2d_TransitionSlideInT_class, js_cocos2d_TransitionSlideInT_finalize)
 
 static bool js_cocos2dx_TransitionSlideInT_ctor(se::State& s)
 {
@@ -42034,12 +42417,14 @@ static bool js_cocos2dx_TransitionSlideInT_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInT_ctor, __jsb_cocos2dx_TransitionSlideInT_class, js_cocos2dx_TransitionSlideInT_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSlideInT_ctor, __jsb_cocos2d_TransitionSlideInT_class, js_cocos2d_TransitionSlideInT_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSlideInT_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSlideInL_proto;
+
+bool js_cocos2d_TransitionSlideInT_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42052,27 +42437,27 @@ bool js_cocos2dx_TransitionSlideInT_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSlideInT_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSlideInT_finalize)
 
 bool js_register_cocos2dx_TransitionSlideInT(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSlideInT", obj, __jsb_cocos2dx_TransitionSlideInL_proto, _SE(js_cocos2dx_TransitionSlideInT_constructor));
+    auto cls = se::Class::create("TransitionSlideInT", obj, __jsb_cocos2d_TransitionSlideInL_proto, _SE(js_cocos2dx_TransitionSlideInT_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSlideInT_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSlideInT_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSlideInT_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSlideInT_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSlideInT>(cls);
 
-    __jsb_cocos2dx_TransitionSlideInT_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSlideInT_class = cls;
+    __jsb_cocos2d_TransitionSlideInT_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSlideInT_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSlideInT.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionShrinkGrow_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionShrinkGrow_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionShrinkGrow_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionShrinkGrow_class = nullptr;
 
 static bool js_cocos2dx_TransitionShrinkGrow_easeActionWithAction(se::State& s)
 {
@@ -42108,7 +42493,7 @@ static bool js_cocos2dx_TransitionShrinkGrow_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionShrinkGrow_create : Error processing arguments");
         auto result = cocos2d::TransitionShrinkGrow::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionShrinkGrow_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionShrinkGrow_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -42118,7 +42503,7 @@ static bool js_cocos2dx_TransitionShrinkGrow_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionShrinkGrow_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionShrinkGrow_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionShrinkGrow_finalize)
 
 static bool js_cocos2dx_TransitionShrinkGrow_constructor(se::State& s)
 {
@@ -42127,7 +42512,7 @@ static bool js_cocos2dx_TransitionShrinkGrow_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionShrinkGrow_constructor, __jsb_cocos2dx_TransitionShrinkGrow_class, js_cocos2dx_TransitionShrinkGrow_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionShrinkGrow_constructor, __jsb_cocos2d_TransitionShrinkGrow_class, js_cocos2d_TransitionShrinkGrow_finalize)
 
 static bool js_cocos2dx_TransitionShrinkGrow_ctor(se::State& s)
 {
@@ -42136,12 +42521,14 @@ static bool js_cocos2dx_TransitionShrinkGrow_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionShrinkGrow_ctor, __jsb_cocos2dx_TransitionShrinkGrow_class, js_cocos2dx_TransitionShrinkGrow_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionShrinkGrow_ctor, __jsb_cocos2d_TransitionShrinkGrow_class, js_cocos2d_TransitionShrinkGrow_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionShrinkGrow_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionShrinkGrow_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42154,28 +42541,28 @@ bool js_cocos2dx_TransitionShrinkGrow_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionShrinkGrow_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionShrinkGrow_finalize)
 
 bool js_register_cocos2dx_TransitionShrinkGrow(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionShrinkGrow", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionShrinkGrow_constructor));
+    auto cls = se::Class::create("TransitionShrinkGrow", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionShrinkGrow_constructor));
 
     cls->defineFunction("easeActionWithAction", _SE(js_cocos2dx_TransitionShrinkGrow_easeActionWithAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionShrinkGrow_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionShrinkGrow_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionShrinkGrow_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionShrinkGrow_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionShrinkGrow>(cls);
 
-    __jsb_cocos2dx_TransitionShrinkGrow_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionShrinkGrow_class = cls;
+    __jsb_cocos2d_TransitionShrinkGrow_proto = cls->getProto();
+    __jsb_cocos2d_TransitionShrinkGrow_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionShrinkGrow.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFlipX_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFlipX_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFlipX_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFlipX_class = nullptr;
 
 static bool js_cocos2dx_TransitionFlipX_create(se::State& s)
 {
@@ -42218,7 +42605,7 @@ static bool js_cocos2dx_TransitionFlipX_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFlipX_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFlipX_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFlipX_finalize)
 
 static bool js_cocos2dx_TransitionFlipX_constructor(se::State& s)
 {
@@ -42227,7 +42614,7 @@ static bool js_cocos2dx_TransitionFlipX_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFlipX_constructor, __jsb_cocos2dx_TransitionFlipX_class, js_cocos2dx_TransitionFlipX_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFlipX_constructor, __jsb_cocos2d_TransitionFlipX_class, js_cocos2d_TransitionFlipX_finalize)
 
 static bool js_cocos2dx_TransitionFlipX_ctor(se::State& s)
 {
@@ -42236,12 +42623,14 @@ static bool js_cocos2dx_TransitionFlipX_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFlipX_ctor, __jsb_cocos2dx_TransitionFlipX_class, js_cocos2dx_TransitionFlipX_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFlipX_ctor, __jsb_cocos2d_TransitionFlipX_class, js_cocos2d_TransitionFlipX_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFlipX_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+
+bool js_cocos2d_TransitionFlipX_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42254,27 +42643,27 @@ bool js_cocos2dx_TransitionFlipX_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFlipX_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFlipX_finalize)
 
 bool js_register_cocos2dx_TransitionFlipX(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFlipX", obj, __jsb_cocos2dx_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionFlipX_constructor));
+    auto cls = se::Class::create("TransitionFlipX", obj, __jsb_cocos2d_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionFlipX_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFlipX_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFlipX_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFlipX_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFlipX_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFlipX>(cls);
 
-    __jsb_cocos2dx_TransitionFlipX_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFlipX_class = cls;
+    __jsb_cocos2d_TransitionFlipX_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFlipX_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFlipX.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFlipY_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFlipY_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFlipY_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFlipY_class = nullptr;
 
 static bool js_cocos2dx_TransitionFlipY_create(se::State& s)
 {
@@ -42317,7 +42706,7 @@ static bool js_cocos2dx_TransitionFlipY_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFlipY_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFlipY_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFlipY_finalize)
 
 static bool js_cocos2dx_TransitionFlipY_constructor(se::State& s)
 {
@@ -42326,7 +42715,7 @@ static bool js_cocos2dx_TransitionFlipY_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFlipY_constructor, __jsb_cocos2dx_TransitionFlipY_class, js_cocos2dx_TransitionFlipY_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFlipY_constructor, __jsb_cocos2d_TransitionFlipY_class, js_cocos2d_TransitionFlipY_finalize)
 
 static bool js_cocos2dx_TransitionFlipY_ctor(se::State& s)
 {
@@ -42335,12 +42724,14 @@ static bool js_cocos2dx_TransitionFlipY_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFlipY_ctor, __jsb_cocos2dx_TransitionFlipY_class, js_cocos2dx_TransitionFlipY_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFlipY_ctor, __jsb_cocos2d_TransitionFlipY_class, js_cocos2d_TransitionFlipY_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFlipY_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+
+bool js_cocos2d_TransitionFlipY_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42353,27 +42744,27 @@ bool js_cocos2dx_TransitionFlipY_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFlipY_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFlipY_finalize)
 
 bool js_register_cocos2dx_TransitionFlipY(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFlipY", obj, __jsb_cocos2dx_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionFlipY_constructor));
+    auto cls = se::Class::create("TransitionFlipY", obj, __jsb_cocos2d_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionFlipY_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFlipY_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFlipY_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFlipY_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFlipY_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFlipY>(cls);
 
-    __jsb_cocos2dx_TransitionFlipY_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFlipY_class = cls;
+    __jsb_cocos2d_TransitionFlipY_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFlipY_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFlipY.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFlipAngular_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFlipAngular_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFlipAngular_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFlipAngular_class = nullptr;
 
 static bool js_cocos2dx_TransitionFlipAngular_create(se::State& s)
 {
@@ -42416,7 +42807,7 @@ static bool js_cocos2dx_TransitionFlipAngular_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFlipAngular_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFlipAngular_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFlipAngular_finalize)
 
 static bool js_cocos2dx_TransitionFlipAngular_constructor(se::State& s)
 {
@@ -42425,7 +42816,7 @@ static bool js_cocos2dx_TransitionFlipAngular_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFlipAngular_constructor, __jsb_cocos2dx_TransitionFlipAngular_class, js_cocos2dx_TransitionFlipAngular_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFlipAngular_constructor, __jsb_cocos2d_TransitionFlipAngular_class, js_cocos2d_TransitionFlipAngular_finalize)
 
 static bool js_cocos2dx_TransitionFlipAngular_ctor(se::State& s)
 {
@@ -42434,12 +42825,14 @@ static bool js_cocos2dx_TransitionFlipAngular_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFlipAngular_ctor, __jsb_cocos2dx_TransitionFlipAngular_class, js_cocos2dx_TransitionFlipAngular_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFlipAngular_ctor, __jsb_cocos2d_TransitionFlipAngular_class, js_cocos2d_TransitionFlipAngular_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFlipAngular_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+
+bool js_cocos2d_TransitionFlipAngular_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42452,27 +42845,27 @@ bool js_cocos2dx_TransitionFlipAngular_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFlipAngular_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFlipAngular_finalize)
 
 bool js_register_cocos2dx_TransitionFlipAngular(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFlipAngular", obj, __jsb_cocos2dx_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionFlipAngular_constructor));
+    auto cls = se::Class::create("TransitionFlipAngular", obj, __jsb_cocos2d_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionFlipAngular_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFlipAngular_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFlipAngular_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFlipAngular_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFlipAngular_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFlipAngular>(cls);
 
-    __jsb_cocos2dx_TransitionFlipAngular_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFlipAngular_class = cls;
+    __jsb_cocos2d_TransitionFlipAngular_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFlipAngular_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFlipAngular.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionZoomFlipX_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionZoomFlipX_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionZoomFlipX_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionZoomFlipX_class = nullptr;
 
 static bool js_cocos2dx_TransitionZoomFlipX_create(se::State& s)
 {
@@ -42515,7 +42908,7 @@ static bool js_cocos2dx_TransitionZoomFlipX_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionZoomFlipX_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionZoomFlipX_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionZoomFlipX_finalize)
 
 static bool js_cocos2dx_TransitionZoomFlipX_constructor(se::State& s)
 {
@@ -42524,7 +42917,7 @@ static bool js_cocos2dx_TransitionZoomFlipX_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionZoomFlipX_constructor, __jsb_cocos2dx_TransitionZoomFlipX_class, js_cocos2dx_TransitionZoomFlipX_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionZoomFlipX_constructor, __jsb_cocos2d_TransitionZoomFlipX_class, js_cocos2d_TransitionZoomFlipX_finalize)
 
 static bool js_cocos2dx_TransitionZoomFlipX_ctor(se::State& s)
 {
@@ -42533,12 +42926,14 @@ static bool js_cocos2dx_TransitionZoomFlipX_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionZoomFlipX_ctor, __jsb_cocos2dx_TransitionZoomFlipX_class, js_cocos2dx_TransitionZoomFlipX_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionZoomFlipX_ctor, __jsb_cocos2d_TransitionZoomFlipX_class, js_cocos2d_TransitionZoomFlipX_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionZoomFlipX_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+
+bool js_cocos2d_TransitionZoomFlipX_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42551,27 +42946,27 @@ bool js_cocos2dx_TransitionZoomFlipX_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionZoomFlipX_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionZoomFlipX_finalize)
 
 bool js_register_cocos2dx_TransitionZoomFlipX(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionZoomFlipX", obj, __jsb_cocos2dx_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionZoomFlipX_constructor));
+    auto cls = se::Class::create("TransitionZoomFlipX", obj, __jsb_cocos2d_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionZoomFlipX_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionZoomFlipX_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionZoomFlipX_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionZoomFlipX_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionZoomFlipX_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionZoomFlipX>(cls);
 
-    __jsb_cocos2dx_TransitionZoomFlipX_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionZoomFlipX_class = cls;
+    __jsb_cocos2d_TransitionZoomFlipX_proto = cls->getProto();
+    __jsb_cocos2d_TransitionZoomFlipX_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionZoomFlipX.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionZoomFlipY_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionZoomFlipY_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionZoomFlipY_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionZoomFlipY_class = nullptr;
 
 static bool js_cocos2dx_TransitionZoomFlipY_create(se::State& s)
 {
@@ -42614,7 +43009,7 @@ static bool js_cocos2dx_TransitionZoomFlipY_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionZoomFlipY_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionZoomFlipY_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionZoomFlipY_finalize)
 
 static bool js_cocos2dx_TransitionZoomFlipY_constructor(se::State& s)
 {
@@ -42623,7 +43018,7 @@ static bool js_cocos2dx_TransitionZoomFlipY_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionZoomFlipY_constructor, __jsb_cocos2dx_TransitionZoomFlipY_class, js_cocos2dx_TransitionZoomFlipY_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionZoomFlipY_constructor, __jsb_cocos2d_TransitionZoomFlipY_class, js_cocos2d_TransitionZoomFlipY_finalize)
 
 static bool js_cocos2dx_TransitionZoomFlipY_ctor(se::State& s)
 {
@@ -42632,12 +43027,14 @@ static bool js_cocos2dx_TransitionZoomFlipY_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionZoomFlipY_ctor, __jsb_cocos2dx_TransitionZoomFlipY_class, js_cocos2dx_TransitionZoomFlipY_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionZoomFlipY_ctor, __jsb_cocos2d_TransitionZoomFlipY_class, js_cocos2d_TransitionZoomFlipY_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionZoomFlipY_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+
+bool js_cocos2d_TransitionZoomFlipY_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42650,27 +43047,27 @@ bool js_cocos2dx_TransitionZoomFlipY_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionZoomFlipY_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionZoomFlipY_finalize)
 
 bool js_register_cocos2dx_TransitionZoomFlipY(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionZoomFlipY", obj, __jsb_cocos2dx_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionZoomFlipY_constructor));
+    auto cls = se::Class::create("TransitionZoomFlipY", obj, __jsb_cocos2d_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionZoomFlipY_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionZoomFlipY_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionZoomFlipY_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionZoomFlipY_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionZoomFlipY_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionZoomFlipY>(cls);
 
-    __jsb_cocos2dx_TransitionZoomFlipY_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionZoomFlipY_class = cls;
+    __jsb_cocos2d_TransitionZoomFlipY_proto = cls->getProto();
+    __jsb_cocos2d_TransitionZoomFlipY_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionZoomFlipY.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionZoomFlipAngular_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionZoomFlipAngular_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionZoomFlipAngular_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionZoomFlipAngular_class = nullptr;
 
 static bool js_cocos2dx_TransitionZoomFlipAngular_create(se::State& s)
 {
@@ -42713,7 +43110,7 @@ static bool js_cocos2dx_TransitionZoomFlipAngular_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionZoomFlipAngular_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionZoomFlipAngular_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionZoomFlipAngular_finalize)
 
 static bool js_cocos2dx_TransitionZoomFlipAngular_constructor(se::State& s)
 {
@@ -42722,7 +43119,7 @@ static bool js_cocos2dx_TransitionZoomFlipAngular_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionZoomFlipAngular_constructor, __jsb_cocos2dx_TransitionZoomFlipAngular_class, js_cocos2dx_TransitionZoomFlipAngular_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionZoomFlipAngular_constructor, __jsb_cocos2d_TransitionZoomFlipAngular_class, js_cocos2d_TransitionZoomFlipAngular_finalize)
 
 static bool js_cocos2dx_TransitionZoomFlipAngular_ctor(se::State& s)
 {
@@ -42731,12 +43128,14 @@ static bool js_cocos2dx_TransitionZoomFlipAngular_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionZoomFlipAngular_ctor, __jsb_cocos2dx_TransitionZoomFlipAngular_class, js_cocos2dx_TransitionZoomFlipAngular_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionZoomFlipAngular_ctor, __jsb_cocos2d_TransitionZoomFlipAngular_class, js_cocos2d_TransitionZoomFlipAngular_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionZoomFlipAngular_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+
+bool js_cocos2d_TransitionZoomFlipAngular_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42749,27 +43148,27 @@ bool js_cocos2dx_TransitionZoomFlipAngular_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionZoomFlipAngular_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionZoomFlipAngular_finalize)
 
 bool js_register_cocos2dx_TransitionZoomFlipAngular(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionZoomFlipAngular", obj, __jsb_cocos2dx_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionZoomFlipAngular_constructor));
+    auto cls = se::Class::create("TransitionZoomFlipAngular", obj, __jsb_cocos2d_TransitionSceneOriented_proto, _SE(js_cocos2dx_TransitionZoomFlipAngular_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionZoomFlipAngular_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionZoomFlipAngular_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionZoomFlipAngular_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionZoomFlipAngular_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionZoomFlipAngular>(cls);
 
-    __jsb_cocos2dx_TransitionZoomFlipAngular_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionZoomFlipAngular_class = cls;
+    __jsb_cocos2d_TransitionZoomFlipAngular_proto = cls->getProto();
+    __jsb_cocos2d_TransitionZoomFlipAngular_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionZoomFlipAngular.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFade_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFade_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFade_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFade_class = nullptr;
 
 static bool js_cocos2dx_TransitionFade_initWithDuration(se::State& s)
 {
@@ -42857,7 +43256,7 @@ static bool js_cocos2dx_TransitionFade_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFade_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFade_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFade_finalize)
 
 static bool js_cocos2dx_TransitionFade_constructor(se::State& s)
 {
@@ -42866,7 +43265,7 @@ static bool js_cocos2dx_TransitionFade_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFade_constructor, __jsb_cocos2dx_TransitionFade_class, js_cocos2dx_TransitionFade_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFade_constructor, __jsb_cocos2d_TransitionFade_class, js_cocos2d_TransitionFade_finalize)
 
 static bool js_cocos2dx_TransitionFade_ctor(se::State& s)
 {
@@ -42875,12 +43274,14 @@ static bool js_cocos2dx_TransitionFade_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFade_ctor, __jsb_cocos2dx_TransitionFade_class, js_cocos2dx_TransitionFade_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFade_ctor, __jsb_cocos2d_TransitionFade_class, js_cocos2d_TransitionFade_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFade_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionFade_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42893,28 +43294,28 @@ bool js_cocos2dx_TransitionFade_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFade_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFade_finalize)
 
 bool js_register_cocos2dx_TransitionFade(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFade", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionFade_constructor));
+    auto cls = se::Class::create("TransitionFade", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionFade_constructor));
 
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_TransitionFade_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFade_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFade_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFade_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFade_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFade>(cls);
 
-    __jsb_cocos2dx_TransitionFade_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFade_class = cls;
+    __jsb_cocos2d_TransitionFade_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFade_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFade.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionCrossFade_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionCrossFade_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionCrossFade_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionCrossFade_class = nullptr;
 
 static bool js_cocos2dx_TransitionCrossFade_create(se::State& s)
 {
@@ -42929,7 +43330,7 @@ static bool js_cocos2dx_TransitionCrossFade_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionCrossFade_create : Error processing arguments");
         auto result = cocos2d::TransitionCrossFade::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionCrossFade_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionCrossFade_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -42939,7 +43340,7 @@ static bool js_cocos2dx_TransitionCrossFade_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionCrossFade_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionCrossFade_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionCrossFade_finalize)
 
 static bool js_cocos2dx_TransitionCrossFade_constructor(se::State& s)
 {
@@ -42948,7 +43349,7 @@ static bool js_cocos2dx_TransitionCrossFade_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionCrossFade_constructor, __jsb_cocos2dx_TransitionCrossFade_class, js_cocos2dx_TransitionCrossFade_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionCrossFade_constructor, __jsb_cocos2d_TransitionCrossFade_class, js_cocos2d_TransitionCrossFade_finalize)
 
 static bool js_cocos2dx_TransitionCrossFade_ctor(se::State& s)
 {
@@ -42957,12 +43358,14 @@ static bool js_cocos2dx_TransitionCrossFade_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionCrossFade_ctor, __jsb_cocos2dx_TransitionCrossFade_class, js_cocos2dx_TransitionCrossFade_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionCrossFade_ctor, __jsb_cocos2d_TransitionCrossFade_class, js_cocos2d_TransitionCrossFade_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionCrossFade_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionCrossFade_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -42975,27 +43378,27 @@ bool js_cocos2dx_TransitionCrossFade_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionCrossFade_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionCrossFade_finalize)
 
 bool js_register_cocos2dx_TransitionCrossFade(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionCrossFade", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionCrossFade_constructor));
+    auto cls = se::Class::create("TransitionCrossFade", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionCrossFade_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionCrossFade_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionCrossFade_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionCrossFade_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionCrossFade_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionCrossFade>(cls);
 
-    __jsb_cocos2dx_TransitionCrossFade_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionCrossFade_class = cls;
+    __jsb_cocos2d_TransitionCrossFade_proto = cls->getProto();
+    __jsb_cocos2d_TransitionCrossFade_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionCrossFade.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionTurnOffTiles_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionTurnOffTiles_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionTurnOffTiles_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionTurnOffTiles_class = nullptr;
 
 static bool js_cocos2dx_TransitionTurnOffTiles_easeActionWithAction(se::State& s)
 {
@@ -43031,7 +43434,7 @@ static bool js_cocos2dx_TransitionTurnOffTiles_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionTurnOffTiles_create : Error processing arguments");
         auto result = cocos2d::TransitionTurnOffTiles::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionTurnOffTiles_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionTurnOffTiles_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43041,7 +43444,7 @@ static bool js_cocos2dx_TransitionTurnOffTiles_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionTurnOffTiles_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionTurnOffTiles_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionTurnOffTiles_finalize)
 
 static bool js_cocos2dx_TransitionTurnOffTiles_constructor(se::State& s)
 {
@@ -43050,7 +43453,7 @@ static bool js_cocos2dx_TransitionTurnOffTiles_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionTurnOffTiles_constructor, __jsb_cocos2dx_TransitionTurnOffTiles_class, js_cocos2dx_TransitionTurnOffTiles_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionTurnOffTiles_constructor, __jsb_cocos2d_TransitionTurnOffTiles_class, js_cocos2d_TransitionTurnOffTiles_finalize)
 
 static bool js_cocos2dx_TransitionTurnOffTiles_ctor(se::State& s)
 {
@@ -43059,12 +43462,14 @@ static bool js_cocos2dx_TransitionTurnOffTiles_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionTurnOffTiles_ctor, __jsb_cocos2dx_TransitionTurnOffTiles_class, js_cocos2dx_TransitionTurnOffTiles_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionTurnOffTiles_ctor, __jsb_cocos2d_TransitionTurnOffTiles_class, js_cocos2d_TransitionTurnOffTiles_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionTurnOffTiles_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionTurnOffTiles_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43077,28 +43482,28 @@ bool js_cocos2dx_TransitionTurnOffTiles_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionTurnOffTiles_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionTurnOffTiles_finalize)
 
 bool js_register_cocos2dx_TransitionTurnOffTiles(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionTurnOffTiles", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionTurnOffTiles_constructor));
+    auto cls = se::Class::create("TransitionTurnOffTiles", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionTurnOffTiles_constructor));
 
     cls->defineFunction("easeActionWithAction", _SE(js_cocos2dx_TransitionTurnOffTiles_easeActionWithAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionTurnOffTiles_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionTurnOffTiles_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionTurnOffTiles_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionTurnOffTiles_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionTurnOffTiles>(cls);
 
-    __jsb_cocos2dx_TransitionTurnOffTiles_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionTurnOffTiles_class = cls;
+    __jsb_cocos2d_TransitionTurnOffTiles_proto = cls->getProto();
+    __jsb_cocos2d_TransitionTurnOffTiles_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionTurnOffTiles.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSplitCols_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSplitCols_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSplitCols_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSplitCols_class = nullptr;
 
 static bool js_cocos2dx_TransitionSplitCols_action(se::State& s)
 {
@@ -43152,7 +43557,7 @@ static bool js_cocos2dx_TransitionSplitCols_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSplitCols_create : Error processing arguments");
         auto result = cocos2d::TransitionSplitCols::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSplitCols_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSplitCols_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43162,7 +43567,7 @@ static bool js_cocos2dx_TransitionSplitCols_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSplitCols_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSplitCols_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSplitCols_finalize)
 
 static bool js_cocos2dx_TransitionSplitCols_constructor(se::State& s)
 {
@@ -43171,7 +43576,7 @@ static bool js_cocos2dx_TransitionSplitCols_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSplitCols_constructor, __jsb_cocos2dx_TransitionSplitCols_class, js_cocos2dx_TransitionSplitCols_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSplitCols_constructor, __jsb_cocos2d_TransitionSplitCols_class, js_cocos2d_TransitionSplitCols_finalize)
 
 static bool js_cocos2dx_TransitionSplitCols_ctor(se::State& s)
 {
@@ -43180,12 +43585,14 @@ static bool js_cocos2dx_TransitionSplitCols_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSplitCols_ctor, __jsb_cocos2dx_TransitionSplitCols_class, js_cocos2dx_TransitionSplitCols_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSplitCols_ctor, __jsb_cocos2d_TransitionSplitCols_class, js_cocos2d_TransitionSplitCols_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSplitCols_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionSplitCols_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43198,29 +43605,29 @@ bool js_cocos2dx_TransitionSplitCols_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSplitCols_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSplitCols_finalize)
 
 bool js_register_cocos2dx_TransitionSplitCols(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSplitCols", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionSplitCols_constructor));
+    auto cls = se::Class::create("TransitionSplitCols", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionSplitCols_constructor));
 
     cls->defineFunction("action", _SE(js_cocos2dx_TransitionSplitCols_action));
     cls->defineFunction("easeActionWithAction", _SE(js_cocos2dx_TransitionSplitCols_easeActionWithAction));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSplitCols_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSplitCols_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSplitCols_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSplitCols_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSplitCols>(cls);
 
-    __jsb_cocos2dx_TransitionSplitCols_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSplitCols_class = cls;
+    __jsb_cocos2d_TransitionSplitCols_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSplitCols_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSplitCols.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionSplitRows_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionSplitRows_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionSplitRows_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionSplitRows_class = nullptr;
 
 static bool js_cocos2dx_TransitionSplitRows_create(se::State& s)
 {
@@ -43235,7 +43642,7 @@ static bool js_cocos2dx_TransitionSplitRows_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionSplitRows_create : Error processing arguments");
         auto result = cocos2d::TransitionSplitRows::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionSplitRows_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionSplitRows_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43245,7 +43652,7 @@ static bool js_cocos2dx_TransitionSplitRows_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionSplitRows_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionSplitRows_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionSplitRows_finalize)
 
 static bool js_cocos2dx_TransitionSplitRows_constructor(se::State& s)
 {
@@ -43254,7 +43661,7 @@ static bool js_cocos2dx_TransitionSplitRows_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionSplitRows_constructor, __jsb_cocos2dx_TransitionSplitRows_class, js_cocos2dx_TransitionSplitRows_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionSplitRows_constructor, __jsb_cocos2d_TransitionSplitRows_class, js_cocos2d_TransitionSplitRows_finalize)
 
 static bool js_cocos2dx_TransitionSplitRows_ctor(se::State& s)
 {
@@ -43263,12 +43670,14 @@ static bool js_cocos2dx_TransitionSplitRows_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSplitRows_ctor, __jsb_cocos2dx_TransitionSplitRows_class, js_cocos2dx_TransitionSplitRows_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionSplitRows_ctor, __jsb_cocos2d_TransitionSplitRows_class, js_cocos2d_TransitionSplitRows_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionSplitRows_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionSplitCols_proto;
+
+bool js_cocos2d_TransitionSplitRows_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43281,27 +43690,27 @@ bool js_cocos2dx_TransitionSplitRows_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionSplitRows_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionSplitRows_finalize)
 
 bool js_register_cocos2dx_TransitionSplitRows(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionSplitRows", obj, __jsb_cocos2dx_TransitionSplitCols_proto, _SE(js_cocos2dx_TransitionSplitRows_constructor));
+    auto cls = se::Class::create("TransitionSplitRows", obj, __jsb_cocos2d_TransitionSplitCols_proto, _SE(js_cocos2dx_TransitionSplitRows_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionSplitRows_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionSplitRows_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionSplitRows_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionSplitRows_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionSplitRows>(cls);
 
-    __jsb_cocos2dx_TransitionSplitRows_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionSplitRows_class = cls;
+    __jsb_cocos2d_TransitionSplitRows_proto = cls->getProto();
+    __jsb_cocos2d_TransitionSplitRows_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionSplitRows.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFadeTR_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFadeTR_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFadeTR_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFadeTR_class = nullptr;
 
 static bool js_cocos2dx_TransitionFadeTR_easeActionWithAction(se::State& s)
 {
@@ -43358,7 +43767,7 @@ static bool js_cocos2dx_TransitionFadeTR_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionFadeTR_create : Error processing arguments");
         auto result = cocos2d::TransitionFadeTR::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionFadeTR_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionFadeTR_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43368,7 +43777,7 @@ static bool js_cocos2dx_TransitionFadeTR_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFadeTR_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFadeTR_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFadeTR_finalize)
 
 static bool js_cocos2dx_TransitionFadeTR_constructor(se::State& s)
 {
@@ -43377,7 +43786,7 @@ static bool js_cocos2dx_TransitionFadeTR_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFadeTR_constructor, __jsb_cocos2dx_TransitionFadeTR_class, js_cocos2dx_TransitionFadeTR_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFadeTR_constructor, __jsb_cocos2d_TransitionFadeTR_class, js_cocos2d_TransitionFadeTR_finalize)
 
 static bool js_cocos2dx_TransitionFadeTR_ctor(se::State& s)
 {
@@ -43386,12 +43795,14 @@ static bool js_cocos2dx_TransitionFadeTR_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeTR_ctor, __jsb_cocos2dx_TransitionFadeTR_class, js_cocos2dx_TransitionFadeTR_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeTR_ctor, __jsb_cocos2d_TransitionFadeTR_class, js_cocos2d_TransitionFadeTR_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFadeTR_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionFadeTR_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43404,29 +43815,29 @@ bool js_cocos2dx_TransitionFadeTR_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFadeTR_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFadeTR_finalize)
 
 bool js_register_cocos2dx_TransitionFadeTR(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFadeTR", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionFadeTR_constructor));
+    auto cls = se::Class::create("TransitionFadeTR", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionFadeTR_constructor));
 
     cls->defineFunction("easeActionWithAction", _SE(js_cocos2dx_TransitionFadeTR_easeActionWithAction));
     cls->defineFunction("actionWithSize", _SE(js_cocos2dx_TransitionFadeTR_actionWithSize));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFadeTR_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFadeTR_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFadeTR_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFadeTR_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFadeTR>(cls);
 
-    __jsb_cocos2dx_TransitionFadeTR_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFadeTR_class = cls;
+    __jsb_cocos2d_TransitionFadeTR_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFadeTR_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFadeTR.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFadeBL_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFadeBL_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFadeBL_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFadeBL_class = nullptr;
 
 static bool js_cocos2dx_TransitionFadeBL_create(se::State& s)
 {
@@ -43441,7 +43852,7 @@ static bool js_cocos2dx_TransitionFadeBL_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionFadeBL_create : Error processing arguments");
         auto result = cocos2d::TransitionFadeBL::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionFadeBL_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionFadeBL_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43451,7 +43862,7 @@ static bool js_cocos2dx_TransitionFadeBL_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFadeBL_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFadeBL_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFadeBL_finalize)
 
 static bool js_cocos2dx_TransitionFadeBL_constructor(se::State& s)
 {
@@ -43460,7 +43871,7 @@ static bool js_cocos2dx_TransitionFadeBL_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFadeBL_constructor, __jsb_cocos2dx_TransitionFadeBL_class, js_cocos2dx_TransitionFadeBL_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFadeBL_constructor, __jsb_cocos2d_TransitionFadeBL_class, js_cocos2d_TransitionFadeBL_finalize)
 
 static bool js_cocos2dx_TransitionFadeBL_ctor(se::State& s)
 {
@@ -43469,12 +43880,14 @@ static bool js_cocos2dx_TransitionFadeBL_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeBL_ctor, __jsb_cocos2dx_TransitionFadeBL_class, js_cocos2dx_TransitionFadeBL_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeBL_ctor, __jsb_cocos2d_TransitionFadeBL_class, js_cocos2d_TransitionFadeBL_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFadeBL_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionFadeTR_proto;
+
+bool js_cocos2d_TransitionFadeBL_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43487,27 +43900,27 @@ bool js_cocos2dx_TransitionFadeBL_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFadeBL_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFadeBL_finalize)
 
 bool js_register_cocos2dx_TransitionFadeBL(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFadeBL", obj, __jsb_cocos2dx_TransitionFadeTR_proto, _SE(js_cocos2dx_TransitionFadeBL_constructor));
+    auto cls = se::Class::create("TransitionFadeBL", obj, __jsb_cocos2d_TransitionFadeTR_proto, _SE(js_cocos2dx_TransitionFadeBL_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFadeBL_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFadeBL_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFadeBL_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFadeBL_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFadeBL>(cls);
 
-    __jsb_cocos2dx_TransitionFadeBL_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFadeBL_class = cls;
+    __jsb_cocos2d_TransitionFadeBL_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFadeBL_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFadeBL.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFadeUp_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFadeUp_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFadeUp_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFadeUp_class = nullptr;
 
 static bool js_cocos2dx_TransitionFadeUp_create(se::State& s)
 {
@@ -43522,7 +43935,7 @@ static bool js_cocos2dx_TransitionFadeUp_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionFadeUp_create : Error processing arguments");
         auto result = cocos2d::TransitionFadeUp::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionFadeUp_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionFadeUp_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43532,7 +43945,7 @@ static bool js_cocos2dx_TransitionFadeUp_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFadeUp_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFadeUp_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFadeUp_finalize)
 
 static bool js_cocos2dx_TransitionFadeUp_constructor(se::State& s)
 {
@@ -43541,7 +43954,7 @@ static bool js_cocos2dx_TransitionFadeUp_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFadeUp_constructor, __jsb_cocos2dx_TransitionFadeUp_class, js_cocos2dx_TransitionFadeUp_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFadeUp_constructor, __jsb_cocos2d_TransitionFadeUp_class, js_cocos2d_TransitionFadeUp_finalize)
 
 static bool js_cocos2dx_TransitionFadeUp_ctor(se::State& s)
 {
@@ -43550,12 +43963,14 @@ static bool js_cocos2dx_TransitionFadeUp_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeUp_ctor, __jsb_cocos2dx_TransitionFadeUp_class, js_cocos2dx_TransitionFadeUp_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeUp_ctor, __jsb_cocos2d_TransitionFadeUp_class, js_cocos2d_TransitionFadeUp_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFadeUp_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionFadeTR_proto;
+
+bool js_cocos2d_TransitionFadeUp_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43568,27 +43983,27 @@ bool js_cocos2dx_TransitionFadeUp_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFadeUp_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFadeUp_finalize)
 
 bool js_register_cocos2dx_TransitionFadeUp(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFadeUp", obj, __jsb_cocos2dx_TransitionFadeTR_proto, _SE(js_cocos2dx_TransitionFadeUp_constructor));
+    auto cls = se::Class::create("TransitionFadeUp", obj, __jsb_cocos2d_TransitionFadeTR_proto, _SE(js_cocos2dx_TransitionFadeUp_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFadeUp_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFadeUp_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFadeUp_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFadeUp_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFadeUp>(cls);
 
-    __jsb_cocos2dx_TransitionFadeUp_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFadeUp_class = cls;
+    __jsb_cocos2d_TransitionFadeUp_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFadeUp_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFadeUp.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionFadeDown_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionFadeDown_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionFadeDown_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionFadeDown_class = nullptr;
 
 static bool js_cocos2dx_TransitionFadeDown_create(se::State& s)
 {
@@ -43603,7 +44018,7 @@ static bool js_cocos2dx_TransitionFadeDown_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionFadeDown_create : Error processing arguments");
         auto result = cocos2d::TransitionFadeDown::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionFadeDown_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionFadeDown_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43613,7 +44028,7 @@ static bool js_cocos2dx_TransitionFadeDown_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionFadeDown_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionFadeDown_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionFadeDown_finalize)
 
 static bool js_cocos2dx_TransitionFadeDown_constructor(se::State& s)
 {
@@ -43622,7 +44037,7 @@ static bool js_cocos2dx_TransitionFadeDown_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionFadeDown_constructor, __jsb_cocos2dx_TransitionFadeDown_class, js_cocos2dx_TransitionFadeDown_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionFadeDown_constructor, __jsb_cocos2d_TransitionFadeDown_class, js_cocos2d_TransitionFadeDown_finalize)
 
 static bool js_cocos2dx_TransitionFadeDown_ctor(se::State& s)
 {
@@ -43631,12 +44046,14 @@ static bool js_cocos2dx_TransitionFadeDown_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeDown_ctor, __jsb_cocos2dx_TransitionFadeDown_class, js_cocos2dx_TransitionFadeDown_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionFadeDown_ctor, __jsb_cocos2d_TransitionFadeDown_class, js_cocos2d_TransitionFadeDown_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionFadeDown_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionFadeTR_proto;
+
+bool js_cocos2d_TransitionFadeDown_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43649,27 +44066,27 @@ bool js_cocos2dx_TransitionFadeDown_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionFadeDown_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionFadeDown_finalize)
 
 bool js_register_cocos2dx_TransitionFadeDown(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionFadeDown", obj, __jsb_cocos2dx_TransitionFadeTR_proto, _SE(js_cocos2dx_TransitionFadeDown_constructor));
+    auto cls = se::Class::create("TransitionFadeDown", obj, __jsb_cocos2d_TransitionFadeTR_proto, _SE(js_cocos2dx_TransitionFadeDown_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionFadeDown_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionFadeDown_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionFadeDown_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionFadeDown_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionFadeDown>(cls);
 
-    __jsb_cocos2dx_TransitionFadeDown_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionFadeDown_class = cls;
+    __jsb_cocos2d_TransitionFadeDown_proto = cls->getProto();
+    __jsb_cocos2d_TransitionFadeDown_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionFadeDown.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionPageTurn_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionPageTurn_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionPageTurn_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionPageTurn_class = nullptr;
 
 static bool js_cocos2dx_TransitionPageTurn_actionWithSize(se::State& s)
 {
@@ -43732,7 +44149,7 @@ static bool js_cocos2dx_TransitionPageTurn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionPageTurn_create : Error processing arguments");
         auto result = cocos2d::TransitionPageTurn::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionPageTurn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionPageTurn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43742,7 +44159,7 @@ static bool js_cocos2dx_TransitionPageTurn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionPageTurn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionPageTurn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionPageTurn_finalize)
 
 static bool js_cocos2dx_TransitionPageTurn_constructor(se::State& s)
 {
@@ -43751,7 +44168,7 @@ static bool js_cocos2dx_TransitionPageTurn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionPageTurn_constructor, __jsb_cocos2dx_TransitionPageTurn_class, js_cocos2dx_TransitionPageTurn_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionPageTurn_constructor, __jsb_cocos2d_TransitionPageTurn_class, js_cocos2d_TransitionPageTurn_finalize)
 
 static bool js_cocos2dx_TransitionPageTurn_ctor(se::State& s)
 {
@@ -43760,12 +44177,14 @@ static bool js_cocos2dx_TransitionPageTurn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionPageTurn_ctor, __jsb_cocos2dx_TransitionPageTurn_class, js_cocos2dx_TransitionPageTurn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionPageTurn_ctor, __jsb_cocos2d_TransitionPageTurn_class, js_cocos2d_TransitionPageTurn_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionPageTurn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionPageTurn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43778,29 +44197,29 @@ bool js_cocos2dx_TransitionPageTurn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionPageTurn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionPageTurn_finalize)
 
 bool js_register_cocos2dx_TransitionPageTurn(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionPageTurn", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionPageTurn_constructor));
+    auto cls = se::Class::create("TransitionPageTurn", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionPageTurn_constructor));
 
     cls->defineFunction("actionWithSize", _SE(js_cocos2dx_TransitionPageTurn_actionWithSize));
     cls->defineFunction("initWithDuration", _SE(js_cocos2dx_TransitionPageTurn_initWithDuration));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionPageTurn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionPageTurn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionPageTurn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionPageTurn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionPageTurn>(cls);
 
-    __jsb_cocos2dx_TransitionPageTurn_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionPageTurn_class = cls;
+    __jsb_cocos2d_TransitionPageTurn_proto = cls->getProto();
+    __jsb_cocos2d_TransitionPageTurn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionPageTurn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgress_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgress_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgress_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgress_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgress_create(se::State& s)
 {
@@ -43815,7 +44234,7 @@ static bool js_cocos2dx_TransitionProgress_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgress_create : Error processing arguments");
         auto result = cocos2d::TransitionProgress::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgress_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgress_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43825,7 +44244,7 @@ static bool js_cocos2dx_TransitionProgress_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgress_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgress_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgress_finalize)
 
 static bool js_cocos2dx_TransitionProgress_constructor(se::State& s)
 {
@@ -43834,7 +44253,7 @@ static bool js_cocos2dx_TransitionProgress_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgress_constructor, __jsb_cocos2dx_TransitionProgress_class, js_cocos2dx_TransitionProgress_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgress_constructor, __jsb_cocos2d_TransitionProgress_class, js_cocos2d_TransitionProgress_finalize)
 
 static bool js_cocos2dx_TransitionProgress_ctor(se::State& s)
 {
@@ -43843,12 +44262,14 @@ static bool js_cocos2dx_TransitionProgress_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgress_ctor, __jsb_cocos2dx_TransitionProgress_class, js_cocos2dx_TransitionProgress_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgress_ctor, __jsb_cocos2d_TransitionProgress_class, js_cocos2d_TransitionProgress_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgress_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+
+bool js_cocos2d_TransitionProgress_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43861,27 +44282,27 @@ bool js_cocos2dx_TransitionProgress_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgress_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgress_finalize)
 
 bool js_register_cocos2dx_TransitionProgress(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgress", obj, __jsb_cocos2dx_TransitionScene_proto, _SE(js_cocos2dx_TransitionProgress_constructor));
+    auto cls = se::Class::create("TransitionProgress", obj, __jsb_cocos2d_TransitionScene_proto, _SE(js_cocos2dx_TransitionProgress_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgress_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgress_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgress_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgress_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgress>(cls);
 
-    __jsb_cocos2dx_TransitionProgress_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgress_class = cls;
+    __jsb_cocos2d_TransitionProgress_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgress_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgress.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgressRadialCCW_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgressRadialCCW_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgressRadialCCW_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgressRadialCCW_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgressRadialCCW_create(se::State& s)
 {
@@ -43896,7 +44317,7 @@ static bool js_cocos2dx_TransitionProgressRadialCCW_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgressRadialCCW_create : Error processing arguments");
         auto result = cocos2d::TransitionProgressRadialCCW::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgressRadialCCW_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgressRadialCCW_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43906,7 +44327,7 @@ static bool js_cocos2dx_TransitionProgressRadialCCW_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgressRadialCCW_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgressRadialCCW_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgressRadialCCW_finalize)
 
 static bool js_cocos2dx_TransitionProgressRadialCCW_constructor(se::State& s)
 {
@@ -43915,7 +44336,7 @@ static bool js_cocos2dx_TransitionProgressRadialCCW_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgressRadialCCW_constructor, __jsb_cocos2dx_TransitionProgressRadialCCW_class, js_cocos2dx_TransitionProgressRadialCCW_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgressRadialCCW_constructor, __jsb_cocos2d_TransitionProgressRadialCCW_class, js_cocos2d_TransitionProgressRadialCCW_finalize)
 
 static bool js_cocos2dx_TransitionProgressRadialCCW_ctor(se::State& s)
 {
@@ -43924,12 +44345,14 @@ static bool js_cocos2dx_TransitionProgressRadialCCW_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressRadialCCW_ctor, __jsb_cocos2dx_TransitionProgressRadialCCW_class, js_cocos2dx_TransitionProgressRadialCCW_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressRadialCCW_ctor, __jsb_cocos2d_TransitionProgressRadialCCW_class, js_cocos2d_TransitionProgressRadialCCW_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgressRadialCCW_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+
+bool js_cocos2d_TransitionProgressRadialCCW_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -43942,27 +44365,27 @@ bool js_cocos2dx_TransitionProgressRadialCCW_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgressRadialCCW_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgressRadialCCW_finalize)
 
 bool js_register_cocos2dx_TransitionProgressRadialCCW(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgressRadialCCW", obj, __jsb_cocos2dx_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressRadialCCW_constructor));
+    auto cls = se::Class::create("TransitionProgressRadialCCW", obj, __jsb_cocos2d_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressRadialCCW_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgressRadialCCW_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgressRadialCCW_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgressRadialCCW_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgressRadialCCW_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgressRadialCCW>(cls);
 
-    __jsb_cocos2dx_TransitionProgressRadialCCW_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgressRadialCCW_class = cls;
+    __jsb_cocos2d_TransitionProgressRadialCCW_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgressRadialCCW_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgressRadialCCW.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgressRadialCW_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgressRadialCW_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgressRadialCW_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgressRadialCW_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgressRadialCW_create(se::State& s)
 {
@@ -43977,7 +44400,7 @@ static bool js_cocos2dx_TransitionProgressRadialCW_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgressRadialCW_create : Error processing arguments");
         auto result = cocos2d::TransitionProgressRadialCW::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgressRadialCW_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgressRadialCW_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -43987,7 +44410,7 @@ static bool js_cocos2dx_TransitionProgressRadialCW_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgressRadialCW_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgressRadialCW_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgressRadialCW_finalize)
 
 static bool js_cocos2dx_TransitionProgressRadialCW_constructor(se::State& s)
 {
@@ -43996,7 +44419,7 @@ static bool js_cocos2dx_TransitionProgressRadialCW_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgressRadialCW_constructor, __jsb_cocos2dx_TransitionProgressRadialCW_class, js_cocos2dx_TransitionProgressRadialCW_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgressRadialCW_constructor, __jsb_cocos2d_TransitionProgressRadialCW_class, js_cocos2d_TransitionProgressRadialCW_finalize)
 
 static bool js_cocos2dx_TransitionProgressRadialCW_ctor(se::State& s)
 {
@@ -44005,12 +44428,14 @@ static bool js_cocos2dx_TransitionProgressRadialCW_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressRadialCW_ctor, __jsb_cocos2dx_TransitionProgressRadialCW_class, js_cocos2dx_TransitionProgressRadialCW_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressRadialCW_ctor, __jsb_cocos2d_TransitionProgressRadialCW_class, js_cocos2d_TransitionProgressRadialCW_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgressRadialCW_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+
+bool js_cocos2d_TransitionProgressRadialCW_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -44023,27 +44448,27 @@ bool js_cocos2dx_TransitionProgressRadialCW_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgressRadialCW_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgressRadialCW_finalize)
 
 bool js_register_cocos2dx_TransitionProgressRadialCW(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgressRadialCW", obj, __jsb_cocos2dx_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressRadialCW_constructor));
+    auto cls = se::Class::create("TransitionProgressRadialCW", obj, __jsb_cocos2d_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressRadialCW_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgressRadialCW_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgressRadialCW_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgressRadialCW_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgressRadialCW_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgressRadialCW>(cls);
 
-    __jsb_cocos2dx_TransitionProgressRadialCW_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgressRadialCW_class = cls;
+    __jsb_cocos2d_TransitionProgressRadialCW_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgressRadialCW_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgressRadialCW.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgressHorizontal_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgressHorizontal_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgressHorizontal_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgressHorizontal_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgressHorizontal_create(se::State& s)
 {
@@ -44058,7 +44483,7 @@ static bool js_cocos2dx_TransitionProgressHorizontal_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgressHorizontal_create : Error processing arguments");
         auto result = cocos2d::TransitionProgressHorizontal::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgressHorizontal_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgressHorizontal_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -44068,7 +44493,7 @@ static bool js_cocos2dx_TransitionProgressHorizontal_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgressHorizontal_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgressHorizontal_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgressHorizontal_finalize)
 
 static bool js_cocos2dx_TransitionProgressHorizontal_constructor(se::State& s)
 {
@@ -44077,7 +44502,7 @@ static bool js_cocos2dx_TransitionProgressHorizontal_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgressHorizontal_constructor, __jsb_cocos2dx_TransitionProgressHorizontal_class, js_cocos2dx_TransitionProgressHorizontal_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgressHorizontal_constructor, __jsb_cocos2d_TransitionProgressHorizontal_class, js_cocos2d_TransitionProgressHorizontal_finalize)
 
 static bool js_cocos2dx_TransitionProgressHorizontal_ctor(se::State& s)
 {
@@ -44086,12 +44511,14 @@ static bool js_cocos2dx_TransitionProgressHorizontal_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressHorizontal_ctor, __jsb_cocos2dx_TransitionProgressHorizontal_class, js_cocos2dx_TransitionProgressHorizontal_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressHorizontal_ctor, __jsb_cocos2d_TransitionProgressHorizontal_class, js_cocos2d_TransitionProgressHorizontal_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgressHorizontal_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+
+bool js_cocos2d_TransitionProgressHorizontal_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -44104,27 +44531,27 @@ bool js_cocos2dx_TransitionProgressHorizontal_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgressHorizontal_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgressHorizontal_finalize)
 
 bool js_register_cocos2dx_TransitionProgressHorizontal(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgressHorizontal", obj, __jsb_cocos2dx_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressHorizontal_constructor));
+    auto cls = se::Class::create("TransitionProgressHorizontal", obj, __jsb_cocos2d_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressHorizontal_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgressHorizontal_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgressHorizontal_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgressHorizontal_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgressHorizontal_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgressHorizontal>(cls);
 
-    __jsb_cocos2dx_TransitionProgressHorizontal_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgressHorizontal_class = cls;
+    __jsb_cocos2d_TransitionProgressHorizontal_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgressHorizontal_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgressHorizontal.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgressVertical_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgressVertical_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgressVertical_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgressVertical_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgressVertical_create(se::State& s)
 {
@@ -44139,7 +44566,7 @@ static bool js_cocos2dx_TransitionProgressVertical_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgressVertical_create : Error processing arguments");
         auto result = cocos2d::TransitionProgressVertical::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgressVertical_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgressVertical_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -44149,7 +44576,7 @@ static bool js_cocos2dx_TransitionProgressVertical_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgressVertical_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgressVertical_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgressVertical_finalize)
 
 static bool js_cocos2dx_TransitionProgressVertical_constructor(se::State& s)
 {
@@ -44158,7 +44585,7 @@ static bool js_cocos2dx_TransitionProgressVertical_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgressVertical_constructor, __jsb_cocos2dx_TransitionProgressVertical_class, js_cocos2dx_TransitionProgressVertical_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgressVertical_constructor, __jsb_cocos2d_TransitionProgressVertical_class, js_cocos2d_TransitionProgressVertical_finalize)
 
 static bool js_cocos2dx_TransitionProgressVertical_ctor(se::State& s)
 {
@@ -44167,12 +44594,14 @@ static bool js_cocos2dx_TransitionProgressVertical_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressVertical_ctor, __jsb_cocos2dx_TransitionProgressVertical_class, js_cocos2dx_TransitionProgressVertical_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressVertical_ctor, __jsb_cocos2d_TransitionProgressVertical_class, js_cocos2d_TransitionProgressVertical_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgressVertical_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+
+bool js_cocos2d_TransitionProgressVertical_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -44185,27 +44614,27 @@ bool js_cocos2dx_TransitionProgressVertical_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgressVertical_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgressVertical_finalize)
 
 bool js_register_cocos2dx_TransitionProgressVertical(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgressVertical", obj, __jsb_cocos2dx_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressVertical_constructor));
+    auto cls = se::Class::create("TransitionProgressVertical", obj, __jsb_cocos2d_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressVertical_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgressVertical_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgressVertical_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgressVertical_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgressVertical_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgressVertical>(cls);
 
-    __jsb_cocos2dx_TransitionProgressVertical_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgressVertical_class = cls;
+    __jsb_cocos2d_TransitionProgressVertical_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgressVertical_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgressVertical.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgressInOut_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgressInOut_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgressInOut_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgressInOut_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgressInOut_create(se::State& s)
 {
@@ -44220,7 +44649,7 @@ static bool js_cocos2dx_TransitionProgressInOut_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgressInOut_create : Error processing arguments");
         auto result = cocos2d::TransitionProgressInOut::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgressInOut_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgressInOut_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -44230,7 +44659,7 @@ static bool js_cocos2dx_TransitionProgressInOut_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgressInOut_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgressInOut_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgressInOut_finalize)
 
 static bool js_cocos2dx_TransitionProgressInOut_constructor(se::State& s)
 {
@@ -44239,7 +44668,7 @@ static bool js_cocos2dx_TransitionProgressInOut_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgressInOut_constructor, __jsb_cocos2dx_TransitionProgressInOut_class, js_cocos2dx_TransitionProgressInOut_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgressInOut_constructor, __jsb_cocos2d_TransitionProgressInOut_class, js_cocos2d_TransitionProgressInOut_finalize)
 
 static bool js_cocos2dx_TransitionProgressInOut_ctor(se::State& s)
 {
@@ -44248,12 +44677,14 @@ static bool js_cocos2dx_TransitionProgressInOut_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressInOut_ctor, __jsb_cocos2dx_TransitionProgressInOut_class, js_cocos2dx_TransitionProgressInOut_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressInOut_ctor, __jsb_cocos2d_TransitionProgressInOut_class, js_cocos2d_TransitionProgressInOut_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgressInOut_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+
+bool js_cocos2d_TransitionProgressInOut_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -44266,27 +44697,27 @@ bool js_cocos2dx_TransitionProgressInOut_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgressInOut_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgressInOut_finalize)
 
 bool js_register_cocos2dx_TransitionProgressInOut(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgressInOut", obj, __jsb_cocos2dx_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressInOut_constructor));
+    auto cls = se::Class::create("TransitionProgressInOut", obj, __jsb_cocos2d_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressInOut_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgressInOut_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgressInOut_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgressInOut_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgressInOut_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgressInOut>(cls);
 
-    __jsb_cocos2dx_TransitionProgressInOut_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgressInOut_class = cls;
+    __jsb_cocos2d_TransitionProgressInOut_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgressInOut_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgressInOut.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TransitionProgressOutIn_proto = nullptr;
-se::Class* __jsb_cocos2dx_TransitionProgressOutIn_class = nullptr;
+se::Object* __jsb_cocos2d_TransitionProgressOutIn_proto = nullptr;
+se::Class* __jsb_cocos2d_TransitionProgressOutIn_class = nullptr;
 
 static bool js_cocos2dx_TransitionProgressOutIn_create(se::State& s)
 {
@@ -44301,7 +44732,7 @@ static bool js_cocos2dx_TransitionProgressOutIn_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TransitionProgressOutIn_create : Error processing arguments");
         auto result = cocos2d::TransitionProgressOutIn::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TransitionProgressOutIn_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TransitionProgressOutIn_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -44311,7 +44742,7 @@ static bool js_cocos2dx_TransitionProgressOutIn_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TransitionProgressOutIn_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TransitionProgressOutIn_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TransitionProgressOutIn_finalize)
 
 static bool js_cocos2dx_TransitionProgressOutIn_constructor(se::State& s)
 {
@@ -44320,7 +44751,7 @@ static bool js_cocos2dx_TransitionProgressOutIn_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TransitionProgressOutIn_constructor, __jsb_cocos2dx_TransitionProgressOutIn_class, js_cocos2dx_TransitionProgressOutIn_finalize)
+SE_BIND_CTOR(js_cocos2dx_TransitionProgressOutIn_constructor, __jsb_cocos2d_TransitionProgressOutIn_class, js_cocos2d_TransitionProgressOutIn_finalize)
 
 static bool js_cocos2dx_TransitionProgressOutIn_ctor(se::State& s)
 {
@@ -44329,12 +44760,14 @@ static bool js_cocos2dx_TransitionProgressOutIn_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressOutIn_ctor, __jsb_cocos2dx_TransitionProgressOutIn_class, js_cocos2dx_TransitionProgressOutIn_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TransitionProgressOutIn_ctor, __jsb_cocos2d_TransitionProgressOutIn_class, js_cocos2d_TransitionProgressOutIn_finalize)
 
 
     
 
-bool js_cocos2dx_TransitionProgressOutIn_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+
+bool js_cocos2d_TransitionProgressOutIn_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -44347,27 +44780,27 @@ bool js_cocos2dx_TransitionProgressOutIn_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TransitionProgressOutIn_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TransitionProgressOutIn_finalize)
 
 bool js_register_cocos2dx_TransitionProgressOutIn(se::Object* obj)
 {
-    auto cls = se::Class::create("TransitionProgressOutIn", obj, __jsb_cocos2dx_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressOutIn_constructor));
+    auto cls = se::Class::create("TransitionProgressOutIn", obj, __jsb_cocos2d_TransitionProgress_proto, _SE(js_cocos2dx_TransitionProgressOutIn_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TransitionProgressOutIn_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TransitionProgressOutIn_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TransitionProgressOutIn_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TransitionProgressOutIn_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TransitionProgressOutIn>(cls);
 
-    __jsb_cocos2dx_TransitionProgressOutIn_proto = cls->getProto();
-    __jsb_cocos2dx_TransitionProgressOutIn_class = cls;
+    __jsb_cocos2d_TransitionProgressOutIn_proto = cls->getProto();
+    __jsb_cocos2d_TransitionProgressOutIn_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TransitionProgressOutIn.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Camera_proto = nullptr;
-se::Class* __jsb_cocos2dx_Camera_class = nullptr;
+se::Object* __jsb_cocos2d_Camera_proto = nullptr;
+se::Class* __jsb_cocos2d_Camera_class = nullptr;
 
 static bool js_cocos2dx_Camera_restore(se::State& s)
 {
@@ -45004,7 +45437,7 @@ static bool js_cocos2dx_Camera_createOrthographic(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Camera_createOrthographic : Error processing arguments");
         auto result = cocos2d::Camera::createOrthographic(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Camera_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Camera_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45038,7 +45471,7 @@ static bool js_cocos2dx_Camera_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::Camera::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Camera_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Camera_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45065,7 +45498,7 @@ static bool js_cocos2dx_Camera_createPerspective(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Camera_createPerspective : Error processing arguments");
         auto result = cocos2d::Camera::createPerspective(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Camera_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Camera_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45125,7 +45558,7 @@ static bool js_cocos2dx_Camera_getDefaultCamera(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Camera_getDefaultCamera)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Camera_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Camera_finalize)
 
 static bool js_cocos2dx_Camera_constructor(se::State& s)
 {
@@ -45134,11 +45567,13 @@ static bool js_cocos2dx_Camera_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Camera_constructor, __jsb_cocos2dx_Camera_class, js_cocos2dx_Camera_finalize)
+SE_BIND_CTOR(js_cocos2dx_Camera_constructor, __jsb_cocos2d_Camera_class, js_cocos2d_Camera_finalize)
 
 
 
-bool js_cocos2dx_Camera_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_Camera_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -45151,11 +45586,11 @@ bool js_cocos2dx_Camera_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Camera_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Camera_finalize)
 
 bool js_register_cocos2dx_Camera(se::Object* obj)
 {
-    auto cls = se::Class::create("Camera", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_Camera_constructor));
+    auto cls = se::Class::create("Camera", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_Camera_constructor));
 
     cls->defineFunction("restore", _SE(js_cocos2dx_Camera_restore));
     cls->defineFunction("getDepth", _SE(js_cocos2dx_Camera_getDepth));
@@ -45197,18 +45632,18 @@ bool js_register_cocos2dx_Camera(se::Object* obj)
     cls->defineStaticFunction("getDefaultViewport", _SE(js_cocos2dx_Camera_getDefaultViewport));
     cls->defineStaticFunction("setDefaultViewport", _SE(js_cocos2dx_Camera_setDefaultViewport));
     cls->defineStaticFunction("getDefaultCamera", _SE(js_cocos2dx_Camera_getDefaultCamera));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Camera_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Camera_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Camera>(cls);
 
-    __jsb_cocos2dx_Camera_proto = cls->getProto();
-    __jsb_cocos2dx_Camera_class = cls;
+    __jsb_cocos2d_Camera_proto = cls->getProto();
+    __jsb_cocos2d_Camera_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CameraBackgroundBrush_proto = nullptr;
-se::Class* __jsb_cocos2dx_CameraBackgroundBrush_class = nullptr;
+se::Object* __jsb_cocos2d_CameraBackgroundBrush_proto = nullptr;
+se::Class* __jsb_cocos2d_CameraBackgroundBrush_class = nullptr;
 
 static bool js_cocos2dx_CameraBackgroundBrush_getBrushType(se::State& s)
 {
@@ -45304,7 +45739,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createSkyboxBrush(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_CameraBackgroundBrush_createSkyboxBrush : Error processing arguments");
         auto result = cocos2d::CameraBackgroundBrush::createSkyboxBrush(arg0, arg1, arg2, arg3, arg4, arg5);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45327,7 +45762,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createColorBrush(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_CameraBackgroundBrush_createColorBrush : Error processing arguments");
         auto result = cocos2d::CameraBackgroundBrush::createColorBrush(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45345,7 +45780,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createNoneBrush(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::CameraBackgroundBrush::createNoneBrush();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45363,7 +45798,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createDepthBrush(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::CameraBackgroundBrush::createDepthBrush();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45374,7 +45809,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createDepthBrush(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_CameraBackgroundBrush_createDepthBrush : Error processing arguments");
         auto result = cocos2d::CameraBackgroundBrush::createDepthBrush(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45384,7 +45819,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createDepthBrush(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CameraBackgroundBrush_createDepthBrush)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundBrush_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CameraBackgroundBrush_finalize)
 
 static bool js_cocos2dx_CameraBackgroundBrush_constructor(se::State& s)
 {
@@ -45393,11 +45828,12 @@ static bool js_cocos2dx_CameraBackgroundBrush_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CameraBackgroundBrush_constructor, __jsb_cocos2dx_CameraBackgroundBrush_class, js_cocos2dx_CameraBackgroundBrush_finalize)
+SE_BIND_CTOR(js_cocos2dx_CameraBackgroundBrush_constructor, __jsb_cocos2d_CameraBackgroundBrush_class, js_cocos2d_CameraBackgroundBrush_finalize)
 
 
 
-bool js_cocos2dx_CameraBackgroundBrush_finalize(se::State& s)
+
+bool js_cocos2d_CameraBackgroundBrush_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -45410,7 +45846,7 @@ bool js_cocos2dx_CameraBackgroundBrush_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundBrush_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CameraBackgroundBrush_finalize)
 
 bool js_register_cocos2dx_CameraBackgroundBrush(se::Object* obj)
 {
@@ -45424,18 +45860,18 @@ bool js_register_cocos2dx_CameraBackgroundBrush(se::Object* obj)
     cls->defineStaticFunction("createColorBrush", _SE(js_cocos2dx_CameraBackgroundBrush_createColorBrush));
     cls->defineStaticFunction("createNoneBrush", _SE(js_cocos2dx_CameraBackgroundBrush_createNoneBrush));
     cls->defineStaticFunction("createDepthBrush", _SE(js_cocos2dx_CameraBackgroundBrush_createDepthBrush));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CameraBackgroundBrush_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CameraBackgroundBrush_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CameraBackgroundBrush>(cls);
 
-    __jsb_cocos2dx_CameraBackgroundBrush_proto = cls->getProto();
-    __jsb_cocos2dx_CameraBackgroundBrush_class = cls;
+    __jsb_cocos2d_CameraBackgroundBrush_proto = cls->getProto();
+    __jsb_cocos2d_CameraBackgroundBrush_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CameraBackgroundDepthBrush_proto = nullptr;
-se::Class* __jsb_cocos2dx_CameraBackgroundDepthBrush_class = nullptr;
+se::Object* __jsb_cocos2d_CameraBackgroundDepthBrush_proto = nullptr;
+se::Class* __jsb_cocos2d_CameraBackgroundDepthBrush_class = nullptr;
 
 static bool js_cocos2dx_CameraBackgroundDepthBrush_setDepth(se::State& s)
 {
@@ -45467,7 +45903,7 @@ static bool js_cocos2dx_CameraBackgroundDepthBrush_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_CameraBackgroundDepthBrush_create : Error processing arguments");
         auto result = cocos2d::CameraBackgroundDepthBrush::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundDepthBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundDepthBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45477,7 +45913,7 @@ static bool js_cocos2dx_CameraBackgroundDepthBrush_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CameraBackgroundDepthBrush_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundDepthBrush_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CameraBackgroundDepthBrush_finalize)
 
 static bool js_cocos2dx_CameraBackgroundDepthBrush_constructor(se::State& s)
 {
@@ -45486,11 +45922,13 @@ static bool js_cocos2dx_CameraBackgroundDepthBrush_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CameraBackgroundDepthBrush_constructor, __jsb_cocos2dx_CameraBackgroundDepthBrush_class, js_cocos2dx_CameraBackgroundDepthBrush_finalize)
+SE_BIND_CTOR(js_cocos2dx_CameraBackgroundDepthBrush_constructor, __jsb_cocos2d_CameraBackgroundDepthBrush_class, js_cocos2d_CameraBackgroundDepthBrush_finalize)
 
 
 
-bool js_cocos2dx_CameraBackgroundDepthBrush_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_CameraBackgroundBrush_proto;
+
+bool js_cocos2d_CameraBackgroundDepthBrush_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -45503,26 +45941,26 @@ bool js_cocos2dx_CameraBackgroundDepthBrush_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundDepthBrush_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CameraBackgroundDepthBrush_finalize)
 
 bool js_register_cocos2dx_CameraBackgroundDepthBrush(se::Object* obj)
 {
-    auto cls = se::Class::create("CameraBackgroundDepthBrush", obj, __jsb_cocos2dx_CameraBackgroundBrush_proto, _SE(js_cocos2dx_CameraBackgroundDepthBrush_constructor));
+    auto cls = se::Class::create("CameraBackgroundDepthBrush", obj, __jsb_cocos2d_CameraBackgroundBrush_proto, _SE(js_cocos2dx_CameraBackgroundDepthBrush_constructor));
 
     cls->defineFunction("setDepth", _SE(js_cocos2dx_CameraBackgroundDepthBrush_setDepth));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_CameraBackgroundDepthBrush_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CameraBackgroundDepthBrush_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CameraBackgroundDepthBrush_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CameraBackgroundDepthBrush>(cls);
 
-    __jsb_cocos2dx_CameraBackgroundDepthBrush_proto = cls->getProto();
-    __jsb_cocos2dx_CameraBackgroundDepthBrush_class = cls;
+    __jsb_cocos2d_CameraBackgroundDepthBrush_proto = cls->getProto();
+    __jsb_cocos2d_CameraBackgroundDepthBrush_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CameraBackgroundColorBrush_proto = nullptr;
-se::Class* __jsb_cocos2dx_CameraBackgroundColorBrush_class = nullptr;
+se::Object* __jsb_cocos2d_CameraBackgroundColorBrush_proto = nullptr;
+se::Class* __jsb_cocos2d_CameraBackgroundColorBrush_class = nullptr;
 
 static bool js_cocos2dx_CameraBackgroundColorBrush_setColor(se::State& s)
 {
@@ -45556,7 +45994,7 @@ static bool js_cocos2dx_CameraBackgroundColorBrush_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_CameraBackgroundColorBrush_create : Error processing arguments");
         auto result = cocos2d::CameraBackgroundColorBrush::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_CameraBackgroundColorBrush_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_CameraBackgroundColorBrush_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -45566,7 +46004,7 @@ static bool js_cocos2dx_CameraBackgroundColorBrush_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CameraBackgroundColorBrush_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundColorBrush_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CameraBackgroundColorBrush_finalize)
 
 static bool js_cocos2dx_CameraBackgroundColorBrush_constructor(se::State& s)
 {
@@ -45575,11 +46013,13 @@ static bool js_cocos2dx_CameraBackgroundColorBrush_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CameraBackgroundColorBrush_constructor, __jsb_cocos2dx_CameraBackgroundColorBrush_class, js_cocos2dx_CameraBackgroundColorBrush_finalize)
+SE_BIND_CTOR(js_cocos2dx_CameraBackgroundColorBrush_constructor, __jsb_cocos2d_CameraBackgroundColorBrush_class, js_cocos2d_CameraBackgroundColorBrush_finalize)
 
 
 
-bool js_cocos2dx_CameraBackgroundColorBrush_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_CameraBackgroundDepthBrush_proto;
+
+bool js_cocos2d_CameraBackgroundColorBrush_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -45592,26 +46032,26 @@ bool js_cocos2dx_CameraBackgroundColorBrush_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundColorBrush_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CameraBackgroundColorBrush_finalize)
 
 bool js_register_cocos2dx_CameraBackgroundColorBrush(se::Object* obj)
 {
-    auto cls = se::Class::create("CameraBackgroundColorBrush", obj, __jsb_cocos2dx_CameraBackgroundDepthBrush_proto, _SE(js_cocos2dx_CameraBackgroundColorBrush_constructor));
+    auto cls = se::Class::create("CameraBackgroundColorBrush", obj, __jsb_cocos2d_CameraBackgroundDepthBrush_proto, _SE(js_cocos2dx_CameraBackgroundColorBrush_constructor));
 
     cls->defineFunction("setColor", _SE(js_cocos2dx_CameraBackgroundColorBrush_setColor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_CameraBackgroundColorBrush_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CameraBackgroundColorBrush_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CameraBackgroundColorBrush_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CameraBackgroundColorBrush>(cls);
 
-    __jsb_cocos2dx_CameraBackgroundColorBrush_proto = cls->getProto();
-    __jsb_cocos2dx_CameraBackgroundColorBrush_class = cls;
+    __jsb_cocos2d_CameraBackgroundColorBrush_proto = cls->getProto();
+    __jsb_cocos2d_CameraBackgroundColorBrush_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_proto = nullptr;
-se::Class* __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_class = nullptr;
+se::Object* __jsb_cocos2d_CameraBackgroundSkyBoxBrush_proto = nullptr;
+se::Class* __jsb_cocos2d_CameraBackgroundSkyBoxBrush_class = nullptr;
 
 static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_setTextureValid(se::State& s)
 {
@@ -45732,7 +46172,7 @@ static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_CameraBackgroundSkyBoxBrush_finalize)
 
 static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_constructor(se::State& s)
 {
@@ -45741,11 +46181,13 @@ static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_CameraBackgroundSkyBoxBrush_constructor, __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_class, js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize)
+SE_BIND_CTOR(js_cocos2dx_CameraBackgroundSkyBoxBrush_constructor, __jsb_cocos2d_CameraBackgroundSkyBoxBrush_class, js_cocos2d_CameraBackgroundSkyBoxBrush_finalize)
 
 
 
-bool js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_CameraBackgroundBrush_proto;
+
+bool js_cocos2d_CameraBackgroundSkyBoxBrush_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -45758,29 +46200,29 @@ bool js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_CameraBackgroundSkyBoxBrush_finalize)
 
 bool js_register_cocos2dx_CameraBackgroundSkyBoxBrush(se::Object* obj)
 {
-    auto cls = se::Class::create("CameraBackgroundSkyBoxBrush", obj, __jsb_cocos2dx_CameraBackgroundBrush_proto, _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_constructor));
+    auto cls = se::Class::create("CameraBackgroundSkyBoxBrush", obj, __jsb_cocos2d_CameraBackgroundBrush_proto, _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_constructor));
 
     cls->defineFunction("setTextureValid", _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_setTextureValid));
     cls->defineFunction("setTexture", _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_setTexture));
     cls->defineFunction("setActived", _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_setActived));
     cls->defineFunction("isActived", _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_isActived));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_CameraBackgroundSkyBoxBrush_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_CameraBackgroundSkyBoxBrush_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::CameraBackgroundSkyBoxBrush>(cls);
 
-    __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_proto = cls->getProto();
-    __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_class = cls;
+    __jsb_cocos2d_CameraBackgroundSkyBoxBrush_proto = cls->getProto();
+    __jsb_cocos2d_CameraBackgroundSkyBoxBrush_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_GridBase_proto = nullptr;
-se::Class* __jsb_cocos2dx_GridBase_class = nullptr;
+se::Object* __jsb_cocos2d_GridBase_proto = nullptr;
+se::Class* __jsb_cocos2d_GridBase_class = nullptr;
 
 static bool js_cocos2dx_GridBase_setGridSize(se::State& s)
 {
@@ -46244,6 +46686,7 @@ SE_BIND_FUNC(js_cocos2dx_GridBase_create)
 
 
 
+
 bool js_register_cocos2dx_GridBase(se::Object* obj)
 {
     auto cls = se::Class::create("GridBase", obj, nullptr, nullptr);
@@ -46273,15 +46716,15 @@ bool js_register_cocos2dx_GridBase(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::GridBase>(cls);
 
-    __jsb_cocos2dx_GridBase_proto = cls->getProto();
-    __jsb_cocos2dx_GridBase_class = cls;
+    __jsb_cocos2d_GridBase_proto = cls->getProto();
+    __jsb_cocos2d_GridBase_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.GridBase.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Grid3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_Grid3D_class = nullptr;
+se::Object* __jsb_cocos2d_Grid3D_proto = nullptr;
+se::Class* __jsb_cocos2d_Grid3D_class = nullptr;
 
 static bool js_cocos2dx_Grid3D_getNeedDepthTestForBlit(se::State& s)
 {
@@ -46392,7 +46835,7 @@ static bool js_cocos2dx_Grid3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Grid3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_Grid3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Grid3D_finalize)
 
 static bool js_cocos2dx_Grid3D_constructor(se::State& s)
 {
@@ -46401,7 +46844,7 @@ static bool js_cocos2dx_Grid3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_Grid3D_constructor, __jsb_cocos2dx_Grid3D_class, js_cocos2dx_Grid3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_Grid3D_constructor, __jsb_cocos2d_Grid3D_class, js_cocos2d_Grid3D_finalize)
 
 static bool js_cocos2dx_Grid3D_ctor(se::State& s)
 {
@@ -46410,12 +46853,14 @@ static bool js_cocos2dx_Grid3D_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Grid3D_ctor, __jsb_cocos2dx_Grid3D_class, js_cocos2dx_Grid3D_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_Grid3D_ctor, __jsb_cocos2d_Grid3D_class, js_cocos2d_Grid3D_finalize)
 
 
     
 
-bool js_cocos2dx_Grid3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_GridBase_proto;
+
+bool js_cocos2d_Grid3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -46428,29 +46873,29 @@ bool js_cocos2dx_Grid3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_Grid3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_Grid3D_finalize)
 
 bool js_register_cocos2dx_Grid3D(se::Object* obj)
 {
-    auto cls = se::Class::create("Grid3D", obj, __jsb_cocos2dx_GridBase_proto, _SE(js_cocos2dx_Grid3D_constructor));
+    auto cls = se::Class::create("Grid3D", obj, __jsb_cocos2d_GridBase_proto, _SE(js_cocos2dx_Grid3D_constructor));
 
     cls->defineFunction("getNeedDepthTestForBlit", _SE(js_cocos2dx_Grid3D_getNeedDepthTestForBlit));
     cls->defineFunction("setNeedDepthTestForBlit", _SE(js_cocos2dx_Grid3D_setNeedDepthTestForBlit));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Grid3D_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_Grid3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_Grid3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_Grid3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::Grid3D>(cls);
 
-    __jsb_cocos2dx_Grid3D_proto = cls->getProto();
-    __jsb_cocos2dx_Grid3D_class = cls;
+    __jsb_cocos2d_Grid3D_proto = cls->getProto();
+    __jsb_cocos2d_Grid3D_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.Grid3D.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TiledGrid3D_proto = nullptr;
-se::Class* __jsb_cocos2dx_TiledGrid3D_class = nullptr;
+se::Object* __jsb_cocos2d_TiledGrid3D_proto = nullptr;
+se::Class* __jsb_cocos2d_TiledGrid3D_class = nullptr;
 
 static bool js_cocos2dx_TiledGrid3D_create(se::State& s)
 {
@@ -46524,7 +46969,7 @@ static bool js_cocos2dx_TiledGrid3D_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TiledGrid3D_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TiledGrid3D_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TiledGrid3D_finalize)
 
 static bool js_cocos2dx_TiledGrid3D_constructor(se::State& s)
 {
@@ -46533,7 +46978,7 @@ static bool js_cocos2dx_TiledGrid3D_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TiledGrid3D_constructor, __jsb_cocos2dx_TiledGrid3D_class, js_cocos2dx_TiledGrid3D_finalize)
+SE_BIND_CTOR(js_cocos2dx_TiledGrid3D_constructor, __jsb_cocos2d_TiledGrid3D_class, js_cocos2d_TiledGrid3D_finalize)
 
 static bool js_cocos2dx_TiledGrid3D_ctor(se::State& s)
 {
@@ -46542,12 +46987,14 @@ static bool js_cocos2dx_TiledGrid3D_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TiledGrid3D_ctor, __jsb_cocos2dx_TiledGrid3D_class, js_cocos2dx_TiledGrid3D_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TiledGrid3D_ctor, __jsb_cocos2d_TiledGrid3D_class, js_cocos2d_TiledGrid3D_finalize)
 
 
     
 
-bool js_cocos2dx_TiledGrid3D_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_GridBase_proto;
+
+bool js_cocos2d_TiledGrid3D_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -46560,27 +47007,27 @@ bool js_cocos2dx_TiledGrid3D_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TiledGrid3D_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TiledGrid3D_finalize)
 
 bool js_register_cocos2dx_TiledGrid3D(se::Object* obj)
 {
-    auto cls = se::Class::create("TiledGrid3D", obj, __jsb_cocos2dx_GridBase_proto, _SE(js_cocos2dx_TiledGrid3D_constructor));
+    auto cls = se::Class::create("TiledGrid3D", obj, __jsb_cocos2d_GridBase_proto, _SE(js_cocos2dx_TiledGrid3D_constructor));
 
     cls->defineFunction("ctor", _SE(js_cocos2dx_TiledGrid3D_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TiledGrid3D_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TiledGrid3D_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TiledGrid3D_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TiledGrid3D>(cls);
 
-    __jsb_cocos2dx_TiledGrid3D_proto = cls->getProto();
-    __jsb_cocos2dx_TiledGrid3D_class = cls;
+    __jsb_cocos2d_TiledGrid3D_proto = cls->getProto();
+    __jsb_cocos2d_TiledGrid3D_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TiledGrid3D.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_BaseLight_proto = nullptr;
-se::Class* __jsb_cocos2dx_BaseLight_class = nullptr;
+se::Object* __jsb_cocos2d_BaseLight_proto = nullptr;
+se::Class* __jsb_cocos2d_BaseLight_class = nullptr;
 
 static bool js_cocos2dx_BaseLight_setEnabled(se::State& s)
 {
@@ -46712,10 +47159,12 @@ static bool js_cocos2dx_BaseLight_getLightFlag(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_BaseLight_getLightFlag)
 
 
+extern se::Object* __jsb_cocos2d_Node_proto;
+
 
 bool js_register_cocos2dx_BaseLight(se::Object* obj)
 {
-    auto cls = se::Class::create("BaseLight", obj, __jsb_cocos2dx_Node_proto, nullptr);
+    auto cls = se::Class::create("BaseLight", obj, __jsb_cocos2d_Node_proto, nullptr);
 
     cls->defineFunction("setEnabled", _SE(js_cocos2dx_BaseLight_setEnabled));
     cls->defineFunction("getIntensity", _SE(js_cocos2dx_BaseLight_getIntensity));
@@ -46727,14 +47176,14 @@ bool js_register_cocos2dx_BaseLight(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::BaseLight>(cls);
 
-    __jsb_cocos2dx_BaseLight_proto = cls->getProto();
-    __jsb_cocos2dx_BaseLight_class = cls;
+    __jsb_cocos2d_BaseLight_proto = cls->getProto();
+    __jsb_cocos2d_BaseLight_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_DirectionLight_proto = nullptr;
-se::Class* __jsb_cocos2dx_DirectionLight_class = nullptr;
+se::Object* __jsb_cocos2d_DirectionLight_proto = nullptr;
+se::Class* __jsb_cocos2d_DirectionLight_class = nullptr;
 
 static bool js_cocos2dx_DirectionLight_getDirection(se::State& s)
 {
@@ -46804,7 +47253,7 @@ static bool js_cocos2dx_DirectionLight_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_DirectionLight_create : Error processing arguments");
         auto result = cocos2d::DirectionLight::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_DirectionLight_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_DirectionLight_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -46814,7 +47263,7 @@ static bool js_cocos2dx_DirectionLight_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_DirectionLight_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_DirectionLight_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_DirectionLight_finalize)
 
 static bool js_cocos2dx_DirectionLight_constructor(se::State& s)
 {
@@ -46823,11 +47272,13 @@ static bool js_cocos2dx_DirectionLight_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_DirectionLight_constructor, __jsb_cocos2dx_DirectionLight_class, js_cocos2dx_DirectionLight_finalize)
+SE_BIND_CTOR(js_cocos2dx_DirectionLight_constructor, __jsb_cocos2d_DirectionLight_class, js_cocos2d_DirectionLight_finalize)
 
 
 
-bool js_cocos2dx_DirectionLight_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_BaseLight_proto;
+
+bool js_cocos2d_DirectionLight_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -46840,28 +47291,28 @@ bool js_cocos2dx_DirectionLight_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_DirectionLight_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_DirectionLight_finalize)
 
 bool js_register_cocos2dx_DirectionLight(se::Object* obj)
 {
-    auto cls = se::Class::create("DirectionLight", obj, __jsb_cocos2dx_BaseLight_proto, _SE(js_cocos2dx_DirectionLight_constructor));
+    auto cls = se::Class::create("DirectionLight", obj, __jsb_cocos2d_BaseLight_proto, _SE(js_cocos2dx_DirectionLight_constructor));
 
     cls->defineFunction("getDirection", _SE(js_cocos2dx_DirectionLight_getDirection));
     cls->defineFunction("getDirectionInWorld", _SE(js_cocos2dx_DirectionLight_getDirectionInWorld));
     cls->defineFunction("setDirection", _SE(js_cocos2dx_DirectionLight_setDirection));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_DirectionLight_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_DirectionLight_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_DirectionLight_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::DirectionLight>(cls);
 
-    __jsb_cocos2dx_DirectionLight_proto = cls->getProto();
-    __jsb_cocos2dx_DirectionLight_class = cls;
+    __jsb_cocos2d_DirectionLight_proto = cls->getProto();
+    __jsb_cocos2d_DirectionLight_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_PointLight_proto = nullptr;
-se::Class* __jsb_cocos2dx_PointLight_class = nullptr;
+se::Object* __jsb_cocos2d_PointLight_proto = nullptr;
+se::Class* __jsb_cocos2d_PointLight_class = nullptr;
 
 static bool js_cocos2dx_PointLight_getRange(se::State& s)
 {
@@ -46915,7 +47366,7 @@ static bool js_cocos2dx_PointLight_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_PointLight_create : Error processing arguments");
         auto result = cocos2d::PointLight::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_PointLight_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_PointLight_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -46925,7 +47376,7 @@ static bool js_cocos2dx_PointLight_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_PointLight_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_PointLight_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_PointLight_finalize)
 
 static bool js_cocos2dx_PointLight_constructor(se::State& s)
 {
@@ -46934,11 +47385,13 @@ static bool js_cocos2dx_PointLight_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_PointLight_constructor, __jsb_cocos2dx_PointLight_class, js_cocos2dx_PointLight_finalize)
+SE_BIND_CTOR(js_cocos2dx_PointLight_constructor, __jsb_cocos2d_PointLight_class, js_cocos2d_PointLight_finalize)
 
 
 
-bool js_cocos2dx_PointLight_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_BaseLight_proto;
+
+bool js_cocos2d_PointLight_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -46951,27 +47404,27 @@ bool js_cocos2dx_PointLight_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_PointLight_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_PointLight_finalize)
 
 bool js_register_cocos2dx_PointLight(se::Object* obj)
 {
-    auto cls = se::Class::create("PointLight", obj, __jsb_cocos2dx_BaseLight_proto, _SE(js_cocos2dx_PointLight_constructor));
+    auto cls = se::Class::create("PointLight", obj, __jsb_cocos2d_BaseLight_proto, _SE(js_cocos2dx_PointLight_constructor));
 
     cls->defineFunction("getRange", _SE(js_cocos2dx_PointLight_getRange));
     cls->defineFunction("setRange", _SE(js_cocos2dx_PointLight_setRange));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_PointLight_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_PointLight_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_PointLight_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::PointLight>(cls);
 
-    __jsb_cocos2dx_PointLight_proto = cls->getProto();
-    __jsb_cocos2dx_PointLight_class = cls;
+    __jsb_cocos2d_PointLight_proto = cls->getProto();
+    __jsb_cocos2d_PointLight_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SpotLight_proto = nullptr;
-se::Class* __jsb_cocos2dx_SpotLight_class = nullptr;
+se::Object* __jsb_cocos2d_SpotLight_proto = nullptr;
+se::Class* __jsb_cocos2d_SpotLight_class = nullptr;
 
 static bool js_cocos2dx_SpotLight_getRange(se::State& s)
 {
@@ -47196,7 +47649,7 @@ static bool js_cocos2dx_SpotLight_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SpotLight_create : Error processing arguments");
         auto result = cocos2d::SpotLight::create(arg0, arg1, arg2, arg3, arg4, arg5);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SpotLight_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SpotLight_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -47206,7 +47659,7 @@ static bool js_cocos2dx_SpotLight_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SpotLight_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SpotLight_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SpotLight_finalize)
 
 static bool js_cocos2dx_SpotLight_constructor(se::State& s)
 {
@@ -47215,11 +47668,13 @@ static bool js_cocos2dx_SpotLight_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SpotLight_constructor, __jsb_cocos2dx_SpotLight_class, js_cocos2dx_SpotLight_finalize)
+SE_BIND_CTOR(js_cocos2dx_SpotLight_constructor, __jsb_cocos2d_SpotLight_class, js_cocos2d_SpotLight_finalize)
 
 
 
-bool js_cocos2dx_SpotLight_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_BaseLight_proto;
+
+bool js_cocos2d_SpotLight_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -47232,11 +47687,11 @@ bool js_cocos2dx_SpotLight_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SpotLight_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SpotLight_finalize)
 
 bool js_register_cocos2dx_SpotLight(se::Object* obj)
 {
-    auto cls = se::Class::create("SpotLight", obj, __jsb_cocos2dx_BaseLight_proto, _SE(js_cocos2dx_SpotLight_constructor));
+    auto cls = se::Class::create("SpotLight", obj, __jsb_cocos2d_BaseLight_proto, _SE(js_cocos2dx_SpotLight_constructor));
 
     cls->defineFunction("getRange", _SE(js_cocos2dx_SpotLight_getRange));
     cls->defineFunction("setDirection", _SE(js_cocos2dx_SpotLight_setDirection));
@@ -47250,18 +47705,18 @@ bool js_register_cocos2dx_SpotLight(se::Object* obj)
     cls->defineFunction("getDirectionInWorld", _SE(js_cocos2dx_SpotLight_getDirectionInWorld));
     cls->defineFunction("setRange", _SE(js_cocos2dx_SpotLight_setRange));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SpotLight_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SpotLight_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SpotLight_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SpotLight>(cls);
 
-    __jsb_cocos2dx_SpotLight_proto = cls->getProto();
-    __jsb_cocos2dx_SpotLight_class = cls;
+    __jsb_cocos2d_SpotLight_proto = cls->getProto();
+    __jsb_cocos2d_SpotLight_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_AmbientLight_proto = nullptr;
-se::Class* __jsb_cocos2dx_AmbientLight_class = nullptr;
+se::Object* __jsb_cocos2d_AmbientLight_proto = nullptr;
+se::Class* __jsb_cocos2d_AmbientLight_class = nullptr;
 
 static bool js_cocos2dx_AmbientLight_create(se::State& s)
 {
@@ -47274,7 +47729,7 @@ static bool js_cocos2dx_AmbientLight_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_AmbientLight_create : Error processing arguments");
         auto result = cocos2d::AmbientLight::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_AmbientLight_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_AmbientLight_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -47284,7 +47739,7 @@ static bool js_cocos2dx_AmbientLight_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_AmbientLight_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_AmbientLight_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_AmbientLight_finalize)
 
 static bool js_cocos2dx_AmbientLight_constructor(se::State& s)
 {
@@ -47293,11 +47748,13 @@ static bool js_cocos2dx_AmbientLight_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_AmbientLight_constructor, __jsb_cocos2dx_AmbientLight_class, js_cocos2dx_AmbientLight_finalize)
+SE_BIND_CTOR(js_cocos2dx_AmbientLight_constructor, __jsb_cocos2d_AmbientLight_class, js_cocos2d_AmbientLight_finalize)
 
 
 
-bool js_cocos2dx_AmbientLight_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_BaseLight_proto;
+
+bool js_cocos2d_AmbientLight_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -47310,25 +47767,25 @@ bool js_cocos2dx_AmbientLight_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_AmbientLight_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_AmbientLight_finalize)
 
 bool js_register_cocos2dx_AmbientLight(se::Object* obj)
 {
-    auto cls = se::Class::create("AmbientLight", obj, __jsb_cocos2dx_BaseLight_proto, _SE(js_cocos2dx_AmbientLight_constructor));
+    auto cls = se::Class::create("AmbientLight", obj, __jsb_cocos2d_BaseLight_proto, _SE(js_cocos2dx_AmbientLight_constructor));
 
     cls->defineStaticFunction("create", _SE(js_cocos2dx_AmbientLight_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_AmbientLight_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_AmbientLight_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::AmbientLight>(cls);
 
-    __jsb_cocos2dx_AmbientLight_proto = cls->getProto();
-    __jsb_cocos2dx_AmbientLight_class = cls;
+    __jsb_cocos2d_AmbientLight_proto = cls->getProto();
+    __jsb_cocos2d_AmbientLight_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_GLProgram_proto = nullptr;
-se::Class* __jsb_cocos2dx_GLProgram_class = nullptr;
+se::Object* __jsb_cocos2d_GLProgram_proto = nullptr;
+se::Class* __jsb_cocos2d_GLProgram_class = nullptr;
 
 static bool js_cocos2dx_GLProgram_getFragmentShaderLog(se::State& s)
 {
@@ -48048,7 +48505,7 @@ static bool js_cocos2dx_GLProgram_createWithFilenames(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_GLProgram_createWithFilenames)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_GLProgram_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_GLProgram_finalize)
 
 static bool js_cocos2dx_GLProgram_constructor(se::State& s)
 {
@@ -48057,7 +48514,7 @@ static bool js_cocos2dx_GLProgram_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_GLProgram_constructor, __jsb_cocos2dx_GLProgram_class, js_cocos2dx_GLProgram_finalize)
+SE_BIND_CTOR(js_cocos2dx_GLProgram_constructor, __jsb_cocos2d_GLProgram_class, js_cocos2d_GLProgram_finalize)
 
 static bool js_cocos2dx_GLProgram_ctor(se::State& s)
 {
@@ -48066,12 +48523,13 @@ static bool js_cocos2dx_GLProgram_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_GLProgram_ctor, __jsb_cocos2dx_GLProgram_class, js_cocos2dx_GLProgram_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_GLProgram_ctor, __jsb_cocos2d_GLProgram_class, js_cocos2d_GLProgram_finalize)
 
 
     
 
-bool js_cocos2dx_GLProgram_finalize(se::State& s)
+
+bool js_cocos2d_GLProgram_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -48084,7 +48542,7 @@ bool js_cocos2dx_GLProgram_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_GLProgram_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_GLProgram_finalize)
 
 bool js_register_cocos2dx_GLProgram(se::Object* obj)
 {
@@ -48117,19 +48575,19 @@ bool js_register_cocos2dx_GLProgram(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_GLProgram_ctor));
     cls->defineStaticFunction("createWithByteArrays", _SE(js_cocos2dx_GLProgram_createWithByteArrays));
     cls->defineStaticFunction("createWithFilenames", _SE(js_cocos2dx_GLProgram_createWithFilenames));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_GLProgram_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_GLProgram_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::GLProgram>(cls);
 
-    __jsb_cocos2dx_GLProgram_proto = cls->getProto();
-    __jsb_cocos2dx_GLProgram_class = cls;
+    __jsb_cocos2d_GLProgram_proto = cls->getProto();
+    __jsb_cocos2d_GLProgram_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.GLProgram.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_GLProgramCache_proto = nullptr;
-se::Class* __jsb_cocos2dx_GLProgramCache_class = nullptr;
+se::Object* __jsb_cocos2d_GLProgramCache_proto = nullptr;
+se::Class* __jsb_cocos2d_GLProgramCache_class = nullptr;
 
 static bool js_cocos2dx_GLProgramCache_loadDefaultGLPrograms(se::State& s)
 {
@@ -48241,7 +48699,7 @@ static bool js_cocos2dx_GLProgramCache_getInstance(se::State& s)
         se::Object* obj = nullptr;
         if (result->_scriptObject == nullptr)
         {
-            obj = se::Object::createObjectWithClass(__jsb_cocos2dx_GLProgramCache_class, true);
+            obj = se::Object::createObjectWithClass(__jsb_cocos2d_GLProgramCache_class, true);
             obj->setPrivateData(result);
             result->_scriptObject = obj;
         }
@@ -48258,7 +48716,7 @@ static bool js_cocos2dx_GLProgramCache_getInstance(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_GLProgramCache_getInstance)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_GLProgramCache_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_GLProgramCache_finalize)
 
 static bool js_cocos2dx_GLProgramCache_constructor(se::State& s)
 {
@@ -48267,11 +48725,12 @@ static bool js_cocos2dx_GLProgramCache_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_GLProgramCache_constructor, __jsb_cocos2dx_GLProgramCache_class, js_cocos2dx_GLProgramCache_finalize)
+SE_BIND_CTOR(js_cocos2dx_GLProgramCache_constructor, __jsb_cocos2d_GLProgramCache_class, js_cocos2d_GLProgramCache_finalize)
 
 
 
-bool js_cocos2dx_GLProgramCache_finalize(se::State& s)
+
+bool js_cocos2d_GLProgramCache_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -48284,7 +48743,7 @@ bool js_cocos2dx_GLProgramCache_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_GLProgramCache_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_GLProgramCache_finalize)
 
 bool js_register_cocos2dx_GLProgramCache(se::Object* obj)
 {
@@ -48297,18 +48756,18 @@ bool js_register_cocos2dx_GLProgramCache(se::Object* obj)
     cls->defineFunction("getProgram", _SE(js_cocos2dx_GLProgramCache_getGLProgram));
     cls->defineStaticFunction("destroyInstance", _SE(js_cocos2dx_GLProgramCache_destroyInstance));
     cls->defineStaticFunction("getInstance", _SE(js_cocos2dx_GLProgramCache_getInstance));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_GLProgramCache_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_GLProgramCache_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::GLProgramCache>(cls);
 
-    __jsb_cocos2dx_GLProgramCache_proto = cls->getProto();
-    __jsb_cocos2dx_GLProgramCache_class = cls;
+    __jsb_cocos2d_GLProgramCache_proto = cls->getProto();
+    __jsb_cocos2d_GLProgramCache_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_RenderState_proto = nullptr;
-se::Class* __jsb_cocos2dx_RenderState_class = nullptr;
+se::Object* __jsb_cocos2d_RenderState_proto = nullptr;
+se::Class* __jsb_cocos2d_RenderState_class = nullptr;
 
 static bool js_cocos2dx_RenderState_setTexture(se::State& s)
 {
@@ -48452,6 +48911,7 @@ SE_BIND_FUNC(js_cocos2dx_RenderState_finalize)
 
 
 
+
 bool js_register_cocos2dx_RenderState(se::Object* obj)
 {
     auto cls = se::Class::create("RenderState", obj, nullptr, nullptr);
@@ -48467,14 +48927,14 @@ bool js_register_cocos2dx_RenderState(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::RenderState>(cls);
 
-    __jsb_cocos2dx_RenderState_proto = cls->getProto();
-    __jsb_cocos2dx_RenderState_class = cls;
+    __jsb_cocos2d_RenderState_proto = cls->getProto();
+    __jsb_cocos2d_RenderState_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Pass_proto = nullptr;
-se::Class* __jsb_cocos2dx_Pass_class = nullptr;
+se::Object* __jsb_cocos2d_Pass_proto = nullptr;
+se::Class* __jsb_cocos2d_Pass_class = nullptr;
 
 static bool js_cocos2dx_Pass_unbind(se::State& s)
 {
@@ -48609,7 +49069,7 @@ static bool js_cocos2dx_Pass_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Pass_create : Error processing arguments");
         auto result = cocos2d::Pass::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Pass_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Pass_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -48632,7 +49092,7 @@ static bool js_cocos2dx_Pass_createWithGLProgramState(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Pass_createWithGLProgramState : Error processing arguments");
         auto result = cocos2d::Pass::createWithGLProgramState(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Pass_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Pass_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -48643,10 +49103,12 @@ static bool js_cocos2dx_Pass_createWithGLProgramState(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_Pass_createWithGLProgramState)
 
 
+extern se::Object* __jsb_cocos2d_RenderState_proto;
+
 
 bool js_register_cocos2dx_Pass(se::Object* obj)
 {
-    auto cls = se::Class::create("Pass", obj, __jsb_cocos2dx_RenderState_proto, nullptr);
+    auto cls = se::Class::create("Pass", obj, __jsb_cocos2d_RenderState_proto, nullptr);
 
     cls->defineFunction("unbind", _SE(js_cocos2dx_Pass_unbind));
     cls->defineFunction("bind", _SE(js_cocos2dx_Pass_bind));
@@ -48659,14 +49121,14 @@ bool js_register_cocos2dx_Pass(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Pass>(cls);
 
-    __jsb_cocos2dx_Pass_proto = cls->getProto();
-    __jsb_cocos2dx_Pass_class = cls;
+    __jsb_cocos2d_Pass_proto = cls->getProto();
+    __jsb_cocos2d_Pass_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Technique_proto = nullptr;
-se::Class* __jsb_cocos2dx_Technique_class = nullptr;
+se::Object* __jsb_cocos2d_Technique_proto = nullptr;
+se::Class* __jsb_cocos2d_Technique_class = nullptr;
 
 static bool js_cocos2dx_Technique_getPassCount(se::State& s)
 {
@@ -48791,7 +49253,7 @@ static bool js_cocos2dx_Technique_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Technique_create : Error processing arguments");
         auto result = cocos2d::Technique::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Technique_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Technique_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -48814,7 +49276,7 @@ static bool js_cocos2dx_Technique_createWithGLProgramState(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Technique_createWithGLProgramState : Error processing arguments");
         auto result = cocos2d::Technique::createWithGLProgramState(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Technique_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Technique_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -48825,10 +49287,12 @@ static bool js_cocos2dx_Technique_createWithGLProgramState(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_Technique_createWithGLProgramState)
 
 
+extern se::Object* __jsb_cocos2d_RenderState_proto;
+
 
 bool js_register_cocos2dx_Technique(se::Object* obj)
 {
-    auto cls = se::Class::create("Technique", obj, __jsb_cocos2dx_RenderState_proto, nullptr);
+    auto cls = se::Class::create("Technique", obj, __jsb_cocos2d_RenderState_proto, nullptr);
 
     cls->defineFunction("getPassCount", _SE(js_cocos2dx_Technique_getPassCount));
     cls->defineFunction("clone", _SE(js_cocos2dx_Technique_clone));
@@ -48841,14 +49305,14 @@ bool js_register_cocos2dx_Technique(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Technique>(cls);
 
-    __jsb_cocos2dx_Technique_proto = cls->getProto();
-    __jsb_cocos2dx_Technique_class = cls;
+    __jsb_cocos2d_Technique_proto = cls->getProto();
+    __jsb_cocos2d_Technique_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Material_proto = nullptr;
-se::Class* __jsb_cocos2dx_Material_class = nullptr;
+se::Object* __jsb_cocos2d_Material_proto = nullptr;
+se::Class* __jsb_cocos2d_Material_class = nullptr;
 
 static bool js_cocos2dx_Material_clone(se::State& s)
 {
@@ -49050,7 +49514,7 @@ static bool js_cocos2dx_Material_createWithFilename(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Material_createWithFilename : Error processing arguments");
         auto result = cocos2d::Material::createWithFilename(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Material_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Material_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -49071,7 +49535,7 @@ static bool js_cocos2dx_Material_createWithGLStateProgram(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Material_createWithGLStateProgram : Error processing arguments");
         auto result = cocos2d::Material::createWithGLStateProgram(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Material_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Material_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -49092,7 +49556,7 @@ static bool js_cocos2dx_Material_createWithProperties(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Material_createWithProperties : Error processing arguments");
         auto result = cocos2d::Material::createWithProperties(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_Material_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_Material_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -49103,10 +49567,12 @@ static bool js_cocos2dx_Material_createWithProperties(se::State& s)
 SE_BIND_FUNC(js_cocos2dx_Material_createWithProperties)
 
 
+extern se::Object* __jsb_cocos2d_RenderState_proto;
+
 
 bool js_register_cocos2dx_Material(se::Object* obj)
 {
-    auto cls = se::Class::create("Material", obj, __jsb_cocos2dx_RenderState_proto, nullptr);
+    auto cls = se::Class::create("Material", obj, __jsb_cocos2d_RenderState_proto, nullptr);
 
     cls->defineFunction("clone", _SE(js_cocos2dx_Material_clone));
     cls->defineFunction("getTechniqueCount", _SE(js_cocos2dx_Material_getTechniqueCount));
@@ -49124,14 +49590,14 @@ bool js_register_cocos2dx_Material(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Material>(cls);
 
-    __jsb_cocos2dx_Material_proto = cls->getProto();
-    __jsb_cocos2dx_Material_class = cls;
+    __jsb_cocos2d_Material_proto = cls->getProto();
+    __jsb_cocos2d_Material_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TextureCache_proto = nullptr;
-se::Class* __jsb_cocos2dx_TextureCache_class = nullptr;
+se::Object* __jsb_cocos2d_TextureCache_proto = nullptr;
+se::Class* __jsb_cocos2d_TextureCache_class = nullptr;
 
 static bool js_cocos2dx_TextureCache_reloadTexture(se::State& s)
 {
@@ -49541,7 +50007,7 @@ static bool js_cocos2dx_TextureCache_getETC1AlphaFileSuffix(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TextureCache_getETC1AlphaFileSuffix)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TextureCache_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TextureCache_finalize)
 
 static bool js_cocos2dx_TextureCache_constructor(se::State& s)
 {
@@ -49550,11 +50016,12 @@ static bool js_cocos2dx_TextureCache_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TextureCache_constructor, __jsb_cocos2dx_TextureCache_class, js_cocos2dx_TextureCache_finalize)
+SE_BIND_CTOR(js_cocos2dx_TextureCache_constructor, __jsb_cocos2d_TextureCache_class, js_cocos2d_TextureCache_finalize)
 
 
 
-bool js_cocos2dx_TextureCache_finalize(se::State& s)
+
+bool js_cocos2d_TextureCache_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -49567,7 +50034,7 @@ bool js_cocos2dx_TextureCache_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TextureCache_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TextureCache_finalize)
 
 bool js_register_cocos2dx_TextureCache(se::Object* obj)
 {
@@ -49590,18 +50057,18 @@ bool js_register_cocos2dx_TextureCache(se::Object* obj)
     cls->defineFunction("waitForQuit", _SE(js_cocos2dx_TextureCache_waitForQuit));
     cls->defineStaticFunction("setETC1AlphaFileSuffix", _SE(js_cocos2dx_TextureCache_setETC1AlphaFileSuffix));
     cls->defineStaticFunction("getETC1AlphaFileSuffix", _SE(js_cocos2dx_TextureCache_getETC1AlphaFileSuffix));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TextureCache_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TextureCache_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TextureCache>(cls);
 
-    __jsb_cocos2dx_TextureCache_proto = cls->getProto();
-    __jsb_cocos2dx_TextureCache_class = cls;
+    __jsb_cocos2d_TextureCache_proto = cls->getProto();
+    __jsb_cocos2d_TextureCache_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Device_proto = nullptr;
-se::Class* __jsb_cocos2dx_Device_class = nullptr;
+se::Object* __jsb_cocos2d_Device_proto = nullptr;
+se::Class* __jsb_cocos2d_Device_class = nullptr;
 
 static bool js_cocos2dx_Device_setAccelerometerEnabled(se::State& s)
 {
@@ -49689,6 +50156,7 @@ SE_BIND_FUNC(js_cocos2dx_Device_getDPI)
 
 
 
+
 bool js_register_cocos2dx_Device(se::Object* obj)
 {
     auto cls = se::Class::create("Device", obj, nullptr, nullptr);
@@ -49701,14 +50169,14 @@ bool js_register_cocos2dx_Device(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Device>(cls);
 
-    __jsb_cocos2dx_Device_proto = cls->getProto();
-    __jsb_cocos2dx_Device_class = cls;
+    __jsb_cocos2d_Device_proto = cls->getProto();
+    __jsb_cocos2d_Device_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SAXParser_proto = nullptr;
-se::Class* __jsb_cocos2dx_SAXParser_class = nullptr;
+se::Object* __jsb_cocos2d_SAXParser_proto = nullptr;
+se::Class* __jsb_cocos2d_SAXParser_class = nullptr;
 
 static bool js_cocos2dx_SAXParser_init(se::State& s)
 {
@@ -49733,6 +50201,7 @@ SE_BIND_FUNC(js_cocos2dx_SAXParser_init)
 
 
 
+
 bool js_register_cocos2dx_SAXParser(se::Object* obj)
 {
     auto cls = se::Class::create("PlistParser", obj, nullptr, nullptr);
@@ -49741,14 +50210,14 @@ bool js_register_cocos2dx_SAXParser(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::SAXParser>(cls);
 
-    __jsb_cocos2dx_SAXParser_proto = cls->getProto();
-    __jsb_cocos2dx_SAXParser_class = cls;
+    __jsb_cocos2d_SAXParser_proto = cls->getProto();
+    __jsb_cocos2d_SAXParser_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_Application_proto = nullptr;
-se::Class* __jsb_cocos2dx_Application_class = nullptr;
+se::Object* __jsb_cocos2d_Application_proto = nullptr;
+se::Class* __jsb_cocos2d_Application_class = nullptr;
 
 static bool js_cocos2dx_Application_getTargetPlatform(se::State& s)
 {
@@ -49843,6 +50312,7 @@ SE_BIND_FUNC(js_cocos2dx_Application_getInstance)
 
 
 
+
 bool js_register_cocos2dx_Application(se::Object* obj)
 {
     auto cls = se::Class::create("Application", obj, nullptr, nullptr);
@@ -49855,14 +50325,14 @@ bool js_register_cocos2dx_Application(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::Application>(cls);
 
-    __jsb_cocos2dx_Application_proto = cls->getProto();
-    __jsb_cocos2dx_Application_class = cls;
+    __jsb_cocos2d_Application_proto = cls->getProto();
+    __jsb_cocos2d_Application_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_AnimationCache_proto = nullptr;
-se::Class* __jsb_cocos2dx_AnimationCache_class = nullptr;
+se::Object* __jsb_cocos2d_AnimationCache_proto = nullptr;
+se::Class* __jsb_cocos2d_AnimationCache_class = nullptr;
 
 static bool js_cocos2dx_AnimationCache_getAnimation(se::State& s)
 {
@@ -50006,7 +50476,7 @@ static bool js_cocos2dx_AnimationCache_getInstance(se::State& s)
         se::Object* obj = nullptr;
         if (result->_scriptObject == nullptr)
         {
-            obj = se::Object::createObjectWithClass(__jsb_cocos2dx_AnimationCache_class, true);
+            obj = se::Object::createObjectWithClass(__jsb_cocos2d_AnimationCache_class, true);
             obj->setPrivateData(result);
             result->_scriptObject = obj;
         }
@@ -50023,7 +50493,7 @@ static bool js_cocos2dx_AnimationCache_getInstance(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_AnimationCache_getInstance)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_AnimationCache_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_AnimationCache_finalize)
 
 static bool js_cocos2dx_AnimationCache_constructor(se::State& s)
 {
@@ -50032,7 +50502,7 @@ static bool js_cocos2dx_AnimationCache_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_AnimationCache_constructor, __jsb_cocos2dx_AnimationCache_class, js_cocos2dx_AnimationCache_finalize)
+SE_BIND_CTOR(js_cocos2dx_AnimationCache_constructor, __jsb_cocos2d_AnimationCache_class, js_cocos2d_AnimationCache_finalize)
 
 static bool js_cocos2dx_AnimationCache_ctor(se::State& s)
 {
@@ -50041,12 +50511,13 @@ static bool js_cocos2dx_AnimationCache_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_AnimationCache_ctor, __jsb_cocos2dx_AnimationCache_class, js_cocos2dx_AnimationCache_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_AnimationCache_ctor, __jsb_cocos2d_AnimationCache_class, js_cocos2d_AnimationCache_finalize)
 
 
     
 
-bool js_cocos2dx_AnimationCache_finalize(se::State& s)
+
+bool js_cocos2d_AnimationCache_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -50059,7 +50530,7 @@ bool js_cocos2dx_AnimationCache_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_AnimationCache_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_AnimationCache_finalize)
 
 bool js_register_cocos2dx_AnimationCache(se::Object* obj)
 {
@@ -50074,19 +50545,19 @@ bool js_register_cocos2dx_AnimationCache(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_AnimationCache_ctor));
     cls->defineStaticFunction("destroyInstance", _SE(js_cocos2dx_AnimationCache_destroyInstance));
     cls->defineStaticFunction("getInstance", _SE(js_cocos2dx_AnimationCache_getInstance));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_AnimationCache_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_AnimationCache_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::AnimationCache>(cls);
 
-    __jsb_cocos2dx_AnimationCache_proto = cls->getProto();
-    __jsb_cocos2dx_AnimationCache_class = cls;
+    __jsb_cocos2d_AnimationCache_proto = cls->getProto();
+    __jsb_cocos2d_AnimationCache_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.AnimationCache.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SpriteBatchNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_SpriteBatchNode_class = nullptr;
+se::Object* __jsb_cocos2d_SpriteBatchNode_proto = nullptr;
+se::Class* __jsb_cocos2d_SpriteBatchNode_class = nullptr;
 
 static bool js_cocos2dx_SpriteBatchNode_appendChild(se::State& s)
 {
@@ -50502,7 +50973,7 @@ static bool js_cocos2dx_SpriteBatchNode_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SpriteBatchNode_create : Error processing arguments");
         auto result = cocos2d::SpriteBatchNode::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SpriteBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SpriteBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -50515,7 +50986,7 @@ static bool js_cocos2dx_SpriteBatchNode_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SpriteBatchNode_create : Error processing arguments");
         auto result = cocos2d::SpriteBatchNode::create(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SpriteBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SpriteBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -50536,7 +51007,7 @@ static bool js_cocos2dx_SpriteBatchNode_createWithTexture(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SpriteBatchNode_createWithTexture : Error processing arguments");
         auto result = cocos2d::SpriteBatchNode::createWithTexture(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SpriteBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SpriteBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -50549,7 +51020,7 @@ static bool js_cocos2dx_SpriteBatchNode_createWithTexture(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_SpriteBatchNode_createWithTexture : Error processing arguments");
         auto result = cocos2d::SpriteBatchNode::createWithTexture(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SpriteBatchNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_SpriteBatchNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -50559,7 +51030,7 @@ static bool js_cocos2dx_SpriteBatchNode_createWithTexture(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_SpriteBatchNode_createWithTexture)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_SpriteBatchNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_SpriteBatchNode_finalize)
 
 static bool js_cocos2dx_SpriteBatchNode_constructor(se::State& s)
 {
@@ -50568,7 +51039,7 @@ static bool js_cocos2dx_SpriteBatchNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_SpriteBatchNode_constructor, __jsb_cocos2dx_SpriteBatchNode_class, js_cocos2dx_SpriteBatchNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_SpriteBatchNode_constructor, __jsb_cocos2d_SpriteBatchNode_class, js_cocos2d_SpriteBatchNode_finalize)
 
 static bool js_cocos2dx_SpriteBatchNode_ctor(se::State& s)
 {
@@ -50577,12 +51048,14 @@ static bool js_cocos2dx_SpriteBatchNode_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SpriteBatchNode_ctor, __jsb_cocos2dx_SpriteBatchNode_class, js_cocos2dx_SpriteBatchNode_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_SpriteBatchNode_ctor, __jsb_cocos2d_SpriteBatchNode_class, js_cocos2d_SpriteBatchNode_finalize)
 
 
     
 
-bool js_cocos2dx_SpriteBatchNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_SpriteBatchNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -50595,11 +51068,11 @@ bool js_cocos2dx_SpriteBatchNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_SpriteBatchNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_SpriteBatchNode_finalize)
 
 bool js_register_cocos2dx_SpriteBatchNode(se::Object* obj)
 {
-    auto cls = se::Class::create("SpriteBatchNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_SpriteBatchNode_constructor));
+    auto cls = se::Class::create("SpriteBatchNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_SpriteBatchNode_constructor));
 
     cls->defineFunction("appendChild", _SE(js_cocos2dx_SpriteBatchNode_appendChild));
     cls->defineFunction("reorderBatch", _SE(js_cocos2dx_SpriteBatchNode_reorderBatch));
@@ -50623,19 +51096,19 @@ bool js_register_cocos2dx_SpriteBatchNode(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_SpriteBatchNode_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_SpriteBatchNode_create));
     cls->defineStaticFunction("createWithTexture", _SE(js_cocos2dx_SpriteBatchNode_createWithTexture));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_SpriteBatchNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_SpriteBatchNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::SpriteBatchNode>(cls);
 
-    __jsb_cocos2dx_SpriteBatchNode_proto = cls->getProto();
-    __jsb_cocos2dx_SpriteBatchNode_class = cls;
+    __jsb_cocos2d_SpriteBatchNode_proto = cls->getProto();
+    __jsb_cocos2d_SpriteBatchNode_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.SpriteBatchNode.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SpriteFrameCache_proto = nullptr;
-se::Class* __jsb_cocos2dx_SpriteFrameCache_class = nullptr;
+se::Object* __jsb_cocos2d_SpriteFrameCache_proto = nullptr;
+se::Class* __jsb_cocos2d_SpriteFrameCache_class = nullptr;
 
 static bool js_cocos2dx_SpriteFrameCache_reloadTexture(se::State& s)
 {
@@ -50937,7 +51410,7 @@ static bool js_cocos2dx_SpriteFrameCache_getInstance(se::State& s)
         se::Object* obj = nullptr;
         if (result->_scriptObject == nullptr)
         {
-            obj = se::Object::createObjectWithClass(__jsb_cocos2dx_SpriteFrameCache_class, true);
+            obj = se::Object::createObjectWithClass(__jsb_cocos2d_SpriteFrameCache_class, true);
             obj->setPrivateData(result);
             result->_scriptObject = obj;
         }
@@ -50953,6 +51426,7 @@ static bool js_cocos2dx_SpriteFrameCache_getInstance(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_SpriteFrameCache_getInstance)
+
 
 
 
@@ -50978,14 +51452,14 @@ bool js_register_cocos2dx_SpriteFrameCache(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::SpriteFrameCache>(cls);
 
-    __jsb_cocos2dx_SpriteFrameCache_proto = cls->getProto();
-    __jsb_cocos2dx_SpriteFrameCache_class = cls;
+    __jsb_cocos2d_SpriteFrameCache_proto = cls->getProto();
+    __jsb_cocos2d_SpriteFrameCache_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TextFieldTTF_proto = nullptr;
-se::Class* __jsb_cocos2dx_TextFieldTTF_class = nullptr;
+se::Object* __jsb_cocos2d_TextFieldTTF_proto = nullptr;
+se::Class* __jsb_cocos2d_TextFieldTTF_class = nullptr;
 
 static bool js_cocos2dx_TextFieldTTF_getCharCount(se::State& s)
 {
@@ -51403,7 +51877,7 @@ static bool js_cocos2dx_TextFieldTTF_textFieldWithPlaceHolder(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TextFieldTTF_textFieldWithPlaceHolder)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TextFieldTTF_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TextFieldTTF_finalize)
 
 static bool js_cocos2dx_TextFieldTTF_constructor(se::State& s)
 {
@@ -51412,7 +51886,7 @@ static bool js_cocos2dx_TextFieldTTF_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TextFieldTTF_constructor, __jsb_cocos2dx_TextFieldTTF_class, js_cocos2dx_TextFieldTTF_finalize)
+SE_BIND_CTOR(js_cocos2dx_TextFieldTTF_constructor, __jsb_cocos2d_TextFieldTTF_class, js_cocos2d_TextFieldTTF_finalize)
 
 static bool js_cocos2dx_TextFieldTTF_ctor(se::State& s)
 {
@@ -51421,12 +51895,14 @@ static bool js_cocos2dx_TextFieldTTF_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TextFieldTTF_ctor, __jsb_cocos2dx_TextFieldTTF_class, js_cocos2dx_TextFieldTTF_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TextFieldTTF_ctor, __jsb_cocos2d_TextFieldTTF_class, js_cocos2d_TextFieldTTF_finalize)
 
 
     
 
-bool js_cocos2dx_TextFieldTTF_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Label_proto;
+
+bool js_cocos2d_TextFieldTTF_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -51439,11 +51915,11 @@ bool js_cocos2dx_TextFieldTTF_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TextFieldTTF_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TextFieldTTF_finalize)
 
 bool js_register_cocos2dx_TextFieldTTF(se::Object* obj)
 {
-    auto cls = se::Class::create("TextFieldTTF", obj, __jsb_cocos2dx_Label_proto, _SE(js_cocos2dx_TextFieldTTF_constructor));
+    auto cls = se::Class::create("TextFieldTTF", obj, __jsb_cocos2d_Label_proto, _SE(js_cocos2dx_TextFieldTTF_constructor));
 
     cls->defineFunction("getCharCount", _SE(js_cocos2dx_TextFieldTTF_getCharCount));
     cls->defineFunction("setCursorChar", _SE(js_cocos2dx_TextFieldTTF_setCursorChar));
@@ -51464,19 +51940,19 @@ bool js_register_cocos2dx_TextFieldTTF(se::Object* obj)
     cls->defineFunction("attachWithIME", _SE(js_cocos2dx_TextFieldTTF_attachWithIME));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TextFieldTTF_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TextFieldTTF_textFieldWithPlaceHolder));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TextFieldTTF_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TextFieldTTF_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TextFieldTTF>(cls);
 
-    __jsb_cocos2dx_TextFieldTTF_proto = cls->getProto();
-    __jsb_cocos2dx_TextFieldTTF_class = cls;
+    __jsb_cocos2d_TextFieldTTF_proto = cls->getProto();
+    __jsb_cocos2d_TextFieldTTF_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TextFieldTTF.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_ParallaxNode_proto = nullptr;
-se::Class* __jsb_cocos2dx_ParallaxNode_class = nullptr;
+se::Object* __jsb_cocos2d_ParallaxNode_proto = nullptr;
+se::Class* __jsb_cocos2d_ParallaxNode_class = nullptr;
 
 static bool js_cocos2dx_ParallaxNode_getParallaxArray(se::State& s)
 {
@@ -51580,7 +52056,7 @@ static bool js_cocos2dx_ParallaxNode_create(se::State& s)
     if (argc == 0) {
         auto result = cocos2d::ParallaxNode::create();
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_ParallaxNode_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_ParallaxNode_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -51590,7 +52066,7 @@ static bool js_cocos2dx_ParallaxNode_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParallaxNode_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_ParallaxNode_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_ParallaxNode_finalize)
 
 static bool js_cocos2dx_ParallaxNode_constructor(se::State& s)
 {
@@ -51599,7 +52075,7 @@ static bool js_cocos2dx_ParallaxNode_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_ParallaxNode_constructor, __jsb_cocos2dx_ParallaxNode_class, js_cocos2dx_ParallaxNode_finalize)
+SE_BIND_CTOR(js_cocos2dx_ParallaxNode_constructor, __jsb_cocos2d_ParallaxNode_class, js_cocos2d_ParallaxNode_finalize)
 
 static bool js_cocos2dx_ParallaxNode_ctor(se::State& s)
 {
@@ -51608,12 +52084,14 @@ static bool js_cocos2dx_ParallaxNode_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ParallaxNode_ctor, __jsb_cocos2dx_ParallaxNode_class, js_cocos2dx_ParallaxNode_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_ParallaxNode_ctor, __jsb_cocos2d_ParallaxNode_class, js_cocos2d_ParallaxNode_finalize)
 
 
     
 
-bool js_cocos2dx_ParallaxNode_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_ParallaxNode_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -51626,11 +52104,11 @@ bool js_cocos2dx_ParallaxNode_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_ParallaxNode_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_ParallaxNode_finalize)
 
 bool js_register_cocos2dx_ParallaxNode(se::Object* obj)
 {
-    auto cls = se::Class::create("ParallaxNode", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_ParallaxNode_constructor));
+    auto cls = se::Class::create("ParallaxNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ParallaxNode_constructor));
 
     cls->defineFunction("getParallaxArray", _SE(js_cocos2dx_ParallaxNode_getParallaxArray));
     cls->defineFunction("addChild", _SE(js_cocos2dx_ParallaxNode_addChild));
@@ -51638,19 +52116,19 @@ bool js_register_cocos2dx_ParallaxNode(se::Object* obj)
     cls->defineFunction("setParallaxArray", _SE(js_cocos2dx_ParallaxNode_setParallaxArray));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ParallaxNode_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParallaxNode_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_ParallaxNode_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_ParallaxNode_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::ParallaxNode>(cls);
 
-    __jsb_cocos2dx_ParallaxNode_proto = cls->getProto();
-    __jsb_cocos2dx_ParallaxNode_class = cls;
+    __jsb_cocos2d_ParallaxNode_proto = cls->getProto();
+    __jsb_cocos2d_ParallaxNode_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.ParallaxNode.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TMXObjectGroup_proto = nullptr;
-se::Class* __jsb_cocos2dx_TMXObjectGroup_class = nullptr;
+se::Object* __jsb_cocos2d_TMXObjectGroup_proto = nullptr;
+se::Class* __jsb_cocos2d_TMXObjectGroup_class = nullptr;
 
 static bool js_cocos2dx_TMXObjectGroup_setPositionOffset(se::State& s)
 {
@@ -51866,7 +52344,7 @@ static bool js_cocos2dx_TMXObjectGroup_setObjects(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TMXObjectGroup_setObjects)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TMXObjectGroup_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TMXObjectGroup_finalize)
 
 static bool js_cocos2dx_TMXObjectGroup_constructor(se::State& s)
 {
@@ -51875,11 +52353,12 @@ static bool js_cocos2dx_TMXObjectGroup_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TMXObjectGroup_constructor, __jsb_cocos2dx_TMXObjectGroup_class, js_cocos2dx_TMXObjectGroup_finalize)
+SE_BIND_CTOR(js_cocos2dx_TMXObjectGroup_constructor, __jsb_cocos2d_TMXObjectGroup_class, js_cocos2d_TMXObjectGroup_finalize)
 
 
 
-bool js_cocos2dx_TMXObjectGroup_finalize(se::State& s)
+
+bool js_cocos2d_TMXObjectGroup_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -51892,7 +52371,7 @@ bool js_cocos2dx_TMXObjectGroup_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TMXObjectGroup_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TMXObjectGroup_finalize)
 
 bool js_register_cocos2dx_TMXObjectGroup(se::Object* obj)
 {
@@ -51908,18 +52387,18 @@ bool js_register_cocos2dx_TMXObjectGroup(se::Object* obj)
     cls->defineFunction("getGroupName", _SE(js_cocos2dx_TMXObjectGroup_getGroupName));
     cls->defineFunction("setProperties", _SE(js_cocos2dx_TMXObjectGroup_setProperties));
     cls->defineFunction("setObjects", _SE(js_cocos2dx_TMXObjectGroup_setObjects));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TMXObjectGroup_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TMXObjectGroup_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TMXObjectGroup>(cls);
 
-    __jsb_cocos2dx_TMXObjectGroup_proto = cls->getProto();
-    __jsb_cocos2dx_TMXObjectGroup_class = cls;
+    __jsb_cocos2d_TMXObjectGroup_proto = cls->getProto();
+    __jsb_cocos2d_TMXObjectGroup_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TMXLayerInfo_proto = nullptr;
-se::Class* __jsb_cocos2dx_TMXLayerInfo_class = nullptr;
+se::Object* __jsb_cocos2d_TMXLayerInfo_proto = nullptr;
+se::Class* __jsb_cocos2d_TMXLayerInfo_class = nullptr;
 
 static bool js_cocos2dx_TMXLayerInfo_setProperties(se::State& s)
 {
@@ -51958,7 +52437,7 @@ static bool js_cocos2dx_TMXLayerInfo_getProperties(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TMXLayerInfo_getProperties)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TMXLayerInfo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TMXLayerInfo_finalize)
 
 static bool js_cocos2dx_TMXLayerInfo_constructor(se::State& s)
 {
@@ -51967,11 +52446,12 @@ static bool js_cocos2dx_TMXLayerInfo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TMXLayerInfo_constructor, __jsb_cocos2dx_TMXLayerInfo_class, js_cocos2dx_TMXLayerInfo_finalize)
+SE_BIND_CTOR(js_cocos2dx_TMXLayerInfo_constructor, __jsb_cocos2d_TMXLayerInfo_class, js_cocos2d_TMXLayerInfo_finalize)
 
 
 
-bool js_cocos2dx_TMXLayerInfo_finalize(se::State& s)
+
+bool js_cocos2d_TMXLayerInfo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -51984,7 +52464,7 @@ bool js_cocos2dx_TMXLayerInfo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TMXLayerInfo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TMXLayerInfo_finalize)
 
 bool js_register_cocos2dx_TMXLayerInfo(se::Object* obj)
 {
@@ -51992,18 +52472,18 @@ bool js_register_cocos2dx_TMXLayerInfo(se::Object* obj)
 
     cls->defineFunction("setProperties", _SE(js_cocos2dx_TMXLayerInfo_setProperties));
     cls->defineFunction("getProperties", _SE(js_cocos2dx_TMXLayerInfo_getProperties));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TMXLayerInfo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TMXLayerInfo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TMXLayerInfo>(cls);
 
-    __jsb_cocos2dx_TMXLayerInfo_proto = cls->getProto();
-    __jsb_cocos2dx_TMXLayerInfo_class = cls;
+    __jsb_cocos2d_TMXLayerInfo_proto = cls->getProto();
+    __jsb_cocos2d_TMXLayerInfo_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TMXTilesetInfo_proto = nullptr;
-se::Class* __jsb_cocos2dx_TMXTilesetInfo_class = nullptr;
+se::Object* __jsb_cocos2d_TMXTilesetInfo_proto = nullptr;
+se::Class* __jsb_cocos2d_TMXTilesetInfo_class = nullptr;
 
 static bool js_cocos2dx_TMXTilesetInfo_getRectForGID(se::State& s)
 {
@@ -52026,7 +52506,7 @@ static bool js_cocos2dx_TMXTilesetInfo_getRectForGID(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TMXTilesetInfo_getRectForGID)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TMXTilesetInfo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TMXTilesetInfo_finalize)
 
 static bool js_cocos2dx_TMXTilesetInfo_constructor(se::State& s)
 {
@@ -52035,11 +52515,12 @@ static bool js_cocos2dx_TMXTilesetInfo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TMXTilesetInfo_constructor, __jsb_cocos2dx_TMXTilesetInfo_class, js_cocos2dx_TMXTilesetInfo_finalize)
+SE_BIND_CTOR(js_cocos2dx_TMXTilesetInfo_constructor, __jsb_cocos2d_TMXTilesetInfo_class, js_cocos2d_TMXTilesetInfo_finalize)
 
 
 
-bool js_cocos2dx_TMXTilesetInfo_finalize(se::State& s)
+
+bool js_cocos2d_TMXTilesetInfo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -52052,25 +52533,25 @@ bool js_cocos2dx_TMXTilesetInfo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TMXTilesetInfo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TMXTilesetInfo_finalize)
 
 bool js_register_cocos2dx_TMXTilesetInfo(se::Object* obj)
 {
     auto cls = se::Class::create("TMXTilesetInfo", obj, nullptr, _SE(js_cocos2dx_TMXTilesetInfo_constructor));
 
     cls->defineFunction("getRectForGID", _SE(js_cocos2dx_TMXTilesetInfo_getRectForGID));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TMXTilesetInfo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TMXTilesetInfo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TMXTilesetInfo>(cls);
 
-    __jsb_cocos2dx_TMXTilesetInfo_proto = cls->getProto();
-    __jsb_cocos2dx_TMXTilesetInfo_class = cls;
+    __jsb_cocos2d_TMXTilesetInfo_proto = cls->getProto();
+    __jsb_cocos2d_TMXTilesetInfo_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TMXMapInfo_proto = nullptr;
-se::Class* __jsb_cocos2dx_TMXMapInfo_class = nullptr;
+se::Object* __jsb_cocos2d_TMXMapInfo_proto = nullptr;
+se::Class* __jsb_cocos2d_TMXMapInfo_class = nullptr;
 
 static bool js_cocos2dx_TMXMapInfo_setCurrentString(se::State& s)
 {
@@ -52864,7 +53345,7 @@ static bool js_cocos2dx_TMXMapInfo_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TMXMapInfo_create : Error processing arguments");
         auto result = cocos2d::TMXMapInfo::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TMXMapInfo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TMXMapInfo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -52887,7 +53368,7 @@ static bool js_cocos2dx_TMXMapInfo_createWithXML(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TMXMapInfo_createWithXML : Error processing arguments");
         auto result = cocos2d::TMXMapInfo::createWithXML(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TMXMapInfo_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TMXMapInfo_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -52897,7 +53378,7 @@ static bool js_cocos2dx_TMXMapInfo_createWithXML(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TMXMapInfo_createWithXML)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TMXMapInfo_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TMXMapInfo_finalize)
 
 static bool js_cocos2dx_TMXMapInfo_constructor(se::State& s)
 {
@@ -52906,7 +53387,7 @@ static bool js_cocos2dx_TMXMapInfo_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TMXMapInfo_constructor, __jsb_cocos2dx_TMXMapInfo_class, js_cocos2dx_TMXMapInfo_finalize)
+SE_BIND_CTOR(js_cocos2dx_TMXMapInfo_constructor, __jsb_cocos2d_TMXMapInfo_class, js_cocos2d_TMXMapInfo_finalize)
 
 static bool js_cocos2dx_TMXMapInfo_ctor(se::State& s)
 {
@@ -52915,12 +53396,13 @@ static bool js_cocos2dx_TMXMapInfo_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TMXMapInfo_ctor, __jsb_cocos2dx_TMXMapInfo_class, js_cocos2dx_TMXMapInfo_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TMXMapInfo_ctor, __jsb_cocos2d_TMXMapInfo_class, js_cocos2d_TMXMapInfo_finalize)
 
 
     
 
-bool js_cocos2dx_TMXMapInfo_finalize(se::State& s)
+
+bool js_cocos2d_TMXMapInfo_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -52933,7 +53415,7 @@ bool js_cocos2dx_TMXMapInfo_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TMXMapInfo_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TMXMapInfo_finalize)
 
 bool js_register_cocos2dx_TMXMapInfo(se::Object* obj)
 {
@@ -52981,19 +53463,19 @@ bool js_register_cocos2dx_TMXMapInfo(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_TMXMapInfo_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TMXMapInfo_create));
     cls->defineStaticFunction("createWithXML", _SE(js_cocos2dx_TMXMapInfo_createWithXML));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TMXMapInfo_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TMXMapInfo_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TMXMapInfo>(cls);
 
-    __jsb_cocos2dx_TMXMapInfo_proto = cls->getProto();
-    __jsb_cocos2dx_TMXMapInfo_class = cls;
+    __jsb_cocos2d_TMXMapInfo_proto = cls->getProto();
+    __jsb_cocos2d_TMXMapInfo_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TMXMapInfo.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TMXLayer_proto = nullptr;
-se::Class* __jsb_cocos2dx_TMXLayer_class = nullptr;
+se::Object* __jsb_cocos2d_TMXLayer_proto = nullptr;
+se::Class* __jsb_cocos2d_TMXLayer_class = nullptr;
 
 static bool js_cocos2dx_TMXLayer_getTileGIDAt(se::State& s)
 {
@@ -53474,7 +53956,7 @@ static bool js_cocos2dx_TMXLayer_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TMXLayer_create : Error processing arguments");
         auto result = cocos2d::TMXLayer::create(arg0, arg1, arg2);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TMXLayer_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TMXLayer_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -53484,7 +53966,7 @@ static bool js_cocos2dx_TMXLayer_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TMXLayer_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TMXLayer_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TMXLayer_finalize)
 
 static bool js_cocos2dx_TMXLayer_constructor(se::State& s)
 {
@@ -53493,7 +53975,7 @@ static bool js_cocos2dx_TMXLayer_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TMXLayer_constructor, __jsb_cocos2dx_TMXLayer_class, js_cocos2dx_TMXLayer_finalize)
+SE_BIND_CTOR(js_cocos2dx_TMXLayer_constructor, __jsb_cocos2d_TMXLayer_class, js_cocos2d_TMXLayer_finalize)
 
 static bool js_cocos2dx_TMXLayer_ctor(se::State& s)
 {
@@ -53502,12 +53984,14 @@ static bool js_cocos2dx_TMXLayer_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TMXLayer_ctor, __jsb_cocos2dx_TMXLayer_class, js_cocos2dx_TMXLayer_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TMXLayer_ctor, __jsb_cocos2d_TMXLayer_class, js_cocos2d_TMXLayer_finalize)
 
 
     
 
-bool js_cocos2dx_TMXLayer_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_SpriteBatchNode_proto;
+
+bool js_cocos2d_TMXLayer_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -53520,11 +54004,11 @@ bool js_cocos2dx_TMXLayer_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TMXLayer_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TMXLayer_finalize)
 
 bool js_register_cocos2dx_TMXLayer(se::Object* obj)
 {
-    auto cls = se::Class::create("TMXLayer", obj, __jsb_cocos2dx_SpriteBatchNode_proto, _SE(js_cocos2dx_TMXLayer_constructor));
+    auto cls = se::Class::create("TMXLayer", obj, __jsb_cocos2d_SpriteBatchNode_proto, _SE(js_cocos2dx_TMXLayer_constructor));
 
     cls->defineFunction("getTileGIDAt", _SE(js_cocos2dx_TMXLayer_getTileGIDAt));
     cls->defineFunction("getPositionAt", _SE(js_cocos2dx_TMXLayer_getPositionAt));
@@ -53550,19 +54034,19 @@ bool js_register_cocos2dx_TMXLayer(se::Object* obj)
     cls->defineFunction("getTileAt", _SE(js_cocos2dx_TMXLayer_getTileAt));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TMXLayer_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TMXLayer_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TMXLayer_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TMXLayer_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TMXLayer>(cls);
 
-    __jsb_cocos2dx_TMXLayer_proto = cls->getProto();
-    __jsb_cocos2dx_TMXLayer_class = cls;
+    __jsb_cocos2d_TMXLayer_proto = cls->getProto();
+    __jsb_cocos2d_TMXLayer_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TMXLayer.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TMXTiledMap_proto = nullptr;
-se::Class* __jsb_cocos2dx_TMXTiledMap_class = nullptr;
+se::Object* __jsb_cocos2d_TMXTiledMap_proto = nullptr;
+se::Class* __jsb_cocos2d_TMXTiledMap_class = nullptr;
 
 static bool js_cocos2dx_TMXTiledMap_setObjectGroups(se::State& s)
 {
@@ -53954,7 +54438,7 @@ static bool js_cocos2dx_TMXTiledMap_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TMXTiledMap_create : Error processing arguments");
         auto result = cocos2d::TMXTiledMap::create(arg0);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TMXTiledMap_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TMXTiledMap_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -53977,7 +54461,7 @@ static bool js_cocos2dx_TMXTiledMap_createWithXML(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TMXTiledMap_createWithXML : Error processing arguments");
         auto result = cocos2d::TMXTiledMap::createWithXML(arg0, arg1);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TMXTiledMap_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TMXTiledMap_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -53987,7 +54471,7 @@ static bool js_cocos2dx_TMXTiledMap_createWithXML(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TMXTiledMap_createWithXML)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TMXTiledMap_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TMXTiledMap_finalize)
 
 static bool js_cocos2dx_TMXTiledMap_constructor(se::State& s)
 {
@@ -53996,7 +54480,7 @@ static bool js_cocos2dx_TMXTiledMap_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TMXTiledMap_constructor, __jsb_cocos2dx_TMXTiledMap_class, js_cocos2dx_TMXTiledMap_finalize)
+SE_BIND_CTOR(js_cocos2dx_TMXTiledMap_constructor, __jsb_cocos2d_TMXTiledMap_class, js_cocos2d_TMXTiledMap_finalize)
 
 static bool js_cocos2dx_TMXTiledMap_ctor(se::State& s)
 {
@@ -54005,12 +54489,14 @@ static bool js_cocos2dx_TMXTiledMap_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TMXTiledMap_ctor, __jsb_cocos2dx_TMXTiledMap_class, js_cocos2dx_TMXTiledMap_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TMXTiledMap_ctor, __jsb_cocos2d_TMXTiledMap_class, js_cocos2d_TMXTiledMap_finalize)
 
 
     
 
-bool js_cocos2dx_TMXTiledMap_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_Node_proto;
+
+bool js_cocos2d_TMXTiledMap_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -54023,11 +54509,11 @@ bool js_cocos2dx_TMXTiledMap_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TMXTiledMap_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TMXTiledMap_finalize)
 
 bool js_register_cocos2dx_TMXTiledMap(se::Object* obj)
 {
-    auto cls = se::Class::create("TMXTiledMap", obj, __jsb_cocos2dx_Node_proto, _SE(js_cocos2dx_TMXTiledMap_constructor));
+    auto cls = se::Class::create("TMXTiledMap", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_TMXTiledMap_constructor));
 
     cls->defineFunction("setObjectGroups", _SE(js_cocos2dx_TMXTiledMap_setObjectGroups));
     cls->defineFunction("getProperty", _SE(js_cocos2dx_TMXTiledMap_getProperty));
@@ -54050,19 +54536,19 @@ bool js_register_cocos2dx_TMXTiledMap(se::Object* obj)
     cls->defineFunction("ctor", _SE(js_cocos2dx_TMXTiledMap_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TMXTiledMap_create));
     cls->defineStaticFunction("createWithXML", _SE(js_cocos2dx_TMXTiledMap_createWithXML));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TMXTiledMap_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TMXTiledMap_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TMXTiledMap>(cls);
 
-    __jsb_cocos2dx_TMXTiledMap_proto = cls->getProto();
-    __jsb_cocos2dx_TMXTiledMap_class = cls;
+    __jsb_cocos2d_TMXTiledMap_proto = cls->getProto();
+    __jsb_cocos2d_TMXTiledMap_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TMXTiledMap.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_TileMapAtlas_proto = nullptr;
-se::Class* __jsb_cocos2dx_TileMapAtlas_class = nullptr;
+se::Object* __jsb_cocos2d_TileMapAtlas_proto = nullptr;
+se::Class* __jsb_cocos2d_TileMapAtlas_class = nullptr;
 
 static bool js_cocos2dx_TileMapAtlas_initWithTileFile(se::State& s)
 {
@@ -54203,7 +54689,7 @@ static bool js_cocos2dx_TileMapAtlas_create(se::State& s)
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TileMapAtlas_create : Error processing arguments");
         auto result = cocos2d::TileMapAtlas::create(arg0, arg1, arg2, arg3);
         result->retain();
-        auto obj = se::Object::createObjectWithClass(__jsb_cocos2dx_TileMapAtlas_class, false);
+        auto obj = se::Object::createObjectWithClass(__jsb_cocos2d_TileMapAtlas_class, false);
         obj->setPrivateData(result);
         s.rval().setObject(obj);
         return true;
@@ -54213,7 +54699,7 @@ static bool js_cocos2dx_TileMapAtlas_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TileMapAtlas_create)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_TileMapAtlas_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_TileMapAtlas_finalize)
 
 static bool js_cocos2dx_TileMapAtlas_constructor(se::State& s)
 {
@@ -54222,7 +54708,7 @@ static bool js_cocos2dx_TileMapAtlas_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_TileMapAtlas_constructor, __jsb_cocos2dx_TileMapAtlas_class, js_cocos2dx_TileMapAtlas_finalize)
+SE_BIND_CTOR(js_cocos2dx_TileMapAtlas_constructor, __jsb_cocos2d_TileMapAtlas_class, js_cocos2d_TileMapAtlas_finalize)
 
 static bool js_cocos2dx_TileMapAtlas_ctor(se::State& s)
 {
@@ -54231,12 +54717,14 @@ static bool js_cocos2dx_TileMapAtlas_ctor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TileMapAtlas_ctor, __jsb_cocos2dx_TileMapAtlas_class, js_cocos2dx_TileMapAtlas_finalize)
+SE_BIND_SUB_CLS_CTOR(js_cocos2dx_TileMapAtlas_ctor, __jsb_cocos2d_TileMapAtlas_class, js_cocos2d_TileMapAtlas_finalize)
 
 
     
 
-bool js_cocos2dx_TileMapAtlas_finalize(se::State& s)
+extern se::Object* __jsb_cocos2d_AtlasNode_proto;
+
+bool js_cocos2d_TileMapAtlas_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -54249,11 +54737,11 @@ bool js_cocos2dx_TileMapAtlas_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_TileMapAtlas_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_TileMapAtlas_finalize)
 
 bool js_register_cocos2dx_TileMapAtlas(se::Object* obj)
 {
-    auto cls = se::Class::create("TileMapAtlas", obj, __jsb_cocos2dx_AtlasNode_proto, _SE(js_cocos2dx_TileMapAtlas_constructor));
+    auto cls = se::Class::create("TileMapAtlas", obj, __jsb_cocos2d_AtlasNode_proto, _SE(js_cocos2dx_TileMapAtlas_constructor));
 
     cls->defineFunction("initWithTileFile", _SE(js_cocos2dx_TileMapAtlas_initWithTileFile));
     cls->defineFunction("releaseMap", _SE(js_cocos2dx_TileMapAtlas_releaseMap));
@@ -54263,19 +54751,19 @@ bool js_register_cocos2dx_TileMapAtlas(se::Object* obj)
     cls->defineFunction("setTGAInfo", _SE(js_cocos2dx_TileMapAtlas_setTGAInfo));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TileMapAtlas_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TileMapAtlas_create));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_TileMapAtlas_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_TileMapAtlas_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::TileMapAtlas>(cls);
 
-    __jsb_cocos2dx_TileMapAtlas_proto = cls->getProto();
-    __jsb_cocos2dx_TileMapAtlas_class = cls;
+    __jsb_cocos2d_TileMapAtlas_proto = cls->getProto();
+    __jsb_cocos2d_TileMapAtlas_class = cls;
 
     se::ScriptEngine::getInstance()->executeScriptBuffer("(function () { cc.TileMapAtlas.extend = cc.Class.extend; })()");
     return true;
 }
 
-se::Object* __jsb_cocos2dx_SimpleAudioEngine_proto = nullptr;
-se::Class* __jsb_cocos2dx_SimpleAudioEngine_class = nullptr;
+se::Object* __jsb_CocosDenshion_SimpleAudioEngine_proto = nullptr;
+se::Class* __jsb_CocosDenshion_SimpleAudioEngine_class = nullptr;
 
 static bool js_cocos2dx_SimpleAudioEngine_preloadBackgroundMusic(se::State& s)
 {
@@ -54750,6 +55238,7 @@ SE_BIND_FUNC(js_cocos2dx_SimpleAudioEngine_getInstance)
 
 
 
+
 bool js_register_cocos2dx_SimpleAudioEngine(se::Object* obj)
 {
     auto cls = se::Class::create("AudioEngine", obj, nullptr, nullptr);
@@ -54780,8 +55269,8 @@ bool js_register_cocos2dx_SimpleAudioEngine(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<CocosDenshion::SimpleAudioEngine>(cls);
 
-    __jsb_cocos2dx_SimpleAudioEngine_proto = cls->getProto();
-    __jsb_cocos2dx_SimpleAudioEngine_class = cls;
+    __jsb_CocosDenshion_SimpleAudioEngine_proto = cls->getProto();
+    __jsb_CocosDenshion_SimpleAudioEngine_class = cls;
 
     return true;
 }

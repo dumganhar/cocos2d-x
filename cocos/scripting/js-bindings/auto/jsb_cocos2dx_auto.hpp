@@ -3,10 +3,10 @@
 
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
-extern se::Object* __jsb_cocos2dx_Texture2D_proto;
-extern se::Class* __jsb_cocos2dx_Texture2D_class;
+extern se::Object* __jsb_cocos2d_Texture2D_proto;
+extern se::Class* __jsb_cocos2d_Texture2D_class;
 
-bool js_register_cocos2dx_Texture2D(se::Object* obj);
+bool js_register_cocos2d_Texture2D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Texture2D_getGLProgram);
 SE_DECLARE_FUNC(js_cocos2dx_Texture2D_getMaxT);
@@ -42,10 +42,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Texture2D_setDefaultAlphaPixelFormat);
 SE_DECLARE_FUNC(js_cocos2dx_Texture2D_getDefaultAlphaPixelFormat);
 SE_DECLARE_FUNC(js_cocos2dx_Texture2D_Texture2D);
 
-extern se::Object* __jsb_cocos2dx_Touch_proto;
-extern se::Class* __jsb_cocos2dx_Touch_class;
+extern se::Object* __jsb_cocos2d_Touch_proto;
+extern se::Class* __jsb_cocos2d_Touch_class;
 
-bool js_register_cocos2dx_Touch(se::Object* obj);
+bool js_register_cocos2d_Touch(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getPreviousLocationInView);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getLocation);
@@ -60,28 +60,28 @@ SE_DECLARE_FUNC(js_cocos2dx_Touch_getLocationInView);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_getPreviousLocation);
 SE_DECLARE_FUNC(js_cocos2dx_Touch_Touch);
 
-extern se::Object* __jsb_cocos2dx_Event_proto;
-extern se::Class* __jsb_cocos2dx_Event_class;
+extern se::Object* __jsb_cocos2d_Event_proto;
+extern se::Class* __jsb_cocos2d_Event_class;
 
-bool js_register_cocos2dx_Event(se::Object* obj);
+bool js_register_cocos2d_Event(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Event_isStopped);
 SE_DECLARE_FUNC(js_cocos2dx_Event_getType);
 SE_DECLARE_FUNC(js_cocos2dx_Event_getCurrentTarget);
 SE_DECLARE_FUNC(js_cocos2dx_Event_stopPropagation);
 
-extern se::Object* __jsb_cocos2dx_EventTouch_proto;
-extern se::Class* __jsb_cocos2dx_EventTouch_class;
+extern se::Object* __jsb_cocos2d_EventTouch_proto;
+extern se::Class* __jsb_cocos2d_EventTouch_class;
 
-bool js_register_cocos2dx_EventTouch(se::Object* obj);
+bool js_register_cocos2d_EventTouch(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventTouch_setEventCode);
 SE_DECLARE_FUNC(js_cocos2dx_EventTouch_getEventCode);
 
-extern se::Object* __jsb_cocos2dx_ComponentContainer_proto;
-extern se::Class* __jsb_cocos2dx_ComponentContainer_class;
+extern se::Object* __jsb_cocos2d_ComponentContainer_proto;
+extern se::Class* __jsb_cocos2d_ComponentContainer_class;
 
-bool js_register_cocos2dx_ComponentContainer(se::Object* obj);
+bool js_register_cocos2d_ComponentContainer(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ComponentContainer_visit);
 SE_DECLARE_FUNC(js_cocos2dx_ComponentContainer_remove);
@@ -90,10 +90,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ComponentContainer_add);
 SE_DECLARE_FUNC(js_cocos2dx_ComponentContainer_isEmpty);
 SE_DECLARE_FUNC(js_cocos2dx_ComponentContainer_get);
 
-extern se::Object* __jsb_cocos2dx_Component_proto;
-extern se::Class* __jsb_cocos2dx_Component_class;
+extern se::Object* __jsb_cocos2d_Component_proto;
+extern se::Class* __jsb_cocos2d_Component_class;
 
-bool js_register_cocos2dx_Component(se::Object* obj);
+bool js_register_cocos2d_Component(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Component_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_Component_setName);
@@ -105,10 +105,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Component_getName);
 SE_DECLARE_FUNC(js_cocos2dx_Component_create);
 SE_DECLARE_FUNC(js_cocos2dx_Component_Component);
 
-extern se::Object* __jsb_cocos2dx_Node_proto;
-extern se::Class* __jsb_cocos2dx_Node_class;
+extern se::Object* __jsb_cocos2d_Node_proto;
+extern se::Class* __jsb_cocos2d_Node_class;
 
-bool js_register_cocos2dx_Node(se::Object* obj);
+bool js_register_cocos2d_Node(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Node_addChild);
 SE_DECLARE_FUNC(js_cocos2dx_Node_removeComponent);
@@ -255,17 +255,17 @@ SE_DECLARE_FUNC(js_cocos2dx_Node_getActionManager);
 SE_DECLARE_FUNC(js_cocos2dx_Node_create);
 SE_DECLARE_FUNC(js_cocos2dx_Node_Node);
 
-extern se::Object* __jsb_cocos2dx___NodeRGBA_proto;
-extern se::Class* __jsb_cocos2dx___NodeRGBA_class;
+extern se::Object* __jsb_cocos2d___NodeRGBA_proto;
+extern se::Class* __jsb_cocos2d___NodeRGBA_class;
 
-bool js_register_cocos2dx___NodeRGBA(se::Object* obj);
+bool js_register_cocos2d___NodeRGBA(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx___NodeRGBA___NodeRGBA);
 
-extern se::Object* __jsb_cocos2dx_Scene_proto;
-extern se::Class* __jsb_cocos2dx_Scene_class;
+extern se::Object* __jsb_cocos2d_Scene_proto;
+extern se::Class* __jsb_cocos2d_Scene_class;
 
-bool js_register_cocos2dx_Scene(se::Object* obj);
+bool js_register_cocos2d_Scene(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Scene_setCameraOrderDirty);
 SE_DECLARE_FUNC(js_cocos2dx_Scene_render);
@@ -277,10 +277,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Scene_createWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_Scene_create);
 SE_DECLARE_FUNC(js_cocos2dx_Scene_Scene);
 
-extern se::Object* __jsb_cocos2dx_GLView_proto;
-extern se::Class* __jsb_cocos2dx_GLView_class;
+extern se::Object* __jsb_cocos2d_GLView_proto;
+extern se::Class* __jsb_cocos2d_GLView_class;
 
-bool js_register_cocos2dx_GLView(se::Object* obj);
+bool js_register_cocos2d_GLView(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_GLView_setFrameSize);
 SE_DECLARE_FUNC(js_cocos2dx_GLView_getViewPortRect);
@@ -315,10 +315,10 @@ SE_DECLARE_FUNC(js_cocos2dx_GLView_pollEvents);
 SE_DECLARE_FUNC(js_cocos2dx_GLView_setGLContextAttrs);
 SE_DECLARE_FUNC(js_cocos2dx_GLView_getGLContextAttrs);
 
-extern se::Object* __jsb_cocos2dx_Director_proto;
-extern se::Class* __jsb_cocos2dx_Director_class;
+extern se::Object* __jsb_cocos2d_Director_proto;
+extern se::Class* __jsb_cocos2d_Director_class;
 
-bool js_register_cocos2dx_Director(se::Object* obj);
+bool js_register_cocos2d_Director(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Director_pause);
 SE_DECLARE_FUNC(js_cocos2dx_Director_pushProjectionMatrix);
@@ -392,10 +392,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Director_setAnimationInterval);
 SE_DECLARE_FUNC(js_cocos2dx_Director_getActionManager);
 SE_DECLARE_FUNC(js_cocos2dx_Director_getInstance);
 
-extern se::Object* __jsb_cocos2dx_Scheduler_proto;
-extern se::Class* __jsb_cocos2dx_Scheduler_class;
+extern se::Object* __jsb_cocos2d_Scheduler_proto;
+extern se::Class* __jsb_cocos2d_Scheduler_class;
 
-bool js_register_cocos2dx_Scheduler(se::Object* obj);
+bool js_register_cocos2d_Scheduler(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_setTimeScale);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_update);
@@ -407,19 +407,19 @@ SE_DECLARE_FUNC(js_cocos2dx_Scheduler_performFunctionInCocosThread);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_Scheduler);
 
-extern se::Object* __jsb_cocos2dx_AsyncTaskPool_proto;
-extern se::Class* __jsb_cocos2dx_AsyncTaskPool_class;
+extern se::Object* __jsb_cocos2d_AsyncTaskPool_proto;
+extern se::Class* __jsb_cocos2d_AsyncTaskPool_class;
 
-bool js_register_cocos2dx_AsyncTaskPool(se::Object* obj);
+bool js_register_cocos2d_AsyncTaskPool(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_AsyncTaskPool_stopTasks);
 SE_DECLARE_FUNC(js_cocos2dx_AsyncTaskPool_destroyInstance);
 SE_DECLARE_FUNC(js_cocos2dx_AsyncTaskPool_getInstance);
 
-extern se::Object* __jsb_cocos2dx_Action_proto;
-extern se::Class* __jsb_cocos2dx_Action_class;
+extern se::Object* __jsb_cocos2d_Action_proto;
+extern se::Class* __jsb_cocos2d_Action_class;
 
-bool js_register_cocos2dx_Action(se::Object* obj);
+bool js_register_cocos2d_Action(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Action_startWithTarget);
 SE_DECLARE_FUNC(js_cocos2dx_Action_setOriginalTarget);
@@ -437,18 +437,18 @@ SE_DECLARE_FUNC(js_cocos2dx_Action_setTarget);
 SE_DECLARE_FUNC(js_cocos2dx_Action_isDone);
 SE_DECLARE_FUNC(js_cocos2dx_Action_reverse);
 
-extern se::Object* __jsb_cocos2dx_FiniteTimeAction_proto;
-extern se::Class* __jsb_cocos2dx_FiniteTimeAction_class;
+extern se::Object* __jsb_cocos2d_FiniteTimeAction_proto;
+extern se::Class* __jsb_cocos2d_FiniteTimeAction_class;
 
-bool js_register_cocos2dx_FiniteTimeAction(se::Object* obj);
+bool js_register_cocos2d_FiniteTimeAction(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FiniteTimeAction_setDuration);
 SE_DECLARE_FUNC(js_cocos2dx_FiniteTimeAction_getDuration);
 
-extern se::Object* __jsb_cocos2dx_Speed_proto;
-extern se::Class* __jsb_cocos2dx_Speed_class;
+extern se::Object* __jsb_cocos2d_Speed_proto;
+extern se::Class* __jsb_cocos2d_Speed_class;
 
-bool js_register_cocos2dx_Speed(se::Object* obj);
+bool js_register_cocos2d_Speed(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Speed_setInnerAction);
 SE_DECLARE_FUNC(js_cocos2dx_Speed_getSpeed);
@@ -458,10 +458,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Speed_getInnerAction);
 SE_DECLARE_FUNC(js_cocos2dx_Speed_create);
 SE_DECLARE_FUNC(js_cocos2dx_Speed_Speed);
 
-extern se::Object* __jsb_cocos2dx_Follow_proto;
-extern se::Class* __jsb_cocos2dx_Follow_class;
+extern se::Object* __jsb_cocos2d_Follow_proto;
+extern se::Class* __jsb_cocos2d_Follow_class;
 
-bool js_register_cocos2dx_Follow(se::Object* obj);
+bool js_register_cocos2d_Follow(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Follow_setBoundarySet);
 SE_DECLARE_FUNC(js_cocos2dx_Follow_initWithTarget);
@@ -471,10 +471,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Follow_create);
 SE_DECLARE_FUNC(js_cocos2dx_Follow_createWithOffset);
 SE_DECLARE_FUNC(js_cocos2dx_Follow_Follow);
 
-extern se::Object* __jsb_cocos2dx_Image_proto;
-extern se::Class* __jsb_cocos2dx_Image_class;
+extern se::Object* __jsb_cocos2d_Image_proto;
+extern se::Class* __jsb_cocos2d_Image_class;
 
-bool js_register_cocos2dx_Image(se::Object* obj);
+bool js_register_cocos2d_Image(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Image_hasPremultipliedAlpha);
 SE_DECLARE_FUNC(js_cocos2dx_Image_getDataLen);
@@ -496,10 +496,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Image_setPVRImagesHavePremultipliedAlpha);
 SE_DECLARE_FUNC(js_cocos2dx_Image_setPNGPremultipliedAlphaEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_Image_Image);
 
-extern se::Object* __jsb_cocos2dx_GLProgramState_proto;
-extern se::Class* __jsb_cocos2dx_GLProgramState_class;
+extern se::Object* __jsb_cocos2d_GLProgramState_proto;
+extern se::Class* __jsb_cocos2d_GLProgramState_class;
 
-bool js_register_cocos2dx_GLProgramState(se::Object* obj);
+bool js_register_cocos2d_GLProgramState(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramState_setUniformCallback);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramState_getVertexAttribsFlags);
@@ -531,10 +531,10 @@ SE_DECLARE_FUNC(js_cocos2dx_GLProgramState_getOrCreateWithGLProgramName);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramState_getOrCreateWithGLProgram);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramState_getOrCreateWithShaders);
 
-extern se::Object* __jsb_cocos2dx_SpriteFrame_proto;
-extern se::Class* __jsb_cocos2dx_SpriteFrame_class;
+extern se::Object* __jsb_cocos2d_SpriteFrame_proto;
+extern se::Class* __jsb_cocos2d_SpriteFrame_class;
 
-bool js_register_cocos2dx_SpriteFrame(se::Object* obj);
+bool js_register_cocos2d_SpriteFrame(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrame_setAnchorPoint);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrame_setTexture);
@@ -565,10 +565,10 @@ SE_DECLARE_FUNC(js_cocos2dx_SpriteFrame_create);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrame_createWithTexture);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrame_SpriteFrame);
 
-extern se::Object* __jsb_cocos2dx_AnimationFrame_proto;
-extern se::Class* __jsb_cocos2dx_AnimationFrame_class;
+extern se::Object* __jsb_cocos2d_AnimationFrame_proto;
+extern se::Class* __jsb_cocos2d_AnimationFrame_class;
 
-bool js_register_cocos2dx_AnimationFrame(se::Object* obj);
+bool js_register_cocos2d_AnimationFrame(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_AnimationFrame_setSpriteFrame);
 SE_DECLARE_FUNC(js_cocos2dx_AnimationFrame_getUserInfo);
@@ -581,10 +581,10 @@ SE_DECLARE_FUNC(js_cocos2dx_AnimationFrame_initWithSpriteFrame);
 SE_DECLARE_FUNC(js_cocos2dx_AnimationFrame_create);
 SE_DECLARE_FUNC(js_cocos2dx_AnimationFrame_AnimationFrame);
 
-extern se::Object* __jsb_cocos2dx_Animation_proto;
-extern se::Class* __jsb_cocos2dx_Animation_class;
+extern se::Object* __jsb_cocos2d_Animation_proto;
+extern se::Class* __jsb_cocos2d_Animation_class;
 
-bool js_register_cocos2dx_Animation(se::Object* obj);
+bool js_register_cocos2d_Animation(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Animation_getLoops);
 SE_DECLARE_FUNC(js_cocos2dx_Animation_addSpriteFrame);
@@ -607,29 +607,29 @@ SE_DECLARE_FUNC(js_cocos2dx_Animation_create);
 SE_DECLARE_FUNC(js_cocos2dx_Animation_createWithSpriteFrames);
 SE_DECLARE_FUNC(js_cocos2dx_Animation_Animation);
 
-extern se::Object* __jsb_cocos2dx_ActionInterval_proto;
-extern se::Class* __jsb_cocos2dx_ActionInterval_class;
+extern se::Object* __jsb_cocos2d_ActionInterval_proto;
+extern se::Class* __jsb_cocos2d_ActionInterval_class;
 
-bool js_register_cocos2dx_ActionInterval(se::Object* obj);
+bool js_register_cocos2d_ActionInterval(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ActionInterval_getAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_ActionInterval_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ActionInterval_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_ActionInterval_getElapsed);
 
-extern se::Object* __jsb_cocos2dx_Sequence_proto;
-extern se::Class* __jsb_cocos2dx_Sequence_class;
+extern se::Object* __jsb_cocos2d_Sequence_proto;
+extern se::Class* __jsb_cocos2d_Sequence_class;
 
-bool js_register_cocos2dx_Sequence(se::Object* obj);
+bool js_register_cocos2d_Sequence(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Sequence_init);
 SE_DECLARE_FUNC(js_cocos2dx_Sequence_initWithTwoActions);
 SE_DECLARE_FUNC(js_cocos2dx_Sequence_Sequence);
 
-extern se::Object* __jsb_cocos2dx_Repeat_proto;
-extern se::Class* __jsb_cocos2dx_Repeat_class;
+extern se::Object* __jsb_cocos2d_Repeat_proto;
+extern se::Class* __jsb_cocos2d_Repeat_class;
 
-bool js_register_cocos2dx_Repeat(se::Object* obj);
+bool js_register_cocos2d_Repeat(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Repeat_setInnerAction);
 SE_DECLARE_FUNC(js_cocos2dx_Repeat_initWithAction);
@@ -637,10 +637,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Repeat_getInnerAction);
 SE_DECLARE_FUNC(js_cocos2dx_Repeat_create);
 SE_DECLARE_FUNC(js_cocos2dx_Repeat_Repeat);
 
-extern se::Object* __jsb_cocos2dx_RepeatForever_proto;
-extern se::Class* __jsb_cocos2dx_RepeatForever_class;
+extern se::Object* __jsb_cocos2d_RepeatForever_proto;
+extern se::Class* __jsb_cocos2d_RepeatForever_class;
 
-bool js_register_cocos2dx_RepeatForever(se::Object* obj);
+bool js_register_cocos2d_RepeatForever(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_RepeatForever_setInnerAction);
 SE_DECLARE_FUNC(js_cocos2dx_RepeatForever_initWithAction);
@@ -648,193 +648,193 @@ SE_DECLARE_FUNC(js_cocos2dx_RepeatForever_getInnerAction);
 SE_DECLARE_FUNC(js_cocos2dx_RepeatForever_create);
 SE_DECLARE_FUNC(js_cocos2dx_RepeatForever_RepeatForever);
 
-extern se::Object* __jsb_cocos2dx_Spawn_proto;
-extern se::Class* __jsb_cocos2dx_Spawn_class;
+extern se::Object* __jsb_cocos2d_Spawn_proto;
+extern se::Class* __jsb_cocos2d_Spawn_class;
 
-bool js_register_cocos2dx_Spawn(se::Object* obj);
+bool js_register_cocos2d_Spawn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Spawn_init);
 SE_DECLARE_FUNC(js_cocos2dx_Spawn_initWithTwoActions);
 SE_DECLARE_FUNC(js_cocos2dx_Spawn_Spawn);
 
-extern se::Object* __jsb_cocos2dx_RotateTo_proto;
-extern se::Class* __jsb_cocos2dx_RotateTo_class;
+extern se::Object* __jsb_cocos2d_RotateTo_proto;
+extern se::Class* __jsb_cocos2d_RotateTo_class;
 
-bool js_register_cocos2dx_RotateTo(se::Object* obj);
+bool js_register_cocos2d_RotateTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_RotateTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_RotateTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_RotateTo_RotateTo);
 
-extern se::Object* __jsb_cocos2dx_RotateBy_proto;
-extern se::Class* __jsb_cocos2dx_RotateBy_class;
+extern se::Object* __jsb_cocos2d_RotateBy_proto;
+extern se::Class* __jsb_cocos2d_RotateBy_class;
 
-bool js_register_cocos2dx_RotateBy(se::Object* obj);
+bool js_register_cocos2d_RotateBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_RotateBy_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_RotateBy_create);
 SE_DECLARE_FUNC(js_cocos2dx_RotateBy_RotateBy);
 
-extern se::Object* __jsb_cocos2dx_MoveBy_proto;
-extern se::Class* __jsb_cocos2dx_MoveBy_class;
+extern se::Object* __jsb_cocos2d_MoveBy_proto;
+extern se::Class* __jsb_cocos2d_MoveBy_class;
 
-bool js_register_cocos2dx_MoveBy(se::Object* obj);
+bool js_register_cocos2d_MoveBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MoveBy_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_MoveBy_create);
 SE_DECLARE_FUNC(js_cocos2dx_MoveBy_MoveBy);
 
-extern se::Object* __jsb_cocos2dx_MoveTo_proto;
-extern se::Class* __jsb_cocos2dx_MoveTo_class;
+extern se::Object* __jsb_cocos2d_MoveTo_proto;
+extern se::Class* __jsb_cocos2d_MoveTo_class;
 
-bool js_register_cocos2dx_MoveTo(se::Object* obj);
+bool js_register_cocos2d_MoveTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MoveTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_MoveTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_MoveTo_MoveTo);
 
-extern se::Object* __jsb_cocos2dx_SkewTo_proto;
-extern se::Class* __jsb_cocos2dx_SkewTo_class;
+extern se::Object* __jsb_cocos2d_SkewTo_proto;
+extern se::Class* __jsb_cocos2d_SkewTo_class;
 
-bool js_register_cocos2dx_SkewTo(se::Object* obj);
+bool js_register_cocos2d_SkewTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SkewTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_SkewTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_SkewTo_SkewTo);
 
-extern se::Object* __jsb_cocos2dx_SkewBy_proto;
-extern se::Class* __jsb_cocos2dx_SkewBy_class;
+extern se::Object* __jsb_cocos2d_SkewBy_proto;
+extern se::Class* __jsb_cocos2d_SkewBy_class;
 
-bool js_register_cocos2dx_SkewBy(se::Object* obj);
+bool js_register_cocos2d_SkewBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SkewBy_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_SkewBy_create);
 SE_DECLARE_FUNC(js_cocos2dx_SkewBy_SkewBy);
 
-extern se::Object* __jsb_cocos2dx_JumpBy_proto;
-extern se::Class* __jsb_cocos2dx_JumpBy_class;
+extern se::Object* __jsb_cocos2d_JumpBy_proto;
+extern se::Class* __jsb_cocos2d_JumpBy_class;
 
-bool js_register_cocos2dx_JumpBy(se::Object* obj);
+bool js_register_cocos2d_JumpBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_JumpBy_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_JumpBy_create);
 SE_DECLARE_FUNC(js_cocos2dx_JumpBy_JumpBy);
 
-extern se::Object* __jsb_cocos2dx_JumpTo_proto;
-extern se::Class* __jsb_cocos2dx_JumpTo_class;
+extern se::Object* __jsb_cocos2d_JumpTo_proto;
+extern se::Class* __jsb_cocos2d_JumpTo_class;
 
-bool js_register_cocos2dx_JumpTo(se::Object* obj);
+bool js_register_cocos2d_JumpTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_JumpTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_JumpTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_JumpTo_JumpTo);
 
-extern se::Object* __jsb_cocos2dx_BezierBy_proto;
-extern se::Class* __jsb_cocos2dx_BezierBy_class;
+extern se::Object* __jsb_cocos2d_BezierBy_proto;
+extern se::Class* __jsb_cocos2d_BezierBy_class;
 
-bool js_register_cocos2dx_BezierBy(se::Object* obj);
+bool js_register_cocos2d_BezierBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_BezierBy_BezierBy);
 
-extern se::Object* __jsb_cocos2dx_BezierTo_proto;
-extern se::Class* __jsb_cocos2dx_BezierTo_class;
+extern se::Object* __jsb_cocos2d_BezierTo_proto;
+extern se::Class* __jsb_cocos2d_BezierTo_class;
 
-bool js_register_cocos2dx_BezierTo(se::Object* obj);
+bool js_register_cocos2d_BezierTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_BezierTo_BezierTo);
 
-extern se::Object* __jsb_cocos2dx_ScaleTo_proto;
-extern se::Class* __jsb_cocos2dx_ScaleTo_class;
+extern se::Object* __jsb_cocos2d_ScaleTo_proto;
+extern se::Class* __jsb_cocos2d_ScaleTo_class;
 
-bool js_register_cocos2dx_ScaleTo(se::Object* obj);
+bool js_register_cocos2d_ScaleTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ScaleTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ScaleTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_ScaleTo_ScaleTo);
 
-extern se::Object* __jsb_cocos2dx_ScaleBy_proto;
-extern se::Class* __jsb_cocos2dx_ScaleBy_class;
+extern se::Object* __jsb_cocos2d_ScaleBy_proto;
+extern se::Class* __jsb_cocos2d_ScaleBy_class;
 
-bool js_register_cocos2dx_ScaleBy(se::Object* obj);
+bool js_register_cocos2d_ScaleBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ScaleBy_create);
 SE_DECLARE_FUNC(js_cocos2dx_ScaleBy_ScaleBy);
 
-extern se::Object* __jsb_cocos2dx_Blink_proto;
-extern se::Class* __jsb_cocos2dx_Blink_class;
+extern se::Object* __jsb_cocos2d_Blink_proto;
+extern se::Class* __jsb_cocos2d_Blink_class;
 
-bool js_register_cocos2dx_Blink(se::Object* obj);
+bool js_register_cocos2d_Blink(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Blink_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_Blink_create);
 SE_DECLARE_FUNC(js_cocos2dx_Blink_Blink);
 
-extern se::Object* __jsb_cocos2dx_FadeTo_proto;
-extern se::Class* __jsb_cocos2dx_FadeTo_class;
+extern se::Object* __jsb_cocos2d_FadeTo_proto;
+extern se::Class* __jsb_cocos2d_FadeTo_class;
 
-bool js_register_cocos2dx_FadeTo(se::Object* obj);
+bool js_register_cocos2d_FadeTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_FadeTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeTo_FadeTo);
 
-extern se::Object* __jsb_cocos2dx_FadeIn_proto;
-extern se::Class* __jsb_cocos2dx_FadeIn_class;
+extern se::Object* __jsb_cocos2d_FadeIn_proto;
+extern se::Class* __jsb_cocos2d_FadeIn_class;
 
-bool js_register_cocos2dx_FadeIn(se::Object* obj);
+bool js_register_cocos2d_FadeIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeIn_setReverseAction);
 SE_DECLARE_FUNC(js_cocos2dx_FadeIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeIn_FadeIn);
 
-extern se::Object* __jsb_cocos2dx_FadeOut_proto;
-extern se::Class* __jsb_cocos2dx_FadeOut_class;
+extern se::Object* __jsb_cocos2d_FadeOut_proto;
+extern se::Class* __jsb_cocos2d_FadeOut_class;
 
-bool js_register_cocos2dx_FadeOut(se::Object* obj);
+bool js_register_cocos2d_FadeOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeOut_setReverseAction);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOut_FadeOut);
 
-extern se::Object* __jsb_cocos2dx_TintTo_proto;
-extern se::Class* __jsb_cocos2dx_TintTo_class;
+extern se::Object* __jsb_cocos2d_TintTo_proto;
+extern se::Class* __jsb_cocos2d_TintTo_class;
 
-bool js_register_cocos2dx_TintTo(se::Object* obj);
+bool js_register_cocos2d_TintTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TintTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_TintTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_TintTo_TintTo);
 
-extern se::Object* __jsb_cocos2dx_TintBy_proto;
-extern se::Class* __jsb_cocos2dx_TintBy_class;
+extern se::Object* __jsb_cocos2d_TintBy_proto;
+extern se::Class* __jsb_cocos2d_TintBy_class;
 
-bool js_register_cocos2dx_TintBy(se::Object* obj);
+bool js_register_cocos2d_TintBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TintBy_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_TintBy_create);
 SE_DECLARE_FUNC(js_cocos2dx_TintBy_TintBy);
 
-extern se::Object* __jsb_cocos2dx_DelayTime_proto;
-extern se::Class* __jsb_cocos2dx_DelayTime_class;
+extern se::Object* __jsb_cocos2d_DelayTime_proto;
+extern se::Class* __jsb_cocos2d_DelayTime_class;
 
-bool js_register_cocos2dx_DelayTime(se::Object* obj);
+bool js_register_cocos2d_DelayTime(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_DelayTime_create);
 SE_DECLARE_FUNC(js_cocos2dx_DelayTime_DelayTime);
 
-extern se::Object* __jsb_cocos2dx_ReverseTime_proto;
-extern se::Class* __jsb_cocos2dx_ReverseTime_class;
+extern se::Object* __jsb_cocos2d_ReverseTime_proto;
+extern se::Class* __jsb_cocos2d_ReverseTime_class;
 
-bool js_register_cocos2dx_ReverseTime(se::Object* obj);
+bool js_register_cocos2d_ReverseTime(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ReverseTime_initWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_ReverseTime_create);
 SE_DECLARE_FUNC(js_cocos2dx_ReverseTime_ReverseTime);
 
-extern se::Object* __jsb_cocos2dx_Animate_proto;
-extern se::Class* __jsb_cocos2dx_Animate_class;
+extern se::Object* __jsb_cocos2d_Animate_proto;
+extern se::Class* __jsb_cocos2d_Animate_class;
 
-bool js_register_cocos2dx_Animate(se::Object* obj);
+bool js_register_cocos2d_Animate(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Animate_initWithAnimation);
 SE_DECLARE_FUNC(js_cocos2dx_Animate_getAnimation);
@@ -843,10 +843,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Animate_setAnimation);
 SE_DECLARE_FUNC(js_cocos2dx_Animate_create);
 SE_DECLARE_FUNC(js_cocos2dx_Animate_Animate);
 
-extern se::Object* __jsb_cocos2dx_TargetedAction_proto;
-extern se::Class* __jsb_cocos2dx_TargetedAction_class;
+extern se::Object* __jsb_cocos2d_TargetedAction_proto;
+extern se::Class* __jsb_cocos2d_TargetedAction_class;
 
-bool js_register_cocos2dx_TargetedAction(se::Object* obj);
+bool js_register_cocos2d_TargetedAction(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TargetedAction_getForcedTarget);
 SE_DECLARE_FUNC(js_cocos2dx_TargetedAction_initWithTarget);
@@ -854,19 +854,19 @@ SE_DECLARE_FUNC(js_cocos2dx_TargetedAction_setForcedTarget);
 SE_DECLARE_FUNC(js_cocos2dx_TargetedAction_create);
 SE_DECLARE_FUNC(js_cocos2dx_TargetedAction_TargetedAction);
 
-extern se::Object* __jsb_cocos2dx_ActionFloat_proto;
-extern se::Class* __jsb_cocos2dx_ActionFloat_class;
+extern se::Object* __jsb_cocos2d_ActionFloat_proto;
+extern se::Class* __jsb_cocos2d_ActionFloat_class;
 
-bool js_register_cocos2dx_ActionFloat(se::Object* obj);
+bool js_register_cocos2d_ActionFloat(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ActionFloat_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ActionFloat_create);
 SE_DECLARE_FUNC(js_cocos2dx_ActionFloat_ActionFloat);
 
-extern se::Object* __jsb_cocos2dx_Configuration_proto;
-extern se::Class* __jsb_cocos2dx_Configuration_class;
+extern se::Object* __jsb_cocos2d_Configuration_proto;
+extern se::Class* __jsb_cocos2d_Configuration_class;
 
-bool js_register_cocos2dx_Configuration(se::Object* obj);
+bool js_register_cocos2d_Configuration(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Configuration_supportsPVRTC);
 SE_DECLARE_FUNC(js_cocos2dx_Configuration_supportsOESDepth24);
@@ -896,10 +896,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Configuration_supportsMapBuffer);
 SE_DECLARE_FUNC(js_cocos2dx_Configuration_destroyInstance);
 SE_DECLARE_FUNC(js_cocos2dx_Configuration_getInstance);
 
-extern se::Object* __jsb_cocos2dx_Properties_proto;
-extern se::Class* __jsb_cocos2dx_Properties_class;
+extern se::Object* __jsb_cocos2d_Properties_proto;
+extern se::Class* __jsb_cocos2d_Properties_class;
 
-bool js_register_cocos2dx_Properties(se::Object* obj);
+bool js_register_cocos2d_Properties(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Properties_getVariable);
 SE_DECLARE_FUNC(js_cocos2dx_Properties_getString);
@@ -930,10 +930,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Properties_parseVec2);
 SE_DECLARE_FUNC(js_cocos2dx_Properties_createNonRefCounted);
 SE_DECLARE_FUNC(js_cocos2dx_Properties_parseVec4);
 
-extern se::Object* __jsb_cocos2dx_FileUtils_proto;
-extern se::Class* __jsb_cocos2dx_FileUtils_class;
+extern se::Object* __jsb_cocos2d_FileUtils_proto;
+extern se::Class* __jsb_cocos2d_FileUtils_class;
 
-bool js_register_cocos2dx_FileUtils(se::Object* obj);
+bool js_register_cocos2d_FileUtils(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_fullPathForFilename);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_getStringFromFile);
@@ -976,34 +976,34 @@ SE_DECLARE_FUNC(js_cocos2dx_FileUtils_listFilesRecursively);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_setDelegate);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_getInstance);
 
-extern se::Object* __jsb_cocos2dx_EventAcceleration_proto;
-extern se::Class* __jsb_cocos2dx_EventAcceleration_class;
+extern se::Object* __jsb_cocos2d_EventAcceleration_proto;
+extern se::Class* __jsb_cocos2d_EventAcceleration_class;
 
-bool js_register_cocos2dx_EventAcceleration(se::Object* obj);
+bool js_register_cocos2d_EventAcceleration(se::Object* obj);
 
 
-extern se::Object* __jsb_cocos2dx_EventCustom_proto;
-extern se::Class* __jsb_cocos2dx_EventCustom_class;
+extern se::Object* __jsb_cocos2d_EventCustom_proto;
+extern se::Class* __jsb_cocos2d_EventCustom_class;
 
-bool js_register_cocos2dx_EventCustom(se::Object* obj);
+bool js_register_cocos2d_EventCustom(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventCustom_getEventName);
 SE_DECLARE_FUNC(js_cocos2dx_EventCustom_EventCustom);
 
-extern se::Object* __jsb_cocos2dx_EventListener_proto;
-extern se::Class* __jsb_cocos2dx_EventListener_class;
+extern se::Object* __jsb_cocos2d_EventListener_proto;
+extern se::Class* __jsb_cocos2d_EventListener_class;
 
-bool js_register_cocos2dx_EventListener(se::Object* obj);
+bool js_register_cocos2d_EventListener(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListener_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_EventListener_isEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_EventListener_clone);
 SE_DECLARE_FUNC(js_cocos2dx_EventListener_checkAvailable);
 
-extern se::Object* __jsb_cocos2dx_EventDispatcher_proto;
-extern se::Class* __jsb_cocos2dx_EventDispatcher_class;
+extern se::Object* __jsb_cocos2d_EventDispatcher_proto;
+extern se::Class* __jsb_cocos2d_EventDispatcher_class;
 
-bool js_register_cocos2dx_EventDispatcher(se::Object* obj);
+bool js_register_cocos2d_EventDispatcher(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventDispatcher_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_EventDispatcher_removeAllEventListeners);
@@ -1020,47 +1020,47 @@ SE_DECLARE_FUNC(js_cocos2dx_EventDispatcher_removeEventListener);
 SE_DECLARE_FUNC(js_cocos2dx_EventDispatcher_isEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_EventDispatcher_EventDispatcher);
 
-extern se::Object* __jsb_cocos2dx_EventFocus_proto;
-extern se::Class* __jsb_cocos2dx_EventFocus_class;
+extern se::Object* __jsb_cocos2d_EventFocus_proto;
+extern se::Class* __jsb_cocos2d_EventFocus_class;
 
-bool js_register_cocos2dx_EventFocus(se::Object* obj);
+bool js_register_cocos2d_EventFocus(se::Object* obj);
 
 
-extern se::Object* __jsb_cocos2dx_EventListenerAcceleration_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerAcceleration_class;
+extern se::Object* __jsb_cocos2d_EventListenerAcceleration_proto;
+extern se::Class* __jsb_cocos2d_EventListenerAcceleration_class;
 
-bool js_register_cocos2dx_EventListenerAcceleration(se::Object* obj);
+bool js_register_cocos2d_EventListenerAcceleration(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerAcceleration_init);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerAcceleration_EventListenerAcceleration);
 
-extern se::Object* __jsb_cocos2dx_EventListenerCustom_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerCustom_class;
+extern se::Object* __jsb_cocos2d_EventListenerCustom_proto;
+extern se::Class* __jsb_cocos2d_EventListenerCustom_class;
 
-bool js_register_cocos2dx_EventListenerCustom(se::Object* obj);
+bool js_register_cocos2d_EventListenerCustom(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerCustom_EventListenerCustom);
 
-extern se::Object* __jsb_cocos2dx_EventListenerFocus_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerFocus_class;
+extern se::Object* __jsb_cocos2d_EventListenerFocus_proto;
+extern se::Class* __jsb_cocos2d_EventListenerFocus_class;
 
-bool js_register_cocos2dx_EventListenerFocus(se::Object* obj);
+bool js_register_cocos2d_EventListenerFocus(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerFocus_init);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerFocus_EventListenerFocus);
 
-extern se::Object* __jsb_cocos2dx_EventListenerKeyboard_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerKeyboard_class;
+extern se::Object* __jsb_cocos2d_EventListenerKeyboard_proto;
+extern se::Class* __jsb_cocos2d_EventListenerKeyboard_class;
 
-bool js_register_cocos2dx_EventListenerKeyboard(se::Object* obj);
+bool js_register_cocos2d_EventListenerKeyboard(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerKeyboard_init);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerKeyboard_EventListenerKeyboard);
 
-extern se::Object* __jsb_cocos2dx_EventMouse_proto;
-extern se::Class* __jsb_cocos2dx_EventMouse_class;
+extern se::Object* __jsb_cocos2d_EventMouse_proto;
+extern se::Class* __jsb_cocos2d_EventMouse_class;
 
-bool js_register_cocos2dx_EventMouse(se::Object* obj);
+bool js_register_cocos2d_EventMouse(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getMouseButton);
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getLocation);
@@ -1078,36 +1078,36 @@ SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getScrollX);
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getPreviousLocation);
 SE_DECLARE_FUNC(js_cocos2dx_EventMouse_getStartLocationInView);
 
-extern se::Object* __jsb_cocos2dx_EventListenerMouse_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerMouse_class;
+extern se::Object* __jsb_cocos2d_EventListenerMouse_proto;
+extern se::Class* __jsb_cocos2d_EventListenerMouse_class;
 
-bool js_register_cocos2dx_EventListenerMouse(se::Object* obj);
+bool js_register_cocos2d_EventListenerMouse(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerMouse_init);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerMouse_EventListenerMouse);
 
-extern se::Object* __jsb_cocos2dx_EventListenerTouchOneByOne_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerTouchOneByOne_class;
+extern se::Object* __jsb_cocos2d_EventListenerTouchOneByOne_proto;
+extern se::Class* __jsb_cocos2d_EventListenerTouchOneByOne_class;
 
-bool js_register_cocos2dx_EventListenerTouchOneByOne(se::Object* obj);
+bool js_register_cocos2d_EventListenerTouchOneByOne(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerTouchOneByOne_isSwallowTouches);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerTouchOneByOne_setSwallowTouches);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerTouchOneByOne_init);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerTouchOneByOne_EventListenerTouchOneByOne);
 
-extern se::Object* __jsb_cocos2dx_EventListenerTouchAllAtOnce_proto;
-extern se::Class* __jsb_cocos2dx_EventListenerTouchAllAtOnce_class;
+extern se::Object* __jsb_cocos2d_EventListenerTouchAllAtOnce_proto;
+extern se::Class* __jsb_cocos2d_EventListenerTouchAllAtOnce_class;
 
-bool js_register_cocos2dx_EventListenerTouchAllAtOnce(se::Object* obj);
+bool js_register_cocos2d_EventListenerTouchAllAtOnce(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerTouchAllAtOnce_init);
 SE_DECLARE_FUNC(js_cocos2dx_EventListenerTouchAllAtOnce_EventListenerTouchAllAtOnce);
 
-extern se::Object* __jsb_cocos2dx_ActionCamera_proto;
-extern se::Class* __jsb_cocos2dx_ActionCamera_class;
+extern se::Object* __jsb_cocos2d_ActionCamera_proto;
+extern se::Class* __jsb_cocos2d_ActionCamera_class;
 
-bool js_register_cocos2dx_ActionCamera(se::Object* obj);
+bool js_register_cocos2d_ActionCamera(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ActionCamera_setEye);
 SE_DECLARE_FUNC(js_cocos2dx_ActionCamera_getEye);
@@ -1117,472 +1117,472 @@ SE_DECLARE_FUNC(js_cocos2dx_ActionCamera_setCenter);
 SE_DECLARE_FUNC(js_cocos2dx_ActionCamera_getUp);
 SE_DECLARE_FUNC(js_cocos2dx_ActionCamera_ActionCamera);
 
-extern se::Object* __jsb_cocos2dx_OrbitCamera_proto;
-extern se::Class* __jsb_cocos2dx_OrbitCamera_class;
+extern se::Object* __jsb_cocos2d_OrbitCamera_proto;
+extern se::Class* __jsb_cocos2d_OrbitCamera_class;
 
-bool js_register_cocos2dx_OrbitCamera(se::Object* obj);
+bool js_register_cocos2d_OrbitCamera(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_OrbitCamera_sphericalRadius);
 SE_DECLARE_FUNC(js_cocos2dx_OrbitCamera_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_OrbitCamera_create);
 SE_DECLARE_FUNC(js_cocos2dx_OrbitCamera_OrbitCamera);
 
-extern se::Object* __jsb_cocos2dx_CardinalSplineTo_proto;
-extern se::Class* __jsb_cocos2dx_CardinalSplineTo_class;
+extern se::Object* __jsb_cocos2d_CardinalSplineTo_proto;
+extern se::Class* __jsb_cocos2d_CardinalSplineTo_class;
 
-bool js_register_cocos2dx_CardinalSplineTo(se::Object* obj);
+bool js_register_cocos2d_CardinalSplineTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CardinalSplineTo_updatePosition);
 SE_DECLARE_FUNC(js_cocos2dx_CardinalSplineTo_CardinalSplineTo);
 
-extern se::Object* __jsb_cocos2dx_CardinalSplineBy_proto;
-extern se::Class* __jsb_cocos2dx_CardinalSplineBy_class;
+extern se::Object* __jsb_cocos2d_CardinalSplineBy_proto;
+extern se::Class* __jsb_cocos2d_CardinalSplineBy_class;
 
-bool js_register_cocos2dx_CardinalSplineBy(se::Object* obj);
+bool js_register_cocos2d_CardinalSplineBy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CardinalSplineBy_CardinalSplineBy);
 
-extern se::Object* __jsb_cocos2dx_CatmullRomTo_proto;
-extern se::Class* __jsb_cocos2dx_CatmullRomTo_class;
+extern se::Object* __jsb_cocos2d_CatmullRomTo_proto;
+extern se::Class* __jsb_cocos2d_CatmullRomTo_class;
 
-bool js_register_cocos2dx_CatmullRomTo(se::Object* obj);
-
-
-extern se::Object* __jsb_cocos2dx_CatmullRomBy_proto;
-extern se::Class* __jsb_cocos2dx_CatmullRomBy_class;
-
-bool js_register_cocos2dx_CatmullRomBy(se::Object* obj);
+bool js_register_cocos2d_CatmullRomTo(se::Object* obj);
 
 
-extern se::Object* __jsb_cocos2dx_ActionEase_proto;
-extern se::Class* __jsb_cocos2dx_ActionEase_class;
+extern se::Object* __jsb_cocos2d_CatmullRomBy_proto;
+extern se::Class* __jsb_cocos2d_CatmullRomBy_class;
 
-bool js_register_cocos2dx_ActionEase(se::Object* obj);
+bool js_register_cocos2d_CatmullRomBy(se::Object* obj);
+
+
+extern se::Object* __jsb_cocos2d_ActionEase_proto;
+extern se::Class* __jsb_cocos2d_ActionEase_class;
+
+bool js_register_cocos2d_ActionEase(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ActionEase_initWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_ActionEase_getInnerAction);
 
-extern se::Object* __jsb_cocos2dx_EaseRateAction_proto;
-extern se::Class* __jsb_cocos2dx_EaseRateAction_class;
+extern se::Object* __jsb_cocos2d_EaseRateAction_proto;
+extern se::Class* __jsb_cocos2d_EaseRateAction_class;
 
-bool js_register_cocos2dx_EaseRateAction(se::Object* obj);
+bool js_register_cocos2d_EaseRateAction(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseRateAction_setRate);
 SE_DECLARE_FUNC(js_cocos2dx_EaseRateAction_initWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_EaseRateAction_getRate);
 SE_DECLARE_FUNC(js_cocos2dx_EaseRateAction_create);
 
-extern se::Object* __jsb_cocos2dx_EaseExponentialIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseExponentialIn_class;
+extern se::Object* __jsb_cocos2d_EaseExponentialIn_proto;
+extern se::Class* __jsb_cocos2d_EaseExponentialIn_class;
 
-bool js_register_cocos2dx_EaseExponentialIn(se::Object* obj);
+bool js_register_cocos2d_EaseExponentialIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseExponentialIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseExponentialIn_EaseExponentialIn);
 
-extern se::Object* __jsb_cocos2dx_EaseExponentialOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseExponentialOut_class;
+extern se::Object* __jsb_cocos2d_EaseExponentialOut_proto;
+extern se::Class* __jsb_cocos2d_EaseExponentialOut_class;
 
-bool js_register_cocos2dx_EaseExponentialOut(se::Object* obj);
+bool js_register_cocos2d_EaseExponentialOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseExponentialOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseExponentialOut_EaseExponentialOut);
 
-extern se::Object* __jsb_cocos2dx_EaseExponentialInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseExponentialInOut_class;
+extern se::Object* __jsb_cocos2d_EaseExponentialInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseExponentialInOut_class;
 
-bool js_register_cocos2dx_EaseExponentialInOut(se::Object* obj);
+bool js_register_cocos2d_EaseExponentialInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseExponentialInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseExponentialInOut_EaseExponentialInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseSineIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseSineIn_class;
+extern se::Object* __jsb_cocos2d_EaseSineIn_proto;
+extern se::Class* __jsb_cocos2d_EaseSineIn_class;
 
-bool js_register_cocos2dx_EaseSineIn(se::Object* obj);
+bool js_register_cocos2d_EaseSineIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseSineIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseSineIn_EaseSineIn);
 
-extern se::Object* __jsb_cocos2dx_EaseSineOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseSineOut_class;
+extern se::Object* __jsb_cocos2d_EaseSineOut_proto;
+extern se::Class* __jsb_cocos2d_EaseSineOut_class;
 
-bool js_register_cocos2dx_EaseSineOut(se::Object* obj);
+bool js_register_cocos2d_EaseSineOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseSineOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseSineOut_EaseSineOut);
 
-extern se::Object* __jsb_cocos2dx_EaseSineInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseSineInOut_class;
+extern se::Object* __jsb_cocos2d_EaseSineInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseSineInOut_class;
 
-bool js_register_cocos2dx_EaseSineInOut(se::Object* obj);
+bool js_register_cocos2d_EaseSineInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseSineInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseSineInOut_EaseSineInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseBounce_proto;
-extern se::Class* __jsb_cocos2dx_EaseBounce_class;
+extern se::Object* __jsb_cocos2d_EaseBounce_proto;
+extern se::Class* __jsb_cocos2d_EaseBounce_class;
 
-bool js_register_cocos2dx_EaseBounce(se::Object* obj);
+bool js_register_cocos2d_EaseBounce(se::Object* obj);
 
 
-extern se::Object* __jsb_cocos2dx_EaseBounceIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseBounceIn_class;
+extern se::Object* __jsb_cocos2d_EaseBounceIn_proto;
+extern se::Class* __jsb_cocos2d_EaseBounceIn_class;
 
-bool js_register_cocos2dx_EaseBounceIn(se::Object* obj);
+bool js_register_cocos2d_EaseBounceIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBounceIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBounceIn_EaseBounceIn);
 
-extern se::Object* __jsb_cocos2dx_EaseBounceOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseBounceOut_class;
+extern se::Object* __jsb_cocos2d_EaseBounceOut_proto;
+extern se::Class* __jsb_cocos2d_EaseBounceOut_class;
 
-bool js_register_cocos2dx_EaseBounceOut(se::Object* obj);
+bool js_register_cocos2d_EaseBounceOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBounceOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBounceOut_EaseBounceOut);
 
-extern se::Object* __jsb_cocos2dx_EaseBounceInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseBounceInOut_class;
+extern se::Object* __jsb_cocos2d_EaseBounceInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseBounceInOut_class;
 
-bool js_register_cocos2dx_EaseBounceInOut(se::Object* obj);
+bool js_register_cocos2d_EaseBounceInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBounceInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBounceInOut_EaseBounceInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseBackIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseBackIn_class;
+extern se::Object* __jsb_cocos2d_EaseBackIn_proto;
+extern se::Class* __jsb_cocos2d_EaseBackIn_class;
 
-bool js_register_cocos2dx_EaseBackIn(se::Object* obj);
+bool js_register_cocos2d_EaseBackIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBackIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBackIn_EaseBackIn);
 
-extern se::Object* __jsb_cocos2dx_EaseBackOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseBackOut_class;
+extern se::Object* __jsb_cocos2d_EaseBackOut_proto;
+extern se::Class* __jsb_cocos2d_EaseBackOut_class;
 
-bool js_register_cocos2dx_EaseBackOut(se::Object* obj);
+bool js_register_cocos2d_EaseBackOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBackOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBackOut_EaseBackOut);
 
-extern se::Object* __jsb_cocos2dx_EaseBackInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseBackInOut_class;
+extern se::Object* __jsb_cocos2d_EaseBackInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseBackInOut_class;
 
-bool js_register_cocos2dx_EaseBackInOut(se::Object* obj);
+bool js_register_cocos2d_EaseBackInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBackInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBackInOut_EaseBackInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseQuadraticActionIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuadraticActionIn_class;
+extern se::Object* __jsb_cocos2d_EaseQuadraticActionIn_proto;
+extern se::Class* __jsb_cocos2d_EaseQuadraticActionIn_class;
 
-bool js_register_cocos2dx_EaseQuadraticActionIn(se::Object* obj);
+bool js_register_cocos2d_EaseQuadraticActionIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuadraticActionIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuadraticActionIn_EaseQuadraticActionIn);
 
-extern se::Object* __jsb_cocos2dx_EaseQuadraticActionOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuadraticActionOut_class;
+extern se::Object* __jsb_cocos2d_EaseQuadraticActionOut_proto;
+extern se::Class* __jsb_cocos2d_EaseQuadraticActionOut_class;
 
-bool js_register_cocos2dx_EaseQuadraticActionOut(se::Object* obj);
+bool js_register_cocos2d_EaseQuadraticActionOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuadraticActionOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuadraticActionOut_EaseQuadraticActionOut);
 
-extern se::Object* __jsb_cocos2dx_EaseQuadraticActionInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuadraticActionInOut_class;
+extern se::Object* __jsb_cocos2d_EaseQuadraticActionInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseQuadraticActionInOut_class;
 
-bool js_register_cocos2dx_EaseQuadraticActionInOut(se::Object* obj);
+bool js_register_cocos2d_EaseQuadraticActionInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuadraticActionInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuadraticActionInOut_EaseQuadraticActionInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseQuarticActionIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuarticActionIn_class;
+extern se::Object* __jsb_cocos2d_EaseQuarticActionIn_proto;
+extern se::Class* __jsb_cocos2d_EaseQuarticActionIn_class;
 
-bool js_register_cocos2dx_EaseQuarticActionIn(se::Object* obj);
+bool js_register_cocos2d_EaseQuarticActionIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuarticActionIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuarticActionIn_EaseQuarticActionIn);
 
-extern se::Object* __jsb_cocos2dx_EaseQuarticActionOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuarticActionOut_class;
+extern se::Object* __jsb_cocos2d_EaseQuarticActionOut_proto;
+extern se::Class* __jsb_cocos2d_EaseQuarticActionOut_class;
 
-bool js_register_cocos2dx_EaseQuarticActionOut(se::Object* obj);
+bool js_register_cocos2d_EaseQuarticActionOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuarticActionOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuarticActionOut_EaseQuarticActionOut);
 
-extern se::Object* __jsb_cocos2dx_EaseQuarticActionInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuarticActionInOut_class;
+extern se::Object* __jsb_cocos2d_EaseQuarticActionInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseQuarticActionInOut_class;
 
-bool js_register_cocos2dx_EaseQuarticActionInOut(se::Object* obj);
+bool js_register_cocos2d_EaseQuarticActionInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuarticActionInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuarticActionInOut_EaseQuarticActionInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseQuinticActionIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuinticActionIn_class;
+extern se::Object* __jsb_cocos2d_EaseQuinticActionIn_proto;
+extern se::Class* __jsb_cocos2d_EaseQuinticActionIn_class;
 
-bool js_register_cocos2dx_EaseQuinticActionIn(se::Object* obj);
+bool js_register_cocos2d_EaseQuinticActionIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuinticActionIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuinticActionIn_EaseQuinticActionIn);
 
-extern se::Object* __jsb_cocos2dx_EaseQuinticActionOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuinticActionOut_class;
+extern se::Object* __jsb_cocos2d_EaseQuinticActionOut_proto;
+extern se::Class* __jsb_cocos2d_EaseQuinticActionOut_class;
 
-bool js_register_cocos2dx_EaseQuinticActionOut(se::Object* obj);
+bool js_register_cocos2d_EaseQuinticActionOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuinticActionOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuinticActionOut_EaseQuinticActionOut);
 
-extern se::Object* __jsb_cocos2dx_EaseQuinticActionInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseQuinticActionInOut_class;
+extern se::Object* __jsb_cocos2d_EaseQuinticActionInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseQuinticActionInOut_class;
 
-bool js_register_cocos2dx_EaseQuinticActionInOut(se::Object* obj);
+bool js_register_cocos2d_EaseQuinticActionInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuinticActionInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseQuinticActionInOut_EaseQuinticActionInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseCircleActionIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseCircleActionIn_class;
+extern se::Object* __jsb_cocos2d_EaseCircleActionIn_proto;
+extern se::Class* __jsb_cocos2d_EaseCircleActionIn_class;
 
-bool js_register_cocos2dx_EaseCircleActionIn(se::Object* obj);
+bool js_register_cocos2d_EaseCircleActionIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseCircleActionIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseCircleActionIn_EaseCircleActionIn);
 
-extern se::Object* __jsb_cocos2dx_EaseCircleActionOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseCircleActionOut_class;
+extern se::Object* __jsb_cocos2d_EaseCircleActionOut_proto;
+extern se::Class* __jsb_cocos2d_EaseCircleActionOut_class;
 
-bool js_register_cocos2dx_EaseCircleActionOut(se::Object* obj);
+bool js_register_cocos2d_EaseCircleActionOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseCircleActionOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseCircleActionOut_EaseCircleActionOut);
 
-extern se::Object* __jsb_cocos2dx_EaseCircleActionInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseCircleActionInOut_class;
+extern se::Object* __jsb_cocos2d_EaseCircleActionInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseCircleActionInOut_class;
 
-bool js_register_cocos2dx_EaseCircleActionInOut(se::Object* obj);
+bool js_register_cocos2d_EaseCircleActionInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseCircleActionInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseCircleActionInOut_EaseCircleActionInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseCubicActionIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseCubicActionIn_class;
+extern se::Object* __jsb_cocos2d_EaseCubicActionIn_proto;
+extern se::Class* __jsb_cocos2d_EaseCubicActionIn_class;
 
-bool js_register_cocos2dx_EaseCubicActionIn(se::Object* obj);
+bool js_register_cocos2d_EaseCubicActionIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseCubicActionIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseCubicActionIn_EaseCubicActionIn);
 
-extern se::Object* __jsb_cocos2dx_EaseCubicActionOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseCubicActionOut_class;
+extern se::Object* __jsb_cocos2d_EaseCubicActionOut_proto;
+extern se::Class* __jsb_cocos2d_EaseCubicActionOut_class;
 
-bool js_register_cocos2dx_EaseCubicActionOut(se::Object* obj);
+bool js_register_cocos2d_EaseCubicActionOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseCubicActionOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseCubicActionOut_EaseCubicActionOut);
 
-extern se::Object* __jsb_cocos2dx_EaseCubicActionInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseCubicActionInOut_class;
+extern se::Object* __jsb_cocos2d_EaseCubicActionInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseCubicActionInOut_class;
 
-bool js_register_cocos2dx_EaseCubicActionInOut(se::Object* obj);
+bool js_register_cocos2d_EaseCubicActionInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseCubicActionInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseCubicActionInOut_EaseCubicActionInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseIn_class;
+extern se::Object* __jsb_cocos2d_EaseIn_proto;
+extern se::Class* __jsb_cocos2d_EaseIn_class;
 
-bool js_register_cocos2dx_EaseIn(se::Object* obj);
+bool js_register_cocos2d_EaseIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseIn_EaseIn);
 
-extern se::Object* __jsb_cocos2dx_EaseOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseOut_class;
+extern se::Object* __jsb_cocos2d_EaseOut_proto;
+extern se::Class* __jsb_cocos2d_EaseOut_class;
 
-bool js_register_cocos2dx_EaseOut(se::Object* obj);
+bool js_register_cocos2d_EaseOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseOut_EaseOut);
 
-extern se::Object* __jsb_cocos2dx_EaseInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseInOut_class;
+extern se::Object* __jsb_cocos2d_EaseInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseInOut_class;
 
-bool js_register_cocos2dx_EaseInOut(se::Object* obj);
+bool js_register_cocos2d_EaseInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseInOut_EaseInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseElastic_proto;
-extern se::Class* __jsb_cocos2dx_EaseElastic_class;
+extern se::Object* __jsb_cocos2d_EaseElastic_proto;
+extern se::Class* __jsb_cocos2d_EaseElastic_class;
 
-bool js_register_cocos2dx_EaseElastic(se::Object* obj);
+bool js_register_cocos2d_EaseElastic(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseElastic_setPeriod);
 SE_DECLARE_FUNC(js_cocos2dx_EaseElastic_initWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_EaseElastic_getPeriod);
 
-extern se::Object* __jsb_cocos2dx_EaseElasticIn_proto;
-extern se::Class* __jsb_cocos2dx_EaseElasticIn_class;
+extern se::Object* __jsb_cocos2d_EaseElasticIn_proto;
+extern se::Class* __jsb_cocos2d_EaseElasticIn_class;
 
-bool js_register_cocos2dx_EaseElasticIn(se::Object* obj);
+bool js_register_cocos2d_EaseElasticIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseElasticIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseElasticIn_EaseElasticIn);
 
-extern se::Object* __jsb_cocos2dx_EaseElasticOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseElasticOut_class;
+extern se::Object* __jsb_cocos2d_EaseElasticOut_proto;
+extern se::Class* __jsb_cocos2d_EaseElasticOut_class;
 
-bool js_register_cocos2dx_EaseElasticOut(se::Object* obj);
+bool js_register_cocos2d_EaseElasticOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseElasticOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseElasticOut_EaseElasticOut);
 
-extern se::Object* __jsb_cocos2dx_EaseElasticInOut_proto;
-extern se::Class* __jsb_cocos2dx_EaseElasticInOut_class;
+extern se::Object* __jsb_cocos2d_EaseElasticInOut_proto;
+extern se::Class* __jsb_cocos2d_EaseElasticInOut_class;
 
-bool js_register_cocos2dx_EaseElasticInOut(se::Object* obj);
+bool js_register_cocos2d_EaseElasticInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseElasticInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseElasticInOut_EaseElasticInOut);
 
-extern se::Object* __jsb_cocos2dx_EaseBezierAction_proto;
-extern se::Class* __jsb_cocos2dx_EaseBezierAction_class;
+extern se::Object* __jsb_cocos2d_EaseBezierAction_proto;
+extern se::Class* __jsb_cocos2d_EaseBezierAction_class;
 
-bool js_register_cocos2dx_EaseBezierAction(se::Object* obj);
+bool js_register_cocos2d_EaseBezierAction(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_EaseBezierAction_setBezierParamer);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBezierAction_create);
 SE_DECLARE_FUNC(js_cocos2dx_EaseBezierAction_EaseBezierAction);
 
-extern se::Object* __jsb_cocos2dx_ActionInstant_proto;
-extern se::Class* __jsb_cocos2dx_ActionInstant_class;
+extern se::Object* __jsb_cocos2d_ActionInstant_proto;
+extern se::Class* __jsb_cocos2d_ActionInstant_class;
 
-bool js_register_cocos2dx_ActionInstant(se::Object* obj);
+bool js_register_cocos2d_ActionInstant(se::Object* obj);
 
 
-extern se::Object* __jsb_cocos2dx_Show_proto;
-extern se::Class* __jsb_cocos2dx_Show_class;
+extern se::Object* __jsb_cocos2d_Show_proto;
+extern se::Class* __jsb_cocos2d_Show_class;
 
-bool js_register_cocos2dx_Show(se::Object* obj);
+bool js_register_cocos2d_Show(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Show_create);
 SE_DECLARE_FUNC(js_cocos2dx_Show_Show);
 
-extern se::Object* __jsb_cocos2dx_Hide_proto;
-extern se::Class* __jsb_cocos2dx_Hide_class;
+extern se::Object* __jsb_cocos2d_Hide_proto;
+extern se::Class* __jsb_cocos2d_Hide_class;
 
-bool js_register_cocos2dx_Hide(se::Object* obj);
+bool js_register_cocos2d_Hide(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Hide_create);
 SE_DECLARE_FUNC(js_cocos2dx_Hide_Hide);
 
-extern se::Object* __jsb_cocos2dx_ToggleVisibility_proto;
-extern se::Class* __jsb_cocos2dx_ToggleVisibility_class;
+extern se::Object* __jsb_cocos2d_ToggleVisibility_proto;
+extern se::Class* __jsb_cocos2d_ToggleVisibility_class;
 
-bool js_register_cocos2dx_ToggleVisibility(se::Object* obj);
+bool js_register_cocos2d_ToggleVisibility(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ToggleVisibility_create);
 SE_DECLARE_FUNC(js_cocos2dx_ToggleVisibility_ToggleVisibility);
 
-extern se::Object* __jsb_cocos2dx_RemoveSelf_proto;
-extern se::Class* __jsb_cocos2dx_RemoveSelf_class;
+extern se::Object* __jsb_cocos2d_RemoveSelf_proto;
+extern se::Class* __jsb_cocos2d_RemoveSelf_class;
 
-bool js_register_cocos2dx_RemoveSelf(se::Object* obj);
+bool js_register_cocos2d_RemoveSelf(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_RemoveSelf_init);
 SE_DECLARE_FUNC(js_cocos2dx_RemoveSelf_create);
 SE_DECLARE_FUNC(js_cocos2dx_RemoveSelf_RemoveSelf);
 
-extern se::Object* __jsb_cocos2dx_FlipX_proto;
-extern se::Class* __jsb_cocos2dx_FlipX_class;
+extern se::Object* __jsb_cocos2d_FlipX_proto;
+extern se::Class* __jsb_cocos2d_FlipX_class;
 
-bool js_register_cocos2dx_FlipX(se::Object* obj);
+bool js_register_cocos2d_FlipX(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FlipX_initWithFlipX);
 SE_DECLARE_FUNC(js_cocos2dx_FlipX_create);
 SE_DECLARE_FUNC(js_cocos2dx_FlipX_FlipX);
 
-extern se::Object* __jsb_cocos2dx_FlipY_proto;
-extern se::Class* __jsb_cocos2dx_FlipY_class;
+extern se::Object* __jsb_cocos2d_FlipY_proto;
+extern se::Class* __jsb_cocos2d_FlipY_class;
 
-bool js_register_cocos2dx_FlipY(se::Object* obj);
+bool js_register_cocos2d_FlipY(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FlipY_initWithFlipY);
 SE_DECLARE_FUNC(js_cocos2dx_FlipY_create);
 SE_DECLARE_FUNC(js_cocos2dx_FlipY_FlipY);
 
-extern se::Object* __jsb_cocos2dx_Place_proto;
-extern se::Class* __jsb_cocos2dx_Place_class;
+extern se::Object* __jsb_cocos2d_Place_proto;
+extern se::Class* __jsb_cocos2d_Place_class;
 
-bool js_register_cocos2dx_Place(se::Object* obj);
+bool js_register_cocos2d_Place(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Place_initWithPosition);
 SE_DECLARE_FUNC(js_cocos2dx_Place_create);
 SE_DECLARE_FUNC(js_cocos2dx_Place_Place);
 
-extern se::Object* __jsb_cocos2dx_CallFunc_proto;
-extern se::Class* __jsb_cocos2dx_CallFunc_class;
+extern se::Object* __jsb_cocos2d_CallFunc_proto;
+extern se::Class* __jsb_cocos2d_CallFunc_class;
 
-bool js_register_cocos2dx_CallFunc(se::Object* obj);
+bool js_register_cocos2d_CallFunc(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CallFunc_execute);
 SE_DECLARE_FUNC(js_cocos2dx_CallFunc_CallFunc);
 
-extern se::Object* __jsb_cocos2dx_CallFuncN_proto;
-extern se::Class* __jsb_cocos2dx_CallFuncN_class;
+extern se::Object* __jsb_cocos2d_CallFuncN_proto;
+extern se::Class* __jsb_cocos2d_CallFuncN_class;
 
-bool js_register_cocos2dx_CallFuncN(se::Object* obj);
+bool js_register_cocos2d_CallFuncN(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CallFuncN_CallFuncN);
 
-extern se::Object* __jsb_cocos2dx_GridAction_proto;
-extern se::Class* __jsb_cocos2dx_GridAction_class;
+extern se::Object* __jsb_cocos2d_GridAction_proto;
+extern se::Class* __jsb_cocos2d_GridAction_class;
 
-bool js_register_cocos2dx_GridAction(se::Object* obj);
+bool js_register_cocos2d_GridAction(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_GridAction_getGrid);
 SE_DECLARE_FUNC(js_cocos2dx_GridAction_initWithDuration);
 
-extern se::Object* __jsb_cocos2dx_Grid3DAction_proto;
-extern se::Class* __jsb_cocos2dx_Grid3DAction_class;
+extern se::Object* __jsb_cocos2d_Grid3DAction_proto;
+extern se::Class* __jsb_cocos2d_Grid3DAction_class;
 
-bool js_register_cocos2dx_Grid3DAction(se::Object* obj);
+bool js_register_cocos2d_Grid3DAction(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Grid3DAction_getGridRect);
 
-extern se::Object* __jsb_cocos2dx_TiledGrid3DAction_proto;
-extern se::Class* __jsb_cocos2dx_TiledGrid3DAction_class;
+extern se::Object* __jsb_cocos2d_TiledGrid3DAction_proto;
+extern se::Class* __jsb_cocos2d_TiledGrid3DAction_class;
 
-bool js_register_cocos2dx_TiledGrid3DAction(se::Object* obj);
+bool js_register_cocos2d_TiledGrid3DAction(se::Object* obj);
 
 
-extern se::Object* __jsb_cocos2dx_StopGrid_proto;
-extern se::Class* __jsb_cocos2dx_StopGrid_class;
+extern se::Object* __jsb_cocos2d_StopGrid_proto;
+extern se::Class* __jsb_cocos2d_StopGrid_class;
 
-bool js_register_cocos2dx_StopGrid(se::Object* obj);
+bool js_register_cocos2d_StopGrid(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_StopGrid_create);
 SE_DECLARE_FUNC(js_cocos2dx_StopGrid_StopGrid);
 
-extern se::Object* __jsb_cocos2dx_ReuseGrid_proto;
-extern se::Class* __jsb_cocos2dx_ReuseGrid_class;
+extern se::Object* __jsb_cocos2d_ReuseGrid_proto;
+extern se::Class* __jsb_cocos2d_ReuseGrid_class;
 
-bool js_register_cocos2dx_ReuseGrid(se::Object* obj);
+bool js_register_cocos2d_ReuseGrid(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ReuseGrid_initWithTimes);
 SE_DECLARE_FUNC(js_cocos2dx_ReuseGrid_create);
 SE_DECLARE_FUNC(js_cocos2dx_ReuseGrid_ReuseGrid);
 
-extern se::Object* __jsb_cocos2dx_Waves3D_proto;
-extern se::Class* __jsb_cocos2dx_Waves3D_class;
+extern se::Object* __jsb_cocos2d_Waves3D_proto;
+extern se::Class* __jsb_cocos2d_Waves3D_class;
 
-bool js_register_cocos2dx_Waves3D(se::Object* obj);
+bool js_register_cocos2d_Waves3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Waves3D_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_Waves3D_initWithDuration);
@@ -1592,28 +1592,28 @@ SE_DECLARE_FUNC(js_cocos2dx_Waves3D_setAmplitude);
 SE_DECLARE_FUNC(js_cocos2dx_Waves3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_Waves3D_Waves3D);
 
-extern se::Object* __jsb_cocos2dx_FlipX3D_proto;
-extern se::Class* __jsb_cocos2dx_FlipX3D_class;
+extern se::Object* __jsb_cocos2d_FlipX3D_proto;
+extern se::Class* __jsb_cocos2d_FlipX3D_class;
 
-bool js_register_cocos2dx_FlipX3D(se::Object* obj);
+bool js_register_cocos2d_FlipX3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FlipX3D_initWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_FlipX3D_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_FlipX3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_FlipX3D_FlipX3D);
 
-extern se::Object* __jsb_cocos2dx_FlipY3D_proto;
-extern se::Class* __jsb_cocos2dx_FlipY3D_class;
+extern se::Object* __jsb_cocos2d_FlipY3D_proto;
+extern se::Class* __jsb_cocos2d_FlipY3D_class;
 
-bool js_register_cocos2dx_FlipY3D(se::Object* obj);
+bool js_register_cocos2d_FlipY3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FlipY3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_FlipY3D_FlipY3D);
 
-extern se::Object* __jsb_cocos2dx_Lens3D_proto;
-extern se::Class* __jsb_cocos2dx_Lens3D_class;
+extern se::Object* __jsb_cocos2d_Lens3D_proto;
+extern se::Class* __jsb_cocos2d_Lens3D_class;
 
-bool js_register_cocos2dx_Lens3D(se::Object* obj);
+bool js_register_cocos2d_Lens3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Lens3D_setConcave);
 SE_DECLARE_FUNC(js_cocos2dx_Lens3D_initWithDuration);
@@ -1624,10 +1624,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Lens3D_getPosition);
 SE_DECLARE_FUNC(js_cocos2dx_Lens3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_Lens3D_Lens3D);
 
-extern se::Object* __jsb_cocos2dx_Ripple3D_proto;
-extern se::Class* __jsb_cocos2dx_Ripple3D_class;
+extern se::Object* __jsb_cocos2d_Ripple3D_proto;
+extern se::Class* __jsb_cocos2d_Ripple3D_class;
 
-bool js_register_cocos2dx_Ripple3D(se::Object* obj);
+bool js_register_cocos2d_Ripple3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Ripple3D_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_Ripple3D_initWithDuration);
@@ -1639,19 +1639,19 @@ SE_DECLARE_FUNC(js_cocos2dx_Ripple3D_getPosition);
 SE_DECLARE_FUNC(js_cocos2dx_Ripple3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_Ripple3D_Ripple3D);
 
-extern se::Object* __jsb_cocos2dx_Shaky3D_proto;
-extern se::Class* __jsb_cocos2dx_Shaky3D_class;
+extern se::Object* __jsb_cocos2d_Shaky3D_proto;
+extern se::Class* __jsb_cocos2d_Shaky3D_class;
 
-bool js_register_cocos2dx_Shaky3D(se::Object* obj);
+bool js_register_cocos2d_Shaky3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Shaky3D_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_Shaky3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_Shaky3D_Shaky3D);
 
-extern se::Object* __jsb_cocos2dx_Liquid_proto;
-extern se::Class* __jsb_cocos2dx_Liquid_class;
+extern se::Object* __jsb_cocos2d_Liquid_proto;
+extern se::Class* __jsb_cocos2d_Liquid_class;
 
-bool js_register_cocos2dx_Liquid(se::Object* obj);
+bool js_register_cocos2d_Liquid(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Liquid_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_Liquid_initWithDuration);
@@ -1661,10 +1661,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Liquid_setAmplitude);
 SE_DECLARE_FUNC(js_cocos2dx_Liquid_create);
 SE_DECLARE_FUNC(js_cocos2dx_Liquid_Liquid);
 
-extern se::Object* __jsb_cocos2dx_Waves_proto;
-extern se::Class* __jsb_cocos2dx_Waves_class;
+extern se::Object* __jsb_cocos2d_Waves_proto;
+extern se::Class* __jsb_cocos2d_Waves_class;
 
-bool js_register_cocos2dx_Waves(se::Object* obj);
+bool js_register_cocos2d_Waves(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Waves_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_Waves_initWithDuration);
@@ -1674,10 +1674,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Waves_setAmplitude);
 SE_DECLARE_FUNC(js_cocos2dx_Waves_create);
 SE_DECLARE_FUNC(js_cocos2dx_Waves_Waves);
 
-extern se::Object* __jsb_cocos2dx_Twirl_proto;
-extern se::Class* __jsb_cocos2dx_Twirl_class;
+extern se::Object* __jsb_cocos2d_Twirl_proto;
+extern se::Class* __jsb_cocos2d_Twirl_class;
 
-bool js_register_cocos2dx_Twirl(se::Object* obj);
+bool js_register_cocos2d_Twirl(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Twirl_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_Twirl_initWithDuration);
@@ -1689,10 +1689,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Twirl_getPosition);
 SE_DECLARE_FUNC(js_cocos2dx_Twirl_create);
 SE_DECLARE_FUNC(js_cocos2dx_Twirl_Twirl);
 
-extern se::Object* __jsb_cocos2dx_ActionManager_proto;
-extern se::Class* __jsb_cocos2dx_ActionManager_class;
+extern se::Object* __jsb_cocos2d_ActionManager_proto;
+extern se::Class* __jsb_cocos2d_ActionManager_class;
 
-bool js_register_cocos2dx_ActionManager(se::Object* obj);
+bool js_register_cocos2d_ActionManager(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ActionManager_getActionByTag);
 SE_DECLARE_FUNC(js_cocos2dx_ActionManager_removeActionByTag);
@@ -1711,53 +1711,53 @@ SE_DECLARE_FUNC(js_cocos2dx_ActionManager_removeAllActionsByTag);
 SE_DECLARE_FUNC(js_cocos2dx_ActionManager_getNumberOfRunningActionsInTargetByTag);
 SE_DECLARE_FUNC(js_cocos2dx_ActionManager_ActionManager);
 
-extern se::Object* __jsb_cocos2dx_PageTurn3D_proto;
-extern se::Class* __jsb_cocos2dx_PageTurn3D_class;
+extern se::Object* __jsb_cocos2d_PageTurn3D_proto;
+extern se::Class* __jsb_cocos2d_PageTurn3D_class;
 
-bool js_register_cocos2dx_PageTurn3D(se::Object* obj);
+bool js_register_cocos2d_PageTurn3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_PageTurn3D_create);
 
-extern se::Object* __jsb_cocos2dx_ProgressTo_proto;
-extern se::Class* __jsb_cocos2dx_ProgressTo_class;
+extern se::Object* __jsb_cocos2d_ProgressTo_proto;
+extern se::Class* __jsb_cocos2d_ProgressTo_class;
 
-bool js_register_cocos2dx_ProgressTo(se::Object* obj);
+bool js_register_cocos2d_ProgressTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTo_ProgressTo);
 
-extern se::Object* __jsb_cocos2dx_ProgressFromTo_proto;
-extern se::Class* __jsb_cocos2dx_ProgressFromTo_class;
+extern se::Object* __jsb_cocos2d_ProgressFromTo_proto;
+extern se::Class* __jsb_cocos2d_ProgressFromTo_class;
 
-bool js_register_cocos2dx_ProgressFromTo(se::Object* obj);
+bool js_register_cocos2d_ProgressFromTo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ProgressFromTo_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressFromTo_create);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressFromTo_ProgressFromTo);
 
-extern se::Object* __jsb_cocos2dx_ShakyTiles3D_proto;
-extern se::Class* __jsb_cocos2dx_ShakyTiles3D_class;
+extern se::Object* __jsb_cocos2d_ShakyTiles3D_proto;
+extern se::Class* __jsb_cocos2d_ShakyTiles3D_class;
 
-bool js_register_cocos2dx_ShakyTiles3D(se::Object* obj);
+bool js_register_cocos2d_ShakyTiles3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ShakyTiles3D_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ShakyTiles3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_ShakyTiles3D_ShakyTiles3D);
 
-extern se::Object* __jsb_cocos2dx_ShatteredTiles3D_proto;
-extern se::Class* __jsb_cocos2dx_ShatteredTiles3D_class;
+extern se::Object* __jsb_cocos2d_ShatteredTiles3D_proto;
+extern se::Class* __jsb_cocos2d_ShatteredTiles3D_class;
 
-bool js_register_cocos2dx_ShatteredTiles3D(se::Object* obj);
+bool js_register_cocos2d_ShatteredTiles3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ShatteredTiles3D_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ShatteredTiles3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_ShatteredTiles3D_ShatteredTiles3D);
 
-extern se::Object* __jsb_cocos2dx_ShuffleTiles_proto;
-extern se::Class* __jsb_cocos2dx_ShuffleTiles_class;
+extern se::Object* __jsb_cocos2d_ShuffleTiles_proto;
+extern se::Class* __jsb_cocos2d_ShuffleTiles_class;
 
-bool js_register_cocos2dx_ShuffleTiles(se::Object* obj);
+bool js_register_cocos2d_ShuffleTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ShuffleTiles_placeTile);
 SE_DECLARE_FUNC(js_cocos2dx_ShuffleTiles_shuffle);
@@ -1766,10 +1766,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ShuffleTiles_getDelta);
 SE_DECLARE_FUNC(js_cocos2dx_ShuffleTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_ShuffleTiles_ShuffleTiles);
 
-extern se::Object* __jsb_cocos2dx_FadeOutTRTiles_proto;
-extern se::Class* __jsb_cocos2dx_FadeOutTRTiles_class;
+extern se::Object* __jsb_cocos2d_FadeOutTRTiles_proto;
+extern se::Class* __jsb_cocos2d_FadeOutTRTiles_class;
 
-bool js_register_cocos2dx_FadeOutTRTiles(se::Object* obj);
+bool js_register_cocos2d_FadeOutTRTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutTRTiles_turnOnTile);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutTRTiles_turnOffTile);
@@ -1778,34 +1778,34 @@ SE_DECLARE_FUNC(js_cocos2dx_FadeOutTRTiles_testFunc);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutTRTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutTRTiles_FadeOutTRTiles);
 
-extern se::Object* __jsb_cocos2dx_FadeOutBLTiles_proto;
-extern se::Class* __jsb_cocos2dx_FadeOutBLTiles_class;
+extern se::Object* __jsb_cocos2d_FadeOutBLTiles_proto;
+extern se::Class* __jsb_cocos2d_FadeOutBLTiles_class;
 
-bool js_register_cocos2dx_FadeOutBLTiles(se::Object* obj);
+bool js_register_cocos2d_FadeOutBLTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutBLTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutBLTiles_FadeOutBLTiles);
 
-extern se::Object* __jsb_cocos2dx_FadeOutUpTiles_proto;
-extern se::Class* __jsb_cocos2dx_FadeOutUpTiles_class;
+extern se::Object* __jsb_cocos2d_FadeOutUpTiles_proto;
+extern se::Class* __jsb_cocos2d_FadeOutUpTiles_class;
 
-bool js_register_cocos2dx_FadeOutUpTiles(se::Object* obj);
+bool js_register_cocos2d_FadeOutUpTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutUpTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutUpTiles_FadeOutUpTiles);
 
-extern se::Object* __jsb_cocos2dx_FadeOutDownTiles_proto;
-extern se::Class* __jsb_cocos2dx_FadeOutDownTiles_class;
+extern se::Object* __jsb_cocos2d_FadeOutDownTiles_proto;
+extern se::Class* __jsb_cocos2d_FadeOutDownTiles_class;
 
-bool js_register_cocos2dx_FadeOutDownTiles(se::Object* obj);
+bool js_register_cocos2d_FadeOutDownTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutDownTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_FadeOutDownTiles_FadeOutDownTiles);
 
-extern se::Object* __jsb_cocos2dx_TurnOffTiles_proto;
-extern se::Class* __jsb_cocos2dx_TurnOffTiles_class;
+extern se::Object* __jsb_cocos2d_TurnOffTiles_proto;
+extern se::Class* __jsb_cocos2d_TurnOffTiles_class;
 
-bool js_register_cocos2dx_TurnOffTiles(se::Object* obj);
+bool js_register_cocos2d_TurnOffTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TurnOffTiles_turnOnTile);
 SE_DECLARE_FUNC(js_cocos2dx_TurnOffTiles_turnOffTile);
@@ -1814,10 +1814,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TurnOffTiles_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_TurnOffTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_TurnOffTiles_TurnOffTiles);
 
-extern se::Object* __jsb_cocos2dx_WavesTiles3D_proto;
-extern se::Class* __jsb_cocos2dx_WavesTiles3D_class;
+extern se::Object* __jsb_cocos2d_WavesTiles3D_proto;
+extern se::Class* __jsb_cocos2d_WavesTiles3D_class;
 
-bool js_register_cocos2dx_WavesTiles3D(se::Object* obj);
+bool js_register_cocos2d_WavesTiles3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_WavesTiles3D_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_WavesTiles3D_initWithDuration);
@@ -1827,10 +1827,10 @@ SE_DECLARE_FUNC(js_cocos2dx_WavesTiles3D_setAmplitude);
 SE_DECLARE_FUNC(js_cocos2dx_WavesTiles3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_WavesTiles3D_WavesTiles3D);
 
-extern se::Object* __jsb_cocos2dx_JumpTiles3D_proto;
-extern se::Class* __jsb_cocos2dx_JumpTiles3D_class;
+extern se::Object* __jsb_cocos2d_JumpTiles3D_proto;
+extern se::Class* __jsb_cocos2d_JumpTiles3D_class;
 
-bool js_register_cocos2dx_JumpTiles3D(se::Object* obj);
+bool js_register_cocos2d_JumpTiles3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_JumpTiles3D_setAmplitudeRate);
 SE_DECLARE_FUNC(js_cocos2dx_JumpTiles3D_initWithDuration);
@@ -1840,36 +1840,36 @@ SE_DECLARE_FUNC(js_cocos2dx_JumpTiles3D_setAmplitude);
 SE_DECLARE_FUNC(js_cocos2dx_JumpTiles3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_JumpTiles3D_JumpTiles3D);
 
-extern se::Object* __jsb_cocos2dx_SplitRows_proto;
-extern se::Class* __jsb_cocos2dx_SplitRows_class;
+extern se::Object* __jsb_cocos2d_SplitRows_proto;
+extern se::Class* __jsb_cocos2d_SplitRows_class;
 
-bool js_register_cocos2dx_SplitRows(se::Object* obj);
+bool js_register_cocos2d_SplitRows(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SplitRows_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_SplitRows_create);
 SE_DECLARE_FUNC(js_cocos2dx_SplitRows_SplitRows);
 
-extern se::Object* __jsb_cocos2dx_SplitCols_proto;
-extern se::Class* __jsb_cocos2dx_SplitCols_class;
+extern se::Object* __jsb_cocos2d_SplitCols_proto;
+extern se::Class* __jsb_cocos2d_SplitCols_class;
 
-bool js_register_cocos2dx_SplitCols(se::Object* obj);
+bool js_register_cocos2d_SplitCols(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SplitCols_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_SplitCols_create);
 SE_DECLARE_FUNC(js_cocos2dx_SplitCols_SplitCols);
 
-extern se::Object* __jsb_cocos2dx_ActionTween_proto;
-extern se::Class* __jsb_cocos2dx_ActionTween_class;
+extern se::Object* __jsb_cocos2d_ActionTween_proto;
+extern se::Class* __jsb_cocos2d_ActionTween_class;
 
-bool js_register_cocos2dx_ActionTween(se::Object* obj);
+bool js_register_cocos2d_ActionTween(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ActionTween_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_ActionTween_create);
 
-extern se::Object* __jsb_cocos2dx_AtlasNode_proto;
-extern se::Class* __jsb_cocos2dx_AtlasNode_class;
+extern se::Object* __jsb_cocos2d_AtlasNode_proto;
+extern se::Class* __jsb_cocos2d_AtlasNode_class;
 
-bool js_register_cocos2dx_AtlasNode(se::Object* obj);
+bool js_register_cocos2d_AtlasNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_AtlasNode_updateAtlasValues);
 SE_DECLARE_FUNC(js_cocos2dx_AtlasNode_initWithTileFile);
@@ -1884,10 +1884,10 @@ SE_DECLARE_FUNC(js_cocos2dx_AtlasNode_setQuadsToDraw);
 SE_DECLARE_FUNC(js_cocos2dx_AtlasNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_AtlasNode_AtlasNode);
 
-extern se::Object* __jsb_cocos2dx_ClippingNode_proto;
-extern se::Class* __jsb_cocos2dx_ClippingNode_class;
+extern se::Object* __jsb_cocos2d_ClippingNode_proto;
+extern se::Class* __jsb_cocos2d_ClippingNode_class;
 
-bool js_register_cocos2dx_ClippingNode(se::Object* obj);
+bool js_register_cocos2d_ClippingNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ClippingNode_hasContent);
 SE_DECLARE_FUNC(js_cocos2dx_ClippingNode_setInverted);
@@ -1899,10 +1899,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ClippingNode_isInverted);
 SE_DECLARE_FUNC(js_cocos2dx_ClippingNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_ClippingNode_ClippingNode);
 
-extern se::Object* __jsb_cocos2dx_DrawNode_proto;
-extern se::Class* __jsb_cocos2dx_DrawNode_class;
+extern se::Object* __jsb_cocos2d_DrawNode_proto;
+extern se::Class* __jsb_cocos2d_DrawNode_class;
 
-bool js_register_cocos2dx_DrawNode(se::Object* obj);
+bool js_register_cocos2d_DrawNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_DrawNode_drawLine);
 SE_DECLARE_FUNC(js_cocos2dx_DrawNode_drawPoints);
@@ -1931,10 +1931,10 @@ SE_DECLARE_FUNC(js_cocos2dx_DrawNode_drawCubicBezier);
 SE_DECLARE_FUNC(js_cocos2dx_DrawNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_DrawNode_DrawNode);
 
-extern se::Object* __jsb_cocos2dx_Label_proto;
-extern se::Class* __jsb_cocos2dx_Label_class;
+extern se::Object* __jsb_cocos2d_Label_proto;
+extern se::Class* __jsb_cocos2d_Label_class;
 
-bool js_register_cocos2dx_Label(se::Object* obj);
+bool js_register_cocos2d_Label(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Label_isClipMarginEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_Label_enableShadow);
@@ -2007,10 +2007,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Label_createWithCharMap);
 SE_DECLARE_FUNC(js_cocos2dx_Label_createWithSystemFont);
 SE_DECLARE_FUNC(js_cocos2dx_Label_Label);
 
-extern se::Object* __jsb_cocos2dx_LabelAtlas_proto;
-extern se::Class* __jsb_cocos2dx_LabelAtlas_class;
+extern se::Object* __jsb_cocos2d_LabelAtlas_proto;
+extern se::Class* __jsb_cocos2d_LabelAtlas_class;
 
-bool js_register_cocos2dx_LabelAtlas(se::Object* obj);
+bool js_register_cocos2d_LabelAtlas(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_LabelAtlas_setString);
 SE_DECLARE_FUNC(js_cocos2dx_LabelAtlas_initWithString);
@@ -2018,10 +2018,10 @@ SE_DECLARE_FUNC(js_cocos2dx_LabelAtlas_getString);
 SE_DECLARE_FUNC(js_cocos2dx_LabelAtlas_create);
 SE_DECLARE_FUNC(js_cocos2dx_LabelAtlas_LabelAtlas);
 
-extern se::Object* __jsb_cocos2dx_LabelBMFont_proto;
-extern se::Class* __jsb_cocos2dx_LabelBMFont_class;
+extern se::Object* __jsb_cocos2d_LabelBMFont_proto;
+extern se::Class* __jsb_cocos2d_LabelBMFont_class;
 
-bool js_register_cocos2dx_LabelBMFont(se::Object* obj);
+bool js_register_cocos2d_LabelBMFont(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_LabelBMFont_setLineBreakWithoutSpace);
 SE_DECLARE_FUNC(js_cocos2dx_LabelBMFont_getBlendFunc);
@@ -2037,10 +2037,10 @@ SE_DECLARE_FUNC(js_cocos2dx_LabelBMFont_setWidth);
 SE_DECLARE_FUNC(js_cocos2dx_LabelBMFont_create);
 SE_DECLARE_FUNC(js_cocos2dx_LabelBMFont_LabelBMFont);
 
-extern se::Object* __jsb_cocos2dx_LabelTTF_proto;
-extern se::Class* __jsb_cocos2dx_LabelTTF_class;
+extern se::Object* __jsb_cocos2d_LabelTTF_proto;
+extern se::Class* __jsb_cocos2d_LabelTTF_class;
 
-bool js_register_cocos2dx_LabelTTF(se::Object* obj);
+bool js_register_cocos2d_LabelTTF(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_LabelTTF_enableShadow);
 SE_DECLARE_FUNC(js_cocos2dx_LabelTTF_setDimensions);
@@ -2071,26 +2071,26 @@ SE_DECLARE_FUNC(js_cocos2dx_LabelTTF_create);
 SE_DECLARE_FUNC(js_cocos2dx_LabelTTF_createWithFontDefinition);
 SE_DECLARE_FUNC(js_cocos2dx_LabelTTF_LabelTTF);
 
-extern se::Object* __jsb_cocos2dx_Layer_proto;
-extern se::Class* __jsb_cocos2dx_Layer_class;
+extern se::Object* __jsb_cocos2d_Layer_proto;
+extern se::Class* __jsb_cocos2d_Layer_class;
 
-bool js_register_cocos2dx_Layer(se::Object* obj);
+bool js_register_cocos2d_Layer(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Layer_create);
 SE_DECLARE_FUNC(js_cocos2dx_Layer_Layer);
 
-extern se::Object* __jsb_cocos2dx___LayerRGBA_proto;
-extern se::Class* __jsb_cocos2dx___LayerRGBA_class;
+extern se::Object* __jsb_cocos2d___LayerRGBA_proto;
+extern se::Class* __jsb_cocos2d___LayerRGBA_class;
 
-bool js_register_cocos2dx___LayerRGBA(se::Object* obj);
+bool js_register_cocos2d___LayerRGBA(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx___LayerRGBA_create);
 SE_DECLARE_FUNC(js_cocos2dx___LayerRGBA___LayerRGBA);
 
-extern se::Object* __jsb_cocos2dx_LayerColor_proto;
-extern se::Class* __jsb_cocos2dx_LayerColor_class;
+extern se::Object* __jsb_cocos2d_LayerColor_proto;
+extern se::Class* __jsb_cocos2d_LayerColor_class;
 
-bool js_register_cocos2dx_LayerColor(se::Object* obj);
+bool js_register_cocos2d_LayerColor(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_LayerColor_changeWidthAndHeight);
 SE_DECLARE_FUNC(js_cocos2dx_LayerColor_getBlendFunc);
@@ -2101,10 +2101,10 @@ SE_DECLARE_FUNC(js_cocos2dx_LayerColor_changeHeight);
 SE_DECLARE_FUNC(js_cocos2dx_LayerColor_create);
 SE_DECLARE_FUNC(js_cocos2dx_LayerColor_LayerColor);
 
-extern se::Object* __jsb_cocos2dx_LayerGradient_proto;
-extern se::Class* __jsb_cocos2dx_LayerGradient_class;
+extern se::Object* __jsb_cocos2d_LayerGradient_proto;
+extern se::Class* __jsb_cocos2d_LayerGradient_class;
 
-bool js_register_cocos2dx_LayerGradient(se::Object* obj);
+bool js_register_cocos2d_LayerGradient(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_LayerGradient_getStartColor);
 SE_DECLARE_FUNC(js_cocos2dx_LayerGradient_isCompressedInterpolation);
@@ -2122,10 +2122,10 @@ SE_DECLARE_FUNC(js_cocos2dx_LayerGradient_setStartColor);
 SE_DECLARE_FUNC(js_cocos2dx_LayerGradient_create);
 SE_DECLARE_FUNC(js_cocos2dx_LayerGradient_LayerGradient);
 
-extern se::Object* __jsb_cocos2dx_LayerMultiplex_proto;
-extern se::Class* __jsb_cocos2dx_LayerMultiplex_class;
+extern se::Object* __jsb_cocos2d_LayerMultiplex_proto;
+extern se::Class* __jsb_cocos2d_LayerMultiplex_class;
 
-bool js_register_cocos2dx_LayerMultiplex(se::Object* obj);
+bool js_register_cocos2d_LayerMultiplex(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_LayerMultiplex_initWithArray);
 SE_DECLARE_FUNC(js_cocos2dx_LayerMultiplex_switchToAndReleaseMe);
@@ -2133,10 +2133,10 @@ SE_DECLARE_FUNC(js_cocos2dx_LayerMultiplex_addLayer);
 SE_DECLARE_FUNC(js_cocos2dx_LayerMultiplex_switchTo);
 SE_DECLARE_FUNC(js_cocos2dx_LayerMultiplex_LayerMultiplex);
 
-extern se::Object* __jsb_cocos2dx_MenuItem_proto;
-extern se::Class* __jsb_cocos2dx_MenuItem_class;
+extern se::Object* __jsb_cocos2d_MenuItem_proto;
+extern se::Class* __jsb_cocos2d_MenuItem_class;
 
-bool js_register_cocos2dx_MenuItem(se::Object* obj);
+bool js_register_cocos2d_MenuItem(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItem_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItem_activate);
@@ -2149,10 +2149,10 @@ SE_DECLARE_FUNC(js_cocos2dx_MenuItem_unselected);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItem_rect);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItem_MenuItem);
 
-extern se::Object* __jsb_cocos2dx_MenuItemLabel_proto;
-extern se::Class* __jsb_cocos2dx_MenuItemLabel_class;
+extern se::Object* __jsb_cocos2d_MenuItemLabel_proto;
+extern se::Class* __jsb_cocos2d_MenuItemLabel_class;
 
-bool js_register_cocos2dx_MenuItemLabel(se::Object* obj);
+bool js_register_cocos2d_MenuItemLabel(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemLabel_setLabel);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemLabel_getString);
@@ -2163,18 +2163,18 @@ SE_DECLARE_FUNC(js_cocos2dx_MenuItemLabel_setDisabledColor);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemLabel_getLabel);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemLabel_MenuItemLabel);
 
-extern se::Object* __jsb_cocos2dx_MenuItemAtlasFont_proto;
-extern se::Class* __jsb_cocos2dx_MenuItemAtlasFont_class;
+extern se::Object* __jsb_cocos2d_MenuItemAtlasFont_proto;
+extern se::Class* __jsb_cocos2d_MenuItemAtlasFont_class;
 
-bool js_register_cocos2dx_MenuItemAtlasFont(se::Object* obj);
+bool js_register_cocos2d_MenuItemAtlasFont(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemAtlasFont_initWithString);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemAtlasFont_MenuItemAtlasFont);
 
-extern se::Object* __jsb_cocos2dx_MenuItemFont_proto;
-extern se::Class* __jsb_cocos2dx_MenuItemFont_class;
+extern se::Object* __jsb_cocos2d_MenuItemFont_proto;
+extern se::Class* __jsb_cocos2d_MenuItemFont_class;
 
-bool js_register_cocos2dx_MenuItemFont(se::Object* obj);
+bool js_register_cocos2d_MenuItemFont(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemFont_setFontNameObj);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemFont_getFontSizeObj);
@@ -2187,10 +2187,10 @@ SE_DECLARE_FUNC(js_cocos2dx_MenuItemFont_getFontName);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemFont_setFontSize);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemFont_MenuItemFont);
 
-extern se::Object* __jsb_cocos2dx_MenuItemSprite_proto;
-extern se::Class* __jsb_cocos2dx_MenuItemSprite_class;
+extern se::Object* __jsb_cocos2d_MenuItemSprite_proto;
+extern se::Class* __jsb_cocos2d_MenuItemSprite_class;
 
-bool js_register_cocos2dx_MenuItemSprite(se::Object* obj);
+bool js_register_cocos2d_MenuItemSprite(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemSprite_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemSprite_selected);
@@ -2204,10 +2204,10 @@ SE_DECLARE_FUNC(js_cocos2dx_MenuItemSprite_getNormalImage);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemSprite_unselected);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemSprite_MenuItemSprite);
 
-extern se::Object* __jsb_cocos2dx_MenuItemImage_proto;
-extern se::Class* __jsb_cocos2dx_MenuItemImage_class;
+extern se::Object* __jsb_cocos2d_MenuItemImage_proto;
+extern se::Class* __jsb_cocos2d_MenuItemImage_class;
 
-bool js_register_cocos2dx_MenuItemImage(se::Object* obj);
+bool js_register_cocos2d_MenuItemImage(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemImage_setDisabledSpriteFrame);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemImage_setSelectedSpriteFrame);
@@ -2216,10 +2216,10 @@ SE_DECLARE_FUNC(js_cocos2dx_MenuItemImage_init);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemImage_initWithNormalImage);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemImage_MenuItemImage);
 
-extern se::Object* __jsb_cocos2dx_MenuItemToggle_proto;
-extern se::Class* __jsb_cocos2dx_MenuItemToggle_class;
+extern se::Object* __jsb_cocos2d_MenuItemToggle_proto;
+extern se::Class* __jsb_cocos2d_MenuItemToggle_class;
 
-bool js_register_cocos2dx_MenuItemToggle(se::Object* obj);
+bool js_register_cocos2d_MenuItemToggle(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemToggle_setSubItems);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemToggle_initWithItem);
@@ -2229,10 +2229,10 @@ SE_DECLARE_FUNC(js_cocos2dx_MenuItemToggle_getSelectedItem);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemToggle_setSelectedIndex);
 SE_DECLARE_FUNC(js_cocos2dx_MenuItemToggle_MenuItemToggle);
 
-extern se::Object* __jsb_cocos2dx_Menu_proto;
-extern se::Class* __jsb_cocos2dx_Menu_class;
+extern se::Object* __jsb_cocos2d_Menu_proto;
+extern se::Class* __jsb_cocos2d_Menu_class;
 
-bool js_register_cocos2dx_Menu(se::Object* obj);
+bool js_register_cocos2d_Menu(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Menu_initWithArray);
 SE_DECLARE_FUNC(js_cocos2dx_Menu_setEnabled);
@@ -2243,10 +2243,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Menu_alignItemsVerticallyWithPadding);
 SE_DECLARE_FUNC(js_cocos2dx_Menu_alignItemsHorizontally);
 SE_DECLARE_FUNC(js_cocos2dx_Menu_Menu);
 
-extern se::Object* __jsb_cocos2dx_MotionStreak_proto;
-extern se::Class* __jsb_cocos2dx_MotionStreak_class;
+extern se::Object* __jsb_cocos2d_MotionStreak_proto;
+extern se::Class* __jsb_cocos2d_MotionStreak_class;
 
-bool js_register_cocos2dx_MotionStreak(se::Object* obj);
+bool js_register_cocos2d_MotionStreak(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_MotionStreak_reset);
 SE_DECLARE_FUNC(js_cocos2dx_MotionStreak_setTexture);
@@ -2264,10 +2264,10 @@ SE_DECLARE_FUNC(js_cocos2dx_MotionStreak_setStroke);
 SE_DECLARE_FUNC(js_cocos2dx_MotionStreak_create);
 SE_DECLARE_FUNC(js_cocos2dx_MotionStreak_MotionStreak);
 
-extern se::Object* __jsb_cocos2dx_NodeGrid_proto;
-extern se::Class* __jsb_cocos2dx_NodeGrid_class;
+extern se::Object* __jsb_cocos2d_NodeGrid_proto;
+extern se::Class* __jsb_cocos2d_NodeGrid_class;
 
-bool js_register_cocos2dx_NodeGrid(se::Object* obj);
+bool js_register_cocos2d_NodeGrid(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_NodeGrid_setTarget);
 SE_DECLARE_FUNC(js_cocos2dx_NodeGrid_getGrid);
@@ -2275,10 +2275,10 @@ SE_DECLARE_FUNC(js_cocos2dx_NodeGrid_getGridRect);
 SE_DECLARE_FUNC(js_cocos2dx_NodeGrid_create);
 SE_DECLARE_FUNC(js_cocos2dx_NodeGrid_NodeGrid);
 
-extern se::Object* __jsb_cocos2dx_ParticleBatchNode_proto;
-extern se::Class* __jsb_cocos2dx_ParticleBatchNode_class;
+extern se::Object* __jsb_cocos2d_ParticleBatchNode_proto;
+extern se::Class* __jsb_cocos2d_ParticleBatchNode_class;
 
-bool js_register_cocos2dx_ParticleBatchNode(se::Object* obj);
+bool js_register_cocos2d_ParticleBatchNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleBatchNode_setTexture);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleBatchNode_initWithTexture);
@@ -2295,10 +2295,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleBatchNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleBatchNode_createWithTexture);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleBatchNode_ParticleBatchNode);
 
-extern se::Object* __jsb_cocos2dx_ParticleSystem_proto;
-extern se::Class* __jsb_cocos2dx_ParticleSystem_class;
+extern se::Object* __jsb_cocos2d_ParticleSystem_proto;
+extern se::Class* __jsb_cocos2d_ParticleSystem_class;
 
-bool js_register_cocos2dx_ParticleSystem(se::Object* obj);
+bool js_register_cocos2d_ParticleSystem(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystem_getStartSizeVar);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystem_getTexture);
@@ -2408,10 +2408,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleSystem_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystem_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystem_ParticleSystem);
 
-extern se::Object* __jsb_cocos2dx_ParticleSystemQuad_proto;
-extern se::Class* __jsb_cocos2dx_ParticleSystemQuad_class;
+extern se::Object* __jsb_cocos2d_ParticleSystemQuad_proto;
+extern se::Class* __jsb_cocos2d_ParticleSystemQuad_class;
 
-bool js_register_cocos2dx_ParticleSystemQuad(se::Object* obj);
+bool js_register_cocos2d_ParticleSystemQuad(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystemQuad_setDisplayFrame);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystemQuad_setTextureWithRect);
@@ -2420,19 +2420,19 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleSystemQuad_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystemQuad_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSystemQuad_ParticleSystemQuad);
 
-extern se::Object* __jsb_cocos2dx_ParticleFire_proto;
-extern se::Class* __jsb_cocos2dx_ParticleFire_class;
+extern se::Object* __jsb_cocos2d_ParticleFire_proto;
+extern se::Class* __jsb_cocos2d_ParticleFire_class;
 
-bool js_register_cocos2dx_ParticleFire(se::Object* obj);
+bool js_register_cocos2d_ParticleFire(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFire_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFire_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFire_ParticleFire);
 
-extern se::Object* __jsb_cocos2dx_ParticleFireworks_proto;
-extern se::Class* __jsb_cocos2dx_ParticleFireworks_class;
+extern se::Object* __jsb_cocos2d_ParticleFireworks_proto;
+extern se::Class* __jsb_cocos2d_ParticleFireworks_class;
 
-bool js_register_cocos2dx_ParticleFireworks(se::Object* obj);
+bool js_register_cocos2d_ParticleFireworks(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFireworks_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFireworks_initWithTotalParticles);
@@ -2440,10 +2440,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleFireworks_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFireworks_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFireworks_ParticleFireworks);
 
-extern se::Object* __jsb_cocos2dx_ParticleSun_proto;
-extern se::Class* __jsb_cocos2dx_ParticleSun_class;
+extern se::Object* __jsb_cocos2d_ParticleSun_proto;
+extern se::Class* __jsb_cocos2d_ParticleSun_class;
 
-bool js_register_cocos2dx_ParticleSun(se::Object* obj);
+bool js_register_cocos2d_ParticleSun(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSun_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSun_initWithTotalParticles);
@@ -2451,10 +2451,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleSun_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSun_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSun_ParticleSun);
 
-extern se::Object* __jsb_cocos2dx_ParticleGalaxy_proto;
-extern se::Class* __jsb_cocos2dx_ParticleGalaxy_class;
+extern se::Object* __jsb_cocos2d_ParticleGalaxy_proto;
+extern se::Class* __jsb_cocos2d_ParticleGalaxy_class;
 
-bool js_register_cocos2dx_ParticleGalaxy(se::Object* obj);
+bool js_register_cocos2d_ParticleGalaxy(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleGalaxy_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleGalaxy_initWithTotalParticles);
@@ -2462,10 +2462,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleGalaxy_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleGalaxy_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleGalaxy_ParticleGalaxy);
 
-extern se::Object* __jsb_cocos2dx_ParticleFlower_proto;
-extern se::Class* __jsb_cocos2dx_ParticleFlower_class;
+extern se::Object* __jsb_cocos2d_ParticleFlower_proto;
+extern se::Class* __jsb_cocos2d_ParticleFlower_class;
 
-bool js_register_cocos2dx_ParticleFlower(se::Object* obj);
+bool js_register_cocos2d_ParticleFlower(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFlower_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFlower_initWithTotalParticles);
@@ -2473,10 +2473,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleFlower_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFlower_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleFlower_ParticleFlower);
 
-extern se::Object* __jsb_cocos2dx_ParticleMeteor_proto;
-extern se::Class* __jsb_cocos2dx_ParticleMeteor_class;
+extern se::Object* __jsb_cocos2d_ParticleMeteor_proto;
+extern se::Class* __jsb_cocos2d_ParticleMeteor_class;
 
-bool js_register_cocos2dx_ParticleMeteor(se::Object* obj);
+bool js_register_cocos2d_ParticleMeteor(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleMeteor_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleMeteor_initWithTotalParticles);
@@ -2484,10 +2484,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleMeteor_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleMeteor_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleMeteor_ParticleMeteor);
 
-extern se::Object* __jsb_cocos2dx_ParticleSpiral_proto;
-extern se::Class* __jsb_cocos2dx_ParticleSpiral_class;
+extern se::Object* __jsb_cocos2d_ParticleSpiral_proto;
+extern se::Class* __jsb_cocos2d_ParticleSpiral_class;
 
-bool js_register_cocos2dx_ParticleSpiral(se::Object* obj);
+bool js_register_cocos2d_ParticleSpiral(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSpiral_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSpiral_initWithTotalParticles);
@@ -2495,10 +2495,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleSpiral_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSpiral_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSpiral_ParticleSpiral);
 
-extern se::Object* __jsb_cocos2dx_ParticleExplosion_proto;
-extern se::Class* __jsb_cocos2dx_ParticleExplosion_class;
+extern se::Object* __jsb_cocos2d_ParticleExplosion_proto;
+extern se::Class* __jsb_cocos2d_ParticleExplosion_class;
 
-bool js_register_cocos2dx_ParticleExplosion(se::Object* obj);
+bool js_register_cocos2d_ParticleExplosion(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleExplosion_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleExplosion_initWithTotalParticles);
@@ -2506,10 +2506,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleExplosion_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleExplosion_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleExplosion_ParticleExplosion);
 
-extern se::Object* __jsb_cocos2dx_ParticleSmoke_proto;
-extern se::Class* __jsb_cocos2dx_ParticleSmoke_class;
+extern se::Object* __jsb_cocos2d_ParticleSmoke_proto;
+extern se::Class* __jsb_cocos2d_ParticleSmoke_class;
 
-bool js_register_cocos2dx_ParticleSmoke(se::Object* obj);
+bool js_register_cocos2d_ParticleSmoke(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSmoke_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSmoke_initWithTotalParticles);
@@ -2517,10 +2517,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleSmoke_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSmoke_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSmoke_ParticleSmoke);
 
-extern se::Object* __jsb_cocos2dx_ParticleSnow_proto;
-extern se::Class* __jsb_cocos2dx_ParticleSnow_class;
+extern se::Object* __jsb_cocos2d_ParticleSnow_proto;
+extern se::Class* __jsb_cocos2d_ParticleSnow_class;
 
-bool js_register_cocos2dx_ParticleSnow(se::Object* obj);
+bool js_register_cocos2d_ParticleSnow(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSnow_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSnow_initWithTotalParticles);
@@ -2528,10 +2528,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleSnow_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSnow_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleSnow_ParticleSnow);
 
-extern se::Object* __jsb_cocos2dx_ParticleRain_proto;
-extern se::Class* __jsb_cocos2dx_ParticleRain_class;
+extern se::Object* __jsb_cocos2d_ParticleRain_proto;
+extern se::Class* __jsb_cocos2d_ParticleRain_class;
 
-bool js_register_cocos2dx_ParticleRain(se::Object* obj);
+bool js_register_cocos2d_ParticleRain(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParticleRain_init);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleRain_initWithTotalParticles);
@@ -2539,10 +2539,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParticleRain_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleRain_createWithTotalParticles);
 SE_DECLARE_FUNC(js_cocos2dx_ParticleRain_ParticleRain);
 
-extern se::Object* __jsb_cocos2dx_ProgressTimer_proto;
-extern se::Class* __jsb_cocos2dx_ProgressTimer_class;
+extern se::Object* __jsb_cocos2d_ProgressTimer_proto;
+extern se::Class* __jsb_cocos2d_ProgressTimer_class;
 
-bool js_register_cocos2dx_ProgressTimer(se::Object* obj);
+bool js_register_cocos2d_ProgressTimer(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTimer_initWithSprite);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTimer_isReverseDirection);
@@ -2560,10 +2560,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ProgressTimer_setType);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTimer_create);
 SE_DECLARE_FUNC(js_cocos2dx_ProgressTimer_ProgressTimer);
 
-extern se::Object* __jsb_cocos2dx_ProtectedNode_proto;
-extern se::Class* __jsb_cocos2dx_ProtectedNode_class;
+extern se::Object* __jsb_cocos2d_ProtectedNode_proto;
+extern se::Class* __jsb_cocos2d_ProtectedNode_class;
 
-bool js_register_cocos2dx_ProtectedNode(se::Object* obj);
+bool js_register_cocos2d_ProtectedNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ProtectedNode_addProtectedChild);
 SE_DECLARE_FUNC(js_cocos2dx_ProtectedNode_disableCascadeColor);
@@ -2578,10 +2578,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ProtectedNode_removeAllProtectedChildren);
 SE_DECLARE_FUNC(js_cocos2dx_ProtectedNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_ProtectedNode_ProtectedNode);
 
-extern se::Object* __jsb_cocos2dx_Sprite_proto;
-extern se::Class* __jsb_cocos2dx_Sprite_class;
+extern se::Object* __jsb_cocos2d_Sprite_proto;
+extern se::Class* __jsb_cocos2d_Sprite_class;
 
-bool js_register_cocos2dx_Sprite(se::Object* obj);
+bool js_register_cocos2d_Sprite(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Sprite_setSpriteFrame);
 SE_DECLARE_FUNC(js_cocos2dx_Sprite_setTexture);
@@ -2624,10 +2624,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Sprite_isFlippedY);
 SE_DECLARE_FUNC(js_cocos2dx_Sprite_setVertexRect);
 SE_DECLARE_FUNC(js_cocos2dx_Sprite_Sprite);
 
-extern se::Object* __jsb_cocos2dx_RenderTexture_proto;
-extern se::Class* __jsb_cocos2dx_RenderTexture_class;
+extern se::Object* __jsb_cocos2d_RenderTexture_proto;
+extern se::Class* __jsb_cocos2d_RenderTexture_class;
 
-bool js_register_cocos2dx_RenderTexture(se::Object* obj);
+bool js_register_cocos2d_RenderTexture(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_RenderTexture_setVirtualViewport);
 SE_DECLARE_FUNC(js_cocos2dx_RenderTexture_clearStencil);
@@ -2654,17 +2654,17 @@ SE_DECLARE_FUNC(js_cocos2dx_RenderTexture_initWithWidthAndHeight);
 SE_DECLARE_FUNC(js_cocos2dx_RenderTexture_create);
 SE_DECLARE_FUNC(js_cocos2dx_RenderTexture_RenderTexture);
 
-extern se::Object* __jsb_cocos2dx_TransitionEaseScene_proto;
-extern se::Class* __jsb_cocos2dx_TransitionEaseScene_class;
+extern se::Object* __jsb_cocos2d_TransitionEaseScene_proto;
+extern se::Class* __jsb_cocos2d_TransitionEaseScene_class;
 
-bool js_register_cocos2dx_TransitionEaseScene(se::Object* obj);
+bool js_register_cocos2d_TransitionEaseScene(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionEaseScene_easeActionWithAction);
 
-extern se::Object* __jsb_cocos2dx_TransitionScene_proto;
-extern se::Class* __jsb_cocos2dx_TransitionScene_class;
+extern se::Object* __jsb_cocos2d_TransitionScene_proto;
+extern se::Class* __jsb_cocos2d_TransitionScene_class;
 
-bool js_register_cocos2dx_TransitionScene(se::Object* obj);
+bool js_register_cocos2d_TransitionScene(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionScene_getInScene);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionScene_finish);
@@ -2674,304 +2674,304 @@ SE_DECLARE_FUNC(js_cocos2dx_TransitionScene_hideOutShowIn);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionScene_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionScene_TransitionScene);
 
-extern se::Object* __jsb_cocos2dx_TransitionSceneOriented_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSceneOriented_class;
+extern se::Object* __jsb_cocos2d_TransitionSceneOriented_proto;
+extern se::Class* __jsb_cocos2d_TransitionSceneOriented_class;
 
-bool js_register_cocos2dx_TransitionSceneOriented(se::Object* obj);
+bool js_register_cocos2d_TransitionSceneOriented(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSceneOriented_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSceneOriented_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSceneOriented_TransitionSceneOriented);
 
-extern se::Object* __jsb_cocos2dx_TransitionRotoZoom_proto;
-extern se::Class* __jsb_cocos2dx_TransitionRotoZoom_class;
+extern se::Object* __jsb_cocos2d_TransitionRotoZoom_proto;
+extern se::Class* __jsb_cocos2d_TransitionRotoZoom_class;
 
-bool js_register_cocos2dx_TransitionRotoZoom(se::Object* obj);
+bool js_register_cocos2d_TransitionRotoZoom(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionRotoZoom_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionRotoZoom_TransitionRotoZoom);
 
-extern se::Object* __jsb_cocos2dx_TransitionJumpZoom_proto;
-extern se::Class* __jsb_cocos2dx_TransitionJumpZoom_class;
+extern se::Object* __jsb_cocos2d_TransitionJumpZoom_proto;
+extern se::Class* __jsb_cocos2d_TransitionJumpZoom_class;
 
-bool js_register_cocos2dx_TransitionJumpZoom(se::Object* obj);
+bool js_register_cocos2d_TransitionJumpZoom(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionJumpZoom_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionJumpZoom_TransitionJumpZoom);
 
-extern se::Object* __jsb_cocos2dx_TransitionMoveInL_proto;
-extern se::Class* __jsb_cocos2dx_TransitionMoveInL_class;
+extern se::Object* __jsb_cocos2d_TransitionMoveInL_proto;
+extern se::Class* __jsb_cocos2d_TransitionMoveInL_class;
 
-bool js_register_cocos2dx_TransitionMoveInL(se::Object* obj);
+bool js_register_cocos2d_TransitionMoveInL(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInL_action);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInL_easeActionWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInL_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInL_TransitionMoveInL);
 
-extern se::Object* __jsb_cocos2dx_TransitionMoveInR_proto;
-extern se::Class* __jsb_cocos2dx_TransitionMoveInR_class;
+extern se::Object* __jsb_cocos2d_TransitionMoveInR_proto;
+extern se::Class* __jsb_cocos2d_TransitionMoveInR_class;
 
-bool js_register_cocos2dx_TransitionMoveInR(se::Object* obj);
+bool js_register_cocos2d_TransitionMoveInR(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInR_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInR_TransitionMoveInR);
 
-extern se::Object* __jsb_cocos2dx_TransitionMoveInT_proto;
-extern se::Class* __jsb_cocos2dx_TransitionMoveInT_class;
+extern se::Object* __jsb_cocos2d_TransitionMoveInT_proto;
+extern se::Class* __jsb_cocos2d_TransitionMoveInT_class;
 
-bool js_register_cocos2dx_TransitionMoveInT(se::Object* obj);
+bool js_register_cocos2d_TransitionMoveInT(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInT_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInT_TransitionMoveInT);
 
-extern se::Object* __jsb_cocos2dx_TransitionMoveInB_proto;
-extern se::Class* __jsb_cocos2dx_TransitionMoveInB_class;
+extern se::Object* __jsb_cocos2d_TransitionMoveInB_proto;
+extern se::Class* __jsb_cocos2d_TransitionMoveInB_class;
 
-bool js_register_cocos2dx_TransitionMoveInB(se::Object* obj);
+bool js_register_cocos2d_TransitionMoveInB(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInB_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionMoveInB_TransitionMoveInB);
 
-extern se::Object* __jsb_cocos2dx_TransitionSlideInL_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSlideInL_class;
+extern se::Object* __jsb_cocos2d_TransitionSlideInL_proto;
+extern se::Class* __jsb_cocos2d_TransitionSlideInL_class;
 
-bool js_register_cocos2dx_TransitionSlideInL(se::Object* obj);
+bool js_register_cocos2d_TransitionSlideInL(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInL_action);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInL_easeActionWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInL_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInL_TransitionSlideInL);
 
-extern se::Object* __jsb_cocos2dx_TransitionSlideInR_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSlideInR_class;
+extern se::Object* __jsb_cocos2d_TransitionSlideInR_proto;
+extern se::Class* __jsb_cocos2d_TransitionSlideInR_class;
 
-bool js_register_cocos2dx_TransitionSlideInR(se::Object* obj);
+bool js_register_cocos2d_TransitionSlideInR(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInR_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInR_TransitionSlideInR);
 
-extern se::Object* __jsb_cocos2dx_TransitionSlideInB_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSlideInB_class;
+extern se::Object* __jsb_cocos2d_TransitionSlideInB_proto;
+extern se::Class* __jsb_cocos2d_TransitionSlideInB_class;
 
-bool js_register_cocos2dx_TransitionSlideInB(se::Object* obj);
+bool js_register_cocos2d_TransitionSlideInB(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInB_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInB_TransitionSlideInB);
 
-extern se::Object* __jsb_cocos2dx_TransitionSlideInT_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSlideInT_class;
+extern se::Object* __jsb_cocos2d_TransitionSlideInT_proto;
+extern se::Class* __jsb_cocos2d_TransitionSlideInT_class;
 
-bool js_register_cocos2dx_TransitionSlideInT(se::Object* obj);
+bool js_register_cocos2d_TransitionSlideInT(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInT_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSlideInT_TransitionSlideInT);
 
-extern se::Object* __jsb_cocos2dx_TransitionShrinkGrow_proto;
-extern se::Class* __jsb_cocos2dx_TransitionShrinkGrow_class;
+extern se::Object* __jsb_cocos2d_TransitionShrinkGrow_proto;
+extern se::Class* __jsb_cocos2d_TransitionShrinkGrow_class;
 
-bool js_register_cocos2dx_TransitionShrinkGrow(se::Object* obj);
+bool js_register_cocos2d_TransitionShrinkGrow(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionShrinkGrow_easeActionWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionShrinkGrow_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionShrinkGrow_TransitionShrinkGrow);
 
-extern se::Object* __jsb_cocos2dx_TransitionFlipX_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFlipX_class;
+extern se::Object* __jsb_cocos2d_TransitionFlipX_proto;
+extern se::Class* __jsb_cocos2d_TransitionFlipX_class;
 
-bool js_register_cocos2dx_TransitionFlipX(se::Object* obj);
+bool js_register_cocos2d_TransitionFlipX(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFlipX_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFlipX_TransitionFlipX);
 
-extern se::Object* __jsb_cocos2dx_TransitionFlipY_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFlipY_class;
+extern se::Object* __jsb_cocos2d_TransitionFlipY_proto;
+extern se::Class* __jsb_cocos2d_TransitionFlipY_class;
 
-bool js_register_cocos2dx_TransitionFlipY(se::Object* obj);
+bool js_register_cocos2d_TransitionFlipY(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFlipY_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFlipY_TransitionFlipY);
 
-extern se::Object* __jsb_cocos2dx_TransitionFlipAngular_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFlipAngular_class;
+extern se::Object* __jsb_cocos2d_TransitionFlipAngular_proto;
+extern se::Class* __jsb_cocos2d_TransitionFlipAngular_class;
 
-bool js_register_cocos2dx_TransitionFlipAngular(se::Object* obj);
+bool js_register_cocos2d_TransitionFlipAngular(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFlipAngular_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFlipAngular_TransitionFlipAngular);
 
-extern se::Object* __jsb_cocos2dx_TransitionZoomFlipX_proto;
-extern se::Class* __jsb_cocos2dx_TransitionZoomFlipX_class;
+extern se::Object* __jsb_cocos2d_TransitionZoomFlipX_proto;
+extern se::Class* __jsb_cocos2d_TransitionZoomFlipX_class;
 
-bool js_register_cocos2dx_TransitionZoomFlipX(se::Object* obj);
+bool js_register_cocos2d_TransitionZoomFlipX(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionZoomFlipX_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionZoomFlipX_TransitionZoomFlipX);
 
-extern se::Object* __jsb_cocos2dx_TransitionZoomFlipY_proto;
-extern se::Class* __jsb_cocos2dx_TransitionZoomFlipY_class;
+extern se::Object* __jsb_cocos2d_TransitionZoomFlipY_proto;
+extern se::Class* __jsb_cocos2d_TransitionZoomFlipY_class;
 
-bool js_register_cocos2dx_TransitionZoomFlipY(se::Object* obj);
+bool js_register_cocos2d_TransitionZoomFlipY(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionZoomFlipY_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionZoomFlipY_TransitionZoomFlipY);
 
-extern se::Object* __jsb_cocos2dx_TransitionZoomFlipAngular_proto;
-extern se::Class* __jsb_cocos2dx_TransitionZoomFlipAngular_class;
+extern se::Object* __jsb_cocos2d_TransitionZoomFlipAngular_proto;
+extern se::Class* __jsb_cocos2d_TransitionZoomFlipAngular_class;
 
-bool js_register_cocos2dx_TransitionZoomFlipAngular(se::Object* obj);
+bool js_register_cocos2d_TransitionZoomFlipAngular(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionZoomFlipAngular_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionZoomFlipAngular_TransitionZoomFlipAngular);
 
-extern se::Object* __jsb_cocos2dx_TransitionFade_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFade_class;
+extern se::Object* __jsb_cocos2d_TransitionFade_proto;
+extern se::Class* __jsb_cocos2d_TransitionFade_class;
 
-bool js_register_cocos2dx_TransitionFade(se::Object* obj);
+bool js_register_cocos2d_TransitionFade(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFade_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFade_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFade_TransitionFade);
 
-extern se::Object* __jsb_cocos2dx_TransitionCrossFade_proto;
-extern se::Class* __jsb_cocos2dx_TransitionCrossFade_class;
+extern se::Object* __jsb_cocos2d_TransitionCrossFade_proto;
+extern se::Class* __jsb_cocos2d_TransitionCrossFade_class;
 
-bool js_register_cocos2dx_TransitionCrossFade(se::Object* obj);
+bool js_register_cocos2d_TransitionCrossFade(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionCrossFade_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionCrossFade_TransitionCrossFade);
 
-extern se::Object* __jsb_cocos2dx_TransitionTurnOffTiles_proto;
-extern se::Class* __jsb_cocos2dx_TransitionTurnOffTiles_class;
+extern se::Object* __jsb_cocos2d_TransitionTurnOffTiles_proto;
+extern se::Class* __jsb_cocos2d_TransitionTurnOffTiles_class;
 
-bool js_register_cocos2dx_TransitionTurnOffTiles(se::Object* obj);
+bool js_register_cocos2d_TransitionTurnOffTiles(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionTurnOffTiles_easeActionWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionTurnOffTiles_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionTurnOffTiles_TransitionTurnOffTiles);
 
-extern se::Object* __jsb_cocos2dx_TransitionSplitCols_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSplitCols_class;
+extern se::Object* __jsb_cocos2d_TransitionSplitCols_proto;
+extern se::Class* __jsb_cocos2d_TransitionSplitCols_class;
 
-bool js_register_cocos2dx_TransitionSplitCols(se::Object* obj);
+bool js_register_cocos2d_TransitionSplitCols(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSplitCols_action);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSplitCols_easeActionWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSplitCols_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSplitCols_TransitionSplitCols);
 
-extern se::Object* __jsb_cocos2dx_TransitionSplitRows_proto;
-extern se::Class* __jsb_cocos2dx_TransitionSplitRows_class;
+extern se::Object* __jsb_cocos2d_TransitionSplitRows_proto;
+extern se::Class* __jsb_cocos2d_TransitionSplitRows_class;
 
-bool js_register_cocos2dx_TransitionSplitRows(se::Object* obj);
+bool js_register_cocos2d_TransitionSplitRows(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSplitRows_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionSplitRows_TransitionSplitRows);
 
-extern se::Object* __jsb_cocos2dx_TransitionFadeTR_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFadeTR_class;
+extern se::Object* __jsb_cocos2d_TransitionFadeTR_proto;
+extern se::Class* __jsb_cocos2d_TransitionFadeTR_class;
 
-bool js_register_cocos2dx_TransitionFadeTR(se::Object* obj);
+bool js_register_cocos2d_TransitionFadeTR(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeTR_easeActionWithAction);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeTR_actionWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeTR_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeTR_TransitionFadeTR);
 
-extern se::Object* __jsb_cocos2dx_TransitionFadeBL_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFadeBL_class;
+extern se::Object* __jsb_cocos2d_TransitionFadeBL_proto;
+extern se::Class* __jsb_cocos2d_TransitionFadeBL_class;
 
-bool js_register_cocos2dx_TransitionFadeBL(se::Object* obj);
+bool js_register_cocos2d_TransitionFadeBL(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeBL_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeBL_TransitionFadeBL);
 
-extern se::Object* __jsb_cocos2dx_TransitionFadeUp_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFadeUp_class;
+extern se::Object* __jsb_cocos2d_TransitionFadeUp_proto;
+extern se::Class* __jsb_cocos2d_TransitionFadeUp_class;
 
-bool js_register_cocos2dx_TransitionFadeUp(se::Object* obj);
+bool js_register_cocos2d_TransitionFadeUp(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeUp_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeUp_TransitionFadeUp);
 
-extern se::Object* __jsb_cocos2dx_TransitionFadeDown_proto;
-extern se::Class* __jsb_cocos2dx_TransitionFadeDown_class;
+extern se::Object* __jsb_cocos2d_TransitionFadeDown_proto;
+extern se::Class* __jsb_cocos2d_TransitionFadeDown_class;
 
-bool js_register_cocos2dx_TransitionFadeDown(se::Object* obj);
+bool js_register_cocos2d_TransitionFadeDown(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeDown_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionFadeDown_TransitionFadeDown);
 
-extern se::Object* __jsb_cocos2dx_TransitionPageTurn_proto;
-extern se::Class* __jsb_cocos2dx_TransitionPageTurn_class;
+extern se::Object* __jsb_cocos2d_TransitionPageTurn_proto;
+extern se::Class* __jsb_cocos2d_TransitionPageTurn_class;
 
-bool js_register_cocos2dx_TransitionPageTurn(se::Object* obj);
+bool js_register_cocos2d_TransitionPageTurn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionPageTurn_actionWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionPageTurn_initWithDuration);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionPageTurn_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionPageTurn_TransitionPageTurn);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgress_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgress_class;
+extern se::Object* __jsb_cocos2d_TransitionProgress_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgress_class;
 
-bool js_register_cocos2dx_TransitionProgress(se::Object* obj);
+bool js_register_cocos2d_TransitionProgress(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgress_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgress_TransitionProgress);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgressRadialCCW_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgressRadialCCW_class;
+extern se::Object* __jsb_cocos2d_TransitionProgressRadialCCW_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgressRadialCCW_class;
 
-bool js_register_cocos2dx_TransitionProgressRadialCCW(se::Object* obj);
+bool js_register_cocos2d_TransitionProgressRadialCCW(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressRadialCCW_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressRadialCCW_TransitionProgressRadialCCW);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgressRadialCW_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgressRadialCW_class;
+extern se::Object* __jsb_cocos2d_TransitionProgressRadialCW_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgressRadialCW_class;
 
-bool js_register_cocos2dx_TransitionProgressRadialCW(se::Object* obj);
+bool js_register_cocos2d_TransitionProgressRadialCW(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressRadialCW_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressRadialCW_TransitionProgressRadialCW);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgressHorizontal_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgressHorizontal_class;
+extern se::Object* __jsb_cocos2d_TransitionProgressHorizontal_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgressHorizontal_class;
 
-bool js_register_cocos2dx_TransitionProgressHorizontal(se::Object* obj);
+bool js_register_cocos2d_TransitionProgressHorizontal(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressHorizontal_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressHorizontal_TransitionProgressHorizontal);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgressVertical_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgressVertical_class;
+extern se::Object* __jsb_cocos2d_TransitionProgressVertical_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgressVertical_class;
 
-bool js_register_cocos2dx_TransitionProgressVertical(se::Object* obj);
+bool js_register_cocos2d_TransitionProgressVertical(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressVertical_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressVertical_TransitionProgressVertical);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgressInOut_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgressInOut_class;
+extern se::Object* __jsb_cocos2d_TransitionProgressInOut_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgressInOut_class;
 
-bool js_register_cocos2dx_TransitionProgressInOut(se::Object* obj);
+bool js_register_cocos2d_TransitionProgressInOut(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressInOut_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressInOut_TransitionProgressInOut);
 
-extern se::Object* __jsb_cocos2dx_TransitionProgressOutIn_proto;
-extern se::Class* __jsb_cocos2dx_TransitionProgressOutIn_class;
+extern se::Object* __jsb_cocos2d_TransitionProgressOutIn_proto;
+extern se::Class* __jsb_cocos2d_TransitionProgressOutIn_class;
 
-bool js_register_cocos2dx_TransitionProgressOutIn(se::Object* obj);
+bool js_register_cocos2d_TransitionProgressOutIn(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressOutIn_create);
 SE_DECLARE_FUNC(js_cocos2dx_TransitionProgressOutIn_TransitionProgressOutIn);
 
-extern se::Object* __jsb_cocos2dx_Camera_proto;
-extern se::Class* __jsb_cocos2dx_Camera_class;
+extern se::Object* __jsb_cocos2d_Camera_proto;
+extern se::Class* __jsb_cocos2d_Camera_class;
 
-bool js_register_cocos2dx_Camera(se::Object* obj);
+bool js_register_cocos2d_Camera(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Camera_restore);
 SE_DECLARE_FUNC(js_cocos2dx_Camera_getDepth);
@@ -3015,10 +3015,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Camera_setDefaultViewport);
 SE_DECLARE_FUNC(js_cocos2dx_Camera_getDefaultCamera);
 SE_DECLARE_FUNC(js_cocos2dx_Camera_Camera);
 
-extern se::Object* __jsb_cocos2dx_CameraBackgroundBrush_proto;
-extern se::Class* __jsb_cocos2dx_CameraBackgroundBrush_class;
+extern se::Object* __jsb_cocos2d_CameraBackgroundBrush_proto;
+extern se::Class* __jsb_cocos2d_CameraBackgroundBrush_class;
 
-bool js_register_cocos2dx_CameraBackgroundBrush(se::Object* obj);
+bool js_register_cocos2d_CameraBackgroundBrush(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundBrush_getBrushType);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundBrush_drawBackground);
@@ -3030,28 +3030,28 @@ SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundBrush_createNoneBrush);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundBrush_createDepthBrush);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundBrush_CameraBackgroundBrush);
 
-extern se::Object* __jsb_cocos2dx_CameraBackgroundDepthBrush_proto;
-extern se::Class* __jsb_cocos2dx_CameraBackgroundDepthBrush_class;
+extern se::Object* __jsb_cocos2d_CameraBackgroundDepthBrush_proto;
+extern se::Class* __jsb_cocos2d_CameraBackgroundDepthBrush_class;
 
-bool js_register_cocos2dx_CameraBackgroundDepthBrush(se::Object* obj);
+bool js_register_cocos2d_CameraBackgroundDepthBrush(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundDepthBrush_setDepth);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundDepthBrush_create);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundDepthBrush_CameraBackgroundDepthBrush);
 
-extern se::Object* __jsb_cocos2dx_CameraBackgroundColorBrush_proto;
-extern se::Class* __jsb_cocos2dx_CameraBackgroundColorBrush_class;
+extern se::Object* __jsb_cocos2d_CameraBackgroundColorBrush_proto;
+extern se::Class* __jsb_cocos2d_CameraBackgroundColorBrush_class;
 
-bool js_register_cocos2dx_CameraBackgroundColorBrush(se::Object* obj);
+bool js_register_cocos2d_CameraBackgroundColorBrush(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundColorBrush_setColor);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundColorBrush_create);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundColorBrush_CameraBackgroundColorBrush);
 
-extern se::Object* __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_proto;
-extern se::Class* __jsb_cocos2dx_CameraBackgroundSkyBoxBrush_class;
+extern se::Object* __jsb_cocos2d_CameraBackgroundSkyBoxBrush_proto;
+extern se::Class* __jsb_cocos2d_CameraBackgroundSkyBoxBrush_class;
 
-bool js_register_cocos2dx_CameraBackgroundSkyBoxBrush(se::Object* obj);
+bool js_register_cocos2d_CameraBackgroundSkyBoxBrush(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_setTextureValid);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_setTexture);
@@ -3060,10 +3060,10 @@ SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_isActived);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_create);
 SE_DECLARE_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_CameraBackgroundSkyBoxBrush);
 
-extern se::Object* __jsb_cocos2dx_GridBase_proto;
-extern se::Class* __jsb_cocos2dx_GridBase_class;
+extern se::Object* __jsb_cocos2d_GridBase_proto;
+extern se::Class* __jsb_cocos2d_GridBase_class;
 
-bool js_register_cocos2dx_GridBase(se::Object* obj);
+bool js_register_cocos2d_GridBase(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_GridBase_setGridSize);
 SE_DECLARE_FUNC(js_cocos2dx_GridBase_setGridRect);
@@ -3088,28 +3088,28 @@ SE_DECLARE_FUNC(js_cocos2dx_GridBase_isActive);
 SE_DECLARE_FUNC(js_cocos2dx_GridBase_reuse);
 SE_DECLARE_FUNC(js_cocos2dx_GridBase_create);
 
-extern se::Object* __jsb_cocos2dx_Grid3D_proto;
-extern se::Class* __jsb_cocos2dx_Grid3D_class;
+extern se::Object* __jsb_cocos2d_Grid3D_proto;
+extern se::Class* __jsb_cocos2d_Grid3D_class;
 
-bool js_register_cocos2dx_Grid3D(se::Object* obj);
+bool js_register_cocos2d_Grid3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Grid3D_getNeedDepthTestForBlit);
 SE_DECLARE_FUNC(js_cocos2dx_Grid3D_setNeedDepthTestForBlit);
 SE_DECLARE_FUNC(js_cocos2dx_Grid3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_Grid3D_Grid3D);
 
-extern se::Object* __jsb_cocos2dx_TiledGrid3D_proto;
-extern se::Class* __jsb_cocos2dx_TiledGrid3D_class;
+extern se::Object* __jsb_cocos2d_TiledGrid3D_proto;
+extern se::Class* __jsb_cocos2d_TiledGrid3D_class;
 
-bool js_register_cocos2dx_TiledGrid3D(se::Object* obj);
+bool js_register_cocos2d_TiledGrid3D(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TiledGrid3D_create);
 SE_DECLARE_FUNC(js_cocos2dx_TiledGrid3D_TiledGrid3D);
 
-extern se::Object* __jsb_cocos2dx_BaseLight_proto;
-extern se::Class* __jsb_cocos2dx_BaseLight_class;
+extern se::Object* __jsb_cocos2d_BaseLight_proto;
+extern se::Class* __jsb_cocos2d_BaseLight_class;
 
-bool js_register_cocos2dx_BaseLight(se::Object* obj);
+bool js_register_cocos2d_BaseLight(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_BaseLight_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_BaseLight_getIntensity);
@@ -3119,10 +3119,10 @@ SE_DECLARE_FUNC(js_cocos2dx_BaseLight_setLightFlag);
 SE_DECLARE_FUNC(js_cocos2dx_BaseLight_setIntensity);
 SE_DECLARE_FUNC(js_cocos2dx_BaseLight_getLightFlag);
 
-extern se::Object* __jsb_cocos2dx_DirectionLight_proto;
-extern se::Class* __jsb_cocos2dx_DirectionLight_class;
+extern se::Object* __jsb_cocos2d_DirectionLight_proto;
+extern se::Class* __jsb_cocos2d_DirectionLight_class;
 
-bool js_register_cocos2dx_DirectionLight(se::Object* obj);
+bool js_register_cocos2d_DirectionLight(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_DirectionLight_getDirection);
 SE_DECLARE_FUNC(js_cocos2dx_DirectionLight_getDirectionInWorld);
@@ -3130,20 +3130,20 @@ SE_DECLARE_FUNC(js_cocos2dx_DirectionLight_setDirection);
 SE_DECLARE_FUNC(js_cocos2dx_DirectionLight_create);
 SE_DECLARE_FUNC(js_cocos2dx_DirectionLight_DirectionLight);
 
-extern se::Object* __jsb_cocos2dx_PointLight_proto;
-extern se::Class* __jsb_cocos2dx_PointLight_class;
+extern se::Object* __jsb_cocos2d_PointLight_proto;
+extern se::Class* __jsb_cocos2d_PointLight_class;
 
-bool js_register_cocos2dx_PointLight(se::Object* obj);
+bool js_register_cocos2d_PointLight(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_PointLight_getRange);
 SE_DECLARE_FUNC(js_cocos2dx_PointLight_setRange);
 SE_DECLARE_FUNC(js_cocos2dx_PointLight_create);
 SE_DECLARE_FUNC(js_cocos2dx_PointLight_PointLight);
 
-extern se::Object* __jsb_cocos2dx_SpotLight_proto;
-extern se::Class* __jsb_cocos2dx_SpotLight_class;
+extern se::Object* __jsb_cocos2d_SpotLight_proto;
+extern se::Class* __jsb_cocos2d_SpotLight_class;
 
-bool js_register_cocos2dx_SpotLight(se::Object* obj);
+bool js_register_cocos2d_SpotLight(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SpotLight_getRange);
 SE_DECLARE_FUNC(js_cocos2dx_SpotLight_setDirection);
@@ -3159,18 +3159,18 @@ SE_DECLARE_FUNC(js_cocos2dx_SpotLight_setRange);
 SE_DECLARE_FUNC(js_cocos2dx_SpotLight_create);
 SE_DECLARE_FUNC(js_cocos2dx_SpotLight_SpotLight);
 
-extern se::Object* __jsb_cocos2dx_AmbientLight_proto;
-extern se::Class* __jsb_cocos2dx_AmbientLight_class;
+extern se::Object* __jsb_cocos2d_AmbientLight_proto;
+extern se::Class* __jsb_cocos2d_AmbientLight_class;
 
-bool js_register_cocos2dx_AmbientLight(se::Object* obj);
+bool js_register_cocos2d_AmbientLight(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_AmbientLight_create);
 SE_DECLARE_FUNC(js_cocos2dx_AmbientLight_AmbientLight);
 
-extern se::Object* __jsb_cocos2dx_GLProgram_proto;
-extern se::Class* __jsb_cocos2dx_GLProgram_class;
+extern se::Object* __jsb_cocos2d_GLProgram_proto;
+extern se::Class* __jsb_cocos2d_GLProgram_class;
 
-bool js_register_cocos2dx_GLProgram(se::Object* obj);
+bool js_register_cocos2d_GLProgram(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_GLProgram_getFragmentShaderLog);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgram_bindAttribLocation);
@@ -3200,10 +3200,10 @@ SE_DECLARE_FUNC(js_cocos2dx_GLProgram_createWithByteArrays);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgram_createWithFilenames);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgram_GLProgram);
 
-extern se::Object* __jsb_cocos2dx_GLProgramCache_proto;
-extern se::Class* __jsb_cocos2dx_GLProgramCache_class;
+extern se::Object* __jsb_cocos2d_GLProgramCache_proto;
+extern se::Class* __jsb_cocos2d_GLProgramCache_class;
 
-bool js_register_cocos2dx_GLProgramCache(se::Object* obj);
+bool js_register_cocos2d_GLProgramCache(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramCache_loadDefaultGLPrograms);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramCache_reloadDefaultGLProgramsRelativeToLights);
@@ -3214,10 +3214,10 @@ SE_DECLARE_FUNC(js_cocos2dx_GLProgramCache_destroyInstance);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramCache_getInstance);
 SE_DECLARE_FUNC(js_cocos2dx_GLProgramCache_GLProgramCache);
 
-extern se::Object* __jsb_cocos2dx_RenderState_proto;
-extern se::Class* __jsb_cocos2dx_RenderState_class;
+extern se::Object* __jsb_cocos2d_RenderState_proto;
+extern se::Class* __jsb_cocos2d_RenderState_class;
 
-bool js_register_cocos2dx_RenderState(se::Object* obj);
+bool js_register_cocos2d_RenderState(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_RenderState_setTexture);
 SE_DECLARE_FUNC(js_cocos2dx_RenderState_getTopmost);
@@ -3228,10 +3228,10 @@ SE_DECLARE_FUNC(js_cocos2dx_RenderState_setParent);
 SE_DECLARE_FUNC(js_cocos2dx_RenderState_initialize);
 SE_DECLARE_FUNC(js_cocos2dx_RenderState_finalize);
 
-extern se::Object* __jsb_cocos2dx_Pass_proto;
-extern se::Class* __jsb_cocos2dx_Pass_class;
+extern se::Object* __jsb_cocos2d_Pass_proto;
+extern se::Class* __jsb_cocos2d_Pass_class;
 
-bool js_register_cocos2dx_Pass(se::Object* obj);
+bool js_register_cocos2d_Pass(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Pass_unbind);
 SE_DECLARE_FUNC(js_cocos2dx_Pass_bind);
@@ -3242,10 +3242,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Pass_setVertexAttribBinding);
 SE_DECLARE_FUNC(js_cocos2dx_Pass_create);
 SE_DECLARE_FUNC(js_cocos2dx_Pass_createWithGLProgramState);
 
-extern se::Object* __jsb_cocos2dx_Technique_proto;
-extern se::Class* __jsb_cocos2dx_Technique_class;
+extern se::Object* __jsb_cocos2d_Technique_proto;
+extern se::Class* __jsb_cocos2d_Technique_class;
 
-bool js_register_cocos2dx_Technique(se::Object* obj);
+bool js_register_cocos2d_Technique(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Technique_getPassCount);
 SE_DECLARE_FUNC(js_cocos2dx_Technique_clone);
@@ -3256,10 +3256,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Technique_getPassByIndex);
 SE_DECLARE_FUNC(js_cocos2dx_Technique_create);
 SE_DECLARE_FUNC(js_cocos2dx_Technique_createWithGLProgramState);
 
-extern se::Object* __jsb_cocos2dx_Material_proto;
-extern se::Class* __jsb_cocos2dx_Material_class;
+extern se::Object* __jsb_cocos2d_Material_proto;
+extern se::Class* __jsb_cocos2d_Material_class;
 
-bool js_register_cocos2dx_Material(se::Object* obj);
+bool js_register_cocos2d_Material(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Material_clone);
 SE_DECLARE_FUNC(js_cocos2dx_Material_getTechniqueCount);
@@ -3275,10 +3275,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Material_createWithFilename);
 SE_DECLARE_FUNC(js_cocos2dx_Material_createWithGLStateProgram);
 SE_DECLARE_FUNC(js_cocos2dx_Material_createWithProperties);
 
-extern se::Object* __jsb_cocos2dx_TextureCache_proto;
-extern se::Class* __jsb_cocos2dx_TextureCache_class;
+extern se::Object* __jsb_cocos2d_TextureCache_proto;
+extern se::Class* __jsb_cocos2d_TextureCache_class;
 
-bool js_register_cocos2dx_TextureCache(se::Object* obj);
+bool js_register_cocos2d_TextureCache(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TextureCache_reloadTexture);
 SE_DECLARE_FUNC(js_cocos2dx_TextureCache_unbindAllImageAsync);
@@ -3299,10 +3299,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TextureCache_setETC1AlphaFileSuffix);
 SE_DECLARE_FUNC(js_cocos2dx_TextureCache_getETC1AlphaFileSuffix);
 SE_DECLARE_FUNC(js_cocos2dx_TextureCache_TextureCache);
 
-extern se::Object* __jsb_cocos2dx_Device_proto;
-extern se::Class* __jsb_cocos2dx_Device_class;
+extern se::Object* __jsb_cocos2d_Device_proto;
+extern se::Class* __jsb_cocos2d_Device_class;
 
-bool js_register_cocos2dx_Device(se::Object* obj);
+bool js_register_cocos2d_Device(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Device_setAccelerometerEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_Device_setAccelerometerInterval);
@@ -3310,17 +3310,17 @@ SE_DECLARE_FUNC(js_cocos2dx_Device_setKeepScreenOn);
 SE_DECLARE_FUNC(js_cocos2dx_Device_vibrate);
 SE_DECLARE_FUNC(js_cocos2dx_Device_getDPI);
 
-extern se::Object* __jsb_cocos2dx_SAXParser_proto;
-extern se::Class* __jsb_cocos2dx_SAXParser_class;
+extern se::Object* __jsb_cocos2d_SAXParser_proto;
+extern se::Class* __jsb_cocos2d_SAXParser_class;
 
-bool js_register_cocos2dx_SAXParser(se::Object* obj);
+bool js_register_cocos2d_SAXParser(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SAXParser_init);
 
-extern se::Object* __jsb_cocos2dx_Application_proto;
-extern se::Class* __jsb_cocos2dx_Application_class;
+extern se::Object* __jsb_cocos2d_Application_proto;
+extern se::Class* __jsb_cocos2d_Application_class;
 
-bool js_register_cocos2dx_Application(se::Object* obj);
+bool js_register_cocos2d_Application(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Application_getTargetPlatform);
 SE_DECLARE_FUNC(js_cocos2dx_Application_getCurrentLanguage);
@@ -3328,10 +3328,10 @@ SE_DECLARE_FUNC(js_cocos2dx_Application_openURL);
 SE_DECLARE_FUNC(js_cocos2dx_Application_getVersion);
 SE_DECLARE_FUNC(js_cocos2dx_Application_getInstance);
 
-extern se::Object* __jsb_cocos2dx_AnimationCache_proto;
-extern se::Class* __jsb_cocos2dx_AnimationCache_class;
+extern se::Object* __jsb_cocos2d_AnimationCache_proto;
+extern se::Class* __jsb_cocos2d_AnimationCache_class;
 
-bool js_register_cocos2dx_AnimationCache(se::Object* obj);
+bool js_register_cocos2d_AnimationCache(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_AnimationCache_getAnimation);
 SE_DECLARE_FUNC(js_cocos2dx_AnimationCache_addAnimation);
@@ -3343,10 +3343,10 @@ SE_DECLARE_FUNC(js_cocos2dx_AnimationCache_destroyInstance);
 SE_DECLARE_FUNC(js_cocos2dx_AnimationCache_getInstance);
 SE_DECLARE_FUNC(js_cocos2dx_AnimationCache_AnimationCache);
 
-extern se::Object* __jsb_cocos2dx_SpriteBatchNode_proto;
-extern se::Class* __jsb_cocos2dx_SpriteBatchNode_class;
+extern se::Object* __jsb_cocos2d_SpriteBatchNode_proto;
+extern se::Class* __jsb_cocos2d_SpriteBatchNode_class;
 
-bool js_register_cocos2dx_SpriteBatchNode(se::Object* obj);
+bool js_register_cocos2d_SpriteBatchNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SpriteBatchNode_appendChild);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteBatchNode_reorderBatch);
@@ -3371,10 +3371,10 @@ SE_DECLARE_FUNC(js_cocos2dx_SpriteBatchNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteBatchNode_createWithTexture);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteBatchNode_SpriteBatchNode);
 
-extern se::Object* __jsb_cocos2dx_SpriteFrameCache_proto;
-extern se::Class* __jsb_cocos2dx_SpriteFrameCache_class;
+extern se::Object* __jsb_cocos2d_SpriteFrameCache_proto;
+extern se::Class* __jsb_cocos2d_SpriteFrameCache_class;
 
-bool js_register_cocos2dx_SpriteFrameCache(se::Object* obj);
+bool js_register_cocos2d_SpriteFrameCache(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrameCache_reloadTexture);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrameCache_addSpriteFramesWithFileContent);
@@ -3392,10 +3392,10 @@ SE_DECLARE_FUNC(js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromTexture);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrameCache_destroyInstance);
 SE_DECLARE_FUNC(js_cocos2dx_SpriteFrameCache_getInstance);
 
-extern se::Object* __jsb_cocos2dx_TextFieldTTF_proto;
-extern se::Class* __jsb_cocos2dx_TextFieldTTF_class;
+extern se::Object* __jsb_cocos2d_TextFieldTTF_proto;
+extern se::Class* __jsb_cocos2d_TextFieldTTF_class;
 
-bool js_register_cocos2dx_TextFieldTTF(se::Object* obj);
+bool js_register_cocos2d_TextFieldTTF(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TextFieldTTF_getCharCount);
 SE_DECLARE_FUNC(js_cocos2dx_TextFieldTTF_setCursorChar);
@@ -3417,10 +3417,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TextFieldTTF_attachWithIME);
 SE_DECLARE_FUNC(js_cocos2dx_TextFieldTTF_textFieldWithPlaceHolder);
 SE_DECLARE_FUNC(js_cocos2dx_TextFieldTTF_TextFieldTTF);
 
-extern se::Object* __jsb_cocos2dx_ParallaxNode_proto;
-extern se::Class* __jsb_cocos2dx_ParallaxNode_class;
+extern se::Object* __jsb_cocos2d_ParallaxNode_proto;
+extern se::Class* __jsb_cocos2d_ParallaxNode_class;
 
-bool js_register_cocos2dx_ParallaxNode(se::Object* obj);
+bool js_register_cocos2d_ParallaxNode(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_ParallaxNode_getParallaxArray);
 SE_DECLARE_FUNC(js_cocos2dx_ParallaxNode_addChild);
@@ -3429,10 +3429,10 @@ SE_DECLARE_FUNC(js_cocos2dx_ParallaxNode_setParallaxArray);
 SE_DECLARE_FUNC(js_cocos2dx_ParallaxNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_ParallaxNode_ParallaxNode);
 
-extern se::Object* __jsb_cocos2dx_TMXObjectGroup_proto;
-extern se::Class* __jsb_cocos2dx_TMXObjectGroup_class;
+extern se::Object* __jsb_cocos2d_TMXObjectGroup_proto;
+extern se::Class* __jsb_cocos2d_TMXObjectGroup_class;
 
-bool js_register_cocos2dx_TMXObjectGroup(se::Object* obj);
+bool js_register_cocos2d_TMXObjectGroup(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TMXObjectGroup_setPositionOffset);
 SE_DECLARE_FUNC(js_cocos2dx_TMXObjectGroup_getProperty);
@@ -3446,27 +3446,27 @@ SE_DECLARE_FUNC(js_cocos2dx_TMXObjectGroup_setProperties);
 SE_DECLARE_FUNC(js_cocos2dx_TMXObjectGroup_setObjects);
 SE_DECLARE_FUNC(js_cocos2dx_TMXObjectGroup_TMXObjectGroup);
 
-extern se::Object* __jsb_cocos2dx_TMXLayerInfo_proto;
-extern se::Class* __jsb_cocos2dx_TMXLayerInfo_class;
+extern se::Object* __jsb_cocos2d_TMXLayerInfo_proto;
+extern se::Class* __jsb_cocos2d_TMXLayerInfo_class;
 
-bool js_register_cocos2dx_TMXLayerInfo(se::Object* obj);
+bool js_register_cocos2d_TMXLayerInfo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayerInfo_setProperties);
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayerInfo_getProperties);
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayerInfo_TMXLayerInfo);
 
-extern se::Object* __jsb_cocos2dx_TMXTilesetInfo_proto;
-extern se::Class* __jsb_cocos2dx_TMXTilesetInfo_class;
+extern se::Object* __jsb_cocos2d_TMXTilesetInfo_proto;
+extern se::Class* __jsb_cocos2d_TMXTilesetInfo_class;
 
-bool js_register_cocos2dx_TMXTilesetInfo(se::Object* obj);
+bool js_register_cocos2d_TMXTilesetInfo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TMXTilesetInfo_getRectForGID);
 SE_DECLARE_FUNC(js_cocos2dx_TMXTilesetInfo_TMXTilesetInfo);
 
-extern se::Object* __jsb_cocos2dx_TMXMapInfo_proto;
-extern se::Class* __jsb_cocos2dx_TMXMapInfo_class;
+extern se::Object* __jsb_cocos2d_TMXMapInfo_proto;
+extern se::Class* __jsb_cocos2d_TMXMapInfo_class;
 
-bool js_register_cocos2dx_TMXMapInfo(se::Object* obj);
+bool js_register_cocos2d_TMXMapInfo(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TMXMapInfo_setCurrentString);
 SE_DECLARE_FUNC(js_cocos2dx_TMXMapInfo_getHexSideLength);
@@ -3511,10 +3511,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TMXMapInfo_create);
 SE_DECLARE_FUNC(js_cocos2dx_TMXMapInfo_createWithXML);
 SE_DECLARE_FUNC(js_cocos2dx_TMXMapInfo_TMXMapInfo);
 
-extern se::Object* __jsb_cocos2dx_TMXLayer_proto;
-extern se::Class* __jsb_cocos2dx_TMXLayer_class;
+extern se::Object* __jsb_cocos2d_TMXLayer_proto;
+extern se::Class* __jsb_cocos2d_TMXLayer_class;
 
-bool js_register_cocos2dx_TMXLayer(se::Object* obj);
+bool js_register_cocos2d_TMXLayer(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayer_getTileGIDAt);
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayer_getPositionAt);
@@ -3541,10 +3541,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TMXLayer_getTileAt);
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayer_create);
 SE_DECLARE_FUNC(js_cocos2dx_TMXLayer_TMXLayer);
 
-extern se::Object* __jsb_cocos2dx_TMXTiledMap_proto;
-extern se::Class* __jsb_cocos2dx_TMXTiledMap_class;
+extern se::Object* __jsb_cocos2d_TMXTiledMap_proto;
+extern se::Class* __jsb_cocos2d_TMXTiledMap_class;
 
-bool js_register_cocos2dx_TMXTiledMap(se::Object* obj);
+bool js_register_cocos2d_TMXTiledMap(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TMXTiledMap_setObjectGroups);
 SE_DECLARE_FUNC(js_cocos2dx_TMXTiledMap_getProperty);
@@ -3568,10 +3568,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TMXTiledMap_create);
 SE_DECLARE_FUNC(js_cocos2dx_TMXTiledMap_createWithXML);
 SE_DECLARE_FUNC(js_cocos2dx_TMXTiledMap_TMXTiledMap);
 
-extern se::Object* __jsb_cocos2dx_TileMapAtlas_proto;
-extern se::Class* __jsb_cocos2dx_TileMapAtlas_class;
+extern se::Object* __jsb_cocos2d_TileMapAtlas_proto;
+extern se::Class* __jsb_cocos2d_TileMapAtlas_class;
 
-bool js_register_cocos2dx_TileMapAtlas(se::Object* obj);
+bool js_register_cocos2d_TileMapAtlas(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_TileMapAtlas_initWithTileFile);
 SE_DECLARE_FUNC(js_cocos2dx_TileMapAtlas_releaseMap);
@@ -3582,10 +3582,10 @@ SE_DECLARE_FUNC(js_cocos2dx_TileMapAtlas_setTGAInfo);
 SE_DECLARE_FUNC(js_cocos2dx_TileMapAtlas_create);
 SE_DECLARE_FUNC(js_cocos2dx_TileMapAtlas_TileMapAtlas);
 
-extern se::Object* __jsb_cocos2dx_SimpleAudioEngine_proto;
-extern se::Class* __jsb_cocos2dx_SimpleAudioEngine_class;
+extern se::Object* __jsb_CocosDenshion_SimpleAudioEngine_proto;
+extern se::Class* __jsb_CocosDenshion_SimpleAudioEngine_class;
 
-bool js_register_cocos2dx_SimpleAudioEngine(se::Object* obj);
+bool js_register_CocosDenshion_SimpleAudioEngine(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_SimpleAudioEngine_preloadBackgroundMusic);
 SE_DECLARE_FUNC(js_cocos2dx_SimpleAudioEngine_stopBackgroundMusic);

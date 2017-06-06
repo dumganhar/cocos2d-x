@@ -17,10 +17,10 @@ using namespace cocos2d;
 
 #define STANDALONE_TEST 0
 
-extern se::Object* __jsb_cocos2dx_Node_proto;
-extern se::Class* __jsb_cocos2dx__Node_class;
+extern se::Object* __jsb_cocos2d_Node_proto;
+extern se::Class* __jsb_cocos2d__Node_class;
 
-extern se::Object* __jsb_cocos2dx_Scheduler_proto;
+extern se::Object* __jsb_cocos2d_Scheduler_proto;
 
 se::Object* __jsb_Node_proto = nullptr;
 se::Class* __jsb_Node_class = nullptr;
@@ -1336,7 +1336,7 @@ bool jsb_register_Node_manual()
     cls->defineProperty("y", _SE(Node_get_y), _SE(Node_set_y));
     cls->defineFunction("ctor", _SE(Node_ctor));
 #else
-    auto cls = __jsb_cocos2dx_Node_proto;
+    auto cls = __jsb_cocos2d_Node_proto;
 #endif
 
     cls->defineFunction("onEnter", _SE(Node_onEnter));
@@ -1356,7 +1356,7 @@ bool jsb_register_Node_manual()
     cls->defineFunction("setAnchorPoint", _SE(Node_setAnchorPoint));
     cls->defineFunction("setPosition", _SE(Node_setPosition));
 
-    auto schedulerProto = __jsb_cocos2dx_Scheduler_proto;
+    auto schedulerProto = __jsb_cocos2d_Scheduler_proto;
     schedulerProto->defineFunction("scheduleUpdateForTarget", _SE(js_cocos2dx_Scheduler_scheduleUpdateForTarget));
     schedulerProto->defineFunction("unscheduleUpdate", _SE(js_cocos2dx_Scheduler_unscheduleUpdate));
     schedulerProto->defineFunction("schedule", _SE(js_cocos2dx_Scheduler_schedule));

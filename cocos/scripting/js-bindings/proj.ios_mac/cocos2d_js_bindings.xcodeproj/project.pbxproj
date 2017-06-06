@@ -61,6 +61,12 @@
 		1A48DF161EE00F470040CD39 /* jsb_classtype.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF121EE00F470040CD39 /* jsb_classtype.hpp */; };
 		1A48DF171EE00F470040CD39 /* jsb_classtype.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF121EE00F470040CD39 /* jsb_classtype.hpp */; };
 		1A48DF181EE00F470040CD39 /* jsb_classtype.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF121EE00F470040CD39 /* jsb_classtype.hpp */; };
+		1A48DF1D1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A48DF191EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp */; };
+		1A48DF1E1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A48DF191EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp */; };
+		1A48DF1F1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A48DF191EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp */; };
+		1A48DF201EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF1A1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp */; };
+		1A48DF211EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF1A1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp */; };
+		1A48DF221EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF1A1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp */; };
 		1A5543531EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
 		1A5543541EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
 		1A5543551EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
@@ -386,6 +392,8 @@
 		1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_menuitem.hpp; sourceTree = "<group>"; };
 		1A48DF111EE00F470040CD39 /* jsb_classtype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_classtype.cpp; sourceTree = "<group>"; };
 		1A48DF121EE00F470040CD39 /* jsb_classtype.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_classtype.hpp; sourceTree = "<group>"; };
+		1A48DF191EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_ui_auto.cpp; sourceTree = "<group>"; };
+		1A48DF1A1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_ui_auto.hpp; sourceTree = "<group>"; };
 		1A5410A418B785A10016A3AF /* libjscocos2d Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5410A518B785A10016A3AF /* libjscocos2d iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5543521EC155D200AEA55E /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
@@ -701,6 +709,8 @@
 		1A119E2E18BDF19200352BAA /* auto */ = {
 			isa = PBXGroup;
 			children = (
+				1A48DF191EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp */,
+				1A48DF1A1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp */,
 				1ADEB5D11ED422FE004ACBDE /* jsb_cocos2dx_auto.cpp */,
 				1ADEB5D21ED422FE004ACBDE /* jsb_cocos2dx_auto.hpp */,
 			);
@@ -1204,6 +1214,7 @@
 				1A9E999C1EB1F3D6001AEA19 /* Ref.hpp in Headers */,
 				1A55435F1EC15EA100AEA55E /* HelperMacros.h in Headers */,
 				1A5543771EC1606800AEA55E /* ScriptEngine.hpp in Headers */,
+				1A48DF221EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp in Headers */,
 				1A9E98EB1EB081B4001AEA19 /* config.hpp in Headers */,
 				1A5543551EC155D200AEA55E /* SeApi.h in Headers */,
 				1A9E99861EB19ED7001AEA19 /* SeApi.h in Headers */,
@@ -1343,6 +1354,7 @@
 				60379FC518174885E52C0400 /* Saturate.h in Headers */,
 				60379A9077133DCE72B1A476 /* ToString.h in Headers */,
 				1AC0050F1EBC480D004B3660 /* v8config.h in Headers */,
+				1A48DF201EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp in Headers */,
 				60379CF7BBE4E08A54469625 /* Alignment.h in Headers */,
 				60379E43E97463B574EE60C6 /* ChaosMode.h in Headers */,
 				6037975A8DD335413B90807F /* DebugOnly.h in Headers */,
@@ -1465,6 +1477,7 @@
 				1A9E999B1EB1F3D6001AEA19 /* Ref.hpp in Headers */,
 				1A55435E1EC15EA100AEA55E /* HelperMacros.h in Headers */,
 				1A5543761EC1606800AEA55E /* ScriptEngine.hpp in Headers */,
+				1A48DF211EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp in Headers */,
 				1A9E98EA1EB081B4001AEA19 /* config.hpp in Headers */,
 				1A5543541EC155D200AEA55E /* SeApi.h in Headers */,
 				1A9E99851EB19ED7001AEA19 /* SeApi.h in Headers */,
@@ -1605,6 +1618,7 @@
 				1A5543741EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				60379E9CD24D2AE4E98E139D /* jsb_global.cpp in Sources */,
 				1A97FE461EC9AD7000B1751D /* jsb_xmlhttprequest.cpp in Sources */,
+				1A48DF1F1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp in Sources */,
 				1A55436E1EC1606800AEA55E /* Class.cpp in Sources */,
 				60379CF2325A7BF4C9135CEE /* jsb_register_all.cpp in Sources */,
 			);
@@ -1627,6 +1641,7 @@
 				1A5543721EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				1A4711941EB9BA880027E3D9 /* Object.cpp in Sources */,
 				1A5543B81EC2B14E00AEA55E /* Class.cpp in Sources */,
+				1A48DF1D1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp in Sources */,
 				1A55436C1EC1606800AEA55E /* Class.cpp in Sources */,
 				1A164DBC1EDE5F8100A2F3DC /* jsb_node.cpp in Sources */,
 				1A1853A31EC052FE00EF28DC /* ObjectWrap.cpp in Sources */,
@@ -1671,6 +1686,7 @@
 				1A5543731EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				60379C55954457DCDA33E26C /* jsb_global.cpp in Sources */,
 				1A97FE451EC9AD7000B1751D /* jsb_xmlhttprequest.cpp in Sources */,
+				1A48DF1E1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp in Sources */,
 				1A55436D1EC1606800AEA55E /* Class.cpp in Sources */,
 				60379F94A885F4F798D38A1D /* jsb_register_all.cpp in Sources */,
 			);
