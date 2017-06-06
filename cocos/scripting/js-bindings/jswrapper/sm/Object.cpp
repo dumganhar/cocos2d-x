@@ -177,7 +177,11 @@ namespace se {
 
     bool Object::getProperty(const char* name, Value* data)
     {
-        JS::RootedObject object(__cx, _getJSObject());
+        JSObject* jsobj = _getJSObject();
+        if (jsobj == nullptr)
+            return false;
+
+        JS::RootedObject object(__cx, jsobj);
 
         bool found = false;
         bool ok = JS_HasProperty(__cx, object, name, &found);
@@ -691,7 +695,10 @@ namespace se {
         JSObject* ownerObj = _getJSObject();
         JSObject* targetObj = child->_getJSObject();
         if (ownerObj == nullptr || targetObj == nullptr)
+        {
+            printf("%s: try to detach on invalid object, owner: %p, target: %p\n", __FUNCTION__, ownerObj, targetObj);
             return false;
+        }
 
         JS::RootedValue valOwner(__cx, JS::ObjectValue(*ownerObj));
         JS::RootedValue valTarget(__cx, JS::ObjectValue(*targetObj));

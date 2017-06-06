@@ -296,48 +296,14 @@ namespace se {
 
     bool ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
     {
-//        printf("ScriptEngine::_onReceiveNodeEvent, node: %p, type: %d\n", node, (int) type);
+        assert(_nodeEventListener != nullptr);
+        return _nodeEventListener(node, type);
+    }
 
-        auto iter = __nativePtrToObjectMap.find(node);
-        if (iter  == __nativePtrToObjectMap.end())
-            return false;
-
-        clearException();
-        Object* target = iter->second;
-        const char* funcName = nullptr;
-        if (type == NodeEventType::ENTER)
-        {
-            funcName = "onEnter";
-        }
-        else if (type == NodeEventType::EXIT)
-        {
-            funcName = "onExit";
-        }
-        else if (type == NodeEventType::ENTER_TRANSITION_DID_FINISH)
-        {
-            funcName = "onEnterTransitionDidFinish";
-        }
-        else if (type == NodeEventType::EXIT_TRANSITION_DID_START)
-        {
-            funcName = "onExitTransitionDidStart";
-        }
-        else if (type == NodeEventType::CLEANUP)
-        {
-            funcName = "cleanup";
-        }
-        else
-        {
-            assert(false);
-        }
-
-        bool ret = false;
-        Value funcVal;
-        bool ok = target->getProperty(funcName, &funcVal);
-        if (ok && !funcVal.toObject()->_isNativeFunction())
-        {
-            ret = funcVal.toObject()->call(EmptyValueArray, target);
-        }
-        return ret;
+    bool ScriptEngine::_setNodeEventListener(NodeEventListener listener)
+    {
+        _nodeEventListener = listener;
+        return true;
     }
 
     void ScriptEngine::clearException()

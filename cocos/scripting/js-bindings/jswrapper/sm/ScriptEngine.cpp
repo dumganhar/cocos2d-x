@@ -6,12 +6,6 @@
 
 #ifdef SCRIPT_ENGINE_SM
 
-SE_DECLARE_FUNC(Node_onEnter);
-SE_DECLARE_FUNC(Node_onExit);
-SE_DECLARE_FUNC(Node_onEnterTransitionDidFinish);
-SE_DECLARE_FUNC(Node_onExitTransitionDidStart);
-SE_DECLARE_FUNC(Node_cleanup);
-
 namespace se {
 
     Class* __jsb_CCPrivateData_class = nullptr;
@@ -139,6 +133,7 @@ namespace se {
             , _globalObj(nullptr)
             , _oldCompartment(nullptr)
             , _isValid(false)
+            , _nodeEventListener(nullptr)
     {
     }
 
@@ -371,57 +366,14 @@ namespace se {
 
     bool ScriptEngine::_onReceiveNodeEvent(void* node, NodeEventType type)
     {
-//        printf("ScriptEngine::_onReceiveNodeEvent, node: %p, type: %d\n", node, (int) type);
+        assert(_nodeEventListener != nullptr);
+        return _nodeEventListener(node, type);
+    }
 
-        auto iter = __nativePtrToObjectMap.find(node);
-        if (iter  == __nativePtrToObjectMap.end())
-            return false;
-
-        clearException();
-
-        JS::RootedValue retval(_cx);
-        Object* target = iter->second;
-        const char* funcName = nullptr;
-        JSNative func = nullptr;
-        if (type == NodeEventType::ENTER)
-        {
-            funcName = "onEnter";
-            func = _SE(Node_onEnter);
-        }
-        else if (type == NodeEventType::EXIT)
-        {
-            funcName = "onExit";
-            func = _SE(Node_onExit);
-        }
-        else if (type == NodeEventType::ENTER_TRANSITION_DID_FINISH)
-        {
-            funcName = "onEnterTransitionDidFinish";
-            func = _SE(Node_onEnterTransitionDidFinish);
-        }
-        else if (type == NodeEventType::EXIT_TRANSITION_DID_START)
-        {
-            funcName = "onExitTransitionDidStart";
-            func = _SE(Node_onExitTransitionDidStart);
-        }
-        else if (type == NodeEventType::CLEANUP)
-        {
-            funcName = "cleanup";
-            func = _SE(Node_cleanup);
-        }
-        else
-        {
-            assert(false);
-        }
-
-        bool ret = false;
-        Value funcVal;
-        bool ok = target->getProperty(funcName, &funcVal);
-        if (ok && !funcVal.toObject()->_isNativeFunction(func))
-        {
-            ret = funcVal.toObject()->call(EmptyValueArray, target);
-        }
-
-        return ret;
+    bool ScriptEngine::_setNodeEventListener(NodeEventListener listener)
+    {
+        _nodeEventListener = listener;
+        return true;
     }
 
     void ScriptEngine::clearException()

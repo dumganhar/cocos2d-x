@@ -61,6 +61,9 @@ namespace se {
         };
         bool _onReceiveNodeEvent(void* node, NodeEventType type);
 
+        using NodeEventListener = bool(*)(void*/*node*/, NodeEventType);
+        bool _setNodeEventListener(NodeEventListener listener);
+
     private:
         static void myWeakPointerCompartmentCallback(JSContext* cx, JSCompartment* comp, void* data);
         static void myWeakPointerZoneGroupCallback(JSContext* cx, void* data);
@@ -75,6 +78,7 @@ namespace se {
         Object* _globalObj;
 
         bool _isValid;
+        NodeEventListener _nodeEventListener;
     };
 
  } // namespace se {

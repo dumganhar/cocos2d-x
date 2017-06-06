@@ -85,6 +85,8 @@ namespace se {
             CLEANUP
         };
         bool _onReceiveNodeEvent(void* node, NodeEventType type);
+        using NodeEventListener = bool(*)(void*/*node*/, NodeEventType);
+        bool _setNodeEventListener(NodeEventListener listener);
 
     private:
 
@@ -102,6 +104,7 @@ namespace se {
         Object* _globalObj;
 
         bool _isValid;
+        NodeEventListener _nodeEventListener;
     };
 
 } // namespace se {

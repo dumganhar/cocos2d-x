@@ -2700,9 +2700,8 @@ _p.setBoundingHeight = _p.setHeight;
 //
 _p = cc.Scheduler.prototype;
 _p.unscheduleUpdateForTarget = _p.unscheduleUpdate;
-_p.unscheduleAllCallbacksForTarget = function (target) {
-    this.unschedule(target.__instanceId + "", target);
-};
+_p.unscheduleAllCallbacksForTarget = _p.unscheduleAllForTarget;
+
 _p._schedule = _p.schedule;
 _p.schedule = function (callback, target, interval, repeat, delay, paused, key) {
     var isSelector = false;
@@ -2728,9 +2727,7 @@ _p.schedule = function (callback, target, interval, repeat, delay, paused, key) 
             delay = 0;
         }
     }
-    if (key === undefined) {
-        key = target.__instanceId + "";
-    }
+
     this._schedule(callback, target, interval, repeat, delay, paused, key);
 };
 

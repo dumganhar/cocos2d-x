@@ -44,6 +44,7 @@ var SchedulerTestLayer = BaseTestLayer.extend({
 
         scene.addChild(layer);
         director.runScene(scene);
+        cc.sys.garbageCollect();
     },
     onNextCallback:function (sender) {
         var scene = new SchedulerTestScene();
@@ -51,6 +52,7 @@ var SchedulerTestLayer = BaseTestLayer.extend({
 
         scene.addChild(layer);
         director.runScene(scene);
+        cc.sys.garbageCollect();
     },
     onRestartCallback:function (sender) {
         var scene = new SchedulerTestScene();
@@ -58,6 +60,7 @@ var SchedulerTestLayer = BaseTestLayer.extend({
 
         scene.addChild(layer);
         director.runScene(scene);
+        cc.sys.garbageCollect();
     },
     // automation
     numberOfPendingTests:function() {
@@ -534,7 +537,9 @@ var ScheduleUsingSchedulerTest = SchedulerTestLayer.extend({
     unscheduleAll: function() {
         var scheduler = director.getScheduler();
         scheduler.unscheduleUpdate(this);
+        cc.log("before unscheduleAll ...");
         scheduler.unscheduleAllCallbacksForTarget(this);
+        cc.log("after unscheduleAll ...");
     }
 });
 
@@ -596,36 +601,36 @@ var SchedulerTimeScale = SchedulerTestLayer.extend({
         var slider = null;
         var l = null;
 
-        slider = new ccui.Slider();
-        slider.setTouchEnabled(true);
-        slider.loadBarTexture("ccs-res/cocosui/sliderTrack.png");
-        slider.loadSlidBallTextures("ccs-res/cocosui/sliderThumb.png", "ccs-res/cocosui/sliderThumb.png", "");
-        slider.loadProgressBarTexture("ccs-res/cocosui/sliderProgress.png");
-        slider.x = cc.winSize.width / 2.0;
-        slider.y = cc.winSize.height / 3.0 * 2;
-        slider.addEventListener(this.sliderEventForGrossini, this);
-        this.addChild(slider);
-        slider.setPercent(20);
+        // slider = new ccui.Slider();
+        // slider.setTouchEnabled(true);
+        // slider.loadBarTexture("ccs-res/cocosui/sliderTrack.png");
+        // slider.loadSlidBallTextures("ccs-res/cocosui/sliderThumb.png", "ccs-res/cocosui/sliderThumb.png", "");
+        // slider.loadProgressBarTexture("ccs-res/cocosui/sliderProgress.png");
+        // slider.x = cc.winSize.width / 2.0;
+        // slider.y = cc.winSize.height / 3.0 * 2;
+        // slider.addEventListener(this.sliderEventForGrossini, this);
+        // this.addChild(slider);
+        // slider.setPercent(20);
 
-        l = new cc.LabelTTF("Control time scale only for Grossini", "Thonburi", 16);
-        this.addChild(l);
-        l.x = slider.x;
-        l.y = slider.y + 30;
+        // l = new cc.LabelTTF("Control time scale only for Grossini", "Thonburi", 16);
+        // this.addChild(l);
+        // l.x = slider.x;
+        // l.y = slider.y + 30;
 
-        slider = new ccui.Slider();
-        slider.setTouchEnabled(true);
-        slider.loadBarTexture("ccs-res/cocosui/sliderTrack.png");
-        slider.loadSlidBallTextures("ccs-res/cocosui/sliderThumb.png", "ccs-res/cocosui/sliderThumb.png", "");
-        slider.loadProgressBarTexture("ccs-res/cocosui/sliderProgress.png");
-        slider.x = cc.winSize.width / 2.0;
-        slider.y = cc.winSize.height / 3.0;
-        slider.addEventListener(this.sliderEventForGlobal, this);
-        this.addChild(slider);
-        slider.setPercent(20);
-        l = new cc.LabelTTF("Control time scale for all", "Thonburi", 16);
-        this.addChild(l);
-        l.x = slider.x;
-        l.y = slider.y + 30;
+        // slider = new ccui.Slider();
+        // slider.setTouchEnabled(true);
+        // slider.loadBarTexture("ccs-res/cocosui/sliderTrack.png");
+        // slider.loadSlidBallTextures("ccs-res/cocosui/sliderThumb.png", "ccs-res/cocosui/sliderThumb.png", "");
+        // slider.loadProgressBarTexture("ccs-res/cocosui/sliderProgress.png");
+        // slider.x = cc.winSize.width / 2.0;
+        // slider.y = cc.winSize.height / 3.0;
+        // slider.addEventListener(this.sliderEventForGlobal, this);
+        // this.addChild(slider);
+        // slider.setPercent(20);
+        // l = new cc.LabelTTF("Control time scale for all", "Thonburi", 16);
+        // this.addChild(l);
+        // l.x = slider.x;
+        // l.y = slider.y + 30;
     },
 
     sliderEventForGrossini: function (sender, type) {

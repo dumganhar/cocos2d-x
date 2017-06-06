@@ -171,6 +171,11 @@ namespace se {
 
         v8::HandleScope handle_scope(__isolate);
 
+        if (_obj.persistent().IsEmpty())
+        {
+            return false;
+        }
+
         v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
 
         bool exist = _obj.handle(__isolate)->Has(nameValue);

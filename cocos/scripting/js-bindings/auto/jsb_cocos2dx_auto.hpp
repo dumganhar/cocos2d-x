@@ -398,13 +398,13 @@ extern se::Class* __jsb_cocos2dx_Scheduler_class;
 bool js_register_cocos2dx_Scheduler(se::Object* obj);
 
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_setTimeScale);
-SE_DECLARE_FUNC(js_cocos2dx_Scheduler_unscheduleAllWithMinPriority);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_update);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_unscheduleScriptEntry);
-SE_DECLARE_FUNC(js_cocos2dx_Scheduler_performFunctionInCocosThread);
-SE_DECLARE_FUNC(js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_unscheduleAll);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_getTimeScale);
+SE_DECLARE_FUNC(js_cocos2dx_Scheduler_unscheduleAllWithMinPriority);
+SE_DECLARE_FUNC(js_cocos2dx_Scheduler_performFunctionInCocosThread);
+SE_DECLARE_FUNC(js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread);
 SE_DECLARE_FUNC(js_cocos2dx_Scheduler_Scheduler);
 
 extern se::Object* __jsb_cocos2dx_AsyncTaskPool_proto;
