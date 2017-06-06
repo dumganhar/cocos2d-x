@@ -124,7 +124,7 @@ static bool Node_addChild(se::State& s)
 SE_BIND_FUNC(Node_addChild)
 
 static std::unordered_map<se::Object*, std::unordered_map<se::Object*, std::string>> __jsthis_schedulekey_map;
-static std::unordered_map<se::Object*, bool> __jsthis_schedule_update_map;
+static std::unordered_map<se::Object*, int/*priority*/> __jsthis_schedule_update_map;
 
 static bool isScheduleExist(se::Object* jsFunc, se::Object* jsThis, se::Object** outJsFunc, se::Object** outJsThis, std::string* outKey)
 {
@@ -258,7 +258,7 @@ static void removeScheduleForKey(const std::string& key, bool needDetachChild)
     }
 }
 
-static void removeAllScheduleAndUpdate(bool needDetachChild)
+static void removeAllSchedules(bool needDetachChild)
 {
     CCLOG("Begin unschedule all callbacks");
     for (auto& e1 :__jsthis_schedulekey_map)
@@ -268,20 +268,82 @@ static void removeAllScheduleAndUpdate(bool needDetachChild)
         CCLOG(">> Found funcMap: %d", (int)funcMap.size());
         for (auto& e : funcMap)
         {
-            CCLOG("detachChild: owner: %p, target: %p", e1.first, e.first);
-            e1.first->detachChild(e.first);
+            if (needDetachChild)
+            {
+                CCLOG("detachChild: owner: %p, target: %p", e1.first, e.first);
+                e1.first->detachChild(e.first);
+            }
             e1.first->release(); // Release jsThis
             e.first->release(); // Release jsFunc
         }
         funcMap.clear();
     }
     __jsthis_schedulekey_map.clear();
+}
 
+static void removeAllScheduleUpdates()
+{
     for (auto& e2 : __jsthis_schedule_update_map)
     {
         e2.first->release();
     }
     __jsthis_schedule_update_map.clear();
+}
+
+static void removeAllScheduleAndUpdate(bool needDetachChild)
+{
+    removeAllSchedules(needDetachChild);
+    removeAllScheduleUpdates();
+}
+
+static bool isScheduleUpdateExist(se::Object* jsThis, se::Object** foundJsThis)
+{
+    assert(foundJsThis != nullptr);
+    for (const auto& e : __jsthis_schedule_update_map)
+    {
+        if (e.first->isSame(jsThis))
+        {
+            *foundJsThis = e.first;
+            return true;
+        }
+    }
+    *foundJsThis = nullptr;
+    return false;
+}
+
+static void removeScheduleUpdate(se::Object* jsThis)
+{
+    auto iter =  __jsthis_schedule_update_map.find(jsThis);
+    if (iter != __jsthis_schedule_update_map.end())
+    {
+        __jsthis_schedule_update_map.erase(iter);
+        jsThis->release();
+    }
+}
+
+static void removeScheduleUpdatesForMinPriority(int minPriority)
+{
+    int foundPriority = 0;
+    auto iter = __jsthis_schedule_update_map.begin();
+    while (iter != __jsthis_schedule_update_map.end())
+    {
+        foundPriority = iter->second;
+        if (foundPriority >= minPriority)
+        {
+            iter->first->release();
+            iter = __jsthis_schedule_update_map.erase(iter);
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+}
+
+static void insertScheduleUpdate(se::Object* jsThis, int priority)
+{
+    __jsthis_schedule_update_map[jsThis] = priority;
+    jsThis->addRef();
 }
 
 static void insertSchedule(se::Object* jsFunc, se::Object* jsThis, const std::string& key)
@@ -509,46 +571,15 @@ static bool Node_scheduleOnce(se::State& s)
 }
 SE_BIND_FUNC(Node_scheduleOnce)
 
-static bool isScheduleUpdateExist(se::Object* jsThis, se::Object** foundJsThis)
-{
-    assert(foundJsThis != nullptr);
-    for (const auto& e : __jsthis_schedule_update_map)
-    {
-        if (e.first->isSame(jsThis))
-        {
-            *foundJsThis = e.first;
-            return true;
-        }
-    }
-    *foundJsThis = nullptr;
-    return false;
-}
-
-static void removeScheduleUpdate(se::Object* jsThis)
-{
-    auto iter =  __jsthis_schedule_update_map.find(jsThis);
-    if (iter != __jsthis_schedule_update_map.end())
-    {
-        __jsthis_schedule_update_map.erase(iter);
-        jsThis->release();
-    }
-}
-
-static void insertScheduleUpdate(se::Object* jsThis)
-{
-    __jsthis_schedule_update_map[jsThis] = true;
-    jsThis->addRef();
-}
-
-class ScheduleUpdateWrapper : public cocos2d::Ref
+class UnscheduleUpdateNotifier
 {
 public:
-    ScheduleUpdateWrapper(se::Object* target)
+    UnscheduleUpdateNotifier(se::Object* target)
     : _target(target) //FIXME: need retain?
     {
     }
 
-    ~ScheduleUpdateWrapper()
+    ~UnscheduleUpdateNotifier()
     {
         printf("~ScheduleUpdateWrapper: %p\n", _target);
         removeScheduleUpdate(_target);
@@ -576,8 +607,8 @@ static bool Scheduler_scheduleUpdateCommon(Scheduler* scheduler, const se::Value
     se::Object* jsThisObj = jsThis.toObject();
     Scheduler_unscheduleUpdateCommon(scheduler, jsThisObj);
 
-    insertScheduleUpdate(jsThisObj);
-    std::shared_ptr<ScheduleUpdateWrapper> scheduleUpdateWrapper = std::make_shared<ScheduleUpdateWrapper>(jsThisObj);
+    insertScheduleUpdate(jsThisObj, priority);
+    std::shared_ptr<UnscheduleUpdateNotifier> scheduleUpdateWrapper = std::make_shared<UnscheduleUpdateNotifier>(jsThisObj);
 
     se::Value thisVal = jsThis;
 
@@ -621,7 +652,7 @@ SE_BIND_FUNC(Node_scheduleUpdate)
 static bool Node_scheduleUpdateWithPriority(se::State& s)
 {
     const auto& args = s.args();
-    size_t argc = args.size();
+    int argc = (int)args.size();
 #if COCOS2D_DEBUG
     printf("--------------------------\nscheduleUpdate target count: %d\n", (int)__jsthis_schedule_update_map.size());
     for (const auto& e1 : __jsthis_schedule_update_map)
@@ -636,10 +667,15 @@ static bool Node_scheduleUpdateWithPriority(se::State& s)
 
     int priority = 0;
 
-    if (argc >= 1)
-        priority = args[0].toInt32();
+    if (argc == 1)
+    {
+        bool ok = seval_to_int32(args[0], &priority);
+        JSB_PRECONDITION2(ok, false, "Converting priority failed!");
+        return Scheduler_scheduleUpdateCommon(thiz->getScheduler(), jsThis, priority, !thiz->isRunning());
+    }
 
-    return Scheduler_scheduleUpdateCommon(thiz->getScheduler(), jsThis, priority, !thiz->isRunning());
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
 }
 SE_BIND_FUNC(Node_scheduleUpdateWithPriority)
 
@@ -1105,7 +1141,25 @@ SE_BIND_FUNC(js_cocos2dx_Scheduler_unscheduleAllCallbacks)
 
 static bool js_cocos2dx_Scheduler_unscheduleAllCallbacksWithMinPriority(se::State& s)
 {
-    assert(false); //FIXME:
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 1)
+    {
+        int minPriority = 0;
+        bool ok = false;
+        ok = seval_to_int32(args[0], &minPriority);
+        JSB_PRECONDITION2(ok, false, "Converting minPriority failed!");
+
+        removeAllSchedules(true);
+        removeScheduleUpdatesForMinPriority(minPriority);
+
+        Scheduler* cobj = (Scheduler*)s.nativeThisObject();
+        cobj->unscheduleAllWithMinPriority(minPriority);
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Scheduler_unscheduleAllCallbacksWithMinPriority)

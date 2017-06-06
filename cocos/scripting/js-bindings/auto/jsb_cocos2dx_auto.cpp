@@ -3461,27 +3461,6 @@ static bool js_cocos2dx_Node_getSkewY(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getSkewY)
 
-static bool js_cocos2dx_Node_isScheduled(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isScheduled : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 1) {
-        std::string arg0;
-        ok &= seval_to_std_string(args[0], &arg0);
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_isScheduled : Error processing arguments");
-        bool result = cobj->isScheduled(arg0);
-        ok &= boolean_to_seval(result, &s.rval());
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_isScheduled : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_isScheduled)
-
 static bool js_cocos2dx_Node_getDisplayedColor(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
@@ -4858,7 +4837,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("stopAllActions", _SE(js_cocos2dx_Node_stopAllActions));
     cls->defineFunction("getSkewX", _SE(js_cocos2dx_Node_getSkewX));
     cls->defineFunction("getSkewY", _SE(js_cocos2dx_Node_getSkewY));
-    cls->defineFunction("isScheduled", _SE(js_cocos2dx_Node_isScheduled));
     cls->defineFunction("getDisplayedColor", _SE(js_cocos2dx_Node_getDisplayedColor));
     cls->defineFunction("getActionByTag", _SE(js_cocos2dx_Node_getActionByTag));
     cls->defineFunction("setRotationX", _SE(js_cocos2dx_Node_setRotationSkewX));

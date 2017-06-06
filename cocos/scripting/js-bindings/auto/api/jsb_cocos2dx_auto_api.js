@@ -1600,18 +1600,6 @@ getSkewY : function (
 },
 
 /**
- * @method isScheduled
- * @param {String} arg0
- * @return {bool}
- */
-isScheduled : function (
-str 
-)
-{
-    return false;
-},
-
-/**
  * @method getDisplayedColor
  * @return {color3b_object}
  */

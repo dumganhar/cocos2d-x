@@ -193,7 +193,6 @@ SE_DECLARE_FUNC(js_cocos2dx_Node_setScheduler);
 SE_DECLARE_FUNC(js_cocos2dx_Node_stopAllActions);
 SE_DECLARE_FUNC(js_cocos2dx_Node_getSkewX);
 SE_DECLARE_FUNC(js_cocos2dx_Node_getSkewY);
-SE_DECLARE_FUNC(js_cocos2dx_Node_isScheduled);
 SE_DECLARE_FUNC(js_cocos2dx_Node_getDisplayedColor);
 SE_DECLARE_FUNC(js_cocos2dx_Node_getActionByTag);
 SE_DECLARE_FUNC(js_cocos2dx_Node_setRotationSkewX);

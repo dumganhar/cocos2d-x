@@ -84,8 +84,13 @@ var SchedulerAutoremove = SchedulerTestLayer.extend({
         this._super();
 
         this.schedule(this.onAutoremove, 0.5);
+        cc.log("111 node.isScheduled(func): " + this.isScheduled(this.onAutoremove));
+        cc.log("111 scheduler.isScheduled(func, target): " + this.getScheduler().isScheduled(this.onAutoremove, this));
+        this.schedule(this.onAutoremove, 0.5);
+        this.schedule(this.onTick, 0.5);
         this.schedule(this.onTick, 0.5);
         this._accum = 0;
+
         //----end0----
     },
     title:function () {
@@ -103,11 +108,16 @@ var SchedulerAutoremove = SchedulerTestLayer.extend({
         if (this._accum > 3) {
             this.unschedule(this.onAutoremove);
             cc.log("scheduler removed");
+            cc.log("222 node.isScheduled(func): " + this.isScheduled(this.onAutoremove));
+            cc.log("222 scheduler.isScheduled(func, target): " + this.getScheduler().isScheduled(this.onAutoremove, this));
         }
         //----end0----
     },
     onTick:function (dt) {
         cc.log("This scheduler should not be removed");
+    },
+    update: function(dt) {
+        cc.log("updating ...");
     }
 });
 
@@ -293,7 +303,7 @@ var SchedulerSchedulesAndRemove = SchedulerTestLayer.extend({
         this.unschedule(this.onScheduleAndUnschedule);
 
         this.schedule(this.onTick3, 1.0);
-        this.schedule(this.onTick4, 1.0)
+        this.schedule(this.onTick4, 1.0);
         //----end4----
     }
 });
@@ -660,6 +670,7 @@ var SchedulerTimeScale = SchedulerTestLayer.extend({
     onExit: function() {
         cc.director.getScheduler().setTimeScale(1);
         // restore scale
+        this._newScheduler.unscheduleUpdateForTarget(this._newActionManager);
         cc.director.getScheduler().unscheduleUpdateForTarget(this._newScheduler);
         this._super();
     },
