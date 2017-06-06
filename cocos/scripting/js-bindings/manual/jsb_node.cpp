@@ -192,8 +192,6 @@ static bool isScheduleExist(const std::string& key, se::Object* jsThis, se::Obje
     return found;
 }
 
-
-
 static void removeSchedule(se::Object* jsFunc, se::Object* jsThis, bool needDetachChild)
 {
     auto funcObjKeyMapIter = __jsthis_schedulekey_map.find(jsThis);
@@ -223,12 +221,11 @@ static void removeScheduleForThis(se::Object* jsThis, bool needDetachChild)
                 jsThis->detachChild(e.first);
 
             e.first->release(); // Release jsFunc
+            jsThis->release(); // Release jsThis
         }
 
         funcMap.clear();
         __jsthis_schedulekey_map.erase(funcObjKeyMapIter);
-
-        jsThis->release();
     }
 }
 
@@ -259,6 +256,32 @@ static void removeScheduleForKey(const std::string& key, bool needDetachChild)
     {
         removeSchedule(jsFunc, jsThis, needDetachChild);
     }
+}
+
+static void removeAllScheduleAndUpdate(bool needDetachChild)
+{
+    CCLOG("Begin unschedule all callbacks");
+    for (auto& e1 :__jsthis_schedulekey_map)
+    {
+        auto& funcMap = e1.second;
+
+        CCLOG(">> Found funcMap: %d", (int)funcMap.size());
+        for (auto& e : funcMap)
+        {
+            CCLOG("detachChild: owner: %p, target: %p", e1.first, e.first);
+            e1.first->detachChild(e.first);
+            e1.first->release(); // Release jsThis
+            e.first->release(); // Release jsFunc
+        }
+        funcMap.clear();
+    }
+    __jsthis_schedulekey_map.clear();
+
+    for (auto& e2 : __jsthis_schedule_update_map)
+    {
+        e2.first->release();
+    }
+    __jsthis_schedule_update_map.clear();
 }
 
 static void insertSchedule(se::Object* jsFunc, se::Object* jsThis, const std::string& key)
@@ -671,13 +694,66 @@ static bool Scheduler_unscheduleCommon(Scheduler* scheduler, const se::Value& js
 static bool Node_unschedule(se::State& s)
 {
     const auto& args = s.args();
-    Node* thiz = (Node*)s.nativeThisObject();
-    se::Value jsThis(s.thisObject());
-    se::Value jsFunc(args[0]);
-    return Scheduler_unscheduleCommon(thiz->getScheduler(), jsThis, jsFunc);
+    int argc = (int)args.size();
+    if (argc == 1)
+    {
+        Node* thiz = (Node*)s.nativeThisObject();
+        se::Value jsThis(s.thisObject());
+        se::Value jsFunc(args[0]);
+        return Scheduler_unscheduleCommon(thiz->getScheduler(), jsThis, jsFunc);
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
 }
 
 SE_BIND_FUNC(Node_unschedule)
+
+static bool Scheduler_isScheduled(Scheduler* scheduler, const se::Value& jsThis, const se::Value& jsFuncOrKey)
+{
+    se::Object* foundTarget = nullptr;
+    if (isTargetExistInScheduler(jsThis.toObject(), &foundTarget) && foundTarget != nullptr)
+    {
+        if (jsFuncOrKey.isString() || jsFuncOrKey.isNumber())
+        {
+            return scheduler->isScheduled(jsFuncOrKey.toStringForce(), foundTarget);
+        }
+        else if (jsFuncOrKey.isObject())
+        {
+            se::Object* foundJsFunc = nullptr;
+            std::string key;
+            if (isScheduleExist(jsFuncOrKey.toObject(), jsThis.toObject(), &foundJsFunc, &foundTarget, &key) && foundTarget != nullptr && foundJsFunc != nullptr && !key.empty())
+            {
+                return scheduler->isScheduled(key, foundTarget);
+            }
+        }
+        else
+        {
+            assert(false);
+        }
+
+    }
+    return false;
+}
+
+static bool Node_isScheduled(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    if (argc == 1)
+    {
+        Node* thiz = (Node*)s.nativeThisObject();
+        se::Value jsThis(s.thisObject());
+        se::Value jsFuncOrKey(args[0]);
+        bool isScheduled = Scheduler_isScheduled(thiz->getScheduler(), jsThis, jsFuncOrKey);
+        s.rval().setBoolean(isScheduled);
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+SE_BIND_FUNC(Node_isScheduled)
 
 static bool Scheduler_unscheduleAllCallbacksCommon(Scheduler* scheduler, se::Object* jsThis, bool needDetachChild)
 {
@@ -1014,26 +1090,7 @@ static bool js_cocos2dx_Scheduler_unscheduleAllCallbacks(se::State& s)
 
     if (argc == 0)
     {
-        CCLOG("Begin unschedule all callbacks");
-        for (auto& e1 :__jsthis_schedulekey_map)
-        {
-            auto& funcMap = e1.second;
-
-            CCLOG(">> Found funcMap: %d", (int)funcMap.size());
-            for (auto& e : funcMap)
-            {
-                CCLOG("detachChild: owner: %p, target: %p", e1.first, e.first);
-                e1.first->detachChild(e.first);
-                e.first->release(); // Release jsFunc
-            }
-
-            funcMap.clear();
-
-            e1.first->release();
-        }
-        __jsthis_schedulekey_map.clear();
-
-        __jsthis_schedule_update_map.clear();
+        removeAllScheduleAndUpdate(true);
 
         Scheduler* cobj = (Scheduler*)s.nativeThisObject();
         cobj->unscheduleAll();
@@ -1055,7 +1112,19 @@ SE_BIND_FUNC(js_cocos2dx_Scheduler_unscheduleAllCallbacksWithMinPriority)
 
 static bool js_cocos2dx_Scheduler_isScheduled(se::State& s)
 {
-    assert(false); //FIXME:
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    if (argc == 2)
+    {
+        Scheduler* thiz = (Scheduler*)s.nativeThisObject();
+        se::Value jsFuncOrKey(args[0]);
+        se::Value jsThis(args[1]);
+        bool isScheduled = Scheduler_isScheduled(thiz, jsThis, jsFuncOrKey);
+        s.rval().setBoolean(isScheduled);
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Scheduler_isScheduled)
@@ -1228,6 +1297,7 @@ bool jsb_register_Node_manual()
     cls->defineFunction("unscheduleUpdate", _SE(Node_unscheduleUpdate));
     cls->defineFunction("unschedule", _SE(Node_unschedule));
     cls->defineFunction("unscheduleAllCallbacks", _SE(Node_unscheduleAllCallbacks));
+    cls->defineFunction("isScheduled", _SE(Node_isScheduled));
     cls->defineFunction("setContentSize", _SE(Node_setContentSize));
     cls->defineFunction("setAnchorPoint", _SE(Node_setAnchorPoint));
     cls->defineFunction("setPosition", _SE(Node_setPosition));
