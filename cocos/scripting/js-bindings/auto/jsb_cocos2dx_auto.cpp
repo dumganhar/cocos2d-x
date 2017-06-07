@@ -17441,6 +17441,58 @@ static bool js_cocos2dx_EventDispatcher_addEventListenerWithSceneGraphPriority(s
 }
 SE_BIND_FUNC(js_cocos2dx_EventDispatcher_addEventListenerWithSceneGraphPriority)
 
+static bool js_cocos2dx_EventDispatcher_addCustomEventListener(se::State& s)
+{
+    cocos2d::EventDispatcher* cobj = (cocos2d::EventDispatcher*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_addCustomEventListener : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 2) {
+        std::string arg0;
+        std::function<void (cocos2d::EventCustom *)> arg1;
+        ok &= seval_to_std_string(args[0], &arg0);
+        do {
+		    if (args[1].isObject() && args[1].toObject()->isFunction())
+		    {
+		        se::Value jsThis(s.thisObject());
+		        se::Value jsFunc(args[1]);
+		        jsThis.toObject()->attachChild(jsFunc.toObject());
+		        auto lambda = [=](cocos2d::EventCustom* larg0) -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
+		            CC_UNUSED bool ok = true;
+		            se::ValueArray args;
+		            args.resize(1);
+		            ok &= native_ptr_to_seval<cocos2d::EventCustom>((cocos2d::EventCustom*)larg0, &args[0]);
+		            se::Value rval;
+		            se::Object* thisObj = jsThis.toObject();
+		            se::Object* funcObj = jsFunc.toObject();
+		            bool succeed = funcObj->call(args, thisObj, &rval);
+		            if (!succeed) {
+		                se::ScriptEngine::getInstance()->clearException();
+		            }
+		        };
+		        arg1 = lambda;
+		    }
+		    else
+		    {
+		        arg1 = nullptr;
+		    }
+		} while(false)
+		;
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_EventDispatcher_addCustomEventListener : Error processing arguments");
+        cocos2d::EventListenerCustom* result = cobj->addCustomEventListener(arg0, arg1);
+        ok &= native_ptr_to_seval<cocos2d::EventListenerCustom>((cocos2d::EventListenerCustom*)result, &s.rval());
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_EventDispatcher_addCustomEventListener : Error processing arguments");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 2);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_EventDispatcher_addCustomEventListener)
+
 static bool js_cocos2dx_EventDispatcher_addEventListenerWithFixedPriority(se::State& s)
 {
     cocos2d::EventDispatcher* cobj = (cocos2d::EventDispatcher*)s.nativeThisObject();
@@ -17715,6 +17767,7 @@ bool js_register_cocos2dx_EventDispatcher(se::Object* obj)
     cls->defineFunction("setEnabled", _SE(js_cocos2dx_EventDispatcher_setEnabled));
     cls->defineFunction("removeAllListeners", _SE(js_cocos2dx_EventDispatcher_removeAllEventListeners));
     cls->defineFunction("addEventListenerWithSceneGraphPriority", _SE(js_cocos2dx_EventDispatcher_addEventListenerWithSceneGraphPriority));
+    cls->defineFunction("addCustomListener", _SE(js_cocos2dx_EventDispatcher_addCustomEventListener));
     cls->defineFunction("addEventListenerWithFixedPriority", _SE(js_cocos2dx_EventDispatcher_addEventListenerWithFixedPriority));
     cls->defineFunction("removeListeners", _SE(js_cocos2dx_EventDispatcher_removeEventListenersForTarget));
     cls->defineFunction("resumeTarget", _SE(js_cocos2dx_EventDispatcher_resumeEventListenersForTarget));

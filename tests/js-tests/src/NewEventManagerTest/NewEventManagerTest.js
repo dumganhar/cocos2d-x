@@ -1229,7 +1229,7 @@ var Issue9898 = EventDispatcherTestDemo.extend({
                 cc.eventManager.dispatchEvent(event);
             }
         });
-        cc.eventManager.addListener(_listener, 1);
+        cc.eventManager.addListener(_listener, node);
         var menuItem  = new cc.MenuItemFont("Dispatch Custom Event1", function(sender){
             var event = new cc.EventCustom("Issue9898");
             cc.eventManager.dispatchEvent(event);

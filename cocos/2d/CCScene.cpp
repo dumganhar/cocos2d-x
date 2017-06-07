@@ -93,14 +93,13 @@ Scene::~Scene()
     delete _physicsWorld;
 #endif
 
-    // New JSB HAL doesn't need this, it may cause crash while GC.
-//#if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-//    auto sEngine = ScriptEngineManager::getInstance()->getScriptEngine();
-//    if (sEngine)
-//    {
-//        sEngine->releaseAllChildrenRecursive(this);
-//    }
-//#endif // CC_ENABLE_GC_FOR_NATIVE_OBJECTS
+#if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
+    auto sEngine = ScriptEngineManager::getInstance()->getScriptEngine();
+    if (sEngine)
+    {
+        sEngine->releaseAllChildrenRecursive(this);
+    }
+#endif // CC_ENABLE_GC_FOR_NATIVE_OBJECTS
 }
 
 #if CC_USE_NAVMESH

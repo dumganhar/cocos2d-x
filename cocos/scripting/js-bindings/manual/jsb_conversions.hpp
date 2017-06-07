@@ -203,7 +203,13 @@ bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Value* ret)
 {
-    assert(v != nullptr && ret != nullptr);
+    assert(ret != nullptr);
+    if (v == nullptr)
+    {
+        ret->setNull();
+        return true;
+    }
+
     se::Object* obj = nullptr;
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())
@@ -226,12 +232,18 @@ bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Value* ret)
 {
-    assert(v != nullptr && ret != nullptr);
+    assert(ret != nullptr);
+    if (v == nullptr)
+    {
+        ret->setNull();
+        return true;
+    }
+
     se::Object* obj = nullptr;
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())
     { // If we couldn't find native object in map, then the native object is created from native code. e.g. TMXLayer::getTileAt
-//        CCLOGWARN("WARNING: Ref type: (%s) isn't catched!", typeid(*v).name());
+        CCLOGWARN("WARNING: Ref type: (%s) isn't catched!", typeid(*v).name());
         se::Class* cls = JSBClassType::findClass<T>(v);
         assert(cls != nullptr);
         obj = se::Object::createObjectWithClass(cls, false);
@@ -250,7 +262,13 @@ bool native_ptr_to_seval(typename std::enable_if<std::is_base_of<cocos2d::Ref,T>
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Class* cls, se::Value* ret)
 {
-    assert(v != nullptr && ret != nullptr);
+    assert(ret != nullptr);
+    if (v == nullptr)
+    {
+        ret->setNull();
+        return true;
+    }
+
     se::Object* obj = nullptr;
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())
