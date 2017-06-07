@@ -32,13 +32,13 @@ namespace se {
         return obj;
     }
 
-    Object* Object::createObject(const char* clsName, bool rooted)
-    {
-        Class* cls = nullptr;
-        JsValueRef jsObj = Class::_createJSObject(clsName, &cls);
-        Object* obj = _createJSObject(cls, jsObj, rooted);
-        return obj;
-    }
+//    Object* Object::createObject(const char* clsName, bool rooted)
+//    {
+//        Class* cls = nullptr;
+//        JsValueRef jsObj = Class::_createJSObject(clsName, &cls);
+//        Object* obj = _createJSObject(cls, jsObj, rooted);
+//        return obj;
+//    }
 
     Object* Object::createArrayObject(size_t length, bool rooted)
     {
@@ -101,16 +101,16 @@ namespace se {
         return obj;
     }
 
-    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
-    {
-        Object* obj = getObjectWithPtr(ptr);
-        if (obj == nullptr)
-        {
-            obj = createObject(clsName, rooted);
-            obj->setPrivateData(ptr);
-        }
-        return obj;
-    }
+//    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
+//    {
+//        Object* obj = getObjectWithPtr(ptr);
+//        if (obj == nullptr)
+//        {
+//            obj = createObject(clsName, rooted);
+//            obj->setPrivateData(ptr);
+//        }
+//        return obj;
+//    }
 
     Object* Object::_createJSObject(Class* cls, JsValueRef obj, bool rooted)
     {

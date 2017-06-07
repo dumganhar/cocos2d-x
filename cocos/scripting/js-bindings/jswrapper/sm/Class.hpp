@@ -31,7 +31,7 @@ namespace se {
     private:
         bool init(const char* clsName, Object* obj, Object* parentProto, JSNative ctor);
 
-        static JSObject* _createJSObject(const std::string &clsName, Class** outCls);
+//        static JSObject* _createJSObject(const std::string &clsName, Class** outCls);
         static JSObject* _createJSObjectWithClass(Class* cls);
 
         static void setContext(JSContext* cx);

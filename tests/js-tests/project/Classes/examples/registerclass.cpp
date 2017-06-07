@@ -330,7 +330,7 @@ int main_register_class(int argc, char** argv)
         {
             se::Object* subobj = se::Object::createPlainObject(false);
             subobj->setProperty("x", se::Value(239184543.2372f));
-//            subobj->setProperty("y", se::Value(3.2389f));
+            subobj->setProperty("y", se::Value(3.2389f));
             obj->setArrayElement(3, se::Value(subobj));
             subobj->release();
         }

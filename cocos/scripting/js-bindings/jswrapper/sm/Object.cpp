@@ -97,13 +97,13 @@ namespace se {
         return obj;
     }
 
-    Object* Object::createObject(const char* clsName, bool rooted)
-    {
-        Class* cls = nullptr;
-        JSObject* jsobj = Class::_createJSObject(clsName, &cls);
-        Object* obj = Object::_createJSObject(cls, jsobj, rooted);
-        return obj;
-    }
+//    Object* Object::createObject(const char* clsName, bool rooted)
+//    {
+//        Class* cls = nullptr;
+//        JSObject* jsobj = Class::_createJSObject(clsName, &cls);
+//        Object* obj = Object::_createJSObject(cls, jsobj, rooted);
+//        return obj;
+//    }
 
     Object* Object::createObjectWithClass(Class* cls, bool rooted)
     {
@@ -124,16 +124,16 @@ namespace se {
         return obj;
     }
 
-    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
-    {
-        Object* obj = getObjectWithPtr(ptr);
-        if (obj == nullptr)
-        {
-            obj = createObject(clsName, rooted);
-            obj->setPrivateData(ptr);
-        }
-        return obj;
-    }
+//    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
+//    {
+//        Object* obj = getObjectWithPtr(ptr);
+//        if (obj == nullptr)
+//        {
+//            obj = createObject(clsName, rooted);
+//            obj->setPrivateData(ptr);
+//        }
+//        return obj;
+//    }
 
     Object* Object::createArrayObject(size_t length, bool rooted)
     {

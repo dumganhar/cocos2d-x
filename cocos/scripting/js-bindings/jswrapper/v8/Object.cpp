@@ -71,14 +71,14 @@ namespace se {
         return obj;
     }
 
-    Object* Object::createObject(const char* clsName, bool rooted)
-    {
-        Class* cls = nullptr;
-        auto jsobj = Class::_createJSObject(clsName, &cls);
-        Object* obj = _createJSObject(cls, jsobj, rooted);
-
-        return obj;
-    }
+//    Object* Object::createObject(const char* clsName, bool rooted)
+//    {
+//        Class* cls = nullptr;
+//        auto jsobj = Class::_createJSObject(clsName, &cls);
+//        Object* obj = _createJSObject(cls, jsobj, rooted);
+//
+//        return obj;
+//    }
 
     Object* Object::getObjectWithPtr(void* ptr)
     {
@@ -92,16 +92,16 @@ namespace se {
         return obj;
     }
 
-    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
-    {
-        Object* obj = getObjectWithPtr(ptr);
-        if (obj == nullptr)
-        {
-            obj = createObject(clsName, rooted);
-            obj->setPrivateData(ptr);
-        }
-        return obj;
-    }
+//    Object* Object::getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted)
+//    {
+//        Object* obj = getObjectWithPtr(ptr);
+//        if (obj == nullptr)
+//        {
+//            obj = createObject(clsName, rooted);
+//            obj->setPrivateData(ptr);
+//        }
+//        return obj;
+//    }
 
     Object* Object::_createJSObject(Class* cls, v8::Local<v8::Object> obj, bool rooted)
     {

@@ -20,12 +20,12 @@ namespace se {
         virtual ~Object();
 
         static Object* createPlainObject(bool rooted);
-        static Object* createObject(const char* clsName, bool rooted);
+//        static Object* createObject(const char* clsName, bool rooted);
         static Object* createArrayObject(size_t length, bool rooted);
         static Object* createArrayBufferObject(void* data, size_t byteLength, bool rooted);
         static Object* createJSONObject(const std::string& jsonStr, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
-        static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
+//        static Object* getOrCreateObjectWithPtr(void* ptr, const char* clsName, bool rooted);
         static Object* createObjectWithClass(Class* cls, bool rooted);
         static Object* _createJSObject(Class* cls, JsValueRef obj, bool rooted);
 

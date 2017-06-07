@@ -17,7 +17,7 @@ namespace se {
     // --- Global Lookup for Constructor Functions
 
     namespace {
-        std::unordered_map<std::string, Class *> __clsMap;
+//        std::unordered_map<std::string, Class *> __clsMap;
         JSContextRef __cx = nullptr;
 
         JSValueRef _getPropertyCallback(JSContextRef context, JSObjectRef object, JSStringRef propertyName, JSValueRef* exception)
@@ -104,9 +104,9 @@ namespace se {
 
     bool Class::install()
     {
-        assert(__clsMap.find(_name) == __clsMap.end());
-
-        __clsMap.emplace(_name, this);
+//        assert(__clsMap.find(_name) == __clsMap.end());
+//
+//        __clsMap.emplace(_name, this);
 
         _jsClsDef.version = 0;
         _jsClsDef.attributes = kJSClassAttributeNone;
@@ -210,20 +210,20 @@ namespace se {
         return true;
     }
 
-    JSObjectRef Class::_createJSObject(const std::string &clsName, Class** outCls)
-    {
-        auto iter = __clsMap.find(clsName);
-        if (iter == __clsMap.end())
-        {
-            *outCls = nullptr;
-            return nullptr;
-        }
-
-        Class* thiz = iter->second;
-        *outCls = thiz;
-
-        return _createJSObjectWithClass(thiz);
-    }
+//    JSObjectRef Class::_createJSObject(const std::string &clsName, Class** outCls)
+//    {
+//        auto iter = __clsMap.find(clsName);
+//        if (iter == __clsMap.end())
+//        {
+//            *outCls = nullptr;
+//            return nullptr;
+//        }
+//
+//        Class* thiz = iter->second;
+//        *outCls = thiz;
+//
+//        return _createJSObjectWithClass(thiz);
+//    }
 
     JSObjectRef Class::_createJSObjectWithClass(Class* cls)
     {

@@ -9,7 +9,7 @@ namespace se {
 // ------------------------------------------------------- Object
 
     namespace {
-        std::unordered_map<std::string, Class *> __clsMap;
+//        std::unordered_map<std::string, Class *> __clsMap;
         v8::Isolate* __isolate = nullptr;
     }
 
@@ -63,9 +63,9 @@ namespace se {
 
     bool Class::install()
     {
-        assert(__clsMap.find(_name) == __clsMap.end());
-
-        __clsMap.emplace(_name, this);
+//        assert(__clsMap.find(_name) == __clsMap.end());
+//
+//        __clsMap.emplace(_name, this);
 
         if (_parentProto != nullptr)
         {
@@ -111,18 +111,18 @@ namespace se {
         return true;
     }
 
-    v8::Local<v8::Object> Class::_createJSObject(const std::string &clsName, Class** outCls)
-    {
-        auto iter = __clsMap.find(clsName);
-        if (iter == __clsMap.end())
-        {
-            *outCls = nullptr;
-            return v8::Local<v8::Object>::Cast(v8::Undefined(__isolate));
-        }
-
-        *outCls = iter->second;
-        return _createJSObjectWithClass(iter->second);
-    }
+//    v8::Local<v8::Object> Class::_createJSObject(const std::string &clsName, Class** outCls)
+//    {
+//        auto iter = __clsMap.find(clsName);
+//        if (iter == __clsMap.end())
+//        {
+//            *outCls = nullptr;
+//            return v8::Local<v8::Object>::Cast(v8::Undefined(__isolate));
+//        }
+//
+//        *outCls = iter->second;
+//        return _createJSObjectWithClass(iter->second);
+//    }
 
     v8::Local<v8::Object> Class::_createJSObjectWithClass(Class* cls)
     {

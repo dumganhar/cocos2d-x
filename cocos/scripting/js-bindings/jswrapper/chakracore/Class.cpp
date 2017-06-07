@@ -14,7 +14,7 @@ namespace se {
 #define JS_PS_END JS_PSGS(0, 0, 0)
 
     namespace {
-        std::unordered_map<std::string, Class *> __clsMap;
+//        std::unordered_map<std::string, Class *> __clsMap;
 
         JsValueRef emptyContructor(JsValueRef callee, bool isConstructCall, JsValueRef *arguments, unsigned short argumentCount, void *callbackState)
         {
@@ -77,9 +77,13 @@ namespace se {
 
     bool Class::install()
     {
-        assert(__clsMap.find(_name) == __clsMap.end());
-
-        __clsMap.emplace(_name, this);
+//        auto iter = __clsMap.find(_name);
+//        if (iter != __clsMap.end())
+//        {
+//            assert(!iter->second->_parent->isSame(_parent));
+//        }
+//
+//        __clsMap.emplace(_name, this);
 
         JsValueRef funcName;
         _CHECK(JsCreateString(_name.c_str(), _name.length(), &funcName));
@@ -166,19 +170,19 @@ namespace se {
         return true;
     }
 
-    JsValueRef Class::_createJSObject(const std::string &clsName, Class** outCls)
-    {
-        auto iter = __clsMap.find(clsName);
-        if (iter == __clsMap.end())
-        {
-            *outCls = nullptr;
-            return nullptr;
-        }
-
-        Class* thiz = iter->second;
-        *outCls = thiz;
-        return _createJSObjectWithClass(thiz);
-    }
+//    JsValueRef Class::_createJSObject(const std::string &clsName, Class** outCls)
+//    {
+//        auto iter = __clsMap.find(clsName);
+//        if (iter == __clsMap.end())
+//        {
+//            *outCls = nullptr;
+//            return nullptr;
+//        }
+//
+//        Class* thiz = iter->second;
+//        *outCls = thiz;
+//        return _createJSObjectWithClass(thiz);
+//    }
 
     JsValueRef Class::_createJSObjectWithClass(Class* cls)
     {
