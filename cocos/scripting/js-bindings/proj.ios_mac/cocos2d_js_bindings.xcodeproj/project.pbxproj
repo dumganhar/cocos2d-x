@@ -73,6 +73,12 @@
 		1A48DF2E1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF2A1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp */; };
 		1A48DF2F1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF2A1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp */; };
 		1A48DF301EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF2A1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp */; };
+		1A48DF331EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A48DF311EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp */; };
+		1A48DF341EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A48DF311EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp */; };
+		1A48DF351EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A48DF311EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp */; };
+		1A48DF361EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF321EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp */; };
+		1A48DF371EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF321EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp */; };
+		1A48DF381EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A48DF321EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp */; };
 		1A5543531EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
 		1A5543541EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
 		1A5543551EC155D200AEA55E /* SeApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5543521EC155D200AEA55E /* SeApi.h */; };
@@ -402,6 +408,8 @@
 		1A48DF1A1EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_ui_auto.hpp; sourceTree = "<group>"; };
 		1A48DF291EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_extension_auto.cpp; sourceTree = "<group>"; };
 		1A48DF2A1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_extension_auto.hpp; sourceTree = "<group>"; };
+		1A48DF311EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_audioengine_auto.cpp; sourceTree = "<group>"; };
+		1A48DF321EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = jsb_cocos2dx_audioengine_auto.hpp; sourceTree = "<group>"; };
 		1A5410A418B785A10016A3AF /* libjscocos2d Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5410A518B785A10016A3AF /* libjscocos2d iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5543521EC155D200AEA55E /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
@@ -717,6 +725,8 @@
 		1A119E2E18BDF19200352BAA /* auto */ = {
 			isa = PBXGroup;
 			children = (
+				1A48DF311EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp */,
+				1A48DF321EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp */,
 				1A48DF291EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.cpp */,
 				1A48DF2A1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.hpp */,
 				1A48DF191EE6B0060040CD39 /* jsb_cocos2dx_ui_auto.cpp */,
@@ -1249,6 +1259,7 @@
 				1A9E99331EB0827B001AEA19 /* jsb_node.hpp in Headers */,
 				1A9E994B1EB09566001AEA19 /* Class.hpp in Headers */,
 				1A5543591EC155EC00AEA55E /* Base.h in Headers */,
+				1A48DF381EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp in Headers */,
 				1A3757601EB96C2C000CA182 /* jsb_menu.hpp in Headers */,
 				1A9E995A1EB09566001AEA19 /* ScriptEngine.hpp in Headers */,
 				6037911ED2ACA2FDD998083F /* jsb_global.h in Headers */,
@@ -1304,6 +1315,7 @@
 				603799AA8BA7A6E28D671256 /* MemoryMetrics.h in Headers */,
 				60379F63C59FCFD7C547CF05 /* UbiNodeCensus.h in Headers */,
 				1AC005321EBC5A2B004B3660 /* Object.hpp in Headers */,
+				1A48DF361EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp in Headers */,
 				60379477EF120D7E077B8DBE /* Initialization.h in Headers */,
 				1A3005C01ED82F3500F29697 /* jsb_cocos2dx_manual.hpp in Headers */,
 				60379C1F7E18855B9583E30A /* LegacyIntTypes.h in Headers */,
@@ -1514,6 +1526,7 @@
 				1A9E99321EB0827B001AEA19 /* jsb_node.hpp in Headers */,
 				1A9E994A1EB09566001AEA19 /* Class.hpp in Headers */,
 				1A5543581EC155EC00AEA55E /* Base.h in Headers */,
+				1A48DF371EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.hpp in Headers */,
 				1A37575F1EB96C2C000CA182 /* jsb_menu.hpp in Headers */,
 				1A9E99591EB09566001AEA19 /* ScriptEngine.hpp in Headers */,
 				603799782A0215AB34E958D0 /* jsb_global.h in Headers */,
@@ -1620,6 +1633,7 @@
 				1A9E995D1EB09566001AEA19 /* Value.cpp in Sources */,
 				1A48DF151EE00F470040CD39 /* jsb_classtype.cpp in Sources */,
 				1A5543641EC15F1800AEA55E /* Object.cpp in Sources */,
+				1A48DF351EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp in Sources */,
 				1A48DF2D1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.cpp in Sources */,
 				1A164DA51EDE5B8200A2F3DC /* State.cpp in Sources */,
 				1A9E99301EB0827B001AEA19 /* jsb_node.cpp in Sources */,
@@ -1652,6 +1666,7 @@
 				1A48DF2B1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.cpp in Sources */,
 				1A4711921EB9BA880027E3D9 /* Class.cpp in Sources */,
 				1A4711A21EB9BA880027E3D9 /* Ref.cpp in Sources */,
+				1A48DF331EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp in Sources */,
 				1ADB8B0F1EC2FB92007B7FA3 /* ScriptingCore.cpp in Sources */,
 				1A5543721EC1606800AEA55E /* ScriptEngine.cpp in Sources */,
 				1A4711941EB9BA880027E3D9 /* Object.cpp in Sources */,
@@ -1690,6 +1705,7 @@
 				1A9E995C1EB09566001AEA19 /* Value.cpp in Sources */,
 				1A48DF141EE00F470040CD39 /* jsb_classtype.cpp in Sources */,
 				1A5543631EC15F1800AEA55E /* Object.cpp in Sources */,
+				1A48DF341EE79DC10040CD39 /* jsb_cocos2dx_audioengine_auto.cpp in Sources */,
 				1A48DF2C1EE6EE2C0040CD39 /* jsb_cocos2dx_extension_auto.cpp in Sources */,
 				1A164DA41EDE5B8200A2F3DC /* State.cpp in Sources */,
 				1A9E992F1EB0827B001AEA19 /* jsb_node.cpp in Sources */,

@@ -6,15 +6,15 @@
 #include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_conversions.hpp"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_ui_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_audioengine_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_extension_auto.hpp"
 
 #include <unistd.h>
 #include <iostream>
 #include <string>
 
 using namespace cocos2d;
-
-bool register_all_cocos2dx(se::Object* obj);
-bool register_all_cocos2dx_ui(se::Object* obj);
 
 int main_register_class(int argc, char** argv)
 {
@@ -33,6 +33,8 @@ int main_register_class(int argc, char** argv)
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_prepare.js"));
 //    jsb_register_all();
     register_all_cocos2dx(global);
+    register_all_cocos2dx_audioengine(global);
+    register_all_cocos2dx_extension(global);
     register_all_cocos2dx_ui(global);
 
     jsb_register_Node_manual();
@@ -328,7 +330,7 @@ int main_register_class(int argc, char** argv)
         {
             se::Object* subobj = se::Object::createPlainObject(false);
             subobj->setProperty("x", se::Value(239184543.2372f));
-            subobj->setProperty("y", se::Value(3.2389f));
+//            subobj->setProperty("y", se::Value(3.2389f));
             obj->setArrayElement(3, se::Value(subobj));
             subobj->release();
         }

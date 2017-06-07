@@ -4,18 +4,18 @@
 
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
-extern se::Object* __jsb_cocos2dx_audioengine_AudioProfile_proto;
-extern se::Class* __jsb_cocos2dx_audioengine_AudioProfile_class;
+extern se::Object* __jsb_cocos2d_experimental_AudioProfile_proto;
+extern se::Class* __jsb_cocos2d_experimental_AudioProfile_class;
 
-bool js_register_cocos2dx_audioengine_AudioProfile(se::Object* obj);
-
+bool js_register_cocos2d_experimental_AudioProfile(se::Object* obj);
+bool register_all_cocos2dx_audioengine(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_audioengine_AudioProfile_AudioProfile);
 
-extern se::Object* __jsb_cocos2dx_audioengine_AudioEngine_proto;
-extern se::Class* __jsb_cocos2dx_audioengine_AudioEngine_class;
+extern se::Object* __jsb_cocos2d_experimental_AudioEngine_proto;
+extern se::Class* __jsb_cocos2d_experimental_AudioEngine_class;
 
-bool js_register_cocos2dx_audioengine_AudioEngine(se::Object* obj);
-
+bool js_register_cocos2d_experimental_AudioEngine(se::Object* obj);
+bool register_all_cocos2dx_audioengine(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_audioengine_AudioEngine_lazyInit);
 SE_DECLARE_FUNC(js_cocos2dx_audioengine_AudioEngine_setCurrentTime);
 SE_DECLARE_FUNC(js_cocos2dx_audioengine_AudioEngine_getVolume);

@@ -5366,7 +5366,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
 		            se::ValueArray args;
 		            args.resize(2);
 		            ok &= std_string_to_seval(larg0, &args[0]);
-		            ok &= native_ptr_to_seval<cocos2d::extension::ManifestAsset>((cocos2d::extension::ManifestAsset)larg1, &args[1]);
+		            ok &= ManifestAsset_to_seval(larg1, &args[1]);
 		            se::Value rval;
 		            se::Object* thisObj = jsThis.toObject();
 		            se::Object* funcObj = jsFunc.toObject();
@@ -5376,7 +5376,8 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
 		            }
 		            bool result;
 		            ok &= seval_to_boolean(rval, &result);
-		            JSB_PRECONDITION2(ok, false, "lambda function : Error processing return value with type bool");
+		            JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type bool");
+		            return result;
 		        };
 		        arg0 = lambda;
 		    }
@@ -5461,7 +5462,8 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle(se::St
 		            }
 		            int result;
 		            ok &= seval_to_int32(rval, (int32_t *)&result);
-		            JSB_PRECONDITION2(ok, false, "lambda function : Error processing return value with type int");
+		            JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type int");
+		            return result;
 		        };
 		        arg0 = lambda;
 		    }

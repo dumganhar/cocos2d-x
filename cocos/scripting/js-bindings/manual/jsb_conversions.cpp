@@ -10,66 +10,79 @@
 
 bool seval_to_int32(const se::Value& v, int32_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toInt32(); //FIXME: need to check isNan?
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_uint32(const se::Value& v, uint32_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toUint32();
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_int8(const se::Value& v, int8_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toInt8();
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_uint8(const se::Value& v, uint8_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toUint8();
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_int16(const se::Value& v, int16_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toInt16();
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_uint16(const se::Value& v, uint16_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toUint16();
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_boolean(const se::Value& v, bool* ret)
 {
+    assert(ret != nullptr);
     if (v.isBoolean())
     {
         *ret = v.toBoolean();
@@ -81,17 +94,19 @@ bool seval_to_boolean(const se::Value& v, bool* ret)
         *ret = v.toInt32() != 0 ? true : false;
         return true;
     }
-
+    *ret = false;
     return false;
 }
 
 bool seval_to_float(const se::Value& v, float* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toFloat();
         return true;
     }
+    *ret = 0.0f;
     return false;
 }
 
@@ -102,56 +117,67 @@ bool seval_to_double(const se::Value& v, double* ret)
         *ret = v.toNumber();
         return true;
     }
+    *ret = 0.0;
     return false;
 }
 
 bool seval_to_long(const se::Value& v, long* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toLong();
         return true;
     }
+    *ret = 0L;
     return false;
 }
 
 bool seval_to_ulong(const se::Value& v, unsigned long* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = v.toUlong();
         return true;
     }
+    *ret = 0UL;
     return false;
 }
 
 bool seval_to_longlong(const se::Value& v, long long* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = (long long)v.toLong();
         return true;
     }
+    *ret = 0LL;
     return false;
 }
 
 bool seval_to_ssize(const se::Value& v, ssize_t* ret)
 {
+    assert(ret != nullptr);
     if (v.isNumber())
     {
         *ret = (ssize_t)v.toLong();
         return true;
     }
+    *ret = 0;
     return false;
 }
 
 bool seval_to_std_string(const se::Value& v, std::string* ret)
 {
+    assert(ret != nullptr);
     if (v.isString())
     {
         *ret = v.toString();
         return true;
     }
+    ret->clear();
     return false;
 }
 
@@ -162,9 +188,9 @@ bool seval_to_Vec2(const se::Value& v, cocos2d::Vec2* pt)
     se::Value x;
     se::Value y;
     bool ok = obj->getProperty("x", &x);
-    JSB_PRECONDITION3(ok && x.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && x.isNumber(), false, *pt = cocos2d::Vec2::ZERO);
     ok = obj->getProperty("y", &y);
-    JSB_PRECONDITION3(ok && y.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && y.isNumber(), false, *pt = cocos2d::Vec2::ZERO);
     pt->x = x.toFloat();
     pt->y = y.toFloat();
     return true;
@@ -178,11 +204,11 @@ bool seval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt)
     se::Value y;
     se::Value z;
     bool ok = obj->getProperty("x", &x);
-    JSB_PRECONDITION3(ok && x.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && x.isNumber(), false, *pt = cocos2d::Vec3::ZERO);
     ok = obj->getProperty("y", &y);
-    JSB_PRECONDITION3(ok && y.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && y.isNumber(), false, *pt = cocos2d::Vec3::ZERO);
     ok = obj->getProperty("z", &z);
-    JSB_PRECONDITION3(ok && z.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && z.isNumber(), false, *pt = cocos2d::Vec3::ZERO);
     pt->x = x.toFloat();
     pt->y = y.toFloat();
     pt->z = z.toFloat();
@@ -192,19 +218,20 @@ bool seval_to_Vec3(const se::Value& v, cocos2d::Vec3* pt)
 bool seval_to_Vec4(const se::Value& v, cocos2d::Vec4* pt)
 {
     assert(v.isObject() && pt != nullptr);
+    pt->x = pt->y = pt->z = pt->w = 0.0f;
     se::Object* obj = v.toObject();
     se::Value x;
     se::Value y;
     se::Value z;
     se::Value w;
     bool ok = obj->getProperty("x", &x);
-    JSB_PRECONDITION3(ok && x.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && x.isNumber(), false, *pt = cocos2d::Vec4::ZERO);
     ok = obj->getProperty("y", &y);
-    JSB_PRECONDITION3(ok && y.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && y.isNumber(), false, *pt = cocos2d::Vec4::ZERO);
     ok = obj->getProperty("z", &z);
-    JSB_PRECONDITION3(ok && z.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && z.isNumber(), false, *pt = cocos2d::Vec4::ZERO);
     ok = obj->getProperty("w", &w);
-    JSB_PRECONDITION3(ok && w.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && w.isNumber(), false, *pt = cocos2d::Vec4::ZERO);
     pt->x = x.toFloat();
     pt->y = y.toFloat();
     pt->z = z.toFloat();
@@ -216,18 +243,19 @@ bool seval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
 {
     assert(v.isObject() && mat != nullptr);
 
-    JSB_PRECONDITION3(v.toObject()->isArray(), false, "Matrix object must be an Array");
+    JSB_PRECONDITION3(v.toObject()->isArray(), false, *mat = cocos2d::Mat4::IDENTITY;);
 
     se::Object* obj = v.toObject();
 
     bool ok = false;
     uint32_t len = 0;
     ok = obj->getArrayLength(&len);
-    JSB_PRECONDITION3(ok, false, "getArrayLength failed!");
+    JSB_PRECONDITION3(ok, false, *mat = cocos2d::Mat4::IDENTITY);
 
     if (len != 16)
     {
         SE_REPORT_ERROR("Array length error: %d, was expecting 16", len);
+        *mat = cocos2d::Mat4::IDENTITY;
         return false;
     }
 
@@ -235,7 +263,7 @@ bool seval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
     for (uint32_t i = 0; i < len; ++i)
     {
         ok = obj->getArrayElement(i, &tmp);
-        JSB_PRECONDITION3(ok, false, "getArrayElement failed!");
+        JSB_PRECONDITION3(ok, false, *mat = cocos2d::Mat4::IDENTITY);
 
         if (tmp.isNumber())
         {
@@ -244,6 +272,7 @@ bool seval_to_Mat4(const se::Value& v, cocos2d::Mat4* mat)
         else
         {
             SE_REPORT_ERROR("%u, not supported type in matrix", i);
+            *mat = cocos2d::Mat4::IDENTITY;
             return false;
         }
 
@@ -261,9 +290,9 @@ bool seval_to_Size(const se::Value& v, cocos2d::Size* size)
     se::Value height;
 
     bool ok = obj->getProperty("width", &width);
-    JSB_PRECONDITION3(ok && width.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && width.isNumber(), false, *size = cocos2d::Size::ZERO);
     ok = obj->getProperty("height", &height);
-    JSB_PRECONDITION3(ok && height.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && height.isNumber(), false, *size = cocos2d::Size::ZERO);
     size->width = width.toFloat();
     size->height = height.toFloat();
     return true;
@@ -279,13 +308,13 @@ bool seval_to_Rect(const se::Value& v, cocos2d::Rect* rect)
     se::Value height;
 
     bool ok = obj->getProperty("x", &x);
-    JSB_PRECONDITION3(ok && x.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && x.isNumber(), false, *rect = cocos2d::Rect::ZERO);
     ok = obj->getProperty("y", &y);
-    JSB_PRECONDITION3(ok && y.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && y.isNumber(), false, *rect = cocos2d::Rect::ZERO);
     ok = obj->getProperty("width", &width);
-    JSB_PRECONDITION3(ok && width.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && width.isNumber(), false, *rect = cocos2d::Rect::ZERO);
     ok = obj->getProperty("height", &height);
-    JSB_PRECONDITION3(ok && height.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && height.isNumber(), false, *rect = cocos2d::Rect::ZERO);
     rect->origin.x = x.toFloat();
     rect->origin.y = y.toFloat();
     rect->size.width = width.toFloat();
@@ -302,11 +331,11 @@ bool seval_to_Color3B(const se::Value& v, cocos2d::Color3B* color)
     se::Value g;
     se::Value b;
     bool ok = obj->getProperty("r", &r);
-    JSB_PRECONDITION3(ok && r.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && r.isNumber(), false, *color = cocos2d::Color3B::BLACK);
     ok = obj->getProperty("g", &g);
-    JSB_PRECONDITION3(ok && g.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && g.isNumber(), false, *color = cocos2d::Color3B::BLACK);
     ok = obj->getProperty("b", &b);
-    JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && b.isNumber(), false, *color = cocos2d::Color3B::BLACK);
     color->r = (GLubyte)r.toUint16();
     color->g = (GLubyte)g.toUint16();
     color->b = (GLubyte)b.toUint16();
@@ -322,13 +351,13 @@ bool seval_to_Color4B(const se::Value& v, cocos2d::Color4B* color)
     se::Value b;
     se::Value a;
     bool ok = obj->getProperty("r", &r);
-    JSB_PRECONDITION3(ok && r.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && r.isNumber(), false, *color = cocos2d::Color4B::BLACK);
     ok = obj->getProperty("g", &g);
-    JSB_PRECONDITION3(ok && g.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && g.isNumber(), false, *color = cocos2d::Color4B::BLACK);
     ok = obj->getProperty("b", &b);
-    JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && b.isNumber(), false, *color = cocos2d::Color4B::BLACK);
     ok = obj->getProperty("a", &a);
-    JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && b.isNumber(), false, *color = cocos2d::Color4B::BLACK);
     color->r = (GLubyte)r.toUint16();
     color->g = (GLubyte)g.toUint16();
     color->b = (GLubyte)b.toUint16();
@@ -345,13 +374,13 @@ bool seval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
     se::Value b;
     se::Value a;
     bool ok = obj->getProperty("r", &r);
-    JSB_PRECONDITION3(ok && r.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && r.isNumber(), false, *color = cocos2d::Color4F::BLACK);
     ok = obj->getProperty("g", &g);
-    JSB_PRECONDITION3(ok && g.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && g.isNumber(), false, *color = cocos2d::Color4F::BLACK);
     ok = obj->getProperty("b", &b);
-    JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && b.isNumber(), false, *color = cocos2d::Color4F::BLACK);
     ok = obj->getProperty("a", &a);
-    JSB_PRECONDITION3(ok && b.isNumber(), false , "Error processing arguments");
+    JSB_PRECONDITION3(ok && b.isNumber(), false, *color = cocos2d::Color4F::BLACK);
     color->r = r.toFloat() / 255.0f;
     color->g = g.toFloat() / 255.0f;
     color->b = b.toFloat() / 255.0f;
@@ -362,6 +391,7 @@ bool seval_to_Color4F(const se::Value& v, cocos2d::Color4F* color)
 bool seval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
 {
     assert(ret != nullptr);
+    bool ok = true;
     if (v.isObject())
     {
         se::Object* jsobj = v.toObject();
@@ -369,21 +399,17 @@ bool seval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
         {
             // It's a normal js object.
             cocos2d::ValueMap dictVal;
-            bool ok = seval_to_ccvaluemap(v, &dictVal);
-            if (ok)
-            {
-                *ret = cocos2d::Value(dictVal);
-            }
+            ok = seval_to_ccvaluemap(v, &dictVal);
+            JSB_PRECONDITION3(ok, false, *ret = cocos2d::Value::Null);
+            *ret = cocos2d::Value(dictVal);
         }
         else
         {
             // It's a js array object.
             cocos2d::ValueVector arrVal;
-            bool ok = seval_to_ccvaluevector(v, &arrVal);
-            if (ok)
-            {
-                *ret = cocos2d::Value(arrVal);
-            }
+            ok = seval_to_ccvaluevector(v, &arrVal);
+            JSB_PRECONDITION3(ok, false, *ret = cocos2d::Value::Null);
+            *ret = cocos2d::Value(arrVal);
         }
     }
     else if (v.isString())
@@ -403,45 +429,31 @@ bool seval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
         CCASSERT(false, "not supported type");
     }
 
-    return true;
+    return ok;
 }
 
 bool seval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
 {
-    if (v.isNullOrUndefined())
-        return false;
-
+    assert(ret != nullptr);
     assert(v.isObject());
+
+    JSB_PRECONDITION3(!v.isNullOrUndefined(), false, ret->clear());
 
     se::Object* obj = v.toObject();
 
     cocos2d::ValueMap& dict = *ret;
 
     std::vector<std::string> allKeys;
-    if (!obj->getAllKeys(&allKeys))
-    {
-        CCLOGERROR("Can't get keys for obj: %p", obj);
-        return false;
-    }
+    JSB_PRECONDITION3(obj->getAllKeys(&allKeys), false, ret->clear());
 
     bool ok = false;
     se::Value value;
     cocos2d::Value ccvalue;
     for (const auto& key : allKeys)
     {
-        if (!obj->getProperty(key.c_str(), &value))
-        {
-            ret->clear();
-            return false;
-        }
-
+        JSB_PRECONDITION3(obj->getProperty(key.c_str(), &value), false, ret->clear());
         ok = seval_to_ccvalue(value, &ccvalue);
-        if (!ok)
-        {
-            ret->clear();
-            return false;
-        }
-
+        JSB_PRECONDITION3(ok, false, ret->clear());
         dict.emplace(key, ccvalue);
     }
 
@@ -460,32 +472,24 @@ static bool isNumberString(const std::string& str)
 
 bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
 {
-    if (v.isNullOrUndefined())
-        return false;
-
+    assert(ret != nullptr);
     assert(v.isObject());
+
+    JSB_PRECONDITION3(!v.isNullOrUndefined(), false, ret->clear());
 
     se::Object* obj = v.toObject();
 
     cocos2d::ValueMapIntKey& dict = *ret;
 
     std::vector<std::string> allKeys;
-    if (!obj->getAllKeys(&allKeys))
-    {
-        CCLOGERROR("Can't get keys for obj: %p", obj);
-        return false;
-    }
+    JSB_PRECONDITION3(obj->getAllKeys(&allKeys), false, ret->clear());
 
     bool ok = false;
     se::Value value;
     cocos2d::Value ccvalue;
     for (const auto& key : allKeys)
     {
-        if (!obj->getProperty(key.c_str(), &value))
-        {
-            ret->clear();
-            return false;
-        }
+        JSB_PRECONDITION3(obj->getProperty(key.c_str(), &value), false, ret->clear());
 
         if (!isNumberString(key))
         {
@@ -496,12 +500,7 @@ bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
         int intKey = atoi(key.c_str());
 
         ok = seval_to_ccvalue(value, &ccvalue);
-        if (!ok)
-        {
-            ret->clear();
-            return false;
-        }
-
+        JSB_PRECONDITION3(ok, false, ret->clear());
         dict.emplace(intKey, ccvalue);
     }
     
@@ -515,7 +514,7 @@ bool seval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
     assert(v.isObject());
 
     se::Object* obj = v.toObject();
-    JSB_PRECONDITION3(obj->isArray(), false, "Object must be an array");
+    JSB_PRECONDITION3(obj->isArray(), false, ret->clear());
 
     uint32_t len = 0;
     obj->getArrayLength(&len);
@@ -528,12 +527,7 @@ bool seval_to_ccvaluevector(const se::Value& v,  cocos2d::ValueVector* ret)
         if (obj->getArrayElement(i, &value))
         {
             ok = seval_to_ccvalue(value, &ccvalue);
-            if (!ok)
-            {
-                ret->clear();
-                return false;
-            }
-
+            JSB_PRECONDITION3(ok, false, ret->clear());
             ret->push_back(ccvalue);
         }
     }
@@ -549,12 +543,7 @@ bool sevals_variadic_to_ccvaluevector(const se::ValueArray& args, cocos2d::Value
     for (const auto& arg : args)
     {
         ok = seval_to_ccvalue(arg, &ccvalue);
-        if (!ok)
-        {
-            ret->clear();
-            return false;
-        }
-
+        JSB_PRECONDITION3(ok, false, ret->clear());
         ret->push_back(ccvalue);
     }
 
@@ -566,13 +555,14 @@ bool seval_to_blendfunc(const se::Value& v, cocos2d::BlendFunc* ret)
     assert(v.isObject());
     se::Object* obj = v.toObject();
     se::Value value;
+    bool ok = false;
 
-    if (!obj->getProperty("src", &value))
-        return false;
+    ok = obj->getProperty("src", &value);
+    JSB_PRECONDITION3(ok, false, *ret = cocos2d::BlendFunc::DISABLE);
     ret->src = value.toUint32();
+    ok = obj->getProperty("dst", &value);
+    JSB_PRECONDITION3(ok, false, *ret = cocos2d::BlendFunc::DISABLE);
 
-    if (!obj->getProperty("dst", &value))
-        return false;
     ret->dst = value.toUint32();
     return true;
 }
@@ -589,12 +579,7 @@ bool seval_to_std_vector_string(const se::Value& v, std::vector<std::string>* re
         se::Value value;
         for (uint32_t i = 0; i < len; ++i)
         {
-            if (!obj->getArrayElement(i, &value))
-            {
-                ret->clear();
-                return false;
-            }
-
+            JSB_PRECONDITION3(obj->getArrayElement(i, &value), false, ret->clear());
             assert(value.isString());
             ret->push_back(value.toString());
         }
@@ -617,12 +602,7 @@ bool seval_to_std_vector_int(const se::Value& v, std::vector<int>* ret)
         se::Value value;
         for (uint32_t i = 0; i < len; ++i)
         {
-            if (!obj->getArrayElement(i, &value))
-            {
-                ret->clear();
-                return false;
-            }
-
+            JSB_PRECONDITION3(obj->getArrayElement(i, &value), false, ret->clear());
             assert(value.isNumber());
             ret->push_back(value.toInt32());
         }
@@ -645,12 +625,7 @@ bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret)
         se::Value value;
         for (uint32_t i = 0; i < len; ++i)
         {
-            if (!obj->getArrayElement(i, &value))
-            {
-                ret->clear();
-                return false;
-            }
-
+            JSB_PRECONDITION3(obj->getArrayElement(i, &value), false, ret->clear());
             assert(value.isNumber());
             ret->push_back(value.toFloat());
         }
@@ -674,12 +649,7 @@ bool seval_to_std_vector_Vec2(const se::Value& v, std::vector<cocos2d::Vec2>* re
         cocos2d::Vec2 pt;
         for (uint32_t i = 0; i < len; ++i)
         {
-            if (!obj->getArrayElement(i, &value) || !seval_to_Vec2(value, &pt))
-            {
-                ret->clear();
-                return false;
-            }
-
+            JSB_PRECONDITION3(obj->getArrayElement(i, &value) && seval_to_Vec2(value, &pt), false, ret->clear());
             ret->push_back(pt);
         }
         return true;
@@ -847,19 +817,19 @@ bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret)
     se::Value tmp;
 
     ok = obj->getProperty("x", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, ret->x = ret->y = ret->z = ret->timestamp = 0.0);
     ret->x = tmp.toNumber();
 
     ok = obj->getProperty("y", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, ret->x = ret->y = ret->z = ret->timestamp = 0.0);
     ret->y = tmp.toNumber();
 
     ok = obj->getProperty("z", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, ret->x = ret->y = ret->z = ret->timestamp = 0.0);
     ret->z = tmp.toNumber();
 
     ok = obj->getProperty("timestamp", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, ret->x = ret->y = ret->z = ret->timestamp = 0.0);
     ret->timestamp = tmp.toNumber();
 
     return true;
@@ -874,19 +844,19 @@ bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret)
     se::Value tmp;
 
     ok = obj->getProperty("x", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = cocos2d::Quaternion::ZERO);
     ret->x = tmp.toFloat();
 
     ok = obj->getProperty("y", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = cocos2d::Quaternion::ZERO);
     ret->y = tmp.toFloat();
 
     ok = obj->getProperty("z", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = cocos2d::Quaternion::ZERO);
     ret->z = tmp.toFloat();
 
     ok = obj->getProperty("w", &tmp);
-    JSB_PRECONDITION3(ok && tmp.isNumber(), false, "Error processing arguments");
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = cocos2d::Quaternion::ZERO);
     ret->w = tmp.toFloat();
 
     return true;
@@ -1383,3 +1353,17 @@ bool Quaternion_to_seval(const cocos2d::Quaternion& v, se::Value* ret)
     return true;
 }
 
+bool ManifestAsset_to_seval(const cocos2d::extension::ManifestAsset& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("md5", se::Value(v.md5));
+    obj->setProperty("path", se::Value(v.path));
+    obj->setProperty("compressed", se::Value(v.compressed));
+    obj->setProperty("size", se::Value(v.size));
+    obj->setProperty("downloadState", se::Value(v.downloadState));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}

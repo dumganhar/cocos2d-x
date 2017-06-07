@@ -4350,7 +4350,8 @@ static bool js_cocos2dx_Node_enumerateChildren(se::State& s)
 		            }
 		            bool result;
 		            ok &= seval_to_boolean(rval, &result);
-		            JSB_PRECONDITION2(ok, false, "lambda function : Error processing return value with type bool");
+		            JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type bool");
+		            return result;
 		        };
 		        arg1 = lambda;
 		    }

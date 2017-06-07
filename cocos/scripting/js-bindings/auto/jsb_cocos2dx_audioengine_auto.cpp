@@ -3,94 +3,94 @@
 #include "scripting/js-bindings/manual/jsb_conversions.hpp"
 #include "audio/include/AudioEngine.h"
 
-se::Object* __jsb_cocos2dx_audioengine_AudioProfile_proto = nullptr;
-se::Class* __jsb_cocos2dx_audioengine_AudioProfile_class = nullptr;
-bool js_cocos2dx_audioengine_AudioProfile_get_name(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject jsthis(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(jsthis);
-    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_audioengine_AudioProfile_get_name : Invalid Native Object");
+se::Object* __jsb_cocos2d_experimental_AudioProfile_proto = nullptr;
+se::Class* __jsb_cocos2d_experimental_AudioProfile_class = nullptr;
 
-    JS::RootedValue jsret(cx);
+static bool js_cocos2dx_audioengine_AudioProfile_get_name(se::State& s)
+{
+    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_get_name : Invalid Native Object");
+
+    bool ok = true;
+    se::Value jsret;
     ok &= std_string_to_seval(cobj->name, &jsret);
-    args.rval().set(jsret);
+    s.rval() = jsret;
     return true;
 }
-bool js_cocos2dx_audioengine_AudioProfile_set_name(JSContext *cx, uint32_t argc, jsval *vp)
+SE_BIND_PROP_GET(js_cocos2dx_audioengine_AudioProfile_get_name)
+
+static bool js_cocos2dx_audioengine_AudioProfile_set_name(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject jsthis(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(jsthis);
-    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_audioengine_AudioProfile_set_name : Invalid Native Object");
+    const auto& args = s.args();
+    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_set_name : Invalid Native Object");
 
     bool ok = true;
     std::string arg0;
-    ok &= seval_to_std_string(args.get(0), &arg0);
-    JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_audioengine_AudioProfile_set_name : Error processing new value");
+    ok &= seval_to_std_string(args[0], &arg0);
+    JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioProfile_set_name : Error processing new value");
     cobj->name = arg0;
     return true;
 }
-bool js_cocos2dx_audioengine_AudioProfile_get_maxInstances(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject jsthis(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(jsthis);
-    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_audioengine_AudioProfile_get_maxInstances : Invalid Native Object");
+SE_BIND_PROP_SET(js_cocos2dx_audioengine_AudioProfile_set_name)
 
-    JS::RootedValue jsret(cx);
+static bool js_cocos2dx_audioengine_AudioProfile_get_maxInstances(se::State& s)
+{
+    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_get_maxInstances : Invalid Native Object");
+
+    bool ok = true;
+    se::Value jsret;
     ok &= uint32_to_seval(cobj->maxInstances, &jsret);
-    args.rval().set(jsret);
+    s.rval() = jsret;
     return true;
 }
-bool js_cocos2dx_audioengine_AudioProfile_set_maxInstances(JSContext *cx, uint32_t argc, jsval *vp)
+SE_BIND_PROP_GET(js_cocos2dx_audioengine_AudioProfile_get_maxInstances)
+
+static bool js_cocos2dx_audioengine_AudioProfile_set_maxInstances(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject jsthis(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(jsthis);
-    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_audioengine_AudioProfile_set_maxInstances : Invalid Native Object");
+    const auto& args = s.args();
+    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_set_maxInstances : Invalid Native Object");
 
     bool ok = true;
     unsigned int arg0 = 0;
-    ok &= seval_to_uint32(args.get(0), &arg0);
-    JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_audioengine_AudioProfile_set_maxInstances : Error processing new value");
+    ok &= seval_to_uint32(args[0], &arg0);
+    JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioProfile_set_maxInstances : Error processing new value");
     cobj->maxInstances = arg0;
     return true;
 }
-bool js_cocos2dx_audioengine_AudioProfile_get_minDelay(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject jsthis(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(jsthis);
-    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_audioengine_AudioProfile_get_minDelay : Invalid Native Object");
+SE_BIND_PROP_SET(js_cocos2dx_audioengine_AudioProfile_set_maxInstances)
 
-    JS::RootedValue jsret(cx);
+static bool js_cocos2dx_audioengine_AudioProfile_get_minDelay(se::State& s)
+{
+    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_get_minDelay : Invalid Native Object");
+
+    bool ok = true;
+    se::Value jsret;
     ok &= double_to_seval(cobj->minDelay, &jsret);
-    args.rval().set(jsret);
+    s.rval() = jsret;
     return true;
 }
-bool js_cocos2dx_audioengine_AudioProfile_set_minDelay(JSContext *cx, uint32_t argc, jsval *vp)
+SE_BIND_PROP_GET(js_cocos2dx_audioengine_AudioProfile_get_minDelay)
+
+static bool js_cocos2dx_audioengine_AudioProfile_set_minDelay(se::State& s)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject jsthis(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(jsthis);
-    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_audioengine_AudioProfile_set_minDelay : Invalid Native Object");
+    const auto& args = s.args();
+    cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_set_minDelay : Invalid Native Object");
 
     bool ok = true;
     double arg0 = 0;
-    ok &= seval_to_double(args.get(0), &arg0);
-    JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_audioengine_AudioProfile_set_minDelay : Error processing new value");
+    ok &= seval_to_double(args[0], &arg0);
+    JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioProfile_set_minDelay : Error processing new value");
     cobj->minDelay = arg0;
     return true;
 }
+SE_BIND_PROP_SET(js_cocos2dx_audioengine_AudioProfile_set_minDelay)
 
-SE_DECLARE_FINALIZE_FUNC(js_cocos2dx_audioengine_AudioProfile_finalize)
+SE_DECLARE_FINALIZE_FUNC(js_cocos2d_experimental_AudioProfile_finalize)
 
 static bool js_cocos2dx_audioengine_AudioProfile_constructor(se::State& s)
 {
@@ -99,11 +99,12 @@ static bool js_cocos2dx_audioengine_AudioProfile_constructor(se::State& s)
     s.thisObject()->addRef();
     return true;
 }
-SE_BIND_CTOR(js_cocos2dx_audioengine_AudioProfile_constructor, __jsb_cocos2dx_audioengine_AudioProfile_class, js_cocos2dx_audioengine_AudioProfile_finalize)
+SE_BIND_CTOR(js_cocos2dx_audioengine_AudioProfile_constructor, __jsb_cocos2d_experimental_AudioProfile_class, js_cocos2d_experimental_AudioProfile_finalize)
 
 
 
-bool js_cocos2dx_audioengine_AudioProfile_finalize(se::State& s)
+
+bool js_cocos2d_experimental_AudioProfile_finalize(se::State& s)
 {
     if (s.nativeThisObject() != nullptr)
     {
@@ -113,7 +114,7 @@ bool js_cocos2dx_audioengine_AudioProfile_finalize(se::State& s)
     }
     return true;
 }
-SE_BIND_FINALIZE_FUNC(js_cocos2dx_audioengine_AudioProfile_finalize)
+SE_BIND_FINALIZE_FUNC(js_cocos2d_experimental_AudioProfile_finalize)
 
 bool js_register_cocos2dx_audioengine_AudioProfile(se::Object* obj)
 {
@@ -122,18 +123,18 @@ bool js_register_cocos2dx_audioengine_AudioProfile(se::Object* obj)
     cls->defineProperty("name", _SE(js_cocos2dx_audioengine_AudioProfile_get_name), _SE(js_cocos2dx_audioengine_AudioProfile_set_name));
     cls->defineProperty("maxInstances", _SE(js_cocos2dx_audioengine_AudioProfile_get_maxInstances), _SE(js_cocos2dx_audioengine_AudioProfile_set_maxInstances));
     cls->defineProperty("minDelay", _SE(js_cocos2dx_audioengine_AudioProfile_get_minDelay), _SE(js_cocos2dx_audioengine_AudioProfile_set_minDelay));
-    cls->defineFinalizedFunction(_SE(js_cocos2dx_audioengine_AudioProfile_finalize));
+    cls->defineFinalizedFunction(_SE(js_cocos2d_experimental_AudioProfile_finalize));
     cls->install();
     JSBClassType::registerClass<cocos2d::experimental::AudioProfile>(cls);
 
-    __jsb_cocos2dx_audioengine_AudioProfile_proto = cls->getProto();
-    __jsb_cocos2dx_audioengine_AudioProfile_class = cls;
+    __jsb_cocos2d_experimental_AudioProfile_proto = cls->getProto();
+    __jsb_cocos2d_experimental_AudioProfile_class = cls;
 
     return true;
 }
 
-se::Object* __jsb_cocos2dx_audioengine_AudioEngine_proto = nullptr;
-se::Class* __jsb_cocos2dx_audioengine_AudioEngine_class = nullptr;
+se::Object* __jsb_cocos2d_experimental_AudioEngine_proto = nullptr;
+se::Class* __jsb_cocos2d_experimental_AudioEngine_class = nullptr;
 
 static bool js_cocos2dx_audioengine_AudioEngine_lazyInit(se::State& s)
 {
@@ -690,6 +691,7 @@ SE_BIND_FUNC(js_cocos2dx_audioengine_AudioEngine_getProfile)
 
 
 
+
 bool js_register_cocos2dx_audioengine_AudioEngine(se::Object* obj)
 {
     auto cls = se::Class::create("AudioEngine", obj, nullptr, nullptr);
@@ -722,8 +724,8 @@ bool js_register_cocos2dx_audioengine_AudioEngine(se::Object* obj)
     cls->install();
     JSBClassType::registerClass<cocos2d::experimental::AudioEngine>(cls);
 
-    __jsb_cocos2dx_audioengine_AudioEngine_proto = cls->getProto();
-    __jsb_cocos2dx_audioengine_AudioEngine_class = cls;
+    __jsb_cocos2d_experimental_AudioEngine_proto = cls->getProto();
+    __jsb_cocos2d_experimental_AudioEngine_class = cls;
 
     return true;
 }
@@ -732,7 +734,13 @@ bool register_all_cocos2dx_audioengine(se::Object* obj)
 {
     // Get the ns
     se::Value nsVal;
-    obj->getProperty("jsb", &nsVal);
+    if (!obj->getProperty("jsb", &nsVal))
+    {
+        se::Object* jsobj = se::Object::createPlainObject(false);
+        nsVal.setObject(jsobj);
+        obj->setProperty("jsb", nsVal);
+        jsobj->release();
+    }
     se::Object* ns = nsVal.toObject();
 
     js_register_cocos2dx_audioengine_AudioProfile(ns);

@@ -7,7 +7,7 @@ extern se::Object* __jsb_cocos2d_extension_Control_proto;
 extern se::Class* __jsb_cocos2d_extension_Control_class;
 
 bool js_register_cocos2d_extension_Control(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_Control_setEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_extension_Control_getState);
 SE_DECLARE_FUNC(js_cocos2dx_extension_Control_sendActionsForControlEvents);
@@ -27,7 +27,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlButton_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlButton_class;
 
 bool js_register_cocos2d_extension_ControlButton(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlButton_isPushed);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlButton_setTitleLabelForState);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlButton_setAdjustBackgroundImage);
@@ -73,7 +73,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlHuePicker_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlHuePicker_class;
 
 bool js_register_cocos2d_extension_ControlHuePicker(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlHuePicker_initWithTargetAndPos);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlHuePicker_setHue);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlHuePicker_getStartPos);
@@ -91,7 +91,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlSaturationBrightnessPicker_pro
 extern se::Class* __jsb_cocos2d_extension_ControlSaturationBrightnessPicker_class;
 
 bool js_register_cocos2d_extension_ControlSaturationBrightnessPicker(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSaturationBrightnessPicker_getShadow);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSaturationBrightnessPicker_initWithTargetAndPos);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSaturationBrightnessPicker_getStartPos);
@@ -107,7 +107,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlColourPicker_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlColourPicker_class;
 
 bool js_register_cocos2d_extension_ControlColourPicker(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlColourPicker_hueSliderValueChanged);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlColourPicker_getHuePicker);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlColourPicker_getcolourPicker);
@@ -123,7 +123,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlPotentiometer_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlPotentiometer_class;
 
 bool js_register_cocos2d_extension_ControlPotentiometer(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlPotentiometer_setPreviousLocation);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlPotentiometer_setValue);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlPotentiometer_getProgressTimer);
@@ -149,7 +149,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlSlider_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlSlider_class;
 
 bool js_register_cocos2d_extension_ControlSlider(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSlider_setBackgroundSprite);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSlider_getMaximumAllowedValue);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSlider_initWithSprites);
@@ -177,7 +177,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlStepper_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlStepper_class;
 
 bool js_register_cocos2d_extension_ControlStepper(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlStepper_getMinusSprite);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlStepper_setValue);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlStepper_setStepValue);
@@ -205,7 +205,7 @@ extern se::Object* __jsb_cocos2d_extension_ControlSwitch_proto;
 extern se::Class* __jsb_cocos2d_extension_ControlSwitch_class;
 
 bool js_register_cocos2d_extension_ControlSwitch(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSwitch_setOn);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSwitch_locationFromTouch);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ControlSwitch_isOn);
@@ -218,7 +218,7 @@ extern se::Object* __jsb_cocos2d_extension_ScrollView_proto;
 extern se::Class* __jsb_cocos2d_extension_ScrollView_class;
 
 bool js_register_cocos2d_extension_ScrollView(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ScrollView_isClippingToBounds);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ScrollView_setContainer);
 SE_DECLARE_FUNC(js_cocos2dx_extension_ScrollView_setContentOffsetInDuration);
@@ -258,7 +258,7 @@ extern se::Object* __jsb_cocos2d_extension_TableViewCell_proto;
 extern se::Class* __jsb_cocos2d_extension_TableViewCell_class;
 
 bool js_register_cocos2d_extension_TableViewCell(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_TableViewCell_reset);
 SE_DECLARE_FUNC(js_cocos2dx_extension_TableViewCell_getIdx);
 SE_DECLARE_FUNC(js_cocos2dx_extension_TableViewCell_setIdx);
@@ -269,7 +269,7 @@ extern se::Object* __jsb_cocos2d_extension_TableView_proto;
 extern se::Class* __jsb_cocos2d_extension_TableView_class;
 
 bool js_register_cocos2d_extension_TableView(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_TableView_updateCellAtIndex);
 SE_DECLARE_FUNC(js_cocos2dx_extension_TableView_setVerticalFillOrder);
 SE_DECLARE_FUNC(js_cocos2dx_extension_TableView_scrollViewDidZoom);
@@ -288,7 +288,7 @@ extern se::Object* __jsb_cocos2d_extension_EventAssetsManagerEx_proto;
 extern se::Class* __jsb_cocos2d_extension_EventAssetsManagerEx_class;
 
 bool js_register_cocos2d_extension_EventAssetsManagerEx(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_EventAssetsManagerEx_getAssetsManagerEx);
 SE_DECLARE_FUNC(js_cocos2dx_extension_EventAssetsManagerEx_getAssetId);
 SE_DECLARE_FUNC(js_cocos2dx_extension_EventAssetsManagerEx_getCURLECode);
@@ -303,7 +303,7 @@ extern se::Object* __jsb_cocos2d_extension_Manifest_proto;
 extern se::Class* __jsb_cocos2d_extension_Manifest_class;
 
 bool js_register_cocos2d_extension_Manifest(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_Manifest_getManifestFileUrl);
 SE_DECLARE_FUNC(js_cocos2dx_extension_Manifest_isVersionLoaded);
 SE_DECLARE_FUNC(js_cocos2dx_extension_Manifest_isLoaded);
@@ -316,7 +316,7 @@ extern se::Object* __jsb_cocos2d_extension_AssetsManagerEx_proto;
 extern se::Class* __jsb_cocos2d_extension_AssetsManagerEx_class;
 
 bool js_register_cocos2d_extension_AssetsManagerEx(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_AssetsManagerEx_getState);
 SE_DECLARE_FUNC(js_cocos2dx_extension_AssetsManagerEx_getMaxConcurrentTask);
 SE_DECLARE_FUNC(js_cocos2dx_extension_AssetsManagerEx_checkUpdate);
@@ -335,6 +335,6 @@ extern se::Object* __jsb_cocos2d_extension_EventListenerAssetsManagerEx_proto;
 extern se::Class* __jsb_cocos2d_extension_EventListenerAssetsManagerEx_class;
 
 bool js_register_cocos2d_extension_EventListenerAssetsManagerEx(se::Object* obj);
-
+bool register_all_cocos2dx_extension(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_extension_EventListenerAssetsManagerEx_EventListenerAssetsManagerEx);
 

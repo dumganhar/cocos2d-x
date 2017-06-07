@@ -7,7 +7,7 @@ extern se::Object* __jsb_cocos2d_ui_LayoutParameter_proto;
 extern se::Class* __jsb_cocos2d_ui_LayoutParameter_class;
 
 bool js_register_cocos2d_ui_LayoutParameter(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LayoutParameter_clone);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LayoutParameter_getLayoutType);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LayoutParameter_createCloneInstance);
@@ -19,7 +19,7 @@ extern se::Object* __jsb_cocos2d_ui_LinearLayoutParameter_proto;
 extern se::Class* __jsb_cocos2d_ui_LinearLayoutParameter_class;
 
 bool js_register_cocos2d_ui_LinearLayoutParameter(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LinearLayoutParameter_setGravity);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LinearLayoutParameter_getGravity);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LinearLayoutParameter_create);
@@ -29,7 +29,7 @@ extern se::Object* __jsb_cocos2d_ui_RelativeLayoutParameter_proto;
 extern se::Class* __jsb_cocos2d_ui_RelativeLayoutParameter_class;
 
 bool js_register_cocos2d_ui_RelativeLayoutParameter(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RelativeLayoutParameter_setAlign);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RelativeLayoutParameter_setRelativeToWidgetName);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RelativeLayoutParameter_getRelativeName);
@@ -43,7 +43,7 @@ extern se::Object* __jsb_cocos2d_ui_Widget_proto;
 extern se::Class* __jsb_cocos2d_ui_Widget_class;
 
 bool js_register_cocos2d_ui_Widget(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Widget_setLayoutComponentEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Widget_setSizePercent);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Widget_getCustomSize);
@@ -122,7 +122,7 @@ extern se::Object* __jsb_cocos2d_ui_Layout_proto;
 extern se::Class* __jsb_cocos2d_ui_Layout_class;
 
 bool js_register_cocos2d_ui_Layout(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Layout_setBackGroundColorVector);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Layout_setClippingType);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Layout_setBackGroundColorType);
@@ -164,7 +164,7 @@ extern se::Object* __jsb_cocos2d_ui_Button_proto;
 extern se::Class* __jsb_cocos2d_ui_Button_class;
 
 bool js_register_cocos2d_ui_Button(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Button_getNormalTextureSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Button_getTitleText);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Button_setTitleLabel);
@@ -211,7 +211,7 @@ extern se::Object* __jsb_cocos2d_ui_AbstractCheckButton_proto;
 extern se::Class* __jsb_cocos2d_ui_AbstractCheckButton_class;
 
 bool js_register_cocos2d_ui_AbstractCheckButton(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_AbstractCheckButton_getCrossDisabledFile);
 SE_DECLARE_FUNC(js_cocos2dx_ui_AbstractCheckButton_getBackDisabledFile);
 SE_DECLARE_FUNC(js_cocos2dx_ui_AbstractCheckButton_loadTextureBackGroundSelected);
@@ -238,7 +238,7 @@ extern se::Object* __jsb_cocos2d_ui_CheckBox_proto;
 extern se::Class* __jsb_cocos2d_ui_CheckBox_class;
 
 bool js_register_cocos2d_ui_CheckBox(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_CheckBox_addEventListener);
 SE_DECLARE_FUNC(js_cocos2dx_ui_CheckBox_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_CheckBox_CheckBox);
@@ -247,7 +247,7 @@ extern se::Object* __jsb_cocos2d_ui_RadioButton_proto;
 extern se::Class* __jsb_cocos2d_ui_RadioButton_class;
 
 bool js_register_cocos2d_ui_RadioButton(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RadioButton_addEventListener);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RadioButton_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RadioButton_RadioButton);
@@ -256,7 +256,7 @@ extern se::Object* __jsb_cocos2d_ui_RadioButtonGroup_proto;
 extern se::Class* __jsb_cocos2d_ui_RadioButtonGroup_class;
 
 bool js_register_cocos2d_ui_RadioButtonGroup(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RadioButtonGroup_removeRadioButton);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RadioButtonGroup_isAllowedNoSelection);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RadioButtonGroup_getSelectedButtonIndex);
@@ -275,7 +275,7 @@ extern se::Object* __jsb_cocos2d_ui_ImageView_proto;
 extern se::Class* __jsb_cocos2d_ui_ImageView_class;
 
 bool js_register_cocos2d_ui_ImageView(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ImageView_loadTexture);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ImageView_init);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ImageView_setScale9Enabled);
@@ -291,7 +291,7 @@ extern se::Object* __jsb_cocos2d_ui_Text_proto;
 extern se::Class* __jsb_cocos2d_ui_Text_class;
 
 bool js_register_cocos2d_ui_Text(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Text_enableShadow);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Text_getFontSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Text_getString);
@@ -331,7 +331,7 @@ extern se::Object* __jsb_cocos2d_ui_TextAtlas_proto;
 extern se::Class* __jsb_cocos2d_ui_TextAtlas_class;
 
 bool js_register_cocos2d_ui_TextAtlas(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextAtlas_getStringLength);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextAtlas_getString);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextAtlas_setString);
@@ -345,7 +345,7 @@ extern se::Object* __jsb_cocos2d_ui_LoadingBar_proto;
 extern se::Class* __jsb_cocos2d_ui_LoadingBar_class;
 
 bool js_register_cocos2d_ui_LoadingBar(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LoadingBar_setPercent);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LoadingBar_loadTexture);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LoadingBar_setDirection);
@@ -363,7 +363,7 @@ extern se::Object* __jsb_cocos2d_ui_ScrollView_proto;
 extern se::Class* __jsb_cocos2d_ui_ScrollView_class;
 
 bool js_register_cocos2d_ui_ScrollView(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ScrollView_scrollToTop);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ScrollView_scrollToPercentHorizontal);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ScrollView_setScrollBarOpacity);
@@ -425,7 +425,7 @@ extern se::Object* __jsb_cocos2d_ui_ListView_proto;
 extern se::Class* __jsb_cocos2d_ui_ListView_class;
 
 bool js_register_cocos2d_ui_ListView(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ListView_setGravity);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ListView_removeLastItem);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ListView_getCenterItemInCurrentView);
@@ -466,7 +466,7 @@ extern se::Object* __jsb_cocos2d_ui_Slider_proto;
 extern se::Class* __jsb_cocos2d_ui_Slider_class;
 
 bool js_register_cocos2d_ui_Slider(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Slider_setPercent);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Slider_getMaxPercent);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Slider_loadSlidBallTextureNormal);
@@ -503,7 +503,7 @@ extern se::Object* __jsb_cocos2d_ui_UICCTextField_proto;
 extern se::Class* __jsb_cocos2d_ui_UICCTextField_class;
 
 bool js_register_cocos2d_ui_UICCTextField(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_UICCTextField_onTextFieldAttachWithIME);
 SE_DECLARE_FUNC(js_cocos2dx_ui_UICCTextField_setPasswordText);
 SE_DECLARE_FUNC(js_cocos2dx_ui_UICCTextField_setAttachWithIME);
@@ -536,7 +536,7 @@ extern se::Object* __jsb_cocos2d_ui_TextField_proto;
 extern se::Class* __jsb_cocos2d_ui_TextField_class;
 
 bool js_register_cocos2d_ui_TextField(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextField_setAttachWithIME);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextField_getFontSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextField_getString);
@@ -589,7 +589,7 @@ extern se::Object* __jsb_cocos2d_ui_TextBMFont_proto;
 extern se::Class* __jsb_cocos2d_ui_TextBMFont_class;
 
 bool js_register_cocos2d_ui_TextBMFont(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextBMFont_getStringLength);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextBMFont_getString);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TextBMFont_setString);
@@ -603,7 +603,7 @@ extern se::Object* __jsb_cocos2d_ui_PageView_proto;
 extern se::Class* __jsb_cocos2d_ui_PageView_class;
 
 bool js_register_cocos2d_ui_PageView(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_PageView_setIndicatorSpaceBetweenIndexNodes);
 SE_DECLARE_FUNC(js_cocos2dx_ui_PageView_insertPage);
 SE_DECLARE_FUNC(js_cocos2dx_ui_PageView_removeAllPages);
@@ -637,7 +637,7 @@ extern se::Object* __jsb_cocos2d_ui_Helper_proto;
 extern se::Class* __jsb_cocos2d_ui_Helper_class;
 
 bool js_register_cocos2d_ui_Helper(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Helper_getSubStringOfUTF8String);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Helper_convertBoundingBoxToScreen);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Helper_changeLayoutSystemActiveState);
@@ -651,7 +651,7 @@ extern se::Object* __jsb_cocos2d_ui_RichElement_proto;
 extern se::Class* __jsb_cocos2d_ui_RichElement_class;
 
 bool js_register_cocos2d_ui_RichElement(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElement_equalType);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElement_init);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElement_setColor);
@@ -661,7 +661,7 @@ extern se::Object* __jsb_cocos2d_ui_RichElementText_proto;
 extern se::Class* __jsb_cocos2d_ui_RichElementText_class;
 
 bool js_register_cocos2d_ui_RichElementText(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementText_init);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementText_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementText_RichElementText);
@@ -670,7 +670,7 @@ extern se::Object* __jsb_cocos2d_ui_RichElementImage_proto;
 extern se::Class* __jsb_cocos2d_ui_RichElementImage_class;
 
 bool js_register_cocos2d_ui_RichElementImage(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementImage_setHeight);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementImage_init);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementImage_setWidth);
@@ -682,7 +682,7 @@ extern se::Object* __jsb_cocos2d_ui_RichElementCustomNode_proto;
 extern se::Class* __jsb_cocos2d_ui_RichElementCustomNode_class;
 
 bool js_register_cocos2d_ui_RichElementCustomNode(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementCustomNode_init);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementCustomNode_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementCustomNode_RichElementCustomNode);
@@ -691,7 +691,7 @@ extern se::Object* __jsb_cocos2d_ui_RichElementNewLine_proto;
 extern se::Class* __jsb_cocos2d_ui_RichElementNewLine_class;
 
 bool js_register_cocos2d_ui_RichElementNewLine(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementNewLine_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichElementNewLine_RichElementNewLine);
 
@@ -699,7 +699,7 @@ extern se::Object* __jsb_cocos2d_ui_RichText_proto;
 extern se::Class* __jsb_cocos2d_ui_RichText_class;
 
 bool js_register_cocos2d_ui_RichText(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichText_insertElement);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichText_setAnchorTextOutline);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RichText_getFontSize);
@@ -752,7 +752,7 @@ extern se::Object* __jsb_cocos2d_ui_HBox_proto;
 extern se::Class* __jsb_cocos2d_ui_HBox_class;
 
 bool js_register_cocos2d_ui_HBox(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_HBox_initWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_HBox_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_HBox_HBox);
@@ -761,7 +761,7 @@ extern se::Object* __jsb_cocos2d_ui_VBox_proto;
 extern se::Class* __jsb_cocos2d_ui_VBox_class;
 
 bool js_register_cocos2d_ui_VBox(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_VBox_initWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_VBox_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_VBox_VBox);
@@ -770,7 +770,7 @@ extern se::Object* __jsb_cocos2d_ui_RelativeBox_proto;
 extern se::Class* __jsb_cocos2d_ui_RelativeBox_class;
 
 bool js_register_cocos2d_ui_RelativeBox(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RelativeBox_initWithSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RelativeBox_create);
 SE_DECLARE_FUNC(js_cocos2dx_ui_RelativeBox_RelativeBox);
@@ -779,7 +779,7 @@ extern se::Object* __jsb_cocos2d_ui_Scale9Sprite_proto;
 extern se::Class* __jsb_cocos2d_ui_Scale9Sprite_class;
 
 bool js_register_cocos2d_ui_Scale9Sprite(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Scale9Sprite_updateWithSprite);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Scale9Sprite_resizableSpriteWithCapInsets);
 SE_DECLARE_FUNC(js_cocos2dx_ui_Scale9Sprite_getCapInsets);
@@ -818,7 +818,7 @@ extern se::Object* __jsb_cocos2d_ui_EditBox_proto;
 extern se::Class* __jsb_cocos2d_ui_EditBox_class;
 
 bool js_register_cocos2d_ui_EditBox(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_EditBox_getFontSize);
 SE_DECLARE_FUNC(js_cocos2dx_ui_EditBox_getText);
 SE_DECLARE_FUNC(js_cocos2dx_ui_EditBox_setFontSize);
@@ -855,7 +855,7 @@ extern se::Object* __jsb_cocos2d_ui_LayoutComponent_proto;
 extern se::Class* __jsb_cocos2d_ui_LayoutComponent_class;
 
 bool js_register_cocos2d_ui_LayoutComponent(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LayoutComponent_setStretchWidthEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LayoutComponent_setPercentWidth);
 SE_DECLARE_FUNC(js_cocos2dx_ui_LayoutComponent_getAnchorPosition);
@@ -913,7 +913,7 @@ extern se::Object* __jsb_cocos2d_ui_TabHeader_proto;
 extern se::Class* __jsb_cocos2d_ui_TabHeader_class;
 
 bool js_register_cocos2d_ui_TabHeader(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TabHeader_getIndexInTabControl);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TabHeader_getTitleText);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TabHeader_setTitleFontSize);
@@ -930,7 +930,7 @@ extern se::Object* __jsb_cocos2d_ui_TabControl_proto;
 extern se::Class* __jsb_cocos2d_ui_TabControl_class;
 
 bool js_register_cocos2d_ui_TabControl(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TabControl_setHeaderWidth);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TabControl_removeTab);
 SE_DECLARE_FUNC(js_cocos2dx_ui_TabControl_getTabCount);
@@ -956,7 +956,7 @@ extern se::Object* __jsb_cocos2d_ui_ScrollViewBar_proto;
 extern se::Class* __jsb_cocos2d_ui_ScrollViewBar_class;
 
 bool js_register_cocos2d_ui_ScrollViewBar(se::Object* obj);
-
+bool register_all_cocos2dx_ui(se::Object* obj);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ScrollViewBar_setAutoHideEnabled);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ScrollViewBar_onScrolled);
 SE_DECLARE_FUNC(js_cocos2dx_ui_ScrollViewBar_isAutoHideEnabled);

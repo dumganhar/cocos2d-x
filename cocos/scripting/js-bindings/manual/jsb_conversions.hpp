@@ -4,6 +4,7 @@
 #include "cocos/scripting/js-bindings/manual/jsb_classtype.hpp"
 
 #include "cocos2d.h"
+#include "extensions/cocos-ext.h"
 
 #define JSB_PRECONDITION2_VOID(condition, ...) \
     do { \
@@ -24,9 +25,13 @@
     } while(0)
 
 
-#define JSB_PRECONDITION3(condition, ret_value, ...) \
+#define JSB_PRECONDITION3(condition, ret_value, failed_code) \
     do { \
-        if (!(condition)) return (ret_value); \
+        if (!(condition)) \
+        { \
+            failed_code; \
+            return (ret_value); \
+        } \
     } while(0)
 
 
@@ -161,6 +166,7 @@ bool uniform_to_seval(const cocos2d::Uniform* v, se::Value* ret);
 bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
 bool Acceleration_to_seval(const cocos2d::Acceleration* v, se::Value* ret);
 bool Quaternion_to_seval(const cocos2d::Quaternion& v, se::Value* ret);
+bool ManifestAsset_to_seval(const cocos2d::extension::ManifestAsset& v, se::Value* ret);
 
 template<typename T>
 bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
