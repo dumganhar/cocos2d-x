@@ -72,6 +72,8 @@ bool seval_to_std_vector_Vec2(const se::Value& v, std::vector<cocos2d::Vec2>* re
 bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret);
 bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret);
 bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret);
+bool seval_to_AffineTransform(const se::Value& v, cocos2d::AffineTransform* ret);
+bool seval_to_Viewport(const se::Value& v, cocos2d::experimental::Viewport* ret);
 
 template<typename T>
 bool seval_to_native_ptr(const se::Value& v, T* ret)
@@ -130,6 +132,7 @@ bool seval_to_Vector(const se::Value& v, cocos2d::Vector<T>* ret)
 }
 
 // native value -> se value
+bool int8_to_seval(int8_t v, se::Value* ret);
 bool uint8_to_seval(uint8_t v, se::Value* ret);
 bool int32_to_seval(int32_t v, se::Value* ret);
 bool uint32_to_seval(uint32_t v, se::Value* ret);
@@ -167,6 +170,8 @@ bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
 bool Acceleration_to_seval(const cocos2d::Acceleration* v, se::Value* ret);
 bool Quaternion_to_seval(const cocos2d::Quaternion& v, se::Value* ret);
 bool ManifestAsset_to_seval(const cocos2d::extension::ManifestAsset& v, se::Value* ret);
+bool AffineTransform_to_seval(const cocos2d::AffineTransform& v, se::Value* ret);
+bool Viewport_to_seval(const cocos2d::experimental::Viewport& v, se::Value* ret);
 
 template<typename T>
 bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)

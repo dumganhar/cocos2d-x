@@ -14,7 +14,7 @@ static bool js_cocos2dx_Texture2D_getGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLProgram* result = cobj->getGLProgram();
         ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)result, &s.rval());
@@ -32,7 +32,7 @@ static bool js_cocos2dx_Texture2D_getMaxT(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getMaxT : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaxT();
         ok &= float_to_seval(result, &s.rval());
@@ -50,7 +50,7 @@ static bool js_cocos2dx_Texture2D_setAlphaTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_setAlphaTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -69,7 +69,7 @@ static bool js_cocos2dx_Texture2D_getStringForFormat(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getStringForFormat : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const char* result = cobj->getStringForFormat();
         ok &= std_string_to_seval(result, &s.rval());
@@ -83,7 +83,7 @@ SE_BIND_FUNC(js_cocos2dx_Texture2D_getStringForFormat)
 
 static bool js_cocos2dx_Texture2D_initWithImage(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Texture2D* cobj = (cocos2d::Texture2D*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Texture2D_initWithImage : Invalid Native Object");
     const auto& args = s.args();
@@ -126,7 +126,7 @@ static bool js_cocos2dx_Texture2D_setGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_setGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgram* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -145,7 +145,7 @@ static bool js_cocos2dx_Texture2D_getMaxS(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getMaxS : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaxS();
         ok &= float_to_seval(result, &s.rval());
@@ -163,7 +163,7 @@ static bool js_cocos2dx_Texture2D_hasPremultipliedAlpha(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_hasPremultipliedAlpha : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasPremultipliedAlpha();
         ok &= boolean_to_seval(result, &s.rval());
@@ -181,7 +181,7 @@ static bool js_cocos2dx_Texture2D_getPixelsHigh(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getPixelsHigh : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getPixelsHigh();
         ok &= int32_to_seval(result, &s.rval());
@@ -199,7 +199,7 @@ static bool js_cocos2dx_Texture2D_initWithMipmaps(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_initWithMipmaps : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         cocos2d::_MipmapInfo* arg0 = nullptr;
         int arg1 = 0;
@@ -229,7 +229,7 @@ static bool js_cocos2dx_Texture2D_getAlphaTextureName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getAlphaTextureName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getAlphaTextureName();
         ok &= uint32_to_seval(result, &s.rval());
@@ -243,7 +243,7 @@ SE_BIND_FUNC(js_cocos2dx_Texture2D_getAlphaTextureName)
 
 static bool js_cocos2dx_Texture2D_getBitsPerPixelForFormat(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Texture2D* cobj = (cocos2d::Texture2D*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Texture2D_getBitsPerPixelForFormat : Invalid Native Object");
     const auto& args = s.args();
@@ -280,7 +280,7 @@ static bool js_cocos2dx_Texture2D_getName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getName();
         ok &= uint32_to_seval(result, &s.rval());
@@ -294,7 +294,7 @@ SE_BIND_FUNC(js_cocos2dx_Texture2D_getName)
 
 static bool js_cocos2dx_Texture2D_initWithString(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Texture2D* cobj = (cocos2d::Texture2D*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Texture2D_initWithString : Invalid Native Object");
     const auto& args = s.args();
@@ -476,7 +476,7 @@ static bool js_cocos2dx_Texture2D_setMaxT(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_setMaxT : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -495,7 +495,7 @@ static bool js_cocos2dx_Texture2D_getPath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getPath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getPath();
         ok &= std_string_to_seval(result, &s.rval());
@@ -513,7 +513,7 @@ static bool js_cocos2dx_Texture2D_drawInRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_drawInRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -532,7 +532,7 @@ static bool js_cocos2dx_Texture2D_getContentSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getContentSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Size result = cobj->getContentSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -595,7 +595,7 @@ static bool js_cocos2dx_Texture2D_getAlphaTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getAlphaTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getAlphaTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -613,7 +613,7 @@ static bool js_cocos2dx_Texture2D_getDescription(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getDescription : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getDescription();
         ok &= std_string_to_seval(result, &s.rval());
@@ -631,7 +631,7 @@ static bool js_cocos2dx_Texture2D_getPixelFormat(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getPixelFormat : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getPixelFormat();
         ok &= int32_to_seval(result, &s.rval());
@@ -649,7 +649,7 @@ static bool js_cocos2dx_Texture2D_getContentSizeInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getContentSizeInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getContentSizeInPixels();
         ok &= Size_to_seval(result, &s.rval());
@@ -682,7 +682,7 @@ static bool js_cocos2dx_Texture2D_getPixelsWide(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_getPixelsWide : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getPixelsWide();
         ok &= int32_to_seval(result, &s.rval());
@@ -700,7 +700,7 @@ static bool js_cocos2dx_Texture2D_drawAtPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_drawAtPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -719,7 +719,7 @@ static bool js_cocos2dx_Texture2D_hasMipmaps(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_hasMipmaps : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasMipmaps();
         ok &= boolean_to_seval(result, &s.rval());
@@ -737,7 +737,7 @@ static bool js_cocos2dx_Texture2D_setMaxS(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_setMaxS : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -754,7 +754,7 @@ static bool js_cocos2dx_Texture2D_setDefaultAlphaPixelFormat(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D::PixelFormat arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -771,7 +771,7 @@ static bool js_cocos2dx_Texture2D_getDefaultAlphaPixelFormat(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cocos2d::Texture2D::getDefaultAlphaPixelFormat();
         ok &= int32_to_seval(result, &s.rval());
@@ -867,7 +867,7 @@ static bool js_cocos2dx_Touch_getPreviousLocationInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getPreviousLocationInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getPreviousLocationInView();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -885,7 +885,7 @@ static bool js_cocos2dx_Touch_getLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -903,7 +903,7 @@ static bool js_cocos2dx_Touch_getDelta(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getDelta : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getDelta();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -921,7 +921,7 @@ static bool js_cocos2dx_Touch_getStartLocationInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getStartLocationInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getStartLocationInView();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -939,7 +939,7 @@ static bool js_cocos2dx_Touch_getCurrentForce(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getCurrentForce : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getCurrentForce();
         ok &= float_to_seval(result, &s.rval());
@@ -957,7 +957,7 @@ static bool js_cocos2dx_Touch_getStartLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getStartLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getStartLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -975,7 +975,7 @@ static bool js_cocos2dx_Touch_getID(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getID : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getID();
         ok &= int32_to_seval(result, &s.rval());
@@ -989,7 +989,7 @@ SE_BIND_FUNC(js_cocos2dx_Touch_getID)
 
 static bool js_cocos2dx_Touch_setTouchInfo(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Touch* cobj = (cocos2d::Touch*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Touch_setTouchInfo : Invalid Native Object");
     const auto& args = s.args();
@@ -1043,7 +1043,7 @@ static bool js_cocos2dx_Touch_getMaxForce(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getMaxForce : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaxForce();
         ok &= float_to_seval(result, &s.rval());
@@ -1061,7 +1061,7 @@ static bool js_cocos2dx_Touch_getLocationInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getLocationInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getLocationInView();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -1079,7 +1079,7 @@ static bool js_cocos2dx_Touch_getPreviousLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Touch_getPreviousLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getPreviousLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -1154,7 +1154,7 @@ static bool js_cocos2dx_Event_isStopped(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Event_isStopped : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isStopped();
         ok &= boolean_to_seval(result, &s.rval());
@@ -1172,7 +1172,7 @@ static bool js_cocos2dx_Event_getType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Event_getType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getType();
         ok &= int32_to_seval(result, &s.rval());
@@ -1190,7 +1190,7 @@ static bool js_cocos2dx_Event_getCurrentTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Event_getCurrentTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getCurrentTarget();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -1246,7 +1246,7 @@ static bool js_cocos2dx_EventTouch_setEventCode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventTouch_setEventCode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventTouch::EventCode arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -1265,7 +1265,7 @@ static bool js_cocos2dx_EventTouch_getEventCode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventTouch_getEventCode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getEventCode();
         ok &= int32_to_seval(result, &s.rval());
@@ -1305,7 +1305,7 @@ static bool js_cocos2dx_ComponentContainer_visit(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ComponentContainer_visit : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -1320,7 +1320,7 @@ SE_BIND_FUNC(js_cocos2dx_ComponentContainer_visit)
 
 static bool js_cocos2dx_ComponentContainer_remove(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::ComponentContainer* cobj = (cocos2d::ComponentContainer*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ComponentContainer_remove : Invalid Native Object");
     const auto& args = s.args();
@@ -1375,7 +1375,7 @@ static bool js_cocos2dx_ComponentContainer_add(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ComponentContainer_add : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Component* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1396,7 +1396,7 @@ static bool js_cocos2dx_ComponentContainer_isEmpty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ComponentContainer_isEmpty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEmpty();
         ok &= boolean_to_seval(result, &s.rval());
@@ -1414,7 +1414,7 @@ static bool js_cocos2dx_ComponentContainer_get(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ComponentContainer_get : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -1460,7 +1460,7 @@ static bool js_cocos2dx_Component_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -1479,7 +1479,7 @@ static bool js_cocos2dx_Component_setName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_setName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -1498,7 +1498,7 @@ static bool js_cocos2dx_Component_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -1516,7 +1516,7 @@ static bool js_cocos2dx_Component_getOwner(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_getOwner : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getOwner();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -1534,7 +1534,7 @@ static bool js_cocos2dx_Component_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -1552,7 +1552,7 @@ static bool js_cocos2dx_Component_setOwner(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_setOwner : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1571,7 +1571,7 @@ static bool js_cocos2dx_Component_getName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Component_getName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -1587,7 +1587,7 @@ static bool js_cocos2dx_Component_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Component::create();
         result->retain();
@@ -1669,7 +1669,7 @@ se::Class* __jsb_cocos2d_Node_class = nullptr;
 
 static bool js_cocos2dx_Node_addChild(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_addChild : Invalid Native Object");
     const auto& args = s.args();
@@ -1736,7 +1736,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_addChild)
 
 static bool js_cocos2dx_Node_removeComponent(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_removeComponent : Invalid Native Object");
     const auto& args = s.args();
@@ -1776,7 +1776,7 @@ static bool js_cocos2dx_Node_setPhysicsBody(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setPhysicsBody : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::PhysicsBody* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1795,7 +1795,7 @@ static bool js_cocos2dx_Node_getGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLProgram* result = cobj->getGLProgram();
         ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)result, &s.rval());
@@ -1813,7 +1813,7 @@ static bool js_cocos2dx_Node_getDescription(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getDescription : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getDescription();
         ok &= std_string_to_seval(result, &s.rval());
@@ -1831,7 +1831,7 @@ static bool js_cocos2dx_Node_setOpacityModifyRGB(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setOpacityModifyRGB : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -1850,7 +1850,7 @@ static bool js_cocos2dx_Node_setCascadeOpacityEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setCascadeOpacityEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -1865,7 +1865,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_setCascadeOpacityEnabled)
 
 static bool js_cocos2dx_Node_getChildren(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getChildren : Invalid Native Object");
     const auto& args = s.args();
@@ -1899,7 +1899,7 @@ static bool js_cocos2dx_Node_setOnExitCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setOnExitCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
@@ -1943,7 +1943,7 @@ static bool js_cocos2dx_Node_setActionManager(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setActionManager : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionManager* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1962,7 +1962,7 @@ static bool js_cocos2dx_Node_convertToWorldSpaceAR(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertToWorldSpaceAR : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -1983,7 +1983,7 @@ static bool js_cocos2dx_Node_isIgnoreAnchorPointForPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isIgnoreAnchorPointForPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isIgnoreAnchorPointForPosition();
         ok &= boolean_to_seval(result, &s.rval());
@@ -2001,7 +2001,7 @@ static bool js_cocos2dx_Node_getChildByName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getChildByName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -2022,7 +2022,7 @@ static bool js_cocos2dx_Node_updateDisplayedOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_updateDisplayedOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         uint8_t arg0;
         ok &= seval_to_uint8(args[0], &arg0);
@@ -2041,7 +2041,7 @@ static bool js_cocos2dx_Node_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -2059,7 +2059,7 @@ static bool js_cocos2dx_Node_getCameraMask(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getCameraMask : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned short result = cobj->getCameraMask();
         ok &= int16_to_seval(result, &s.rval());
@@ -2077,7 +2077,7 @@ static bool js_cocos2dx_Node_setRotation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setRotation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2096,7 +2096,7 @@ static bool js_cocos2dx_Node_setScaleZ(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setScaleZ : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2115,7 +2115,7 @@ static bool js_cocos2dx_Node_setScaleY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setScaleY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2134,7 +2134,7 @@ static bool js_cocos2dx_Node_setScaleX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setScaleX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2153,7 +2153,7 @@ static bool js_cocos2dx_Node_getColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color3B& result = cobj->getColor();
         ok &= Color3B_to_seval(result, &s.rval());
@@ -2171,7 +2171,7 @@ static bool js_cocos2dx_Node_setonEnterTransitionDidFinishCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setonEnterTransitionDidFinishCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
@@ -2230,7 +2230,7 @@ static bool js_cocos2dx_Node__setLocalZOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node__setLocalZOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -2249,7 +2249,7 @@ static bool js_cocos2dx_Node_setCameraMask(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setCameraMask : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned short arg0 = 0;
         ok &= seval_to_uint16(args[0], &arg0);
@@ -2277,7 +2277,7 @@ static bool js_cocos2dx_Node_getTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getTag();
         ok &= int32_to_seval(result, &s.rval());
@@ -2289,34 +2289,16 @@ static bool js_cocos2dx_Node_getTag(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getTag)
 
-static bool js_cocos2dx_Node_getonEnterTransitionDidFinishCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getonEnterTransitionDidFinishCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        const std::function<void ()>& result = cobj->getonEnterTransitionDidFinishCallback();
-        #pragma warning NO CONVERSION FROM NATIVE FOR std::function;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getonEnterTransitionDidFinishCallback : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_getonEnterTransitionDidFinishCallback)
-
 static bool js_cocos2dx_Node_getNodeToWorldAffineTransform(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getNodeToWorldAffineTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::AffineTransform result = cobj->getNodeToWorldAffineTransform();
-        #pragma warning NO CONVERSION FROM NATIVE FOR AffineTransform;
+        ok &= AffineTransform_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getNodeToWorldAffineTransform : Error processing arguments");
         return true;
     }
@@ -2331,7 +2313,7 @@ static bool js_cocos2dx_Node_getPosition3D(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getPosition3D : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec3 result = cobj->getPosition3D();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -2349,7 +2331,7 @@ static bool js_cocos2dx_Node_removeChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_removeChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2377,7 +2359,7 @@ static bool js_cocos2dx_Node_convertToWorldSpace(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertToWorldSpace : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2398,7 +2380,7 @@ static bool js_cocos2dx_Node_getScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Scene* result = cobj->getScene();
         ok &= native_ptr_to_seval<cocos2d::Scene>((cocos2d::Scene*)result, &s.rval());
@@ -2416,7 +2398,7 @@ static bool js_cocos2dx_Node_getEventDispatcher(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getEventDispatcher : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::EventDispatcher* result = cobj->getEventDispatcher();
         ok &= native_ptr_to_seval<cocos2d::EventDispatcher>((cocos2d::EventDispatcher*)result, &s.rval());
@@ -2434,7 +2416,7 @@ static bool js_cocos2dx_Node_setSkewX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setSkewX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2453,7 +2435,7 @@ static bool js_cocos2dx_Node_setGLProgramState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setGLProgramState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgramState* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2472,7 +2454,7 @@ static bool js_cocos2dx_Node_setOnEnterCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setOnEnterCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
@@ -2516,7 +2498,7 @@ static bool js_cocos2dx_Node_stopActionsByFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_stopActionsByFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -2535,7 +2517,7 @@ static bool js_cocos2dx_Node_setNormalizedPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setNormalizedPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2554,7 +2536,7 @@ static bool js_cocos2dx_Node_setonExitTransitionDidStartCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setonExitTransitionDidStartCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
@@ -2598,7 +2580,7 @@ static bool js_cocos2dx_Node_convertTouchToNodeSpace(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertTouchToNodeSpace : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Touch* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2615,7 +2597,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_convertTouchToNodeSpace)
 
 static bool js_cocos2dx_Node_removeAllChildrenWithCleanup(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_removeAllChildrenWithCleanup : Invalid Native Object");
     const auto& args = s.args();
@@ -2647,7 +2629,7 @@ static bool js_cocos2dx_Node_getRotationSkewX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getRotationSkewX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRotationSkewX();
         ok &= float_to_seval(result, &s.rval());
@@ -2665,7 +2647,7 @@ static bool js_cocos2dx_Node_getRotationSkewY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getRotationSkewY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRotationSkewY();
         ok &= float_to_seval(result, &s.rval());
@@ -2683,7 +2665,7 @@ static bool js_cocos2dx_Node_getNodeToWorldTransform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getNodeToWorldTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Mat4 result = cobj->getNodeToWorldTransform();
         ok &= Mat4_to_seval(result, &s.rval());
@@ -2701,7 +2683,7 @@ static bool js_cocos2dx_Node_isCascadeOpacityEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isCascadeOpacityEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isCascadeOpacityEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -2719,7 +2701,7 @@ static bool js_cocos2dx_Node_setParent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setParent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2738,7 +2720,7 @@ static bool js_cocos2dx_Node_getName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -2771,7 +2753,7 @@ static bool js_cocos2dx_Node_getRotation3D(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getRotation3D : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec3 result = cobj->getRotation3D();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -2785,7 +2767,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_getRotation3D)
 
 static bool js_cocos2dx_Node_getNodeToParentAffineTransform(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getNodeToParentAffineTransform : Invalid Native Object");
     const auto& args = s.args();
@@ -2796,7 +2778,7 @@ static bool js_cocos2dx_Node_getNodeToParentAffineTransform(se::State& s)
             ok &= seval_to_native_ptr(args[0], &arg0);
             if (!ok) { ok = true; break; }
             cocos2d::AffineTransform result = cobj->getNodeToParentAffineTransform(arg0);
-            #pragma warning NO CONVERSION FROM NATIVE FOR AffineTransform;
+            ok &= AffineTransform_to_seval(result, &s.rval());
             JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getNodeToParentAffineTransform : Error processing arguments");
             return true;
         }
@@ -2805,7 +2787,7 @@ static bool js_cocos2dx_Node_getNodeToParentAffineTransform(se::State& s)
     do {
         if (argc == 0) {
             cocos2d::AffineTransform result = cobj->getNodeToParentAffineTransform();
-            #pragma warning NO CONVERSION FROM NATIVE FOR AffineTransform;
+            ok &= AffineTransform_to_seval(result, &s.rval());
             JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getNodeToParentAffineTransform : Error processing arguments");
             return true;
         }
@@ -2822,7 +2804,7 @@ static bool js_cocos2dx_Node_convertTouchToNodeSpaceAR(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertTouchToNodeSpaceAR : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Touch* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2837,31 +2819,13 @@ static bool js_cocos2dx_Node_convertTouchToNodeSpaceAR(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_convertTouchToNodeSpaceAR)
 
-static bool js_cocos2dx_Node_getOnEnterCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getOnEnterCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        const std::function<void ()>& result = cobj->getOnEnterCallback();
-        #pragma warning NO CONVERSION FROM NATIVE FOR std::function;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getOnEnterCallback : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_getOnEnterCallback)
-
 static bool js_cocos2dx_Node_setPositionNormalized(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setPositionNormalized : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2895,7 +2859,7 @@ static bool js_cocos2dx_Node_isOpacityModifyRGB(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isOpacityModifyRGB : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isOpacityModifyRGB();
         ok &= boolean_to_seval(result, &s.rval());
@@ -2913,7 +2877,7 @@ static bool js_cocos2dx_Node_stopActionByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_stopActionByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -2932,7 +2896,7 @@ static bool js_cocos2dx_Node_reorderChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_reorderChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         int arg1 = 0;
@@ -2953,7 +2917,7 @@ static bool js_cocos2dx_Node_setSkewY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setSkewY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2972,7 +2936,7 @@ static bool js_cocos2dx_Node_setColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -2991,7 +2955,7 @@ static bool js_cocos2dx_Node_setRotation3D(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setRotation3D : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -3010,7 +2974,7 @@ static bool js_cocos2dx_Node_setPositionX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setPositionX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3029,7 +2993,7 @@ static bool js_cocos2dx_Node_setNodeToParentTransform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setNodeToParentTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Mat4 arg0;
         ok &= seval_to_Mat4(args[0], &arg0);
@@ -3048,7 +3012,7 @@ static bool js_cocos2dx_Node_getAnchorPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getAnchorPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getAnchorPoint();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -3066,7 +3030,7 @@ static bool js_cocos2dx_Node_getNumberOfRunningActions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getNumberOfRunningActions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getNumberOfRunningActions();
         ok &= ssize_to_seval(result, &s.rval());
@@ -3099,7 +3063,7 @@ static bool js_cocos2dx_Node_isVisible(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isVisible : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isVisible();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3117,7 +3081,7 @@ static bool js_cocos2dx_Node_getChildrenCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getChildrenCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getChildrenCount();
         ok &= ssize_to_seval(result, &s.rval());
@@ -3131,7 +3095,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_getChildrenCount)
 
 static bool js_cocos2dx_Node_getNodeToParentTransform(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getNodeToParentTransform : Invalid Native Object");
     const auto& args = s.args();
@@ -3168,7 +3132,7 @@ static bool js_cocos2dx_Node_convertToNodeSpaceAR(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertToNodeSpaceAR : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -3189,7 +3153,7 @@ static bool js_cocos2dx_Node_addComponent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_addComponent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Component* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3210,7 +3174,7 @@ static bool js_cocos2dx_Node_runAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_runAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Action* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3227,7 +3191,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_runAction)
 
 static bool js_cocos2dx_Node_visit(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_visit : Invalid Native Object");
     const auto& args = s.args();
@@ -3266,7 +3230,7 @@ static bool js_cocos2dx_Node_setGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgram* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3285,7 +3249,7 @@ static bool js_cocos2dx_Node_getRotation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getRotation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRotation();
         ok &= float_to_seval(result, &s.rval());
@@ -3303,7 +3267,7 @@ static bool js_cocos2dx_Node_getAnchorPointInPoints(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getAnchorPointInPoints : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getAnchorPointInPoints();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -3321,7 +3285,7 @@ static bool js_cocos2dx_Node_getRotationQuat(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getRotationQuat : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Quaternion result = cobj->getRotationQuat();
         ok &= Quaternion_to_seval(result, &s.rval());
@@ -3339,7 +3303,7 @@ static bool js_cocos2dx_Node_removeChildByName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_removeChildByName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -3367,7 +3331,7 @@ static bool js_cocos2dx_Node_setPositionZ(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setPositionZ : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3386,7 +3350,7 @@ static bool js_cocos2dx_Node_getGLProgramState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getGLProgramState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLProgramState* result = cobj->getGLProgramState();
         ok &= native_ptr_to_seval<cocos2d::GLProgramState>((cocos2d::GLProgramState*)result, &s.rval());
@@ -3404,7 +3368,7 @@ static bool js_cocos2dx_Node_setScheduler(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setScheduler : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Scheduler* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3438,7 +3402,7 @@ static bool js_cocos2dx_Node_getSkewX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getSkewX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSkewX();
         ok &= float_to_seval(result, &s.rval());
@@ -3456,7 +3420,7 @@ static bool js_cocos2dx_Node_getSkewY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getSkewY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSkewY();
         ok &= float_to_seval(result, &s.rval());
@@ -3474,7 +3438,7 @@ static bool js_cocos2dx_Node_getDisplayedColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getDisplayedColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color3B& result = cobj->getDisplayedColor();
         ok &= Color3B_to_seval(result, &s.rval());
@@ -3492,7 +3456,7 @@ static bool js_cocos2dx_Node_getActionByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getActionByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -3513,7 +3477,7 @@ static bool js_cocos2dx_Node_setRotationSkewX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setRotationSkewX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3532,7 +3496,7 @@ static bool js_cocos2dx_Node_setRotationSkewY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setRotationSkewY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3551,7 +3515,7 @@ static bool js_cocos2dx_Node_setName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -3570,7 +3534,7 @@ static bool js_cocos2dx_Node_update(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_update : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3589,7 +3553,7 @@ static bool js_cocos2dx_Node_getDisplayedOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getDisplayedOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         uint8_t result = cobj->getDisplayedOpacity();
         ok &= uint8_to_seval(result, &s.rval());
@@ -3607,7 +3571,7 @@ static bool js_cocos2dx_Node_getLocalZOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getLocalZOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getLocalZOrder();
         ok &= int32_to_seval(result, &s.rval());
@@ -3621,7 +3585,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_getLocalZOrder)
 
 static bool js_cocos2dx_Node_getScheduler(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getScheduler : Invalid Native Object");
     const auto& args = s.args();
@@ -3655,7 +3619,7 @@ static bool js_cocos2dx_Node_getPositionNormalized(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getPositionNormalized : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getPositionNormalized();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -3669,7 +3633,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_getPositionNormalized)
 
 static bool js_cocos2dx_Node_getPosition(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getPosition : Invalid Native Object");
     const auto& args = s.args();
@@ -3709,7 +3673,7 @@ static bool js_cocos2dx_Node_isRunning(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isRunning : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isRunning();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3723,7 +3687,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_isRunning)
 
 static bool js_cocos2dx_Node_getParent(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getParent : Invalid Native Object");
     const auto& args = s.args();
@@ -3757,7 +3721,7 @@ static bool js_cocos2dx_Node_getWorldToNodeTransform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getWorldToNodeTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Mat4 result = cobj->getWorldToNodeTransform();
         ok &= Mat4_to_seval(result, &s.rval());
@@ -3775,7 +3739,7 @@ static bool js_cocos2dx_Node_getPositionY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getPositionY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPositionY();
         ok &= float_to_seval(result, &s.rval());
@@ -3793,7 +3757,7 @@ static bool js_cocos2dx_Node_getPositionX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getPositionX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPositionX();
         ok &= float_to_seval(result, &s.rval());
@@ -3811,7 +3775,7 @@ static bool js_cocos2dx_Node_removeChildByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_removeChildByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -3839,7 +3803,7 @@ static bool js_cocos2dx_Node_setPositionY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setPositionY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3858,7 +3822,7 @@ static bool js_cocos2dx_Node_updateDisplayedColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_updateDisplayedColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -3877,7 +3841,7 @@ static bool js_cocos2dx_Node_setVisible(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setVisible : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -3896,10 +3860,10 @@ static bool js_cocos2dx_Node_getParentToNodeAffineTransform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getParentToNodeAffineTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::AffineTransform result = cobj->getParentToNodeAffineTransform();
-        #pragma warning NO CONVERSION FROM NATIVE FOR AffineTransform;
+        ok &= AffineTransform_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getParentToNodeAffineTransform : Error processing arguments");
         return true;
     }
@@ -3914,7 +3878,7 @@ static bool js_cocos2dx_Node_getPositionZ(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getPositionZ : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPositionZ();
         ok &= float_to_seval(result, &s.rval());
@@ -3932,7 +3896,7 @@ static bool js_cocos2dx_Node_setGlobalZOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setGlobalZOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3947,7 +3911,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_setGlobalZOrder)
 
 static bool js_cocos2dx_Node_setScale(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_setScale : Invalid Native Object");
     const auto& args = s.args();
@@ -3980,31 +3944,13 @@ static bool js_cocos2dx_Node_setScale(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_setScale)
 
-static bool js_cocos2dx_Node_getOnExitCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getOnExitCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        const std::function<void ()>& result = cobj->getOnExitCallback();
-        #pragma warning NO CONVERSION FROM NATIVE FOR std::function;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getOnExitCallback : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_getOnExitCallback)
-
 static bool js_cocos2dx_Node_getChildByTag(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getChildByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4025,7 +3971,7 @@ static bool js_cocos2dx_Node_getScaleZ(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getScaleZ : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScaleZ();
         ok &= float_to_seval(result, &s.rval());
@@ -4043,7 +3989,7 @@ static bool js_cocos2dx_Node_getScaleY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getScaleY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScaleY();
         ok &= float_to_seval(result, &s.rval());
@@ -4061,7 +4007,7 @@ static bool js_cocos2dx_Node_getScaleX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getScaleX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScaleX();
         ok &= float_to_seval(result, &s.rval());
@@ -4079,7 +4025,7 @@ static bool js_cocos2dx_Node_setLocalZOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setLocalZOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4098,7 +4044,7 @@ static bool js_cocos2dx_Node_setCascadeColorEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setCascadeColorEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -4117,7 +4063,7 @@ static bool js_cocos2dx_Node_setOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         uint8_t arg0;
         ok &= seval_to_uint8(args[0], &arg0);
@@ -4136,7 +4082,7 @@ static bool js_cocos2dx_Node_getComponent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getComponent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -4157,7 +4103,7 @@ static bool js_cocos2dx_Node_getContentSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getContentSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getContentSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -4175,7 +4121,7 @@ static bool js_cocos2dx_Node_stopAllActionsByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_stopAllActionsByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4194,7 +4140,7 @@ static bool js_cocos2dx_Node_getBoundingBox(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getBoundingBox : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->getBoundingBox();
         ok &= Rect_to_seval(result, &s.rval());
@@ -4212,7 +4158,7 @@ static bool js_cocos2dx_Node_setIgnoreAnchorPointForPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setIgnoreAnchorPointForPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -4231,7 +4177,7 @@ static bool js_cocos2dx_Node_setEventDispatcher(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setEventDispatcher : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventDispatcher* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4250,7 +4196,7 @@ static bool js_cocos2dx_Node_getGlobalZOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getGlobalZOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getGlobalZOrder();
         ok &= float_to_seval(result, &s.rval());
@@ -4264,7 +4210,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_getGlobalZOrder)
 
 static bool js_cocos2dx_Node_draw(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_draw : Invalid Native Object");
     const auto& args = s.args();
@@ -4303,7 +4249,7 @@ static bool js_cocos2dx_Node_setUserObject(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setUserObject : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Ref* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4322,7 +4268,7 @@ static bool js_cocos2dx_Node_enumerateChildren(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_enumerateChildren : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::function<bool (cocos2d::Node *)> arg1;
@@ -4337,7 +4283,7 @@ static bool js_cocos2dx_Node_enumerateChildren(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)larg0, &args[0]);
@@ -4370,27 +4316,9 @@ static bool js_cocos2dx_Node_enumerateChildren(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_enumerateChildren)
 
-static bool js_cocos2dx_Node_getonExitTransitionDidStartCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getonExitTransitionDidStartCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        const std::function<void ()>& result = cobj->getonExitTransitionDidStartCallback();
-        #pragma warning NO CONVERSION FROM NATIVE FOR std::function;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getonExitTransitionDidStartCallback : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_getonExitTransitionDidStartCallback)
-
 static bool js_cocos2dx_Node_removeFromParentAndCleanup(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_removeFromParentAndCleanup : Invalid Native Object");
     const auto& args = s.args();
@@ -4422,7 +4350,7 @@ static bool js_cocos2dx_Node_setPosition3D(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setPosition3D : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -4441,7 +4369,7 @@ static bool js_cocos2dx_Node_getNumberOfRunningActionsByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getNumberOfRunningActionsByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4477,10 +4405,10 @@ static bool js_cocos2dx_Node_getWorldToNodeAffineTransform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getWorldToNodeAffineTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::AffineTransform result = cobj->getWorldToNodeAffineTransform();
-        #pragma warning NO CONVERSION FROM NATIVE FOR AffineTransform;
+        ok &= AffineTransform_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getWorldToNodeAffineTransform : Error processing arguments");
         return true;
     }
@@ -4495,7 +4423,7 @@ static bool js_cocos2dx_Node_getScale(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getScale : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScale();
         ok &= float_to_seval(result, &s.rval());
@@ -4513,7 +4441,7 @@ static bool js_cocos2dx_Node_getOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         uint8_t result = cobj->getOpacity();
         ok &= uint8_to_seval(result, &s.rval());
@@ -4546,7 +4474,7 @@ static bool js_cocos2dx_Node_getNormalizedPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getNormalizedPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getNormalizedPosition();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -4564,7 +4492,7 @@ static bool js_cocos2dx_Node_getParentToNodeTransform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getParentToNodeTransform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Mat4& result = cobj->getParentToNodeTransform();
         ok &= Mat4_to_seval(result, &s.rval());
@@ -4582,7 +4510,7 @@ static bool js_cocos2dx_Node_convertToNodeSpace(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_convertToNodeSpace : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -4603,7 +4531,7 @@ static bool js_cocos2dx_Node_setTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4622,7 +4550,7 @@ static bool js_cocos2dx_Node_isCascadeColorEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_isCascadeColorEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isCascadeColorEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -4640,7 +4568,7 @@ static bool js_cocos2dx_Node_setRotationQuat(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setRotationQuat : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Quaternion arg0;
         ok &= seval_to_Quaternion(args[0], &arg0);
@@ -4659,7 +4587,7 @@ static bool js_cocos2dx_Node_stopAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_stopAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Action* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4674,7 +4602,7 @@ SE_BIND_FUNC(js_cocos2dx_Node_stopAction)
 
 static bool js_cocos2dx_Node_getActionManager(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Node_getActionManager : Invalid Native Object");
     const auto& args = s.args();
@@ -4706,7 +4634,7 @@ static bool js_cocos2dx_Node_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Node::create();
         result->retain();
@@ -4789,7 +4717,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("_setLocalZOrder", _SE(js_cocos2dx_Node__setLocalZOrder));
     cls->defineFunction("setCameraMask", _SE(js_cocos2dx_Node_setCameraMask));
     cls->defineFunction("getTag", _SE(js_cocos2dx_Node_getTag));
-    cls->defineFunction("getonEnterTransitionDidFinishCallback", _SE(js_cocos2dx_Node_getonEnterTransitionDidFinishCallback));
     cls->defineFunction("getNodeToWorldTransform", _SE(js_cocos2dx_Node_getNodeToWorldAffineTransform));
     cls->defineFunction("getPosition3D", _SE(js_cocos2dx_Node_getPosition3D));
     cls->defineFunction("removeChild", _SE(js_cocos2dx_Node_removeChild));
@@ -4814,7 +4741,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("getRotation3D", _SE(js_cocos2dx_Node_getRotation3D));
     cls->defineFunction("getNodeToParentTransform", _SE(js_cocos2dx_Node_getNodeToParentAffineTransform));
     cls->defineFunction("convertTouchToNodeSpaceAR", _SE(js_cocos2dx_Node_convertTouchToNodeSpaceAR));
-    cls->defineFunction("getOnEnterCallback", _SE(js_cocos2dx_Node_getOnEnterCallback));
     cls->defineFunction("setPositionNormalized", _SE(js_cocos2dx_Node_setPositionNormalized));
     cls->defineFunction("pause", _SE(js_cocos2dx_Node_pause));
     cls->defineFunction("isOpacityModifyRGB", _SE(js_cocos2dx_Node_isOpacityModifyRGB));
@@ -4870,7 +4796,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("getVertexZ", _SE(js_cocos2dx_Node_getPositionZ));
     cls->defineFunction("setGlobalZOrder", _SE(js_cocos2dx_Node_setGlobalZOrder));
     cls->defineFunction("setScale", _SE(js_cocos2dx_Node_setScale));
-    cls->defineFunction("getOnExitCallback", _SE(js_cocos2dx_Node_getOnExitCallback));
     cls->defineFunction("getChildByTag", _SE(js_cocos2dx_Node_getChildByTag));
     cls->defineFunction("getScaleZ", _SE(js_cocos2dx_Node_getScaleZ));
     cls->defineFunction("getScaleY", _SE(js_cocos2dx_Node_getScaleY));
@@ -4888,7 +4813,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("draw", _SE(js_cocos2dx_Node_draw));
     cls->defineFunction("setUserObject", _SE(js_cocos2dx_Node_setUserObject));
     cls->defineFunction("enumerateChildren", _SE(js_cocos2dx_Node_enumerateChildren));
-    cls->defineFunction("getonExitTransitionDidStartCallback", _SE(js_cocos2dx_Node_getonExitTransitionDidStartCallback));
     cls->defineFunction("removeFromParent", _SE(js_cocos2dx_Node_removeFromParentAndCleanup));
     cls->defineFunction("setPosition3D", _SE(js_cocos2dx_Node_setPosition3D));
     cls->defineFunction("getNumberOfRunningActionsByTag", _SE(js_cocos2dx_Node_getNumberOfRunningActionsByTag));
@@ -4985,7 +4909,7 @@ SE_BIND_FUNC(js_cocos2dx_Scene_setCameraOrderDirty)
 
 static bool js_cocos2dx_Scene_render(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Scene* cobj = (cocos2d::Scene*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Scene_render : Invalid Native Object");
     const auto& args = s.args();
@@ -5049,7 +4973,7 @@ static bool js_cocos2dx_Scene_stepPhysicsAndNavigation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scene_stepPhysicsAndNavigation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -5068,7 +4992,7 @@ static bool js_cocos2dx_Scene_onProjectionChanged(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scene_onProjectionChanged : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventCustom* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -5087,7 +5011,7 @@ static bool js_cocos2dx_Scene_initWithSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scene_initWithSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -5108,7 +5032,7 @@ static bool js_cocos2dx_Scene_getDefaultCamera(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scene_getDefaultCamera : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Camera* result = cobj->getDefaultCamera();
         ok &= native_ptr_to_seval<cocos2d::Camera>((cocos2d::Camera*)result, &s.rval());
@@ -5124,7 +5048,7 @@ static bool js_cocos2dx_Scene_createWithSize(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -5145,7 +5069,7 @@ static bool js_cocos2dx_Scene_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Scene::create();
         result->retain();
@@ -5232,7 +5156,7 @@ static bool js_cocos2dx_GLView_setFrameSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setFrameSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -5253,7 +5177,7 @@ static bool js_cocos2dx_GLView_getViewPortRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getViewPortRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getViewPortRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -5271,7 +5195,7 @@ static bool js_cocos2dx_GLView_setContentScaleFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setContentScaleFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -5292,7 +5216,7 @@ static bool js_cocos2dx_GLView_getContentScaleFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getContentScaleFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getContentScaleFactor();
         ok &= float_to_seval(result, &s.rval());
@@ -5310,7 +5234,7 @@ static bool js_cocos2dx_GLView_setIMEKeyboardState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setIMEKeyboardState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -5329,7 +5253,7 @@ static bool js_cocos2dx_GLView_setScissorInPoints(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setScissorInPoints : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -5354,7 +5278,7 @@ static bool js_cocos2dx_GLView_getViewName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getViewName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getViewName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5372,7 +5296,7 @@ static bool js_cocos2dx_GLView_isOpenGLReady(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_isOpenGLReady : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isOpenGLReady();
         ok &= boolean_to_seval(result, &s.rval());
@@ -5390,7 +5314,7 @@ static bool js_cocos2dx_GLView_setCursorVisible(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setCursorVisible : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -5409,7 +5333,7 @@ static bool js_cocos2dx_GLView_getScaleY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getScaleY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScaleY();
         ok &= float_to_seval(result, &s.rval());
@@ -5427,7 +5351,7 @@ static bool js_cocos2dx_GLView_getScaleX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getScaleX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScaleX();
         ok &= float_to_seval(result, &s.rval());
@@ -5445,7 +5369,7 @@ static bool js_cocos2dx_GLView_getVisibleOrigin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getVisibleOrigin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getVisibleOrigin();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -5463,7 +5387,7 @@ static bool js_cocos2dx_GLView_getFrameSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getFrameSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getFrameSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -5481,7 +5405,7 @@ static bool js_cocos2dx_GLView_setFrameZoomFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setFrameZoomFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -5500,7 +5424,7 @@ static bool js_cocos2dx_GLView_getFrameZoomFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getFrameZoomFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getFrameZoomFactor();
         ok &= float_to_seval(result, &s.rval());
@@ -5518,7 +5442,7 @@ static bool js_cocos2dx_GLView_getDesignResolutionSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getDesignResolutionSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getDesignResolutionSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -5536,7 +5460,7 @@ static bool js_cocos2dx_GLView_windowShouldClose(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_windowShouldClose : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->windowShouldClose();
         ok &= boolean_to_seval(result, &s.rval());
@@ -5554,7 +5478,7 @@ static bool js_cocos2dx_GLView_setDesignResolutionSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setDesignResolutionSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -5577,7 +5501,7 @@ static bool js_cocos2dx_GLView_getResolutionPolicy(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getResolutionPolicy : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getResolutionPolicy();
         ok &= int32_to_seval(result, &s.rval());
@@ -5595,7 +5519,7 @@ static bool js_cocos2dx_GLView_isRetinaDisplay(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_isRetinaDisplay : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isRetinaDisplay();
         ok &= boolean_to_seval(result, &s.rval());
@@ -5613,7 +5537,7 @@ static bool js_cocos2dx_GLView_renderScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_renderScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Scene* arg0 = nullptr;
         cocos2d::Renderer* arg1 = nullptr;
@@ -5634,7 +5558,7 @@ static bool js_cocos2dx_GLView_setVR(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setVR : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::VRIRenderer* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -5653,7 +5577,7 @@ static bool js_cocos2dx_GLView_setViewPortInPoints(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setViewPortInPoints : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -5678,7 +5602,7 @@ static bool js_cocos2dx_GLView_getScissorRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getScissorRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->getScissorRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -5696,7 +5620,7 @@ static bool js_cocos2dx_GLView_getRetinaFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getRetinaFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getRetinaFactor();
         ok &= int32_to_seval(result, &s.rval());
@@ -5714,7 +5638,7 @@ static bool js_cocos2dx_GLView_setViewName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_setViewName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -5733,7 +5657,7 @@ static bool js_cocos2dx_GLView_getVisibleRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getVisibleRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->getVisibleRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -5751,7 +5675,7 @@ static bool js_cocos2dx_GLView_getVisibleSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_getVisibleSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Size result = cobj->getVisibleSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -5769,7 +5693,7 @@ static bool js_cocos2dx_GLView_isScissorEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLView_isScissorEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isScissorEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -5795,40 +5719,6 @@ static bool js_cocos2dx_GLView_pollEvents(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_GLView_pollEvents)
-
-static bool js_cocos2dx_GLView_setGLContextAttrs(se::State& s)
-{
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 1) {
-        GLContextAttrs arg0;
-        #pragma warning NO CONVERSION TO NATIVE FOR GLContextAttrs
-		ok = false;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLView_setGLContextAttrs : Error processing arguments");
-        cocos2d::GLView::setGLContextAttrs(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_GLView_setGLContextAttrs)
-
-static bool js_cocos2dx_GLView_getGLContextAttrs(se::State& s)
-{
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        GLContextAttrs result = cocos2d::GLView::getGLContextAttrs();
-        #pragma warning NO CONVERSION FROM NATIVE FOR GLContextAttrs;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLView_getGLContextAttrs : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_GLView_getGLContextAttrs)
 
 
 
@@ -5867,8 +5757,6 @@ bool js_register_cocos2dx_GLView(se::Object* obj)
     cls->defineFunction("getVisibleSize", _SE(js_cocos2dx_GLView_getVisibleSize));
     cls->defineFunction("isScissorEnabled", _SE(js_cocos2dx_GLView_isScissorEnabled));
     cls->defineFunction("pollEvents", _SE(js_cocos2dx_GLView_pollEvents));
-    cls->defineStaticFunction("setGLContextAttrs", _SE(js_cocos2dx_GLView_setGLContextAttrs));
-    cls->defineStaticFunction("getGLContextAttrs", _SE(js_cocos2dx_GLView_getGLContextAttrs));
     cls->install();
     JSBClassType::registerClass<cocos2d::GLView>(cls);
 
@@ -5902,7 +5790,7 @@ static bool js_cocos2dx_Director_pushProjectionMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_pushProjectionMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned long arg0 = 0;
         ok &= seval_to_ulong(args[0], &arg0);
@@ -5921,7 +5809,7 @@ static bool js_cocos2dx_Director_popProjectionMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_popProjectionMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned long arg0 = 0;
         ok &= seval_to_ulong(args[0], &arg0);
@@ -5940,7 +5828,7 @@ static bool js_cocos2dx_Director_setEventDispatcher(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setEventDispatcher : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventDispatcher* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -5959,7 +5847,7 @@ static bool js_cocos2dx_Director_loadProjectionIdentityMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_loadProjectionIdentityMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned long arg0 = 0;
         ok &= seval_to_ulong(args[0], &arg0);
@@ -5978,7 +5866,7 @@ static bool js_cocos2dx_Director_setContentScaleFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setContentScaleFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -5997,7 +5885,7 @@ static bool js_cocos2dx_Director_getContentScaleFactor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getContentScaleFactor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getContentScaleFactor();
         ok &= float_to_seval(result, &s.rval());
@@ -6015,7 +5903,7 @@ static bool js_cocos2dx_Director_getWinSizeInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getWinSizeInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Size result = cobj->getWinSizeInPixels();
         ok &= Size_to_seval(result, &s.rval());
@@ -6033,7 +5921,7 @@ static bool js_cocos2dx_Director_getDeltaTime(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getDeltaTime : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDeltaTime();
         ok &= float_to_seval(result, &s.rval());
@@ -6066,7 +5954,7 @@ static bool js_cocos2dx_Director_setActionManager(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setActionManager : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionManager* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -6085,7 +5973,7 @@ static bool js_cocos2dx_Director_setAlphaBlending(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setAlphaBlending : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -6119,7 +6007,7 @@ static bool js_cocos2dx_Director_loadMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_loadMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::MATRIX_STACK_TYPE arg0;
         cocos2d::Mat4 arg1;
@@ -6140,7 +6028,7 @@ static bool js_cocos2dx_Director_getNotificationNode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getNotificationNode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getNotificationNode();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -6158,7 +6046,7 @@ static bool js_cocos2dx_Director_getWinSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getWinSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getWinSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -6191,7 +6079,7 @@ static bool js_cocos2dx_Director_getTextureCache(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getTextureCache : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::TextureCache* result = cobj->getTextureCache();
         ok &= native_ptr_to_seval<cocos2d::TextureCache>((cocos2d::TextureCache*)result, &s.rval());
@@ -6209,7 +6097,7 @@ static bool js_cocos2dx_Director_isSendCleanupToScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_isSendCleanupToScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isSendCleanupToScene();
         ok &= boolean_to_seval(result, &s.rval());
@@ -6227,7 +6115,7 @@ static bool js_cocos2dx_Director_getVisibleOrigin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getVisibleOrigin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getVisibleOrigin();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -6260,7 +6148,7 @@ static bool js_cocos2dx_Director_setDepthTest(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setDepthTest : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -6279,7 +6167,7 @@ static bool js_cocos2dx_Director_getFrameRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getFrameRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getFrameRate();
         ok &= float_to_seval(result, &s.rval());
@@ -6297,7 +6185,7 @@ static bool js_cocos2dx_Director_getSecondsPerFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getSecondsPerFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSecondsPerFrame();
         ok &= float_to_seval(result, &s.rval());
@@ -6330,7 +6218,7 @@ static bool js_cocos2dx_Director_convertToUI(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_convertToUI : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -6351,7 +6239,7 @@ static bool js_cocos2dx_Director_pushMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_pushMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::MATRIX_STACK_TYPE arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -6385,7 +6273,7 @@ static bool js_cocos2dx_Director_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -6403,7 +6291,7 @@ static bool js_cocos2dx_Director_setScheduler(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setScheduler : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Scheduler* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -6422,7 +6310,7 @@ static bool js_cocos2dx_Director_multiplyProjectionMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_multiplyProjectionMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Mat4 arg0;
         unsigned long arg1 = 0;
@@ -6443,7 +6331,7 @@ static bool js_cocos2dx_Director_getMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::MATRIX_STACK_TYPE arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -6464,7 +6352,7 @@ static bool js_cocos2dx_Director_isValid(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_isValid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isValid();
         ok &= boolean_to_seval(result, &s.rval());
@@ -6497,7 +6385,7 @@ static bool js_cocos2dx_Director_getOpenGLView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getOpenGLView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLView* result = cobj->getOpenGLView();
         ok &= native_ptr_to_seval<cocos2d::GLView>((cocos2d::GLView*)result, &s.rval());
@@ -6515,7 +6403,7 @@ static bool js_cocos2dx_Director_getRunningScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getRunningScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Scene* result = cobj->getRunningScene();
         ok &= native_ptr_to_seval<cocos2d::Scene>((cocos2d::Scene*)result, &s.rval());
@@ -6563,7 +6451,7 @@ static bool js_cocos2dx_Director_popToSceneStackLevel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_popToSceneStackLevel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -6597,7 +6485,7 @@ static bool js_cocos2dx_Director_isNextDeltaTimeZero(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_isNextDeltaTimeZero : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isNextDeltaTimeZero();
         ok &= boolean_to_seval(result, &s.rval());
@@ -6615,7 +6503,7 @@ static bool js_cocos2dx_Director_setClearColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setClearColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -6634,7 +6522,7 @@ static bool js_cocos2dx_Director_setOpenGLView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setOpenGLView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLView* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -6653,7 +6541,7 @@ static bool js_cocos2dx_Director_convertToGL(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_convertToGL : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -6689,7 +6577,7 @@ static bool js_cocos2dx_Director_getTotalFrames(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getTotalFrames : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getTotalFrames();
         ok &= uint32_to_seval(result, &s.rval());
@@ -6707,7 +6595,7 @@ static bool js_cocos2dx_Director_runWithScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_runWithScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Scene* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -6726,7 +6614,7 @@ static bool js_cocos2dx_Director_setNotificationNode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setNotificationNode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -6790,7 +6678,7 @@ static bool js_cocos2dx_Director_loadIdentityMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_loadIdentityMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::MATRIX_STACK_TYPE arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -6809,7 +6697,7 @@ static bool js_cocos2dx_Director_isDisplayStats(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_isDisplayStats : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isDisplayStats();
         ok &= boolean_to_seval(result, &s.rval());
@@ -6827,7 +6715,7 @@ static bool js_cocos2dx_Director_setProjection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setProjection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Director::Projection arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -6846,7 +6734,7 @@ static bool js_cocos2dx_Director_multiplyMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_multiplyMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::MATRIX_STACK_TYPE arg0;
         cocos2d::Mat4 arg1;
@@ -6867,7 +6755,7 @@ static bool js_cocos2dx_Director_getZEye(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getZEye : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getZEye();
         ok &= float_to_seval(result, &s.rval());
@@ -6885,7 +6773,7 @@ static bool js_cocos2dx_Director_setNextDeltaTimeZero(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setNextDeltaTimeZero : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -6904,7 +6792,7 @@ static bool js_cocos2dx_Director_popMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_popMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::MATRIX_STACK_TYPE arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -6923,7 +6811,7 @@ static bool js_cocos2dx_Director_getVisibleSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getVisibleSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Size result = cobj->getVisibleSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -6941,7 +6829,7 @@ static bool js_cocos2dx_Director_loadProjectionMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_loadProjectionMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Mat4 arg0;
         unsigned long arg1 = 0;
@@ -6962,7 +6850,7 @@ static bool js_cocos2dx_Director_initProjectionMatrixStack(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_initProjectionMatrixStack : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned long arg0 = 0;
         ok &= seval_to_ulong(args[0], &arg0);
@@ -6981,7 +6869,7 @@ static bool js_cocos2dx_Director_getScheduler(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getScheduler : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Scheduler* result = cobj->getScheduler();
         ok &= native_ptr_to_seval<cocos2d::Scheduler>((cocos2d::Scheduler*)result, &s.rval());
@@ -6999,7 +6887,7 @@ static bool js_cocos2dx_Director_pushScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_pushScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Scene* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -7018,7 +6906,7 @@ static bool js_cocos2dx_Director_getAnimationInterval(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getAnimationInterval : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAnimationInterval();
         ok &= float_to_seval(result, &s.rval());
@@ -7036,7 +6924,7 @@ static bool js_cocos2dx_Director_isPaused(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_isPaused : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isPaused();
         ok &= boolean_to_seval(result, &s.rval());
@@ -7054,7 +6942,7 @@ static bool js_cocos2dx_Director_setDisplayStats(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setDisplayStats : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -7073,7 +6961,7 @@ static bool js_cocos2dx_Director_getEventDispatcher(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getEventDispatcher : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::EventDispatcher* result = cobj->getEventDispatcher();
         ok &= native_ptr_to_seval<cocos2d::EventDispatcher>((cocos2d::EventDispatcher*)result, &s.rval());
@@ -7091,7 +6979,7 @@ static bool js_cocos2dx_Director_replaceScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_replaceScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Scene* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -7110,7 +6998,7 @@ static bool js_cocos2dx_Director_setAnimationInterval(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_setAnimationInterval : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7129,7 +7017,7 @@ static bool js_cocos2dx_Director_getActionManager(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Director_getActionManager : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionManager* result = cobj->getActionManager();
         ok &= native_ptr_to_seval<cocos2d::ActionManager>((cocos2d::ActionManager*)result, &s.rval());
@@ -7145,7 +7033,7 @@ static bool js_cocos2dx_Director_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Director::getInstance();
         se::Object* obj = nullptr;
@@ -7264,7 +7152,7 @@ static bool js_cocos2dx_Scheduler_setTimeScale(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_setTimeScale : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7283,7 +7171,7 @@ static bool js_cocos2dx_Scheduler_update(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_update : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7302,7 +7190,7 @@ static bool js_cocos2dx_Scheduler_unscheduleScriptEntry(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_unscheduleScriptEntry : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -7336,7 +7224,7 @@ static bool js_cocos2dx_Scheduler_getTimeScale(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_getTimeScale : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getTimeScale();
         ok &= float_to_seval(result, &s.rval());
@@ -7354,7 +7242,7 @@ static bool js_cocos2dx_Scheduler_unscheduleAllWithMinPriority(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_unscheduleAllWithMinPriority : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -7373,7 +7261,7 @@ static bool js_cocos2dx_Scheduler_performFunctionInCocosThread(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_performFunctionInCocosThread : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void ()> arg0;
         do {
@@ -7486,7 +7374,7 @@ static bool js_cocos2dx_AsyncTaskPool_stopTasks(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AsyncTaskPool_stopTasks : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::AsyncTaskPool::TaskType arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -7516,7 +7404,7 @@ static bool js_cocos2dx_AsyncTaskPool_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::AsyncTaskPool* result = cocos2d::AsyncTaskPool::getInstance();
         ok &= native_ptr_to_seval<cocos2d::AsyncTaskPool>((cocos2d::AsyncTaskPool*)result, &s.rval());
@@ -7556,7 +7444,7 @@ static bool js_cocos2dx_Action_startWithTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_startWithTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -7575,7 +7463,7 @@ static bool js_cocos2dx_Action_setOriginalTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_setOriginalTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -7594,7 +7482,7 @@ static bool js_cocos2dx_Action_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Action* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::Action>((cocos2d::Action*)result, &s.rval());
@@ -7612,7 +7500,7 @@ static bool js_cocos2dx_Action_getOriginalTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_getOriginalTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getOriginalTarget();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -7645,7 +7533,7 @@ static bool js_cocos2dx_Action_update(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_update : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7664,7 +7552,7 @@ static bool js_cocos2dx_Action_getTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_getTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getTarget();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -7682,7 +7570,7 @@ static bool js_cocos2dx_Action_getFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_getFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getFlags();
         ok &= uint32_to_seval(result, &s.rval());
@@ -7700,7 +7588,7 @@ static bool js_cocos2dx_Action_step(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_step : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7719,7 +7607,7 @@ static bool js_cocos2dx_Action_setTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_setTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -7738,7 +7626,7 @@ static bool js_cocos2dx_Action_setFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_setFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -7757,7 +7645,7 @@ static bool js_cocos2dx_Action_getTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_getTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getTag();
         ok &= int32_to_seval(result, &s.rval());
@@ -7775,7 +7663,7 @@ static bool js_cocos2dx_Action_setTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_setTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -7794,7 +7682,7 @@ static bool js_cocos2dx_Action_isDone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_isDone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isDone();
         ok &= boolean_to_seval(result, &s.rval());
@@ -7812,7 +7700,7 @@ static bool js_cocos2dx_Action_reverse(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Action_reverse : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Action* result = cobj->reverse();
         ok &= native_ptr_to_seval<cocos2d::Action>((cocos2d::Action*)result, &s.rval());
@@ -7864,7 +7752,7 @@ static bool js_cocos2dx_FiniteTimeAction_setDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FiniteTimeAction_setDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7883,7 +7771,7 @@ static bool js_cocos2dx_FiniteTimeAction_getDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FiniteTimeAction_getDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDuration();
         ok &= float_to_seval(result, &s.rval());
@@ -7923,7 +7811,7 @@ static bool js_cocos2dx_Speed_setInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Speed_setInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -7942,7 +7830,7 @@ static bool js_cocos2dx_Speed_getSpeed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Speed_getSpeed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSpeed();
         ok &= float_to_seval(result, &s.rval());
@@ -7960,7 +7848,7 @@ static bool js_cocos2dx_Speed_setSpeed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Speed_setSpeed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -7979,7 +7867,7 @@ static bool js_cocos2dx_Speed_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Speed_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -8002,7 +7890,7 @@ static bool js_cocos2dx_Speed_getInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Speed_getInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionInterval* result = cobj->getInnerAction();
         ok &= native_ptr_to_seval<cocos2d::ActionInterval>((cocos2d::ActionInterval*)result, &s.rval());
@@ -8018,7 +7906,7 @@ static bool js_cocos2dx_Speed_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -8096,7 +7984,7 @@ static bool js_cocos2dx_Follow_setBoundarySet(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Follow_setBoundarySet : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -8115,7 +8003,7 @@ static bool js_cocos2dx_Follow_initWithTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Follow_initWithTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -8147,7 +8035,7 @@ static bool js_cocos2dx_Follow_initWithTargetAndOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Follow_initWithTargetAndOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Node* arg0 = nullptr;
         float arg1 = 0;
@@ -8187,7 +8075,7 @@ static bool js_cocos2dx_Follow_isBoundarySet(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Follow_isBoundarySet : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isBoundarySet();
         ok &= boolean_to_seval(result, &s.rval());
@@ -8203,7 +8091,7 @@ static bool js_cocos2dx_Follow_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -8237,7 +8125,7 @@ static bool js_cocos2dx_Follow_createWithOffset(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Node* arg0 = nullptr;
         float arg1 = 0;
@@ -8346,7 +8234,7 @@ static bool js_cocos2dx_Image_hasPremultipliedAlpha(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_hasPremultipliedAlpha : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasPremultipliedAlpha();
         ok &= boolean_to_seval(result, &s.rval());
@@ -8358,31 +8246,13 @@ static bool js_cocos2dx_Image_hasPremultipliedAlpha(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Image_hasPremultipliedAlpha)
 
-static bool js_cocos2dx_Image_getDataLen(se::State& s)
-{
-    cocos2d::Image* cobj = (cocos2d::Image*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getDataLen : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        ssize_t result = cobj->getDataLen();
-        ok &= ssize_to_seval(result, &s.rval());
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Image_getDataLen : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Image_getDataLen)
-
 static bool js_cocos2dx_Image_saveToFile(se::State& s)
 {
     cocos2d::Image* cobj = (cocos2d::Image*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_saveToFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -8414,7 +8284,7 @@ static bool js_cocos2dx_Image_hasAlpha(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_hasAlpha : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasAlpha();
         ok &= boolean_to_seval(result, &s.rval());
@@ -8432,7 +8302,7 @@ static bool js_cocos2dx_Image_isCompressed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_isCompressed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isCompressed();
         ok &= boolean_to_seval(result, &s.rval());
@@ -8450,7 +8320,7 @@ static bool js_cocos2dx_Image_getHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getHeight();
         ok &= int32_to_seval(result, &s.rval());
@@ -8468,7 +8338,7 @@ static bool js_cocos2dx_Image_initWithImageFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_initWithImageFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -8489,7 +8359,7 @@ static bool js_cocos2dx_Image_getWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getWidth();
         ok &= int32_to_seval(result, &s.rval());
@@ -8507,7 +8377,7 @@ static bool js_cocos2dx_Image_getBitPerPixel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getBitPerPixel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getBitPerPixel();
         ok &= int32_to_seval(result, &s.rval());
@@ -8525,7 +8395,7 @@ static bool js_cocos2dx_Image_getFileType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getFileType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getFileType();
         ok &= int32_to_seval(result, &s.rval());
@@ -8543,7 +8413,7 @@ static bool js_cocos2dx_Image_getFilePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getFilePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getFilePath();
         ok &= std_string_to_seval(result, &s.rval());
@@ -8561,7 +8431,7 @@ static bool js_cocos2dx_Image_getNumberOfMipmaps(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getNumberOfMipmaps : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getNumberOfMipmaps();
         ok &= int32_to_seval(result, &s.rval());
@@ -8579,7 +8449,7 @@ static bool js_cocos2dx_Image_getRenderFormat(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getRenderFormat : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getRenderFormat();
         ok &= int32_to_seval(result, &s.rval());
@@ -8591,49 +8461,13 @@ static bool js_cocos2dx_Image_getRenderFormat(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Image_getRenderFormat)
 
-static bool js_cocos2dx_Image_getData(se::State& s)
-{
-    cocos2d::Image* cobj = (cocos2d::Image*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getData : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        unsigned char* result = cobj->getData();
-        #pragma warning NO CONVERSION FROM NATIVE FOR unsigned char*;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Image_getData : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Image_getData)
-
-static bool js_cocos2dx_Image_getMipmaps(se::State& s)
-{
-    cocos2d::Image* cobj = (cocos2d::Image*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_getMipmaps : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        cocos2d::_MipmapInfo* result = cobj->getMipmaps();
-        #pragma warning NO CONVERSION FROM NATIVE FOR _MipmapInfo*;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Image_getMipmaps : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Image_getMipmaps)
-
 static bool js_cocos2dx_Image_initWithRawData(se::State& s)
 {
     cocos2d::Image* cobj = (cocos2d::Image*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Image_initWithRawData : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         const unsigned char* arg0 = nullptr;
         ssize_t arg1 = 0;
@@ -8681,7 +8515,7 @@ static bool js_cocos2dx_Image_setPVRImagesHavePremultipliedAlpha(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -8698,7 +8532,7 @@ static bool js_cocos2dx_Image_setPNGPremultipliedAlphaEnabled(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -8745,7 +8579,6 @@ bool js_register_cocos2dx_Image(se::Object* obj)
     auto cls = se::Class::create("Image", obj, nullptr, _SE(js_cocos2dx_Image_constructor));
 
     cls->defineFunction("hasPremultipliedAlpha", _SE(js_cocos2dx_Image_hasPremultipliedAlpha));
-    cls->defineFunction("getDataLen", _SE(js_cocos2dx_Image_getDataLen));
     cls->defineFunction("saveToFile", _SE(js_cocos2dx_Image_saveToFile));
     cls->defineFunction("hasAlpha", _SE(js_cocos2dx_Image_hasAlpha));
     cls->defineFunction("isCompressed", _SE(js_cocos2dx_Image_isCompressed));
@@ -8757,8 +8590,6 @@ bool js_register_cocos2dx_Image(se::Object* obj)
     cls->defineFunction("getFilePath", _SE(js_cocos2dx_Image_getFilePath));
     cls->defineFunction("getNumberOfMipmaps", _SE(js_cocos2dx_Image_getNumberOfMipmaps));
     cls->defineFunction("getRenderFormat", _SE(js_cocos2dx_Image_getRenderFormat));
-    cls->defineFunction("getData", _SE(js_cocos2dx_Image_getData));
-    cls->defineFunction("getMipmaps", _SE(js_cocos2dx_Image_getMipmaps));
     cls->defineFunction("initWithRawData", _SE(js_cocos2dx_Image_initWithRawData));
     cls->defineStaticFunction("setPVRImagesHavePremultipliedAlpha", _SE(js_cocos2dx_Image_setPVRImagesHavePremultipliedAlpha));
     cls->defineStaticFunction("setPNGPremultipliedAlphaEnabled", _SE(js_cocos2dx_Image_setPNGPremultipliedAlphaEnabled));
@@ -8777,7 +8608,7 @@ se::Class* __jsb_cocos2d_GLProgramState_class = nullptr;
 
 static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformCallback : Invalid Native Object");
     const auto& args = s.args();
@@ -8798,7 +8629,7 @@ static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(2);
 			            ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)larg0, &args[0]);
@@ -8841,7 +8672,7 @@ static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(2);
 			            ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)larg0, &args[0]);
@@ -8879,7 +8710,7 @@ static bool js_cocos2dx_GLProgramState_getVertexAttribsFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_getVertexAttribsFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getVertexAttribsFlags();
         ok &= uint32_to_seval(result, &s.rval());
@@ -8897,7 +8728,7 @@ static bool js_cocos2dx_GLProgramState_applyAutoBinding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_applyAutoBinding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -8914,7 +8745,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_applyAutoBinding)
 
 static bool js_cocos2dx_GLProgramState_setUniformVec2(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformVec2 : Invalid Native Object");
     const auto& args = s.args();
@@ -8952,7 +8783,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_setUniformVec2)
 
 static bool js_cocos2dx_GLProgramState_setUniformVec3(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformVec3 : Invalid Native Object");
     const auto& args = s.args();
@@ -8994,7 +8825,7 @@ static bool js_cocos2dx_GLProgramState_setVertexAttribCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_setVertexAttribCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::function<void (cocos2d::VertexAttrib *)> arg1;
@@ -9009,7 +8840,7 @@ static bool js_cocos2dx_GLProgramState_setVertexAttribCallback(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::VertexAttrib>((cocos2d::VertexAttrib*)larg0, &args[0]);
@@ -9044,7 +8875,7 @@ static bool js_cocos2dx_GLProgramState_apply(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_apply : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Mat4 arg0;
         ok &= seval_to_Mat4(args[0], &arg0);
@@ -9063,7 +8894,7 @@ static bool js_cocos2dx_GLProgramState_getNodeBinding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_getNodeBinding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getNodeBinding();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -9081,7 +8912,7 @@ static bool js_cocos2dx_GLProgramState_applyGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_applyGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Mat4 arg0;
         ok &= seval_to_Mat4(args[0], &arg0);
@@ -9100,7 +8931,7 @@ static bool js_cocos2dx_GLProgramState_setNodeBinding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_setNodeBinding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -9115,7 +8946,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_setNodeBinding)
 
 static bool js_cocos2dx_GLProgramState_setUniformInt(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformInt : Invalid Native Object");
     const auto& args = s.args();
@@ -9157,7 +8988,7 @@ static bool js_cocos2dx_GLProgramState_setParameterAutoBinding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_setParameterAutoBinding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -9174,7 +9005,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_setParameterAutoBinding)
 
 static bool js_cocos2dx_GLProgramState_setUniformVec2v(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformVec2v : Invalid Native Object");
     const auto& args = s.args();
@@ -9222,7 +9053,7 @@ static bool js_cocos2dx_GLProgramState_getUniformCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_getUniformCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getUniformCount();
         ok &= ssize_to_seval(result, &s.rval());
@@ -9240,7 +9071,7 @@ static bool js_cocos2dx_GLProgramState_applyAttributes(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_applyAttributes : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cobj->applyAttributes();
         return true;
@@ -9263,7 +9094,7 @@ static bool js_cocos2dx_GLProgramState_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLProgramState* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::GLProgramState>((cocos2d::GLProgramState*)result, &s.rval());
@@ -9281,7 +9112,7 @@ static bool js_cocos2dx_GLProgramState_setGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_setGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgram* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -9296,7 +9127,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_setGLProgram)
 
 static bool js_cocos2dx_GLProgramState_setUniformFloatv(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformFloatv : Invalid Native Object");
     const auto& args = s.args();
@@ -9346,7 +9177,7 @@ static bool js_cocos2dx_GLProgramState_getGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_getGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLProgram* result = cobj->getGLProgram();
         ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)result, &s.rval());
@@ -9360,7 +9191,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_getGLProgram)
 
 static bool js_cocos2dx_GLProgramState_setUniformTexture(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformTexture : Invalid Native Object");
     const auto& args = s.args();
@@ -9413,7 +9244,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_applyUniforms)
 
 static bool js_cocos2dx_GLProgramState_setUniformFloat(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformFloat : Invalid Native Object");
     const auto& args = s.args();
@@ -9451,7 +9282,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_setUniformFloat)
 
 static bool js_cocos2dx_GLProgramState_setUniformMat4(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformMat4 : Invalid Native Object");
     const auto& args = s.args();
@@ -9489,7 +9320,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_setUniformMat4)
 
 static bool js_cocos2dx_GLProgramState_setUniformVec3v(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgramState* cobj = (cocos2d::GLProgramState*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgramState_setUniformVec3v : Invalid Native Object");
     const auto& args = s.args();
@@ -9537,7 +9368,7 @@ static bool js_cocos2dx_GLProgramState_getVertexAttribCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramState_getVertexAttribCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getVertexAttribCount();
         ok &= ssize_to_seval(result, &s.rval());
@@ -9553,7 +9384,7 @@ static bool js_cocos2dx_GLProgramState_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgram* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -9572,7 +9403,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgramState_create)
 
 static bool js_cocos2dx_GLProgramState_getOrCreateWithGLProgramName(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -9609,7 +9440,7 @@ static bool js_cocos2dx_GLProgramState_getOrCreateWithGLProgram(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgram* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -9628,7 +9459,7 @@ static bool js_cocos2dx_GLProgramState_getOrCreateWithShaders(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         std::string arg0;
         std::string arg1;
@@ -9701,7 +9532,7 @@ static bool js_cocos2dx_SpriteFrame_setAnchorPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setAnchorPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -9720,7 +9551,7 @@ static bool js_cocos2dx_SpriteFrame_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -9739,7 +9570,7 @@ static bool js_cocos2dx_SpriteFrame_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -9757,7 +9588,7 @@ static bool js_cocos2dx_SpriteFrame_setOffsetInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setOffsetInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -9776,7 +9607,7 @@ static bool js_cocos2dx_SpriteFrame_getOriginalSizeInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getOriginalSizeInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getOriginalSizeInPixels();
         ok &= Size_to_seval(result, &s.rval());
@@ -9794,7 +9625,7 @@ static bool js_cocos2dx_SpriteFrame_setOriginalSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setOriginalSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -9813,7 +9644,7 @@ static bool js_cocos2dx_SpriteFrame_getCenterRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getCenterRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getCenterRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -9831,7 +9662,7 @@ static bool js_cocos2dx_SpriteFrame_setRectInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setRectInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -9850,7 +9681,7 @@ static bool js_cocos2dx_SpriteFrame_getRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -9868,7 +9699,7 @@ static bool js_cocos2dx_SpriteFrame_setCenterRectInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setCenterRectInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -9887,7 +9718,7 @@ static bool js_cocos2dx_SpriteFrame_setOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -9902,7 +9733,7 @@ SE_BIND_FUNC(js_cocos2dx_SpriteFrame_setOffset)
 
 static bool js_cocos2dx_SpriteFrame_initWithTextureFilename(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::SpriteFrame* cobj = (cocos2d::SpriteFrame*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_SpriteFrame_initWithTextureFilename : Invalid Native Object");
     const auto& args = s.args();
@@ -9956,7 +9787,7 @@ static bool js_cocos2dx_SpriteFrame_setRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -9971,7 +9802,7 @@ SE_BIND_FUNC(js_cocos2dx_SpriteFrame_setRect)
 
 static bool js_cocos2dx_SpriteFrame_initWithTexture(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::SpriteFrame* cobj = (cocos2d::SpriteFrame*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_SpriteFrame_initWithTexture : Invalid Native Object");
     const auto& args = s.args();
@@ -10025,7 +9856,7 @@ static bool js_cocos2dx_SpriteFrame_getOriginalSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getOriginalSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getOriginalSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -10043,7 +9874,7 @@ static bool js_cocos2dx_SpriteFrame_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::SpriteFrame* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::SpriteFrame>((cocos2d::SpriteFrame*)result, &s.rval());
@@ -10061,7 +9892,7 @@ static bool js_cocos2dx_SpriteFrame_getRectInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getRectInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getRectInPixels();
         ok &= Rect_to_seval(result, &s.rval());
@@ -10079,7 +9910,7 @@ static bool js_cocos2dx_SpriteFrame_isRotated(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_isRotated : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isRotated();
         ok &= boolean_to_seval(result, &s.rval());
@@ -10097,7 +9928,7 @@ static bool js_cocos2dx_SpriteFrame_hasCenterRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_hasCenterRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasCenterRect();
         ok &= boolean_to_seval(result, &s.rval());
@@ -10115,7 +9946,7 @@ static bool js_cocos2dx_SpriteFrame_setRotated(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setRotated : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -10134,7 +9965,7 @@ static bool js_cocos2dx_SpriteFrame_getOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getOffset();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -10152,7 +9983,7 @@ static bool js_cocos2dx_SpriteFrame_setOriginalSizeInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_setOriginalSizeInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -10171,7 +10002,7 @@ static bool js_cocos2dx_SpriteFrame_getAnchorPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getAnchorPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getAnchorPoint();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -10189,7 +10020,7 @@ static bool js_cocos2dx_SpriteFrame_hasAnchorPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_hasAnchorPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasAnchorPoint();
         ok &= boolean_to_seval(result, &s.rval());
@@ -10207,7 +10038,7 @@ static bool js_cocos2dx_SpriteFrame_getOffsetInPixels(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrame_getOffsetInPixels : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getOffsetInPixels();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -10221,7 +10052,7 @@ SE_BIND_FUNC(js_cocos2dx_SpriteFrame_getOffsetInPixels)
 
 static bool js_cocos2dx_SpriteFrame_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -10268,7 +10099,7 @@ SE_BIND_FUNC(js_cocos2dx_SpriteFrame_create)
 
 static bool js_cocos2dx_SpriteFrame_createWithTexture(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -10404,7 +10235,7 @@ static bool js_cocos2dx_AnimationFrame_setSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_setSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -10419,7 +10250,7 @@ SE_BIND_FUNC(js_cocos2dx_AnimationFrame_setSpriteFrame)
 
 static bool js_cocos2dx_AnimationFrame_getUserInfo(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::AnimationFrame* cobj = (cocos2d::AnimationFrame*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_AnimationFrame_getUserInfo : Invalid Native Object");
     const auto& args = s.args();
@@ -10453,7 +10284,7 @@ static bool js_cocos2dx_AnimationFrame_setDelayUnits(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_setDelayUnits : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -10472,7 +10303,7 @@ static bool js_cocos2dx_AnimationFrame_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::AnimationFrame* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::AnimationFrame>((cocos2d::AnimationFrame*)result, &s.rval());
@@ -10490,7 +10321,7 @@ static bool js_cocos2dx_AnimationFrame_getSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_getSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::SpriteFrame* result = cobj->getSpriteFrame();
         ok &= native_ptr_to_seval<cocos2d::SpriteFrame>((cocos2d::SpriteFrame*)result, &s.rval());
@@ -10508,7 +10339,7 @@ static bool js_cocos2dx_AnimationFrame_getDelayUnits(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_getDelayUnits : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDelayUnits();
         ok &= float_to_seval(result, &s.rval());
@@ -10526,7 +10357,7 @@ static bool js_cocos2dx_AnimationFrame_setUserInfo(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_setUserInfo : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMap arg0;
         ok &= seval_to_ccvaluemap(args[0], &arg0);
@@ -10545,7 +10376,7 @@ static bool js_cocos2dx_AnimationFrame_initWithSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationFrame_initWithSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         float arg1 = 0;
@@ -10568,7 +10399,7 @@ static bool js_cocos2dx_AnimationFrame_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         float arg1 = 0;
@@ -10662,7 +10493,7 @@ static bool js_cocos2dx_Animation_getLoops(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_getLoops : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getLoops();
         ok &= uint32_to_seval(result, &s.rval());
@@ -10680,7 +10511,7 @@ static bool js_cocos2dx_Animation_addSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_addSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -10699,7 +10530,7 @@ static bool js_cocos2dx_Animation_setRestoreOriginalFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_setRestoreOriginalFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -10718,7 +10549,7 @@ static bool js_cocos2dx_Animation_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Animation* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::Animation>((cocos2d::Animation*)result, &s.rval());
@@ -10736,7 +10567,7 @@ static bool js_cocos2dx_Animation_getDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_getDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDuration();
         ok &= float_to_seval(result, &s.rval());
@@ -10754,7 +10585,7 @@ static bool js_cocos2dx_Animation_initWithAnimationFrames(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_initWithAnimationFrames : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vector<cocos2d::AnimationFrame *> arg0;
         float arg1 = 0;
@@ -10779,7 +10610,7 @@ static bool js_cocos2dx_Animation_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -10797,7 +10628,7 @@ static bool js_cocos2dx_Animation_setFrames(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_setFrames : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::AnimationFrame *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -10816,7 +10647,7 @@ static bool js_cocos2dx_Animation_getFrames(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_getFrames : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vector<cocos2d::AnimationFrame *>& result = cobj->getFrames();
         ok &= Vector_to_seval(result, &s.rval());
@@ -10834,7 +10665,7 @@ static bool js_cocos2dx_Animation_setLoops(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_setLoops : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -10853,7 +10684,7 @@ static bool js_cocos2dx_Animation_setDelayPerUnit(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_setDelayPerUnit : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -10872,7 +10703,7 @@ static bool js_cocos2dx_Animation_addSpriteFrameWithFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_addSpriteFrameWithFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -10891,7 +10722,7 @@ static bool js_cocos2dx_Animation_getTotalDelayUnits(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_getTotalDelayUnits : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getTotalDelayUnits();
         ok &= float_to_seval(result, &s.rval());
@@ -10909,7 +10740,7 @@ static bool js_cocos2dx_Animation_getDelayPerUnit(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_getDelayPerUnit : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDelayPerUnit();
         ok &= float_to_seval(result, &s.rval());
@@ -10927,7 +10758,7 @@ static bool js_cocos2dx_Animation_initWithSpriteFrames(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_initWithSpriteFrames : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::SpriteFrame *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -10972,7 +10803,7 @@ static bool js_cocos2dx_Animation_getRestoreOriginalFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_getRestoreOriginalFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->getRestoreOriginalFrame();
         ok &= boolean_to_seval(result, &s.rval());
@@ -10990,7 +10821,7 @@ static bool js_cocos2dx_Animation_addSpriteFrameWithTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animation_addSpriteFrameWithTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Texture2D* arg0 = nullptr;
         cocos2d::Rect arg1;
@@ -11007,7 +10838,7 @@ SE_BIND_FUNC(js_cocos2dx_Animation_addSpriteFrameWithTexture)
 
 static bool js_cocos2dx_Animation_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -11058,7 +10889,7 @@ static bool js_cocos2dx_Animation_createWithSpriteFrames(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::SpriteFrame *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -11186,7 +11017,7 @@ static bool js_cocos2dx_ActionInterval_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionInterval_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -11204,7 +11035,7 @@ static bool js_cocos2dx_ActionInterval_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionInterval_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -11225,7 +11056,7 @@ static bool js_cocos2dx_ActionInterval_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionInterval_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -11244,7 +11075,7 @@ static bool js_cocos2dx_ActionInterval_getElapsed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionInterval_getElapsed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getElapsed();
         ok &= float_to_seval(result, &s.rval());
@@ -11286,7 +11117,7 @@ static bool js_cocos2dx_Sequence_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sequence_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::FiniteTimeAction *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -11307,7 +11138,7 @@ static bool js_cocos2dx_Sequence_initWithTwoActions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sequence_initWithTwoActions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         cocos2d::FiniteTimeAction* arg1 = nullptr;
@@ -11391,7 +11222,7 @@ static bool js_cocos2dx_Repeat_setInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Repeat_setInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -11410,7 +11241,7 @@ static bool js_cocos2dx_Repeat_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Repeat_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         unsigned int arg1 = 0;
@@ -11433,7 +11264,7 @@ static bool js_cocos2dx_Repeat_getInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Repeat_getInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::FiniteTimeAction* result = cobj->getInnerAction();
         ok &= native_ptr_to_seval<cocos2d::FiniteTimeAction>((cocos2d::FiniteTimeAction*)result, &s.rval());
@@ -11449,7 +11280,7 @@ static bool js_cocos2dx_Repeat_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         unsigned int arg1 = 0;
@@ -11537,7 +11368,7 @@ static bool js_cocos2dx_RepeatForever_setInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RepeatForever_setInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -11556,7 +11387,7 @@ static bool js_cocos2dx_RepeatForever_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RepeatForever_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -11577,7 +11408,7 @@ static bool js_cocos2dx_RepeatForever_getInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RepeatForever_getInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionInterval* result = cobj->getInnerAction();
         ok &= native_ptr_to_seval<cocos2d::ActionInterval>((cocos2d::ActionInterval*)result, &s.rval());
@@ -11593,7 +11424,7 @@ static bool js_cocos2dx_RepeatForever_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -11679,7 +11510,7 @@ static bool js_cocos2dx_Spawn_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Spawn_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::FiniteTimeAction *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -11700,7 +11531,7 @@ static bool js_cocos2dx_Spawn_initWithTwoActions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Spawn_initWithTwoActions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         cocos2d::FiniteTimeAction* arg1 = nullptr;
@@ -11780,7 +11611,7 @@ se::Class* __jsb_cocos2d_RotateTo_class = nullptr;
 
 static bool js_cocos2dx_RotateTo_initWithDuration(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::RotateTo* cobj = (cocos2d::RotateTo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_RotateTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
@@ -11825,7 +11656,7 @@ SE_BIND_FUNC(js_cocos2dx_RotateTo_initWithDuration)
 
 static bool js_cocos2dx_RotateTo_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -11941,7 +11772,7 @@ se::Class* __jsb_cocos2d_RotateBy_class = nullptr;
 
 static bool js_cocos2dx_RotateBy_initWithDuration(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::RotateBy* cobj = (cocos2d::RotateBy*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_RotateBy_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
@@ -12001,7 +11832,7 @@ SE_BIND_FUNC(js_cocos2dx_RotateBy_initWithDuration)
 
 static bool js_cocos2dx_RotateBy_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -12117,7 +11948,7 @@ se::Class* __jsb_cocos2d_MoveBy_class = nullptr;
 
 static bool js_cocos2dx_MoveBy_initWithDuration(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::MoveBy* cobj = (cocos2d::MoveBy*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_MoveBy_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
@@ -12159,7 +11990,7 @@ SE_BIND_FUNC(js_cocos2dx_MoveBy_initWithDuration)
 
 static bool js_cocos2dx_MoveBy_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -12258,7 +12089,7 @@ se::Class* __jsb_cocos2d_MoveTo_class = nullptr;
 
 static bool js_cocos2dx_MoveTo_initWithDuration(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::MoveTo* cobj = (cocos2d::MoveTo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_MoveTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
@@ -12300,7 +12131,7 @@ SE_BIND_FUNC(js_cocos2dx_MoveTo_initWithDuration)
 
 static bool js_cocos2dx_MoveTo_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -12403,7 +12234,7 @@ static bool js_cocos2dx_SkewTo_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SkewTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -12426,7 +12257,7 @@ static bool js_cocos2dx_SkewTo_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -12514,7 +12345,7 @@ static bool js_cocos2dx_SkewBy_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SkewBy_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -12537,7 +12368,7 @@ static bool js_cocos2dx_SkewBy_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -12625,7 +12456,7 @@ static bool js_cocos2dx_JumpBy_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpBy_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Vec2 arg1;
@@ -12650,7 +12481,7 @@ static bool js_cocos2dx_JumpBy_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Vec2 arg1;
@@ -12740,7 +12571,7 @@ static bool js_cocos2dx_JumpTo_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Vec2 arg1;
@@ -12765,7 +12596,7 @@ static bool js_cocos2dx_JumpTo_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Vec2 arg1;
@@ -12969,7 +12800,7 @@ se::Class* __jsb_cocos2d_ScaleTo_class = nullptr;
 
 static bool js_cocos2dx_ScaleTo_initWithDuration(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::ScaleTo* cobj = (cocos2d::ScaleTo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ScaleTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
@@ -13035,7 +12866,7 @@ SE_BIND_FUNC(js_cocos2dx_ScaleTo_initWithDuration)
 
 static bool js_cocos2dx_ScaleTo_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -13157,7 +12988,7 @@ se::Class* __jsb_cocos2d_ScaleBy_class = nullptr;
 
 static bool js_cocos2dx_ScaleBy_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -13282,7 +13113,7 @@ static bool js_cocos2dx_Blink_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Blink_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         int arg1 = 0;
@@ -13303,7 +13134,7 @@ static bool js_cocos2dx_Blink_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         int arg1 = 0;
@@ -13389,7 +13220,7 @@ static bool js_cocos2dx_FadeTo_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         uint8_t arg1;
@@ -13410,7 +13241,7 @@ static bool js_cocos2dx_FadeTo_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         uint8_t arg1;
@@ -13496,7 +13327,7 @@ static bool js_cocos2dx_FadeIn_setReverseAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeIn_setReverseAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FadeTo* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -13513,7 +13344,7 @@ static bool js_cocos2dx_FadeIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -13597,7 +13428,7 @@ static bool js_cocos2dx_FadeOut_setReverseAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeOut_setReverseAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FadeTo* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -13614,7 +13445,7 @@ static bool js_cocos2dx_FadeOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -13698,7 +13529,7 @@ static bool js_cocos2dx_TintTo_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TintTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         uint8_t arg1;
@@ -13721,7 +13552,7 @@ SE_BIND_FUNC(js_cocos2dx_TintTo_initWithDuration)
 
 static bool js_cocos2dx_TintTo_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -13830,7 +13661,7 @@ static bool js_cocos2dx_TintBy_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TintBy_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         int16_t arg1 = 0;
@@ -13855,7 +13686,7 @@ static bool js_cocos2dx_TintBy_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         int16_t arg1 = 0;
@@ -13943,7 +13774,7 @@ static bool js_cocos2dx_DelayTime_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -14026,7 +13857,7 @@ static bool js_cocos2dx_ReverseTime_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ReverseTime_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -14045,7 +13876,7 @@ static bool js_cocos2dx_ReverseTime_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FiniteTimeAction* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -14129,7 +13960,7 @@ static bool js_cocos2dx_Animate_initWithAnimation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animate_initWithAnimation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Animation* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -14146,7 +13977,7 @@ SE_BIND_FUNC(js_cocos2dx_Animate_initWithAnimation)
 
 static bool js_cocos2dx_Animate_getAnimation(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Animate* cobj = (cocos2d::Animate*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Animate_getAnimation : Invalid Native Object");
     const auto& args = s.args();
@@ -14180,7 +14011,7 @@ static bool js_cocos2dx_Animate_getCurrentFrameIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animate_getCurrentFrameIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getCurrentFrameIndex();
         ok &= int32_to_seval(result, &s.rval());
@@ -14198,7 +14029,7 @@ static bool js_cocos2dx_Animate_setAnimation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Animate_setAnimation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Animation* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -14215,7 +14046,7 @@ static bool js_cocos2dx_Animate_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Animation* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -14298,7 +14129,7 @@ se::Class* __jsb_cocos2d_TargetedAction_class = nullptr;
 
 static bool js_cocos2dx_TargetedAction_getForcedTarget(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TargetedAction* cobj = (cocos2d::TargetedAction*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TargetedAction_getForcedTarget : Invalid Native Object");
     const auto& args = s.args();
@@ -14332,7 +14163,7 @@ static bool js_cocos2dx_TargetedAction_initWithTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TargetedAction_initWithTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::FiniteTimeAction* arg1 = nullptr;
@@ -14355,7 +14186,7 @@ static bool js_cocos2dx_TargetedAction_setForcedTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TargetedAction_setForcedTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -14372,7 +14203,7 @@ static bool js_cocos2dx_TargetedAction_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::FiniteTimeAction* arg1 = nullptr;
@@ -14460,7 +14291,7 @@ static bool js_cocos2dx_ActionFloat_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionFloat_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -14479,7 +14310,7 @@ static bool js_cocos2dx_ActionFloat_initWithDuration(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= float_to_seval(larg0, &args[0]);
@@ -14514,7 +14345,7 @@ static bool js_cocos2dx_ActionFloat_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -14533,7 +14364,7 @@ static bool js_cocos2dx_ActionFloat_create(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= float_to_seval(larg0, &args[0]);
@@ -14633,7 +14464,7 @@ static bool js_cocos2dx_Configuration_supportsPVRTC(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsPVRTC : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsPVRTC();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14651,7 +14482,7 @@ static bool js_cocos2dx_Configuration_supportsOESDepth24(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsOESDepth24 : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsOESDepth24();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14669,7 +14500,7 @@ static bool js_cocos2dx_Configuration_getMaxModelviewStackDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getMaxModelviewStackDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMaxModelviewStackDepth();
         ok &= int32_to_seval(result, &s.rval());
@@ -14687,7 +14518,7 @@ static bool js_cocos2dx_Configuration_supportsShareableVAO(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsShareableVAO : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsShareableVAO();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14705,7 +14536,7 @@ static bool js_cocos2dx_Configuration_supportsBGRA8888(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsBGRA8888 : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsBGRA8888();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14723,7 +14554,7 @@ static bool js_cocos2dx_Configuration_checkForGLExtension(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_checkForGLExtension : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -14744,7 +14575,7 @@ static bool js_cocos2dx_Configuration_supportsATITC(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsATITC : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsATITC();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14762,7 +14593,7 @@ static bool js_cocos2dx_Configuration_supportsNPOT(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsNPOT : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsNPOT();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14780,7 +14611,7 @@ static bool js_cocos2dx_Configuration_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14798,7 +14629,7 @@ static bool js_cocos2dx_Configuration_getAnimate3DQuality(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getAnimate3DQuality : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getAnimate3DQuality();
         ok &= int32_to_seval(result, &s.rval());
@@ -14816,7 +14647,7 @@ static bool js_cocos2dx_Configuration_getMaxSupportPointLightInShader(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getMaxSupportPointLightInShader : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMaxSupportPointLightInShader();
         ok &= int32_to_seval(result, &s.rval());
@@ -14834,7 +14665,7 @@ static bool js_cocos2dx_Configuration_getMaxTextureSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getMaxTextureSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMaxTextureSize();
         ok &= int32_to_seval(result, &s.rval());
@@ -14852,7 +14683,7 @@ static bool js_cocos2dx_Configuration_setValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_setValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::Value arg1;
@@ -14873,7 +14704,7 @@ static bool js_cocos2dx_Configuration_getMaxSupportSpotLightInShader(se::State& 
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getMaxSupportSpotLightInShader : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMaxSupportSpotLightInShader();
         ok &= int32_to_seval(result, &s.rval());
@@ -14891,7 +14722,7 @@ static bool js_cocos2dx_Configuration_supportsETC(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsETC : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsETC();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14909,7 +14740,7 @@ static bool js_cocos2dx_Configuration_getMaxSupportDirLightInShader(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getMaxSupportDirLightInShader : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMaxSupportDirLightInShader();
         ok &= int32_to_seval(result, &s.rval());
@@ -14927,7 +14758,7 @@ static bool js_cocos2dx_Configuration_loadConfigFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_loadConfigFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -14946,7 +14777,7 @@ static bool js_cocos2dx_Configuration_supportsDiscardFramebuffer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsDiscardFramebuffer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsDiscardFramebuffer();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14964,7 +14795,7 @@ static bool js_cocos2dx_Configuration_supportsOESPackedDepthStencil(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsOESPackedDepthStencil : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsOESPackedDepthStencil();
         ok &= boolean_to_seval(result, &s.rval());
@@ -14982,7 +14813,7 @@ static bool js_cocos2dx_Configuration_supportsS3TC(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsS3TC : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsS3TC();
         ok &= boolean_to_seval(result, &s.rval());
@@ -15000,7 +14831,7 @@ static bool js_cocos2dx_Configuration_getInfo(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getInfo : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getInfo();
         ok &= std_string_to_seval(result, &s.rval());
@@ -15018,7 +14849,7 @@ static bool js_cocos2dx_Configuration_getMaxTextureUnits(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getMaxTextureUnits : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMaxTextureUnits();
         ok &= int32_to_seval(result, &s.rval());
@@ -15036,7 +14867,7 @@ static bool js_cocos2dx_Configuration_getValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_getValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -15083,7 +14914,7 @@ static bool js_cocos2dx_Configuration_supportsMapBuffer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Configuration_supportsMapBuffer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->supportsMapBuffer();
         ok &= boolean_to_seval(result, &s.rval());
@@ -15112,7 +14943,7 @@ static bool js_cocos2dx_Configuration_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Configuration::getInstance();
         se::Object* obj = nullptr;
@@ -15187,7 +15018,7 @@ static bool js_cocos2dx_Properties_getVariable(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getVariable : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         const char* arg1 = nullptr;
@@ -15210,7 +15041,7 @@ static bool js_cocos2dx_Properties_getString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         const char* arg1 = nullptr;
@@ -15233,7 +15064,7 @@ static bool js_cocos2dx_Properties_getLong(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getLong : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -15250,7 +15081,7 @@ SE_BIND_FUNC(js_cocos2dx_Properties_getLong)
 
 static bool js_cocos2dx_Properties_getNamespace(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Properties* cobj = (cocos2d::Properties*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Properties_getNamespace : Invalid Native Object");
     const auto& args = s.args();
@@ -15317,7 +15148,7 @@ static bool js_cocos2dx_Properties_getPath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getPath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         std::string* arg1 = nullptr;
@@ -15341,7 +15172,7 @@ static bool js_cocos2dx_Properties_getMat4(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getMat4 : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Mat4* arg1 = nullptr;
@@ -15364,7 +15195,7 @@ static bool js_cocos2dx_Properties_exists(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_exists : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -15385,7 +15216,7 @@ static bool js_cocos2dx_Properties_setString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_setString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         const char* arg1 = nullptr;
@@ -15408,7 +15239,7 @@ static bool js_cocos2dx_Properties_getId(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getId : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const char* result = cobj->getId();
         ok &= std_string_to_seval(result, &s.rval());
@@ -15441,7 +15272,7 @@ static bool js_cocos2dx_Properties_setVariable(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_setVariable : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         const char* arg1 = nullptr;
@@ -15462,7 +15293,7 @@ static bool js_cocos2dx_Properties_getBool(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getBool : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -15490,7 +15321,7 @@ SE_BIND_FUNC(js_cocos2dx_Properties_getBool)
 
 static bool js_cocos2dx_Properties_getColor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Properties* cobj = (cocos2d::Properties*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Properties_getColor : Invalid Native Object");
     const auto& args = s.args();
@@ -15536,7 +15367,7 @@ static bool js_cocos2dx_Properties_getType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -15557,7 +15388,7 @@ static bool js_cocos2dx_Properties_getNextNamespace(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getNextNamespace : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Properties* result = cobj->getNextNamespace();
         ok &= native_ptr_to_seval<cocos2d::Properties>((cocos2d::Properties*)result, &s.rval());
@@ -15575,7 +15406,7 @@ static bool js_cocos2dx_Properties_getInt(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getInt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -15596,7 +15427,7 @@ static bool js_cocos2dx_Properties_getVec3(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getVec3 : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Vec3* arg1 = nullptr;
@@ -15619,7 +15450,7 @@ static bool js_cocos2dx_Properties_getVec2(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getVec2 : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Vec2* arg1 = nullptr;
@@ -15642,7 +15473,7 @@ static bool js_cocos2dx_Properties_getVec4(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getVec4 : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Vec4* arg1 = nullptr;
@@ -15665,7 +15496,7 @@ static bool js_cocos2dx_Properties_getNextProperty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getNextProperty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const char* result = cobj->getNextProperty();
         ok &= std_string_to_seval(result, &s.rval());
@@ -15683,7 +15514,7 @@ static bool js_cocos2dx_Properties_getFloat(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getFloat : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -15704,7 +15535,7 @@ static bool js_cocos2dx_Properties_getQuaternionFromAxisAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Properties_getQuaternionFromAxisAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Quaternion* arg1 = nullptr;
@@ -15723,7 +15554,7 @@ SE_BIND_FUNC(js_cocos2dx_Properties_getQuaternionFromAxisAngle)
 
 static bool js_cocos2dx_Properties_parseColor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -15763,7 +15594,7 @@ static bool js_cocos2dx_Properties_parseVec3(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Vec3* arg1 = nullptr;
@@ -15784,7 +15615,7 @@ static bool js_cocos2dx_Properties_parseAxisAngle(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Quaternion* arg1 = nullptr;
@@ -15805,7 +15636,7 @@ static bool js_cocos2dx_Properties_parseVec2(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Vec2* arg1 = nullptr;
@@ -15826,7 +15657,7 @@ static bool js_cocos2dx_Properties_createNonRefCounted(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -15845,7 +15676,7 @@ static bool js_cocos2dx_Properties_parseVec4(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         cocos2d::Vec4* arg1 = nullptr;
@@ -15915,7 +15746,7 @@ static bool js_cocos2dx_FileUtils_fullPathForFilename(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_fullPathForFilename : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -15932,7 +15763,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_fullPathForFilename)
 
 static bool js_cocos2dx_FileUtils_getStringFromFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_getStringFromFile : Invalid Native Object");
     const auto& args = s.args();
@@ -15953,7 +15784,7 @@ static bool js_cocos2dx_FileUtils_getStringFromFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= std_string_to_seval(larg0, &args[0]);
@@ -15998,7 +15829,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_getStringFromFile)
 
 static bool js_cocos2dx_FileUtils_removeFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_removeFile : Invalid Native Object");
     const auto& args = s.args();
@@ -16019,7 +15850,7 @@ static bool js_cocos2dx_FileUtils_removeFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16068,7 +15899,7 @@ static bool js_cocos2dx_FileUtils_isAbsolutePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_isAbsolutePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16085,7 +15916,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_isAbsolutePath)
 
 static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_renameFile : Invalid Native Object");
     const auto& args = s.args();
@@ -16112,7 +15943,7 @@ static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16190,7 +16021,7 @@ static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16227,7 +16058,7 @@ static bool js_cocos2dx_FileUtils_getDefaultResourceRootPath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getDefaultResourceRootPath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getDefaultResourceRootPath();
         ok &= std_string_to_seval(result, &s.rval());
@@ -16245,7 +16076,7 @@ static bool js_cocos2dx_FileUtils_loadFilenameLookupDictionaryFromFile(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_loadFilenameLookupDictionaryFromFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16264,7 +16095,7 @@ static bool js_cocos2dx_FileUtils_isPopupNotify(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_isPopupNotify : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isPopupNotify();
         ok &= boolean_to_seval(result, &s.rval());
@@ -16282,7 +16113,7 @@ static bool js_cocos2dx_FileUtils_getValueVectorFromFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getValueVectorFromFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16303,7 +16134,7 @@ static bool js_cocos2dx_FileUtils_getSearchPaths(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getSearchPaths : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::vector<std::string>& result = cobj->getSearchPaths();
         ok &= std_vector_string_to_seval(result, &s.rval());
@@ -16321,7 +16152,7 @@ static bool js_cocos2dx_FileUtils_writeToFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_writeToFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ValueMap arg0;
         std::string arg1;
@@ -16344,7 +16175,7 @@ static bool js_cocos2dx_FileUtils_getOriginalSearchPaths(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getOriginalSearchPaths : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::vector<std::string>& result = cobj->getOriginalSearchPaths();
         ok &= std_vector_string_to_seval(result, &s.rval());
@@ -16362,7 +16193,7 @@ static bool js_cocos2dx_FileUtils_getNewFilename(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getNewFilename : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16383,7 +16214,7 @@ static bool js_cocos2dx_FileUtils_listFiles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_listFiles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16404,7 +16235,7 @@ static bool js_cocos2dx_FileUtils_getValueMapFromFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getValueMapFromFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16421,7 +16252,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_getValueMapFromFile)
 
 static bool js_cocos2dx_FileUtils_getFileSize(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_getFileSize : Invalid Native Object");
     const auto& args = s.args();
@@ -16442,7 +16273,7 @@ static bool js_cocos2dx_FileUtils_getFileSize(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= long_to_seval(larg0, &args[0]);
@@ -16491,7 +16322,7 @@ static bool js_cocos2dx_FileUtils_getValueMapFromData(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getValueMapFromData : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const char* arg0 = nullptr;
         int arg1 = 0;
@@ -16510,7 +16341,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_getValueMapFromData)
 
 static bool js_cocos2dx_FileUtils_removeDirectory(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_removeDirectory : Invalid Native Object");
     const auto& args = s.args();
@@ -16531,7 +16362,7 @@ static bool js_cocos2dx_FileUtils_removeDirectory(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16580,7 +16411,7 @@ static bool js_cocos2dx_FileUtils_setSearchPaths(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_setSearchPaths : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::vector<std::string> arg0;
         ok &= seval_to_std_vector_string(args[0], &arg0);
@@ -16595,7 +16426,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_setSearchPaths)
 
 static bool js_cocos2dx_FileUtils_writeStringToFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_writeStringToFile : Invalid Native Object");
     const auto& args = s.args();
@@ -16619,7 +16450,7 @@ static bool js_cocos2dx_FileUtils_writeStringToFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16671,7 +16502,7 @@ static bool js_cocos2dx_FileUtils_setSearchResolutionsOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_setSearchResolutionsOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::vector<std::string> arg0;
         ok &= seval_to_std_vector_string(args[0], &arg0);
@@ -16690,7 +16521,7 @@ static bool js_cocos2dx_FileUtils_addSearchResolutionsOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_addSearchResolutionsOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16718,7 +16549,7 @@ static bool js_cocos2dx_FileUtils_addSearchPath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_addSearchPath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16742,7 +16573,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_addSearchPath)
 
 static bool js_cocos2dx_FileUtils_writeValueVectorToFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_writeValueVectorToFile : Invalid Native Object");
     const auto& args = s.args();
@@ -16766,7 +16597,7 @@ static bool js_cocos2dx_FileUtils_writeValueVectorToFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16814,7 +16645,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_writeValueVectorToFile)
 
 static bool js_cocos2dx_FileUtils_isFileExist(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_isFileExist : Invalid Native Object");
     const auto& args = s.args();
@@ -16835,7 +16666,7 @@ static bool js_cocos2dx_FileUtils_isFileExist(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -16899,7 +16730,7 @@ static bool js_cocos2dx_FileUtils_fullPathFromRelativeFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_fullPathFromRelativeFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -16922,7 +16753,7 @@ static bool js_cocos2dx_FileUtils_getSuitableFOpen(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getSuitableFOpen : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -16939,7 +16770,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_getSuitableFOpen)
 
 static bool js_cocos2dx_FileUtils_writeValueMapToFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_writeValueMapToFile : Invalid Native Object");
     const auto& args = s.args();
@@ -16963,7 +16794,7 @@ static bool js_cocos2dx_FileUtils_writeValueMapToFile(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -17015,7 +16846,7 @@ static bool js_cocos2dx_FileUtils_getFileExtension(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getFileExtension : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -17036,7 +16867,7 @@ static bool js_cocos2dx_FileUtils_setWritablePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_setWritablePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -17055,7 +16886,7 @@ static bool js_cocos2dx_FileUtils_setPopupNotify(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_setPopupNotify : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -17070,7 +16901,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_setPopupNotify)
 
 static bool js_cocos2dx_FileUtils_isDirectoryExist(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_isDirectoryExist : Invalid Native Object");
     const auto& args = s.args();
@@ -17091,7 +16922,7 @@ static bool js_cocos2dx_FileUtils_isDirectoryExist(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -17140,7 +16971,7 @@ static bool js_cocos2dx_FileUtils_setDefaultResourceRootPath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_setDefaultResourceRootPath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -17159,7 +16990,7 @@ static bool js_cocos2dx_FileUtils_getSearchResolutionsOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getSearchResolutionsOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::vector<std::string>& result = cobj->getSearchResolutionsOrder();
         ok &= std_vector_string_to_seval(result, &s.rval());
@@ -17173,7 +17004,7 @@ SE_BIND_FUNC(js_cocos2dx_FileUtils_getSearchResolutionsOrder)
 
 static bool js_cocos2dx_FileUtils_createDirectory(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::FileUtils* cobj = (cocos2d::FileUtils*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_FileUtils_createDirectory : Invalid Native Object");
     const auto& args = s.args();
@@ -17194,7 +17025,7 @@ static bool js_cocos2dx_FileUtils_createDirectory(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -17243,7 +17074,7 @@ static bool js_cocos2dx_FileUtils_getWritablePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_getWritablePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getWritablePath();
         ok &= std_string_to_seval(result, &s.rval());
@@ -17261,7 +17092,7 @@ static bool js_cocos2dx_FileUtils_listFilesRecursively(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FileUtils_listFilesRecursively : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::vector<std::basic_string<char>, std::allocator<std::basic_string<char> > >* arg1 = nullptr;
@@ -17280,7 +17111,7 @@ static bool js_cocos2dx_FileUtils_setDelegate(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FileUtils* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -17297,7 +17128,7 @@ static bool js_cocos2dx_FileUtils_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::FileUtils* result = cocos2d::FileUtils::getInstance();
         ok &= native_ptr_to_seval<cocos2d::FileUtils>((cocos2d::FileUtils*)result, &s.rval());
@@ -17394,7 +17225,7 @@ static bool js_cocos2dx_EventCustom_getEventName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventCustom_getEventName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getEventName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -17410,7 +17241,7 @@ SE_DECLARE_FINALIZE_FUNC(js_cocos2d_EventCustom_finalize)
 
 static bool js_cocos2dx_EventCustom_constructor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     std::string arg0;
     ok &= seval_to_std_string(args[0], &arg0);
@@ -17465,7 +17296,7 @@ static bool js_cocos2dx_EventListener_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListener_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -17484,7 +17315,7 @@ static bool js_cocos2dx_EventListener_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListener_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -17502,7 +17333,7 @@ static bool js_cocos2dx_EventListener_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListener_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::EventListener* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::EventListener>((cocos2d::EventListener*)result, &s.rval());
@@ -17520,7 +17351,7 @@ static bool js_cocos2dx_EventListener_checkAvailable(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListener_checkAvailable : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->checkAvailable();
         ok &= boolean_to_seval(result, &s.rval());
@@ -17561,7 +17392,7 @@ static bool js_cocos2dx_EventDispatcher_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -17595,7 +17426,7 @@ static bool js_cocos2dx_EventDispatcher_addEventListenerWithSceneGraphPriority(s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_addEventListenerWithSceneGraphPriority : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::EventListener* arg0 = nullptr;
         cocos2d::Node* arg1 = nullptr;
@@ -17616,7 +17447,7 @@ static bool js_cocos2dx_EventDispatcher_addEventListenerWithFixedPriority(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_addEventListenerWithFixedPriority : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::EventListener* arg0 = nullptr;
         int arg1 = 0;
@@ -17633,7 +17464,7 @@ SE_BIND_FUNC(js_cocos2dx_EventDispatcher_addEventListenerWithFixedPriority)
 
 static bool js_cocos2dx_EventDispatcher_removeEventListenersForTarget(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::EventDispatcher* cobj = (cocos2d::EventDispatcher*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_EventDispatcher_removeEventListenersForTarget : Invalid Native Object");
     const auto& args = s.args();
@@ -17681,7 +17512,7 @@ static bool js_cocos2dx_EventDispatcher_resumeEventListenersForTarget(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_resumeEventListenersForTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -17709,7 +17540,7 @@ static bool js_cocos2dx_EventDispatcher_setPriority(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_setPriority : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::EventListener* arg0 = nullptr;
         int arg1 = 0;
@@ -17730,7 +17561,7 @@ static bool js_cocos2dx_EventDispatcher_dispatchEvent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_dispatchEvent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Event* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -17749,7 +17580,7 @@ static bool js_cocos2dx_EventDispatcher_hasEventListener(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_hasEventListener : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventListener::ListenerID arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -17770,7 +17601,7 @@ static bool js_cocos2dx_EventDispatcher_pauseEventListenersForTarget(se::State& 
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_pauseEventListenersForTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -17798,7 +17629,7 @@ static bool js_cocos2dx_EventDispatcher_removeCustomEventListeners(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_removeCustomEventListeners : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -17817,7 +17648,7 @@ static bool js_cocos2dx_EventDispatcher_removeEventListener(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_removeEventListener : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventListener* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -17836,7 +17667,7 @@ static bool js_cocos2dx_EventDispatcher_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventDispatcher_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -17933,7 +17764,7 @@ static bool js_cocos2dx_EventListenerAcceleration_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerAcceleration_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void (cocos2d::Acceleration *, cocos2d::Event *)> arg0;
         do {
@@ -17946,7 +17777,7 @@ static bool js_cocos2dx_EventListenerAcceleration_init(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(2);
 		            ok &= Acceleration_to_seval(larg0, &args[0]);
@@ -18079,7 +17910,7 @@ static bool js_cocos2dx_EventListenerFocus_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerFocus_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -18145,7 +17976,7 @@ static bool js_cocos2dx_EventListenerKeyboard_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerKeyboard_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -18211,7 +18042,7 @@ static bool js_cocos2dx_EventMouse_getMouseButton(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getMouseButton : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getMouseButton();
         ok &= int32_to_seval(result, &s.rval());
@@ -18229,7 +18060,7 @@ static bool js_cocos2dx_EventMouse_getLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18247,7 +18078,7 @@ static bool js_cocos2dx_EventMouse_setMouseButton(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_setMouseButton : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventMouse::MouseButton arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -18266,7 +18097,7 @@ static bool js_cocos2dx_EventMouse_setScrollData(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_setScrollData : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -18287,7 +18118,7 @@ static bool js_cocos2dx_EventMouse_getPreviousLocationInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getPreviousLocationInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getPreviousLocationInView();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18305,7 +18136,7 @@ static bool js_cocos2dx_EventMouse_getDelta(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getDelta : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getDelta();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18323,7 +18154,7 @@ static bool js_cocos2dx_EventMouse_getStartLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getStartLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getStartLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18341,7 +18172,7 @@ static bool js_cocos2dx_EventMouse_getCursorY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getCursorY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getCursorY();
         ok &= float_to_seval(result, &s.rval());
@@ -18359,7 +18190,7 @@ static bool js_cocos2dx_EventMouse_getCursorX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getCursorX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getCursorX();
         ok &= float_to_seval(result, &s.rval());
@@ -18377,7 +18208,7 @@ static bool js_cocos2dx_EventMouse_getLocationInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getLocationInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getLocationInView();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18395,7 +18226,7 @@ static bool js_cocos2dx_EventMouse_getScrollY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getScrollY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScrollY();
         ok &= float_to_seval(result, &s.rval());
@@ -18413,7 +18244,7 @@ static bool js_cocos2dx_EventMouse_setCursorPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_setCursorPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -18434,7 +18265,7 @@ static bool js_cocos2dx_EventMouse_getScrollX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getScrollX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScrollX();
         ok &= float_to_seval(result, &s.rval());
@@ -18452,7 +18283,7 @@ static bool js_cocos2dx_EventMouse_getPreviousLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getPreviousLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getPreviousLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18470,7 +18301,7 @@ static bool js_cocos2dx_EventMouse_getStartLocationInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventMouse_getStartLocationInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getStartLocationInView();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -18523,7 +18354,7 @@ static bool js_cocos2dx_EventListenerMouse_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerMouse_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -18589,7 +18420,7 @@ static bool js_cocos2dx_EventListenerTouchOneByOne_isSwallowTouches(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerTouchOneByOne_isSwallowTouches : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isSwallowTouches();
         ok &= boolean_to_seval(result, &s.rval());
@@ -18607,7 +18438,7 @@ static bool js_cocos2dx_EventListenerTouchOneByOne_setSwallowTouches(se::State& 
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerTouchOneByOne_setSwallowTouches : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -18626,7 +18457,7 @@ static bool js_cocos2dx_EventListenerTouchOneByOne_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerTouchOneByOne_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -18694,7 +18525,7 @@ static bool js_cocos2dx_EventListenerTouchAllAtOnce_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EventListenerTouchAllAtOnce_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -18756,7 +18587,7 @@ se::Class* __jsb_cocos2d_ActionCamera_class = nullptr;
 
 static bool js_cocos2dx_ActionCamera_setEye(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::ActionCamera* cobj = (cocos2d::ActionCamera*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ActionCamera_setEye : Invalid Native Object");
     const auto& args = s.args();
@@ -18798,7 +18629,7 @@ static bool js_cocos2dx_ActionCamera_getEye(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionCamera_getEye : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec3& result = cobj->getEye();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -18816,7 +18647,7 @@ static bool js_cocos2dx_ActionCamera_setUp(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionCamera_setUp : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -18835,7 +18666,7 @@ static bool js_cocos2dx_ActionCamera_getCenter(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionCamera_getCenter : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec3& result = cobj->getCenter();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -18853,7 +18684,7 @@ static bool js_cocos2dx_ActionCamera_setCenter(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionCamera_setCenter : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -18872,7 +18703,7 @@ static bool js_cocos2dx_ActionCamera_getUp(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionCamera_getUp : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec3& result = cobj->getUp();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -18955,7 +18786,7 @@ static bool js_cocos2dx_OrbitCamera_sphericalRadius(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_OrbitCamera_sphericalRadius : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float* arg0 = 0;
         float* arg1 = 0;
@@ -18981,7 +18812,7 @@ static bool js_cocos2dx_OrbitCamera_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_OrbitCamera_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 7) {
         float arg0 = 0;
         float arg1 = 0;
@@ -19012,7 +18843,7 @@ static bool js_cocos2dx_OrbitCamera_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 7) {
         float arg0 = 0;
         float arg1 = 0;
@@ -19109,7 +18940,7 @@ static bool js_cocos2dx_CardinalSplineTo_updatePosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CardinalSplineTo_updatePosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -19263,7 +19094,7 @@ static bool js_cocos2dx_ActionEase_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionEase_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19284,7 +19115,7 @@ static bool js_cocos2dx_ActionEase_getInnerAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionEase_getInnerAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionInterval* result = cobj->getInnerAction();
         ok &= native_ptr_to_seval<cocos2d::ActionInterval>((cocos2d::ActionInterval*)result, &s.rval());
@@ -19324,7 +19155,7 @@ static bool js_cocos2dx_EaseRateAction_setRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseRateAction_setRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -19343,7 +19174,7 @@ static bool js_cocos2dx_EaseRateAction_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseRateAction_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -19366,7 +19197,7 @@ static bool js_cocos2dx_EaseRateAction_getRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseRateAction_getRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRate();
         ok &= float_to_seval(result, &s.rval());
@@ -19382,7 +19213,7 @@ static bool js_cocos2dx_EaseRateAction_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -19429,7 +19260,7 @@ static bool js_cocos2dx_EaseExponentialIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19510,7 +19341,7 @@ static bool js_cocos2dx_EaseExponentialOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19591,7 +19422,7 @@ static bool js_cocos2dx_EaseExponentialInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19672,7 +19503,7 @@ static bool js_cocos2dx_EaseSineIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19753,7 +19584,7 @@ static bool js_cocos2dx_EaseSineOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19834,7 +19665,7 @@ static bool js_cocos2dx_EaseSineInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -19935,7 +19766,7 @@ static bool js_cocos2dx_EaseBounceIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20016,7 +19847,7 @@ static bool js_cocos2dx_EaseBounceOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20097,7 +19928,7 @@ static bool js_cocos2dx_EaseBounceInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20178,7 +20009,7 @@ static bool js_cocos2dx_EaseBackIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20259,7 +20090,7 @@ static bool js_cocos2dx_EaseBackOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20340,7 +20171,7 @@ static bool js_cocos2dx_EaseBackInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20421,7 +20252,7 @@ static bool js_cocos2dx_EaseQuadraticActionIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20502,7 +20333,7 @@ static bool js_cocos2dx_EaseQuadraticActionOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20583,7 +20414,7 @@ static bool js_cocos2dx_EaseQuadraticActionInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20664,7 +20495,7 @@ static bool js_cocos2dx_EaseQuarticActionIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20745,7 +20576,7 @@ static bool js_cocos2dx_EaseQuarticActionOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20826,7 +20657,7 @@ static bool js_cocos2dx_EaseQuarticActionInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20907,7 +20738,7 @@ static bool js_cocos2dx_EaseQuinticActionIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -20988,7 +20819,7 @@ static bool js_cocos2dx_EaseQuinticActionOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21069,7 +20900,7 @@ static bool js_cocos2dx_EaseQuinticActionInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21150,7 +20981,7 @@ static bool js_cocos2dx_EaseCircleActionIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21231,7 +21062,7 @@ static bool js_cocos2dx_EaseCircleActionOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21312,7 +21143,7 @@ static bool js_cocos2dx_EaseCircleActionInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21393,7 +21224,7 @@ static bool js_cocos2dx_EaseCubicActionIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21474,7 +21305,7 @@ static bool js_cocos2dx_EaseCubicActionOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21555,7 +21386,7 @@ static bool js_cocos2dx_EaseCubicActionInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21636,7 +21467,7 @@ static bool js_cocos2dx_EaseIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -21719,7 +21550,7 @@ static bool js_cocos2dx_EaseOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -21802,7 +21633,7 @@ static bool js_cocos2dx_EaseInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ActionInterval* arg0 = nullptr;
         float arg1 = 0;
@@ -21887,7 +21718,7 @@ static bool js_cocos2dx_EaseElastic_setPeriod(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseElastic_setPeriod : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -21906,7 +21737,7 @@ static bool js_cocos2dx_EaseElastic_initWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseElastic_initWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -21938,7 +21769,7 @@ static bool js_cocos2dx_EaseElastic_getPeriod(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseElastic_getPeriod : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPeriod();
         ok &= float_to_seval(result, &s.rval());
@@ -21977,7 +21808,7 @@ static bool js_cocos2dx_EaseElasticIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -22071,7 +21902,7 @@ static bool js_cocos2dx_EaseElasticOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -22165,7 +21996,7 @@ static bool js_cocos2dx_EaseElasticInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -22261,7 +22092,7 @@ static bool js_cocos2dx_EaseBezierAction_setBezierParamer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_EaseBezierAction_setBezierParamer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -22284,7 +22115,7 @@ static bool js_cocos2dx_EaseBezierAction_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -22386,7 +22217,7 @@ static bool js_cocos2dx_Show_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Show::create();
         result->retain();
@@ -22464,7 +22295,7 @@ static bool js_cocos2dx_Hide_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Hide::create();
         result->retain();
@@ -22542,7 +22373,7 @@ static bool js_cocos2dx_ToggleVisibility_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ToggleVisibility::create();
         result->retain();
@@ -22610,7 +22441,7 @@ static bool js_cocos2dx_RemoveSelf_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RemoveSelf_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -22629,7 +22460,7 @@ static bool js_cocos2dx_RemoveSelf_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::RemoveSelf::create();
         result->retain();
@@ -22709,7 +22540,7 @@ static bool js_cocos2dx_FlipX_initWithFlipX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FlipX_initWithFlipX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -22728,7 +22559,7 @@ static bool js_cocos2dx_FlipX_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -22812,7 +22643,7 @@ static bool js_cocos2dx_FlipY_initWithFlipY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FlipY_initWithFlipY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -22831,7 +22662,7 @@ static bool js_cocos2dx_FlipY_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -22915,7 +22746,7 @@ static bool js_cocos2dx_Place_initWithPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Place_initWithPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -22934,7 +22765,7 @@ static bool js_cocos2dx_Place_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -23152,7 +22983,7 @@ static bool js_cocos2dx_GridAction_getGrid(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridAction_getGrid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GridBase* result = cobj->getGrid();
         ok &= native_ptr_to_seval<cocos2d::GridBase>((cocos2d::GridBase*)result, &s.rval());
@@ -23170,7 +23001,7 @@ static bool js_cocos2dx_GridAction_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridAction_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -23215,7 +23046,7 @@ static bool js_cocos2dx_Grid3DAction_getGridRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Grid3DAction_getGridRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->getGridRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -23272,7 +23103,7 @@ static bool js_cocos2dx_StopGrid_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::StopGrid::create();
         result->retain();
@@ -23340,7 +23171,7 @@ static bool js_cocos2dx_ReuseGrid_initWithTimes(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ReuseGrid_initWithTimes : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -23359,7 +23190,7 @@ static bool js_cocos2dx_ReuseGrid_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -23431,7 +23262,7 @@ static bool js_cocos2dx_Waves3D_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves3D_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -23450,7 +23281,7 @@ static bool js_cocos2dx_Waves3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -23477,7 +23308,7 @@ static bool js_cocos2dx_Waves3D_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves3D_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -23495,7 +23326,7 @@ static bool js_cocos2dx_Waves3D_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves3D_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -23513,7 +23344,7 @@ static bool js_cocos2dx_Waves3D_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves3D_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -23530,7 +23361,7 @@ static bool js_cocos2dx_Waves3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -23612,7 +23443,7 @@ static bool js_cocos2dx_FlipX3D_initWithSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FlipX3D_initWithSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Size arg0;
         float arg1 = 0;
@@ -23635,7 +23466,7 @@ static bool js_cocos2dx_FlipX3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FlipX3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -23654,7 +23485,7 @@ static bool js_cocos2dx_FlipX3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -23737,7 +23568,7 @@ static bool js_cocos2dx_FlipY3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -23820,7 +23651,7 @@ static bool js_cocos2dx_Lens3D_setConcave(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Lens3D_setConcave : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -23839,7 +23670,7 @@ static bool js_cocos2dx_Lens3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Lens3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -23866,7 +23697,7 @@ static bool js_cocos2dx_Lens3D_setLensEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Lens3D_setLensEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -23885,7 +23716,7 @@ static bool js_cocos2dx_Lens3D_getLensEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Lens3D_getLensEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getLensEffect();
         ok &= float_to_seval(result, &s.rval());
@@ -23903,7 +23734,7 @@ static bool js_cocos2dx_Lens3D_setPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Lens3D_setPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -23922,7 +23753,7 @@ static bool js_cocos2dx_Lens3D_getPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Lens3D_getPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getPosition();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -23938,7 +23769,7 @@ static bool js_cocos2dx_Lens3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24021,7 +23852,7 @@ static bool js_cocos2dx_Ripple3D_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24040,7 +23871,7 @@ static bool js_cocos2dx_Ripple3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24071,7 +23902,7 @@ static bool js_cocos2dx_Ripple3D_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -24089,7 +23920,7 @@ static bool js_cocos2dx_Ripple3D_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24108,7 +23939,7 @@ static bool js_cocos2dx_Ripple3D_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -24126,7 +23957,7 @@ static bool js_cocos2dx_Ripple3D_setPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_setPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -24145,7 +23976,7 @@ static bool js_cocos2dx_Ripple3D_getPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Ripple3D_getPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getPosition();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -24161,7 +23992,7 @@ static bool js_cocos2dx_Ripple3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24249,7 +24080,7 @@ static bool js_cocos2dx_Shaky3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Shaky3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24274,7 +24105,7 @@ static bool js_cocos2dx_Shaky3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24352,7 +24183,7 @@ static bool js_cocos2dx_Liquid_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Liquid_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24371,7 +24202,7 @@ static bool js_cocos2dx_Liquid_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Liquid_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24398,7 +24229,7 @@ static bool js_cocos2dx_Liquid_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Liquid_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -24416,7 +24247,7 @@ static bool js_cocos2dx_Liquid_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Liquid_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -24434,7 +24265,7 @@ static bool js_cocos2dx_Liquid_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Liquid_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24451,7 +24282,7 @@ static bool js_cocos2dx_Liquid_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24533,7 +24364,7 @@ static bool js_cocos2dx_Waves_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24552,7 +24383,7 @@ static bool js_cocos2dx_Waves_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24583,7 +24414,7 @@ static bool js_cocos2dx_Waves_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -24601,7 +24432,7 @@ static bool js_cocos2dx_Waves_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -24619,7 +24450,7 @@ static bool js_cocos2dx_Waves_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Waves_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24636,7 +24467,7 @@ static bool js_cocos2dx_Waves_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24722,7 +24553,7 @@ static bool js_cocos2dx_Twirl_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24741,7 +24572,7 @@ static bool js_cocos2dx_Twirl_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24770,7 +24601,7 @@ static bool js_cocos2dx_Twirl_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -24788,7 +24619,7 @@ static bool js_cocos2dx_Twirl_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -24807,7 +24638,7 @@ static bool js_cocos2dx_Twirl_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -24825,7 +24656,7 @@ static bool js_cocos2dx_Twirl_setPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_setPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -24844,7 +24675,7 @@ static bool js_cocos2dx_Twirl_getPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Twirl_getPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getPosition();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -24860,7 +24691,7 @@ static bool js_cocos2dx_Twirl_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -24946,7 +24777,7 @@ static bool js_cocos2dx_ActionManager_getActionByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_getActionByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         const cocos2d::Node* arg1 = nullptr;
@@ -24969,7 +24800,7 @@ static bool js_cocos2dx_ActionManager_removeActionByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_removeActionByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         cocos2d::Node* arg1 = nullptr;
@@ -24990,7 +24821,7 @@ static bool js_cocos2dx_ActionManager_removeActionsByFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_removeActionsByFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         unsigned int arg0 = 0;
         cocos2d::Node* arg1 = nullptr;
@@ -25026,7 +24857,7 @@ static bool js_cocos2dx_ActionManager_addAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_addAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Action* arg0 = nullptr;
         cocos2d::Node* arg1 = nullptr;
@@ -25049,7 +24880,7 @@ static bool js_cocos2dx_ActionManager_resumeTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_resumeTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -25068,7 +24899,7 @@ static bool js_cocos2dx_ActionManager_update(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_update : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -25087,7 +24918,7 @@ static bool js_cocos2dx_ActionManager_pauseTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_pauseTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -25106,7 +24937,7 @@ static bool js_cocos2dx_ActionManager_getNumberOfRunningActionsInTarget(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_getNumberOfRunningActionsInTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -25127,7 +24958,7 @@ static bool js_cocos2dx_ActionManager_removeAllActionsFromTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_removeAllActionsFromTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -25146,7 +24977,7 @@ static bool js_cocos2dx_ActionManager_resumeTargets(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_resumeTargets : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::Node *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -25165,7 +24996,7 @@ static bool js_cocos2dx_ActionManager_removeAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_removeAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Action* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -25184,7 +25015,7 @@ static bool js_cocos2dx_ActionManager_pauseAllRunningActions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_pauseAllRunningActions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vector<cocos2d::Node *> result = cobj->pauseAllRunningActions();
         ok &= Vector_to_seval(result, &s.rval());
@@ -25202,7 +25033,7 @@ static bool js_cocos2dx_ActionManager_removeAllActionsByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_removeAllActionsByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         cocos2d::Node* arg1 = nullptr;
@@ -25223,7 +25054,7 @@ static bool js_cocos2dx_ActionManager_getNumberOfRunningActionsInTargetByTag(se:
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionManager_getNumberOfRunningActionsInTargetByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         const cocos2d::Node* arg0 = nullptr;
         int arg1 = 0;
@@ -25317,7 +25148,7 @@ static bool js_cocos2dx_PageTurn3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25363,7 +25194,7 @@ static bool js_cocos2dx_ProgressTo_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -25384,7 +25215,7 @@ static bool js_cocos2dx_ProgressTo_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -25470,7 +25301,7 @@ static bool js_cocos2dx_ProgressFromTo_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressFromTo_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -25493,7 +25324,7 @@ static bool js_cocos2dx_ProgressFromTo_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         float arg1 = 0;
@@ -25581,7 +25412,7 @@ static bool js_cocos2dx_ShakyTiles3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ShakyTiles3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25606,7 +25437,7 @@ static bool js_cocos2dx_ShakyTiles3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25684,7 +25515,7 @@ static bool js_cocos2dx_ShatteredTiles3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ShatteredTiles3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25709,7 +25540,7 @@ static bool js_cocos2dx_ShatteredTiles3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25787,7 +25618,7 @@ static bool js_cocos2dx_ShuffleTiles_placeTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ShuffleTiles_placeTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Vec2 arg0;
         cocos2d::Tile* arg1 = nullptr;
@@ -25809,7 +25640,7 @@ static bool js_cocos2dx_ShuffleTiles_shuffle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ShuffleTiles_shuffle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         unsigned int* arg0 = 0;
         unsigned int arg1 = 0;
@@ -25831,7 +25662,7 @@ static bool js_cocos2dx_ShuffleTiles_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ShuffleTiles_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25856,7 +25687,7 @@ static bool js_cocos2dx_ShuffleTiles_getDelta(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ShuffleTiles_getDelta : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -25875,7 +25706,7 @@ static bool js_cocos2dx_ShuffleTiles_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -25954,7 +25785,7 @@ static bool js_cocos2dx_FadeOutTRTiles_turnOnTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeOutTRTiles_turnOnTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -25973,7 +25804,7 @@ static bool js_cocos2dx_FadeOutTRTiles_turnOffTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeOutTRTiles_turnOffTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -25992,7 +25823,7 @@ static bool js_cocos2dx_FadeOutTRTiles_transformTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeOutTRTiles_transformTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Vec2 arg0;
         float arg1 = 0;
@@ -26013,7 +25844,7 @@ static bool js_cocos2dx_FadeOutTRTiles_testFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_FadeOutTRTiles_testFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Size arg0;
         float arg1 = 0;
@@ -26034,7 +25865,7 @@ static bool js_cocos2dx_FadeOutTRTiles_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26121,7 +25952,7 @@ static bool js_cocos2dx_FadeOutBLTiles_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26204,7 +26035,7 @@ static bool js_cocos2dx_FadeOutUpTiles_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26287,7 +26118,7 @@ static bool js_cocos2dx_FadeOutDownTiles_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26372,7 +26203,7 @@ static bool js_cocos2dx_TurnOffTiles_turnOnTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TurnOffTiles_turnOnTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -26391,7 +26222,7 @@ static bool js_cocos2dx_TurnOffTiles_turnOffTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TurnOffTiles_turnOffTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -26410,7 +26241,7 @@ static bool js_cocos2dx_TurnOffTiles_shuffle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TurnOffTiles_shuffle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         unsigned int* arg0 = 0;
         unsigned int arg1 = 0;
@@ -26432,7 +26263,7 @@ static bool js_cocos2dx_TurnOffTiles_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TurnOffTiles_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26453,7 +26284,7 @@ SE_BIND_FUNC(js_cocos2dx_TurnOffTiles_initWithDuration)
 
 static bool js_cocos2dx_TurnOffTiles_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -26550,7 +26381,7 @@ static bool js_cocos2dx_WavesTiles3D_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_WavesTiles3D_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -26569,7 +26400,7 @@ static bool js_cocos2dx_WavesTiles3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_WavesTiles3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26596,7 +26427,7 @@ static bool js_cocos2dx_WavesTiles3D_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_WavesTiles3D_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -26614,7 +26445,7 @@ static bool js_cocos2dx_WavesTiles3D_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_WavesTiles3D_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -26632,7 +26463,7 @@ static bool js_cocos2dx_WavesTiles3D_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_WavesTiles3D_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -26649,7 +26480,7 @@ static bool js_cocos2dx_WavesTiles3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26731,7 +26562,7 @@ static bool js_cocos2dx_JumpTiles3D_setAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpTiles3D_setAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -26750,7 +26581,7 @@ static bool js_cocos2dx_JumpTiles3D_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpTiles3D_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26777,7 +26608,7 @@ static bool js_cocos2dx_JumpTiles3D_getAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpTiles3D_getAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitude();
         ok &= float_to_seval(result, &s.rval());
@@ -26795,7 +26626,7 @@ static bool js_cocos2dx_JumpTiles3D_getAmplitudeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpTiles3D_getAmplitudeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAmplitudeRate();
         ok &= float_to_seval(result, &s.rval());
@@ -26813,7 +26644,7 @@ static bool js_cocos2dx_JumpTiles3D_setAmplitude(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_JumpTiles3D_setAmplitude : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -26830,7 +26661,7 @@ static bool js_cocos2dx_JumpTiles3D_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         cocos2d::Size arg1;
@@ -26924,7 +26755,7 @@ static bool js_cocos2dx_SplitRows_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SplitRows_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         unsigned int arg1 = 0;
@@ -26945,7 +26776,7 @@ static bool js_cocos2dx_SplitRows_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         unsigned int arg1 = 0;
@@ -27019,7 +26850,7 @@ static bool js_cocos2dx_SplitCols_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SplitCols_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         unsigned int arg1 = 0;
@@ -27040,7 +26871,7 @@ static bool js_cocos2dx_SplitCols_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         unsigned int arg1 = 0;
@@ -27114,7 +26945,7 @@ static bool js_cocos2dx_ActionTween_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ActionTween_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         std::string arg1;
@@ -27139,7 +26970,7 @@ static bool js_cocos2dx_ActionTween_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         std::string arg1;
@@ -27206,7 +27037,7 @@ static bool js_cocos2dx_AtlasNode_initWithTileFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_initWithTileFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         std::string arg0;
         int arg1 = 0;
@@ -27233,7 +27064,7 @@ static bool js_cocos2dx_AtlasNode_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -27251,7 +27082,7 @@ static bool js_cocos2dx_AtlasNode_setTextureAtlas(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_setTextureAtlas : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextureAtlas* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -27270,7 +27101,7 @@ static bool js_cocos2dx_AtlasNode_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -27289,7 +27120,7 @@ static bool js_cocos2dx_AtlasNode_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -27307,7 +27138,7 @@ static bool js_cocos2dx_AtlasNode_getQuadsToDraw(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_getQuadsToDraw : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getQuadsToDraw();
         ok &= ssize_to_seval(result, &s.rval());
@@ -27325,7 +27156,7 @@ static bool js_cocos2dx_AtlasNode_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -27344,7 +27175,7 @@ static bool js_cocos2dx_AtlasNode_initWithTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_initWithTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::Texture2D* arg0 = nullptr;
         int arg1 = 0;
@@ -27371,7 +27202,7 @@ static bool js_cocos2dx_AtlasNode_setQuadsToDraw(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AtlasNode_setQuadsToDraw : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -27388,7 +27219,7 @@ static bool js_cocos2dx_AtlasNode_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         std::string arg0;
         int arg1 = 0;
@@ -27475,7 +27306,7 @@ static bool js_cocos2dx_ClippingNode_hasContent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_hasContent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasContent();
         ok &= boolean_to_seval(result, &s.rval());
@@ -27493,7 +27324,7 @@ static bool js_cocos2dx_ClippingNode_setInverted(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_setInverted : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -27512,7 +27343,7 @@ static bool js_cocos2dx_ClippingNode_setStencil(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_setStencil : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -27531,7 +27362,7 @@ static bool js_cocos2dx_ClippingNode_getAlphaThreshold(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_getAlphaThreshold : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAlphaThreshold();
         ok &= float_to_seval(result, &s.rval());
@@ -27549,7 +27380,7 @@ static bool js_cocos2dx_ClippingNode_getStencil(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_getStencil : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getStencil();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -27567,7 +27398,7 @@ static bool js_cocos2dx_ClippingNode_setAlphaThreshold(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_setAlphaThreshold : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -27586,7 +27417,7 @@ static bool js_cocos2dx_ClippingNode_isInverted(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ClippingNode_isInverted : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isInverted();
         ok &= boolean_to_seval(result, &s.rval());
@@ -27600,7 +27431,7 @@ SE_BIND_FUNC(js_cocos2dx_ClippingNode_isInverted)
 
 static bool js_cocos2dx_ClippingNode_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -27688,7 +27519,7 @@ static bool js_cocos2dx_DrawNode_drawLine(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawLine : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -27707,7 +27538,7 @@ SE_BIND_FUNC(js_cocos2dx_DrawNode_drawLine)
 
 static bool js_cocos2dx_DrawNode_drawPoints(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::DrawNode* cobj = (cocos2d::DrawNode*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_DrawNode_drawPoints : Invalid Native Object");
     const auto& args = s.args();
@@ -27754,7 +27585,7 @@ SE_BIND_FUNC(js_cocos2dx_DrawNode_drawPoints)
 
 static bool js_cocos2dx_DrawNode_drawRect(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::DrawNode* cobj = (cocos2d::DrawNode*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_DrawNode_drawRect : Invalid Native Object");
     const auto& args = s.args();
@@ -27804,7 +27635,7 @@ SE_BIND_FUNC(js_cocos2dx_DrawNode_drawRect)
 
 static bool js_cocos2dx_DrawNode_drawSolidCircle(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::DrawNode* cobj = (cocos2d::DrawNode*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_DrawNode_drawSolidCircle : Invalid Native Object");
     const auto& args = s.args();
@@ -27870,7 +27701,7 @@ static bool js_cocos2dx_DrawNode_setLineWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_setLineWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -27889,7 +27720,7 @@ static bool js_cocos2dx_DrawNode_onDrawGLPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_onDrawGLPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Mat4 arg0;
         unsigned int arg1 = 0;
@@ -27910,7 +27741,7 @@ static bool js_cocos2dx_DrawNode_drawPolygon(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawPolygon : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         const cocos2d::Vec2* arg0 = nullptr;
         int arg1 = 0;
@@ -27937,7 +27768,7 @@ static bool js_cocos2dx_DrawNode_drawDot(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawDot : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vec2 arg0;
         float arg1 = 0;
@@ -27960,7 +27791,7 @@ static bool js_cocos2dx_DrawNode_drawCatmullRom(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawCatmullRom : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::PointArray* arg0 = nullptr;
         unsigned int arg1 = 0;
@@ -27983,7 +27814,7 @@ static bool js_cocos2dx_DrawNode_drawSegment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawSegment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -28008,7 +27839,7 @@ static bool js_cocos2dx_DrawNode_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -28026,7 +27857,7 @@ static bool js_cocos2dx_DrawNode_onDraw(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_onDraw : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Mat4 arg0;
         unsigned int arg1 = 0;
@@ -28043,7 +27874,7 @@ SE_BIND_FUNC(js_cocos2dx_DrawNode_onDraw)
 
 static bool js_cocos2dx_DrawNode_drawCircle(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::DrawNode* cobj = (cocos2d::DrawNode*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_DrawNode_drawCircle : Invalid Native Object");
     const auto& args = s.args();
@@ -28113,7 +27944,7 @@ static bool js_cocos2dx_DrawNode_drawQuadBezier(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawQuadBezier : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -28140,7 +27971,7 @@ static bool js_cocos2dx_DrawNode_onDrawGLLine(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_onDrawGLLine : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Mat4 arg0;
         unsigned int arg1 = 0;
@@ -28161,7 +27992,7 @@ static bool js_cocos2dx_DrawNode_drawSolidPoly(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawSolidPoly : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         const cocos2d::Vec2* arg0 = nullptr;
         unsigned int arg1 = 0;
@@ -28184,7 +28015,7 @@ static bool js_cocos2dx_DrawNode_drawTriangle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawTriangle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -28209,7 +28040,7 @@ static bool js_cocos2dx_DrawNode_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -28243,7 +28074,7 @@ static bool js_cocos2dx_DrawNode_drawCardinalSpline(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawCardinalSpline : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::PointArray* arg0 = nullptr;
         float arg1 = 0;
@@ -28268,7 +28099,7 @@ static bool js_cocos2dx_DrawNode_drawSolidRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawSolidRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -28291,7 +28122,7 @@ static bool js_cocos2dx_DrawNode_getLineWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_getLineWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getLineWidth();
         ok &= float_to_seval(result, &s.rval());
@@ -28309,7 +28140,7 @@ static bool js_cocos2dx_DrawNode_drawPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vec2 arg0;
         float arg1 = 0;
@@ -28332,7 +28163,7 @@ static bool js_cocos2dx_DrawNode_drawCubicBezier(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DrawNode_drawCubicBezier : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -28359,7 +28190,7 @@ static bool js_cocos2dx_DrawNode_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::DrawNode::create();
         result->retain();
@@ -28474,7 +28305,7 @@ static bool js_cocos2dx_Label_isClipMarginEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_isClipMarginEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isClipMarginEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -28492,7 +28323,7 @@ static bool js_cocos2dx_Label_enableShadow(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_enableShadow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cobj->enableShadow();
         return true;
@@ -28535,7 +28366,7 @@ static bool js_cocos2dx_Label_setDimensions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setDimensions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -28556,7 +28387,7 @@ static bool js_cocos2dx_Label_getWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getWidth();
         ok &= float_to_seval(result, &s.rval());
@@ -28574,7 +28405,7 @@ static bool js_cocos2dx_Label_getString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getString();
         ok &= std_string_to_seval(result, &s.rval());
@@ -28592,7 +28423,7 @@ static bool js_cocos2dx_Label_getHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getHeight();
         ok &= float_to_seval(result, &s.rval());
@@ -28606,7 +28437,7 @@ SE_BIND_FUNC(js_cocos2dx_Label_getHeight)
 
 static bool js_cocos2dx_Label_disableEffect(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Label* cobj = (cocos2d::Label*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Label_disableEffect : Invalid Native Object");
     const auto& args = s.args();
@@ -28639,7 +28470,7 @@ static bool js_cocos2dx_Label_getTextColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getTextColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4B& result = cobj->getTextColor();
         ok &= Color4B_to_seval(result, &s.rval());
@@ -28657,7 +28488,7 @@ static bool js_cocos2dx_Label_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -28675,7 +28506,7 @@ static bool js_cocos2dx_Label_enableWrap(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_enableWrap : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -28694,7 +28525,7 @@ static bool js_cocos2dx_Label_setWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -28713,7 +28544,7 @@ static bool js_cocos2dx_Label_getAdditionalKerning(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getAdditionalKerning : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAdditionalKerning();
         ok &= float_to_seval(result, &s.rval());
@@ -28731,7 +28562,7 @@ static bool js_cocos2dx_Label_getBMFontSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getBMFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getBMFontSize();
         ok &= float_to_seval(result, &s.rval());
@@ -28749,7 +28580,7 @@ static bool js_cocos2dx_Label_getMaxLineWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getMaxLineWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaxLineWidth();
         ok &= float_to_seval(result, &s.rval());
@@ -28767,7 +28598,7 @@ static bool js_cocos2dx_Label_getHorizontalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getHorizontalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getHorizontalAlignment();
         ok &= int32_to_seval(result, &s.rval());
@@ -28785,7 +28616,7 @@ static bool js_cocos2dx_Label_getShadowOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getShadowOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Size result = cobj->getShadowOffset();
         ok &= Size_to_seval(result, &s.rval());
@@ -28803,7 +28634,7 @@ static bool js_cocos2dx_Label_getLineSpacing(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getLineSpacing : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getLineSpacing();
         ok &= float_to_seval(result, &s.rval());
@@ -28821,7 +28652,7 @@ static bool js_cocos2dx_Label_setClipMarginEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setClipMarginEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -28840,7 +28671,7 @@ static bool js_cocos2dx_Label_setString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -28859,7 +28690,7 @@ static bool js_cocos2dx_Label_setSystemFontName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setSystemFontName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -28878,7 +28709,7 @@ static bool js_cocos2dx_Label_isWrapEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_isWrapEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isWrapEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -28896,7 +28727,7 @@ static bool js_cocos2dx_Label_getOutlineSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getOutlineSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getOutlineSize();
         ok &= float_to_seval(result, &s.rval());
@@ -28914,7 +28745,7 @@ static bool js_cocos2dx_Label_setBMFontFilePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setBMFontFilePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -28955,7 +28786,7 @@ SE_BIND_FUNC(js_cocos2dx_Label_setBMFontFilePath)
 
 static bool js_cocos2dx_Label_initWithTTF(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Label* cobj = (cocos2d::Label*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Label_initWithTTF : Invalid Native Object");
     const auto& args = s.args();
@@ -29118,7 +28949,7 @@ static bool js_cocos2dx_Label_setLineHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setLineHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29137,7 +28968,7 @@ static bool js_cocos2dx_Label_setSystemFontSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setSystemFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29156,7 +28987,7 @@ static bool js_cocos2dx_Label_setOverflow(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setOverflow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Label::Overflow arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -29205,7 +29036,7 @@ static bool js_cocos2dx_Label_getStringLength(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getStringLength : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getStringLength();
         ok &= int32_to_seval(result, &s.rval());
@@ -29223,7 +29054,7 @@ static bool js_cocos2dx_Label_setLineBreakWithoutSpace(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setLineBreakWithoutSpace : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -29242,7 +29073,7 @@ static bool js_cocos2dx_Label_getStringNumLines(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getStringNumLines : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getStringNumLines();
         ok &= int32_to_seval(result, &s.rval());
@@ -29260,7 +29091,7 @@ static bool js_cocos2dx_Label_enableOutline(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_enableOutline : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4B arg0;
         ok &= seval_to_Color4B(args[0], &arg0);
@@ -29288,7 +29119,7 @@ static bool js_cocos2dx_Label_getShadowBlurRadius(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getShadowBlurRadius : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getShadowBlurRadius();
         ok &= float_to_seval(result, &s.rval());
@@ -29306,7 +29137,7 @@ static bool js_cocos2dx_Label_getEffectColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getEffectColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Color4F result = cobj->getEffectColor();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -29324,7 +29155,7 @@ static bool js_cocos2dx_Label_removeAllChildrenWithCleanup(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_removeAllChildrenWithCleanup : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -29339,7 +29170,7 @@ SE_BIND_FUNC(js_cocos2dx_Label_removeAllChildrenWithCleanup)
 
 static bool js_cocos2dx_Label_setCharMap(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Label* cobj = (cocos2d::Label*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Label_setCharMap : Invalid Native Object");
     const auto& args = s.args();
@@ -29409,7 +29240,7 @@ static bool js_cocos2dx_Label_getDimensions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getDimensions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getDimensions();
         ok &= Size_to_seval(result, &s.rval());
@@ -29427,7 +29258,7 @@ static bool js_cocos2dx_Label_setMaxLineWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setMaxLineWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29446,7 +29277,7 @@ static bool js_cocos2dx_Label_getSystemFontName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getSystemFontName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getSystemFontName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -29464,7 +29295,7 @@ static bool js_cocos2dx_Label_setVerticalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setVerticalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextVAlignment arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -29483,7 +29314,7 @@ static bool js_cocos2dx_Label_setLineSpacing(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setLineSpacing : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29502,7 +29333,7 @@ static bool js_cocos2dx_Label_getLineHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getLineHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getLineHeight();
         ok &= float_to_seval(result, &s.rval());
@@ -29520,7 +29351,7 @@ static bool js_cocos2dx_Label_getShadowColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getShadowColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Color4F result = cobj->getShadowColor();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -29538,7 +29369,7 @@ static bool js_cocos2dx_Label_getTTFConfig(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getTTFConfig : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::_ttfConfig& result = cobj->getTTFConfig();
         #pragma warning NO CONVERSION FROM NATIVE FOR _ttfConfig;
@@ -29571,7 +29402,7 @@ static bool js_cocos2dx_Label_setTextColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setTextColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4B arg0;
         ok &= seval_to_Color4B(args[0], &arg0);
@@ -29590,7 +29421,7 @@ static bool js_cocos2dx_Label_getLetter(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getLetter : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -29611,7 +29442,7 @@ static bool js_cocos2dx_Label_setHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29630,7 +29461,7 @@ static bool js_cocos2dx_Label_isShadowEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_isShadowEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isShadowEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -29648,7 +29479,7 @@ static bool js_cocos2dx_Label_enableGlow(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_enableGlow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4B arg0;
         ok &= seval_to_Color4B(args[0], &arg0);
@@ -29667,7 +29498,7 @@ static bool js_cocos2dx_Label_getOverflow(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getOverflow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getOverflow();
         ok &= int32_to_seval(result, &s.rval());
@@ -29685,7 +29516,7 @@ static bool js_cocos2dx_Label_getVerticalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getVerticalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getVerticalAlignment();
         ok &= int32_to_seval(result, &s.rval());
@@ -29703,7 +29534,7 @@ static bool js_cocos2dx_Label_setAdditionalKerning(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setAdditionalKerning : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29722,7 +29553,7 @@ static bool js_cocos2dx_Label_getSystemFontSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getSystemFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSystemFontSize();
         ok &= float_to_seval(result, &s.rval());
@@ -29740,7 +29571,7 @@ static bool js_cocos2dx_Label_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -29759,7 +29590,7 @@ static bool js_cocos2dx_Label_getTextAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getTextAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getTextAlignment();
         ok &= int32_to_seval(result, &s.rval());
@@ -29777,7 +29608,7 @@ static bool js_cocos2dx_Label_getBMFontFilePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getBMFontFilePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getBMFontFilePath();
         ok &= std_string_to_seval(result, &s.rval());
@@ -29795,7 +29626,7 @@ static bool js_cocos2dx_Label_setHorizontalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setHorizontalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextHAlignment arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -29844,7 +29675,7 @@ static bool js_cocos2dx_Label_getLabelEffectType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_getLabelEffectType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getLabelEffectType();
         ok &= int32_to_seval(result, &s.rval());
@@ -29858,7 +29689,7 @@ SE_BIND_FUNC(js_cocos2dx_Label_getLabelEffectType)
 
 static bool js_cocos2dx_Label_setAlignment(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Label* cobj = (cocos2d::Label*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Label_setAlignment : Invalid Native Object");
     const auto& args = s.args();
@@ -29912,7 +29743,7 @@ static bool js_cocos2dx_Label_setBMFontSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Label_setBMFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -29929,7 +29760,7 @@ static bool js_cocos2dx_Label_createWithBMFont(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -30003,7 +29834,7 @@ static bool js_cocos2dx_Label_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Label::create();
         result->retain();
@@ -30019,7 +29850,7 @@ SE_BIND_FUNC(js_cocos2dx_Label_create)
 
 static bool js_cocos2dx_Label_createWithCharMap(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -30082,7 +29913,7 @@ static bool js_cocos2dx_Label_createWithSystemFont(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         std::string arg0;
         std::string arg1;
@@ -30294,7 +30125,7 @@ static bool js_cocos2dx_LabelAtlas_setString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelAtlas_setString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -30309,7 +30140,7 @@ SE_BIND_FUNC(js_cocos2dx_LabelAtlas_setString)
 
 static bool js_cocos2dx_LabelAtlas_initWithString(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::LabelAtlas* cobj = (cocos2d::LabelAtlas*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_LabelAtlas_initWithString : Invalid Native Object");
     const auto& args = s.args();
@@ -30388,7 +30219,7 @@ static bool js_cocos2dx_LabelAtlas_getString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelAtlas_getString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getString();
         ok &= std_string_to_seval(result, &s.rval());
@@ -30402,7 +30233,7 @@ SE_BIND_FUNC(js_cocos2dx_LabelAtlas_getString)
 
 static bool js_cocos2dx_LabelAtlas_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -30524,7 +30355,7 @@ static bool js_cocos2dx_LabelBMFont_setLineBreakWithoutSpace(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_setLineBreakWithoutSpace : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -30543,7 +30374,7 @@ static bool js_cocos2dx_LabelBMFont_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -30561,7 +30392,7 @@ static bool js_cocos2dx_LabelBMFont_getLetter(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_getLetter : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -30582,7 +30413,7 @@ static bool js_cocos2dx_LabelBMFont_getString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_getString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getString();
         ok &= std_string_to_seval(result, &s.rval());
@@ -30600,7 +30431,7 @@ static bool js_cocos2dx_LabelBMFont_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -30619,7 +30450,7 @@ static bool js_cocos2dx_LabelBMFont_setString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_setString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -30638,7 +30469,7 @@ static bool js_cocos2dx_LabelBMFont_initWithString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_initWithString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -30706,7 +30537,7 @@ static bool js_cocos2dx_LabelBMFont_getFntFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_getFntFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getFntFile();
         ok &= std_string_to_seval(result, &s.rval());
@@ -30724,7 +30555,7 @@ static bool js_cocos2dx_LabelBMFont_setFntFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_setFntFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -30752,7 +30583,7 @@ static bool js_cocos2dx_LabelBMFont_setAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_setAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextHAlignment arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -30771,7 +30602,7 @@ static bool js_cocos2dx_LabelBMFont_setWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelBMFont_setWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -30786,7 +30617,7 @@ SE_BIND_FUNC(js_cocos2dx_LabelBMFont_setWidth)
 
 static bool js_cocos2dx_LabelBMFont_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -30953,7 +30784,7 @@ static bool js_cocos2dx_LabelTTF_enableShadow(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_enableShadow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Size arg0;
         float arg1 = 0;
@@ -30989,7 +30820,7 @@ static bool js_cocos2dx_LabelTTF_setDimensions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setDimensions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -31008,7 +30839,7 @@ static bool js_cocos2dx_LabelTTF_getFontSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getFontSize();
         ok &= float_to_seval(result, &s.rval());
@@ -31026,7 +30857,7 @@ static bool js_cocos2dx_LabelTTF_getString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getString();
         ok &= std_string_to_seval(result, &s.rval());
@@ -31044,7 +30875,7 @@ static bool js_cocos2dx_LabelTTF_setFlippedY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setFlippedY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -31063,7 +30894,7 @@ static bool js_cocos2dx_LabelTTF_setFlippedX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setFlippedX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -31082,7 +30913,7 @@ static bool js_cocos2dx_LabelTTF_setTextDefinition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setTextDefinition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::FontDefinition arg0;
         ok &= seval_to_FontDefinition(args[0], &arg0);
@@ -31101,7 +30932,7 @@ static bool js_cocos2dx_LabelTTF_setFontName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setFontName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -31120,7 +30951,7 @@ static bool js_cocos2dx_LabelTTF_getHorizontalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getHorizontalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getHorizontalAlignment();
         ok &= int32_to_seval(result, &s.rval());
@@ -31138,7 +30969,7 @@ static bool js_cocos2dx_LabelTTF_initWithStringAndTextDefinition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_initWithStringAndTextDefinition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::FontDefinition arg1;
@@ -31161,7 +30992,7 @@ static bool js_cocos2dx_LabelTTF_setString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -31180,7 +31011,7 @@ static bool js_cocos2dx_LabelTTF_initWithString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_initWithString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         std::string arg0;
         std::string arg1;
@@ -31256,7 +31087,7 @@ static bool js_cocos2dx_LabelTTF_setFontFillColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setFontFillColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -31284,7 +31115,7 @@ static bool js_cocos2dx_LabelTTF_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -31302,7 +31133,7 @@ static bool js_cocos2dx_LabelTTF_enableStroke(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_enableStroke : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Color3B arg0;
         float arg1 = 0;
@@ -31334,7 +31165,7 @@ static bool js_cocos2dx_LabelTTF_getDimensions(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getDimensions : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getDimensions();
         ok &= Size_to_seval(result, &s.rval());
@@ -31352,7 +31183,7 @@ static bool js_cocos2dx_LabelTTF_setVerticalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setVerticalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextVAlignment arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -31371,7 +31202,7 @@ static bool js_cocos2dx_LabelTTF_setFontSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -31390,7 +31221,7 @@ static bool js_cocos2dx_LabelTTF_getVerticalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getVerticalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getVerticalAlignment();
         ok &= int32_to_seval(result, &s.rval());
@@ -31408,7 +31239,7 @@ static bool js_cocos2dx_LabelTTF_getTextDefinition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getTextDefinition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::FontDefinition& result = cobj->getTextDefinition();
         ok &= FontDefinition_to_seval(result, &s.rval());
@@ -31426,7 +31257,7 @@ static bool js_cocos2dx_LabelTTF_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -31445,7 +31276,7 @@ static bool js_cocos2dx_LabelTTF_getFontName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_getFontName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getFontName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -31463,7 +31294,7 @@ static bool js_cocos2dx_LabelTTF_setHorizontalAlignment(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_setHorizontalAlignment : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextHAlignment arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -31482,7 +31313,7 @@ static bool js_cocos2dx_LabelTTF_disableShadow(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_disableShadow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cobj->disableShadow();
         return true;
@@ -31505,7 +31336,7 @@ static bool js_cocos2dx_LabelTTF_disableStroke(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LabelTTF_disableStroke : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cobj->disableStroke();
         return true;
@@ -31524,7 +31355,7 @@ SE_BIND_FUNC(js_cocos2dx_LabelTTF_disableStroke)
 
 static bool js_cocos2dx_LabelTTF_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -31630,7 +31461,7 @@ static bool js_cocos2dx_LabelTTF_createWithFontDefinition(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::FontDefinition arg1;
@@ -31739,7 +31570,7 @@ static bool js_cocos2dx_Layer_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Layer::create();
         result->retain();
@@ -31817,7 +31648,7 @@ static bool js_cocos2dx___LayerRGBA_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::__LayerRGBA::create();
         result->retain();
@@ -31885,7 +31716,7 @@ static bool js_cocos2dx_LayerColor_changeWidthAndHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerColor_changeWidthAndHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -31906,7 +31737,7 @@ static bool js_cocos2dx_LayerColor_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerColor_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -31924,7 +31755,7 @@ static bool js_cocos2dx_LayerColor_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerColor_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -31943,7 +31774,7 @@ static bool js_cocos2dx_LayerColor_changeWidth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerColor_changeWidth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -31958,7 +31789,7 @@ SE_BIND_FUNC(js_cocos2dx_LayerColor_changeWidth)
 
 static bool js_cocos2dx_LayerColor_initWithColor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::LayerColor* cobj = (cocos2d::LayerColor*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_LayerColor_initWithColor : Invalid Native Object");
     const auto& args = s.args();
@@ -32004,7 +31835,7 @@ static bool js_cocos2dx_LayerColor_changeHeight(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerColor_changeHeight : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -32019,7 +31850,7 @@ SE_BIND_FUNC(js_cocos2dx_LayerColor_changeHeight)
 
 static bool js_cocos2dx_LayerColor_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -32135,7 +31966,7 @@ static bool js_cocos2dx_LayerGradient_getStartColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_getStartColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color3B& result = cobj->getStartColor();
         ok &= Color3B_to_seval(result, &s.rval());
@@ -32153,7 +31984,7 @@ static bool js_cocos2dx_LayerGradient_isCompressedInterpolation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_isCompressedInterpolation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isCompressedInterpolation();
         ok &= boolean_to_seval(result, &s.rval());
@@ -32171,7 +32002,7 @@ static bool js_cocos2dx_LayerGradient_getStartOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_getStartOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         uint8_t result = cobj->getStartOpacity();
         ok &= uint8_to_seval(result, &s.rval());
@@ -32189,7 +32020,7 @@ static bool js_cocos2dx_LayerGradient_setVector(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_setVector : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -32208,7 +32039,7 @@ static bool js_cocos2dx_LayerGradient_setStartOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_setStartOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         uint8_t arg0;
         ok &= seval_to_uint8(args[0], &arg0);
@@ -32227,7 +32058,7 @@ static bool js_cocos2dx_LayerGradient_setCompressedInterpolation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_setCompressedInterpolation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -32246,7 +32077,7 @@ static bool js_cocos2dx_LayerGradient_setEndOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_setEndOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         uint8_t arg0;
         ok &= seval_to_uint8(args[0], &arg0);
@@ -32265,7 +32096,7 @@ static bool js_cocos2dx_LayerGradient_getVector(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_getVector : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getVector();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -32283,7 +32114,7 @@ static bool js_cocos2dx_LayerGradient_setEndColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_setEndColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -32298,7 +32129,7 @@ SE_BIND_FUNC(js_cocos2dx_LayerGradient_setEndColor)
 
 static bool js_cocos2dx_LayerGradient_initWithColor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::LayerGradient* cobj = (cocos2d::LayerGradient*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_LayerGradient_initWithColor : Invalid Native Object");
     const auto& args = s.args();
@@ -32347,7 +32178,7 @@ static bool js_cocos2dx_LayerGradient_getEndColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_getEndColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color3B& result = cobj->getEndColor();
         ok &= Color3B_to_seval(result, &s.rval());
@@ -32365,7 +32196,7 @@ static bool js_cocos2dx_LayerGradient_getEndOpacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_getEndOpacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         uint8_t result = cobj->getEndOpacity();
         ok &= uint8_to_seval(result, &s.rval());
@@ -32383,7 +32214,7 @@ static bool js_cocos2dx_LayerGradient_setStartColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerGradient_setStartColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -32398,7 +32229,7 @@ SE_BIND_FUNC(js_cocos2dx_LayerGradient_setStartColor)
 
 static bool js_cocos2dx_LayerGradient_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -32524,7 +32355,7 @@ static bool js_cocos2dx_LayerMultiplex_initWithArray(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerMultiplex_initWithArray : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::Layer *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -32545,7 +32376,7 @@ static bool js_cocos2dx_LayerMultiplex_switchToAndReleaseMe(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerMultiplex_switchToAndReleaseMe : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -32564,7 +32395,7 @@ static bool js_cocos2dx_LayerMultiplex_addLayer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerMultiplex_addLayer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Layer* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -32583,7 +32414,7 @@ static bool js_cocos2dx_LayerMultiplex_switchTo(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_LayerMultiplex_switchTo : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -32665,7 +32496,7 @@ static bool js_cocos2dx_MenuItem_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItem_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -32699,7 +32530,7 @@ static bool js_cocos2dx_MenuItem_initWithCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItem_initWithCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void (cocos2d::Ref *)> arg0;
         do {
@@ -32712,7 +32543,7 @@ static bool js_cocos2dx_MenuItem_initWithCallback(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -32749,7 +32580,7 @@ static bool js_cocos2dx_MenuItem_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItem_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -32782,7 +32613,7 @@ static bool js_cocos2dx_MenuItem_isSelected(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItem_isSelected : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isSelected();
         ok &= boolean_to_seval(result, &s.rval());
@@ -32800,7 +32631,7 @@ static bool js_cocos2dx_MenuItem_setCallback(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItem_setCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<void (cocos2d::Ref *)> arg0;
         do {
@@ -32813,7 +32644,7 @@ static bool js_cocos2dx_MenuItem_setCallback(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -32863,7 +32694,7 @@ static bool js_cocos2dx_MenuItem_rect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItem_rect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->rect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -32949,7 +32780,7 @@ static bool js_cocos2dx_MenuItemLabel_setLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_setLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -32968,7 +32799,7 @@ static bool js_cocos2dx_MenuItemLabel_getString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_getString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getString();
         ok &= std_string_to_seval(result, &s.rval());
@@ -32986,7 +32817,7 @@ static bool js_cocos2dx_MenuItemLabel_getDisabledColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_getDisabledColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color3B& result = cobj->getDisabledColor();
         ok &= Color3B_to_seval(result, &s.rval());
@@ -33004,7 +32835,7 @@ static bool js_cocos2dx_MenuItemLabel_setString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_setString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -33023,7 +32854,7 @@ static bool js_cocos2dx_MenuItemLabel_initWithLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_initWithLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         std::function<void (cocos2d::Ref *)> arg1;
@@ -33038,7 +32869,7 @@ static bool js_cocos2dx_MenuItemLabel_initWithLabel(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -33075,7 +32906,7 @@ static bool js_cocos2dx_MenuItemLabel_setDisabledColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_setDisabledColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -33094,7 +32925,7 @@ static bool js_cocos2dx_MenuItemLabel_getLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemLabel_getLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getLabel();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -33178,7 +33009,7 @@ static bool js_cocos2dx_MenuItemAtlasFont_initWithString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemAtlasFont_initWithString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         std::string arg0;
         std::string arg1;
@@ -33201,7 +33032,7 @@ static bool js_cocos2dx_MenuItemAtlasFont_initWithString(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -33298,7 +33129,7 @@ static bool js_cocos2dx_MenuItemFont_setFontNameObj(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemFont_setFontNameObj : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -33317,7 +33148,7 @@ static bool js_cocos2dx_MenuItemFont_getFontSizeObj(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemFont_getFontSizeObj : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getFontSizeObj();
         ok &= int32_to_seval(result, &s.rval());
@@ -33335,7 +33166,7 @@ static bool js_cocos2dx_MenuItemFont_setFontSizeObj(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemFont_setFontSizeObj : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -33354,7 +33185,7 @@ static bool js_cocos2dx_MenuItemFont_initWithString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemFont_initWithString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::function<void (cocos2d::Ref *)> arg1;
@@ -33369,7 +33200,7 @@ static bool js_cocos2dx_MenuItemFont_initWithString(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -33406,7 +33237,7 @@ static bool js_cocos2dx_MenuItemFont_getFontNameObj(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemFont_getFontNameObj : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getFontNameObj();
         ok &= std_string_to_seval(result, &s.rval());
@@ -33422,7 +33253,7 @@ static bool js_cocos2dx_MenuItemFont_setFontName(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -33439,7 +33270,7 @@ static bool js_cocos2dx_MenuItemFont_getFontSize(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cocos2d::MenuItemFont::getFontSize();
         ok &= int32_to_seval(result, &s.rval());
@@ -33455,7 +33286,7 @@ static bool js_cocos2dx_MenuItemFont_getFontName(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cocos2d::MenuItemFont::getFontName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -33471,7 +33302,7 @@ static bool js_cocos2dx_MenuItemFont_setFontSize(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -33558,7 +33389,7 @@ static bool js_cocos2dx_MenuItemSprite_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -33592,7 +33423,7 @@ static bool js_cocos2dx_MenuItemSprite_setNormalImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_setNormalImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -33611,7 +33442,7 @@ static bool js_cocos2dx_MenuItemSprite_setDisabledImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_setDisabledImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -33630,7 +33461,7 @@ static bool js_cocos2dx_MenuItemSprite_initWithNormalSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_initWithNormalSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::Node* arg1 = nullptr;
@@ -33649,7 +33480,7 @@ static bool js_cocos2dx_MenuItemSprite_initWithNormalSprite(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -33686,7 +33517,7 @@ static bool js_cocos2dx_MenuItemSprite_setSelectedImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_setSelectedImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -33705,7 +33536,7 @@ static bool js_cocos2dx_MenuItemSprite_getDisabledImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_getDisabledImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getDisabledImage();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -33723,7 +33554,7 @@ static bool js_cocos2dx_MenuItemSprite_getSelectedImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_getSelectedImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getSelectedImage();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -33741,7 +33572,7 @@ static bool js_cocos2dx_MenuItemSprite_getNormalImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemSprite_getNormalImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getNormalImage();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -33843,7 +33674,7 @@ static bool js_cocos2dx_MenuItemImage_setDisabledSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemImage_setDisabledSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -33862,7 +33693,7 @@ static bool js_cocos2dx_MenuItemImage_setSelectedSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemImage_setSelectedSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -33881,7 +33712,7 @@ static bool js_cocos2dx_MenuItemImage_setNormalSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemImage_setNormalSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -33900,7 +33731,7 @@ static bool js_cocos2dx_MenuItemImage_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemImage_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -33918,7 +33749,7 @@ static bool js_cocos2dx_MenuItemImage_initWithNormalImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemImage_initWithNormalImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         std::string arg0;
         std::string arg1;
@@ -33937,7 +33768,7 @@ static bool js_cocos2dx_MenuItemImage_initWithNormalImage(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(1);
 		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
@@ -34038,7 +33869,7 @@ static bool js_cocos2dx_MenuItemToggle_setSubItems(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemToggle_setSubItems : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::MenuItem *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -34057,7 +33888,7 @@ static bool js_cocos2dx_MenuItemToggle_initWithItem(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemToggle_initWithItem : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::MenuItem* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -34078,7 +33909,7 @@ static bool js_cocos2dx_MenuItemToggle_getSelectedIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemToggle_getSelectedIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getSelectedIndex();
         ok &= uint32_to_seval(result, &s.rval());
@@ -34096,7 +33927,7 @@ static bool js_cocos2dx_MenuItemToggle_addSubItem(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemToggle_addSubItem : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::MenuItem* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -34115,7 +33946,7 @@ static bool js_cocos2dx_MenuItemToggle_getSelectedItem(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemToggle_getSelectedItem : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::MenuItem* result = cobj->getSelectedItem();
         ok &= native_ptr_to_seval<cocos2d::MenuItem>((cocos2d::MenuItem*)result, &s.rval());
@@ -34133,7 +33964,7 @@ static bool js_cocos2dx_MenuItemToggle_setSelectedIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MenuItemToggle_setSelectedIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -34217,7 +34048,7 @@ static bool js_cocos2dx_Menu_initWithArray(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_initWithArray : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::MenuItem *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -34238,7 +34069,7 @@ static bool js_cocos2dx_Menu_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -34272,7 +34103,7 @@ static bool js_cocos2dx_Menu_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -34290,7 +34121,7 @@ static bool js_cocos2dx_Menu_alignItemsHorizontallyWithPadding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_alignItemsHorizontallyWithPadding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -34309,7 +34140,7 @@ static bool js_cocos2dx_Menu_alignItemsVerticallyWithPadding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_alignItemsVerticallyWithPadding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -34424,7 +34255,7 @@ static bool js_cocos2dx_MotionStreak_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -34443,7 +34274,7 @@ static bool js_cocos2dx_MotionStreak_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -34461,7 +34292,7 @@ static bool js_cocos2dx_MotionStreak_tintWithColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_tintWithColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -34480,7 +34311,7 @@ static bool js_cocos2dx_MotionStreak_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -34499,7 +34330,7 @@ static bool js_cocos2dx_MotionStreak_setStartingPositionInitialized(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_setStartingPositionInitialized : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -34518,7 +34349,7 @@ static bool js_cocos2dx_MotionStreak_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -34536,7 +34367,7 @@ static bool js_cocos2dx_MotionStreak_isStartingPositionInitialized(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_isStartingPositionInitialized : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isStartingPositionInitialized();
         ok &= boolean_to_seval(result, &s.rval());
@@ -34554,7 +34385,7 @@ static bool js_cocos2dx_MotionStreak_isFastMode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_isFastMode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isFastMode();
         ok &= boolean_to_seval(result, &s.rval());
@@ -34572,7 +34403,7 @@ static bool js_cocos2dx_MotionStreak_getStroke(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_getStroke : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStroke();
         ok &= float_to_seval(result, &s.rval());
@@ -34586,7 +34417,7 @@ SE_BIND_FUNC(js_cocos2dx_MotionStreak_getStroke)
 
 static bool js_cocos2dx_MotionStreak_initWithFade(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::MotionStreak* cobj = (cocos2d::MotionStreak*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_MotionStreak_initWithFade : Invalid Native Object");
     const auto& args = s.args();
@@ -34650,7 +34481,7 @@ static bool js_cocos2dx_MotionStreak_setFastMode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_setFastMode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -34669,7 +34500,7 @@ static bool js_cocos2dx_MotionStreak_setStroke(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_MotionStreak_setStroke : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -34684,7 +34515,7 @@ SE_BIND_FUNC(js_cocos2dx_MotionStreak_setStroke)
 
 static bool js_cocos2dx_MotionStreak_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -34817,7 +34648,7 @@ static bool js_cocos2dx_NodeGrid_setTarget(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_NodeGrid_setTarget : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -34832,7 +34663,7 @@ SE_BIND_FUNC(js_cocos2dx_NodeGrid_setTarget)
 
 static bool js_cocos2dx_NodeGrid_getGrid(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::NodeGrid* cobj = (cocos2d::NodeGrid*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_NodeGrid_getGrid : Invalid Native Object");
     const auto& args = s.args();
@@ -34866,7 +34697,7 @@ static bool js_cocos2dx_NodeGrid_getGridRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_NodeGrid_getGridRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getGridRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -34880,7 +34711,7 @@ SE_BIND_FUNC(js_cocos2dx_NodeGrid_getGridRect)
 
 static bool js_cocos2dx_NodeGrid_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -34964,7 +34795,7 @@ static bool js_cocos2dx_ParticleBatchNode_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -34983,7 +34814,7 @@ static bool js_cocos2dx_ParticleBatchNode_initWithTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_initWithTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Texture2D* arg0 = nullptr;
         int arg1 = 0;
@@ -35006,7 +34837,7 @@ static bool js_cocos2dx_ParticleBatchNode_disableParticle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_disableParticle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -35025,7 +34856,7 @@ static bool js_cocos2dx_ParticleBatchNode_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -35043,7 +34874,7 @@ static bool js_cocos2dx_ParticleBatchNode_setTextureAtlas(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_setTextureAtlas : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextureAtlas* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -35062,7 +34893,7 @@ static bool js_cocos2dx_ParticleBatchNode_initWithFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_initWithFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         int arg1 = 0;
@@ -35085,7 +34916,7 @@ static bool js_cocos2dx_ParticleBatchNode_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -35104,7 +34935,7 @@ static bool js_cocos2dx_ParticleBatchNode_removeAllChildrenWithCleanup(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_removeAllChildrenWithCleanup : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -35123,7 +34954,7 @@ static bool js_cocos2dx_ParticleBatchNode_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -35141,7 +34972,7 @@ static bool js_cocos2dx_ParticleBatchNode_insertChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_insertChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ParticleSystem* arg0 = nullptr;
         int arg1 = 0;
@@ -35162,7 +34993,7 @@ static bool js_cocos2dx_ParticleBatchNode_removeChildAtIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleBatchNode_removeChildAtIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         bool arg1;
@@ -35181,7 +35012,7 @@ static bool js_cocos2dx_ParticleBatchNode_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -35215,7 +35046,7 @@ static bool js_cocos2dx_ParticleBatchNode_createWithTexture(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -35323,7 +35154,7 @@ static bool js_cocos2dx_ParticleSystem_getStartSizeVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartSizeVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStartSizeVar();
         ok &= float_to_seval(result, &s.rval());
@@ -35341,7 +35172,7 @@ static bool js_cocos2dx_ParticleSystem_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -35359,7 +35190,7 @@ static bool js_cocos2dx_ParticleSystem_isFull(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_isFull : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isFull();
         ok &= boolean_to_seval(result, &s.rval());
@@ -35377,7 +35208,7 @@ static bool js_cocos2dx_ParticleSystem_getBatchNode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getBatchNode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ParticleBatchNode* result = cobj->getBatchNode();
         ok &= native_ptr_to_seval<cocos2d::ParticleBatchNode>((cocos2d::ParticleBatchNode*)result, &s.rval());
@@ -35395,7 +35226,7 @@ static bool js_cocos2dx_ParticleSystem_getStartColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4F& result = cobj->getStartColor();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -35413,7 +35244,7 @@ static bool js_cocos2dx_ParticleSystem_getPositionType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getPositionType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getPositionType();
         ok &= int32_to_seval(result, &s.rval());
@@ -35431,7 +35262,7 @@ static bool js_cocos2dx_ParticleSystem_setPosVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setPosVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -35450,7 +35281,7 @@ static bool js_cocos2dx_ParticleSystem_getEndSpin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndSpin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEndSpin();
         ok &= float_to_seval(result, &s.rval());
@@ -35468,7 +35299,7 @@ static bool js_cocos2dx_ParticleSystem_setRotatePerSecondVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setRotatePerSecondVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35487,7 +35318,7 @@ static bool js_cocos2dx_ParticleSystem_getStartSpinVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartSpinVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStartSpinVar();
         ok &= float_to_seval(result, &s.rval());
@@ -35505,7 +35336,7 @@ static bool js_cocos2dx_ParticleSystem_getRadialAccelVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getRadialAccelVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRadialAccelVar();
         ok &= float_to_seval(result, &s.rval());
@@ -35523,7 +35354,7 @@ static bool js_cocos2dx_ParticleSystem_getEndSizeVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndSizeVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEndSizeVar();
         ok &= float_to_seval(result, &s.rval());
@@ -35541,7 +35372,7 @@ static bool js_cocos2dx_ParticleSystem_setTangentialAccel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setTangentialAccel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35560,7 +35391,7 @@ static bool js_cocos2dx_ParticleSystem_getRadialAccel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getRadialAccel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRadialAccel();
         ok &= float_to_seval(result, &s.rval());
@@ -35578,7 +35409,7 @@ static bool js_cocos2dx_ParticleSystem_setStartRadius(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartRadius : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35597,7 +35428,7 @@ static bool js_cocos2dx_ParticleSystem_setRotatePerSecond(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setRotatePerSecond : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35616,7 +35447,7 @@ static bool js_cocos2dx_ParticleSystem_setEndSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35635,7 +35466,7 @@ static bool js_cocos2dx_ParticleSystem_getGravity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getGravity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getGravity();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -35668,7 +35499,7 @@ static bool js_cocos2dx_ParticleSystem_getTangentialAccel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getTangentialAccel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getTangentialAccel();
         ok &= float_to_seval(result, &s.rval());
@@ -35686,7 +35517,7 @@ static bool js_cocos2dx_ParticleSystem_setEndRadius(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndRadius : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35705,7 +35536,7 @@ static bool js_cocos2dx_ParticleSystem_getSpeed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getSpeed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSpeed();
         ok &= float_to_seval(result, &s.rval());
@@ -35738,7 +35569,7 @@ static bool js_cocos2dx_ParticleSystem_getAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAngle();
         ok &= float_to_seval(result, &s.rval());
@@ -35756,7 +35587,7 @@ static bool js_cocos2dx_ParticleSystem_setEndColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -35775,7 +35606,7 @@ static bool js_cocos2dx_ParticleSystem_setStartSpin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartSpin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35794,7 +35625,7 @@ static bool js_cocos2dx_ParticleSystem_setDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -35813,7 +35644,7 @@ static bool js_cocos2dx_ParticleSystem_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -35834,7 +35665,7 @@ static bool js_cocos2dx_ParticleSystem_addParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_addParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -35853,7 +35684,7 @@ static bool js_cocos2dx_ParticleSystem_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -35872,7 +35703,7 @@ static bool js_cocos2dx_ParticleSystem_getPosVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getPosVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getPosVar();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -35905,7 +35736,7 @@ static bool js_cocos2dx_ParticleSystem_isBlendAdditive(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_isBlendAdditive : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isBlendAdditive();
         ok &= boolean_to_seval(result, &s.rval());
@@ -35923,7 +35754,7 @@ static bool js_cocos2dx_ParticleSystem_getSpeedVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getSpeedVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSpeedVar();
         ok &= float_to_seval(result, &s.rval());
@@ -35941,7 +35772,7 @@ static bool js_cocos2dx_ParticleSystem_setPositionType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setPositionType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ParticleSystem::PositionType arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -35975,7 +35806,7 @@ static bool js_cocos2dx_ParticleSystem_getSourcePosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getSourcePosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getSourcePosition();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -35993,7 +35824,7 @@ static bool js_cocos2dx_ParticleSystem_setLifeVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setLifeVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36012,7 +35843,7 @@ static bool js_cocos2dx_ParticleSystem_setTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -36031,7 +35862,7 @@ static bool js_cocos2dx_ParticleSystem_setEndColorVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndColorVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -36050,7 +35881,7 @@ static bool js_cocos2dx_ParticleSystem_getAtlasIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getAtlasIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getAtlasIndex();
         ok &= int32_to_seval(result, &s.rval());
@@ -36068,7 +35899,7 @@ static bool js_cocos2dx_ParticleSystem_getStartSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStartSize();
         ok &= float_to_seval(result, &s.rval());
@@ -36086,7 +35917,7 @@ static bool js_cocos2dx_ParticleSystem_setStartSpinVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartSpinVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36120,7 +35951,7 @@ static bool js_cocos2dx_ParticleSystem_setAtlasIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setAtlasIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -36139,7 +35970,7 @@ static bool js_cocos2dx_ParticleSystem_setTangentialAccelVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setTangentialAccelVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36158,7 +35989,7 @@ static bool js_cocos2dx_ParticleSystem_setEndRadiusVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndRadiusVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36177,7 +36008,7 @@ static bool js_cocos2dx_ParticleSystem_getEndRadius(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndRadius : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEndRadius();
         ok &= float_to_seval(result, &s.rval());
@@ -36195,7 +36026,7 @@ static bool js_cocos2dx_ParticleSystem_isActive(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_isActive : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isActive();
         ok &= boolean_to_seval(result, &s.rval());
@@ -36213,7 +36044,7 @@ static bool js_cocos2dx_ParticleSystem_setRadialAccelVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setRadialAccelVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36232,7 +36063,7 @@ static bool js_cocos2dx_ParticleSystem_setStartSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36251,7 +36082,7 @@ static bool js_cocos2dx_ParticleSystem_setSpeed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setSpeed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36270,7 +36101,7 @@ static bool js_cocos2dx_ParticleSystem_getStartSpin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartSpin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStartSpin();
         ok &= float_to_seval(result, &s.rval());
@@ -36288,7 +36119,7 @@ static bool js_cocos2dx_ParticleSystem_getResourceFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getResourceFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getResourceFile();
         ok &= std_string_to_seval(result, &s.rval());
@@ -36306,7 +36137,7 @@ static bool js_cocos2dx_ParticleSystem_getRotatePerSecond(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getRotatePerSecond : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRotatePerSecond();
         ok &= float_to_seval(result, &s.rval());
@@ -36324,7 +36155,7 @@ static bool js_cocos2dx_ParticleSystem_setEmitterMode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEmitterMode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ParticleSystem::Mode arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -36343,7 +36174,7 @@ static bool js_cocos2dx_ParticleSystem_getDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDuration();
         ok &= float_to_seval(result, &s.rval());
@@ -36361,7 +36192,7 @@ static bool js_cocos2dx_ParticleSystem_setSourcePosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setSourcePosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -36410,7 +36241,7 @@ static bool js_cocos2dx_ParticleSystem_getEndSpinVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndSpinVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEndSpinVar();
         ok &= float_to_seval(result, &s.rval());
@@ -36428,7 +36259,7 @@ static bool js_cocos2dx_ParticleSystem_setBlendAdditive(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setBlendAdditive : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -36447,7 +36278,7 @@ static bool js_cocos2dx_ParticleSystem_setLife(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setLife : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36466,7 +36297,7 @@ static bool js_cocos2dx_ParticleSystem_setAngleVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setAngleVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36485,7 +36316,7 @@ static bool js_cocos2dx_ParticleSystem_setRotationIsDir(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setRotationIsDir : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -36519,7 +36350,7 @@ static bool js_cocos2dx_ParticleSystem_setEndSizeVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndSizeVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36538,7 +36369,7 @@ static bool js_cocos2dx_ParticleSystem_setAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36557,7 +36388,7 @@ static bool js_cocos2dx_ParticleSystem_setBatchNode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setBatchNode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ParticleBatchNode* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -36576,7 +36407,7 @@ static bool js_cocos2dx_ParticleSystem_getTangentialAccelVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getTangentialAccelVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getTangentialAccelVar();
         ok &= float_to_seval(result, &s.rval());
@@ -36594,7 +36425,7 @@ static bool js_cocos2dx_ParticleSystem_getEmitterMode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEmitterMode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getEmitterMode();
         ok &= int32_to_seval(result, &s.rval());
@@ -36612,7 +36443,7 @@ static bool js_cocos2dx_ParticleSystem_setEndSpinVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndSpinVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36631,7 +36462,7 @@ static bool js_cocos2dx_ParticleSystem_initWithFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_initWithFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -36652,7 +36483,7 @@ static bool js_cocos2dx_ParticleSystem_getAngleVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getAngleVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getAngleVar();
         ok &= float_to_seval(result, &s.rval());
@@ -36670,7 +36501,7 @@ static bool js_cocos2dx_ParticleSystem_setStartColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -36689,7 +36520,7 @@ static bool js_cocos2dx_ParticleSystem_getRotatePerSecondVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getRotatePerSecondVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRotatePerSecondVar();
         ok &= float_to_seval(result, &s.rval());
@@ -36707,7 +36538,7 @@ static bool js_cocos2dx_ParticleSystem_getEndSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEndSize();
         ok &= float_to_seval(result, &s.rval());
@@ -36725,7 +36556,7 @@ static bool js_cocos2dx_ParticleSystem_getLife(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getLife : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getLife();
         ok &= float_to_seval(result, &s.rval());
@@ -36743,7 +36574,7 @@ static bool js_cocos2dx_ParticleSystem_isPaused(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_isPaused : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isPaused();
         ok &= boolean_to_seval(result, &s.rval());
@@ -36761,7 +36592,7 @@ static bool js_cocos2dx_ParticleSystem_setSpeedVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setSpeedVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36780,7 +36611,7 @@ static bool js_cocos2dx_ParticleSystem_setAutoRemoveOnFinish(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setAutoRemoveOnFinish : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -36799,7 +36630,7 @@ static bool js_cocos2dx_ParticleSystem_setGravity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setGravity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -36833,7 +36664,7 @@ static bool js_cocos2dx_ParticleSystem_setEmissionRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEmissionRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36852,7 +36683,7 @@ static bool js_cocos2dx_ParticleSystem_getEndColorVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndColorVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4F& result = cobj->getEndColorVar();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -36870,7 +36701,7 @@ static bool js_cocos2dx_ParticleSystem_getRotationIsDir(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getRotationIsDir : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->getRotationIsDir();
         ok &= boolean_to_seval(result, &s.rval());
@@ -36888,7 +36719,7 @@ static bool js_cocos2dx_ParticleSystem_getEmissionRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEmissionRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEmissionRate();
         ok &= float_to_seval(result, &s.rval());
@@ -36906,7 +36737,7 @@ static bool js_cocos2dx_ParticleSystem_getEndColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4F& result = cobj->getEndColor();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -36924,7 +36755,7 @@ static bool js_cocos2dx_ParticleSystem_getLifeVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getLifeVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getLifeVar();
         ok &= float_to_seval(result, &s.rval());
@@ -36942,7 +36773,7 @@ static bool js_cocos2dx_ParticleSystem_setStartSizeVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartSizeVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -36961,7 +36792,7 @@ static bool js_cocos2dx_ParticleSystem_getStartRadius(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartRadius : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStartRadius();
         ok &= float_to_seval(result, &s.rval());
@@ -36979,7 +36810,7 @@ static bool js_cocos2dx_ParticleSystem_getParticleCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getParticleCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getParticleCount();
         ok &= uint32_to_seval(result, &s.rval());
@@ -36997,7 +36828,7 @@ static bool js_cocos2dx_ParticleSystem_getStartRadiusVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartRadiusVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getStartRadiusVar();
         ok &= float_to_seval(result, &s.rval());
@@ -37015,7 +36846,7 @@ static bool js_cocos2dx_ParticleSystem_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -37033,7 +36864,7 @@ static bool js_cocos2dx_ParticleSystem_setStartColorVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartColorVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -37052,7 +36883,7 @@ static bool js_cocos2dx_ParticleSystem_setEndSpin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setEndSpin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -37071,7 +36902,7 @@ static bool js_cocos2dx_ParticleSystem_setRadialAccel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setRadialAccel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -37086,7 +36917,7 @@ SE_BIND_FUNC(js_cocos2dx_ParticleSystem_setRadialAccel)
 
 static bool js_cocos2dx_ParticleSystem_initWithDictionary(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::ParticleSystem* cobj = (cocos2d::ParticleSystem*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ParticleSystem_initWithDictionary : Invalid Native Object");
     const auto& args = s.args();
@@ -37129,7 +36960,7 @@ static bool js_cocos2dx_ParticleSystem_isAutoRemoveOnFinish(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_isAutoRemoveOnFinish : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isAutoRemoveOnFinish();
         ok &= boolean_to_seval(result, &s.rval());
@@ -37147,7 +36978,7 @@ static bool js_cocos2dx_ParticleSystem_getTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getTotalParticles();
         ok &= int32_to_seval(result, &s.rval());
@@ -37165,7 +36996,7 @@ static bool js_cocos2dx_ParticleSystem_setStartRadiusVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setStartRadiusVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -37184,7 +37015,7 @@ static bool js_cocos2dx_ParticleSystem_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -37203,7 +37034,7 @@ static bool js_cocos2dx_ParticleSystem_getEndRadiusVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getEndRadiusVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEndRadiusVar();
         ok &= float_to_seval(result, &s.rval());
@@ -37221,7 +37052,7 @@ static bool js_cocos2dx_ParticleSystem_getStartColorVar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystem_getStartColorVar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4F& result = cobj->getStartColorVar();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -37237,7 +37068,7 @@ static bool js_cocos2dx_ParticleSystem_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -37258,7 +37089,7 @@ static bool js_cocos2dx_ParticleSystem_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37446,7 +37277,7 @@ static bool js_cocos2dx_ParticleSystemQuad_setDisplayFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystemQuad_setDisplayFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -37465,7 +37296,7 @@ static bool js_cocos2dx_ParticleSystemQuad_setTextureWithRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystemQuad_setTextureWithRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Texture2D* arg0 = nullptr;
         cocos2d::Rect arg1;
@@ -37486,7 +37317,7 @@ static bool js_cocos2dx_ParticleSystemQuad_listenRendererRecreated(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSystemQuad_listenRendererRecreated : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::EventCustom* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -37501,7 +37332,7 @@ SE_BIND_FUNC(js_cocos2dx_ParticleSystemQuad_listenRendererRecreated)
 
 static bool js_cocos2dx_ParticleSystemQuad_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -37543,7 +37374,7 @@ static bool js_cocos2dx_ParticleSystemQuad_createWithTotalParticles(se::State& s
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37616,7 +37447,7 @@ static bool js_cocos2dx_ParticleFire_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleFire::create();
         result->retain();
@@ -37634,7 +37465,7 @@ static bool js_cocos2dx_ParticleFire_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37706,7 +37537,7 @@ static bool js_cocos2dx_ParticleFireworks_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleFireworks_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -37724,7 +37555,7 @@ static bool js_cocos2dx_ParticleFireworks_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleFireworks_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37743,7 +37574,7 @@ static bool js_cocos2dx_ParticleFireworks_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleFireworks::create();
         result->retain();
@@ -37761,7 +37592,7 @@ static bool js_cocos2dx_ParticleFireworks_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37835,7 +37666,7 @@ static bool js_cocos2dx_ParticleSun_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSun_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -37853,7 +37684,7 @@ static bool js_cocos2dx_ParticleSun_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSun_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37872,7 +37703,7 @@ static bool js_cocos2dx_ParticleSun_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleSun::create();
         result->retain();
@@ -37890,7 +37721,7 @@ static bool js_cocos2dx_ParticleSun_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -37964,7 +37795,7 @@ static bool js_cocos2dx_ParticleGalaxy_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleGalaxy_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -37982,7 +37813,7 @@ static bool js_cocos2dx_ParticleGalaxy_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleGalaxy_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38001,7 +37832,7 @@ static bool js_cocos2dx_ParticleGalaxy_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleGalaxy::create();
         result->retain();
@@ -38019,7 +37850,7 @@ static bool js_cocos2dx_ParticleGalaxy_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38093,7 +37924,7 @@ static bool js_cocos2dx_ParticleFlower_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleFlower_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38111,7 +37942,7 @@ static bool js_cocos2dx_ParticleFlower_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleFlower_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38130,7 +37961,7 @@ static bool js_cocos2dx_ParticleFlower_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleFlower::create();
         result->retain();
@@ -38148,7 +37979,7 @@ static bool js_cocos2dx_ParticleFlower_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38222,7 +38053,7 @@ static bool js_cocos2dx_ParticleMeteor_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleMeteor_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38240,7 +38071,7 @@ static bool js_cocos2dx_ParticleMeteor_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleMeteor_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38259,7 +38090,7 @@ static bool js_cocos2dx_ParticleMeteor_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleMeteor::create();
         result->retain();
@@ -38277,7 +38108,7 @@ static bool js_cocos2dx_ParticleMeteor_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38351,7 +38182,7 @@ static bool js_cocos2dx_ParticleSpiral_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSpiral_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38369,7 +38200,7 @@ static bool js_cocos2dx_ParticleSpiral_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSpiral_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38388,7 +38219,7 @@ static bool js_cocos2dx_ParticleSpiral_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleSpiral::create();
         result->retain();
@@ -38406,7 +38237,7 @@ static bool js_cocos2dx_ParticleSpiral_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38480,7 +38311,7 @@ static bool js_cocos2dx_ParticleExplosion_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleExplosion_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38498,7 +38329,7 @@ static bool js_cocos2dx_ParticleExplosion_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleExplosion_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38517,7 +38348,7 @@ static bool js_cocos2dx_ParticleExplosion_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleExplosion::create();
         result->retain();
@@ -38535,7 +38366,7 @@ static bool js_cocos2dx_ParticleExplosion_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38609,7 +38440,7 @@ static bool js_cocos2dx_ParticleSmoke_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSmoke_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38627,7 +38458,7 @@ static bool js_cocos2dx_ParticleSmoke_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSmoke_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38646,7 +38477,7 @@ static bool js_cocos2dx_ParticleSmoke_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleSmoke::create();
         result->retain();
@@ -38664,7 +38495,7 @@ static bool js_cocos2dx_ParticleSmoke_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38738,7 +38569,7 @@ static bool js_cocos2dx_ParticleSnow_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSnow_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38756,7 +38587,7 @@ static bool js_cocos2dx_ParticleSnow_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleSnow_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38775,7 +38606,7 @@ static bool js_cocos2dx_ParticleSnow_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleSnow::create();
         result->retain();
@@ -38793,7 +38624,7 @@ static bool js_cocos2dx_ParticleSnow_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38867,7 +38698,7 @@ static bool js_cocos2dx_ParticleRain_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleRain_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -38885,7 +38716,7 @@ static bool js_cocos2dx_ParticleRain_initWithTotalParticles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParticleRain_initWithTotalParticles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38904,7 +38735,7 @@ static bool js_cocos2dx_ParticleRain_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParticleRain::create();
         result->retain();
@@ -38922,7 +38753,7 @@ static bool js_cocos2dx_ParticleRain_createWithTotalParticles(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -38996,7 +38827,7 @@ static bool js_cocos2dx_ProgressTimer_initWithSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_initWithSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -39017,7 +38848,7 @@ static bool js_cocos2dx_ProgressTimer_isReverseDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_isReverseDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isReverseDirection();
         ok &= boolean_to_seval(result, &s.rval());
@@ -39035,7 +38866,7 @@ static bool js_cocos2dx_ProgressTimer_setBarChangeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_setBarChangeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -39054,7 +38885,7 @@ static bool js_cocos2dx_ProgressTimer_getPercentage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_getPercentage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPercentage();
         ok &= float_to_seval(result, &s.rval());
@@ -39072,7 +38903,7 @@ static bool js_cocos2dx_ProgressTimer_setSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_setSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -39091,7 +38922,7 @@ static bool js_cocos2dx_ProgressTimer_getType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_getType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getType();
         ok &= int32_to_seval(result, &s.rval());
@@ -39109,7 +38940,7 @@ static bool js_cocos2dx_ProgressTimer_getSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_getSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -39127,7 +38958,7 @@ static bool js_cocos2dx_ProgressTimer_setMidpoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_setMidpoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -39146,7 +38977,7 @@ static bool js_cocos2dx_ProgressTimer_getBarChangeRate(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_getBarChangeRate : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getBarChangeRate();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -39164,7 +38995,7 @@ static bool js_cocos2dx_ProgressTimer_setReverseDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_setReverseDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -39183,7 +39014,7 @@ static bool js_cocos2dx_ProgressTimer_getMidpoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_getMidpoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getMidpoint();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -39201,7 +39032,7 @@ static bool js_cocos2dx_ProgressTimer_setPercentage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_setPercentage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -39220,7 +39051,7 @@ static bool js_cocos2dx_ProgressTimer_setType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProgressTimer_setType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ProgressTimer::Type arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -39237,7 +39068,7 @@ static bool js_cocos2dx_ProgressTimer_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -39329,7 +39160,7 @@ se::Class* __jsb_cocos2d_ProtectedNode_class = nullptr;
 
 static bool js_cocos2dx_ProtectedNode_addProtectedChild(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::ProtectedNode* cobj = (cocos2d::ProtectedNode*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ProtectedNode_addProtectedChild : Invalid Native Object");
     const auto& args = s.args();
@@ -39399,7 +39230,7 @@ static bool js_cocos2dx_ProtectedNode_removeProtectedChildByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProtectedNode_removeProtectedChildByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -39427,7 +39258,7 @@ static bool js_cocos2dx_ProtectedNode_reorderProtectedChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProtectedNode_reorderProtectedChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         int arg1 = 0;
@@ -39448,7 +39279,7 @@ static bool js_cocos2dx_ProtectedNode_removeAllProtectedChildrenWithCleanup(se::
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProtectedNode_removeAllProtectedChildrenWithCleanup : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -39497,7 +39328,7 @@ static bool js_cocos2dx_ProtectedNode_getProtectedChildByTag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProtectedNode_getProtectedChildByTag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -39518,7 +39349,7 @@ static bool js_cocos2dx_ProtectedNode_removeProtectedChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ProtectedNode_removeProtectedChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -39559,7 +39390,7 @@ static bool js_cocos2dx_ProtectedNode_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ProtectedNode::create();
         result->retain();
@@ -39633,7 +39464,7 @@ se::Class* __jsb_cocos2d_Sprite_class = nullptr;
 
 static bool js_cocos2dx_Sprite_setSpriteFrame(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Sprite* cobj = (cocos2d::Sprite*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Sprite_setSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
@@ -39665,7 +39496,7 @@ SE_BIND_FUNC(js_cocos2dx_Sprite_setSpriteFrame)
 
 static bool js_cocos2dx_Sprite_setTexture(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Sprite* cobj = (cocos2d::Sprite*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Sprite_setTexture : Invalid Native Object");
     const auto& args = s.args();
@@ -39701,7 +39532,7 @@ static bool js_cocos2dx_Sprite_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -39719,7 +39550,7 @@ static bool js_cocos2dx_Sprite_setFlippedY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setFlippedY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -39738,7 +39569,7 @@ static bool js_cocos2dx_Sprite_setFlippedX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setFlippedX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -39757,7 +39588,7 @@ static bool js_cocos2dx_Sprite_setRotationSkewX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setRotationSkewX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -39776,7 +39607,7 @@ static bool js_cocos2dx_Sprite_setRotationSkewY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setRotationSkewY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -39795,7 +39626,7 @@ static bool js_cocos2dx_Sprite_getResourceType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getResourceType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getResourceType();
         ok &= int32_to_seval(result, &s.rval());
@@ -39813,7 +39644,7 @@ static bool js_cocos2dx_Sprite_setDisplayFrameWithAnimationName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setDisplayFrameWithAnimationName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         ssize_t arg1 = 0;
@@ -39834,7 +39665,7 @@ static bool js_cocos2dx_Sprite_getBatchNode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getBatchNode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::SpriteBatchNode* result = cobj->getBatchNode();
         ok &= native_ptr_to_seval<cocos2d::SpriteBatchNode>((cocos2d::SpriteBatchNode*)result, &s.rval());
@@ -39852,7 +39683,7 @@ static bool js_cocos2dx_Sprite_getOffsetPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getOffsetPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getOffsetPosition();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -39870,7 +39701,7 @@ static bool js_cocos2dx_Sprite_getCenterRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getCenterRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->getCenterRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -39888,7 +39719,7 @@ static bool js_cocos2dx_Sprite_removeAllChildrenWithCleanup(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_removeAllChildrenWithCleanup : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -39907,7 +39738,7 @@ static bool js_cocos2dx_Sprite_setCenterRectNormalized(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setCenterRectNormalized : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -39926,7 +39757,7 @@ static bool js_cocos2dx_Sprite_isStretchEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_isStretchEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isStretchEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -39940,7 +39771,7 @@ SE_BIND_FUNC(js_cocos2dx_Sprite_isStretchEnabled)
 
 static bool js_cocos2dx_Sprite_setTextureRect(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Sprite* cobj = (cocos2d::Sprite*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Sprite_setTextureRect : Invalid Native Object");
     const auto& args = s.args();
@@ -39981,7 +39812,7 @@ static bool js_cocos2dx_Sprite_initWithSpriteFrameName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_initWithSpriteFrameName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -40002,7 +39833,7 @@ static bool js_cocos2dx_Sprite_setStretchEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setStretchEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -40021,7 +39852,7 @@ static bool js_cocos2dx_Sprite_isFrameDisplayed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_isFrameDisplayed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -40042,7 +39873,7 @@ static bool js_cocos2dx_Sprite_getAtlasIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getAtlasIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getAtlasIndex();
         ok &= ssize_to_seval(result, &s.rval());
@@ -40060,7 +39891,7 @@ static bool js_cocos2dx_Sprite_setBatchNode(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setBatchNode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteBatchNode* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -40079,7 +39910,7 @@ static bool js_cocos2dx_Sprite_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -40097,7 +39928,7 @@ static bool js_cocos2dx_Sprite_setCenterRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setCenterRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -40116,7 +39947,7 @@ static bool js_cocos2dx_Sprite_setTextureAtlas(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setTextureAtlas : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextureAtlas* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -40135,7 +39966,7 @@ static bool js_cocos2dx_Sprite_getSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::SpriteFrame* result = cobj->getSpriteFrame();
         ok &= native_ptr_to_seval<cocos2d::SpriteFrame>((cocos2d::SpriteFrame*)result, &s.rval());
@@ -40153,7 +39984,7 @@ static bool js_cocos2dx_Sprite_getResourceName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getResourceName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getResourceName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -40171,7 +40002,7 @@ static bool js_cocos2dx_Sprite_isDirty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_isDirty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isDirty();
         ok &= boolean_to_seval(result, &s.rval());
@@ -40189,7 +40020,7 @@ static bool js_cocos2dx_Sprite_getCenterRectNormalized(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getCenterRectNormalized : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Rect result = cobj->getCenterRectNormalized();
         ok &= Rect_to_seval(result, &s.rval());
@@ -40207,7 +40038,7 @@ static bool js_cocos2dx_Sprite_setAtlasIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setAtlasIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -40222,7 +40053,7 @@ SE_BIND_FUNC(js_cocos2dx_Sprite_setAtlasIndex)
 
 static bool js_cocos2dx_Sprite_initWithTexture(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Sprite* cobj = (cocos2d::Sprite*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Sprite_initWithTexture : Invalid Native Object");
     const auto& args = s.args();
@@ -40282,7 +40113,7 @@ static bool js_cocos2dx_Sprite_setDirty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setDirty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -40301,7 +40132,7 @@ static bool js_cocos2dx_Sprite_isTextureRectRotated(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_isTextureRectRotated : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isTextureRectRotated();
         ok &= boolean_to_seval(result, &s.rval());
@@ -40319,7 +40150,7 @@ static bool js_cocos2dx_Sprite_getTextureRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_getTextureRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getTextureRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -40333,7 +40164,7 @@ SE_BIND_FUNC(js_cocos2dx_Sprite_getTextureRect)
 
 static bool js_cocos2dx_Sprite_initWithFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Sprite* cobj = (cocos2d::Sprite*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Sprite_initWithFile : Invalid Native Object");
     const auto& args = s.args();
@@ -40376,7 +40207,7 @@ static bool js_cocos2dx_Sprite_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -40395,7 +40226,7 @@ static bool js_cocos2dx_Sprite_initWithSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_initWithSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -40416,7 +40247,7 @@ static bool js_cocos2dx_Sprite_isFlippedX(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_isFlippedX : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isFlippedX();
         ok &= boolean_to_seval(result, &s.rval());
@@ -40434,7 +40265,7 @@ static bool js_cocos2dx_Sprite_isFlippedY(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_isFlippedY : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isFlippedY();
         ok &= boolean_to_seval(result, &s.rval());
@@ -40452,7 +40283,7 @@ static bool js_cocos2dx_Sprite_setVertexRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Sprite_setVertexRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -40569,7 +40400,7 @@ static bool js_cocos2dx_RenderTexture_setVirtualViewport(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setVirtualViewport : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vec2 arg0;
         cocos2d::Rect arg1;
@@ -40592,7 +40423,7 @@ static bool js_cocos2dx_RenderTexture_clearStencil(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_clearStencil : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -40611,7 +40442,7 @@ static bool js_cocos2dx_RenderTexture_getClearDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_getClearDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getClearDepth();
         ok &= float_to_seval(result, &s.rval());
@@ -40629,7 +40460,7 @@ static bool js_cocos2dx_RenderTexture_getClearStencil(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_getClearStencil : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getClearStencil();
         ok &= int32_to_seval(result, &s.rval());
@@ -40662,7 +40493,7 @@ static bool js_cocos2dx_RenderTexture_setClearStencil(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setClearStencil : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -40681,7 +40512,7 @@ static bool js_cocos2dx_RenderTexture_setSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -40700,7 +40531,7 @@ static bool js_cocos2dx_RenderTexture_getSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_getSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -40718,7 +40549,7 @@ static bool js_cocos2dx_RenderTexture_isAutoDraw(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_isAutoDraw : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isAutoDraw();
         ok &= boolean_to_seval(result, &s.rval());
@@ -40736,7 +40567,7 @@ static bool js_cocos2dx_RenderTexture_setKeepMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setKeepMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -40755,7 +40586,7 @@ static bool js_cocos2dx_RenderTexture_setClearFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setClearFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -40789,7 +40620,7 @@ static bool js_cocos2dx_RenderTexture_setAutoDraw(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setAutoDraw : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -40808,7 +40639,7 @@ static bool js_cocos2dx_RenderTexture_setClearColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setClearColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -40823,7 +40654,7 @@ SE_BIND_FUNC(js_cocos2dx_RenderTexture_setClearColor)
 
 static bool js_cocos2dx_RenderTexture_beginWithClear(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::RenderTexture* cobj = (cocos2d::RenderTexture*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_RenderTexture_beginWithClear : Invalid Native Object");
     const auto& args = s.args();
@@ -40905,7 +40736,7 @@ static bool js_cocos2dx_RenderTexture_clearDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_clearDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -40924,7 +40755,7 @@ static bool js_cocos2dx_RenderTexture_getClearColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_getClearColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4F& result = cobj->getClearColor();
         ok &= Color4F_to_seval(result, &s.rval());
@@ -40942,7 +40773,7 @@ static bool js_cocos2dx_RenderTexture_clear(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_clear : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -40967,7 +40798,7 @@ static bool js_cocos2dx_RenderTexture_getClearFlags(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_getClearFlags : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getClearFlags();
         ok &= uint32_to_seval(result, &s.rval());
@@ -40985,7 +40816,7 @@ static bool js_cocos2dx_RenderTexture_newImage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_newImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Image* result = cobj->newImage();
         ok &= native_ptr_to_seval<cocos2d::Image>((cocos2d::Image*)result, &s.rval());
@@ -41012,7 +40843,7 @@ static bool js_cocos2dx_RenderTexture_setClearDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderTexture_setClearDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -41027,7 +40858,7 @@ SE_BIND_FUNC(js_cocos2dx_RenderTexture_setClearDepth)
 
 static bool js_cocos2dx_RenderTexture_initWithWidthAndHeight(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::RenderTexture* cobj = (cocos2d::RenderTexture*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_RenderTexture_initWithWidthAndHeight : Invalid Native Object");
     const auto& args = s.args();
@@ -41078,7 +40909,7 @@ SE_BIND_FUNC(js_cocos2dx_RenderTexture_initWithWidthAndHeight)
 
 static bool js_cocos2dx_RenderTexture_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -41225,7 +41056,7 @@ static bool js_cocos2dx_TransitionEaseScene_easeActionWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionEaseScene_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -41266,7 +41097,7 @@ static bool js_cocos2dx_TransitionScene_getInScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionScene_getInScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Scene* result = cobj->getInScene();
         ok &= native_ptr_to_seval<cocos2d::Scene>((cocos2d::Scene*)result, &s.rval());
@@ -41299,7 +41130,7 @@ static bool js_cocos2dx_TransitionScene_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionScene_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41322,7 +41153,7 @@ static bool js_cocos2dx_TransitionScene_getDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionScene_getDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getDuration();
         ok &= float_to_seval(result, &s.rval());
@@ -41353,7 +41184,7 @@ static bool js_cocos2dx_TransitionScene_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41443,7 +41274,7 @@ static bool js_cocos2dx_TransitionSceneOriented_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionSceneOriented_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41466,7 +41297,7 @@ static bool js_cocos2dx_TransitionSceneOriented_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41552,7 +41383,7 @@ static bool js_cocos2dx_TransitionRotoZoom_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41635,7 +41466,7 @@ static bool js_cocos2dx_TransitionJumpZoom_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41720,7 +41551,7 @@ static bool js_cocos2dx_TransitionMoveInL_action(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionMoveInL_action : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionInterval* result = cobj->action();
         ok &= native_ptr_to_seval<cocos2d::ActionInterval>((cocos2d::ActionInterval*)result, &s.rval());
@@ -41738,7 +41569,7 @@ static bool js_cocos2dx_TransitionMoveInL_easeActionWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionMoveInL_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -41757,7 +41588,7 @@ static bool js_cocos2dx_TransitionMoveInL_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41842,7 +41673,7 @@ static bool js_cocos2dx_TransitionMoveInR_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -41925,7 +41756,7 @@ static bool js_cocos2dx_TransitionMoveInT_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42008,7 +41839,7 @@ static bool js_cocos2dx_TransitionMoveInB_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42093,7 +41924,7 @@ static bool js_cocos2dx_TransitionSlideInL_action(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionSlideInL_action : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionInterval* result = cobj->action();
         ok &= native_ptr_to_seval<cocos2d::ActionInterval>((cocos2d::ActionInterval*)result, &s.rval());
@@ -42111,7 +41942,7 @@ static bool js_cocos2dx_TransitionSlideInL_easeActionWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionSlideInL_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -42130,7 +41961,7 @@ static bool js_cocos2dx_TransitionSlideInL_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42215,7 +42046,7 @@ static bool js_cocos2dx_TransitionSlideInR_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42298,7 +42129,7 @@ static bool js_cocos2dx_TransitionSlideInB_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42381,7 +42212,7 @@ static bool js_cocos2dx_TransitionSlideInT_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42466,7 +42297,7 @@ static bool js_cocos2dx_TransitionShrinkGrow_easeActionWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionShrinkGrow_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -42485,7 +42316,7 @@ static bool js_cocos2dx_TransitionShrinkGrow_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -42567,7 +42398,7 @@ se::Class* __jsb_cocos2d_TransitionFlipX_class = nullptr;
 
 static bool js_cocos2dx_TransitionFlipX_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -42668,7 +42499,7 @@ se::Class* __jsb_cocos2d_TransitionFlipY_class = nullptr;
 
 static bool js_cocos2dx_TransitionFlipY_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -42769,7 +42600,7 @@ se::Class* __jsb_cocos2d_TransitionFlipAngular_class = nullptr;
 
 static bool js_cocos2dx_TransitionFlipAngular_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -42870,7 +42701,7 @@ se::Class* __jsb_cocos2d_TransitionZoomFlipX_class = nullptr;
 
 static bool js_cocos2dx_TransitionZoomFlipX_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -42971,7 +42802,7 @@ se::Class* __jsb_cocos2d_TransitionZoomFlipY_class = nullptr;
 
 static bool js_cocos2dx_TransitionZoomFlipY_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -43072,7 +42903,7 @@ se::Class* __jsb_cocos2d_TransitionZoomFlipAngular_class = nullptr;
 
 static bool js_cocos2dx_TransitionZoomFlipAngular_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -43173,7 +43004,7 @@ se::Class* __jsb_cocos2d_TransitionFade_class = nullptr;
 
 static bool js_cocos2dx_TransitionFade_initWithDuration(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TransitionFade* cobj = (cocos2d::TransitionFade*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TransitionFade_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
@@ -43218,7 +43049,7 @@ SE_BIND_FUNC(js_cocos2dx_TransitionFade_initWithDuration)
 
 static bool js_cocos2dx_TransitionFade_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -43322,7 +43153,7 @@ static bool js_cocos2dx_TransitionCrossFade_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -43407,7 +43238,7 @@ static bool js_cocos2dx_TransitionTurnOffTiles_easeActionWithAction(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionTurnOffTiles_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -43426,7 +43257,7 @@ static bool js_cocos2dx_TransitionTurnOffTiles_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -43512,7 +43343,7 @@ static bool js_cocos2dx_TransitionSplitCols_action(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionSplitCols_action : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ActionInterval* result = cobj->action();
         ok &= native_ptr_to_seval<cocos2d::ActionInterval>((cocos2d::ActionInterval*)result, &s.rval());
@@ -43530,7 +43361,7 @@ static bool js_cocos2dx_TransitionSplitCols_easeActionWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionSplitCols_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -43549,7 +43380,7 @@ static bool js_cocos2dx_TransitionSplitCols_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -43634,7 +43465,7 @@ static bool js_cocos2dx_TransitionSplitRows_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -43719,7 +43550,7 @@ static bool js_cocos2dx_TransitionFadeTR_easeActionWithAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionFadeTR_easeActionWithAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ActionInterval* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -43740,7 +43571,7 @@ static bool js_cocos2dx_TransitionFadeTR_actionWithSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionFadeTR_actionWithSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -43759,7 +43590,7 @@ static bool js_cocos2dx_TransitionFadeTR_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -43844,7 +43675,7 @@ static bool js_cocos2dx_TransitionFadeBL_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -43927,7 +43758,7 @@ static bool js_cocos2dx_TransitionFadeUp_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44010,7 +43841,7 @@ static bool js_cocos2dx_TransitionFadeDown_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44095,7 +43926,7 @@ static bool js_cocos2dx_TransitionPageTurn_actionWithSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionPageTurn_actionWithSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -44116,7 +43947,7 @@ static bool js_cocos2dx_TransitionPageTurn_initWithDuration(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TransitionPageTurn_initWithDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44139,7 +43970,7 @@ static bool js_cocos2dx_TransitionPageTurn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44226,7 +44057,7 @@ static bool js_cocos2dx_TransitionProgress_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44309,7 +44140,7 @@ static bool js_cocos2dx_TransitionProgressRadialCCW_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44392,7 +44223,7 @@ static bool js_cocos2dx_TransitionProgressRadialCW_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44475,7 +44306,7 @@ static bool js_cocos2dx_TransitionProgressHorizontal_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44558,7 +44389,7 @@ static bool js_cocos2dx_TransitionProgressVertical_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44641,7 +44472,7 @@ static bool js_cocos2dx_TransitionProgressInOut_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44724,7 +44555,7 @@ static bool js_cocos2dx_TransitionProgressOutIn_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::Scene* arg1 = nullptr;
@@ -44824,10 +44655,10 @@ static bool js_cocos2dx_Camera_getDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int8_t result = cobj->getDepth();
-        #pragma warning NO CONVERSION FROM NATIVE FOR char;
+        ok &= int8_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Camera_getDepth : Error processing arguments");
         return true;
     }
@@ -44842,7 +44673,7 @@ static bool js_cocos2dx_Camera_getViewProjectionMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getViewProjectionMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Mat4& result = cobj->getViewProjectionMatrix();
         ok &= Mat4_to_seval(result, &s.rval());
@@ -44875,7 +44706,7 @@ static bool js_cocos2dx_Camera_setBackgroundBrush(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setBackgroundBrush : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::CameraBackgroundBrush* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -44894,7 +44725,7 @@ static bool js_cocos2dx_Camera_lookAt(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_lookAt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -44937,7 +44768,7 @@ static bool js_cocos2dx_Camera_getBackgroundBrush(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getBackgroundBrush : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::CameraBackgroundBrush* result = cobj->getBackgroundBrush();
         ok &= native_ptr_to_seval<cocos2d::CameraBackgroundBrush>((cocos2d::CameraBackgroundBrush*)result, &s.rval());
@@ -44955,7 +44786,7 @@ static bool js_cocos2dx_Camera_getProjectionMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getProjectionMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Mat4& result = cobj->getProjectionMatrix();
         ok &= Mat4_to_seval(result, &s.rval());
@@ -44973,7 +44804,7 @@ static bool js_cocos2dx_Camera_isBrushValid(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_isBrushValid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isBrushValid();
         ok &= boolean_to_seval(result, &s.rval());
@@ -44991,7 +44822,7 @@ static bool js_cocos2dx_Camera_getDepthInView(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getDepthInView : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Mat4 arg0;
         ok &= seval_to_Mat4(args[0], &arg0);
@@ -45042,7 +44873,7 @@ static bool js_cocos2dx_Camera_setAdditionalProjection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setAdditionalProjection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Mat4 arg0;
         ok &= seval_to_Mat4(args[0], &arg0);
@@ -45061,11 +44892,10 @@ static bool js_cocos2dx_Camera_setViewport(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setViewport : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::experimental::Viewport arg0;
-        #pragma warning NO CONVERSION TO NATIVE FOR Viewport
-		ok = false;
+        ok &= seval_to_Viewport(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Camera_setViewport : Error processing arguments");
         cobj->setViewport(arg0);
         return true;
@@ -45081,7 +44911,7 @@ static bool js_cocos2dx_Camera_initDefault(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_initDefault : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->initDefault();
         ok &= boolean_to_seval(result, &s.rval());
@@ -45099,7 +44929,7 @@ static bool js_cocos2dx_Camera_getCameraFlag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getCameraFlag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getCameraFlag();
         ok &= int32_to_seval(result, &s.rval());
@@ -45117,7 +44947,7 @@ static bool js_cocos2dx_Camera_getType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getType();
         ok &= int32_to_seval(result, &s.rval());
@@ -45135,7 +44965,7 @@ static bool js_cocos2dx_Camera_initOrthographic(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_initOrthographic : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -45162,7 +44992,7 @@ static bool js_cocos2dx_Camera_getRenderOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getRenderOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getRenderOrder();
         ok &= int32_to_seval(result, &s.rval());
@@ -45180,7 +45010,7 @@ static bool js_cocos2dx_Camera_setDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int8_t arg0;
         ok &= seval_to_int8(args[0], &arg0);
@@ -45199,7 +45029,7 @@ static bool js_cocos2dx_Camera_setScene(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setScene : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Scene* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -45218,7 +45048,7 @@ static bool js_cocos2dx_Camera_projectGL(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_projectGL : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -45254,7 +45084,7 @@ static bool js_cocos2dx_Camera_getViewMatrix(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getViewMatrix : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Mat4& result = cobj->getViewMatrix();
         ok &= Mat4_to_seval(result, &s.rval());
@@ -45272,7 +45102,7 @@ static bool js_cocos2dx_Camera_getNearPlane(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getNearPlane : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getNearPlane();
         ok &= float_to_seval(result, &s.rval());
@@ -45290,7 +45120,7 @@ static bool js_cocos2dx_Camera_project(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_project : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -45311,7 +45141,7 @@ static bool js_cocos2dx_Camera_setCameraFlag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setCameraFlag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::CameraFlag arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -45330,7 +45160,7 @@ static bool js_cocos2dx_Camera_getFarPlane(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_getFarPlane : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getFarPlane();
         ok &= float_to_seval(result, &s.rval());
@@ -45363,7 +45193,7 @@ static bool js_cocos2dx_Camera_setFrameBufferObject(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_setFrameBufferObject : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::experimental::FrameBuffer* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -45382,7 +45212,7 @@ static bool js_cocos2dx_Camera_isViewProjectionUpdated(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_isViewProjectionUpdated : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isViewProjectionUpdated();
         ok &= boolean_to_seval(result, &s.rval());
@@ -45400,7 +45230,7 @@ static bool js_cocos2dx_Camera_initPerspective(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Camera_initPerspective : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -45425,7 +45255,7 @@ static bool js_cocos2dx_Camera_createOrthographic(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -45452,7 +45282,7 @@ static bool js_cocos2dx_Camera_getVisitingCamera(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Camera* result = cocos2d::Camera::getVisitingCamera();
         ok &= native_ptr_to_seval<cocos2d::Camera>((cocos2d::Camera*)result, &s.rval());
@@ -45468,7 +45298,7 @@ static bool js_cocos2dx_Camera_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::Camera::create();
         result->retain();
@@ -45486,7 +45316,7 @@ static bool js_cocos2dx_Camera_createPerspective(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         float arg0 = 0;
         float arg1 = 0;
@@ -45513,10 +45343,10 @@ static bool js_cocos2dx_Camera_getDefaultViewport(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::experimental::Viewport& result = cocos2d::Camera::getDefaultViewport();
-        #pragma warning NO CONVERSION FROM NATIVE FOR Viewport;
+        ok &= Viewport_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Camera_getDefaultViewport : Error processing arguments");
         return true;
     }
@@ -45529,11 +45359,10 @@ static bool js_cocos2dx_Camera_setDefaultViewport(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::experimental::Viewport arg0;
-        #pragma warning NO CONVERSION TO NATIVE FOR Viewport
-		ok = false;
+        ok &= seval_to_Viewport(args[0], &arg0);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Camera_setDefaultViewport : Error processing arguments");
         cocos2d::Camera::setDefaultViewport(arg0);
         return true;
@@ -45547,7 +45376,7 @@ static bool js_cocos2dx_Camera_getDefaultCamera(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Camera* result = cocos2d::Camera::getDefaultCamera();
         ok &= native_ptr_to_seval<cocos2d::Camera>((cocos2d::Camera*)result, &s.rval());
@@ -45652,7 +45481,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_getBrushType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundBrush_getBrushType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getBrushType();
         ok &= int32_to_seval(result, &s.rval());
@@ -45670,7 +45499,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_drawBackground(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundBrush_drawBackground : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Camera* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -45689,7 +45518,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundBrush_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -45707,7 +45536,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_isValid(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundBrush_isValid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isValid();
         ok &= boolean_to_seval(result, &s.rval());
@@ -45723,7 +45552,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createSkyboxBrush(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         std::string arg0;
         std::string arg1;
@@ -45754,7 +45583,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createColorBrush(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Color4F arg0;
         float arg1 = 0;
@@ -45777,7 +45606,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createNoneBrush(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::CameraBackgroundBrush::createNoneBrush();
         result->retain();
@@ -45795,7 +45624,7 @@ static bool js_cocos2dx_CameraBackgroundBrush_createDepthBrush(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::CameraBackgroundBrush::createDepthBrush();
         result->retain();
@@ -45880,7 +45709,7 @@ static bool js_cocos2dx_CameraBackgroundDepthBrush_setDepth(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundDepthBrush_setDepth : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -45897,7 +45726,7 @@ static bool js_cocos2dx_CameraBackgroundDepthBrush_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -45969,7 +45798,7 @@ static bool js_cocos2dx_CameraBackgroundColorBrush_setColor(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundColorBrush_setColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color4F arg0;
         ok &= seval_to_Color4F(args[0], &arg0);
@@ -45986,7 +45815,7 @@ static bool js_cocos2dx_CameraBackgroundColorBrush_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Color4F arg0;
         float arg1 = 0;
@@ -46060,7 +45889,7 @@ static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_setTextureValid(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundSkyBoxBrush_setTextureValid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -46079,7 +45908,7 @@ static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundSkyBoxBrush_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextureCube* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -46098,7 +45927,7 @@ static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_setActived(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundSkyBoxBrush_setActived : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -46117,7 +45946,7 @@ static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_isActived(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_CameraBackgroundSkyBoxBrush_isActived : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isActived();
         ok &= boolean_to_seval(result, &s.rval());
@@ -46131,7 +45960,7 @@ SE_BIND_FUNC(js_cocos2dx_CameraBackgroundSkyBoxBrush_isActived)
 
 static bool js_cocos2dx_CameraBackgroundSkyBoxBrush_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -46231,7 +46060,7 @@ static bool js_cocos2dx_GridBase_setGridSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_setGridSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -46250,7 +46079,7 @@ static bool js_cocos2dx_GridBase_setGridRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_setGridRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Rect arg0;
         ok &= seval_to_Rect(args[0], &arg0);
@@ -46284,7 +46113,7 @@ static bool js_cocos2dx_GridBase_getGridRect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_getGridRect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Rect& result = cobj->getGridRect();
         ok &= Rect_to_seval(result, &s.rval());
@@ -46302,7 +46131,7 @@ static bool js_cocos2dx_GridBase_afterDraw(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_afterDraw : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -46351,7 +46180,7 @@ static bool js_cocos2dx_GridBase_isTextureFlipped(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_isTextureFlipped : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isTextureFlipped();
         ok &= boolean_to_seval(result, &s.rval());
@@ -46369,7 +46198,7 @@ static bool js_cocos2dx_GridBase_getGridSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_getGridSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getGridSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -46387,7 +46216,7 @@ static bool js_cocos2dx_GridBase_getStep(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_getStep : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getStep();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -46420,7 +46249,7 @@ static bool js_cocos2dx_GridBase_setStep(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_setStep : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -46439,7 +46268,7 @@ static bool js_cocos2dx_GridBase_setTextureFlipped(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_setTextureFlipped : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -46473,7 +46302,7 @@ static bool js_cocos2dx_GridBase_setActive(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_setActive : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -46492,7 +46321,7 @@ static bool js_cocos2dx_GridBase_getReuseGrid(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_getReuseGrid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getReuseGrid();
         ok &= int32_to_seval(result, &s.rval());
@@ -46506,7 +46335,7 @@ SE_BIND_FUNC(js_cocos2dx_GridBase_getReuseGrid)
 
 static bool js_cocos2dx_GridBase_initWithSize(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GridBase* cobj = (cocos2d::GridBase*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GridBase_initWithSize : Invalid Native Object");
     const auto& args = s.args();
@@ -46601,7 +46430,7 @@ static bool js_cocos2dx_GridBase_setReuseGrid(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_setReuseGrid : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -46620,7 +46449,7 @@ static bool js_cocos2dx_GridBase_isActive(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GridBase_isActive : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isActive();
         ok &= boolean_to_seval(result, &s.rval());
@@ -46649,7 +46478,7 @@ SE_BIND_FUNC(js_cocos2dx_GridBase_reuse)
 
 static bool js_cocos2dx_GridBase_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -46733,7 +46562,7 @@ static bool js_cocos2dx_Grid3D_getNeedDepthTestForBlit(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Grid3D_getNeedDepthTestForBlit : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->getNeedDepthTestForBlit();
         ok &= boolean_to_seval(result, &s.rval());
@@ -46751,7 +46580,7 @@ static bool js_cocos2dx_Grid3D_setNeedDepthTestForBlit(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Grid3D_setNeedDepthTestForBlit : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -46766,7 +46595,7 @@ SE_BIND_FUNC(js_cocos2dx_Grid3D_setNeedDepthTestForBlit)
 
 static bool js_cocos2dx_Grid3D_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -46900,7 +46729,7 @@ se::Class* __jsb_cocos2d_TiledGrid3D_class = nullptr;
 
 static bool js_cocos2dx_TiledGrid3D_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -47036,7 +46865,7 @@ static bool js_cocos2dx_BaseLight_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -47055,7 +46884,7 @@ static bool js_cocos2dx_BaseLight_getIntensity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_getIntensity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getIntensity();
         ok &= float_to_seval(result, &s.rval());
@@ -47073,7 +46902,7 @@ static bool js_cocos2dx_BaseLight_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -47091,7 +46920,7 @@ static bool js_cocos2dx_BaseLight_getLightType(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_getLightType : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getLightType();
         ok &= int32_to_seval(result, &s.rval());
@@ -47109,7 +46938,7 @@ static bool js_cocos2dx_BaseLight_setLightFlag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_setLightFlag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::LightFlag arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -47128,7 +46957,7 @@ static bool js_cocos2dx_BaseLight_setIntensity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_setIntensity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -47147,7 +46976,7 @@ static bool js_cocos2dx_BaseLight_getLightFlag(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_BaseLight_getLightFlag : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getLightFlag();
         ok &= int32_to_seval(result, &s.rval());
@@ -47192,7 +47021,7 @@ static bool js_cocos2dx_DirectionLight_getDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DirectionLight_getDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec3 result = cobj->getDirection();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -47210,7 +47039,7 @@ static bool js_cocos2dx_DirectionLight_getDirectionInWorld(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DirectionLight_getDirectionInWorld : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec3 result = cobj->getDirectionInWorld();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -47228,7 +47057,7 @@ static bool js_cocos2dx_DirectionLight_setDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_DirectionLight_setDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -47245,7 +47074,7 @@ static bool js_cocos2dx_DirectionLight_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Vec3 arg0;
         cocos2d::Color3B arg1;
@@ -47321,7 +47150,7 @@ static bool js_cocos2dx_PointLight_getRange(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_PointLight_getRange : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRange();
         ok &= float_to_seval(result, &s.rval());
@@ -47339,7 +47168,7 @@ static bool js_cocos2dx_PointLight_setRange(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_PointLight_setRange : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -47356,7 +47185,7 @@ static bool js_cocos2dx_PointLight_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Vec3 arg0;
         cocos2d::Color3B arg1;
@@ -47433,7 +47262,7 @@ static bool js_cocos2dx_SpotLight_getRange(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getRange : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getRange();
         ok &= float_to_seval(result, &s.rval());
@@ -47451,7 +47280,7 @@ static bool js_cocos2dx_SpotLight_setDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_setDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec3 arg0;
         ok &= seval_to_Vec3(args[0], &arg0);
@@ -47470,7 +47299,7 @@ static bool js_cocos2dx_SpotLight_getCosInnerAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getCosInnerAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getCosInnerAngle();
         ok &= float_to_seval(result, &s.rval());
@@ -47488,7 +47317,7 @@ static bool js_cocos2dx_SpotLight_getOuterAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getOuterAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getOuterAngle();
         ok &= float_to_seval(result, &s.rval());
@@ -47506,7 +47335,7 @@ static bool js_cocos2dx_SpotLight_getInnerAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getInnerAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getInnerAngle();
         ok &= float_to_seval(result, &s.rval());
@@ -47524,7 +47353,7 @@ static bool js_cocos2dx_SpotLight_getDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec3 result = cobj->getDirection();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -47542,7 +47371,7 @@ static bool js_cocos2dx_SpotLight_getCosOuterAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getCosOuterAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getCosOuterAngle();
         ok &= float_to_seval(result, &s.rval());
@@ -47560,7 +47389,7 @@ static bool js_cocos2dx_SpotLight_setOuterAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_setOuterAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -47579,7 +47408,7 @@ static bool js_cocos2dx_SpotLight_setInnerAngle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_setInnerAngle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -47598,7 +47427,7 @@ static bool js_cocos2dx_SpotLight_getDirectionInWorld(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_getDirectionInWorld : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec3 result = cobj->getDirectionInWorld();
         ok &= Vec3_to_seval(result, &s.rval());
@@ -47616,7 +47445,7 @@ static bool js_cocos2dx_SpotLight_setRange(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpotLight_setRange : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -47633,7 +47462,7 @@ static bool js_cocos2dx_SpotLight_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 6) {
         cocos2d::Vec3 arg0;
         cocos2d::Vec3 arg1;
@@ -47723,7 +47552,7 @@ static bool js_cocos2dx_AmbientLight_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Color3B arg0;
         ok &= seval_to_Color3B(args[0], &arg0);
@@ -47794,7 +47623,7 @@ static bool js_cocos2dx_GLProgram_getFragmentShaderLog(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getFragmentShaderLog : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getFragmentShaderLog();
         ok &= std_string_to_seval(result, &s.rval());
@@ -47812,7 +47641,7 @@ static bool js_cocos2dx_GLProgram_bindAttribLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_bindAttribLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         unsigned int arg1 = 0;
@@ -47827,31 +47656,13 @@ static bool js_cocos2dx_GLProgram_bindAttribLocation(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_GLProgram_bindAttribLocation)
 
-static bool js_cocos2dx_GLProgram_getUniformFlags(se::State& s)
-{
-    cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getUniformFlags : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        const cocos2d::GLProgram::UniformFlags& result = cobj->getUniformFlags();
-        #pragma warning NO CONVERSION FROM NATIVE FOR UniformFlags;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLProgram_getUniformFlags : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_GLProgram_getUniformFlags)
-
 static bool js_cocos2dx_GLProgram_getUniformLocationForName(se::State& s)
 {
     cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getUniformLocationForName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -47887,7 +47698,7 @@ static bool js_cocos2dx_GLProgram_getVertexShaderLog(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getVertexShaderLog : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getVertexShaderLog();
         ok &= std_string_to_seval(result, &s.rval());
@@ -47905,7 +47716,7 @@ static bool js_cocos2dx_GLProgram_getUniform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getUniform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -47922,7 +47733,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgram_getUniform)
 
 static bool js_cocos2dx_GLProgram_initWithByteArrays(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgram_initWithByteArrays : Invalid Native Object");
     const auto& args = s.args();
@@ -47992,7 +47803,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith1f(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith1f : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         float arg1 = 0;
@@ -48009,7 +47820,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgram_setUniformLocationWith1f)
 
 static bool js_cocos2dx_GLProgram_initWithFilenames(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgram_initWithFilenames : Invalid Native Object");
     const auto& args = s.args();
@@ -48079,7 +47890,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith3f(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith3f : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         int arg0 = 0;
         float arg1 = 0;
@@ -48100,7 +47911,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgram_setUniformLocationWith3f)
 
 static bool js_cocos2dx_GLProgram_setUniformsForBuiltins(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_GLProgram_setUniformsForBuiltins : Invalid Native Object");
     const auto& args = s.args();
@@ -48133,7 +47944,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith3i(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith3i : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         int arg0 = 0;
         int arg1 = 0;
@@ -48158,7 +47969,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith4f(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith4f : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         int arg0 = 0;
         float arg1 = 0;
@@ -48200,7 +48011,7 @@ static bool js_cocos2dx_GLProgram_getUniformLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getUniformLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -48221,7 +48032,7 @@ static bool js_cocos2dx_GLProgram_link(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_link : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->link();
         ok &= boolean_to_seval(result, &s.rval());
@@ -48254,7 +48065,7 @@ static bool js_cocos2dx_GLProgram_getAttribLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getAttribLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -48269,34 +48080,13 @@ static bool js_cocos2dx_GLProgram_getAttribLocation(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_GLProgram_getAttribLocation)
 
-static bool js_cocos2dx_GLProgram_getVertexAttrib(se::State& s)
-{
-    cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_getVertexAttrib : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 1) {
-        std::string arg0;
-        ok &= seval_to_std_string(args[0], &arg0);
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLProgram_getVertexAttrib : Error processing arguments");
-        cocos2d::VertexAttrib* result = cobj->getVertexAttrib(arg0);
-        #pragma warning NO CONVERSION FROM NATIVE FOR VertexAttrib*;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLProgram_getVertexAttrib : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_GLProgram_getVertexAttrib)
-
 static bool js_cocos2dx_GLProgram_setUniformLocationWith2f(se::State& s)
 {
     cocos2d::GLProgram* cobj = (cocos2d::GLProgram*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith2f : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         int arg0 = 0;
         float arg1 = 0;
@@ -48319,7 +48109,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith4i(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith4i : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 5) {
         int arg0 = 0;
         int arg1 = 0;
@@ -48346,7 +48136,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith1i(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith1i : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         int arg1 = 0;
@@ -48367,7 +48157,7 @@ static bool js_cocos2dx_GLProgram_setUniformLocationWith2i(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgram_setUniformLocationWith2i : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         int arg0 = 0;
         int arg1 = 0;
@@ -48386,7 +48176,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgram_setUniformLocationWith2i)
 
 static bool js_cocos2dx_GLProgram_createWithByteArrays(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -48447,7 +48237,7 @@ SE_BIND_FUNC(js_cocos2dx_GLProgram_createWithByteArrays)
 
 static bool js_cocos2dx_GLProgram_createWithFilenames(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -48551,7 +48341,6 @@ bool js_register_cocos2dx_GLProgram(se::Object* obj)
 
     cls->defineFunction("getFragmentShaderLog", _SE(js_cocos2dx_GLProgram_getFragmentShaderLog));
     cls->defineFunction("addAttribute", _SE(js_cocos2dx_GLProgram_bindAttribLocation));
-    cls->defineFunction("getUniformFlags", _SE(js_cocos2dx_GLProgram_getUniformFlags));
     cls->defineFunction("getUniformLocationForName", _SE(js_cocos2dx_GLProgram_getUniformLocationForName));
     cls->defineFunction("use", _SE(js_cocos2dx_GLProgram_use));
     cls->defineFunction("getVertexShaderLog", _SE(js_cocos2dx_GLProgram_getVertexShaderLog));
@@ -48568,7 +48357,6 @@ bool js_register_cocos2dx_GLProgram(se::Object* obj)
     cls->defineFunction("link", _SE(js_cocos2dx_GLProgram_link));
     cls->defineFunction("reset", _SE(js_cocos2dx_GLProgram_reset));
     cls->defineFunction("getAttribLocation", _SE(js_cocos2dx_GLProgram_getAttribLocation));
-    cls->defineFunction("getVertexAttrib", _SE(js_cocos2dx_GLProgram_getVertexAttrib));
     cls->defineFunction("setUniformLocationWith2f", _SE(js_cocos2dx_GLProgram_setUniformLocationWith2f));
     cls->defineFunction("setUniformLocationWith4i", _SE(js_cocos2dx_GLProgram_setUniformLocationWith4i));
     cls->defineFunction("setUniformLocationI32", _SE(js_cocos2dx_GLProgram_setUniformLocationWith1i));
@@ -48626,7 +48414,7 @@ static bool js_cocos2dx_GLProgramCache_addGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramCache_addGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::GLProgram* arg0 = nullptr;
         std::string arg1;
@@ -48662,7 +48450,7 @@ static bool js_cocos2dx_GLProgramCache_getGLProgram(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_GLProgramCache_getGLProgram : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -48694,7 +48482,7 @@ static bool js_cocos2dx_GLProgramCache_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::GLProgramCache::getInstance();
         se::Object* obj = nullptr;
@@ -48776,7 +48564,7 @@ static bool js_cocos2dx_RenderState_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderState_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -48795,7 +48583,7 @@ static bool js_cocos2dx_RenderState_getTopmost(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderState_getTopmost : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::RenderState* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -48816,7 +48604,7 @@ static bool js_cocos2dx_RenderState_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderState_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -48834,7 +48622,7 @@ static bool js_cocos2dx_RenderState_bind(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderState_bind : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Pass* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -48853,7 +48641,7 @@ static bool js_cocos2dx_RenderState_getName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderState_getName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -48871,7 +48659,7 @@ static bool js_cocos2dx_RenderState_setParent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_RenderState_setParent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::RenderState* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -48954,7 +48742,7 @@ SE_BIND_FUNC(js_cocos2dx_Pass_unbind)
 
 static bool js_cocos2dx_Pass_bind(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::Pass* cobj = (cocos2d::Pass*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_Pass_bind : Invalid Native Object");
     const auto& args = s.args();
@@ -48992,7 +48780,7 @@ static bool js_cocos2dx_Pass_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Pass_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Pass* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::Pass>((cocos2d::Pass*)result, &s.rval());
@@ -49010,7 +48798,7 @@ static bool js_cocos2dx_Pass_getGLProgramState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Pass_getGLProgramState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::GLProgramState* result = cobj->getGLProgramState();
         ok &= native_ptr_to_seval<cocos2d::GLProgramState>((cocos2d::GLProgramState*)result, &s.rval());
@@ -49028,7 +48816,7 @@ static bool js_cocos2dx_Pass_getHash(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Pass_getHash : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned int result = cobj->getHash();
         ok &= uint32_to_seval(result, &s.rval());
@@ -49046,7 +48834,7 @@ static bool js_cocos2dx_Pass_setVertexAttribBinding(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Pass_setVertexAttribBinding : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::VertexAttribBinding* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49063,7 +48851,7 @@ static bool js_cocos2dx_Pass_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Technique* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49084,7 +48872,7 @@ static bool js_cocos2dx_Pass_createWithGLProgramState(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Technique* arg0 = nullptr;
         cocos2d::GLProgramState* arg1 = nullptr;
@@ -49137,7 +48925,7 @@ static bool js_cocos2dx_Technique_getPassCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Technique_getPassCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getPassCount();
         ok &= ssize_to_seval(result, &s.rval());
@@ -49155,7 +48943,7 @@ static bool js_cocos2dx_Technique_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Technique_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Technique* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::Technique>((cocos2d::Technique*)result, &s.rval());
@@ -49173,7 +48961,7 @@ static bool js_cocos2dx_Technique_addPass(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Technique_addPass : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Pass* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49192,7 +48980,7 @@ static bool js_cocos2dx_Technique_getPasses(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Technique_getPasses : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vector<cocos2d::Pass *>& result = cobj->getPasses();
         ok &= Vector_to_seval(result, &s.rval());
@@ -49210,7 +48998,7 @@ static bool js_cocos2dx_Technique_getName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Technique_getName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -49228,7 +49016,7 @@ static bool js_cocos2dx_Technique_getPassByIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Technique_getPassByIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -49247,7 +49035,7 @@ static bool js_cocos2dx_Technique_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Material* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49268,7 +49056,7 @@ static bool js_cocos2dx_Technique_createWithGLProgramState(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Material* arg0 = nullptr;
         cocos2d::GLProgramState* arg1 = nullptr;
@@ -49321,7 +49109,7 @@ static bool js_cocos2dx_Material_clone(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_clone : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Material* result = cobj->clone();
         ok &= native_ptr_to_seval<cocos2d::Material>((cocos2d::Material*)result, &s.rval());
@@ -49339,7 +49127,7 @@ static bool js_cocos2dx_Material_getTechniqueCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_getTechniqueCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getTechniqueCount();
         ok &= ssize_to_seval(result, &s.rval());
@@ -49357,7 +49145,7 @@ static bool js_cocos2dx_Material_setName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_setName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49376,7 +49164,7 @@ static bool js_cocos2dx_Material_getTechniqueByIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_getTechniqueByIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -49397,7 +49185,7 @@ static bool js_cocos2dx_Material_getName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_getName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -49415,7 +49203,7 @@ static bool js_cocos2dx_Material_getTechniques(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_getTechniques : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vector<cocos2d::Technique *>& result = cobj->getTechniques();
         ok &= Vector_to_seval(result, &s.rval());
@@ -49433,7 +49221,7 @@ static bool js_cocos2dx_Material_setTechnique(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_setTechnique : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49452,7 +49240,7 @@ static bool js_cocos2dx_Material_getTechniqueByName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_getTechniqueByName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49473,7 +49261,7 @@ static bool js_cocos2dx_Material_addTechnique(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_addTechnique : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Technique* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49492,7 +49280,7 @@ static bool js_cocos2dx_Material_getTechnique(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Material_getTechnique : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Technique* result = cobj->getTechnique();
         ok &= native_ptr_to_seval<cocos2d::Technique>((cocos2d::Technique*)result, &s.rval());
@@ -49508,7 +49296,7 @@ static bool js_cocos2dx_Material_createWithFilename(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49529,7 +49317,7 @@ static bool js_cocos2dx_Material_createWithGLStateProgram(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::GLProgramState* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49550,7 +49338,7 @@ static bool js_cocos2dx_Material_createWithProperties(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Properties* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49606,7 +49394,7 @@ static bool js_cocos2dx_TextureCache_reloadTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_reloadTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49642,7 +49430,7 @@ static bool js_cocos2dx_TextureCache_removeTextureForKey(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_removeTextureForKey : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49672,7 +49460,7 @@ SE_BIND_FUNC(js_cocos2dx_TextureCache_removeAllTextures)
 
 static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TextureCache* cobj = (cocos2d::TextureCache*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TextureCache_addImageAsync : Invalid Native Object");
     const auto& args = s.args();
@@ -49693,7 +49481,7 @@ static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)larg0, &args[0]);
@@ -49738,7 +49526,7 @@ static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)larg0, &args[0]);
@@ -49775,7 +49563,7 @@ static bool js_cocos2dx_TextureCache_getDescription(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_getDescription : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getDescription();
         ok &= std_string_to_seval(result, &s.rval());
@@ -49793,7 +49581,7 @@ static bool js_cocos2dx_TextureCache_getCachedTextureInfo(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_getCachedTextureInfo : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getCachedTextureInfo();
         ok &= std_string_to_seval(result, &s.rval());
@@ -49807,7 +49595,7 @@ SE_BIND_FUNC(js_cocos2dx_TextureCache_getCachedTextureInfo)
 
 static bool js_cocos2dx_TextureCache_addImage(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TextureCache* cobj = (cocos2d::TextureCache*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TextureCache_addImage : Invalid Native Object");
     const auto& args = s.args();
@@ -49850,7 +49638,7 @@ static bool js_cocos2dx_TextureCache_unbindImageAsync(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_unbindImageAsync : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49869,7 +49657,7 @@ static bool js_cocos2dx_TextureCache_getTextureForKey(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_getTextureForKey : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49890,7 +49678,7 @@ static bool js_cocos2dx_TextureCache_getTextureFilePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_getTextureFilePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49911,7 +49699,7 @@ static bool js_cocos2dx_TextureCache_renameTextureWithKey(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_renameTextureWithKey : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -49947,7 +49735,7 @@ static bool js_cocos2dx_TextureCache_removeTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextureCache_removeTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -49979,7 +49767,7 @@ static bool js_cocos2dx_TextureCache_setETC1AlphaFileSuffix(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -49996,7 +49784,7 @@ static bool js_cocos2dx_TextureCache_getETC1AlphaFileSuffix(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cocos2d::TextureCache::getETC1AlphaFileSuffix();
         ok &= std_string_to_seval(result, &s.rval());
@@ -50075,7 +49863,7 @@ static bool js_cocos2dx_Device_setAccelerometerEnabled(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -50092,7 +49880,7 @@ static bool js_cocos2dx_Device_setAccelerometerInterval(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -50109,7 +49897,7 @@ static bool js_cocos2dx_Device_setKeepScreenOn(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -50126,7 +49914,7 @@ static bool js_cocos2dx_Device_vibrate(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -50143,7 +49931,7 @@ static bool js_cocos2dx_Device_getDPI(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cocos2d::Device::getDPI();
         ok &= int32_to_seval(result, &s.rval());
@@ -50185,7 +49973,7 @@ static bool js_cocos2dx_SAXParser_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SAXParser_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -50226,7 +50014,7 @@ static bool js_cocos2dx_Application_getTargetPlatform(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Application_getTargetPlatform : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getTargetPlatform();
         ok &= int32_to_seval(result, &s.rval());
@@ -50244,7 +50032,7 @@ static bool js_cocos2dx_Application_getCurrentLanguage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Application_getCurrentLanguage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getCurrentLanguage();
         ok &= int32_to_seval(result, &s.rval());
@@ -50262,7 +50050,7 @@ static bool js_cocos2dx_Application_openURL(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Application_openURL : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -50283,7 +50071,7 @@ static bool js_cocos2dx_Application_getVersion(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Application_getVersion : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getVersion();
         ok &= std_string_to_seval(result, &s.rval());
@@ -50299,7 +50087,7 @@ static bool js_cocos2dx_Application_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Application* result = cocos2d::Application::getInstance();
         ok &= native_ptr_to_seval<cocos2d::Application>((cocos2d::Application*)result, &s.rval());
@@ -50341,7 +50129,7 @@ static bool js_cocos2dx_AnimationCache_getAnimation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationCache_getAnimation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -50362,7 +50150,7 @@ static bool js_cocos2dx_AnimationCache_addAnimation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationCache_addAnimation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Animation* arg0 = nullptr;
         std::string arg1;
@@ -50383,7 +50171,7 @@ static bool js_cocos2dx_AnimationCache_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationCache_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -50401,7 +50189,7 @@ static bool js_cocos2dx_AnimationCache_addAnimationsWithDictionary(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationCache_addAnimationsWithDictionary : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ValueMap arg0;
         std::string arg1;
@@ -50422,7 +50210,7 @@ static bool js_cocos2dx_AnimationCache_removeAnimation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationCache_removeAnimation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -50441,7 +50229,7 @@ static bool js_cocos2dx_AnimationCache_addAnimationsWithFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_AnimationCache_addAnimationsWithFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -50471,7 +50259,7 @@ static bool js_cocos2dx_AnimationCache_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::AnimationCache::getInstance();
         se::Object* obj = nullptr;
@@ -50566,7 +50354,7 @@ static bool js_cocos2dx_SpriteBatchNode_appendChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_appendChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50585,7 +50373,7 @@ static bool js_cocos2dx_SpriteBatchNode_reorderBatch(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_reorderBatch : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -50604,7 +50392,7 @@ static bool js_cocos2dx_SpriteBatchNode_getTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_getTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Texture2D* result = cobj->getTexture();
         ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)result, &s.rval());
@@ -50622,7 +50410,7 @@ static bool js_cocos2dx_SpriteBatchNode_setTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_setTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50641,7 +50429,7 @@ static bool js_cocos2dx_SpriteBatchNode_removeChildAtIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_removeChildAtIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         ssize_t arg0 = 0;
         bool arg1;
@@ -50662,7 +50450,7 @@ static bool js_cocos2dx_SpriteBatchNode_removeSpriteFromAtlas(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_removeSpriteFromAtlas : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50681,7 +50469,7 @@ static bool js_cocos2dx_SpriteBatchNode_addSpriteWithoutQuad(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_addSpriteWithoutQuad : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Sprite* arg0 = nullptr;
         int arg1 = 0;
@@ -50706,7 +50494,7 @@ static bool js_cocos2dx_SpriteBatchNode_atlasIndexForChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_atlasIndexForChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Sprite* arg0 = nullptr;
         int arg1 = 0;
@@ -50744,7 +50532,7 @@ static bool js_cocos2dx_SpriteBatchNode_lowestAtlasIndexInChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_lowestAtlasIndexInChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50765,7 +50553,7 @@ static bool js_cocos2dx_SpriteBatchNode_getBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_getBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::BlendFunc& result = cobj->getBlendFunc();
         ok &= blendfunc_to_seval(result, &s.rval());
@@ -50783,7 +50571,7 @@ static bool js_cocos2dx_SpriteBatchNode_initWithTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_initWithTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50815,7 +50603,7 @@ static bool js_cocos2dx_SpriteBatchNode_setTextureAtlas(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_setTextureAtlas : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TextureAtlas* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50834,7 +50622,7 @@ static bool js_cocos2dx_SpriteBatchNode_reserveCapacity(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_reserveCapacity : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -50853,7 +50641,7 @@ static bool js_cocos2dx_SpriteBatchNode_insertQuadFromSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_insertQuadFromSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Sprite* arg0 = nullptr;
         ssize_t arg1 = 0;
@@ -50874,7 +50662,7 @@ static bool js_cocos2dx_SpriteBatchNode_initWithFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_initWithFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -50906,7 +50694,7 @@ static bool js_cocos2dx_SpriteBatchNode_setBlendFunc(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_setBlendFunc : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::BlendFunc arg0;
         ok &= seval_to_blendfunc(args[0], &arg0);
@@ -50925,7 +50713,7 @@ static bool js_cocos2dx_SpriteBatchNode_rebuildIndexInOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_rebuildIndexInOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Sprite* arg0 = nullptr;
         ssize_t arg1 = 0;
@@ -50948,7 +50736,7 @@ static bool js_cocos2dx_SpriteBatchNode_highestAtlasIndexInChild(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteBatchNode_highestAtlasIndexInChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -50967,7 +50755,7 @@ static bool js_cocos2dx_SpriteBatchNode_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51001,7 +50789,7 @@ static bool js_cocos2dx_SpriteBatchNode_createWithTexture(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -51117,7 +50905,7 @@ static bool js_cocos2dx_SpriteFrameCache_reloadTexture(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_reloadTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51138,7 +50926,7 @@ static bool js_cocos2dx_SpriteFrameCache_addSpriteFramesWithFileContent(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_addSpriteFramesWithFileContent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::Texture2D* arg1 = nullptr;
@@ -51159,7 +50947,7 @@ static bool js_cocos2dx_SpriteFrameCache_addSpriteFrame(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_addSpriteFrame : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         std::string arg1;
@@ -51176,7 +50964,7 @@ SE_BIND_FUNC(js_cocos2dx_SpriteFrameCache_addSpriteFrame)
 
 static bool js_cocos2dx_SpriteFrameCache_addSpriteFramesWithFile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::SpriteFrameCache* cobj = (cocos2d::SpriteFrameCache*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_SpriteFrameCache_addSpriteFramesWithFile : Invalid Native Object");
     const auto& args = s.args();
@@ -51228,7 +51016,7 @@ static bool js_cocos2dx_SpriteFrameCache_getSpriteFrameByName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_getSpriteFrameByName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51249,7 +51037,7 @@ static bool js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromFile(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51268,7 +51056,7 @@ static bool js_cocos2dx_SpriteFrameCache_init(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_init : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->init();
         ok &= boolean_to_seval(result, &s.rval());
@@ -51316,7 +51104,7 @@ static bool js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromFileContent(se::S
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromFileContent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51335,7 +51123,7 @@ static bool js_cocos2dx_SpriteFrameCache_removeSpriteFrameByName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_removeSpriteFrameByName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51354,7 +51142,7 @@ static bool js_cocos2dx_SpriteFrameCache_isSpriteFramesWithFileLoaded(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_isSpriteFramesWithFileLoaded : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51375,7 +51163,7 @@ static bool js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromTexture(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SpriteFrameCache_removeSpriteFramesFromTexture : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Texture2D* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -51405,7 +51193,7 @@ static bool js_cocos2dx_SpriteFrameCache_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::SpriteFrameCache::getInstance();
         se::Object* obj = nullptr;
@@ -51468,7 +51256,7 @@ static bool js_cocos2dx_TextFieldTTF_getCharCount(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_getCharCount : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         unsigned long result = cobj->getCharCount();
         ok &= ulong_to_seval(result, &s.rval());
@@ -51486,7 +51274,7 @@ static bool js_cocos2dx_TextFieldTTF_setCursorChar(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setCursorChar : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int8_t arg0;
         ok &= seval_to_int8(args[0], &arg0);
@@ -51505,7 +51293,7 @@ static bool js_cocos2dx_TextFieldTTF_setSecureTextEntry(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setSecureTextEntry : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -51524,7 +51312,7 @@ static bool js_cocos2dx_TextFieldTTF_setCursorEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setCursorEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -51543,7 +51331,7 @@ static bool js_cocos2dx_TextFieldTTF_getColorSpaceHolder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_getColorSpaceHolder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color4B& result = cobj->getColorSpaceHolder();
         ok &= Color4B_to_seval(result, &s.rval());
@@ -51557,7 +51345,7 @@ SE_BIND_FUNC(js_cocos2dx_TextFieldTTF_getColorSpaceHolder)
 
 static bool js_cocos2dx_TextFieldTTF_initWithPlaceHolder(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TextFieldTTF* cobj = (cocos2d::TextFieldTTF*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TextFieldTTF_initWithPlaceHolder : Invalid Native Object");
     const auto& args = s.args();
@@ -51615,7 +51403,7 @@ static bool js_cocos2dx_TextFieldTTF_appendString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_appendString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51634,7 +51422,7 @@ static bool js_cocos2dx_TextFieldTTF_getPasswordTextStyle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_getPasswordTextStyle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getPasswordTextStyle();
         ok &= std_string_to_seval(result, &s.rval());
@@ -51652,7 +51440,7 @@ static bool js_cocos2dx_TextFieldTTF_setPasswordTextStyle(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setPasswordTextStyle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51667,7 +51455,7 @@ SE_BIND_FUNC(js_cocos2dx_TextFieldTTF_setPasswordTextStyle)
 
 static bool js_cocos2dx_TextFieldTTF_setColorSpaceHolder(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TextFieldTTF* cobj = (cocos2d::TextFieldTTF*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TextFieldTTF_setColorSpaceHolder : Invalid Native Object");
     const auto& args = s.args();
@@ -51703,7 +51491,7 @@ static bool js_cocos2dx_TextFieldTTF_detachWithIME(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_detachWithIME : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->detachWithIME();
         ok &= boolean_to_seval(result, &s.rval());
@@ -51721,7 +51509,7 @@ static bool js_cocos2dx_TextFieldTTF_setPlaceHolder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setPlaceHolder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -51740,7 +51528,7 @@ static bool js_cocos2dx_TextFieldTTF_setCursorFromPoint(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setCursorFromPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Vec2 arg0;
         const cocos2d::Camera* arg1 = nullptr;
@@ -51761,7 +51549,7 @@ static bool js_cocos2dx_TextFieldTTF_isSecureTextEntry(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_isSecureTextEntry : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isSecureTextEntry();
         ok &= boolean_to_seval(result, &s.rval());
@@ -51779,7 +51567,7 @@ static bool js_cocos2dx_TextFieldTTF_getPlaceHolder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_getPlaceHolder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getPlaceHolder();
         ok &= std_string_to_seval(result, &s.rval());
@@ -51797,7 +51585,7 @@ static bool js_cocos2dx_TextFieldTTF_setCursorPosition(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_setCursorPosition : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned long arg0 = 0;
         ok &= seval_to_ulong(args[0], &arg0);
@@ -51816,7 +51604,7 @@ static bool js_cocos2dx_TextFieldTTF_attachWithIME(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TextFieldTTF_attachWithIME : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->attachWithIME();
         ok &= boolean_to_seval(result, &s.rval());
@@ -51830,7 +51618,7 @@ SE_BIND_FUNC(js_cocos2dx_TextFieldTTF_attachWithIME)
 
 static bool js_cocos2dx_TextFieldTTF_textFieldWithPlaceHolder(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -51955,43 +51743,13 @@ bool js_register_cocos2dx_TextFieldTTF(se::Object* obj)
 se::Object* __jsb_cocos2d_ParallaxNode_proto = nullptr;
 se::Class* __jsb_cocos2d_ParallaxNode_class = nullptr;
 
-static bool js_cocos2dx_ParallaxNode_getParallaxArray(se::State& s)
-{
-    bool ok = true;
-    cocos2d::ParallaxNode* cobj = (cocos2d::ParallaxNode*)s.nativeThisObject();
-    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_ParallaxNode_getParallaxArray : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    do {
-        if (argc == 0) {
-            const cocos2d::_ccArray* result = cobj->getParallaxArray();
-            #pragma warning NO CONVERSION FROM NATIVE FOR _ccArray*;
-            JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParallaxNode_getParallaxArray : Error processing arguments");
-            return true;
-        }
-    } while(false);
-
-    do {
-        if (argc == 0) {
-            cocos2d::_ccArray* result = cobj->getParallaxArray();
-            #pragma warning NO CONVERSION FROM NATIVE FOR _ccArray*;
-            JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParallaxNode_getParallaxArray : Error processing arguments");
-            return true;
-        }
-    } while(false);
-
-    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_ParallaxNode_getParallaxArray)
-
 static bool js_cocos2dx_ParallaxNode_addChild(se::State& s)
 {
     cocos2d::ParallaxNode* cobj = (cocos2d::ParallaxNode*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParallaxNode_addChild : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::Node* arg0 = nullptr;
         int arg1 = 0;
@@ -52016,7 +51774,7 @@ static bool js_cocos2dx_ParallaxNode_removeAllChildrenWithCleanup(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParallaxNode_removeAllChildrenWithCleanup : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -52035,7 +51793,7 @@ static bool js_cocos2dx_ParallaxNode_setParallaxArray(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParallaxNode_setParallaxArray : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::_ccArray* arg0 = nullptr;
         #pragma warning NO CONVERSION TO NATIVE FOR _ccArray*
@@ -52053,7 +51811,7 @@ static bool js_cocos2dx_ParallaxNode_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::ParallaxNode::create();
         result->retain();
@@ -52111,7 +51869,6 @@ bool js_register_cocos2dx_ParallaxNode(se::Object* obj)
 {
     auto cls = se::Class::create("ParallaxNode", obj, __jsb_cocos2d_Node_proto, _SE(js_cocos2dx_ParallaxNode_constructor));
 
-    cls->defineFunction("getParallaxArray", _SE(js_cocos2dx_ParallaxNode_getParallaxArray));
     cls->defineFunction("addChild", _SE(js_cocos2dx_ParallaxNode_addChild));
     cls->defineFunction("removeAllChildrenWithCleanup", _SE(js_cocos2dx_ParallaxNode_removeAllChildrenWithCleanup));
     cls->defineFunction("setParallaxArray", _SE(js_cocos2dx_ParallaxNode_setParallaxArray));
@@ -52137,7 +51894,7 @@ static bool js_cocos2dx_TMXObjectGroup_setPositionOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_setPositionOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -52156,7 +51913,7 @@ static bool js_cocos2dx_TMXObjectGroup_getProperty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_getProperty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52177,7 +51934,7 @@ static bool js_cocos2dx_TMXObjectGroup_getPositionOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_getPositionOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getPositionOffset();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -52195,7 +51952,7 @@ static bool js_cocos2dx_TMXObjectGroup_getObject(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_getObject : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52212,7 +51969,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXObjectGroup_getObject)
 
 static bool js_cocos2dx_TMXObjectGroup_getObjects(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXObjectGroup* cobj = (cocos2d::TMXObjectGroup*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXObjectGroup_getObjects : Invalid Native Object");
     const auto& args = s.args();
@@ -52246,7 +52003,7 @@ static bool js_cocos2dx_TMXObjectGroup_setGroupName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_setGroupName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52261,7 +52018,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXObjectGroup_setGroupName)
 
 static bool js_cocos2dx_TMXObjectGroup_getProperties(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXObjectGroup* cobj = (cocos2d::TMXObjectGroup*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXObjectGroup_getProperties : Invalid Native Object");
     const auto& args = s.args();
@@ -52295,7 +52052,7 @@ static bool js_cocos2dx_TMXObjectGroup_getGroupName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_getGroupName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getGroupName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -52313,7 +52070,7 @@ static bool js_cocos2dx_TMXObjectGroup_setProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_setProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMap arg0;
         ok &= seval_to_ccvaluemap(args[0], &arg0);
@@ -52332,7 +52089,7 @@ static bool js_cocos2dx_TMXObjectGroup_setObjects(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXObjectGroup_setObjects : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueVector arg0;
         ok &= seval_to_ccvaluevector(args[0], &arg0);
@@ -52407,7 +52164,7 @@ static bool js_cocos2dx_TMXLayerInfo_setProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayerInfo_setProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMap arg0;
         ok &= seval_to_ccvaluemap(args[0], &arg0);
@@ -52426,7 +52183,7 @@ static bool js_cocos2dx_TMXLayerInfo_getProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayerInfo_getProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ValueMap& result = cobj->getProperties();
         ok &= ccvaluemap_to_seval(result, &s.rval());
@@ -52492,7 +52249,7 @@ static bool js_cocos2dx_TMXTilesetInfo_getRectForGID(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTilesetInfo_getRectForGID : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -52560,7 +52317,7 @@ static bool js_cocos2dx_TMXMapInfo_setCurrentString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setCurrentString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52579,7 +52336,7 @@ static bool js_cocos2dx_TMXMapInfo_getHexSideLength(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getHexSideLength : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getHexSideLength();
         ok &= int32_to_seval(result, &s.rval());
@@ -52597,7 +52354,7 @@ static bool js_cocos2dx_TMXMapInfo_setTileSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setTileSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -52616,7 +52373,7 @@ static bool js_cocos2dx_TMXMapInfo_initWithTMXFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_initWithTMXFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52637,7 +52394,7 @@ static bool js_cocos2dx_TMXMapInfo_getOrientation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getOrientation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getOrientation();
         ok &= int32_to_seval(result, &s.rval());
@@ -52655,7 +52412,7 @@ static bool js_cocos2dx_TMXMapInfo_setObjectGroups(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setObjectGroups : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::TMXObjectGroup *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -52674,7 +52431,7 @@ static bool js_cocos2dx_TMXMapInfo_setLayers(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setLayers : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::TMXLayerInfo *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -52693,7 +52450,7 @@ static bool js_cocos2dx_TMXMapInfo_parseXMLFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_parseXMLFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52714,7 +52471,7 @@ static bool js_cocos2dx_TMXMapInfo_getParentElement(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getParentElement : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getParentElement();
         ok &= int32_to_seval(result, &s.rval());
@@ -52732,7 +52489,7 @@ static bool js_cocos2dx_TMXMapInfo_setTMXFileName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setTMXFileName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52751,7 +52508,7 @@ static bool js_cocos2dx_TMXMapInfo_parseXMLString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_parseXMLString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -52768,7 +52525,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXMapInfo_parseXMLString)
 
 static bool js_cocos2dx_TMXMapInfo_getLayers(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXMapInfo* cobj = (cocos2d::TMXMapInfo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXMapInfo_getLayers : Invalid Native Object");
     const auto& args = s.args();
@@ -52802,7 +52559,7 @@ static bool js_cocos2dx_TMXMapInfo_getStaggerAxis(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getStaggerAxis : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getStaggerAxis();
         ok &= int32_to_seval(result, &s.rval());
@@ -52820,7 +52577,7 @@ static bool js_cocos2dx_TMXMapInfo_setHexSideLength(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setHexSideLength : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -52835,7 +52592,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXMapInfo_setHexSideLength)
 
 static bool js_cocos2dx_TMXMapInfo_getTilesets(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXMapInfo* cobj = (cocos2d::TMXMapInfo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXMapInfo_getTilesets : Invalid Native Object");
     const auto& args = s.args();
@@ -52869,7 +52626,7 @@ static bool js_cocos2dx_TMXMapInfo_getParentGID(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getParentGID : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getParentGID();
         ok &= int32_to_seval(result, &s.rval());
@@ -52887,7 +52644,7 @@ static bool js_cocos2dx_TMXMapInfo_setParentElement(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setParentElement : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -52906,7 +52663,7 @@ static bool js_cocos2dx_TMXMapInfo_initWithXML(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_initWithXML : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -52929,7 +52686,7 @@ static bool js_cocos2dx_TMXMapInfo_setParentGID(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setParentGID : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -52948,7 +52705,7 @@ static bool js_cocos2dx_TMXMapInfo_getLayerAttribs(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getLayerAttribs : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getLayerAttribs();
         ok &= int32_to_seval(result, &s.rval());
@@ -52966,7 +52723,7 @@ static bool js_cocos2dx_TMXMapInfo_getTileSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getTileSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getTileSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -52984,7 +52741,7 @@ static bool js_cocos2dx_TMXMapInfo_getTileProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getTileProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ValueMapIntKey& result = cobj->getTileProperties();
         ok &= ccvaluemapintkey_to_seval(result, &s.rval());
@@ -53002,7 +52759,7 @@ static bool js_cocos2dx_TMXMapInfo_isStoringCharacters(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_isStoringCharacters : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isStoringCharacters();
         ok &= boolean_to_seval(result, &s.rval());
@@ -53020,7 +52777,7 @@ static bool js_cocos2dx_TMXMapInfo_getExternalTilesetFileName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getExternalTilesetFileName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getExternalTilesetFileName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -53034,7 +52791,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXMapInfo_getExternalTilesetFileName)
 
 static bool js_cocos2dx_TMXMapInfo_getObjectGroups(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXMapInfo* cobj = (cocos2d::TMXMapInfo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXMapInfo_getObjectGroups : Invalid Native Object");
     const auto& args = s.args();
@@ -53068,7 +52825,7 @@ static bool js_cocos2dx_TMXMapInfo_getTMXFileName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getTMXFileName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getTMXFileName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -53086,7 +52843,7 @@ static bool js_cocos2dx_TMXMapInfo_setStaggerIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setStaggerIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -53105,7 +52862,7 @@ static bool js_cocos2dx_TMXMapInfo_setProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMap arg0;
         ok &= seval_to_ccvaluemap(args[0], &arg0);
@@ -53124,7 +52881,7 @@ static bool js_cocos2dx_TMXMapInfo_setOrientation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setOrientation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -53143,7 +52900,7 @@ static bool js_cocos2dx_TMXMapInfo_setTileProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setTileProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMapIntKey arg0;
         ok &= seval_to_ccvaluemapintkey(args[0], &arg0);
@@ -53162,7 +52919,7 @@ static bool js_cocos2dx_TMXMapInfo_setMapSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setMapSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -53181,7 +52938,7 @@ static bool js_cocos2dx_TMXMapInfo_getCurrentString(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getCurrentString : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getCurrentString();
         ok &= std_string_to_seval(result, &s.rval());
@@ -53199,7 +52956,7 @@ static bool js_cocos2dx_TMXMapInfo_setStoringCharacters(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setStoringCharacters : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -53218,7 +52975,7 @@ static bool js_cocos2dx_TMXMapInfo_setStaggerAxis(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setStaggerAxis : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -53237,7 +52994,7 @@ static bool js_cocos2dx_TMXMapInfo_getMapSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getMapSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getMapSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -53255,7 +53012,7 @@ static bool js_cocos2dx_TMXMapInfo_setTilesets(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setTilesets : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::TMXTilesetInfo *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -53270,7 +53027,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXMapInfo_setTilesets)
 
 static bool js_cocos2dx_TMXMapInfo_getProperties(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXMapInfo* cobj = (cocos2d::TMXMapInfo*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXMapInfo_getProperties : Invalid Native Object");
     const auto& args = s.args();
@@ -53304,7 +53061,7 @@ static bool js_cocos2dx_TMXMapInfo_getStaggerIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_getStaggerIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getStaggerIndex();
         ok &= int32_to_seval(result, &s.rval());
@@ -53322,7 +53079,7 @@ static bool js_cocos2dx_TMXMapInfo_setLayerAttribs(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXMapInfo_setLayerAttribs : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -53339,7 +53096,7 @@ static bool js_cocos2dx_TMXMapInfo_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -53360,7 +53117,7 @@ static bool js_cocos2dx_TMXMapInfo_createWithXML(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -53484,7 +53241,7 @@ static bool js_cocos2dx_TMXLayer_getTileGIDAt(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getTileGIDAt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -53516,7 +53273,7 @@ static bool js_cocos2dx_TMXLayer_getPositionAt(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getPositionAt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -53537,7 +53294,7 @@ static bool js_cocos2dx_TMXLayer_setLayerOrientation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setLayerOrientation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -53571,7 +53328,7 @@ static bool js_cocos2dx_TMXLayer_setTiles(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setTiles : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int* arg0 = 0;
         #pragma warning NO CONVERSION TO NATIVE FOR unsigned int*
@@ -53591,7 +53348,7 @@ static bool js_cocos2dx_TMXLayer_getLayerSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getLayerSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getLayerSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -53609,7 +53366,7 @@ static bool js_cocos2dx_TMXLayer_setMapTileSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setMapTileSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -53628,7 +53385,7 @@ static bool js_cocos2dx_TMXLayer_getLayerOrientation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getLayerOrientation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getLayerOrientation();
         ok &= int32_to_seval(result, &s.rval());
@@ -53646,7 +53403,7 @@ static bool js_cocos2dx_TMXLayer_setProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMap arg0;
         ok &= seval_to_ccvaluemap(args[0], &arg0);
@@ -53665,7 +53422,7 @@ static bool js_cocos2dx_TMXLayer_setLayerName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setLayerName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -53684,7 +53441,7 @@ static bool js_cocos2dx_TMXLayer_removeTileAt(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_removeTileAt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -53703,7 +53460,7 @@ static bool js_cocos2dx_TMXLayer_initWithTilesetInfo(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_initWithTilesetInfo : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::TMXTilesetInfo* arg0 = nullptr;
         cocos2d::TMXLayerInfo* arg1 = nullptr;
@@ -53739,7 +53496,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXLayer_setupTiles)
 
 static bool js_cocos2dx_TMXLayer_setTileGID(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXLayer* cobj = (cocos2d::TMXLayer*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXLayer_setTileGID : Invalid Native Object");
     const auto& args = s.args();
@@ -53784,7 +53541,7 @@ static bool js_cocos2dx_TMXLayer_getMapTileSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getMapTileSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getMapTileSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -53802,7 +53559,7 @@ static bool js_cocos2dx_TMXLayer_getProperty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getProperty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -53823,7 +53580,7 @@ static bool js_cocos2dx_TMXLayer_setLayerSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setLayerSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -53842,7 +53599,7 @@ static bool js_cocos2dx_TMXLayer_getLayerName(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getLayerName : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getLayerName();
         ok &= std_string_to_seval(result, &s.rval());
@@ -53860,7 +53617,7 @@ static bool js_cocos2dx_TMXLayer_setTileSet(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_setTileSet : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::TMXTilesetInfo* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -53879,7 +53636,7 @@ static bool js_cocos2dx_TMXLayer_getTileSet(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getTileSet : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::TMXTilesetInfo* result = cobj->getTileSet();
         ok &= native_ptr_to_seval<cocos2d::TMXTilesetInfo>((cocos2d::TMXTilesetInfo*)result, &s.rval());
@@ -53893,7 +53650,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXLayer_getTileSet)
 
 static bool js_cocos2dx_TMXLayer_getProperties(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXLayer* cobj = (cocos2d::TMXLayer*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXLayer_getProperties : Invalid Native Object");
     const auto& args = s.args();
@@ -53927,7 +53684,7 @@ static bool js_cocos2dx_TMXLayer_getTileAt(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXLayer_getTileAt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -53946,7 +53703,7 @@ static bool js_cocos2dx_TMXLayer_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::TMXTilesetInfo* arg0 = nullptr;
         cocos2d::TMXLayerInfo* arg1 = nullptr;
@@ -54055,7 +53812,7 @@ static bool js_cocos2dx_TMXTiledMap_setObjectGroups(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_setObjectGroups : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vector<cocos2d::TMXObjectGroup *> arg0;
         ok &= seval_to_Vector(args[0], &arg0);
@@ -54074,7 +53831,7 @@ static bool js_cocos2dx_TMXTiledMap_getProperty(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getProperty : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -54095,7 +53852,7 @@ static bool js_cocos2dx_TMXTiledMap_getLayerNum(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getLayerNum : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getLayerNum();
         ok &= int32_to_seval(result, &s.rval());
@@ -54113,7 +53870,7 @@ static bool js_cocos2dx_TMXTiledMap_setMapSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_setMapSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -54132,7 +53889,7 @@ static bool js_cocos2dx_TMXTiledMap_getObjectGroup(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getObjectGroup : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -54149,7 +53906,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXTiledMap_getObjectGroup)
 
 static bool js_cocos2dx_TMXTiledMap_getObjectGroups(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXTiledMap* cobj = (cocos2d::TMXTiledMap*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXTiledMap_getObjectGroups : Invalid Native Object");
     const auto& args = s.args();
@@ -54183,7 +53940,7 @@ static bool js_cocos2dx_TMXTiledMap_getResourceFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getResourceFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getResourceFile();
         ok &= std_string_to_seval(result, &s.rval());
@@ -54201,7 +53958,7 @@ static bool js_cocos2dx_TMXTiledMap_initWithTMXFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_initWithTMXFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -54222,7 +53979,7 @@ static bool js_cocos2dx_TMXTiledMap_getTileSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getTileSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getTileSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -54240,7 +53997,7 @@ static bool js_cocos2dx_TMXTiledMap_getMapSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getMapSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getMapSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -54258,7 +54015,7 @@ static bool js_cocos2dx_TMXTiledMap_initWithXML(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_initWithXML : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -54281,7 +54038,7 @@ static bool js_cocos2dx_TMXTiledMap_getProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ValueMap& result = cobj->getProperties();
         ok &= ccvaluemap_to_seval(result, &s.rval());
@@ -54295,7 +54052,7 @@ SE_BIND_FUNC(js_cocos2dx_TMXTiledMap_getProperties)
 
 static bool js_cocos2dx_TMXTiledMap_getPropertiesForGID(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::TMXTiledMap* cobj = (cocos2d::TMXTiledMap*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_TMXTiledMap_getPropertiesForGID : Invalid Native Object");
     const auto& args = s.args();
@@ -54338,7 +54095,7 @@ static bool js_cocos2dx_TMXTiledMap_setTileSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_setTileSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -54357,7 +54114,7 @@ static bool js_cocos2dx_TMXTiledMap_setProperties(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_setProperties : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ValueMap arg0;
         ok &= seval_to_ccvaluemap(args[0], &arg0);
@@ -54376,7 +54133,7 @@ static bool js_cocos2dx_TMXTiledMap_getLayer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getLayer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -54397,7 +54154,7 @@ static bool js_cocos2dx_TMXTiledMap_getMapOrientation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_getMapOrientation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getMapOrientation();
         ok &= int32_to_seval(result, &s.rval());
@@ -54415,7 +54172,7 @@ static bool js_cocos2dx_TMXTiledMap_setMapOrientation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TMXTiledMap_setMapOrientation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -54432,7 +54189,7 @@ static bool js_cocos2dx_TMXTiledMap_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -54453,7 +54210,7 @@ static bool js_cocos2dx_TMXTiledMap_createWithXML(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -54557,7 +54314,7 @@ static bool js_cocos2dx_TileMapAtlas_initWithTileFile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TileMapAtlas_initWithTileFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         std::string arg0;
         std::string arg1;
@@ -54593,31 +54350,13 @@ static bool js_cocos2dx_TileMapAtlas_releaseMap(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TileMapAtlas_releaseMap)
 
-static bool js_cocos2dx_TileMapAtlas_getTGAInfo(se::State& s)
-{
-    cocos2d::TileMapAtlas* cobj = (cocos2d::TileMapAtlas*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TileMapAtlas_getTGAInfo : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    bool ok = true;
-    if (argc == 0) {
-        cocos2d::sImageTGA* result = cobj->getTGAInfo();
-        #pragma warning NO CONVERSION FROM NATIVE FOR sImageTGA*;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_TileMapAtlas_getTGAInfo : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_TileMapAtlas_getTGAInfo)
-
 static bool js_cocos2dx_TileMapAtlas_getTileAt(se::State& s)
 {
     cocos2d::TileMapAtlas* cobj = (cocos2d::TileMapAtlas*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TileMapAtlas_getTileAt : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -54638,7 +54377,7 @@ static bool js_cocos2dx_TileMapAtlas_setTile(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TileMapAtlas_setTile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Color3B arg0;
         cocos2d::Vec2 arg1;
@@ -54659,7 +54398,7 @@ static bool js_cocos2dx_TileMapAtlas_setTGAInfo(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TileMapAtlas_setTGAInfo : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::sImageTGA* arg0 = nullptr;
         #pragma warning NO CONVERSION TO NATIVE FOR sImageTGA*
@@ -54677,7 +54416,7 @@ static bool js_cocos2dx_TileMapAtlas_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         std::string arg0;
         std::string arg1;
@@ -54746,7 +54485,6 @@ bool js_register_cocos2dx_TileMapAtlas(se::Object* obj)
 
     cls->defineFunction("initWithTileFile", _SE(js_cocos2dx_TileMapAtlas_initWithTileFile));
     cls->defineFunction("releaseMap", _SE(js_cocos2dx_TileMapAtlas_releaseMap));
-    cls->defineFunction("getTGAInfo", _SE(js_cocos2dx_TileMapAtlas_getTGAInfo));
     cls->defineFunction("getTileAt", _SE(js_cocos2dx_TileMapAtlas_getTileAt));
     cls->defineFunction("setTile", _SE(js_cocos2dx_TileMapAtlas_setTile));
     cls->defineFunction("setTGAInfo", _SE(js_cocos2dx_TileMapAtlas_setTGAInfo));
@@ -54772,7 +54510,7 @@ static bool js_cocos2dx_SimpleAudioEngine_preloadBackgroundMusic(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_preloadBackgroundMusic : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -54791,7 +54529,7 @@ static bool js_cocos2dx_SimpleAudioEngine_stopBackgroundMusic(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_stopBackgroundMusic : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cobj->stopBackgroundMusic();
         return true;
@@ -54829,7 +54567,7 @@ static bool js_cocos2dx_SimpleAudioEngine_getBackgroundMusicVolume(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_getBackgroundMusicVolume : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getBackgroundMusicVolume();
         ok &= float_to_seval(result, &s.rval());
@@ -54862,7 +54600,7 @@ static bool js_cocos2dx_SimpleAudioEngine_setBackgroundMusicVolume(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_setBackgroundMusicVolume : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -54881,7 +54619,7 @@ static bool js_cocos2dx_SimpleAudioEngine_preloadEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_preloadEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -54900,7 +54638,7 @@ static bool js_cocos2dx_SimpleAudioEngine_isBackgroundMusicPlaying(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_isBackgroundMusicPlaying : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isBackgroundMusicPlaying();
         ok &= boolean_to_seval(result, &s.rval());
@@ -54918,7 +54656,7 @@ static bool js_cocos2dx_SimpleAudioEngine_getEffectsVolume(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_getEffectsVolume : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getEffectsVolume();
         ok &= float_to_seval(result, &s.rval());
@@ -54936,7 +54674,7 @@ static bool js_cocos2dx_SimpleAudioEngine_willPlayBackgroundMusic(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_willPlayBackgroundMusic : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->willPlayBackgroundMusic();
         ok &= boolean_to_seval(result, &s.rval());
@@ -54954,7 +54692,7 @@ static bool js_cocos2dx_SimpleAudioEngine_pauseEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_pauseEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -54973,7 +54711,7 @@ static bool js_cocos2dx_SimpleAudioEngine_playEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_playEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -55065,7 +54803,7 @@ static bool js_cocos2dx_SimpleAudioEngine_playBackgroundMusic(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_playBackgroundMusic : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -55108,7 +54846,7 @@ static bool js_cocos2dx_SimpleAudioEngine_setEffectsVolume(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_setEffectsVolume : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -55127,7 +54865,7 @@ static bool js_cocos2dx_SimpleAudioEngine_stopEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_stopEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -55176,7 +54914,7 @@ static bool js_cocos2dx_SimpleAudioEngine_unloadEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_unloadEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         const char* arg0 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
@@ -55195,7 +54933,7 @@ static bool js_cocos2dx_SimpleAudioEngine_resumeEffect(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_SimpleAudioEngine_resumeEffect : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         unsigned int arg0 = 0;
         ok &= seval_to_uint32(args[0], &arg0);
@@ -55225,7 +54963,7 @@ static bool js_cocos2dx_SimpleAudioEngine_getInstance(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         CocosDenshion::SimpleAudioEngine* result = CocosDenshion::SimpleAudioEngine::getInstance();
         ok &= native_ptr_to_seval<CocosDenshion::SimpleAudioEngine>((CocosDenshion::SimpleAudioEngine*)result, &s.rval());

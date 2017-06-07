@@ -862,6 +862,72 @@ bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret)
     return true;
 }
 
+bool seval_to_AffineTransform(const se::Value& v, cocos2d::AffineTransform* ret)
+{
+    static cocos2d::AffineTransform ZERO = {0, 0, 0, 0, 0, 0};
+
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Value tmp;
+    se::Object* obj = v.toObject();
+    bool ok = false;
+
+    ok = obj->getProperty("a", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->a = tmp.toFloat();
+
+    ok = obj->getProperty("b", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->b = tmp.toFloat();
+
+    ok = obj->getProperty("c", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->c = tmp.toFloat();
+
+    ok = obj->getProperty("d", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->d = tmp.toFloat();
+
+    ok = obj->getProperty("tx", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->tx = tmp.toFloat();
+
+    ok = obj->getProperty("ty", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->ty = tmp.toFloat();
+
+    return true;
+}
+
+bool seval_to_Viewport(const se::Value& v, cocos2d::experimental::Viewport* ret)
+{
+    static cocos2d::experimental::Viewport ZERO = {0, 0, 0, 0};
+
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Value tmp;
+    se::Object* obj = v.toObject();
+    bool ok = false;
+
+    ok = obj->getProperty("left", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->_left = tmp.toFloat();
+
+    ok = obj->getProperty("bottom", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->_bottom = tmp.toFloat();
+
+    ok = obj->getProperty("width", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->_width = tmp.toFloat();
+
+    ok = obj->getProperty("height", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->_height = tmp.toFloat();
+
+    return true;
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 
 bool int32_to_seval(int32_t v, se::Value* ret)
@@ -885,6 +951,12 @@ bool int16_to_seval(uint16_t v, se::Value* ret)
 bool uint16_to_seval(uint16_t v, se::Value* ret)
 {
     ret->setUint16(v);
+    return true;
+}
+
+bool int8_to_seval(int8_t v, se::Value* ret)
+{
+    ret->setInt8(v);
     return true;
 }
 
@@ -1362,6 +1434,36 @@ bool ManifestAsset_to_seval(const cocos2d::extension::ManifestAsset& v, se::Valu
     obj->setProperty("compressed", se::Value(v.compressed));
     obj->setProperty("size", se::Value(v.size));
     obj->setProperty("downloadState", se::Value(v.downloadState));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool AffineTransform_to_seval(const cocos2d::AffineTransform& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("a", se::Value(v.a));
+    obj->setProperty("b", se::Value(v.b));
+    obj->setProperty("c", se::Value(v.c));
+    obj->setProperty("d", se::Value(v.d));
+    obj->setProperty("tx", se::Value(v.tx));
+    obj->setProperty("ty", se::Value(v.ty));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool Viewport_to_seval(const cocos2d::experimental::Viewport& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("left", se::Value(v._left));
+    obj->setProperty("bottom", se::Value(v._bottom));
+    obj->setProperty("width", se::Value(v._width));
+    obj->setProperty("height", se::Value(v._height));
     ret->setObject(obj);
     obj->release();
 

@@ -326,11 +326,11 @@ static bool invokeJSCallbackWithOneArg(T* listener, const char* funcName, ARG1* 
     argArr.reserve(1);
     se::Value arg1Val;
     ok = native_ptr_to_seval<ARG1>(arg1, &arg1Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithOneArg convert arg1 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSCallbackWithOneArg convert arg1 failed!");
     argArr.push_back(std::move(arg1Val));
 
     ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
-    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithOneArg call function failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSCallbackWithOneArg call function failed!");
 
     return true;
 }
@@ -356,16 +356,16 @@ static bool invokeJSCallbackWithTwoArgs(T* listener, const char* funcName, ARG1*
     argArr.reserve(2);
     se::Value arg1Val;
     ok = native_ptr_to_seval<ARG1>(arg1, &arg1Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithTwoArgs convert arg1 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSCallbackWithTwoArgs convert arg1 failed!");
     argArr.push_back(std::move(arg1Val));
 
     se::Value arg2Val;
     ok = native_ptr_to_seval<ARG2>(arg2, &arg2Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithTwoArgs convert arg2 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSCallbackWithTwoArgs convert arg2 failed!");
     argArr.push_back(std::move(arg2Val));
 
     ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
-    JSB_PRECONDITION3(ok, false, "invokeJSCallbackWithTwoArgs call function failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSCallbackWithTwoArgs call function failed!");
 
     return true;
 }
@@ -471,16 +471,16 @@ static bool invokeJSTouchAllAtOnceCallback(EventListenerTouchAllAtOnce* listener
 
     se::Value arg1Val;
     ok = std_vector_Touch_to_seval(touches, &arg1Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSTouchAllAtOnceCallback convert arg1 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSTouchAllAtOnceCallback convert arg1 failed!");
     argArr.push_back(std::move(arg1Val));
 
     se::Value arg2Val;
     ok = native_ptr_to_seval<Event>(event, &arg2Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSTouchAllAtOnceCallback convert arg2 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSTouchAllAtOnceCallback convert arg2 failed!");
     argArr.push_back(std::move(arg2Val));
 
     ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
-    JSB_PRECONDITION3(ok, false, "invokeJSTouchAllAtOnceCallback call function failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSTouchAllAtOnceCallback call function failed!");
 
     return true;
 }
@@ -542,17 +542,17 @@ static bool invokeJSKeyboardCallback(EventListenerKeyboard* listener, const char
 
     se::Value arg1Val;
     ok = int32_to_seval((int32_t)keyCode, &arg1Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSKeyboardCallback convert arg1 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSKeyboardCallback convert arg1 failed!");
     argArr.push_back(std::move(arg1Val));
 
 
     se::Value arg2Val;
     ok = native_ptr_to_seval<Event>(event, &arg2Val);
-    JSB_PRECONDITION3(ok, false, "invokeJSKeyboardCallback convert arg2 failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSKeyboardCallback convert arg2 failed!");
     argArr.push_back(std::move(arg2Val));
 
     ok = funcVal.toObject()->call(argArr, listenerObj, retVal);
-    JSB_PRECONDITION3(ok, false, "invokeJSKeyboardCallback call function failed!");
+    JSB_PRECONDITION2(ok, false, "invokeJSKeyboardCallback call function failed!");
 
     return true;
 }

@@ -1012,16 +1012,6 @@ getTag : function (
 },
 
 /**
- * @method getonEnterTransitionDidFinishCallback
- * @return {function}
- */
-getonEnterTransitionDidFinishCallback : function (
-)
-{
-    return std::function<void ()>;
-},
-
-/**
  * @method getNodeToWorldAffineTransform
  * @return {cc.AffineTransform}
  */
@@ -1267,16 +1257,6 @@ touch
 )
 {
     return cc.Vec2;
-},
-
-/**
- * @method getOnEnterCallback
- * @return {function}
- */
-getOnEnterCallback : function (
-)
-{
-    return std::function<void ()>;
 },
 
 /**
@@ -1849,16 +1829,6 @@ float
 },
 
 /**
- * @method getOnExitCallback
- * @return {function}
- */
-getOnExitCallback : function (
-)
-{
-    return std::function<void ()>;
-},
-
-/**
  * @method getChildByTag
  * @param {int} arg0
  * @return {cc.Node}
@@ -2036,16 +2006,6 @@ str,
 func 
 )
 {
-},
-
-/**
- * @method getonExitTransitionDidStartCallback
- * @return {function}
- */
-getonExitTransitionDidStartCallback : function (
-)
-{
-    return std::function<void ()>;
 },
 
 /**
@@ -2672,26 +2632,6 @@ isScissorEnabled : function (
 pollEvents : function (
 )
 {
-},
-
-/**
- * @method setGLContextAttrs
- * @param {GLContextAttrs} arg0
- */
-setGLContextAttrs : function (
-glcontextattrs 
-)
-{
-},
-
-/**
- * @method getGLContextAttrs
- * @return {GLContextAttrs}
- */
-getGLContextAttrs : function (
-)
-{
-    return GLContextAttrs;
 },
 
 };
@@ -3906,16 +3846,6 @@ hasPremultipliedAlpha : function (
 },
 
 /**
- * @method getDataLen
- * @return {int}
- */
-getDataLen : function (
-)
-{
-    return 0;
-},
-
-/**
  * @method saveToFile
  * @param {String} arg0
  * @param {bool} arg1
@@ -4029,26 +3959,6 @@ getRenderFormat : function (
 )
 {
     return 0;
-},
-
-/**
- * @method getData
- * @return {unsigned char}
- */
-getData : function (
-)
-{
-    return 0;
-},
-
-/**
- * @method getMipmaps
- * @return {cc._MipmapInfo}
- */
-getMipmaps : function (
-)
-{
-    return cc._MipmapInfo;
 },
 
 /**
@@ -20615,16 +20525,6 @@ int
 },
 
 /**
- * @method getUniformFlags
- * @return {cc.GLProgram::UniformFlags}
- */
-getUniformFlags : function (
-)
-{
-    return cc.GLProgram::UniformFlags;
-},
-
-/**
  * @method getUniformLocationForName
  * @param {char} arg0
  * @return {int}
@@ -20822,18 +20722,6 @@ str
 )
 {
     return 0;
-},
-
-/**
- * @method getVertexAttrib
- * @param {String} arg0
- * @return {cc.VertexAttrib}
- */
-getVertexAttrib : function (
-str 
-)
-{
-    return cc.VertexAttrib;
 },
 
 /**
@@ -22521,16 +22409,6 @@ TextFieldTTF : function (
 cc.ParallaxNode = {
 
 /**
- * @method getParallaxArray
-* @return {cc._ccArray|cc._ccArray}
-*/
-getParallaxArray : function(
-)
-{
-    return cc._ccArray;
-},
-
-/**
  * @method addChild
  * @param {cc.Node} arg0
  * @param {int} arg1
@@ -23748,16 +23626,6 @@ int
 releaseMap : function (
 )
 {
-},
-
-/**
- * @method getTGAInfo
- * @return {cc.sImageTGA}
- */
-getTGAInfo : function (
-)
-{
-    return cc.sImageTGA;
 },
 
 /**

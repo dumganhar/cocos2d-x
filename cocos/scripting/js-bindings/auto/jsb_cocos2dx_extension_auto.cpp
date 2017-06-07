@@ -11,7 +11,7 @@ static bool js_cocos2dx_extension_Control_setEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_setEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -30,7 +30,7 @@ static bool js_cocos2dx_extension_Control_getState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_getState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getState();
         ok &= int32_to_seval(result, &s.rval());
@@ -48,7 +48,7 @@ static bool js_cocos2dx_extension_Control_sendActionsForControlEvents(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_sendActionsForControlEvents : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::EventType arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -67,7 +67,7 @@ static bool js_cocos2dx_extension_Control_setSelected(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_setSelected : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -86,7 +86,7 @@ static bool js_cocos2dx_extension_Control_isEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_isEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -119,7 +119,7 @@ static bool js_cocos2dx_extension_Control_hasVisibleParents(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_hasVisibleParents : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasVisibleParents();
         ok &= boolean_to_seval(result, &s.rval());
@@ -137,7 +137,7 @@ static bool js_cocos2dx_extension_Control_isSelected(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_isSelected : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isSelected();
         ok &= boolean_to_seval(result, &s.rval());
@@ -155,7 +155,7 @@ static bool js_cocos2dx_extension_Control_isTouchInside(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_isTouchInside : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Touch* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -176,7 +176,7 @@ static bool js_cocos2dx_extension_Control_setHighlighted(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_setHighlighted : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -195,7 +195,7 @@ static bool js_cocos2dx_extension_Control_getTouchLocation(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_getTouchLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Touch* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -216,7 +216,7 @@ static bool js_cocos2dx_extension_Control_isHighlighted(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Control_isHighlighted : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isHighlighted();
         ok &= boolean_to_seval(result, &s.rval());
@@ -232,7 +232,7 @@ static bool js_cocos2dx_extension_Control_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::extension::Control::create();
         result->retain();
@@ -312,7 +312,7 @@ static bool js_cocos2dx_extension_ControlButton_isPushed(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_isPushed : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isPushed();
         ok &= boolean_to_seval(result, &s.rval());
@@ -330,7 +330,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleLabelForState(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleLabelForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::extension::Control::State arg1;
@@ -351,7 +351,7 @@ static bool js_cocos2dx_extension_ControlButton_setAdjustBackgroundImage(se::Sta
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setAdjustBackgroundImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -370,7 +370,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleForState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::extension::Control::State arg1;
@@ -391,7 +391,7 @@ static bool js_cocos2dx_extension_ControlButton_setLabelAnchorPoint(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setLabelAnchorPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -410,7 +410,7 @@ static bool js_cocos2dx_extension_ControlButton_getLabelAnchorPoint(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getLabelAnchorPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Vec2& result = cobj->getLabelAnchorPoint();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -428,7 +428,7 @@ static bool js_cocos2dx_extension_ControlButton_initWithBackgroundSprite(se::Sta
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_initWithBackgroundSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ui::Scale9Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -449,7 +449,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleTTFSizeForState(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleTTFSizeForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -470,7 +470,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleTTFForState(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleTTFForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::extension::Control::State arg1;
@@ -491,7 +491,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleTTFSizeForState(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleTTFSizeForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         cocos2d::extension::Control::State arg1;
@@ -512,7 +512,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -531,7 +531,7 @@ static bool js_cocos2dx_extension_ControlButton_setPreferredSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setPreferredSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -550,7 +550,7 @@ static bool js_cocos2dx_extension_ControlButton_getCurrentTitleColor(se::State& 
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getCurrentTitleColor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Color3B& result = cobj->getCurrentTitleColor();
         ok &= Color3B_to_seval(result, &s.rval());
@@ -568,7 +568,7 @@ static bool js_cocos2dx_extension_ControlButton_setZoomOnTouchDown(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setZoomOnTouchDown : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -587,7 +587,7 @@ static bool js_cocos2dx_extension_ControlButton_setBackgroundSprite(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setBackgroundSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ui::Scale9Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -606,7 +606,7 @@ static bool js_cocos2dx_extension_ControlButton_getBackgroundSpriteForState(se::
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getBackgroundSpriteForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -627,7 +627,7 @@ static bool js_cocos2dx_extension_ControlButton_getHorizontalOrigin(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getHorizontalOrigin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getHorizontalOrigin();
         ok &= int32_to_seval(result, &s.rval());
@@ -645,7 +645,7 @@ static bool js_cocos2dx_extension_ControlButton_initWithTitleAndFontNameAndFontS
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_initWithTitleAndFontNameAndFontSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         std::string arg0;
         std::string arg1;
@@ -670,7 +670,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleBMFontForState(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleBMFontForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         cocos2d::extension::Control::State arg1;
@@ -691,7 +691,7 @@ static bool js_cocos2dx_extension_ControlButton_getScaleRatio(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getScaleRatio : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getScaleRatio();
         ok &= float_to_seval(result, &s.rval());
@@ -709,7 +709,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleTTFForState(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleTTFForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -730,7 +730,7 @@ static bool js_cocos2dx_extension_ControlButton_getBackgroundSprite(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getBackgroundSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ui::Scale9Sprite* result = cobj->getBackgroundSprite();
         ok &= native_ptr_to_seval<cocos2d::ui::Scale9Sprite>((cocos2d::ui::Scale9Sprite*)result, &s.rval());
@@ -748,7 +748,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleColorForState(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleColorForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -769,7 +769,7 @@ static bool js_cocos2dx_extension_ControlButton_setTitleColorForState(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setTitleColorForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Color3B arg0;
         cocos2d::extension::Control::State arg1;
@@ -790,7 +790,7 @@ static bool js_cocos2dx_extension_ControlButton_doesAdjustBackgroundImage(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_doesAdjustBackgroundImage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->doesAdjustBackgroundImage();
         ok &= boolean_to_seval(result, &s.rval());
@@ -808,7 +808,7 @@ static bool js_cocos2dx_extension_ControlButton_setBackgroundSpriteFrameForState
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setBackgroundSpriteFrameForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::SpriteFrame* arg0 = nullptr;
         cocos2d::extension::Control::State arg1;
@@ -829,7 +829,7 @@ static bool js_cocos2dx_extension_ControlButton_setBackgroundSpriteForState(se::
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setBackgroundSpriteForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::ui::Scale9Sprite* arg0 = nullptr;
         cocos2d::extension::Control::State arg1;
@@ -850,7 +850,7 @@ static bool js_cocos2dx_extension_ControlButton_setScaleRatio(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setScaleRatio : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -869,7 +869,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleBMFontForState(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleBMFontForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -890,7 +890,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getTitleLabel();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -908,7 +908,7 @@ static bool js_cocos2dx_extension_ControlButton_getPreferredSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getPreferredSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Size& result = cobj->getPreferredSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -926,7 +926,7 @@ static bool js_cocos2dx_extension_ControlButton_getVerticalMargin(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getVerticalMargin : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getVerticalMargin();
         ok &= int32_to_seval(result, &s.rval());
@@ -944,7 +944,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleLabelForState(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleLabelForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -965,7 +965,7 @@ static bool js_cocos2dx_extension_ControlButton_setMargins(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_setMargins : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         int arg1 = 0;
@@ -982,7 +982,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ControlButton_setMargins)
 
 static bool js_cocos2dx_extension_ControlButton_getCurrentTitle(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::extension::ControlButton* cobj = (cocos2d::extension::ControlButton*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_extension_ControlButton_getCurrentTitle : Invalid Native Object");
     const auto& args = s.args();
@@ -1016,7 +1016,7 @@ static bool js_cocos2dx_extension_ControlButton_initWithLabelAndBackgroundSprite
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_initWithLabelAndBackgroundSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::ui::Scale9Sprite* arg1 = nullptr;
@@ -1041,7 +1041,7 @@ static bool js_cocos2dx_extension_ControlButton_getZoomOnTouchDown(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getZoomOnTouchDown : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->getZoomOnTouchDown();
         ok &= boolean_to_seval(result, &s.rval());
@@ -1059,7 +1059,7 @@ static bool js_cocos2dx_extension_ControlButton_getTitleForState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlButton_getTitleForState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::Control::State arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -1076,7 +1076,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ControlButton_getTitleForState)
 
 static bool js_cocos2dx_extension_ControlButton_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -1255,7 +1255,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_initWithTargetAndPos(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_initWithTargetAndPos : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::Vec2 arg1;
@@ -1278,7 +1278,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_setHue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_setHue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -1297,7 +1297,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_getStartPos(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_getStartPos : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getStartPos();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -1315,7 +1315,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_getHue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_getHue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getHue();
         ok &= float_to_seval(result, &s.rval());
@@ -1333,7 +1333,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_getSlider(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_getSlider : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getSlider();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1351,7 +1351,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_setBackground(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_setBackground : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1370,7 +1370,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_setHuePercentage(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_setHuePercentage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -1389,7 +1389,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_getBackground(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_getBackground : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getBackground();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1407,7 +1407,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_getHuePercentage(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_getHuePercentage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getHuePercentage();
         ok &= float_to_seval(result, &s.rval());
@@ -1425,7 +1425,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_setSlider(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlHuePicker_setSlider : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1442,7 +1442,7 @@ static bool js_cocos2dx_extension_ControlHuePicker_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::Vec2 arg1;
@@ -1525,7 +1525,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getShadow(se
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getShadow : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getShadow();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1543,7 +1543,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_initWithTarg
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_initWithTargetAndPos : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::Vec2 arg1;
@@ -1566,7 +1566,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getStartPos(
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getStartPos : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getStartPos();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -1584,7 +1584,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getOverlay(s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getOverlay : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getOverlay();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1602,7 +1602,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getSlider(se
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getSlider : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getSlider();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1620,7 +1620,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getBackgroun
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getBackground : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getBackground();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1638,7 +1638,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getSaturatio
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getSaturation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getSaturation();
         ok &= float_to_seval(result, &s.rval());
@@ -1656,7 +1656,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_getBrightnes
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSaturationBrightnessPicker_getBrightness : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getBrightness();
         ok &= float_to_seval(result, &s.rval());
@@ -1672,7 +1672,7 @@ static bool js_cocos2dx_extension_ControlSaturationBrightnessPicker_create(se::S
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Node* arg0 = nullptr;
         cocos2d::Vec2 arg1;
@@ -1753,7 +1753,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_hueSliderValueChanged(se::
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_hueSliderValueChanged : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Ref* arg0 = nullptr;
         cocos2d::extension::Control::EventType arg1;
@@ -1774,7 +1774,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_getHuePicker(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_getHuePicker : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::extension::ControlHuePicker* result = cobj->getHuePicker();
         ok &= native_ptr_to_seval<cocos2d::extension::ControlHuePicker>((cocos2d::extension::ControlHuePicker*)result, &s.rval());
@@ -1792,7 +1792,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_getcolourPicker(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_getcolourPicker : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::extension::ControlSaturationBrightnessPicker* result = cobj->getcolourPicker();
         ok &= native_ptr_to_seval<cocos2d::extension::ControlSaturationBrightnessPicker>((cocos2d::extension::ControlSaturationBrightnessPicker*)result, &s.rval());
@@ -1810,7 +1810,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_setBackground(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_setBackground : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1829,7 +1829,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_setcolourPicker(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_setcolourPicker : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::ControlSaturationBrightnessPicker* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1848,7 +1848,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_colourSliderValueChanged(s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_colourSliderValueChanged : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Ref* arg0 = nullptr;
         cocos2d::extension::Control::EventType arg1;
@@ -1869,7 +1869,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_setHuePicker(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_setHuePicker : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::ControlHuePicker* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -1888,7 +1888,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_getBackground(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlColourPicker_getBackground : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getBackground();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -1904,7 +1904,7 @@ static bool js_cocos2dx_extension_ControlColourPicker_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::extension::ControlColourPicker::create();
         result->retain();
@@ -1992,7 +1992,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_setPreviousLocation(se::S
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_setPreviousLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2011,7 +2011,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_setValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_setValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2030,7 +2030,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_getProgressTimer(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_getProgressTimer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ProgressTimer* result = cobj->getProgressTimer();
         ok &= native_ptr_to_seval<cocos2d::ProgressTimer>((cocos2d::ProgressTimer*)result, &s.rval());
@@ -2048,7 +2048,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_getMaximumValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_getMaximumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaximumValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2066,7 +2066,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_angleInDegreesBetweenLine
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_angleInDegreesBetweenLineFromPoint_toPoint_toLineFromPoint_toPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 4) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -2093,7 +2093,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_potentiometerBegan(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_potentiometerBegan : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2112,7 +2112,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_setMaximumValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_setMaximumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2131,7 +2131,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_getMinimumValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_getMinimumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMinimumValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2149,7 +2149,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_setThumbSprite(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_setThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2168,7 +2168,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_getValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_getValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2186,7 +2186,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_getPreviousLocation(se::S
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_getPreviousLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getPreviousLocation();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -2204,7 +2204,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_distanceBetweenPointAndPo
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_distanceBetweenPointAndPoint : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Vec2 arg0;
         cocos2d::Vec2 arg1;
@@ -2227,7 +2227,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_potentiometerEnded(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_potentiometerEnded : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2246,7 +2246,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_setProgressTimer(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_setProgressTimer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::ProgressTimer* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2265,7 +2265,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_setMinimumValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_setMinimumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2284,7 +2284,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_getThumbSprite(se::State&
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_getThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getThumbSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -2302,7 +2302,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_initWithTrackSprite_Progr
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_initWithTrackSprite_ProgressTimer_ThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         cocos2d::Sprite* arg0 = nullptr;
         cocos2d::ProgressTimer* arg1 = nullptr;
@@ -2327,7 +2327,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_potentiometerMoved(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlPotentiometer_potentiometerMoved : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -2344,7 +2344,7 @@ static bool js_cocos2dx_extension_ControlPotentiometer_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 3) {
         const char* arg0 = nullptr;
         const char* arg1 = nullptr;
@@ -2449,7 +2449,7 @@ static bool js_cocos2dx_extension_ControlSlider_setBackgroundSprite(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setBackgroundSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2468,7 +2468,7 @@ static bool js_cocos2dx_extension_ControlSlider_getMaximumAllowedValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getMaximumAllowedValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaximumAllowedValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2482,7 +2482,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ControlSlider_getMaximumAllowedValue)
 
 static bool js_cocos2dx_extension_ControlSlider_initWithSprites(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::extension::ControlSlider* cobj = (cocos2d::extension::ControlSlider*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_extension_ControlSlider_initWithSprites : Invalid Native Object");
     const auto& args = s.args();
@@ -2537,7 +2537,7 @@ static bool js_cocos2dx_extension_ControlSlider_getMinimumAllowedValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getMinimumAllowedValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMinimumAllowedValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2555,7 +2555,7 @@ static bool js_cocos2dx_extension_ControlSlider_getMaximumValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getMaximumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMaximumValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2573,7 +2573,7 @@ static bool js_cocos2dx_extension_ControlSlider_getSelectedThumbSprite(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getSelectedThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getSelectedThumbSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -2591,7 +2591,7 @@ static bool js_cocos2dx_extension_ControlSlider_setProgressSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setProgressSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2610,7 +2610,7 @@ static bool js_cocos2dx_extension_ControlSlider_setMaximumValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setMaximumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2629,7 +2629,7 @@ static bool js_cocos2dx_extension_ControlSlider_getMinimumValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getMinimumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getMinimumValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2647,7 +2647,7 @@ static bool js_cocos2dx_extension_ControlSlider_setThumbSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2666,7 +2666,7 @@ static bool js_cocos2dx_extension_ControlSlider_getValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getValue();
         ok &= float_to_seval(result, &s.rval());
@@ -2684,7 +2684,7 @@ static bool js_cocos2dx_extension_ControlSlider_getBackgroundSprite(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getBackgroundSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getBackgroundSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -2702,7 +2702,7 @@ static bool js_cocos2dx_extension_ControlSlider_getThumbSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getThumbSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -2720,7 +2720,7 @@ static bool js_cocos2dx_extension_ControlSlider_setValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2739,7 +2739,7 @@ static bool js_cocos2dx_extension_ControlSlider_locationFromTouch(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_locationFromTouch : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Touch* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2760,7 +2760,7 @@ static bool js_cocos2dx_extension_ControlSlider_setMinimumValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setMinimumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2779,7 +2779,7 @@ static bool js_cocos2dx_extension_ControlSlider_setMinimumAllowedValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setMinimumAllowedValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2798,7 +2798,7 @@ static bool js_cocos2dx_extension_ControlSlider_getProgressSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_getProgressSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getProgressSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -2816,7 +2816,7 @@ static bool js_cocos2dx_extension_ControlSlider_setSelectedThumbSprite(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setSelectedThumbSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -2835,7 +2835,7 @@ static bool js_cocos2dx_extension_ControlSlider_setMaximumAllowedValue(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSlider_setMaximumAllowedValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -2850,7 +2850,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ControlSlider_setMaximumAllowedValue)
 
 static bool js_cocos2dx_extension_ControlSlider_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -3018,7 +3018,7 @@ static bool js_cocos2dx_extension_ControlStepper_getMinusSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_getMinusSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getMinusSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -3036,7 +3036,7 @@ static bool js_cocos2dx_extension_ControlStepper_setValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         double arg0 = 0;
         ok &= seval_to_double(args[0], &arg0);
@@ -3055,7 +3055,7 @@ static bool js_cocos2dx_extension_ControlStepper_setStepValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setStepValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         double arg0 = 0;
         ok &= seval_to_double(args[0], &arg0);
@@ -3074,7 +3074,7 @@ static bool js_cocos2dx_extension_ControlStepper_initWithMinusSpriteAndPlusSprit
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_initWithMinusSpriteAndPlusSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Sprite* arg0 = nullptr;
         cocos2d::Sprite* arg1 = nullptr;
@@ -3097,7 +3097,7 @@ static bool js_cocos2dx_extension_ControlStepper_setValueWithSendingEvent(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setValueWithSendingEvent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         double arg0 = 0;
         bool arg1;
@@ -3118,7 +3118,7 @@ static bool js_cocos2dx_extension_ControlStepper_setMaximumValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setMaximumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         double arg0 = 0;
         ok &= seval_to_double(args[0], &arg0);
@@ -3137,7 +3137,7 @@ static bool js_cocos2dx_extension_ControlStepper_getMinusLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_getMinusLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Label* result = cobj->getMinusLabel();
         ok &= native_ptr_to_seval<cocos2d::Label>((cocos2d::Label*)result, &s.rval());
@@ -3155,7 +3155,7 @@ static bool js_cocos2dx_extension_ControlStepper_getPlusLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_getPlusLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Label* result = cobj->getPlusLabel();
         ok &= native_ptr_to_seval<cocos2d::Label>((cocos2d::Label*)result, &s.rval());
@@ -3173,7 +3173,7 @@ static bool js_cocos2dx_extension_ControlStepper_setWraps(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setWraps : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -3192,7 +3192,7 @@ static bool js_cocos2dx_extension_ControlStepper_setMinusLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setMinusLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Label* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3226,7 +3226,7 @@ static bool js_cocos2dx_extension_ControlStepper_updateLayoutUsingTouchLocation(
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_updateLayoutUsingTouchLocation : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -3245,7 +3245,7 @@ static bool js_cocos2dx_extension_ControlStepper_isContinuous(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_isContinuous : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isContinuous();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3278,7 +3278,7 @@ static bool js_cocos2dx_extension_ControlStepper_setMinimumValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setMinimumValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         double arg0 = 0;
         ok &= seval_to_double(args[0], &arg0);
@@ -3297,7 +3297,7 @@ static bool js_cocos2dx_extension_ControlStepper_setPlusLabel(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setPlusLabel : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Label* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3316,7 +3316,7 @@ static bool js_cocos2dx_extension_ControlStepper_getValue(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_getValue : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         double result = cobj->getValue();
         ok &= double_to_seval(result, &s.rval());
@@ -3334,7 +3334,7 @@ static bool js_cocos2dx_extension_ControlStepper_getPlusSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_getPlusSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Sprite* result = cobj->getPlusSprite();
         ok &= native_ptr_to_seval<cocos2d::Sprite>((cocos2d::Sprite*)result, &s.rval());
@@ -3352,7 +3352,7 @@ static bool js_cocos2dx_extension_ControlStepper_setPlusSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setPlusSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3371,7 +3371,7 @@ static bool js_cocos2dx_extension_ControlStepper_setMinusSprite(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlStepper_setMinusSprite : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Sprite* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3388,7 +3388,7 @@ static bool js_cocos2dx_extension_ControlStepper_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Sprite* arg0 = nullptr;
         cocos2d::Sprite* arg1 = nullptr;
@@ -3489,7 +3489,7 @@ se::Class* __jsb_cocos2d_extension_ControlSwitch_class = nullptr;
 
 static bool js_cocos2dx_extension_ControlSwitch_setOn(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::extension::ControlSwitch* cobj = (cocos2d::extension::ControlSwitch*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_extension_ControlSwitch_setOn : Invalid Native Object");
     const auto& args = s.args();
@@ -3525,7 +3525,7 @@ static bool js_cocos2dx_extension_ControlSwitch_locationFromTouch(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSwitch_locationFromTouch : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Touch* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3546,7 +3546,7 @@ static bool js_cocos2dx_extension_ControlSwitch_isOn(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSwitch_isOn : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isOn();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3560,7 +3560,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ControlSwitch_isOn)
 
 static bool js_cocos2dx_extension_ControlSwitch_initWithMaskSprite(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::extension::ControlSwitch* cobj = (cocos2d::extension::ControlSwitch*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_extension_ControlSwitch_initWithMaskSprite : Invalid Native Object");
     const auto& args = s.args();
@@ -3624,7 +3624,7 @@ static bool js_cocos2dx_extension_ControlSwitch_hasMoved(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ControlSwitch_hasMoved : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasMoved();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3638,7 +3638,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ControlSwitch_hasMoved)
 
 static bool js_cocos2dx_extension_ControlSwitch_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -3763,7 +3763,7 @@ static bool js_cocos2dx_extension_ScrollView_isClippingToBounds(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_isClippingToBounds : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isClippingToBounds();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3781,7 +3781,7 @@ static bool js_cocos2dx_extension_ScrollView_setContainer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setContainer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -3800,7 +3800,7 @@ static bool js_cocos2dx_extension_ScrollView_setContentOffsetInDuration(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setContentOffsetInDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Vec2 arg0;
         float arg1 = 0;
@@ -3821,7 +3821,7 @@ static bool js_cocos2dx_extension_ScrollView_setZoomScaleInDuration(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setZoomScaleInDuration : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         float arg1 = 0;
@@ -3842,7 +3842,7 @@ static bool js_cocos2dx_extension_ScrollView_updateTweenAction(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_updateTweenAction : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         float arg0 = 0;
         std::string arg1;
@@ -3863,7 +3863,7 @@ static bool js_cocos2dx_extension_ScrollView_setMaxScale(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setMaxScale : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3882,7 +3882,7 @@ static bool js_cocos2dx_extension_ScrollView_hasVisibleParents(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_hasVisibleParents : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->hasVisibleParents();
         ok &= boolean_to_seval(result, &s.rval());
@@ -3900,7 +3900,7 @@ static bool js_cocos2dx_extension_ScrollView_getDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_getDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getDirection();
         ok &= int32_to_seval(result, &s.rval());
@@ -3918,7 +3918,7 @@ static bool js_cocos2dx_extension_ScrollView_getContainer(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_getContainer : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Node* result = cobj->getContainer();
         ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
@@ -3936,7 +3936,7 @@ static bool js_cocos2dx_extension_ScrollView_setMinScale(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setMinScale : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         float arg0 = 0;
         ok &= seval_to_float(args[0], &arg0);
@@ -3955,7 +3955,7 @@ static bool js_cocos2dx_extension_ScrollView_getZoomScale(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_getZoomScale : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getZoomScale();
         ok &= float_to_seval(result, &s.rval());
@@ -3988,7 +3988,7 @@ static bool js_cocos2dx_extension_ScrollView_initWithViewSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_initWithViewSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Size arg0;
         cocos2d::Node* arg1 = nullptr;
@@ -4011,7 +4011,7 @@ static bool js_cocos2dx_extension_ScrollView_pause(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_pause : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Ref* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4030,7 +4030,7 @@ static bool js_cocos2dx_extension_ScrollView_setDirection(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setDirection : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::ScrollView::Direction arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4064,7 +4064,7 @@ static bool js_cocos2dx_extension_ScrollView_setContentOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setContentOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Vec2 arg0;
         ok &= seval_to_Vec2(args[0], &arg0);
@@ -4092,7 +4092,7 @@ static bool js_cocos2dx_extension_ScrollView_isDragging(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_isDragging : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isDragging();
         ok &= boolean_to_seval(result, &s.rval());
@@ -4110,7 +4110,7 @@ static bool js_cocos2dx_extension_ScrollView_isTouchEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_isTouchEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isTouchEnabled();
         ok &= boolean_to_seval(result, &s.rval());
@@ -4128,7 +4128,7 @@ static bool js_cocos2dx_extension_ScrollView_isBounceable(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_isBounceable : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isBounceable();
         ok &= boolean_to_seval(result, &s.rval());
@@ -4146,7 +4146,7 @@ static bool js_cocos2dx_extension_ScrollView_setTouchEnabled(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setTouchEnabled : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -4165,7 +4165,7 @@ static bool js_cocos2dx_extension_ScrollView_getContentOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_getContentOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->getContentOffset();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -4183,7 +4183,7 @@ static bool js_cocos2dx_extension_ScrollView_resume(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_resume : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Ref* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4202,7 +4202,7 @@ static bool js_cocos2dx_extension_ScrollView_setClippingToBounds(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setClippingToBounds : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -4221,7 +4221,7 @@ static bool js_cocos2dx_extension_ScrollView_setViewSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setViewSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Size arg0;
         ok &= seval_to_Size(args[0], &arg0);
@@ -4240,7 +4240,7 @@ static bool js_cocos2dx_extension_ScrollView_getViewSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_getViewSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Size result = cobj->getViewSize();
         ok &= Size_to_seval(result, &s.rval());
@@ -4258,7 +4258,7 @@ static bool js_cocos2dx_extension_ScrollView_maxContainerOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_maxContainerOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->maxContainerOffset();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -4276,7 +4276,7 @@ static bool js_cocos2dx_extension_ScrollView_setBounceable(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_setBounceable : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         bool arg0;
         ok &= seval_to_boolean(args[0], &arg0);
@@ -4295,7 +4295,7 @@ static bool js_cocos2dx_extension_ScrollView_isTouchMoved(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_isTouchMoved : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isTouchMoved();
         ok &= boolean_to_seval(result, &s.rval());
@@ -4313,7 +4313,7 @@ static bool js_cocos2dx_extension_ScrollView_isNodeVisible(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_isNodeVisible : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::Node* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4334,7 +4334,7 @@ static bool js_cocos2dx_extension_ScrollView_minContainerOffset(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_ScrollView_minContainerOffset : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::Vec2 result = cobj->minContainerOffset();
         ok &= Vec2_to_seval(result, &s.rval());
@@ -4348,7 +4348,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ScrollView_minContainerOffset)
 
 static bool js_cocos2dx_extension_ScrollView_setZoomScale(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     cocos2d::extension::ScrollView* cobj = (cocos2d::extension::ScrollView*)s.nativeThisObject();
     JSB_PRECONDITION2( cobj, false, "js_cocos2dx_extension_ScrollView_setZoomScale : Invalid Native Object");
     const auto& args = s.args();
@@ -4382,7 +4382,7 @@ SE_BIND_FUNC(js_cocos2dx_extension_ScrollView_setZoomScale)
 
 static bool js_cocos2dx_extension_ScrollView_create(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -4525,7 +4525,7 @@ static bool js_cocos2dx_extension_TableViewCell_getIdx(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableViewCell_getIdx : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         ssize_t result = cobj->getIdx();
         ok &= ssize_to_seval(result, &s.rval());
@@ -4543,7 +4543,7 @@ static bool js_cocos2dx_extension_TableViewCell_setIdx(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableViewCell_setIdx : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -4560,7 +4560,7 @@ static bool js_cocos2dx_extension_TableViewCell_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         auto result = cocos2d::extension::TableViewCell::create();
         result->retain();
@@ -4643,7 +4643,7 @@ static bool js_cocos2dx_extension_TableView_updateCellAtIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_updateCellAtIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -4662,7 +4662,7 @@ static bool js_cocos2dx_extension_TableView_setVerticalFillOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_setVerticalFillOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::TableView::VerticalFillOrder arg0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -4681,7 +4681,7 @@ static bool js_cocos2dx_extension_TableView_scrollViewDidZoom(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_scrollViewDidZoom : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::ScrollView* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4715,7 +4715,7 @@ static bool js_cocos2dx_extension_TableView_getVerticalFillOrder(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_getVerticalFillOrder : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getVerticalFillOrder();
         ok &= int32_to_seval(result, &s.rval());
@@ -4733,7 +4733,7 @@ static bool js_cocos2dx_extension_TableView_removeCellAtIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_removeCellAtIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -4752,7 +4752,7 @@ static bool js_cocos2dx_extension_TableView_initWithViewSize(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_initWithViewSize : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         cocos2d::Size arg0;
         cocos2d::Node* arg1 = nullptr;
@@ -4775,7 +4775,7 @@ static bool js_cocos2dx_extension_TableView_scrollViewDidScroll(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_scrollViewDidScroll : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         cocos2d::extension::ScrollView* arg0 = nullptr;
         ok &= seval_to_native_ptr(args[0], &arg0);
@@ -4809,7 +4809,7 @@ static bool js_cocos2dx_extension_TableView_insertCellAtIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_insertCellAtIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -4828,7 +4828,7 @@ static bool js_cocos2dx_extension_TableView_cellAtIndex(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_cellAtIndex : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         ssize_t arg0 = 0;
         ok &= seval_to_ssize(args[0], &arg0);
@@ -4849,7 +4849,7 @@ static bool js_cocos2dx_extension_TableView_dequeueCell(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_TableView_dequeueCell : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::extension::TableViewCell* result = cobj->dequeueCell();
         ok &= native_ptr_to_seval<cocos2d::extension::TableViewCell>((cocos2d::extension::TableViewCell*)result, &s.rval());
@@ -4938,7 +4938,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getAssetsManagerEx(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getAssetsManagerEx : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::extension::AssetsManagerEx* result = cobj->getAssetsManagerEx();
         ok &= native_ptr_to_seval<cocos2d::extension::AssetsManagerEx>((cocos2d::extension::AssetsManagerEx*)result, &s.rval());
@@ -4956,7 +4956,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getAssetId(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getAssetId : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getAssetId();
         ok &= std_string_to_seval(result, &s.rval());
@@ -4974,7 +4974,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getCURLECode(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getCURLECode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getCURLECode();
         ok &= int32_to_seval(result, &s.rval());
@@ -4992,7 +4992,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getMessage(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getMessage : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::string result = cobj->getMessage();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5010,7 +5010,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getCURLMCode(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getCURLMCode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cobj->getCURLMCode();
         ok &= int32_to_seval(result, &s.rval());
@@ -5028,7 +5028,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getPercentByFile(se::Stat
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getPercentByFile : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPercentByFile();
         ok &= float_to_seval(result, &s.rval());
@@ -5046,7 +5046,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getEventCode(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getEventCode : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getEventCode();
         ok &= int32_to_seval(result, &s.rval());
@@ -5064,7 +5064,7 @@ static bool js_cocos2dx_extension_EventAssetsManagerEx_getPercent(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_EventAssetsManagerEx_getPercent : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         float result = cobj->getPercent();
         ok &= float_to_seval(result, &s.rval());
@@ -5080,7 +5080,7 @@ SE_DECLARE_FINALIZE_FUNC(js_cocos2d_extension_EventAssetsManagerEx_finalize)
 
 static bool js_cocos2dx_extension_EventAssetsManagerEx_constructor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     std::string arg0;
     cocos2d::extension::AssetsManagerEx* arg1 = nullptr;
@@ -5146,7 +5146,7 @@ static bool js_cocos2dx_extension_Manifest_getManifestFileUrl(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_getManifestFileUrl : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getManifestFileUrl();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5164,7 +5164,7 @@ static bool js_cocos2dx_extension_Manifest_isVersionLoaded(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_isVersionLoaded : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isVersionLoaded();
         ok &= boolean_to_seval(result, &s.rval());
@@ -5182,7 +5182,7 @@ static bool js_cocos2dx_extension_Manifest_isLoaded(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_isLoaded : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cobj->isLoaded();
         ok &= boolean_to_seval(result, &s.rval());
@@ -5200,7 +5200,7 @@ static bool js_cocos2dx_extension_Manifest_getPackageUrl(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_getPackageUrl : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getPackageUrl();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5218,7 +5218,7 @@ static bool js_cocos2dx_extension_Manifest_getVersion(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_getVersion : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getVersion();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5236,7 +5236,7 @@ static bool js_cocos2dx_extension_Manifest_getVersionFileUrl(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_getVersionFileUrl : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getVersionFileUrl();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5254,7 +5254,7 @@ static bool js_cocos2dx_extension_Manifest_getSearchPaths(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_Manifest_getSearchPaths : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         std::vector<std::string> result = cobj->getSearchPaths();
         ok &= std_vector_string_to_seval(result, &s.rval());
@@ -5298,7 +5298,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_getState(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_getState : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = (int)cobj->getState();
         ok &= int32_to_seval(result, &s.rval());
@@ -5316,7 +5316,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_getMaxConcurrentTask(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_getMaxConcurrentTask : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const int result = cobj->getMaxConcurrentTask();
         ok &= int32_to_seval(result, &s.rval());
@@ -5349,7 +5349,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<bool (const std::basic_string<char> &, cocos2d::extension::ManifestAsset)> arg0;
         do {
@@ -5362,7 +5362,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(2);
 		            ok &= std_string_to_seval(larg0, &args[0]);
@@ -5402,7 +5402,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_getStoragePath(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_getStoragePath : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const std::string& result = cobj->getStoragePath();
         ok &= std_string_to_seval(result, &s.rval());
@@ -5435,7 +5435,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle(se::St
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::function<int (const std::basic_string<char> &, const std::basic_string<char> &)> arg0;
         do {
@@ -5448,7 +5448,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle(se::St
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(2);
 		            ok &= std_string_to_seval(larg0, &args[0]);
@@ -5488,7 +5488,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setMaxConcurrentTask(se::State
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_setMaxConcurrentTask : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -5507,7 +5507,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_getLocalManifest(se::State& s)
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_getLocalManifest : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::extension::Manifest* result = cobj->getLocalManifest();
         ok &= native_ptr_to_seval<cocos2d::extension::Manifest>((cocos2d::extension::Manifest*)result, &s.rval());
@@ -5525,7 +5525,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_getRemoteManifest(se::State& s
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_extension_AssetsManagerEx_getRemoteManifest : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::extension::Manifest* result = cobj->getRemoteManifest();
         ok &= native_ptr_to_seval<cocos2d::extension::Manifest>((cocos2d::extension::Manifest*)result, &s.rval());
@@ -5556,7 +5556,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_create(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         std::string arg0;
         std::string arg1;
@@ -5579,7 +5579,7 @@ SE_DECLARE_FINALIZE_FUNC(js_cocos2d_extension_AssetsManagerEx_finalize)
 
 static bool js_cocos2dx_extension_AssetsManagerEx_constructor(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     std::string arg0;
     std::string arg1;

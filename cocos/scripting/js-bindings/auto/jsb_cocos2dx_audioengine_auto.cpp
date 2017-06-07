@@ -11,7 +11,7 @@ static bool js_cocos2dx_audioengine_AudioProfile_get_name(se::State& s)
     cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_get_name : Invalid Native Object");
 
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     se::Value jsret;
     ok &= std_string_to_seval(cobj->name, &jsret);
     s.rval() = jsret;
@@ -25,7 +25,7 @@ static bool js_cocos2dx_audioengine_AudioProfile_set_name(se::State& s)
     cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_set_name : Invalid Native Object");
 
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     std::string arg0;
     ok &= seval_to_std_string(args[0], &arg0);
     JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioProfile_set_name : Error processing new value");
@@ -39,7 +39,7 @@ static bool js_cocos2dx_audioengine_AudioProfile_get_maxInstances(se::State& s)
     cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_get_maxInstances : Invalid Native Object");
 
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     se::Value jsret;
     ok &= uint32_to_seval(cobj->maxInstances, &jsret);
     s.rval() = jsret;
@@ -53,7 +53,7 @@ static bool js_cocos2dx_audioengine_AudioProfile_set_maxInstances(se::State& s)
     cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_set_maxInstances : Invalid Native Object");
 
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     unsigned int arg0 = 0;
     ok &= seval_to_uint32(args[0], &arg0);
     JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioProfile_set_maxInstances : Error processing new value");
@@ -67,7 +67,7 @@ static bool js_cocos2dx_audioengine_AudioProfile_get_minDelay(se::State& s)
     cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_get_minDelay : Invalid Native Object");
 
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     se::Value jsret;
     ok &= double_to_seval(cobj->minDelay, &jsret);
     s.rval() = jsret;
@@ -81,7 +81,7 @@ static bool js_cocos2dx_audioengine_AudioProfile_set_minDelay(se::State& s)
     cocos2d::experimental::AudioProfile* cobj = (cocos2d::experimental::AudioProfile*)s.nativeThisObject();
     JSB_PRECONDITION2(cobj, false, "js_cocos2dx_audioengine_AudioProfile_set_minDelay : Invalid Native Object");
 
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     double arg0 = 0;
     ok &= seval_to_double(args[0], &arg0);
     JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioProfile_set_minDelay : Error processing new value");
@@ -140,7 +140,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_lazyInit(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         bool result = cocos2d::experimental::AudioEngine::lazyInit();
         ok &= boolean_to_seval(result, &s.rval());
@@ -156,7 +156,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setCurrentTime(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         float arg1 = 0;
@@ -177,7 +177,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_getVolume(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -196,7 +196,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_uncache(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -239,7 +239,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_pause(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -269,7 +269,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_getMaxAudioInstance(se::State& s
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         int result = cocos2d::experimental::AudioEngine::getMaxAudioInstance();
         ok &= int32_to_seval(result, &s.rval());
@@ -285,7 +285,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_getCurrentTime(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -304,7 +304,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setMaxAudioInstance(se::State& s
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -323,7 +323,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_isLoop(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -368,7 +368,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setVolume(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         float arg1 = 0;
@@ -385,7 +385,7 @@ SE_BIND_FUNC(js_cocos2dx_audioengine_AudioEngine_setVolume)
 
 static bool js_cocos2dx_audioengine_AudioEngine_preload(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -404,7 +404,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_preload(se::State& s)
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
 			
-			            bool ok = true;
+			            CC_UNUSED bool ok = true;
 			            se::ValueArray args;
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
@@ -447,7 +447,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_play2d(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         std::string arg0;
         ok &= seval_to_std_string(args[0], &arg0);
@@ -505,7 +505,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_getState(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -524,7 +524,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_resume(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -541,7 +541,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_stop(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -558,7 +558,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_getDuration(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 1) {
         int arg0 = 0;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
@@ -577,7 +577,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setLoop(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         bool arg1;
@@ -596,7 +596,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_getDefaultProfile(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::experimental::AudioProfile* result = cocos2d::experimental::AudioEngine::getDefaultProfile();
         ok &= native_ptr_to_seval<cocos2d::experimental::AudioProfile>((cocos2d::experimental::AudioProfile*)result, &s.rval());
@@ -612,7 +612,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setFinishCallback(se::State& s)
 {
     const auto& args = s.args();
     size_t argc = args.size();
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     if (argc == 2) {
         int arg0 = 0;
         std::function<void (int, const std::basic_string<char> &)> arg1;
@@ -627,7 +627,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setFinishCallback(se::State& s)
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
 		
-		            bool ok = true;
+		            CC_UNUSED bool ok = true;
 		            se::ValueArray args;
 		            args.resize(2);
 		            ok &= int32_to_seval(larg0, &args[0]);
@@ -659,7 +659,7 @@ SE_BIND_FUNC(js_cocos2dx_audioengine_AudioEngine_setFinishCallback)
 
 static bool js_cocos2dx_audioengine_AudioEngine_getProfile(se::State& s)
 {
-    bool ok = true;
+    CC_UNUSED bool ok = true;
     const auto& args = s.args();
     size_t argc = args.size();
     do {
