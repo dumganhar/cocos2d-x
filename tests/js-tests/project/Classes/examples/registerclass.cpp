@@ -1,14 +1,15 @@
 #include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
 
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_ui_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_audioengine_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_extension_auto.hpp"
+#include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_extension_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_register_all.h"
 #include "cocos/scripting/js-bindings/manual/jsb_global.h"
 #include "cocos/scripting/js-bindings/manual/jsb_node.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_conversions.hpp"
-#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_auto.hpp"
-#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_ui_auto.hpp"
-#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_audioengine_auto.hpp"
-#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_extension_auto.hpp"
 
 #include <unistd.h>
 #include <iostream>
@@ -33,12 +34,15 @@ int main_register_class(int argc, char** argv)
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_prepare.js"));
 //    jsb_register_all();
     register_all_cocos2dx(global);
-    register_all_cocos2dx_audioengine(global);
-    register_all_cocos2dx_extension(global);
-    register_all_cocos2dx_ui(global);
-
     jsb_register_Node_manual();
     register_all_cocos2dx_manual(global);
+
+    register_all_cocos2dx_audioengine(global);
+
+    register_all_cocos2dx_extension(global);
+    register_all_cocos2dx_extension_manual(global);
+    
+    register_all_cocos2dx_ui(global);
 
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
 

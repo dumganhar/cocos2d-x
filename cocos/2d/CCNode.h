@@ -1817,6 +1817,18 @@ public:
      * @return A std::function<void()>.
      */
     const std::function<void()>& getOnExitCallback() const { return _onExitCallback; }
+
+    /**
+     * Set the callback of event cleanup.
+     * @param callback A std::function<void()> callback.
+     */
+    void setCleanupCallback(const std::function<void()>& callback) { _onCleanupCallback = callback; }
+    /**
+     * Get the callback of event onExit.
+     * @return A std::function<void()>.
+     */
+    const std::function<void()>& getCleanupCallback() const { return _onCleanupCallback; }
+
     /**
      * Set the callback of event EnterTransitionDidFinish.
      * @param callback A std::function<void()> callback.
@@ -1991,6 +2003,7 @@ protected:
     
     std::function<void()> _onEnterCallback;
     std::function<void()> _onExitCallback;
+    std::function<void()> _onCleanupCallback;
     std::function<void()> _onEnterTransitionDidFinishCallback;
     std::function<void()> _onExitTransitionDidStartCallback;
 
