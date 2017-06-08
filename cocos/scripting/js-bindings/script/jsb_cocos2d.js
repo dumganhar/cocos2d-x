@@ -1284,6 +1284,8 @@ cc.Loader = cc.Class.extend({
             this._target = target;
         }
         this._selector.call(this._target);
+        this._selector = null;
+        this._target = null;
     }
 });
 
