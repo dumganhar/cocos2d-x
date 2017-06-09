@@ -2636,6 +2636,60 @@ _p.setDisabledSpriteFrame = function(frame) {
 
 cc.MenuItemToggle.prototype.selectedItem = cc.MenuItemToggle.prototype.getSelectedItem;
 
+// Menu
+var _p = cc.Menu.prototype;
+_p._alignItemsInColumns = _p.alignItemsInColumns;
+_p.alignItemsInColumns = function() {
+    var arr;
+    var len = arguments.length;
+    if (len == 1)
+    {
+        var arg0 = arguments[0];
+        if (arg0 instanceof Array)
+            arr = arguments[0];
+        else if (typeof arg0 == "number")
+            arr = [arg0];
+        else
+            cc.error("Not supported type: " + (typeof arg0));
+    }
+    else if (len > 1)
+    {
+        arr = [];
+        for (var i = 0; i < len; ++i)
+        {
+            arr.push(arguments[i]);
+        }
+    }
+
+    this._alignItemsInColumns(arr);
+}
+
+_p._alignItemsInRows = _p.alignItemsInRows;
+_p.alignItemsInRows = function() {
+    var arr;
+    var len = arguments.length;
+    if (len == 1)
+    {
+        var arg0 = arguments[0];
+        if (arg0 instanceof Array)
+            arr = arguments[0];
+        else if (typeof arg0 == "number")
+            arr = [arg0];
+        else
+            cc.error("Not supported type: " + (typeof arg0));
+    }
+    else if (len > 1)
+    {
+        arr = [];
+        for (var i = 0; i < len; ++i)
+        {
+            arr.push(arguments[i]);
+        }
+    }
+
+    this._alignItemsInRows(arr);
+}
+
 
 // playMusic searchPaths
 if (cc.sys.os === cc.sys.OS_ANDROID && cc.audioEngine) {
