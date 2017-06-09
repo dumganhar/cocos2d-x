@@ -21,9 +21,9 @@ namespace se {
 		bool install();
 
         bool defineFunction(const char *name, v8::FunctionCallback func);
-        bool defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
+        bool defineProperty(const char *name, v8::AccessorNameGetterCallback getter, v8::AccessorNameSetterCallback setter);
         bool defineStaticFunction(const char *name, v8::FunctionCallback func);
-        bool defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter);
+        bool defineStaticProperty(const char *name, v8::AccessorNameGetterCallback getter, v8::AccessorNameSetterCallback setter);
         bool defineFinalizedFunction(V8FinalizeFunc finalizeFunc);
 
         Object* getProto() const;

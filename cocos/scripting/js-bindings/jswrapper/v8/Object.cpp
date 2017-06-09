@@ -137,17 +137,17 @@ namespace se {
 
     Object* Object::createJSONObject(const std::string& jsonStr, bool rooted)
     {
+        v8::Local<v8::Context> context = __isolate->GetCurrentContext();
         Value strVal(jsonStr);
         v8::Local<v8::Value> jsStr;
         internal::seToJsValue(__isolate, strVal, &jsStr);
-        Object* obj = nullptr;
         v8::Local<v8::String> v8Str = v8::Local<v8::String>::Cast(jsStr);
-        v8::MaybeLocal<v8::Value> ret = v8::JSON::Parse(__isolate, v8Str);
-        if (!ret.IsEmpty())
-        {
-            obj = Object::_createJSObject(nullptr, ret.ToLocalChecked()->ToObject(__isolate), rooted);
-        }
-        return obj;
+        v8::MaybeLocal<v8::Value> ret = v8::JSON::Parse(context, v8Str);
+        if (ret.IsEmpty())
+            return nullptr;
+
+        v8::Local<v8::Object> jsobj = v8::Local<v8::Object>::Cast(ret.ToLocalChecked());
+        return Object::_createJSObject(nullptr, jsobj, rooted);
     }
 
     bool Object::init(Class* cls, v8::Local<v8::Object> obj, bool rooted)
@@ -176,34 +176,53 @@ namespace se {
             return false;
         }
 
-        v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
-
-        bool exist = _obj.handle(__isolate)->Has(nameValue);
-        if (!exist)
+        v8::MaybeLocal<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (nameValue.IsEmpty())
             return false;
 
-        v8::Local<v8::Value> result = _obj.handle(__isolate)->Get(nameValue);
+        v8::Local<v8::String> nameValToLocal = nameValue.ToLocalChecked();
+        v8::Local<v8::Context> context = __isolate->GetCurrentContext();
+        v8::Maybe<bool> maybeExist = _obj.handle(__isolate)->Has(context, nameValToLocal);
+        if (maybeExist.IsNothing())
+            return false;
 
-        internal::jsToSeValue(__isolate, result, data);
+        if (!maybeExist.FromJust())
+            return false;
+
+        v8::MaybeLocal<v8::Value> result = _obj.handle(__isolate)->Get(context, nameValToLocal);
+        if (result.IsEmpty())
+            return false;
+
+        internal::jsToSeValue(__isolate, result.ToLocalChecked(), data);
 
         return true;
     }
 
     void Object::setProperty(const char *name, const Value& data)
     {
-        v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
+        v8::MaybeLocal<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (nameValue.IsEmpty())
+            return;
 
         v8::Local<v8::Value> value;
         internal::seToJsValue(__isolate, data, &value);
-        _obj.handle(__isolate)->Set(nameValue, value);
+        v8::Maybe<bool> ret = _obj.handle(__isolate)->Set(__isolate->GetCurrentContext(), nameValue.ToLocalChecked(), value);
+        if (ret.IsNothing())
+        {
+            printf("ERROR: %s, Set return nothing ...\n", __FUNCTION__);
+        }
     }
 
-    bool Object::defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    bool Object::defineProperty(const char *name, v8::AccessorNameGetterCallback getter, v8::AccessorNameSetterCallback setter)
     {
-        v8::Local<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal).ToLocalChecked();
-        _obj.handle(__isolate)->SetAccessor(nameValue, getter, setter);
+        v8::MaybeLocal<v8::String> nameValue = v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (nameValue.IsEmpty())
+            return false;
 
-        return true;
+        v8::Local<v8::String> nameValChecked = nameValue.ToLocalChecked();
+        v8::Local<v8::Name> jsName = v8::Local<v8::Name>::Cast(nameValChecked);
+        v8::Maybe<bool> ret = _obj.handle(__isolate)->SetAccessor(__isolate->GetCurrentContext(), jsName, getter, setter);
+        return ret.IsJust() && ret.FromJust();
     }
 
     bool Object::isFunction() const
@@ -348,8 +367,20 @@ namespace se {
 
     bool Object::defineFunction(const char *funcName, void (*func)(const v8::FunctionCallbackInfo<v8::Value> &args))
     {
-        _obj.handle(__isolate)->Set(v8::String::NewFromUtf8(__isolate, funcName), v8::FunctionTemplate::New(__isolate, func)->GetFunction());
-        return true;
+        v8::MaybeLocal<v8::String> maybeFuncName = v8::String::NewFromUtf8(__isolate, funcName, v8::NewStringType::kNormal);
+        if (maybeFuncName.IsEmpty())
+            return false;
+
+        v8::Local<v8::Context> context = __isolate->GetCurrentContext();
+        v8::MaybeLocal<v8::Function> maybeFunc = v8::FunctionTemplate::New(__isolate, func)->GetFunction(context);
+        if (maybeFunc.IsEmpty())
+            return false;
+
+        v8::Maybe<bool> ret = _obj.handle(__isolate)->Set(context,
+                                    v8::Local<v8::Name>::Cast(maybeFuncName.ToLocalChecked()),
+                                    maybeFunc.ToLocalChecked());
+
+        return ret.IsJust() && ret.FromJust();
     }
 
 // --- Arrays
@@ -362,21 +393,44 @@ namespace se {
     bool Object::getArrayLength(uint32_t* length) const
     {
         assert(isArray());
+        assert(length != nullptr);
         Object* thiz = const_cast<Object*>(this);
-        *length = thiz->_obj.handle(__isolate)->Get(v8::String::NewFromUtf8(__isolate, "length"))->ToObject()->Uint32Value();
+
+        v8::MaybeLocal<v8::String> lengthStr = v8::String::NewFromUtf8(__isolate, "length", v8::NewStringType::kNormal);
+        if (lengthStr.IsEmpty())
+        {
+            *length = 0;
+            return false;
+        }
+        v8::Local<v8::Context> context = __isolate->GetCurrentContext();
+
+        v8::MaybeLocal<v8::Value> val = thiz->_obj.handle(__isolate)->Get(context, lengthStr.ToLocalChecked());
+        if (val.IsEmpty())
+            return false;
+
+        v8::MaybeLocal<v8::Object> obj = val.ToLocalChecked()->ToObject(context);
+        if (obj.IsEmpty())
+            return false;
+
+        v8::Maybe<uint32_t> mbLen= obj.ToLocalChecked()->Uint32Value(context);
+        if (mbLen.IsNothing())
+            return false;
+
+        *length = mbLen.FromJust();
         return true;
     }
 
     bool Object::getArrayElement(uint32_t index, Value* data) const
     {
         assert(isArray());
+        assert(data != nullptr);
         Object* thiz = const_cast<Object*>(this);
-        v8::Local<v8::Value> result = thiz->_obj.handle(__isolate)->Get(index);
+        v8::MaybeLocal<v8::Value> result = thiz->_obj.handle(__isolate)->Get(__isolate->GetCurrentContext(), index);
 
-        if (data != nullptr)
-        {
-            internal::jsToSeValue(__isolate, result, data);
-        }
+        if (result.IsEmpty())
+            return false;
+
+        internal::jsToSeValue(__isolate, result.ToLocalChecked(), data);
         return true;
     }
 
@@ -386,7 +440,9 @@ namespace se {
 
         v8::Local<v8::Value> jsval;
         internal::seToJsValue(__isolate, data, &jsval);
-        return _obj.handle(__isolate)->Set(index, jsval);
+        v8::Maybe<bool> ret = _obj.handle(__isolate)->Set(__isolate->GetCurrentContext(), index, jsval);
+
+        return ret.IsJust() && ret.FromJust();
     }
 
 //    void Object::getAsFloat32Array(float **ptr, unsigned int *length) {
@@ -454,13 +510,22 @@ namespace se {
     {
         assert(allKeys != nullptr);
         Object* thiz = const_cast<Object*>(this);
-        v8::Local<v8::Array> keys = thiz->_obj.handle(__isolate)->GetOwnPropertyNames();
+        v8::Local<v8::Context> context = __isolate->GetCurrentContext();
+        v8::MaybeLocal<v8::Array> keys = thiz->_obj.handle(__isolate)->GetOwnPropertyNames(context);
+        if (keys.IsEmpty())
+            return false;
 
+        v8::Local<v8::Array> keysChecked = keys.ToLocalChecked();
         Value keyVal;
-        for (uint32_t i = 0, len = keys->Length(); i < len; ++i)
+        for (uint32_t i = 0, len = keysChecked->Length(); i < len; ++i)
         {
-            v8::Local<v8::Value> key = keys->Get(i);
-            internal::jsToSeValue(__isolate, key, &keyVal);
+            v8::MaybeLocal<v8::Value> key = keysChecked->Get(context, i);
+            if (key.IsEmpty())
+            {
+                allKeys->clear();
+                return false;
+            }
+            internal::jsToSeValue(__isolate, key.ToLocalChecked(), &keyVal);
             if (keyVal.isString())
             {
                 allKeys->push_back(keyVal.toString());

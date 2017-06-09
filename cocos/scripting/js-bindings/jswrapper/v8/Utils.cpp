@@ -15,6 +15,7 @@ namespace se {
 
         void jsToSeArgs(const v8::FunctionCallbackInfo<v8::Value>& v8args, ValueArray* outArr)
         {
+            assert(outArr != nullptr);
             v8::Isolate* isolate = v8args.GetIsolate();
             for (int i = 0; i < v8args.Length(); i++)
             {
@@ -26,6 +27,7 @@ namespace se {
 
         void seToJsArgs(v8::Isolate* isolate, const ValueArray& args, std::vector<v8::Local<v8::Value>>* outArr)
         {
+            assert(outArr != nullptr);
             for (const auto& data : args)
             {
                 v8::Local<v8::Value> jsval;
@@ -36,13 +38,20 @@ namespace se {
 
         void seToJsValue(v8::Isolate* isolate, const Value& v, v8::Local<v8::Value>* outJsVal)
         {
+            assert(outJsVal != nullptr);
             switch (v.getType())
             {
                 case Value::Type::Number:
                     *outJsVal = v8::Number::New(isolate, v.toNumber());
                     break;
                 case Value::Type::String:
-                    *outJsVal = v8::String::NewFromUtf8(isolate, v.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+                {
+                    v8::MaybeLocal<v8::String> str = v8::String::NewFromUtf8(isolate, v.toString().c_str(), v8::NewStringType::kNormal);
+                    if (!str.IsEmpty())
+                        *outJsVal = str.ToLocalChecked();
+                    else
+                        outJsVal->Clear();
+                }
                     break;
                 case Value::Type::Boolean:
                     *outJsVal = v8::Boolean::New(isolate, v.toBoolean());
@@ -65,6 +74,7 @@ namespace se {
 
         void jsToSeValue(v8::Isolate* isolate, v8::Local<v8::Value> jsval, Value* v)
         {
+            assert(v != nullptr);
             v8::HandleScope handle_scope(isolate);
 
             if (jsval->IsUndefined()) {
@@ -72,16 +82,32 @@ namespace se {
             } else if (jsval->IsNull()) {
                 v->setNull();
             } else if (jsval->IsNumber()) {
-                v->setNumber(jsval->ToNumber()->Value());
+                v8::MaybeLocal<v8::Number> jsNumber = jsval->ToNumber(isolate->GetCurrentContext());
+                if (!jsNumber.IsEmpty())
+                    v->setNumber(jsNumber.ToLocalChecked()->Value());
+                else
+                    v->setUndefined();
             } else if (jsval->IsString()) {
                 v8::String::Utf8Value utf8(jsval);
                 v->setString(std::string(*utf8));
             } else if (jsval->IsBoolean()) {
-                v->setBoolean(jsval->ToBoolean()->Value());
+                v8::MaybeLocal<v8::Boolean> jsBoolean = jsval->ToBoolean(isolate->GetCurrentContext());
+                if (!jsBoolean.IsEmpty())
+                    v->setBoolean(jsBoolean.ToLocalChecked()->Value());
+                else
+                    v->setUndefined();
             } else if (jsval->IsObject()) {
-                Object* obj = Object::_createJSObject(nullptr, jsval->ToObject(), false);
-                v->setObject(obj);
-                obj->release();
+                v8::MaybeLocal<v8::Object> jsObj = jsval->ToObject(isolate->GetCurrentContext());
+                if (!jsObj.IsEmpty())
+                {
+                    Object* obj = Object::_createJSObject(nullptr, jsObj.ToLocalChecked(), false);
+                    v->setObject(obj);
+                    obj->release();
+                }
+                else
+                {
+                    v->setUndefined();
+                }
             }
         }
 
@@ -95,8 +121,9 @@ namespace se {
             } else if (data.getType() == Value::Type::Number) {
                 argv.GetReturnValue().Set(v8::Number::New(argv.GetIsolate(), data.toNumber()));
             } else if (data.getType() == Value::Type::String) {
-                v8::Local<v8::String> value = v8::String::NewFromUtf8(argv.GetIsolate(), data.toString().c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-                argv.GetReturnValue().Set(value);
+                v8::MaybeLocal<v8::String> value = v8::String::NewFromUtf8(argv.GetIsolate(), data.toString().c_str(), v8::NewStringType::kNormal);
+                assert(!value.IsEmpty());
+                argv.GetReturnValue().Set(value.ToLocalChecked());
             } else if (data.getType() == Value::Type::Boolean) {
                 argv.GetReturnValue().Set(v8::Boolean::New(argv.GetIsolate(), data.toBoolean()));
             } else if (data.getType() == Value::Type::Object) {
@@ -124,8 +151,12 @@ namespace se {
                 return true;
 
             // Pure JS subclass object doesn't have a internal field
-            v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
-            return obj->Has(key);
+            v8::MaybeLocal<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal);
+            if (key.IsEmpty())
+                return false;
+
+            v8::Maybe<bool> ret = obj->Has(isolate->GetCurrentContext(), key.ToLocalChecked());
+            return ret.IsJust() && ret.FromJust();
         }
 
         void setPrivate(v8::Isolate* isolate, ObjectWrap& wrap, void* data)
@@ -147,8 +178,10 @@ namespace se {
                 privateObj->_getWrap().setFinalizeCallback(privateObj->_getClass()->_getFinalizeFunction());
                 privateObj->_getWrap().wrap(privateData);
 
-                v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
-                obj->Set(key, privateObj->_getJSObject());
+                v8::MaybeLocal<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal);
+                assert(!key.IsEmpty());
+                v8::Maybe<bool> ret = obj->Set(isolate->GetCurrentContext(), key.ToLocalChecked(), privateObj->_getJSObject());
+                assert(!ret.IsNothing());
 //                printf("setPrivate: native data: %p\n", privateData);
 //                privateObj->release();
             }
@@ -156,26 +189,40 @@ namespace se {
 
         void* getPrivate(v8::Isolate* isolate, v8::Local<v8::Value> value)
         {
-            v8::Local<v8::Object> obj = value->ToObject(isolate);
-            int c =  obj->InternalFieldCount();
+            v8::Local<v8::Context> context = isolate->GetCurrentContext();
+            v8::MaybeLocal<v8::Object> obj = value->ToObject(context);
+            if (obj.IsEmpty())
+                return nullptr;
+
+            v8::Local<v8::Object> objChecked = obj.ToLocalChecked();
+            int c =  objChecked->InternalFieldCount();
             if (c > 0)
             {
-                void* nativeObj = ObjectWrap::unwrap(obj);
+                void* nativeObj = ObjectWrap::unwrap(objChecked);
 //                printf("getPrivate1: %p\n", nativeObj);
                 return nativeObj;
             }
 
             // Pure JS subclass object doesn't have a internal field
-            v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
+            v8::MaybeLocal<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal);
+            if (key.IsEmpty())
+                return nullptr;
 
-            if (obj->Has(key))
-            {
-                v8::Local<v8::Object> privateObj = obj->Get(key)->ToObject(isolate);
-                internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj);
+            v8::Local<v8::String> keyChecked = key.ToLocalChecked();
+            v8::Maybe<bool> mbHas = objChecked->Has(context, keyChecked);
+            if (mbHas.IsNothing() || !mbHas.FromJust())
+                return nullptr;
+
+            v8::MaybeLocal<v8::Value> mbVal = objChecked->Get(context, keyChecked);
+            if (mbVal.IsEmpty())
+                return nullptr;
+
+            v8::MaybeLocal<v8::Object> privateObj = mbVal.ToLocalChecked()->ToObject(context);
+            if (privateObj.IsEmpty())
+                return nullptr;
+            internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj.ToLocalChecked());
 //                printf("getPrivate: native data: %p\n", privateData);
-                return privateData->data;
-            }
-            return nullptr;
+            return privateData->data;
         }
 
         void clearPrivate(v8::Isolate* isolate, ObjectWrap& wrap)
@@ -188,16 +235,32 @@ namespace se {
             }
             else
             {
+                v8::Local<v8::Context> context = isolate->GetCurrentContext();
                 // Pure JS subclass object doesn't have a internal field
-                v8::Local<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal).ToLocalChecked();
-                if (obj->Has(key))
-                {
-                    v8::Local<v8::Object> privateObj = obj->Get(key)->ToObject(isolate);
-                    internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj);
-                    free(privateData);
-                    bool ok = obj->Delete(key);
-                    assert(ok);
-                }
+                v8::MaybeLocal<v8::String> key = v8::String::NewFromUtf8(isolate, KEY_PRIVATE_DATE, v8::NewStringType::kNormal);
+                if (key.IsEmpty())
+                    return;
+
+                v8::Local<v8::String> keyChecked = key.ToLocalChecked();
+                v8::Maybe<bool> mbHas = obj->Has(context, keyChecked);
+                if (mbHas.IsNothing() || !mbHas.FromJust())
+                    return;
+
+                v8::MaybeLocal<v8::Value> mbVal = obj->Get(context, keyChecked);
+                if (mbVal.IsEmpty())
+                    return;
+
+                v8::MaybeLocal<v8::Object> privateObj = mbVal.ToLocalChecked()->ToObject(context);
+                if (privateObj.IsEmpty())
+                    return;
+
+                internal::PrivateData* privateData =  (internal::PrivateData*)ObjectWrap::unwrap(privateObj.ToLocalChecked());
+                free(privateData);
+                v8::Maybe<bool> ok = obj->Delete(context, keyChecked);
+                if (ok.IsNothing())
+                    return;
+
+                assert(ok.FromJust());
             }
         }
 

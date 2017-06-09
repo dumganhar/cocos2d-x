@@ -203,10 +203,16 @@ namespace se {
     {
         std::string scriptStr(script, length);
 
-        v8::Local<v8::String> source = v8::String::NewFromUtf8(_isolate, scriptStr.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+        v8::MaybeLocal<v8::String> source = v8::String::NewFromUtf8(_isolate, scriptStr.c_str(), v8::NewStringType::kNormal);
+        if (source.IsEmpty())
+            return false;
 
-        v8::ScriptOrigin origin(v8::String::NewFromUtf8(_isolate, fileName ? fileName : "Unknown"));
-        v8::MaybeLocal<v8::Script> maybeScript = v8::Script::Compile(_context.Get(_isolate), source, &origin);
+        v8::MaybeLocal<v8::String> originStr = v8::String::NewFromUtf8(_isolate, fileName ? fileName : "Unknown", v8::NewStringType::kNormal);
+        if (originStr.IsEmpty())
+            return false;
+
+        v8::ScriptOrigin origin(originStr.ToLocalChecked());
+        v8::MaybeLocal<v8::Script> maybeScript = v8::Script::Compile(_context.Get(_isolate), source.ToLocalChecked(), &origin);
 
         bool success = false;
 

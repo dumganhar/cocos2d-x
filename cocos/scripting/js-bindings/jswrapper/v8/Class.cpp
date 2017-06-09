@@ -48,8 +48,11 @@ namespace se {
         _ctor = ctor;
 
         _ctorTemplate.Reset(__isolate, v8::FunctionTemplate::New(__isolate, _ctor));
-        v8::Local<v8::String> jsNameVal = v8::String::NewFromUtf8(__isolate, _name.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-        _ctorTemplate.Get(__isolate)->SetClassName(jsNameVal);
+        v8::MaybeLocal<v8::String> jsNameVal = v8::String::NewFromUtf8(__isolate, _name.c_str(), v8::NewStringType::kNormal);
+        if (jsNameVal.IsEmpty())
+            return false;
+
+        _ctorTemplate.Get(__isolate)->SetClassName(jsNameVal.ToLocalChecked());
         _ctorTemplate.Get(__isolate)->InstanceTemplate()->SetInternalFieldCount(1);
 
         return true;
@@ -72,35 +75,64 @@ namespace se {
             _ctorTemplate.Get(__isolate)->Inherit(_parentProto->_getClass()->_ctorTemplate.Get(__isolate));
         }
 
-        v8::Local<v8::Function> ctor = _ctorTemplate.Get(__isolate)->GetFunction();
-        _parent->_getJSObject()->Set(v8::String::NewFromUtf8(__isolate, _name.c_str()), ctor);
-        v8::Local<v8::Value> prototypeObj = ctor->Get(v8::String::NewFromUtf8(__isolate, "prototype", v8::NewStringType::kNormal).ToLocalChecked());
-        _proto = Object::_createJSObject(this, v8::Local<v8::Object>::Cast(prototypeObj), true); //FIXME: release proto in cleanup method
+        v8::Local<v8::Context> context = __isolate->GetCurrentContext();
+        v8::MaybeLocal<v8::Function> ctor = _ctorTemplate.Get(__isolate)->GetFunction(context);
+        if (ctor.IsEmpty())
+            return false;
+
+        v8::Local<v8::Function> ctorChecked = ctor.ToLocalChecked();
+        v8::MaybeLocal<v8::String> name = v8::String::NewFromUtf8(__isolate, _name.c_str(), v8::NewStringType::kNormal);
+        if (name.IsEmpty())
+            return false;
+
+        v8::Maybe<bool> result = _parent->_getJSObject()->Set(context, name.ToLocalChecked(), ctorChecked);
+        if (result.IsNothing())
+            return false;
+
+        v8::MaybeLocal<v8::String> prototypeName = v8::String::NewFromUtf8(__isolate, "prototype", v8::NewStringType::kNormal);
+        if (prototypeName.IsEmpty())
+            return false;
+
+        v8::MaybeLocal<v8::Value> prototypeObj = ctorChecked->Get(context, prototypeName.ToLocalChecked());
+        if (prototypeObj.IsEmpty())
+            return false;
+        _proto = Object::_createJSObject(this, v8::Local<v8::Object>::Cast(prototypeObj.ToLocalChecked()), true); //FIXME: release proto in cleanup method
         return true;
     }
 
     bool Class::defineFunction(const char *name, v8::FunctionCallback func)
     {
-        _ctorTemplate.Get(__isolate)->PrototypeTemplate()->Set(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, func));
+        v8::MaybeLocal<v8::String> jsName =  v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (jsName.IsEmpty())
+            return false;
+        _ctorTemplate.Get(__isolate)->PrototypeTemplate()->Set(jsName.ToLocalChecked(), v8::FunctionTemplate::New(__isolate, func));
         return true;
     }
 
-    bool Class::defineProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    bool Class::defineProperty(const char *name, v8::AccessorNameGetterCallback getter, v8::AccessorNameSetterCallback setter)
     {
-        _ctorTemplate.Get(__isolate)->PrototypeTemplate()->SetAccessor(v8::String::NewFromUtf8(__isolate, name), getter, setter);
+        v8::MaybeLocal<v8::String> jsName =  v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (jsName.IsEmpty())
+            return false;
+        _ctorTemplate.Get(__isolate)->PrototypeTemplate()->SetAccessor(jsName.ToLocalChecked(), getter, setter);
         return true;
     }
 
     bool Class::defineStaticFunction(const char *name, v8::FunctionCallback func)
     {
-        _ctorTemplate.Get(__isolate)->Set(v8::String::NewFromUtf8(__isolate, name), v8::FunctionTemplate::New(__isolate, func));
+        v8::MaybeLocal<v8::String> jsName =  v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (jsName.IsEmpty())
+            return false;
+        _ctorTemplate.Get(__isolate)->Set(jsName.ToLocalChecked(), v8::FunctionTemplate::New(__isolate, func));
         return true;
     }
 
-    bool Class::defineStaticProperty(const char *name, v8::AccessorGetterCallback getter, v8::AccessorSetterCallback setter)
+    bool Class::defineStaticProperty(const char *name, v8::AccessorNameGetterCallback getter, v8::AccessorNameSetterCallback setter)
     {
-        _ctorTemplate.Get(__isolate)->SetNativeDataProperty(v8::String::NewFromUtf8(__isolate, name), getter, setter);
-//        assert(false);
+        v8::MaybeLocal<v8::String> jsName =  v8::String::NewFromUtf8(__isolate, name, v8::NewStringType::kNormal);
+        if (jsName.IsEmpty())
+            return false;
+        _ctorTemplate.Get(__isolate)->SetNativeDataProperty(jsName.ToLocalChecked(), getter, setter);
         return true;
     }
 
@@ -126,7 +158,9 @@ namespace se {
 
     v8::Local<v8::Object> Class::_createJSObjectWithClass(Class* cls)
     {
-        return cls->_ctorTemplate.Get(__isolate)->InstanceTemplate()->NewInstance();
+        v8::MaybeLocal<v8::Object> ret = cls->_ctorTemplate.Get(__isolate)->InstanceTemplate()->NewInstance(__isolate->GetCurrentContext());
+        assert(!ret.IsEmpty());
+        return ret.ToLocalChecked();
     }
 
     Object* Class::getProto() const

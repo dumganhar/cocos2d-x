@@ -82,7 +82,7 @@
 
 
 #define SE_BIND_PROP_GET(funcName) \
-    void funcName##Registry(v8::Local<v8::String> _property, const v8::PropertyCallbackInfo<v8::Value>& _v8args) \
+    void funcName##Registry(v8::Local<v8::Name> _property, const v8::PropertyCallbackInfo<v8::Value>& _v8args) \
     { \
         v8::Isolate* _isolate = _v8args.GetIsolate(); \
         v8::HandleScope _hs(_isolate); \
@@ -95,7 +95,7 @@
 
 
 #define SE_BIND_PROP_SET(funcName) \
-    void funcName##Registry(v8::Local<v8::String> _property, v8::Local<v8::Value> _value, const v8::PropertyCallbackInfo<void>& _v8args) \
+    void funcName##Registry(v8::Local<v8::Name> _property, v8::Local<v8::Value> _value, const v8::PropertyCallbackInfo<void>& _v8args) \
     { \
         v8::Isolate* _isolate = _v8args.GetIsolate(); \
         v8::HandleScope _hs(_isolate); \
