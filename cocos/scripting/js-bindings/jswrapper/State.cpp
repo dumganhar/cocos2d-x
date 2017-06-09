@@ -65,7 +65,8 @@ namespace se {
         {
             _thisObject = se::Object::getObjectWithPtr(_nativeThisObject);
         }
-        assert(_thisObject != nullptr);
+        // _nativeThisObject in Static method will be nullptr
+//        assert(_thisObject != nullptr);
         return _thisObject;
     }
     

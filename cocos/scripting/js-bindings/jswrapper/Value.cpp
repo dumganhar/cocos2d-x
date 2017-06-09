@@ -297,7 +297,11 @@ namespace se {
 
    	void Value::setObject(Object* object)
     {
-        reset(Type::Object);
+        if (object != nullptr)
+            reset(Type::Object);
+        else
+            reset(Type::Null);
+
         if (_u._object != object)
         {
             SAFE_RELEASE(_u._object);

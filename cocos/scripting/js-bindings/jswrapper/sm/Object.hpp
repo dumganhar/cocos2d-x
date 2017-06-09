@@ -24,6 +24,7 @@ namespace se {
 //        static Object* createObject(const char* clsName, bool rooted);
         static Object* createObjectWithClass(Class* cls, bool rooted);
         static Object* createArrayObject(size_t length, bool rooted);
+        static Object* createUint8TypedArray(uint8_t* data, size_t byteLength, bool rooted);
         static Object* createArrayBufferObject(void* data, size_t byteLength, bool rooted);
         static Object* createJSONObject(const std::string& jsonStr, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
@@ -79,6 +80,7 @@ namespace se {
 
         void switchToRooted(DestroyNotify notify = nullptr, void *data = nullptr);
         void switchToUnrooted();
+        void setKeepRootedUntilDie(bool keepRooted);
         bool isRooted() const;
 
         bool isSame(Object* o) const;
@@ -99,6 +101,7 @@ namespace se {
         bool updateAfterGC(void* data);
 
         bool _isRooted;  /* wrapper is in rooted mode */
+        bool _isKeepRootedUntilDie;
         bool _hasWeakRef;  /* we have a weak reference to the GjsContext */
 
         JS::Heap<JSObject*> _heap;  /* should be untouched if in rooted mode */

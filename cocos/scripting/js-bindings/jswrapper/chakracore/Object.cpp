@@ -13,6 +13,7 @@ namespace se {
     : _cls(nullptr)
     , _obj(JS_INVALID_REFERENCE)
     , _isRooted(false)
+    , _isKeepRootedUntilDie(false)
     , _hasPrivateData(false)
     , _isCleanup(false)
     , _finalizeCb(nullptr)
@@ -56,6 +57,24 @@ namespace se {
         ChakraBytePtr buffer = nullptr;
         unsigned int bufferLength = 0;
         if (JsNoError == JsGetArrayBufferStorage(jsobj, &buffer, &bufferLength))
+        {
+            memcpy((void*)buffer, data, byteLength);
+            obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        }
+
+        return obj;
+    }
+
+    Object* Object::createUint8TypedArray(uint8_t* data, size_t byteLength, bool rooted)
+    {
+        Object* obj = nullptr;
+        JsValueRef jsobj;
+        _CHECK(JsCreateTypedArray(JsArrayTypeUint8, JS_INVALID_REFERENCE, 0, (unsigned int)byteLength, &jsobj));
+        ChakraBytePtr buffer = nullptr;
+        unsigned int bufferLength = 0;
+        JsTypedArrayType arrType;
+        int elementSize = 0;
+        if (JsNoError == JsGetTypedArrayStorage(jsobj, &buffer, &bufferLength, &arrType, &elementSize))
         {
             memcpy((void*)buffer, data, byteLength);
             obj = Object::_createJSObject(nullptr, jsobj, rooted);
@@ -558,12 +577,27 @@ namespace se {
 
     void Object::switchToUnrooted()
     {
-        debug("switch to unrooted");
         assert(_isRooted);
 
+        if (_isKeepRootedUntilDie)
+            return;
+
+        debug("switch to unrooted");
         unsigned int count = 0;
         _CHECK(JsRelease(_obj, &count));
         _isRooted = false;
+    }
+
+
+    void Object::setKeepRootedUntilDie(bool keepRooted)
+    {
+        _isKeepRootedUntilDie = keepRooted;
+
+        if (_isKeepRootedUntilDie)
+        {
+            if (!_isRooted)
+                switchToRooted();
+        }
     }
     
     bool Object::isRooted() const

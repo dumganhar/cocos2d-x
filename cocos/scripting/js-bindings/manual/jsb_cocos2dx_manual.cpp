@@ -18,11 +18,11 @@
 
 using namespace cocos2d;
 
-static bool jsb_empty_func(se::State& s)
+static bool jsb_cocos2dx_empty_func(se::State& s)
 {
     return true;
 }
-SE_BIND_FUNC(jsb_empty_func)
+SE_BIND_FUNC(jsb_cocos2dx_empty_func)
 
 class __JSPlistDelegator: public cocos2d::SAXDelegator
 {
@@ -1612,8 +1612,8 @@ bool register_all_cocos2dx_manual(se::Object* obj)
 
     for (const auto& e : protosNeedEmptyRetainRelease)
     {
-        e->defineFunction("retain", _SE(jsb_empty_func));
-        e->defineFunction("release", _SE(jsb_empty_func));
+        e->defineFunction("retain", _SE(jsb_cocos2dx_empty_func));
+        e->defineFunction("release", _SE(jsb_cocos2dx_empty_func));
     }
 
 

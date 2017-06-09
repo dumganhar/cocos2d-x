@@ -18,6 +18,7 @@ namespace se {
     : _cls(nullptr)
     , _obj(nullptr)
     , _isRooted(false)
+    , _isKeepRootedUntilDie(false)
     , _hasPrivateData(false)
     , _isCleanup(false)
     , _finalizeCb(nullptr)
@@ -60,6 +61,15 @@ namespace se {
         void* copiedData = malloc(byteLength);
         memcpy(copiedData, data, byteLength);
         JSObjectRef jsobj = JSObjectMakeArrayBufferWithBytesNoCopy(__cx, copiedData, byteLength, myJSTypedArrayBytesDeallocator, nullptr, nullptr);
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
+    Object* Object::createUint8TypedArray(uint8_t* data, size_t byteLength, bool rooted)
+    {
+        void* copiedData = malloc(byteLength);
+        memcpy(copiedData, data, byteLength);
+        JSObjectRef jsobj = JSObjectMakeTypedArrayWithBytesNoCopy(__cx, kJSTypedArrayTypeUint8Array, copiedData, byteLength, myJSTypedArrayBytesDeallocator, nullptr, nullptr);
         Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
         return obj;
     }
@@ -469,11 +479,26 @@ namespace se {
 
     void Object::switchToUnrooted()
     {
-        debug("switch to unrooted");
         assert(_isRooted);
 
+        if (_isKeepRootedUntilDie)
+            return;
+
+        debug("switch to unrooted");
         JSValueUnprotect(__cx, _obj);
         _isRooted = false;
+    }
+
+
+    void Object::setKeepRootedUntilDie(bool keepRooted)
+    {
+        _isKeepRootedUntilDie = keepRooted;
+
+        if (_isKeepRootedUntilDie)
+        {
+            if (!_isRooted)
+                switchToRooted();
+        }
     }
     
     bool Object::isRooted() const

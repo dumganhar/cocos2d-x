@@ -928,9 +928,11 @@ extern se::Class* __jsb_cocos2d_FileUtils_class;
 
 bool js_register_cocos2d_FileUtils(se::Object* obj);
 bool register_all_cocos2dx(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_FileUtils_writeDataToFile);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_fullPathForFilename);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_getStringFromFile);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_removeFile);
+SE_DECLARE_FUNC(js_cocos2dx_FileUtils_getDataFromFile);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_isAbsolutePath);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_renameFile);
 SE_DECLARE_FUNC(js_cocos2dx_FileUtils_getDefaultResourceRootPath);

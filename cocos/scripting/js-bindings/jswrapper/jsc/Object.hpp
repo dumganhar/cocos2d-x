@@ -22,6 +22,7 @@ namespace se {
         static Object* createPlainObject(bool rooted);
 //        static Object* createObject(const char* clsName, bool rooted);
         static Object* createArrayObject(size_t length, bool rooted);
+        static Object* createUint8TypedArray(uint8_t* data, size_t byteLength, bool rooted);
         static Object* createArrayBufferObject(void* data, size_t byteLength, bool rooted);
         static Object* createJSONObject(const std::string& jsonStr, bool rooted);
         static Object* getObjectWithPtr(void* ptr);
@@ -77,6 +78,7 @@ namespace se {
 
         void switchToRooted();
         void switchToUnrooted();
+        void setKeepRootedUntilDie(bool keepRooted);
         bool isRooted() const;
 
         bool isSame(Object* o) const;
@@ -90,6 +92,7 @@ namespace se {
         Class* _cls;
         JSObjectRef _obj;
         bool _isRooted;  /* wrapper is in rooted mode */
+        bool _isKeepRootedUntilDie;
         bool _hasPrivateData;
         bool _isCleanup;
         JSObjectFinalizeCallback _finalizeCb;

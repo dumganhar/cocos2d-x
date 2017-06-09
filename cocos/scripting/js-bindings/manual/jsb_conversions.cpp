@@ -928,6 +928,25 @@ bool seval_to_Viewport(const se::Value& v, cocos2d::experimental::Viewport* ret)
     return true;
 }
 
+bool seval_to_Data(const se::Value& v, cocos2d::Data* ret)
+{
+    assert(ret != nullptr);
+    assert(v.isObject() && v.toObject()->isTypedArray());
+    uint8_t* ptr = nullptr;
+    size_t length = 0;
+    bool ok = v.toObject()->getTypedArrayData(&ptr, &length);
+    if (ok)
+    {
+        ret->copy(ptr, length);
+    }
+    else
+    {
+        ret->clear();
+    }
+
+    return ok;
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 
 bool int32_to_seval(int32_t v, se::Value* ret)
@@ -1467,5 +1486,15 @@ bool Viewport_to_seval(const cocos2d::experimental::Viewport& v, se::Value* ret)
     ret->setObject(obj);
     obj->release();
 
+    return true;
+}
+
+bool Data_to_seval(const cocos2d::Data& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    assert(!v.isNull());
+    se::Object* obj = se::Object::createUint8TypedArray(v.getBytes(), v.getSize(), false);
+    ret->setObject(obj);
+    obj->release();
     return true;
 }

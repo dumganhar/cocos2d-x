@@ -38,6 +38,7 @@ namespace se {
     : _isRooted(false)
     , _hasWeakRef(false)
     , _root(nullptr)
+    , _isKeepRootedUntilDie(false)
     , m_notify(nullptr)
     , m_data(nullptr)
     , _hasPrivateData(false)
@@ -148,6 +149,17 @@ namespace se {
         bool isShared = false;
         JS::AutoCheckCannotGC nogc;
         uint8_t* tmpData = JS_GetArrayBufferData(jsobj, &isShared, nogc);
+        memcpy((void*)tmpData, (const void*)data, byteLength);
+        Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+
+    Object* Object::createUint8TypedArray(uint8_t* data, size_t byteLength, bool rooted)
+    {
+        JS::RootedObject jsobj(__cx, JS_NewUint8Array(__cx, (uint32_t)byteLength));
+        bool isShared = false;
+        JS::AutoCheckCannotGC nogc;
+        uint8_t* tmpData = JS_GetUint8ArrayData(jsobj, &isShared, nogc);
         memcpy((void*)tmpData, (const void*)data, byteLength);
         Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
         return obj;
@@ -603,8 +615,12 @@ namespace se {
 
     void Object::switchToUnrooted()
     {
-        debug("switch to unrooted");
         assert(_isRooted);
+
+        if (_isKeepRootedUntilDie)
+            return;
+
+        debug("switch to unrooted");
         /* Prevent the thing from being garbage collected while it is in neither
          * _heap nor _root */
         JSAutoRequest ar(__cx);
@@ -612,6 +628,17 @@ namespace se {
         reset();
         putToHeap(rootedThing);
         assert(!_isRooted);
+    }
+
+    void Object::setKeepRootedUntilDie(bool keepRooted)
+    {
+        _isKeepRootedUntilDie = keepRooted;
+
+        if (_isKeepRootedUntilDie)
+        {
+            if (!_isRooted)
+                switchToRooted();
+        }
     }
 
     /* Tracing makes no sense in the rooted case, because JS::PersistentRooted

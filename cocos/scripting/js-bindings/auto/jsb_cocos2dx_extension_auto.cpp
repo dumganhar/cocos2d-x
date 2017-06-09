@@ -5357,7 +5357,10 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
 		    {
 		        se::Value jsThis(s.thisObject());
 		        se::Value jsFunc(args[0]);
-		        jsThis.toObject()->attachChild(jsFunc.toObject());
+		        if (jsThis.isObject())
+		            jsThis.toObject()->attachChild(jsFunc.toObject());
+		        else
+		            jsFunc.toObject()->setKeepRootedUntilDie(true);
 		        auto lambda = [=](const std::basic_string<char> & larg0, cocos2d::extension::ManifestAsset larg1) -> bool {
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
@@ -5368,7 +5371,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
 		            ok &= std_string_to_seval(larg0, &args[0]);
 		            ok &= ManifestAsset_to_seval(larg1, &args[1]);
 		            se::Value rval;
-		            se::Object* thisObj = jsThis.toObject();
+		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
 		            se::Object* funcObj = jsFunc.toObject();
 		            bool succeed = funcObj->call(args, thisObj, &rval);
 		            if (!succeed) {
@@ -5443,7 +5446,10 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle(se::St
 		    {
 		        se::Value jsThis(s.thisObject());
 		        se::Value jsFunc(args[0]);
-		        jsThis.toObject()->attachChild(jsFunc.toObject());
+		        if (jsThis.isObject())
+		            jsThis.toObject()->attachChild(jsFunc.toObject());
+		        else
+		            jsFunc.toObject()->setKeepRootedUntilDie(true);
 		        auto lambda = [=](const std::basic_string<char> & larg0, const std::basic_string<char> & larg1) -> int {
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
@@ -5454,7 +5460,7 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle(se::St
 		            ok &= std_string_to_seval(larg0, &args[0]);
 		            ok &= std_string_to_seval(larg1, &args[1]);
 		            se::Value rval;
-		            se::Object* thisObj = jsThis.toObject();
+		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
 		            se::Object* funcObj = jsFunc.toObject();
 		            bool succeed = funcObj->call(args, thisObj, &rval);
 		            if (!succeed) {

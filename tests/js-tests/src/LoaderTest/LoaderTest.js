@@ -185,13 +185,13 @@ var LoaderCycleLayer = BaseTestLayer.extend({
     },
 
     onRestartCallback: function(){
-        var parent = this._parent;
+        var parent = this.parent;
         parent.removeChild(this);
         parent.addChild(new LoaderCycleLayer());
     },
 
     onBackCallback: function(){
-        var parent = this._parent;
+        var parent = this.parent;
         parent.removeChild(this);
         parent.addChild(new LoaderTestLayer());
     }

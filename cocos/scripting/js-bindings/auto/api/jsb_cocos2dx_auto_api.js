@@ -6986,6 +6986,21 @@ vec4
 cc.FileUtils = {
 
 /**
+ * @method writeDataToFile
+* @param {cc.Data|cc.Data} data
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+writeDataToFile : function(
+data,
+str,
+func 
+)
+{
+},
+
+/**
  * @method fullPathForFilename
  * @param {String} arg0
  * @return {String}
@@ -7017,6 +7032,19 @@ func
 * @return {bool}
 */
 removeFile : function(
+str,
+func 
+)
+{
+},
+
+/**
+ * @method getDataFromFile
+* @param {String|String} str
+* @param {function} func
+* @return {cc.Data}
+*/
+getDataFromFile : function(
 str,
 func 
 )

@@ -16,6 +16,7 @@ namespace se {
     Object::Object()
     : _cls(nullptr)
     , _isRooted(false)
+    , _isKeepRootedUntilDie(false)
     , _hasPrivateData(false)
     , _finalizeCb(nullptr)
     {
@@ -130,8 +131,18 @@ namespace se {
 
     Object* Object::createArrayBufferObject(void* data, size_t byteLength, bool rooted)
     {
-        v8::Local<v8::ArrayBuffer> jsobj = v8::ArrayBuffer::New(__isolate, data, byteLength);
+        v8::Local<v8::ArrayBuffer> jsobj = v8::ArrayBuffer::New(__isolate, byteLength);
+        memcpy(jsobj->GetContents().Data(), data, byteLength);
         Object* obj = Object::_createJSObject(nullptr, jsobj, rooted);
+        return obj;
+    }
+    
+    Object* Object::createUint8TypedArray(uint8_t* data, size_t byteLength, bool rooted)
+    {
+        v8::Local<v8::ArrayBuffer> jsobj = v8::ArrayBuffer::New(__isolate, byteLength);
+        memcpy(jsobj->GetContents().Data(), data, byteLength);
+        v8::Local<v8::Uint8Array> arr = v8::Uint8Array::New(jsobj, 0, byteLength);
+        Object* obj = Object::_createJSObject(nullptr, arr, rooted);
         return obj;
     }
 
@@ -564,8 +575,23 @@ namespace se {
     void Object::switchToUnrooted()
     {
         assert(_isRooted);
+
+        if (_isKeepRootedUntilDie)
+            return;
+
         _obj.unref();
         _isRooted = false;
+    }
+
+    void Object::setKeepRootedUntilDie(bool keepRooted)
+    {
+        _isKeepRootedUntilDie = keepRooted;
+
+        if (_isKeepRootedUntilDie)
+        {
+            if (!_isRooted)
+                switchToRooted();
+        }
     }
 
     bool Object::isRooted() const {

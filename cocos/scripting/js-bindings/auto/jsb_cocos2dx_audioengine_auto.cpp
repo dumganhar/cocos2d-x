@@ -399,7 +399,10 @@ static bool js_cocos2dx_audioengine_AudioEngine_preload(se::State& s)
 			    {
 			        se::Value jsThis(s.thisObject());
 			        se::Value jsFunc(args[1]);
-			        jsThis.toObject()->attachChild(jsFunc.toObject());
+			        if (jsThis.isObject())
+			            jsThis.toObject()->attachChild(jsFunc.toObject());
+			        else
+			            jsFunc.toObject()->setKeepRootedUntilDie(true);
 			        auto lambda = [=](bool larg0) -> void {
 			            se::ScriptEngine::getInstance()->clearException();
 			            se::AutoHandleScope hs;
@@ -409,7 +412,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_preload(se::State& s)
 			            args.resize(1);
 			            ok &= boolean_to_seval(larg0, &args[0]);
 			            se::Value rval;
-			            se::Object* thisObj = jsThis.toObject();
+			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
 			            se::Object* funcObj = jsFunc.toObject();
 			            bool succeed = funcObj->call(args, thisObj, &rval);
 			            if (!succeed) {
@@ -622,7 +625,10 @@ static bool js_cocos2dx_audioengine_AudioEngine_setFinishCallback(se::State& s)
 		    {
 		        se::Value jsThis(s.thisObject());
 		        se::Value jsFunc(args[1]);
-		        jsThis.toObject()->attachChild(jsFunc.toObject());
+		        if (jsThis.isObject())
+		            jsThis.toObject()->attachChild(jsFunc.toObject());
+		        else
+		            jsFunc.toObject()->setKeepRootedUntilDie(true);
 		        auto lambda = [=](int larg0, const std::basic_string<char> & larg1) -> void {
 		            se::ScriptEngine::getInstance()->clearException();
 		            se::AutoHandleScope hs;
@@ -633,7 +639,7 @@ static bool js_cocos2dx_audioengine_AudioEngine_setFinishCallback(se::State& s)
 		            ok &= int32_to_seval(larg0, &args[0]);
 		            ok &= std_string_to_seval(larg1, &args[1]);
 		            se::Value rval;
-		            se::Object* thisObj = jsThis.toObject();
+		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
 		            se::Object* funcObj = jsFunc.toObject();
 		            bool succeed = funcObj->call(args, thisObj, &rval);
 		            if (!succeed) {
