@@ -242,17 +242,22 @@ namespace se {
         JsErrorCode errCode = JsCallFunction(_obj, jsArgs, args.size() + 1, &rcValue);
         free(jsArgs);
 
-        if (errCode == JsNoError && rval != nullptr)
+        if (errCode == JsNoError)
         {
-            JsValueType type;
-            JsGetValueType(rcValue, &type);
-            if (rval != JS_INVALID_REFERENCE && type != JsUndefined)
+            if (rval != nullptr)
             {
-                internal::jsToSeValue(rcValue, rval);
+                JsValueType type;
+                JsGetValueType(rcValue, &type);
+                if (rval != JS_INVALID_REFERENCE && type != JsUndefined)
+                {
+                    internal::jsToSeValue(rcValue, rval);
+                }
             }
+            return true;
         }
 
-        return errCode == JsNoError;
+        se::ScriptEngine::getInstance()->clearException();
+        return false;
     }
 
     bool Object::defineFunction(const char* funcName, JsNativeFunction func)

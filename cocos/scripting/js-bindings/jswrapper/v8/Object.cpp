@@ -327,14 +327,21 @@ namespace se {
             }
         }
 
-        v8::Local<v8::Value> result = _obj.handle(__isolate)->CallAsFunction(thiz, (int)argc, argv.data());
+        v8::Local<v8::Context> context = se::ScriptEngine::getInstance()->_getContext();
+        v8::MaybeLocal<v8::Value> result = _obj.handle(__isolate)->CallAsFunction(context, thiz, (int)argc, argv.data());
 
-        if (rval != nullptr)
+        if (!result.IsEmpty())
         {
-            internal::jsToSeValue(__isolate, result, rval);
+            if (rval != nullptr)
+            {
+                internal::jsToSeValue(__isolate, result.ToLocalChecked(), rval);
+            }
+            return true;
         }
 
-        return true;
+//        assert(false);
+
+        return false;
     }
 
 // --- Register Function

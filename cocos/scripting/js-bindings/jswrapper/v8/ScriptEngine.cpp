@@ -33,6 +33,34 @@ namespace se {
         void privateDataContructor(const v8::FunctionCallbackInfo<v8::Value>& info)
         {
         }
+
+        void myFatalErrorCallback(const char* location, const char* message)
+        {
+            printf("[FATAL ERROR] location: %s, message: %s\n", location, message);
+        }
+
+        void myOOMErrorCallback(const char* location, bool is_heap_oom)
+        {
+            printf("[OOM ERROR] location: %s, is_heap_oom: %d", location, is_heap_oom);
+        }
+
+        void printStackTrace(v8::Local<v8::StackTrace> stack) {
+            printf("Stack Trace (length %d):\n", stack->GetFrameCount());
+            for (int i = 0, e = stack->GetFrameCount(); i != e; ++i) {
+                v8::Local<v8::StackFrame> frame = stack->GetFrame(i);
+                v8::Local<v8::String> script = frame->GetScriptName();
+                v8::Local<v8::String> func = frame->GetFunctionName();
+                printf("[%d] (%s) %s:%d:%d\n", i,
+                       script.IsEmpty() ? "<null>" : *v8::String::Utf8Value(script),
+                       func.IsEmpty() ? "<null>" : *v8::String::Utf8Value(func),
+                       frame->GetLineNumber(), frame->GetColumn());
+            }
+        }
+
+        void myMessageCallback(v8::Local<v8::Message> message, v8::Local<v8::Value> data)
+        {
+            printStackTrace(message->GetStackTrace());
+        }
     }
 
     void ScriptEngine::privateDataFinalize(void* nativeObj)
@@ -99,6 +127,12 @@ namespace se {
         _isolate = v8::Isolate::New(_createParams);
         v8::HandleScope hs(_isolate);
         _isolate->Enter();
+
+        _isolate->SetCaptureStackTraceForUncaughtExceptions(true, 10, v8::StackTrace::kOverview);
+
+        _isolate->SetFatalErrorHandler(myFatalErrorCallback);
+        _isolate->SetOOMErrorHandler(myOOMErrorCallback);
+        _isolate->AddMessageListener(myMessageCallback);
 
         _context.Reset(_isolate, v8::Context::New(_isolate));
         _context.Get(_isolate)->Enter();
@@ -270,7 +304,11 @@ namespace se {
     {
         //FIXME:
     }
-    
+
+    v8::Local<v8::Context> ScriptEngine::_getContext() const
+    {
+        return _context.Get(_isolate);
+    }
 
 } // namespace se {
 

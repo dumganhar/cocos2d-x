@@ -88,6 +88,7 @@ namespace se {
         using NodeEventListener = bool(*)(void*/*node*/, NodeEventType);
         bool _setNodeEventListener(NodeEventListener listener);
 
+        v8::Local<v8::Context> _getContext() const;
     private:
 
         static void privateDataFinalize(void* nativeObj);
