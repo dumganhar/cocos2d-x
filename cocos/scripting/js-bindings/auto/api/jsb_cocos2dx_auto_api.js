@@ -1178,6 +1178,16 @@ getRotationSkewY : function (
 },
 
 /**
+ * @method setCleanupCallback
+ * @param {function} arg0
+ */
+setCleanupCallback : function (
+func 
+)
+{
+},
+
+/**
  * @method getNodeToWorldTransform
  * @return {mat4_object}
  */
@@ -1497,6 +1507,16 @@ getAnchorPointInPoints : function (
 )
 {
     return cc.Vec2;
+},
+
+/**
+ * @method getCleanupCallback
+ * @return {function}
+ */
+getCleanupCallback : function (
+)
+{
+    return std::function<void ()>;
 },
 
 /**
@@ -14472,6 +14492,16 @@ menuitem
 },
 
 /**
+ * @method getSubItems
+* @return {Array|Array}
+*/
+getSubItems : function(
+)
+{
+    return new Array();
+},
+
+/**
  * @method getSelectedIndex
  * @return {unsigned int}
  */
@@ -14568,6 +14598,14 @@ isEnabled : function (
 },
 
 /**
+ * @method alignItemsHorizontally
+ */
+alignItemsHorizontally : function (
+)
+{
+},
+
+/**
  * @method alignItemsHorizontallyWithPadding
  * @param {float} arg0
  */
@@ -14588,9 +14626,21 @@ float
 },
 
 /**
- * @method alignItemsHorizontally
+ * @method alignItemsInRowsWithArray
+ * @param {Array} arg0
  */
-alignItemsHorizontally : function (
+alignItemsInRowsWithArray : function (
+array 
+)
+{
+},
+
+/**
+ * @method alignItemsInColumnsWithArray
+ * @param {Array} arg0
+ */
+alignItemsInColumnsWithArray : function (
+array 
 )
 {
 },

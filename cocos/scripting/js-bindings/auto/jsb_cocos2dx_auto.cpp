@@ -2659,6 +2659,50 @@ static bool js_cocos2dx_Node_getRotationSkewY(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getRotationSkewY)
 
+static bool js_cocos2dx_Node_setCleanupCallback(se::State& s)
+{
+    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setCleanupCallback : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 1) {
+        std::function<void ()> arg0;
+        do {
+		    if (args[0].isObject() && args[0].toObject()->isFunction())
+		    {
+		        se::Value jsThis(s.thisObject());
+		        se::Value jsFunc(args[0]);
+		        jsThis.toObject()->attachChild(jsFunc.toObject());
+		        auto lambda = [=]() -> void {
+		            se::ScriptEngine::getInstance()->clearException();
+		            se::AutoHandleScope hs;
+		
+		            se::Value rval;
+		            se::Object* thisObj = jsThis.toObject();
+		            se::Object* funcObj = jsFunc.toObject();
+		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
+		            if (!succeed) {
+		                se::ScriptEngine::getInstance()->clearException();
+		            }
+		        };
+		        arg0 = lambda;
+		    }
+		    else
+		    {
+		        arg0 = nullptr;
+		    }
+		} while(false)
+		;
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setCleanupCallback : Error processing arguments");
+        cobj->setCleanupCallback(arg0);
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Node_setCleanupCallback)
+
 static bool js_cocos2dx_Node_getNodeToWorldTransform(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
@@ -3278,6 +3322,24 @@ static bool js_cocos2dx_Node_getAnchorPointInPoints(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getAnchorPointInPoints)
+
+static bool js_cocos2dx_Node_getCleanupCallback(se::State& s)
+{
+    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getCleanupCallback : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 0) {
+        const std::function<void ()>& result = cobj->getCleanupCallback();
+        #pragma warning NO CONVERSION FROM NATIVE FOR std::function;
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getCleanupCallback : Error processing arguments");
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Node_getCleanupCallback)
 
 static bool js_cocos2dx_Node_getRotationQuat(se::State& s)
 {
@@ -4733,6 +4795,7 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("removeAllChildren", _SE(js_cocos2dx_Node_removeAllChildrenWithCleanup));
     cls->defineFunction("getRotationX", _SE(js_cocos2dx_Node_getRotationSkewX));
     cls->defineFunction("getRotationY", _SE(js_cocos2dx_Node_getRotationSkewY));
+    cls->defineFunction("setCleanupCallback", _SE(js_cocos2dx_Node_setCleanupCallback));
     cls->defineFunction("getNodeToWorldTransform3D", _SE(js_cocos2dx_Node_getNodeToWorldTransform));
     cls->defineFunction("isCascadeOpacityEnabled", _SE(js_cocos2dx_Node_isCascadeOpacityEnabled));
     cls->defineFunction("setParent", _SE(js_cocos2dx_Node_setParent));
@@ -4764,6 +4827,7 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("setShaderProgram", _SE(js_cocos2dx_Node_setGLProgram));
     cls->defineFunction("getRotation", _SE(js_cocos2dx_Node_getRotation));
     cls->defineFunction("getAnchorPointInPoints", _SE(js_cocos2dx_Node_getAnchorPointInPoints));
+    cls->defineFunction("getCleanupCallback", _SE(js_cocos2dx_Node_getCleanupCallback));
     cls->defineFunction("getRotationQuat", _SE(js_cocos2dx_Node_getRotationQuat));
     cls->defineFunction("removeChildByName", _SE(js_cocos2dx_Node_removeChildByName));
     cls->defineFunction("setVertexZ", _SE(js_cocos2dx_Node_setPositionZ));
@@ -33956,6 +34020,36 @@ static bool js_cocos2dx_MenuItemToggle_initWithItem(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_MenuItemToggle_initWithItem)
 
+static bool js_cocos2dx_MenuItemToggle_getSubItems(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocos2d::MenuItemToggle* cobj = (cocos2d::MenuItemToggle*)s.nativeThisObject();
+    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_MenuItemToggle_getSubItems : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 0) {
+            cocos2d::Vector<cocos2d::MenuItem *>& result = cobj->getSubItems();
+            ok &= Vector_to_seval(result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemToggle_getSubItems : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    do {
+        if (argc == 0) {
+            const cocos2d::Vector<cocos2d::MenuItem *>& result = cobj->getSubItems();
+            ok &= Vector_to_seval(result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemToggle_getSubItems : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_MenuItemToggle_getSubItems)
+
 static bool js_cocos2dx_MenuItemToggle_getSelectedIndex(se::State& s)
 {
     cocos2d::MenuItemToggle* cobj = (cocos2d::MenuItemToggle*)s.nativeThisObject();
@@ -34076,6 +34170,7 @@ bool js_register_cocos2dx_MenuItemToggle(se::Object* obj)
 
     cls->defineFunction("setSubItems", _SE(js_cocos2dx_MenuItemToggle_setSubItems));
     cls->defineFunction("initWithItem", _SE(js_cocos2dx_MenuItemToggle_initWithItem));
+    cls->defineFunction("getSubItems", _SE(js_cocos2dx_MenuItemToggle_getSubItems));
     cls->defineFunction("getSelectedIndex", _SE(js_cocos2dx_MenuItemToggle_getSelectedIndex));
     cls->defineFunction("addSubItem", _SE(js_cocos2dx_MenuItemToggle_addSubItem));
     cls->defineFunction("getSelectedItem", _SE(js_cocos2dx_MenuItemToggle_getSelectedItem));
@@ -34168,6 +34263,21 @@ static bool js_cocos2dx_Menu_isEnabled(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Menu_isEnabled)
 
+static bool js_cocos2dx_Menu_alignItemsHorizontally(se::State& s)
+{
+    cocos2d::Menu* cobj = (cocos2d::Menu*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_alignItemsHorizontally : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    if (argc == 0) {
+        cobj->alignItemsHorizontally();
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Menu_alignItemsHorizontally)
+
 static bool js_cocos2dx_Menu_alignItemsHorizontallyWithPadding(se::State& s)
 {
     cocos2d::Menu* cobj = (cocos2d::Menu*)s.nativeThisObject();
@@ -34206,20 +34316,43 @@ static bool js_cocos2dx_Menu_alignItemsVerticallyWithPadding(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Menu_alignItemsVerticallyWithPadding)
 
-static bool js_cocos2dx_Menu_alignItemsHorizontally(se::State& s)
+static bool js_cocos2dx_Menu_alignItemsInRowsWithArray(se::State& s)
 {
     cocos2d::Menu* cobj = (cocos2d::Menu*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_alignItemsHorizontally : Invalid Native Object");
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_alignItemsInRowsWithArray : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
-    if (argc == 0) {
-        cobj->alignItemsHorizontally();
+    CC_UNUSED bool ok = true;
+    if (argc == 1) {
+        cocos2d::ValueVector arg0;
+        ok &= seval_to_ccvaluevector(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Menu_alignItemsInRowsWithArray : Error processing arguments");
+        cobj->alignItemsInRowsWithArray(arg0);
         return true;
     }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
     return false;
 }
-SE_BIND_FUNC(js_cocos2dx_Menu_alignItemsHorizontally)
+SE_BIND_FUNC(js_cocos2dx_Menu_alignItemsInRowsWithArray)
+
+static bool js_cocos2dx_Menu_alignItemsInColumnsWithArray(se::State& s)
+{
+    cocos2d::Menu* cobj = (cocos2d::Menu*)s.nativeThisObject();
+    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Menu_alignItemsInColumnsWithArray : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    CC_UNUSED bool ok = true;
+    if (argc == 1) {
+        cocos2d::ValueVector arg0;
+        ok &= seval_to_ccvaluevector(args[0], &arg0);
+        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Menu_alignItemsInColumnsWithArray : Error processing arguments");
+        cobj->alignItemsInColumnsWithArray(arg0);
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Menu_alignItemsInColumnsWithArray)
 
 SE_DECLARE_FINALIZE_FUNC(js_cocos2d_Menu_finalize)
 
@@ -34269,9 +34402,11 @@ bool js_register_cocos2dx_Menu(se::Object* obj)
     cls->defineFunction("setEnabled", _SE(js_cocos2dx_Menu_setEnabled));
     cls->defineFunction("alignItemsVertically", _SE(js_cocos2dx_Menu_alignItemsVertically));
     cls->defineFunction("isEnabled", _SE(js_cocos2dx_Menu_isEnabled));
+    cls->defineFunction("alignItemsHorizontally", _SE(js_cocos2dx_Menu_alignItemsHorizontally));
     cls->defineFunction("alignItemsHorizontallyWithPadding", _SE(js_cocos2dx_Menu_alignItemsHorizontallyWithPadding));
     cls->defineFunction("alignItemsVerticallyWithPadding", _SE(js_cocos2dx_Menu_alignItemsVerticallyWithPadding));
-    cls->defineFunction("alignItemsHorizontally", _SE(js_cocos2dx_Menu_alignItemsHorizontally));
+    cls->defineFunction("alignItemsInRows", _SE(js_cocos2dx_Menu_alignItemsInRowsWithArray));
+    cls->defineFunction("alignItemsInColumns", _SE(js_cocos2dx_Menu_alignItemsInColumnsWithArray));
     cls->defineFunction("ctor", _SE(js_cocos2dx_Menu_ctor));
     cls->defineFinalizedFunction(_SE(js_cocos2d_Menu_finalize));
     cls->install();
