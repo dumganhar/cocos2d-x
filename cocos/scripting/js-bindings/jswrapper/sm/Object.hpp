@@ -39,6 +39,7 @@ namespace se {
         bool defineProperty(const char *name, JSNative getter, JSNative setter);
 
         JSObject* _getJSObject() const;
+        Class* _getClass() const { return _cls; }
 
         // --- Function
         bool isFunction() const;

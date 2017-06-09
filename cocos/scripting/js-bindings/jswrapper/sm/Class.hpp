@@ -28,6 +28,8 @@ namespace se {
         bool defineStaticProperty(const char *name, JSNative getter, JSNative setter);
         bool defineFinalizedFunction(JSFinalizeOp func);
 
+        const char* getName() const { return _name; }
+
     private:
         bool init(const char* clsName, Object* obj, Object* parentProto, JSNative ctor);
 

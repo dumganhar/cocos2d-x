@@ -435,6 +435,50 @@ static bool jsc_garbageCollect(se::State& s)
 }
 SE_BIND_FUNC(jsc_garbageCollect)
 
+static bool jsc_dumpNativePtrToSeObjectMap(se::State& s)
+{
+    cocos2d::log(">>> total: %d, Dump (native -> jsobj) map begin", (int)se::__nativePtrToObjectMap.size());
+
+    struct NamePtrStruct
+    {
+        const char* name;
+        void* ptr;
+    };
+
+    std::vector<NamePtrStruct> namePtrArray;
+
+    for (const auto& e : se::__nativePtrToObjectMap)
+    {
+        se::Object* jsobj = e.second;
+        assert(jsobj->_getClass() != nullptr);
+        NamePtrStruct tmp;
+        tmp.name = jsobj->_getClass()->getName();
+        tmp.ptr = e.first;
+        namePtrArray.push_back(tmp);
+    }
+
+    std::sort(namePtrArray.begin(), namePtrArray.end(), [](const NamePtrStruct& a, const NamePtrStruct& b) -> bool {
+        std::string left = a.name;
+        std::string right = b.name;
+        for( std::string::const_iterator lit = left.begin(), rit = right.begin(); lit != left.end() && rit != right.end(); ++lit, ++rit )
+            if( ::tolower( *lit ) < ::tolower( *rit ) )
+                return true;
+            else if( ::tolower( *lit ) > ::tolower( *rit ) )
+                return false;
+        if( left.size() < right.size() )
+            return true;
+        return false;
+    });
+
+    for (const auto& e : namePtrArray)
+    {
+        cocos2d::log("%s: %p", e.name, e.ptr);
+    }
+    cocos2d::log(">>> total: %d, Dump (native -> jsobj) map end", (int)se::__nativePtrToObjectMap.size());
+    return true;
+}
+SE_BIND_FUNC(jsc_dumpNativePtrToSeObjectMap)
+
 static bool jsc_dumpRoot(se::State& s)
 {
     assert(false);
@@ -583,6 +627,7 @@ bool jsb_register_global_variables()
     getOrCreatePlainObject_r("__jsc__", global, &__jscObj);
 
     __jscObj->defineFunction("garbageCollect", _SE(jsc_garbageCollect));
+    __jscObj->defineFunction("dumpNativePtrToSeObjectMap", _SE(jsc_dumpNativePtrToSeObjectMap));
 
     global->defineFunction("__getPlatform", _SE(JSBCore_platform));
     global->defineFunction("__getOS", _SE(JSBCore_os));

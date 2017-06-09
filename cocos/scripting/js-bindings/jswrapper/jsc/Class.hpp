@@ -35,6 +35,8 @@ namespace se {
         bool defineStaticProperty(const char *name, JSObjectCallAsFunctionCallback getter, JSObjectCallAsFunctionCallback setter);
         bool defineFinalizedFunction(JSObjectFinalizeCallback func);
 
+        const char* getName() const { return _name.c_str(); }
+
     private:
         bool init(const std::string& clsName, Object* obj, Object* parentProto, JSObjectCallAsConstructorCallback ctor);
 

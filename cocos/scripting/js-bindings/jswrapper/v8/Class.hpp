@@ -30,6 +30,8 @@ namespace se {
 
         V8FinalizeFunc _getFinalizeFunction() const;
 
+        const char* getName() const { return _name.c_str(); }
+
 	private:
         bool init(const std::string& clsName, Object* parent, Object* parentProto, v8::FunctionCallback ctor);
         static void cleanup();

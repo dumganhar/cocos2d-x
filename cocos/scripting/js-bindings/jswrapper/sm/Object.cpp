@@ -239,12 +239,17 @@ namespace se {
 
         bool ok = JS_CallFunctionValue(__cx, contextObject, func, jsarr, &rcValue);
 
-        if (ok && rval != nullptr)
+        if (ok)
         {
-            internal::jsToSeValue(__cx, rcValue, rval);
+            if (rval != nullptr)
+                internal::jsToSeValue(__cx, rcValue, rval);
+        }
+        else
+        {
+            se::ScriptEngine::getInstance()->clearException();
         }
 
-        return ok;    
+        return ok;
     }
 
     // --- Register Function

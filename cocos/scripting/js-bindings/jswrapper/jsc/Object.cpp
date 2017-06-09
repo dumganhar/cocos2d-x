@@ -250,13 +250,28 @@ namespace se {
             internal::seToJsArgs(__cx, args, jsArgs);
         }
 
-        JSValueRef rcValue = JSObjectCallAsFunction(__cx, _obj, contextObject, args.size(), jsArgs, nullptr);
+        JSValueRef exception = nullptr;
+        JSValueRef rcValue = JSObjectCallAsFunction(__cx, _obj, contextObject, args.size(), jsArgs, &exception);
         free(jsArgs);
 
-        if (rval != nullptr && !JSValueIsUndefined(__cx, rcValue))
+        if (rcValue != nullptr)
         {
-            internal::jsToSeValue(__cx, rcValue, rval);
+            if (rval != nullptr && !JSValueIsUndefined(__cx, rcValue))
+            {
+                internal::jsToSeValue(__cx, rcValue, rval);
+            }
             return true;
+        }
+
+        // Function call failed, try to output exception
+        if (exception != nullptr)
+        {
+            std::string exceptionStr = se::ScriptEngine::getInstance()->_formatException(exception);
+            if (!exceptionStr.empty())
+            {
+                printf("%s\n", exceptionStr.c_str());
+            }
+            se::ScriptEngine::getInstance()->clearException();
         }
 
         return false;

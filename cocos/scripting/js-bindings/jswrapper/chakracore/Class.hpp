@@ -43,6 +43,8 @@ namespace se {
         bool defineStaticProperty(const char *name, JsNativeFunction getter, JsNativeFunction setter);
         bool defineFinalizedFunction(JsFinalizeCallback func);
 
+        const char* getName() const { return _name.c_str(); }
+
     private:
         bool init(const std::string& clsName, Object* obj, Object* parentProto, JsNativeFunction ctor);
 //        static JsValueRef _createJSObject(const std::string &clsName, Class** outCls);

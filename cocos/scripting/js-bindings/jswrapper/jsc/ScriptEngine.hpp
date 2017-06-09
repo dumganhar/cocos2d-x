@@ -61,12 +61,11 @@ namespace se {
         using NodeEventListener = bool(*)(void*/*node*/, NodeEventType);
         bool _setNodeEventListener(NodeEventListener listener);
 
+        std::string _formatException(JSValueRef exception);
     private:
 
         bool init();
         void cleanup();
-
-        std::string formatException(JSValueRef exception);
 
         JSGlobalContextRef _cx;
 

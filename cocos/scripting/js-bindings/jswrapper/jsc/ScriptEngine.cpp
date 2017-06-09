@@ -131,7 +131,7 @@ namespace se {
         JSGlobalContextRelease(_cx);
     }
 
-    std::string ScriptEngine::formatException(JSValueRef exception)
+    std::string ScriptEngine::_formatException(JSValueRef exception)
     {
         std::string ret;
         internal::forceConvertJsValueToStdString(_cx, exception, &ret);
@@ -205,7 +205,7 @@ namespace se {
 
             if (exception)
             {
-                exceptionStr = formatException(exception);
+                exceptionStr = _formatException(exception);
                 clearException();
                 ok = false;
             }
@@ -214,7 +214,7 @@ namespace se {
         {
             if (exception)
             {
-                exceptionStr = formatException(exception);
+                exceptionStr = _formatException(exception);
                 clearException();
             }
             else
