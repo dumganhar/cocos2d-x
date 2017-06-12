@@ -1588,6 +1588,31 @@ static bool register_actions(se::Object* obj)
     return true;
 }
 
+bool js_cocos2dx_Texture2D_setTexParameters(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+    if (argc == 4)
+    {
+        GLuint arg0, arg1, arg2, arg3;
+        bool ok = seval_to_uint32(args[0], &arg0)
+        && seval_to_uint32(args[1], &arg1)
+        && seval_to_uint32(args[2], &arg2)
+        && seval_to_uint32(args[3], &arg3);
+
+        JSB_PRECONDITION2(ok, false, "Converting arguments failed!");
+        Texture2D* cobj = (Texture2D*)s.nativeThisObject();
+
+        Texture2D::TexParams param = { arg0, arg1, arg2, arg3 };
+        cobj->setTexParameters(param);
+        return true;
+    }
+
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 4);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_Texture2D_setTexParameters)
+
 bool register_all_cocos2dx_manual(se::Object* obj)
 {
     register_plist_parser(obj);
@@ -1615,6 +1640,8 @@ bool register_all_cocos2dx_manual(se::Object* obj)
         e->defineFunction("retain", _SE(jsb_cocos2dx_empty_func));
         e->defineFunction("release", _SE(jsb_cocos2dx_empty_func));
     }
+
+    __jsb_cocos2d_Texture2D_proto->defineFunction("setTexParameters", _SE(js_cocos2dx_Texture2D_setTexParameters));
 
 
     return true;

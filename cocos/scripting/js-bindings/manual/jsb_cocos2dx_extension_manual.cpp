@@ -150,7 +150,7 @@ static bool js_cocos2dx_CCControl_removeTargetWithActionForControlEvents(se::Sta
         int32_t eventType = 0;
         bool ok = false;
         ok = seval_to_int32(args[2], &eventType);
-        JSB_PRECONDITION2(ok, false, "%s, Converting 'eventType' failed!", __FUNCTION__);
+        JSB_PRECONDITION2(ok, false, "Converting 'eventType' failed!");
         Control* cobj = (Control*)s.nativeThisObject();
         JSB_ControlCallbackWrapper* wrapper = JSB_ControlCallbackWrapper::findWrapper(target, func, (Control::EventType)eventType);
         if (wrapper != nullptr)
@@ -165,6 +165,107 @@ static bool js_cocos2dx_CCControl_removeTargetWithActionForControlEvents(se::Sta
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_CCControl_removeTargetWithActionForControlEvents)
+
+static bool js_cocos2dx_extension_loadRemoteImage(se::State& s)
+{
+    const auto& args = s.args();
+    int argc = (int)args.size();
+
+    if (argc == 2)
+    {
+        bool ok = false;
+        std::string url;
+        ok = seval_to_std_string(args[0], &url);
+        JSB_PRECONDITION2(ok, false, "Converting 'url' failed!");
+
+        se::Value func = args[1];
+        assert(func.isObject() && func.toObject()->isFunction());
+
+        func.toObject()->setKeepRootedUntilDie(true);
+
+        auto onSuccess = [func](Texture2D* tex) -> bool {
+
+            se::ScriptEngine::getInstance()->clearException();
+            se::AutoHandleScope hs;
+
+            se::ValueArray args;
+            args.resize(2);
+
+            if (tex != nullptr)
+            {
+                args[0].setBoolean(true);
+                bool ok = native_ptr_to_seval<Texture2D>(tex, &args[1]);
+                JSB_PRECONDITION2(ok, false, "Converting 'tex' argument failed!");
+            }
+            else
+            {
+                args[0].setBoolean(false);
+                args[1].setNull();
+            }
+
+            return func.toObject()->call(args, nullptr);
+        };
+
+        auto onError = [func](){
+
+            se::ScriptEngine::getInstance()->clearException();
+            se::AutoHandleScope hs;
+
+            se::ValueArray args;
+            args.resize(1);
+            args[0].setBoolean(false);
+            func.toObject()->call(args, nullptr);
+        };
+
+        Texture2D* texture = Director::getInstance()->getTextureCache()->getTextureForKey(url);
+        if (texture != nullptr)
+        {
+            onSuccess(texture);
+        }
+        else
+        {
+            auto downloader = new (std::nothrow) cocos2d::network::Downloader();
+            downloader->onDataTaskSuccess = [downloader, url, onSuccess, onError](const cocos2d::network::DownloadTask& task, std::vector<unsigned char>& data){
+                Image* img = new (std::nothrow) Image();
+                Texture2D* tex = nullptr;
+                do
+                {
+                    if (!img->initWithImageData(data.data(), data.size()))
+                        break;
+                    tex = Director::getInstance()->getTextureCache()->addImage(img, url);
+                } while (0);
+
+                CC_SAFE_RELEASE(img);
+
+                if (tex)
+                {
+                    onSuccess(tex);
+                }
+                else
+                {
+                    onError();
+                }
+                Director::getInstance()->getScheduler()->performFunctionInCocosThread([downloader](){
+                    delete downloader;
+                });
+            };
+
+            downloader->onTaskError = [downloader, onError](const cocos2d::network::DownloadTask& task, int errorCode, int errorCodeInternal, const std::string& errorStr)
+            {
+                onError();
+                Director::getInstance()->getScheduler()->performFunctionInCocosThread([downloader](){
+                    delete downloader;
+                });
+            };
+
+            downloader->createDownloadDataTask(url);
+        }
+        return true;
+    }
+    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", argc, 2);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_extension_loadRemoteImage)
 
 bool register_all_cocos2dx_extension_manual(se::Object* obj)
 {
@@ -183,6 +284,8 @@ bool register_all_cocos2dx_extension_manual(se::Object* obj)
 
     __jsb_cocos2d_extension_Control_proto->defineFunction("addTargetWithActionForControlEvents", _SE(js_cocos2dx_CCControl_addTargetWithActionForControlEvents));
     __jsb_cocos2d_extension_Control_proto->defineFunction("removeTargetWithActionForControlEvents", _SE(js_cocos2dx_CCControl_removeTargetWithActionForControlEvents));
+
+    __jsbObj->defineFunction("loadRemoteImg", _SE(js_cocos2dx_extension_loadRemoteImage));
 
     return true;
 }

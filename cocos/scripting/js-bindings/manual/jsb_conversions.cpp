@@ -435,6 +435,13 @@ bool seval_to_ccvalue(const se::Value& v, cocos2d::Value* ret)
 bool seval_to_ccvaluemap(const se::Value& v, cocos2d::ValueMap* ret)
 {
     assert(ret != nullptr);
+
+    if (v.isNullOrUndefined())
+    {
+        ret->clear();
+        return true;
+    }
+
     assert(v.isObject());
 
     JSB_PRECONDITION3(!v.isNullOrUndefined(), false, ret->clear());
@@ -473,6 +480,12 @@ static bool isNumberString(const std::string& str)
 bool seval_to_ccvaluemapintkey(const se::Value& v, cocos2d::ValueMapIntKey* ret)
 {
     assert(ret != nullptr);
+    if (v.isNullOrUndefined())
+    {
+        ret->clear();
+        return true;
+    }
+
     assert(v.isObject());
 
     JSB_PRECONDITION3(!v.isNullOrUndefined(), false, ret->clear());
