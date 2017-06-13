@@ -103,26 +103,6 @@ getPixelsHigh : function (
 },
 
 /**
- * @method initWithMipmaps
- * @param {cc._MipmapInfo} arg0
- * @param {int} arg1
- * @param {cc.Texture2D::PixelFormat} arg2
- * @param {int} arg3
- * @param {int} arg4
- * @return {bool}
- */
-initWithMipmaps : function (
-map, 
-int, 
-pixelformat, 
-int, 
-int 
-)
-{
-    return false;
-},
-
-/**
  * @method getAlphaTextureName
  * @return {unsigned int}
  */
@@ -828,16 +808,6 @@ getChildren : function(
 },
 
 /**
- * @method setOnExitCallback
- * @param {function} arg0
- */
-setOnExitCallback : function (
-func 
-)
-{
-},
-
-/**
  * @method setActionManager
  * @param {cc.ActionManager} arg0
  */
@@ -959,16 +929,6 @@ getColor : function (
 )
 {
     return cc.Color3B;
-},
-
-/**
- * @method setonEnterTransitionDidFinishCallback
- * @param {function} arg0
- */
-setonEnterTransitionDidFinishCallback : function (
-func 
-)
-{
 },
 
 /**
@@ -1096,16 +1056,6 @@ glprogramstate
 },
 
 /**
- * @method setOnEnterCallback
- * @param {function} arg0
- */
-setOnEnterCallback : function (
-func 
-)
-{
-},
-
-/**
  * @method stopActionsByFlags
  * @param {unsigned int} arg0
  */
@@ -1121,16 +1071,6 @@ int
  */
 setNormalizedPosition : function (
 vec2 
-)
-{
-},
-
-/**
- * @method setonExitTransitionDidStartCallback
- * @param {function} arg0
- */
-setonExitTransitionDidStartCallback : function (
-func 
 )
 {
 },
@@ -1175,16 +1115,6 @@ getRotationSkewY : function (
 )
 {
     return 0;
-},
-
-/**
- * @method setCleanupCallback
- * @param {function} arg0
- */
-setCleanupCallback : function (
-func 
-)
-{
 },
 
 /**
@@ -1507,16 +1437,6 @@ getAnchorPointInPoints : function (
 )
 {
     return cc.Vec2;
-},
-
-/**
- * @method getCleanupCallback
- * @return {function}
- */
-getCleanupCallback : function (
-)
-{
-    return std::function<void ()>;
 },
 
 /**
@@ -3416,16 +3336,6 @@ getTimeScale : function (
  */
 unscheduleAllWithMinPriority : function (
 int 
-)
-{
-},
-
-/**
- * @method performFunctionInCocosThread
- * @param {function} arg0
- */
-performFunctionInCocosThread : function (
-func 
 )
 {
 },
@@ -22527,16 +22437,6 @@ bool
 },
 
 /**
- * @method setParallaxArray
- * @param {cc._ccArray} arg0
- */
-setParallaxArray : function (
-_ccarray 
-)
-{
-},
-
-/**
  * @method create
  * @return {cc.ParallaxNode}
  */
@@ -23740,16 +23640,6 @@ vec2
 setTile : function (
 color3b, 
 vec2 
-)
-{
-},
-
-/**
- * @method setTGAInfo
- * @param {cc.sImageTGA} arg0
- */
-setTGAInfo : function (
-simagetga 
 )
 {
 },

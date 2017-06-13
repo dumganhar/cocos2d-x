@@ -32,17 +32,25 @@ var TextureCacheTestBase = BaseTestLayer.extend({
         this._super(cc.color(0,0,0,255), cc.color(98,99,117,255));
     },
 
+    removeAllTexturesAndSpriteFrames: function() {
+        cc.spriteFrameCache.removeSpriteFrames();
+        cc.textureCache.removeAllTextures();
+    },
+
     onRestartCallback:function (sender) {
+        this.removeAllTexturesAndSpriteFrames();
         var s = new TexCacheTestScene();
         s.addChild(restartTexCacheTest());
         director.runScene(s);
     },
     onNextCallback:function (sender) {
+        this.removeAllTexturesAndSpriteFrames();
         var s = new TexCacheTestScene();
         s.addChild(nextTexCacheTest());
         director.runScene(s);
     },
     onBackCallback:function (sender) {
+        this.removeAllTexturesAndSpriteFrames();
         var s = new TexCacheTestScene();
         s.addChild(previousTexCacheTest());
         director.runScene(s);
@@ -146,6 +154,7 @@ var TextureCacheTest = TextureCacheTestBase.extend({
         this.addChild(this._labelPercent);
 
         var texCache = cc.textureCache;
+        log("xxx")
         // load textures
         texCache.addImageAsync("Images/HelloWorld.png", this.loadingCallBack, this);
         texCache.addImageAsync("Images/grossini.png", this.loadingCallBack, this);

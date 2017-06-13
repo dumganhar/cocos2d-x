@@ -395,38 +395,35 @@ static bool js_cocos2dx_audioengine_AudioEngine_preload(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cocos2d::experimental::AudioEngine::preload(arg0, arg1);
             return true;
@@ -621,39 +618,36 @@ static bool js_cocos2dx_audioengine_AudioEngine_setFinishCallback(se::State& s)
         std::function<void (int, const std::basic_string<char> &)> arg1;
         ok &= seval_to_int32(args[0], (int32_t *)&arg0);
         do {
-		    if (args[1].isObject() && args[1].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[1]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](int larg0, const std::basic_string<char> & larg1) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(2);
-		            ok &= int32_to_seval(larg0, &args[0]);
-		            ok &= std_string_to_seval(larg1, &args[1]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg1 = lambda;
-		    }
-		    else
-		    {
-		        arg1 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[1].isObject() && args[1].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[1]);
+                jsFunc.toObject()->setKeepRootedUntilDie(true);
+                auto lambda = [=](int larg0, const std::basic_string<char> & larg1) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(2);
+                    ok &= int32_to_seval(larg0, &args[0]);
+                    ok &= std_string_to_seval(larg1, &args[1]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg1 = lambda;
+            }
+            else
+            {
+                arg1 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_audioengine_AudioEngine_setFinishCallback : Error processing arguments");
         cocos2d::experimental::AudioEngine::setFinishCallback(arg0, arg1);
         return true;

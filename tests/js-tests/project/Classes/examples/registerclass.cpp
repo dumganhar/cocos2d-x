@@ -4,6 +4,9 @@
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_ui_auto.hpp"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_audioengine_auto.hpp"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_extension_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_network_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_builder_auto.hpp"
+
 #include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_extension_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_register_all.h"
 #include "cocos/scripting/js-bindings/manual/jsb_global.h"
@@ -43,6 +46,8 @@ int main_register_class(int argc, char** argv)
     register_all_cocos2dx_extension_manual(global);
     
     register_all_cocos2dx_ui(global);
+    register_all_cocos2dx_network(global);
+    register_all_cocos2dx_builder(global);
 
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
 

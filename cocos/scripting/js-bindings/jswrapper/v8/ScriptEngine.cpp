@@ -59,6 +59,11 @@ namespace se {
 
         void myMessageCallback(v8::Local<v8::Message> message, v8::Local<v8::Value> data)
         {
+            v8::Local<v8::String> msg = message->Get();
+            se::Value msgVal;
+            internal::jsToSeValue(v8::Isolate::GetCurrent(), msg, &msgVal);
+            assert(msgVal.isString());
+            printf("ERROR: %s\n", msgVal.toString().c_str());
             printStackTrace(message->GetStackTrace());
         }
     }
@@ -128,7 +133,7 @@ namespace se {
         v8::HandleScope hs(_isolate);
         _isolate->Enter();
 
-        _isolate->SetCaptureStackTraceForUncaughtExceptions(true, 10, v8::StackTrace::kOverview);
+        _isolate->SetCaptureStackTraceForUncaughtExceptions(true, 20, v8::StackTrace::kOverview);
 
         _isolate->SetFatalErrorHandler(myFatalErrorCallback);
         _isolate->SetOOMErrorHandler(myOOMErrorCallback);

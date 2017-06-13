@@ -1,0 +1,223 @@
+#pragma once
+#include "base/ccConfig.h"
+
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
+
+extern se::Object* __jsb_cocos2d_Animation3D_proto;
+extern se::Class* __jsb_cocos2d_Animation3D_class;
+
+bool js_register_cocos2d_Animation3D(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animation3D_initWithFile);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animation3D_init);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animation3D_getBoneCurveByName);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animation3D_getDuration);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animation3D_Animation3D);
+
+extern se::Object* __jsb_cocos2d_Animate3D_proto;
+extern se::Class* __jsb_cocos2d_Animate3D_class;
+
+bool js_register_cocos2d_Animate3D(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_setKeyFrameUserInfo);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_getSpeed);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_setQuality);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_setWeight);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_removeFromMap);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_initWithFrames);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_getOriginInterval);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_setSpeed);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_init);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_setOriginInterval);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_getWeight);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_getQuality);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_create);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_getTransitionTime);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_createWithFrames);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_setTransitionTime);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Animate3D_Animate3D);
+
+extern se::Object* __jsb_cocos2d_TextureCube_proto;
+extern se::Class* __jsb_cocos2d_TextureCube_class;
+
+bool js_register_cocos2d_TextureCube(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_TextureCube_reloadTexture);
+SE_DECLARE_FUNC(js_cocos2dx_3d_TextureCube_create);
+SE_DECLARE_FUNC(js_cocos2dx_3d_TextureCube_TextureCube);
+
+extern se::Object* __jsb_cocos2d_AttachNode_proto;
+extern se::Class* __jsb_cocos2d_AttachNode_class;
+
+bool js_register_cocos2d_AttachNode(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_AttachNode_create);
+SE_DECLARE_FUNC(js_cocos2dx_3d_AttachNode_AttachNode);
+
+extern se::Object* __jsb_cocos2d_BillBoard_proto;
+extern se::Class* __jsb_cocos2d_BillBoard_class;
+
+bool js_register_cocos2d_BillBoard(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_BillBoard_getMode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_BillBoard_setMode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_BillBoard_create);
+SE_DECLARE_FUNC(js_cocos2dx_3d_BillBoard_createWithTexture);
+SE_DECLARE_FUNC(js_cocos2dx_3d_BillBoard_BillBoard);
+
+extern se::Object* __jsb_cocos2d_Mesh_proto;
+extern se::Class* __jsb_cocos2d_Mesh_class;
+
+bool js_register_cocos2d_Mesh(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getSkin);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getMaterial);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getVertexSizeInBytes);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setMaterial);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getName);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getIndexFormat);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getGLProgramState);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getVertexBuffer);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_calculateAABB);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_hasVertexAttrib);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getMeshIndexData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setName);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getIndexCount);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setMeshIndexData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getMeshVertexAttribCount);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setForce2DQueue);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getPrimitiveType);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setSkin);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_isVisible);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_getIndexBuffer);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setGLProgramState);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_setVisible);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Mesh_Mesh);
+
+extern se::Object* __jsb_cocos2d_Skeleton3D_proto;
+extern se::Class* __jsb_cocos2d_Skeleton3D_class;
+
+bool js_register_cocos2d_Skeleton3D(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_removeAllBones);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_addBone);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_getBoneByName);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_getRootBone);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_updateBoneMatrix);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_getBoneByIndex);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_getRootCount);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_getBoneIndex);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_getBoneCount);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skeleton3D_Skeleton3D);
+
+extern se::Object* __jsb_cocos2d_Skybox_proto;
+extern se::Class* __jsb_cocos2d_Skybox_class;
+
+bool js_register_cocos2d_Skybox(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skybox_reload);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skybox_init);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skybox_setTexture);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skybox_create);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Skybox_Skybox);
+
+extern se::Object* __jsb_cocos2d_Sprite3D_proto;
+extern se::Class* __jsb_cocos2d_Sprite3D_class;
+
+bool js_register_cocos2d_Sprite3D(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setCullFaceEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setTexture);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getLightMask);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_createAttachSprite3DNode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_loadFromFile);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMaterial);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setCullFace);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMeshes);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_addMesh);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_removeAllAttachNode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setMaterial);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMesh);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_createSprite3DNode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMeshCount);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_onAABBDirty);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMeshByIndex);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_createNode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_isForceDepthWrite);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMeshIndexData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setLightMask);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_afterAsyncLoad);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_loadFromCache);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_initFrom);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getAttachNode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_initWithFile);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setForce2DQueue);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_genMaterial);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_removeAttachNode);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getSkeleton);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_setForceDepthWrite);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_getMeshByName);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_create);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3D_Sprite3D);
+
+extern se::Object* __jsb_cocos2d_Sprite3DCache_proto;
+extern se::Class* __jsb_cocos2d_Sprite3DCache_class;
+
+bool js_register_cocos2d_Sprite3DCache(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3DCache_removeSprite3DData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3DCache_removeAllSprite3DData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3DCache_destroyInstance);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Sprite3DCache_getInstance);
+
+extern se::Object* __jsb_cocos2d_Terrain_proto;
+extern se::Class* __jsb_cocos2d_Terrain_class;
+
+bool js_register_cocos2d_Terrain(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_initHeightMap);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setMaxDetailMapAmount);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setDrawWire);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setDetailMap);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_resetHeightMap);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setLightDir);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setAlphaMap);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setSkirtHeightRatio);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_convertToTerrainSpace);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_initTextures);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_initProperties);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getHeight);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_initWithTerrainData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setLODDistance);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getTerrainSize);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getIntersectionPoint);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getNormal);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_reload);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getImageHeight);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setLightMap);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_setIsEnableFrustumCull);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getMinHeight);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_getMaxHeight);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Terrain_Terrain);
+
+extern se::Object* __jsb_cocos2d_Bundle3D_proto;
+extern se::Class* __jsb_cocos2d_Bundle3D_class;
+
+bool js_register_cocos2d_Bundle3D(se::Object* obj);
+bool register_all_cocos2dx_3d(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_load);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_loadSkinData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_clear);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_loadMaterials);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_loadMeshDatas);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_loadNodes);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_loadAnimationData);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_createBundle);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_destroyBundle);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_loadObj);
+SE_DECLARE_FUNC(js_cocos2dx_3d_Bundle3D_Bundle3D);
+

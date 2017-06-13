@@ -100,7 +100,7 @@ var TestWriteData = fileUtilsBase.extend({
         jsb.fileUtils.createDirectory(writablePath);
         if (jsb.fileUtils.writeDataToFile(writeData, fullPath))
         {
-            log("see the file at %s", fullPath);
+            log("see the file at " + fullPath);
             writeResult.setString("write success:\n" + fullPath);
         }
         else
@@ -111,16 +111,19 @@ var TestWriteData = fileUtilsBase.extend({
 
         // readTest
         var readData = jsb.fileUtils.getDataFromFile(fullPath);
+        // readData = new Uint8Array(readData);
+        log("readData type: " + typeof readData + ", writeData type: " + typeof writeData);
         if(!readData || typeof readData != typeof writeData) {
             log("read file failed");
             readResult.setString("read failed");
         } else {
             var match = true;
             if(readData.length != writeData.length){
-                log("data size not match");
+                log("data size not match: origial: " + writeData.length + ", read: " + readData.length);
                 match = false;
             } else {
                 for(var i = 0; i < readData.length; i ++) {
+                    log("aaa:" + readData[i]);
                     if(readData[i] != writeData[i]) {
                         log("data not match");
                         match = false;

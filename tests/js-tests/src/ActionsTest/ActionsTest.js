@@ -134,9 +134,11 @@ var ActionsDemo = BaseTestLayer.extend({
         director.runScene(s);
     },
     onRestartCallback:function (sender) {
-        var s = new ActionsTestScene();
-        s.addChild(restartActionsTest());
-        director.runScene(s);
+        // var s = new ActionsTestScene();
+        // s.addChild(restartActionsTest());
+        // director.runScene(s);
+        cc.sys.garbageCollect();
+        __jsc__.dumpNativePtrToSeObjectMap();
     },
     onNextCallback:function (sender) {
         var s = new ActionsTestScene();

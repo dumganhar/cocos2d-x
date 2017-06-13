@@ -216,6 +216,9 @@ var TestController = cc.LayerGradient.extend({
         if (cc.sys.isNative)
         {
             cc.game.end();
+            cc.spriteFrameCache.removeUnusedSpriteFrames();
+            cc.textureCache.removeUnusedTextures();
+            __jsc__.dumpNativePtrToSeObjectMap();
         }
         else {
             window.history && window.history.go(-1);

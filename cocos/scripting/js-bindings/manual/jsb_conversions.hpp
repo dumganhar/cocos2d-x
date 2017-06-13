@@ -75,6 +75,7 @@ bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret);
 bool seval_to_AffineTransform(const se::Value& v, cocos2d::AffineTransform* ret);
 bool seval_to_Viewport(const se::Value& v, cocos2d::experimental::Viewport* ret);
 bool seval_to_Data(const se::Value& v, cocos2d::Data* ret);
+bool seval_to_DownloaderHints(const se::Value& v, cocos2d::network::DownloaderHints* ret);
 
 template<typename T>
 bool seval_to_native_ptr(const se::Value& v, T* ret)
@@ -174,6 +175,7 @@ bool ManifestAsset_to_seval(const cocos2d::extension::ManifestAsset& v, se::Valu
 bool AffineTransform_to_seval(const cocos2d::AffineTransform& v, se::Value* ret);
 bool Viewport_to_seval(const cocos2d::experimental::Viewport& v, se::Value* ret);
 bool Data_to_seval(const cocos2d::Data& v, se::Value* ret);
+bool DownloadTask_to_seval(const cocos2d::network::DownloadTask& v, se::Value* ret);
 
 template<typename T>
 bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
@@ -245,7 +247,7 @@ bool native_ptr_to_seval(typename std::enable_if<std::is_base_of<cocos2d::Ref,T>
     auto iter = se::__nativePtrToObjectMap.find(v);
     if (iter == se::__nativePtrToObjectMap.end())
     { // If we couldn't find native object in map, then the native object is created from native code. e.g. TMXLayer::getTileAt
-//        CCLOGWARN("WARNING: Ref type: (%s) isn't catched!", typeid(*v).name());
+        CCLOGWARN("WARNING: Ref type: (%s) isn't catched!", typeid(*v).name());
         se::Class* cls = JSBClassType::findClass<T>(v);
         assert(cls != nullptr);
         obj = se::Object::createObjectWithClass(cls, false);

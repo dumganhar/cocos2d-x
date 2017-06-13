@@ -193,36 +193,6 @@ static bool js_cocos2dx_Texture2D_getPixelsHigh(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Texture2D_getPixelsHigh)
 
-static bool js_cocos2dx_Texture2D_initWithMipmaps(se::State& s)
-{
-    cocos2d::Texture2D* cobj = (cocos2d::Texture2D*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Texture2D_initWithMipmaps : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 5) {
-        cocos2d::_MipmapInfo* arg0 = nullptr;
-        int arg1 = 0;
-        cocos2d::Texture2D::PixelFormat arg2;
-        int arg3 = 0;
-        int arg4 = 0;
-        #pragma warning NO CONVERSION TO NATIVE FOR _MipmapInfo*
-		ok = false;
-        ok &= seval_to_int32(args[1], (int32_t *)&arg1);
-        ok &= seval_to_int32(args[2], (int32_t *)&arg2);
-        ok &= seval_to_int32(args[3], (int32_t *)&arg3);
-        ok &= seval_to_int32(args[4], (int32_t *)&arg4);
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Texture2D_initWithMipmaps : Error processing arguments");
-        bool result = cobj->initWithMipmaps(arg0, arg1, arg2, arg3, arg4);
-        ok &= boolean_to_seval(result, &s.rval());
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Texture2D_initWithMipmaps : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 5);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Texture2D_initWithMipmaps)
-
 static bool js_cocos2dx_Texture2D_getAlphaTextureName(se::State& s)
 {
     cocos2d::Texture2D* cobj = (cocos2d::Texture2D*)s.nativeThisObject();
@@ -825,7 +795,6 @@ bool js_register_cocos2dx_Texture2D(se::Object* obj)
     cls->defineFunction("getMaxS", _SE(js_cocos2dx_Texture2D_getMaxS));
     cls->defineFunction("hasPremultipliedAlpha", _SE(js_cocos2dx_Texture2D_hasPremultipliedAlpha));
     cls->defineFunction("getPixelsHigh", _SE(js_cocos2dx_Texture2D_getPixelsHigh));
-    cls->defineFunction("initWithMipmaps", _SE(js_cocos2dx_Texture2D_initWithMipmaps));
     cls->defineFunction("getAlphaTextureName", _SE(js_cocos2dx_Texture2D_getAlphaTextureName));
     cls->defineFunction("getBitsPerPixelForFormat", _SE(js_cocos2dx_Texture2D_getBitsPerPixelForFormat));
     cls->defineFunction("getName", _SE(js_cocos2dx_Texture2D_getName));
@@ -1893,53 +1862,6 @@ static bool js_cocos2dx_Node_getChildren(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getChildren)
 
-static bool js_cocos2dx_Node_setOnExitCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setOnExitCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        std::function<void ()> arg0;
-        do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=]() -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setOnExitCallback : Error processing arguments");
-        cobj->setOnExitCallback(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_setOnExitCallback)
-
 static bool js_cocos2dx_Node_setActionManager(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
@@ -2167,53 +2089,6 @@ static bool js_cocos2dx_Node_getColor(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getColor)
-
-static bool js_cocos2dx_Node_setonEnterTransitionDidFinishCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setonEnterTransitionDidFinishCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        std::function<void ()> arg0;
-        do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=]() -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setonEnterTransitionDidFinishCallback : Error processing arguments");
-        cobj->setonEnterTransitionDidFinishCallback(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_setonEnterTransitionDidFinishCallback)
 
 static bool js_cocos2dx_Node_removeAllComponents(se::State& s)
 {
@@ -2454,53 +2329,6 @@ static bool js_cocos2dx_Node_setGLProgramState(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_setGLProgramState)
 
-static bool js_cocos2dx_Node_setOnEnterCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setOnEnterCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        std::function<void ()> arg0;
-        do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=]() -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setOnEnterCallback : Error processing arguments");
-        cobj->setOnEnterCallback(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_setOnEnterCallback)
-
 static bool js_cocos2dx_Node_stopActionsByFlags(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
@@ -2538,53 +2366,6 @@ static bool js_cocos2dx_Node_setNormalizedPosition(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Node_setNormalizedPosition)
-
-static bool js_cocos2dx_Node_setonExitTransitionDidStartCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setonExitTransitionDidStartCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        std::function<void ()> arg0;
-        do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=]() -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setonExitTransitionDidStartCallback : Error processing arguments");
-        cobj->setonExitTransitionDidStartCallback(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_setonExitTransitionDidStartCallback)
 
 static bool js_cocos2dx_Node_convertTouchToNodeSpace(se::State& s)
 {
@@ -2670,53 +2451,6 @@ static bool js_cocos2dx_Node_getRotationSkewY(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getRotationSkewY)
-
-static bool js_cocos2dx_Node_setCleanupCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_setCleanupCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        std::function<void ()> arg0;
-        do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=]() -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_setCleanupCallback : Error processing arguments");
-        cobj->setCleanupCallback(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_setCleanupCallback)
 
 static bool js_cocos2dx_Node_getNodeToWorldTransform(se::State& s)
 {
@@ -3338,24 +3072,6 @@ static bool js_cocos2dx_Node_getAnchorPointInPoints(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Node_getAnchorPointInPoints)
 
-static bool js_cocos2dx_Node_getCleanupCallback(se::State& s)
-{
-    cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Node_getCleanupCallback : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 0) {
-        const std::function<void ()>& result = cobj->getCleanupCallback();
-        #pragma warning NO CONVERSION FROM NATIVE FOR std::function;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_getCleanupCallback : Error processing arguments");
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 0);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Node_getCleanupCallback)
-
 static bool js_cocos2dx_Node_getRotationQuat(se::State& s)
 {
     cocos2d::Node* cobj = (cocos2d::Node*)s.nativeThisObject();
@@ -3719,11 +3435,11 @@ static bool js_cocos2dx_Node_getPosition(se::State& s)
         if (argc == 2) {
             float* arg0 = 0;
             #pragma warning NO CONVERSION TO NATIVE FOR float*
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             float* arg1 = 0;
             #pragma warning NO CONVERSION TO NATIVE FOR float*
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             cobj->getPosition(arg0, arg1);
             return true;
@@ -4351,42 +4067,39 @@ static bool js_cocos2dx_Node_enumerateChildren(se::State& s)
         std::function<bool (cocos2d::Node *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    if (args[1].isObject() && args[1].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[1]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Node* larg0) -> bool {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		            bool result;
-		            ok &= seval_to_boolean(rval, &result);
-		            JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type bool");
-		            return result;
-		        };
-		        arg1 = lambda;
-		    }
-		    else
-		    {
-		        arg1 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[1].isObject() && args[1].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[1]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Node* larg0) -> bool {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                    bool result;
+                    ok &= seval_to_boolean(rval, &result);
+                    JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type bool");
+                    return result;
+                };
+                arg1 = lambda;
+            }
+            else
+            {
+                arg1 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Node_enumerateChildren : Error processing arguments");
         cobj->enumerateChildren(arg0, arg1);
         return true;
@@ -4779,7 +4492,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("setOpacityModifyRGB", _SE(js_cocos2dx_Node_setOpacityModifyRGB));
     cls->defineFunction("setCascadeOpacityEnabled", _SE(js_cocos2dx_Node_setCascadeOpacityEnabled));
     cls->defineFunction("getChildren", _SE(js_cocos2dx_Node_getChildren));
-    cls->defineFunction("setOnExitCallback", _SE(js_cocos2dx_Node_setOnExitCallback));
     cls->defineFunction("setActionManager", _SE(js_cocos2dx_Node_setActionManager));
     cls->defineFunction("convertToWorldSpaceAR", _SE(js_cocos2dx_Node_convertToWorldSpaceAR));
     cls->defineFunction("isIgnoreAnchorPointForPosition", _SE(js_cocos2dx_Node_isIgnoreAnchorPointForPosition));
@@ -4792,7 +4504,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("setScaleY", _SE(js_cocos2dx_Node_setScaleY));
     cls->defineFunction("setScaleX", _SE(js_cocos2dx_Node_setScaleX));
     cls->defineFunction("getColor", _SE(js_cocos2dx_Node_getColor));
-    cls->defineFunction("setonEnterTransitionDidFinishCallback", _SE(js_cocos2dx_Node_setonEnterTransitionDidFinishCallback));
     cls->defineFunction("removeAllComponents", _SE(js_cocos2dx_Node_removeAllComponents));
     cls->defineFunction("_setLocalZOrder", _SE(js_cocos2dx_Node__setLocalZOrder));
     cls->defineFunction("setCameraMask", _SE(js_cocos2dx_Node_setCameraMask));
@@ -4805,15 +4516,12 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("getEventDispatcher", _SE(js_cocos2dx_Node_getEventDispatcher));
     cls->defineFunction("setSkewX", _SE(js_cocos2dx_Node_setSkewX));
     cls->defineFunction("setGLProgramState", _SE(js_cocos2dx_Node_setGLProgramState));
-    cls->defineFunction("setOnEnterCallback", _SE(js_cocos2dx_Node_setOnEnterCallback));
     cls->defineFunction("stopActionsByFlags", _SE(js_cocos2dx_Node_stopActionsByFlags));
     cls->defineFunction("setNormalizedPosition", _SE(js_cocos2dx_Node_setNormalizedPosition));
-    cls->defineFunction("setonExitTransitionDidStartCallback", _SE(js_cocos2dx_Node_setonExitTransitionDidStartCallback));
     cls->defineFunction("convertTouchToNodeSpace", _SE(js_cocos2dx_Node_convertTouchToNodeSpace));
     cls->defineFunction("removeAllChildren", _SE(js_cocos2dx_Node_removeAllChildrenWithCleanup));
     cls->defineFunction("getRotationX", _SE(js_cocos2dx_Node_getRotationSkewX));
     cls->defineFunction("getRotationY", _SE(js_cocos2dx_Node_getRotationSkewY));
-    cls->defineFunction("setCleanupCallback", _SE(js_cocos2dx_Node_setCleanupCallback));
     cls->defineFunction("getNodeToWorldTransform3D", _SE(js_cocos2dx_Node_getNodeToWorldTransform));
     cls->defineFunction("isCascadeOpacityEnabled", _SE(js_cocos2dx_Node_isCascadeOpacityEnabled));
     cls->defineFunction("setParent", _SE(js_cocos2dx_Node_setParent));
@@ -4845,7 +4553,6 @@ bool js_register_cocos2dx_Node(se::Object* obj)
     cls->defineFunction("setShaderProgram", _SE(js_cocos2dx_Node_setGLProgram));
     cls->defineFunction("getRotation", _SE(js_cocos2dx_Node_getRotation));
     cls->defineFunction("getAnchorPointInPoints", _SE(js_cocos2dx_Node_getAnchorPointInPoints));
-    cls->defineFunction("getCleanupCallback", _SE(js_cocos2dx_Node_getCleanupCallback));
     cls->defineFunction("getRotationQuat", _SE(js_cocos2dx_Node_getRotationQuat));
     cls->defineFunction("removeChildByName", _SE(js_cocos2dx_Node_removeChildByName));
     cls->defineFunction("setVertexZ", _SE(js_cocos2dx_Node_setPositionZ));
@@ -7337,53 +7044,6 @@ static bool js_cocos2dx_Scheduler_unscheduleAllWithMinPriority(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_Scheduler_unscheduleAllWithMinPriority)
 
-static bool js_cocos2dx_Scheduler_performFunctionInCocosThread(se::State& s)
-{
-    cocos2d::Scheduler* cobj = (cocos2d::Scheduler*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_Scheduler_performFunctionInCocosThread : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        std::function<void ()> arg0;
-        do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=]() -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(se::EmptyValueArray, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_Scheduler_performFunctionInCocosThread : Error processing arguments");
-        cobj->performFunctionInCocosThread(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_Scheduler_performFunctionInCocosThread)
-
 static bool js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread(se::State& s)
 {
     cocos2d::Scheduler* cobj = (cocos2d::Scheduler*)s.nativeThisObject();
@@ -7438,7 +7098,6 @@ bool js_register_cocos2dx_Scheduler(se::Object* obj)
     cls->defineFunction("unscheduleAll", _SE(js_cocos2dx_Scheduler_unscheduleAll));
     cls->defineFunction("getTimeScale", _SE(js_cocos2dx_Scheduler_getTimeScale));
     cls->defineFunction("unscheduleAllWithMinPriority", _SE(js_cocos2dx_Scheduler_unscheduleAllWithMinPriority));
-    cls->defineFunction("performFunctionInCocosThread", _SE(js_cocos2dx_Scheduler_performFunctionInCocosThread));
     cls->defineFunction("removeAllFunctionsToBePerformedInCocosThread", _SE(js_cocos2dx_Scheduler_removeAllFunctionsToBePerformedInCocosThread));
     cls->defineFinalizedFunction(_SE(js_cocos2d_Scheduler_finalize));
     cls->install();
@@ -8560,7 +8219,7 @@ static bool js_cocos2dx_Image_initWithRawData(se::State& s)
         int arg3 = 0;
         int arg4 = 0;
         #pragma warning NO CONVERSION TO NATIVE FOR unsigned char*
-		ok = false;
+        ok = false;
         ok &= seval_to_ssize(args[1], &arg1);
         ok &= seval_to_int32(args[2], (int32_t *)&arg2);
         ok &= seval_to_int32(args[3], (int32_t *)&arg3);
@@ -8579,7 +8238,7 @@ static bool js_cocos2dx_Image_initWithRawData(se::State& s)
         int arg4 = 0;
         bool arg5;
         #pragma warning NO CONVERSION TO NATIVE FOR unsigned char*
-		ok = false;
+        ok = false;
         ok &= seval_to_ssize(args[1], &arg1);
         ok &= seval_to_int32(args[2], (int32_t *)&arg2);
         ok &= seval_to_int32(args[3], (int32_t *)&arg3);
@@ -8705,39 +8364,36 @@ static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::GLProgram *, cocos2d::Uniform *)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](cocos2d::GLProgram* larg0, cocos2d::Uniform* larg1) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(2);
-			            ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)larg0, &args[0]);
-			            ok &= uniform_to_seval(larg1, &args[1]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsThis.toObject()->attachChild(jsFunc.toObject());
+                    auto lambda = [=](cocos2d::GLProgram* larg0, cocos2d::Uniform* larg1) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(2);
+                        ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)larg0, &args[0]);
+                        ok &= uniform_to_seval(larg1, &args[1]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->setUniformCallback(arg0, arg1);
             return true;
@@ -8751,39 +8407,36 @@ static bool js_cocos2dx_GLProgramState_setUniformCallback(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::GLProgram *, cocos2d::Uniform *)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](cocos2d::GLProgram* larg0, cocos2d::Uniform* larg1) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(2);
-			            ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)larg0, &args[0]);
-			            ok &= uniform_to_seval(larg1, &args[1]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsThis.toObject()->attachChild(jsFunc.toObject());
+                    auto lambda = [=](cocos2d::GLProgram* larg0, cocos2d::Uniform* larg1) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(2);
+                        ok &= native_ptr_to_seval<cocos2d::GLProgram>((cocos2d::GLProgram*)larg0, &args[0]);
+                        ok &= uniform_to_seval(larg1, &args[1]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->setUniformCallback(arg0, arg1);
             return true;
@@ -8922,38 +8575,35 @@ static bool js_cocos2dx_GLProgramState_setVertexAttribCallback(se::State& s)
         std::function<void (cocos2d::VertexAttrib *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    if (args[1].isObject() && args[1].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[1]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::VertexAttrib* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::VertexAttrib>((cocos2d::VertexAttrib*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg1 = lambda;
-		    }
-		    else
-		    {
-		        arg1 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[1].isObject() && args[1].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[1]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::VertexAttrib* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::VertexAttrib>((cocos2d::VertexAttrib*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg1 = lambda;
+            }
+            else
+            {
+                arg1 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_GLProgramState_setVertexAttribCallback : Error processing arguments");
         cobj->setVertexAttribCallback(arg0, arg1);
         return true;
@@ -9236,7 +8886,7 @@ static bool js_cocos2dx_GLProgramState_setUniformFloatv(se::State& s)
             if (!ok) { ok = true; break; }
             const float* arg2 = 0;
             #pragma warning NO CONVERSION TO NATIVE FOR float*
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             cobj->setUniformFloatv(arg0, arg1, arg2);
             return true;
@@ -9253,7 +8903,7 @@ static bool js_cocos2dx_GLProgramState_setUniformFloatv(se::State& s)
             if (!ok) { ok = true; break; }
             const float* arg2 = 0;
             #pragma warning NO CONVERSION TO NATIVE FOR float*
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             cobj->setUniformFloatv(arg0, arg1, arg2);
             return true;
@@ -14395,38 +14045,35 @@ static bool js_cocos2dx_ActionFloat_initWithDuration(se::State& s)
         ok &= seval_to_float(args[1], &arg1);
         ok &= seval_to_float(args[2], &arg2);
         do {
-		    if (args[3].isObject() && args[3].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[3]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](float larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= float_to_seval(larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg3 = lambda;
-		    }
-		    else
-		    {
-		        arg3 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[3].isObject() && args[3].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[3]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](float larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= float_to_seval(larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg3 = lambda;
+            }
+            else
+            {
+                arg3 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ActionFloat_initWithDuration : Error processing arguments");
         bool result = cobj->initWithDuration(arg0, arg1, arg2, arg3);
         ok &= boolean_to_seval(result, &s.rval());
@@ -14452,38 +14099,35 @@ static bool js_cocos2dx_ActionFloat_create(se::State& s)
         ok &= seval_to_float(args[1], &arg1);
         ok &= seval_to_float(args[2], &arg2);
         do {
-		    if (args[3].isObject() && args[3].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[3]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](float larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= float_to_seval(larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg3 = lambda;
-		    }
-		    else
-		    {
-		        arg3 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[3].isObject() && args[3].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[3]);
+                jsFunc.toObject()->setKeepRootedUntilDie(true);
+                auto lambda = [=](float larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= float_to_seval(larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg3 = lambda;
+            }
+            else
+            {
+                arg3 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ActionFloat_create : Error processing arguments");
         auto result = cocos2d::ActionFloat::create(arg0, arg1, arg2, arg3);
         result->retain();
@@ -15254,7 +14898,7 @@ static bool js_cocos2dx_Properties_getPath(se::State& s)
         std::string* arg1 = nullptr;
         std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
         #pragma warning NO CONVERSION TO NATIVE FOR std::string*
-		ok = false;
+        ok = false;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_Properties_getPath : Error processing arguments");
         bool result = cobj->getPath(arg0, arg1);
         ok &= boolean_to_seval(result, &s.rval());
@@ -15857,38 +15501,35 @@ static bool js_cocos2dx_FileUtils_writeDataToFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    if (args[2].isObject() && args[2].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[2]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg2 = lambda;
-			    }
-			    else
-			    {
-			        arg2 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[2].isObject() && args[2].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[2]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg2 = lambda;
+                }
+                else
+                {
+                    arg2 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->writeDataToFile(arg0, arg1, arg2);
             return true;
@@ -15950,38 +15591,35 @@ static bool js_cocos2dx_FileUtils_getStringFromFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (std::basic_string<char>)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](std::basic_string<char> larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= std_string_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](std::basic_string<char> larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= std_string_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->getStringFromFile(arg0, arg1);
             return true;
@@ -16019,38 +15657,35 @@ static bool js_cocos2dx_FileUtils_removeFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->removeFile(arg0, arg1);
             return true;
@@ -16088,38 +15723,35 @@ static bool js_cocos2dx_FileUtils_getDataFromFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::Data)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](cocos2d::Data larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= Data_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](cocos2d::Data larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= Data_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->getDataFromFile(arg0, arg1);
             return true;
@@ -16184,38 +15816,35 @@ static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg3;
             do {
-			    if (args[3].isObject() && args[3].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[3]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg3 = lambda;
-			    }
-			    else
-			    {
-			        arg3 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[3].isObject() && args[3].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[3]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg3 = lambda;
+                }
+                else
+                {
+                    arg3 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->renameFile(arg0, arg1, arg2, arg3);
             return true;
@@ -16265,38 +15894,35 @@ static bool js_cocos2dx_FileUtils_renameFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    if (args[2].isObject() && args[2].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[2]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg2 = lambda;
-			    }
-			    else
-			    {
-			        arg2 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[2].isObject() && args[2].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[2]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg2 = lambda;
+                }
+                else
+                {
+                    arg2 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->renameFile(arg0, arg1, arg2);
             return true;
@@ -16520,38 +16146,35 @@ static bool js_cocos2dx_FileUtils_getFileSize(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (long)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](long larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= long_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](long larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= long_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->getFileSize(arg0, arg1);
             return true;
@@ -16612,38 +16235,35 @@ static bool js_cocos2dx_FileUtils_removeDirectory(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->removeDirectory(arg0, arg1);
             return true;
@@ -16703,38 +16323,35 @@ static bool js_cocos2dx_FileUtils_writeStringToFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    if (args[2].isObject() && args[2].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[2]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg2 = lambda;
-			    }
-			    else
-			    {
-			        arg2 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[2].isObject() && args[2].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[2]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg2 = lambda;
+                }
+                else
+                {
+                    arg2 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->writeStringToFile(arg0, arg1, arg2);
             return true;
@@ -16853,38 +16470,35 @@ static bool js_cocos2dx_FileUtils_writeValueVectorToFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    if (args[2].isObject() && args[2].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[2]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg2 = lambda;
-			    }
-			    else
-			    {
-			        arg2 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[2].isObject() && args[2].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[2]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg2 = lambda;
+                }
+                else
+                {
+                    arg2 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->writeValueVectorToFile(arg0, arg1, arg2);
             return true;
@@ -16925,38 +16539,35 @@ static bool js_cocos2dx_FileUtils_isFileExist(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->isFileExist(arg0, arg1);
             return true;
@@ -17056,38 +16667,35 @@ static bool js_cocos2dx_FileUtils_writeValueMapToFile(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg2;
             do {
-			    if (args[2].isObject() && args[2].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[2]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg2 = lambda;
-			    }
-			    else
-			    {
-			        arg2 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[2].isObject() && args[2].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[2]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg2 = lambda;
+                }
+                else
+                {
+                    arg2 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->writeValueMapToFile(arg0, arg1, arg2);
             return true;
@@ -17187,38 +16795,35 @@ static bool js_cocos2dx_FileUtils_isDirectoryExist(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->isDirectoryExist(arg0, arg1);
             return true;
@@ -17293,38 +16898,35 @@ static bool js_cocos2dx_FileUtils_createDirectory(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (bool)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](bool larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= boolean_to_seval(larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](bool larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= boolean_to_seval(larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->createDirectory(arg0, arg1);
             return true;
@@ -17735,38 +17337,35 @@ static bool js_cocos2dx_EventDispatcher_addCustomEventListener(se::State& s)
         std::function<void (cocos2d::EventCustom *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    if (args[1].isObject() && args[1].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[1]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::EventCustom* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::EventCustom>((cocos2d::EventCustom*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg1 = lambda;
-		    }
-		    else
-		    {
-		        arg1 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[1].isObject() && args[1].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[1]);
+                jsFunc.toObject()->setKeepRootedUntilDie(true);
+                auto lambda = [=](cocos2d::EventCustom* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::EventCustom>((cocos2d::EventCustom*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg1 = lambda;
+            }
+            else
+            {
+                arg1 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EventDispatcher_addCustomEventListener : Error processing arguments");
         cocos2d::EventListenerCustom* result = cobj->addCustomEventListener(arg0, arg1);
         ok &= native_ptr_to_seval<cocos2d::EventListenerCustom>((cocos2d::EventListenerCustom*)result, &s.rval());
@@ -18106,39 +17705,36 @@ static bool js_cocos2dx_EventListenerAcceleration_init(se::State& s)
     if (argc == 1) {
         std::function<void (cocos2d::Acceleration *, cocos2d::Event *)> arg0;
         do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Acceleration* larg0, cocos2d::Event* larg1) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(2);
-		            ok &= Acceleration_to_seval(larg0, &args[0]);
-		            ok &= native_ptr_to_seval<cocos2d::Event>((cocos2d::Event*)larg1, &args[1]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[0].isObject() && args[0].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[0]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Acceleration* larg0, cocos2d::Event* larg1) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(2);
+                    ok &= Acceleration_to_seval(larg0, &args[0]);
+                    ok &= native_ptr_to_seval<cocos2d::Event>((cocos2d::Event*)larg1, &args[1]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg0 = lambda;
+            }
+            else
+            {
+                arg0 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_EventListenerAcceleration_init : Error processing arguments");
         bool result = cobj->init(arg0);
         ok &= boolean_to_seval(result, &s.rval());
@@ -19133,11 +18729,11 @@ static bool js_cocos2dx_OrbitCamera_sphericalRadius(se::State& s)
         float* arg1 = 0;
         float* arg2 = 0;
         #pragma warning NO CONVERSION TO NATIVE FOR float*
-		ok = false;
+        ok = false;
         #pragma warning NO CONVERSION TO NATIVE FOR float*
-		ok = false;
+        ok = false;
         #pragma warning NO CONVERSION TO NATIVE FOR float*
-		ok = false;
+        ok = false;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_OrbitCamera_sphericalRadius : Error processing arguments");
         cobj->sphericalRadius(arg0, arg1, arg2);
         return true;
@@ -25965,7 +25561,7 @@ static bool js_cocos2dx_ShuffleTiles_placeTile(se::State& s)
         cocos2d::Tile* arg1 = nullptr;
         ok &= seval_to_Vec2(args[0], &arg0);
         #pragma warning NO CONVERSION TO NATIVE FOR Tile*
-		ok = false;
+        ok = false;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ShuffleTiles_placeTile : Error processing arguments");
         cobj->placeTile(arg0, arg1);
         return true;
@@ -25986,7 +25582,7 @@ static bool js_cocos2dx_ShuffleTiles_shuffle(se::State& s)
         unsigned int* arg0 = 0;
         unsigned int arg1 = 0;
         #pragma warning NO CONVERSION TO NATIVE FOR unsigned int*
-		ok = false;
+        ok = false;
         ok &= seval_to_uint32(args[1], &arg1);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ShuffleTiles_shuffle : Error processing arguments");
         cobj->shuffle(arg0, arg1);
@@ -26587,7 +26183,7 @@ static bool js_cocos2dx_TurnOffTiles_shuffle(se::State& s)
         unsigned int* arg0 = 0;
         unsigned int arg1 = 0;
         #pragma warning NO CONVERSION TO NATIVE FOR unsigned int*
-		ok = false;
+        ok = false;
         ok &= seval_to_uint32(args[1], &arg1);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TurnOffTiles_shuffle : Error processing arguments");
         cobj->shuffle(arg0, arg1);
@@ -29136,7 +28732,7 @@ static bool js_cocos2dx_Label_initWithTTF(se::State& s)
         if (argc == 2) {
             cocos2d::_ttfConfig arg0;
             #pragma warning NO CONVERSION TO NATIVE FOR _ttfConfig
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             std::string arg1;
             ok &= seval_to_std_string(args[1], &arg1);
@@ -29152,7 +28748,7 @@ static bool js_cocos2dx_Label_initWithTTF(se::State& s)
         if (argc == 3) {
             cocos2d::_ttfConfig arg0;
             #pragma warning NO CONVERSION TO NATIVE FOR _ttfConfig
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             std::string arg1;
             ok &= seval_to_std_string(args[1], &arg1);
@@ -29171,7 +28767,7 @@ static bool js_cocos2dx_Label_initWithTTF(se::State& s)
         if (argc == 4) {
             cocos2d::_ttfConfig arg0;
             #pragma warning NO CONVERSION TO NATIVE FOR _ttfConfig
-			ok = false;
+            ok = false;
             if (!ok) { ok = true; break; }
             std::string arg1;
             ok &= seval_to_std_string(args[1], &arg1);
@@ -32875,38 +32471,35 @@ static bool js_cocos2dx_MenuItem_initWithCallback(se::State& s)
     if (argc == 1) {
         std::function<void (cocos2d::Ref *)> arg0;
         do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[0].isObject() && args[0].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[0]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg0 = lambda;
+            }
+            else
+            {
+                arg0 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItem_initWithCallback : Error processing arguments");
         bool result = cobj->initWithCallback(arg0);
         ok &= boolean_to_seval(result, &s.rval());
@@ -32979,38 +32572,35 @@ static bool js_cocos2dx_MenuItem_setCallback(se::State& s)
     if (argc == 1) {
         std::function<void (cocos2d::Ref *)> arg0;
         do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[0].isObject() && args[0].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[0]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg0 = lambda;
+            }
+            else
+            {
+                arg0 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItem_setCallback : Error processing arguments");
         cobj->setCallback(arg0);
         return true;
@@ -33207,38 +32797,35 @@ static bool js_cocos2dx_MenuItemLabel_initWithLabel(se::State& s)
         std::function<void (cocos2d::Ref *)> arg1;
         ok &= seval_to_native_ptr(args[0], &arg0);
         do {
-		    if (args[1].isObject() && args[1].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[1]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg1 = lambda;
-		    }
-		    else
-		    {
-		        arg1 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[1].isObject() && args[1].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[1]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg1 = lambda;
+            }
+            else
+            {
+                arg1 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemLabel_initWithLabel : Error processing arguments");
         bool result = cobj->initWithLabel(arg0, arg1);
         ok &= boolean_to_seval(result, &s.rval());
@@ -33373,38 +32960,35 @@ static bool js_cocos2dx_MenuItemAtlasFont_initWithString(se::State& s)
         ok &= seval_to_int32(args[3], (int32_t *)&arg3);
         ok &= seval_to_int8(args[4], &arg4);
         do {
-		    if (args[5].isObject() && args[5].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[5]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg5 = lambda;
-		    }
-		    else
-		    {
-		        arg5 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[5].isObject() && args[5].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[5]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg5 = lambda;
+            }
+            else
+            {
+                arg5 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemAtlasFont_initWithString : Error processing arguments");
         bool result = cobj->initWithString(arg0, arg1, arg2, arg3, arg4, arg5);
         ok &= boolean_to_seval(result, &s.rval());
@@ -33544,38 +33128,35 @@ static bool js_cocos2dx_MenuItemFont_initWithString(se::State& s)
         std::function<void (cocos2d::Ref *)> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
         do {
-		    if (args[1].isObject() && args[1].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[1]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg1 = lambda;
-		    }
-		    else
-		    {
-		        arg1 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[1].isObject() && args[1].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[1]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg1 = lambda;
+            }
+            else
+            {
+                arg1 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemFont_initWithString : Error processing arguments");
         bool result = cobj->initWithString(arg0, arg1);
         ok &= boolean_to_seval(result, &s.rval());
@@ -33827,38 +33408,35 @@ static bool js_cocos2dx_MenuItemSprite_initWithNormalSprite(se::State& s)
         ok &= seval_to_native_ptr(args[1], &arg1);
         ok &= seval_to_native_ptr(args[2], &arg2);
         do {
-		    if (args[3].isObject() && args[3].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[3]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg3 = lambda;
-		    }
-		    else
-		    {
-		        arg3 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[3].isObject() && args[3].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[3]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg3 = lambda;
+            }
+            else
+            {
+                arg3 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemSprite_initWithNormalSprite : Error processing arguments");
         bool result = cobj->initWithNormalSprite(arg0, arg1, arg2, arg3);
         ok &= boolean_to_seval(result, &s.rval());
@@ -34118,38 +33696,35 @@ static bool js_cocos2dx_MenuItemImage_initWithNormalImage(se::State& s)
         ok &= seval_to_std_string(args[1], &arg1);
         ok &= seval_to_std_string(args[2], &arg2);
         do {
-		    if (args[3].isObject() && args[3].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[3]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](cocos2d::Ref* larg0) -> void {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(1);
-		            ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		        };
-		        arg3 = lambda;
-		    }
-		    else
-		    {
-		        arg3 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[3].isObject() && args[3].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[3]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](cocos2d::Ref* larg0) -> void {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(1);
+                    ok &= native_ptr_to_seval<cocos2d::Ref>((cocos2d::Ref*)larg0, &args[0]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                };
+                arg3 = lambda;
+            }
+            else
+            {
+                arg3 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_MenuItemImage_initWithNormalImage : Error processing arguments");
         bool result = cobj->initWithNormalImage(arg0, arg1, arg2, arg3);
         ok &= boolean_to_seval(result, &s.rval());
@@ -49905,38 +49480,35 @@ static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::Texture2D *)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](cocos2d::Texture2D* larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](cocos2d::Texture2D* larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             std::string arg2;
             ok &= seval_to_std_string(args[2], &arg2);
@@ -49953,38 +49525,35 @@ static bool js_cocos2dx_TextureCache_addImageAsync(se::State& s)
             if (!ok) { ok = true; break; }
             std::function<void (cocos2d::Texture2D *)> arg1;
             do {
-			    if (args[1].isObject() && args[1].toObject()->isFunction())
-			    {
-			        se::Value jsThis(s.thisObject());
-			        se::Value jsFunc(args[1]);
-			        if (jsThis.isObject())
-			            jsThis.toObject()->attachChild(jsFunc.toObject());
-			        else
-			            jsFunc.toObject()->setKeepRootedUntilDie(true);
-			        auto lambda = [=](cocos2d::Texture2D* larg0) -> void {
-			            se::ScriptEngine::getInstance()->clearException();
-			            se::AutoHandleScope hs;
-			
-			            CC_UNUSED bool ok = true;
-			            se::ValueArray args;
-			            args.resize(1);
-			            ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)larg0, &args[0]);
-			            se::Value rval;
-			            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-			            se::Object* funcObj = jsFunc.toObject();
-			            bool succeed = funcObj->call(args, thisObj, &rval);
-			            if (!succeed) {
-			                se::ScriptEngine::getInstance()->clearException();
-			            }
-			        };
-			        arg1 = lambda;
-			    }
-			    else
-			    {
-			        arg1 = nullptr;
-			    }
-			} while(false)
-			;
+                if (args[1].isObject() && args[1].toObject()->isFunction())
+                {
+                    se::Value jsThis(s.thisObject());
+                    se::Value jsFunc(args[1]);
+                    jsFunc.toObject()->setKeepRootedUntilDie(true);
+                    auto lambda = [=](cocos2d::Texture2D* larg0) -> void {
+                        se::ScriptEngine::getInstance()->clearException();
+                        se::AutoHandleScope hs;
+            
+                        CC_UNUSED bool ok = true;
+                        se::ValueArray args;
+                        args.resize(1);
+                        ok &= native_ptr_to_seval<cocos2d::Texture2D>((cocos2d::Texture2D*)larg0, &args[0]);
+                        se::Value rval;
+                        se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                        se::Object* funcObj = jsFunc.toObject();
+                        bool succeed = funcObj->call(args, thisObj, &rval);
+                        if (!succeed) {
+                            se::ScriptEngine::getInstance()->clearException();
+                        }
+                    };
+                    arg1 = lambda;
+                }
+                else
+                {
+                    arg1 = nullptr;
+                }
+            } while(false)
+            ;
             if (!ok) { ok = true; break; }
             cobj->addImageAsync(arg0, arg1);
             return true;
@@ -52226,26 +51795,6 @@ static bool js_cocos2dx_ParallaxNode_removeAllChildrenWithCleanup(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_ParallaxNode_removeAllChildrenWithCleanup)
 
-static bool js_cocos2dx_ParallaxNode_setParallaxArray(se::State& s)
-{
-    cocos2d::ParallaxNode* cobj = (cocos2d::ParallaxNode*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_ParallaxNode_setParallaxArray : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        cocos2d::_ccArray* arg0 = nullptr;
-        #pragma warning NO CONVERSION TO NATIVE FOR _ccArray*
-		ok = false;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_ParallaxNode_setParallaxArray : Error processing arguments");
-        cobj->setParallaxArray(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_ParallaxNode_setParallaxArray)
-
 static bool js_cocos2dx_ParallaxNode_create(se::State& s)
 {
     const auto& args = s.args();
@@ -52310,7 +51859,6 @@ bool js_register_cocos2dx_ParallaxNode(se::Object* obj)
 
     cls->defineFunction("addChild", _SE(js_cocos2dx_ParallaxNode_addChild));
     cls->defineFunction("removeAllChildrenWithCleanup", _SE(js_cocos2dx_ParallaxNode_removeAllChildrenWithCleanup));
-    cls->defineFunction("setParallaxArray", _SE(js_cocos2dx_ParallaxNode_setParallaxArray));
     cls->defineFunction("ctor", _SE(js_cocos2dx_ParallaxNode_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_ParallaxNode_create));
     cls->defineFinalizedFunction(_SE(js_cocos2d_ParallaxNode_finalize));
@@ -53771,7 +53319,7 @@ static bool js_cocos2dx_TMXLayer_setTiles(se::State& s)
     if (argc == 1) {
         unsigned int* arg0 = 0;
         #pragma warning NO CONVERSION TO NATIVE FOR unsigned int*
-		ok = false;
+        ok = false;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_TMXLayer_setTiles : Error processing arguments");
         cobj->setTiles(arg0);
         return true;
@@ -54831,26 +54379,6 @@ static bool js_cocos2dx_TileMapAtlas_setTile(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_TileMapAtlas_setTile)
 
-static bool js_cocos2dx_TileMapAtlas_setTGAInfo(se::State& s)
-{
-    cocos2d::TileMapAtlas* cobj = (cocos2d::TileMapAtlas*)s.nativeThisObject();
-    JSB_PRECONDITION2(cobj, false, "js_cocos2dx_TileMapAtlas_setTGAInfo : Invalid Native Object");
-    const auto& args = s.args();
-    size_t argc = args.size();
-    CC_UNUSED bool ok = true;
-    if (argc == 1) {
-        cocos2d::sImageTGA* arg0 = nullptr;
-        #pragma warning NO CONVERSION TO NATIVE FOR sImageTGA*
-		ok = false;
-        JSB_PRECONDITION2(ok, false, "js_cocos2dx_TileMapAtlas_setTGAInfo : Error processing arguments");
-        cobj->setTGAInfo(arg0);
-        return true;
-    }
-    SE_REPORT_ERROR("wrong number of arguments: %d, was expecting %d", (int)argc, 1);
-    return false;
-}
-SE_BIND_FUNC(js_cocos2dx_TileMapAtlas_setTGAInfo)
-
 static bool js_cocos2dx_TileMapAtlas_create(se::State& s)
 {
     const auto& args = s.args();
@@ -54926,7 +54454,6 @@ bool js_register_cocos2dx_TileMapAtlas(se::Object* obj)
     cls->defineFunction("releaseMap", _SE(js_cocos2dx_TileMapAtlas_releaseMap));
     cls->defineFunction("getTileAt", _SE(js_cocos2dx_TileMapAtlas_getTileAt));
     cls->defineFunction("setTile", _SE(js_cocos2dx_TileMapAtlas_setTile));
-    cls->defineFunction("setTGAInfo", _SE(js_cocos2dx_TileMapAtlas_setTGAInfo));
     cls->defineFunction("ctor", _SE(js_cocos2dx_TileMapAtlas_ctor));
     cls->defineStaticFunction("create", _SE(js_cocos2dx_TileMapAtlas_create));
     cls->defineFinalizedFunction(_SE(js_cocos2d_TileMapAtlas_finalize));

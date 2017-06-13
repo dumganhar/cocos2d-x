@@ -8,6 +8,8 @@
 
 #include "jsb_conversions.hpp"
 
+// seval to native
+
 bool seval_to_int32(const se::Value& v, int32_t* ret)
 {
     assert(ret != nullptr);
@@ -960,7 +962,32 @@ bool seval_to_Data(const se::Value& v, cocos2d::Data* ret)
     return ok;
 }
 
+bool seval_to_DownloaderHints(const se::Value& v, cocos2d::network::DownloaderHints* ret)
+{
+    static cocos2d::network::DownloaderHints ZERO = {0, 0, ""};
+    assert(ret != nullptr);
+    assert(v.isObject());
+    se::Value tmp;
+    se::Object* obj = v.toObject();
+    bool ok = false;
+
+    ok = obj->getProperty("countOfMaxProcessingTasks", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->countOfMaxProcessingTasks = tmp.toUint32();
+
+    ok = obj->getProperty("timeoutInSeconds", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isNumber(), false, *ret = ZERO);
+    ret->timeoutInSeconds = tmp.toUint32();
+
+    ok = obj->getProperty("tempFileNameSuffix", &tmp);
+    JSB_PRECONDITION3(ok && tmp.isString(), false, *ret = ZERO);
+    ret->tempFileNameSuffix = tmp.toString();
+
+    return ok;
+}
+
 //////////////////////////////////////////////////////////////////////////////////
+// native to seval
 
 bool int32_to_seval(int32_t v, se::Value* ret)
 {
@@ -1510,4 +1537,17 @@ bool Data_to_seval(const cocos2d::Data& v, se::Value* ret)
     ret->setObject(obj);
     obj->release();
     return true;
+}
+
+bool DownloadTask_to_seval(const cocos2d::network::DownloadTask& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("identifier", se::Value(v.identifier));
+    obj->setProperty("requestURL", se::Value(v.requestURL));
+    obj->setProperty("storagePath", se::Value(v.storagePath));
+    obj->release();
+
+    return false;
 }

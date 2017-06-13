@@ -1,0 +1,726 @@
+#pragma once
+#include "base/ccConfig.h"
+
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
+
+extern se::Object* __jsb_cocostudio_ActionObject_proto;
+extern se::Class* __jsb_cocostudio_ActionObject_class;
+
+bool js_register_cocostudio_ActionObject(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_setCurrentTime);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_pause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_setName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_setUnitTime);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_getTotalTime);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_getName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_stop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_play);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_getCurrentTime);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_removeActionNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_getLoop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_initWithBinary);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_addActionNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_getUnitTime);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_isPlaying);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_updateToFrameByTime);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_setLoop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_simulationActionUpdate);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionObject_ActionObject);
+
+extern se::Object* __jsb_cocostudio_ActionManagerEx_proto;
+extern se::Class* __jsb_cocostudio_ActionManagerEx_class;
+
+bool js_register_cocostudio_ActionManagerEx(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_stopActionByName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_getActionByName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_getStudioVersionNumber);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_initWithBinary);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_playActionByName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_releaseActions);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_destroyInstance);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionManagerEx_getInstance);
+
+extern se::Object* __jsb_cocostudio_BaseData_proto;
+extern se::Class* __jsb_cocostudio_BaseData_class;
+
+bool js_register_cocostudio_BaseData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BaseData_getColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BaseData_setColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BaseData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BaseData_BaseData);
+
+extern se::Object* __jsb_cocostudio_MovementData_proto;
+extern se::Class* __jsb_cocostudio_MovementData_class;
+
+bool js_register_cocostudio_MovementData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_MovementData_getMovementBoneData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_MovementData_addMovementBoneData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_MovementData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_MovementData_MovementData);
+
+extern se::Object* __jsb_cocostudio_AnimationData_proto;
+extern se::Class* __jsb_cocostudio_AnimationData_class;
+
+bool js_register_cocostudio_AnimationData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnimationData_getMovement);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnimationData_getMovementCount);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnimationData_addMovement);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnimationData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnimationData_AnimationData);
+
+extern se::Object* __jsb_cocostudio_ContourData_proto;
+extern se::Class* __jsb_cocostudio_ContourData_class;
+
+bool js_register_cocostudio_ContourData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ContourData_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ContourData_addVertex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ContourData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ContourData_ContourData);
+
+extern se::Object* __jsb_cocostudio_TextureData_proto;
+extern se::Class* __jsb_cocostudio_TextureData_class;
+
+bool js_register_cocostudio_TextureData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureData_getContourData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureData_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureData_addContourData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureData_TextureData);
+
+extern se::Object* __jsb_cocostudio_ProcessBase_proto;
+extern se::Class* __jsb_cocostudio_ProcessBase_class;
+
+bool js_register_cocostudio_ProcessBase(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_play);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_pause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_getRawDuration);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_resume);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_setIsComplete);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_stop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_update);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_getCurrentFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_isComplete);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_getCurrentPercent);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_setIsPause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_getProcessScale);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_isPause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_isPlaying);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_setProcessScale);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_setIsPlaying);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ProcessBase_ProcessBase);
+
+extern se::Object* __jsb_cocostudio_Tween_proto;
+extern se::Class* __jsb_cocostudio_Tween_class;
+
+bool js_register_cocostudio_Tween(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_getAnimation);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_gotoAndPause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_play);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_gotoAndPlay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_setAnimation);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Tween_Tween);
+
+extern se::Object* __jsb_cocostudio_ColliderFilter_proto;
+extern se::Class* __jsb_cocostudio_ColliderFilter_class;
+
+bool js_register_cocostudio_ColliderFilter(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+
+extern se::Object* __jsb_cocostudio_ColliderBody_proto;
+extern se::Class* __jsb_cocostudio_ColliderBody_class;
+
+bool js_register_cocostudio_ColliderBody(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+
+extern se::Object* __jsb_cocostudio_ColliderDetector_proto;
+extern se::Class* __jsb_cocostudio_ColliderDetector_class;
+
+bool js_register_cocostudio_ColliderDetector(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_getBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_getActive);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_getColliderBodyList);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_updateTransform);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_removeAll);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_setActive);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_setBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColliderDetector_create);
+
+extern se::Object* __jsb_cocostudio_DecorativeDisplay_proto;
+extern se::Class* __jsb_cocostudio_DecorativeDisplay_class;
+
+bool js_register_cocostudio_DecorativeDisplay(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_getColliderDetector);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_getDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_setDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_setDisplayData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_getDisplayData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_setColliderDetector);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DecorativeDisplay_create);
+
+extern se::Object* __jsb_cocostudio_DisplayManager_proto;
+extern se::Class* __jsb_cocostudio_DisplayManager_class;
+
+bool js_register_cocostudio_DisplayManager(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getCurrentDecorativeDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getDisplayRenderNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getAnchorPointInPoints);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_setCurrentDecorativeDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getDisplayRenderNodeType);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_removeDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_setForceChangeDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getContentSize);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getBoundingBox);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_addDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_containPoint);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_initDisplayList);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_changeDisplayWithIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_changeDisplayWithName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_isForceChangeDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getDecorativeDisplayByIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getCurrentDisplayIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getAnchorPoint);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_getDecorativeDisplayList);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_isVisible);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_setVisible);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_DisplayManager_DisplayManager);
+
+extern se::Object* __jsb_cocostudio_Bone_proto;
+extern se::Class* __jsb_cocostudio_Bone_class;
+
+bool js_register_cocostudio_Bone(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_isTransformDirty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_isIgnoreMovementBoneData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_updateZOrder);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getDisplayRenderNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_isBlendDirty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_addChildBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getWorldInfo);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getTween);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getParentBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_updateColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setTransformDirty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getDisplayRenderNodeType);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_removeDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setBoneData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setParentBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_addDisplay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setIgnoreMovementBoneData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_removeFromParent);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getColliderDetector);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getChildArmature);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_changeDisplayWithIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_changeDisplayWithName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setArmature);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setBlendDirty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_removeChildBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_setChildArmature);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getNodeToArmatureTransform);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getDisplayManager);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_getArmature);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Bone_Bone);
+
+extern se::Object* __jsb_cocostudio_BatchNode_proto;
+extern se::Class* __jsb_cocostudio_BatchNode_class;
+
+bool js_register_cocostudio_BatchNode(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BatchNode_create);
+
+extern se::Object* __jsb_cocostudio_ArmatureAnimation_proto;
+extern se::Class* __jsb_cocostudio_ArmatureAnimation_class;
+
+bool js_register_cocostudio_ArmatureAnimation(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_getSpeedScale);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_play);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_gotoAndPause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_playWithIndexes);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_setAnimationData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_setSpeedScale);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_getAnimationData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_gotoAndPlay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_playWithNames);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_getMovementCount);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_playWithIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_getCurrentMovementID);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureAnimation_ArmatureAnimation);
+
+extern se::Object* __jsb_cocostudio_ArmatureDataManager_proto;
+extern se::Class* __jsb_cocostudio_ArmatureDataManager_class;
+
+bool js_register_cocostudio_ArmatureDataManager(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_getAnimationDatas);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_removeAnimationData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_addArmatureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_addArmatureFileInfo);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_removeArmatureFileInfo);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_getTextureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_getArmatureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_getAnimationData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_addAnimationData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_removeArmatureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_getArmatureDatas);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_removeTextureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_addTextureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_isAutoLoadSpriteFile);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_addSpriteFrameFromFile);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_destroyInstance);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ArmatureDataManager_getInstance);
+
+extern se::Object* __jsb_cocostudio_Armature_proto;
+extern se::Class* __jsb_cocostudio_Armature_class;
+
+bool js_register_cocostudio_Armature(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_changeBoneParent);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_setAnimation);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getBoneAtPoint);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getArmatureTransformDirty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_setVersion);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_updateOffsetPoint);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getParentBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_removeBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getBatchNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_setParentBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_setBatchNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_setArmatureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_addBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getArmatureData);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getBoundingBox);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getVersion);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getAnimation);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getOffsetPoints);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_setBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_getBoneDic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Armature_Armature);
+
+extern se::Object* __jsb_cocostudio_Skin_proto;
+extern se::Class* __jsb_cocostudio_Skin_class;
+
+bool js_register_cocostudio_Skin(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_getBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_getNodeToWorldTransformAR);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_getDisplayName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_updateArmatureTransform);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_setBone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_createWithSpriteFrameName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Skin_Skin);
+
+extern se::Object* __jsb_cocostudio_ComAttribute_proto;
+extern se::Class* __jsb_cocostudio_ComAttribute_class;
+
+bool js_register_cocostudio_ComAttribute(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_getFloat);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_getBool);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_getString);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_setFloat);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_setString);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_setInt);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_parse);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_getInt);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_setBool);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAttribute_ComAttribute);
+
+extern se::Object* __jsb_cocostudio_ComAudio_proto;
+extern se::Class* __jsb_cocostudio_ComAudio_class;
+
+bool js_register_cocostudio_ComAudio(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_stopAllEffects);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_getEffectsVolume);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_stopEffect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_getBackgroundMusicVolume);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_willPlayBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_setBackgroundMusicVolume);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_end);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_start);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_stopBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_pauseBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_isBackgroundMusicPlaying);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_isLoop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_resumeAllEffects);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_pauseAllEffects);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_preloadBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_playBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_stop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_playEffect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_preloadEffect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_setLoop);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_unloadEffect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_rewindBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_pauseEffect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_resumeBackgroundMusic);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_setFile);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_setEffectsVolume);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_getFile);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_resumeEffect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComAudio_ComAudio);
+
+extern se::Object* __jsb_cocostudio_InputDelegate_proto;
+extern se::Class* __jsb_cocostudio_InputDelegate_class;
+
+bool js_register_cocostudio_InputDelegate(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_isAccelerometerEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_setKeypadEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_getTouchMode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_setAccelerometerEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_isKeypadEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_isTouchEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_setTouchPriority);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_getTouchPriority);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_setTouchEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InputDelegate_setTouchMode);
+
+extern se::Object* __jsb_cocostudio_ComController_proto;
+extern se::Class* __jsb_cocostudio_ComController_class;
+
+bool js_register_cocostudio_ComController(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComController_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComController_ComController);
+
+extern se::Object* __jsb_cocostudio_ComRender_proto;
+extern se::Class* __jsb_cocostudio_ComRender_class;
+
+bool js_register_cocostudio_ComRender(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComRender_setNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComRender_getNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComRender_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComRender_ComRender);
+
+extern se::Object* __jsb_cocostudio_timeline_Frame_proto;
+extern se::Class* __jsb_cocostudio_timeline_Frame_class;
+
+bool js_register_cocostudio_timeline_Frame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_clone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_setTweenType);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_setNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_setTimeline);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_isEnterWhenPassed);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_getTweenType);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_getFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_apply);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_isTween);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_setFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_setTween);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_getTimeline);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Frame_getNode);
+
+extern se::Object* __jsb_cocostudio_timeline_VisibleFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_VisibleFrame_class;
+
+bool js_register_cocostudio_timeline_VisibleFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_VisibleFrame_isVisible);
+SE_DECLARE_FUNC(js_cocos2dx_studio_VisibleFrame_setVisible);
+SE_DECLARE_FUNC(js_cocos2dx_studio_VisibleFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_VisibleFrame_VisibleFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_TextureFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_TextureFrame_class;
+
+bool js_register_cocostudio_timeline_TextureFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureFrame_getTextureName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureFrame_setTextureName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_TextureFrame_TextureFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_RotationFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_RotationFrame_class;
+
+bool js_register_cocostudio_timeline_RotationFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_RotationFrame_setRotation);
+SE_DECLARE_FUNC(js_cocos2dx_studio_RotationFrame_getRotation);
+SE_DECLARE_FUNC(js_cocos2dx_studio_RotationFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_RotationFrame_RotationFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_SkewFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_SkewFrame_class;
+
+bool js_register_cocostudio_timeline_SkewFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkewFrame_getSkewY);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkewFrame_setSkewX);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkewFrame_setSkewY);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkewFrame_getSkewX);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkewFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkewFrame_SkewFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_RotationSkewFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_RotationSkewFrame_class;
+
+bool js_register_cocostudio_timeline_RotationSkewFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_RotationSkewFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_RotationSkewFrame_RotationSkewFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_PositionFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_PositionFrame_class;
+
+bool js_register_cocostudio_timeline_PositionFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_getX);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_getY);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_setPosition);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_setX);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_setY);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_getPosition);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_PositionFrame_PositionFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_ScaleFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_ScaleFrame_class;
+
+bool js_register_cocostudio_timeline_ScaleFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_setScaleY);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_setScaleX);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_getScaleY);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_getScaleX);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_setScale);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ScaleFrame_ScaleFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_AnchorPointFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_AnchorPointFrame_class;
+
+bool js_register_cocostudio_timeline_AnchorPointFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnchorPointFrame_setAnchorPoint);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnchorPointFrame_getAnchorPoint);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnchorPointFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AnchorPointFrame_AnchorPointFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_InnerActionFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_InnerActionFrame_class;
+
+bool js_register_cocostudio_timeline_InnerActionFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_getEndFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_getStartFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_getInnerActionType);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_setEndFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_setEnterWithName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_setSingleFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_setStartFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_getSingleFrameIndex);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_setInnerActionType);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_setAnimationName);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_InnerActionFrame_InnerActionFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_ColorFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_ColorFrame_class;
+
+bool js_register_cocostudio_timeline_ColorFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColorFrame_getColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColorFrame_setColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColorFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ColorFrame_ColorFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_AlphaFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_AlphaFrame_class;
+
+bool js_register_cocostudio_timeline_AlphaFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AlphaFrame_getAlpha);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AlphaFrame_setAlpha);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AlphaFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_AlphaFrame_AlphaFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_EventFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_EventFrame_class;
+
+bool js_register_cocostudio_timeline_EventFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_EventFrame_setEvent);
+SE_DECLARE_FUNC(js_cocos2dx_studio_EventFrame_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_EventFrame_getEvent);
+SE_DECLARE_FUNC(js_cocos2dx_studio_EventFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_EventFrame_EventFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_ZOrderFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_ZOrderFrame_class;
+
+bool js_register_cocostudio_timeline_ZOrderFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ZOrderFrame_getZOrder);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ZOrderFrame_setZOrder);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ZOrderFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ZOrderFrame_ZOrderFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_BlendFuncFrame_proto;
+extern se::Class* __jsb_cocostudio_timeline_BlendFuncFrame_class;
+
+bool js_register_cocostudio_timeline_BlendFuncFrame(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BlendFuncFrame_getBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BlendFuncFrame_setBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BlendFuncFrame_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BlendFuncFrame_BlendFuncFrame);
+
+extern se::Object* __jsb_cocostudio_timeline_Timeline_proto;
+extern se::Class* __jsb_cocostudio_timeline_Timeline_class;
+
+bool js_register_cocostudio_timeline_Timeline(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_clone);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_gotoFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_setNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_getActionTimeline);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_insertFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_setActionTag);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_addFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_getFrames);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_getActionTag);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_getNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_removeFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_setActionTimeline);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_stepToFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_Timeline_Timeline);
+
+extern se::Object* __jsb_cocostudio_timeline_ActionTimelineData_proto;
+extern se::Class* __jsb_cocostudio_timeline_ActionTimelineData_class;
+
+bool js_register_cocostudio_timeline_ActionTimelineData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimelineData_setActionTag);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimelineData_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimelineData_getActionTag);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimelineData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimelineData_ActionTimelineData);
+
+extern se::Object* __jsb_cocostudio_timeline_ActionTimeline_proto;
+extern se::Class* __jsb_cocostudio_timeline_ActionTimeline_class;
+
+bool js_register_cocostudio_timeline_ActionTimeline(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_setFrameEventCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_clearFrameEndCallFuncs);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_setAnimationEndCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_addTimeline);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getCurrentFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getStartFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_pause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_start);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_init);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_removeTimeline);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_setLastFrameCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_IsAnimationInfoExists);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getTimelines);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_play);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getAnimationInfo);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_resume);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_addFrameEndCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_removeAnimationInfo);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getTimeSpeed);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_addAnimationInfo);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getDuration);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_gotoFrameAndPause);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_isPlaying);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_removeFrameEndCallFuncs);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_gotoFrameAndPlay);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_clearFrameEventCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_getEndFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_setTimeSpeed);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_clearLastFrameCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_setDuration);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_setCurrentFrame);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_removeFrameEndCallFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ActionTimeline_ActionTimeline);
+
+extern se::Object* __jsb_cocostudio_timeline_BoneNode_proto;
+extern se::Class* __jsb_cocostudio_timeline_BoneNode_class;
+
+bool js_register_cocostudio_timeline_BoneNode(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getDebugDrawWidth);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getChildBones);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getAllSubBones);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_setBlendFunc);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_setDebugDrawEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getVisibleSkinsRect);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getAllSubSkins);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_displaySkin);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_isDebugDrawEnabled);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_addSkin);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getRootSkeletonNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_setDebugDrawLength);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getSkins);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getVisibleSkins);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_setDebugDrawWidth);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getDebugDrawLength);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_setDebugDrawColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_getDebugDrawColor);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_BoneNode_BoneNode);
+
+extern se::Object* __jsb_cocostudio_timeline_SkeletonNode_proto;
+extern se::Class* __jsb_cocostudio_timeline_SkeletonNode_class;
+
+bool js_register_cocostudio_timeline_SkeletonNode(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkeletonNode_getBoneNode);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkeletonNode_changeSkins);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkeletonNode_addSkinGroup);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkeletonNode_getAllSubBonesMap);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkeletonNode_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_SkeletonNode_SkeletonNode);
+
+extern se::Object* __jsb_cocostudio_ComExtensionData_proto;
+extern se::Class* __jsb_cocostudio_ComExtensionData_class;
+
+bool js_register_cocostudio_ComExtensionData(se::Object* obj);
+bool register_all_cocos2dx_studio(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComExtensionData_setActionTag);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComExtensionData_getCustomProperty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComExtensionData_getActionTag);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComExtensionData_setCustomProperty);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComExtensionData_create);
+SE_DECLARE_FUNC(js_cocos2dx_studio_ComExtensionData_ComExtensionData);
+

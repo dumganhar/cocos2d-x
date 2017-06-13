@@ -5353,43 +5353,40 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback(se::State& s
     if (argc == 1) {
         std::function<bool (const std::basic_string<char> &, cocos2d::extension::ManifestAsset)> arg0;
         do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](const std::basic_string<char> & larg0, cocos2d::extension::ManifestAsset larg1) -> bool {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(2);
-		            ok &= std_string_to_seval(larg0, &args[0]);
-		            ok &= ManifestAsset_to_seval(larg1, &args[1]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		            bool result;
-		            ok &= seval_to_boolean(rval, &result);
-		            JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type bool");
-		            return result;
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[0].isObject() && args[0].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[0]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](const std::basic_string<char> & larg0, cocos2d::extension::ManifestAsset larg1) -> bool {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(2);
+                    ok &= std_string_to_seval(larg0, &args[0]);
+                    ok &= ManifestAsset_to_seval(larg1, &args[1]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                    bool result;
+                    ok &= seval_to_boolean(rval, &result);
+                    JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type bool");
+                    return result;
+                };
+                arg0 = lambda;
+            }
+            else
+            {
+                arg0 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_extension_AssetsManagerEx_setVerifyCallback : Error processing arguments");
         cobj->setVerifyCallback(arg0);
         return true;
@@ -5442,43 +5439,40 @@ static bool js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle(se::St
     if (argc == 1) {
         std::function<int (const std::basic_string<char> &, const std::basic_string<char> &)> arg0;
         do {
-		    if (args[0].isObject() && args[0].toObject()->isFunction())
-		    {
-		        se::Value jsThis(s.thisObject());
-		        se::Value jsFunc(args[0]);
-		        if (jsThis.isObject())
-		            jsThis.toObject()->attachChild(jsFunc.toObject());
-		        else
-		            jsFunc.toObject()->setKeepRootedUntilDie(true);
-		        auto lambda = [=](const std::basic_string<char> & larg0, const std::basic_string<char> & larg1) -> int {
-		            se::ScriptEngine::getInstance()->clearException();
-		            se::AutoHandleScope hs;
-		
-		            CC_UNUSED bool ok = true;
-		            se::ValueArray args;
-		            args.resize(2);
-		            ok &= std_string_to_seval(larg0, &args[0]);
-		            ok &= std_string_to_seval(larg1, &args[1]);
-		            se::Value rval;
-		            se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
-		            se::Object* funcObj = jsFunc.toObject();
-		            bool succeed = funcObj->call(args, thisObj, &rval);
-		            if (!succeed) {
-		                se::ScriptEngine::getInstance()->clearException();
-		            }
-		            int result;
-		            ok &= seval_to_int32(rval, (int32_t *)&result);
-		            JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type int");
-		            return result;
-		        };
-		        arg0 = lambda;
-		    }
-		    else
-		    {
-		        arg0 = nullptr;
-		    }
-		} while(false)
-		;
+            if (args[0].isObject() && args[0].toObject()->isFunction())
+            {
+                se::Value jsThis(s.thisObject());
+                se::Value jsFunc(args[0]);
+                jsThis.toObject()->attachChild(jsFunc.toObject());
+                auto lambda = [=](const std::basic_string<char> & larg0, const std::basic_string<char> & larg1) -> int {
+                    se::ScriptEngine::getInstance()->clearException();
+                    se::AutoHandleScope hs;
+        
+                    CC_UNUSED bool ok = true;
+                    se::ValueArray args;
+                    args.resize(2);
+                    ok &= std_string_to_seval(larg0, &args[0]);
+                    ok &= std_string_to_seval(larg1, &args[1]);
+                    se::Value rval;
+                    se::Object* thisObj = jsThis.isObject() ? jsThis.toObject() : nullptr;
+                    se::Object* funcObj = jsFunc.toObject();
+                    bool succeed = funcObj->call(args, thisObj, &rval);
+                    if (!succeed) {
+                        se::ScriptEngine::getInstance()->clearException();
+                    }
+                    int result;
+                    ok &= seval_to_int32(rval, (int32_t *)&result);
+                    JSB_PRECONDITION2(ok, result, "lambda function : Error processing return value with type int");
+                    return result;
+                };
+                arg0 = lambda;
+            }
+            else
+            {
+                arg0 = nullptr;
+            }
+        } while(false)
+        ;
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_extension_AssetsManagerEx_setVersionCompareHandle : Error processing arguments");
         cobj->setVersionCompareHandle(arg0);
         return true;

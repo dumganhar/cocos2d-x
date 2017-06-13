@@ -48,9 +48,10 @@ var AudioEngineBase = BaseTestLayer.extend({
         new NativeTestScene().runThisTest();
     },
     onRestartCallback:function (sender) {
-        var s = new cc.Scene();
-        s.addChild(AudioTestFlow.current());
-        director.runScene(s);
+        // var s = new cc.Scene();
+        // s.addChild(AudioTestFlow.current());
+        // director.runScene(s);
+        cc.sys.garbageCollect();
     },
     onNextCallback:function (sender) {
         var s = new cc.Scene();
@@ -137,7 +138,9 @@ var AudioControlTest = AudioEngineBase.extend({
                 if(self._audioID !== jsb.AudioEngine.INVALID_AUDIO_ID) {
                     button.setEnabled(false);
                     button.setBright(false);
+                    var node = new cc.Node();
                     jsb.AudioEngine.setFinishCallback(self._audioID, function(id, filePath){
+                        node.setPosition(1,1);
                         self._audioID = jsb.AudioEngine.INVALID_AUDIO_ID;
                         self._playItem.setEnabled(true);
                         self._playItem.setBright(true);
