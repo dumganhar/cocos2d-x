@@ -52,6 +52,7 @@ extern se::Class* __jsb_cocosbuilder_CCBReader_class;
 
 bool js_register_cocosbuilder_CCBReader(se::Object* obj);
 bool register_all_cocos2dx_builder(se::Object* obj);
+SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_readNodeGraphFromFile);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_getAnimationManager);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_setAnimationManager);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_addOwnerOutletName);
@@ -62,6 +63,7 @@ SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_addOwnerOutletNode);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_getCCBRootPath);
+SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_getOwnerOutletNodes);
 SE_DECLARE_FUNC(js_cocos2dx_builder_CCBReader_readUTF8);

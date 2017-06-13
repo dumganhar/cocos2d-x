@@ -800,6 +800,63 @@ bool js_register_cocos2dx_builder_CCBAnimationManager(se::Object* obj)
 se::Object* __jsb_cocosbuilder_CCBReader_proto = nullptr;
 se::Class* __jsb_cocosbuilder_CCBReader_class = nullptr;
 
+static bool js_cocos2dx_builder_CCBReader_readNodeGraphFromFile(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocosbuilder::CCBReader* cobj = (cocosbuilder::CCBReader*)s.nativeThisObject();
+    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_builder_CCBReader_readNodeGraphFromFile : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 2) {
+            const char* arg0 = nullptr;
+            std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
+            if (!ok) { ok = true; break; }
+            cocos2d::Ref* arg1 = nullptr;
+            ok &= seval_to_native_ptr(args[1], &arg1);
+            if (!ok) { ok = true; break; }
+            cocos2d::Node* result = cobj->readNodeGraphFromFile(arg0, arg1);
+            ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_builder_CCBReader_readNodeGraphFromFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    do {
+        if (argc == 1) {
+            const char* arg0 = nullptr;
+            std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
+            if (!ok) { ok = true; break; }
+            cocos2d::Node* result = cobj->readNodeGraphFromFile(arg0);
+            ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_builder_CCBReader_readNodeGraphFromFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    do {
+        if (argc == 3) {
+            const char* arg0 = nullptr;
+            std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
+            if (!ok) { ok = true; break; }
+            cocos2d::Ref* arg1 = nullptr;
+            ok &= seval_to_native_ptr(args[1], &arg1);
+            if (!ok) { ok = true; break; }
+            cocos2d::Size arg2;
+            ok &= seval_to_Size(args[2], &arg2);
+            if (!ok) { ok = true; break; }
+            cocos2d::Node* result = cobj->readNodeGraphFromFile(arg0, arg1, arg2);
+            ok &= native_ptr_to_seval<cocos2d::Node>((cocos2d::Node*)result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_builder_CCBReader_readNodeGraphFromFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_builder_CCBReader_readNodeGraphFromFile)
+
 static bool js_cocos2dx_builder_CCBReader_getAnimationManager(se::State& s)
 {
     cocosbuilder::CCBReader* cobj = (cocosbuilder::CCBReader*)s.nativeThisObject();
@@ -987,6 +1044,63 @@ static bool js_cocos2dx_builder_CCBReader_getCCBRootPath(se::State& s)
     return false;
 }
 SE_BIND_FUNC(js_cocos2dx_builder_CCBReader_getCCBRootPath)
+
+static bool js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile(se::State& s)
+{
+    CC_UNUSED bool ok = true;
+    cocosbuilder::CCBReader* cobj = (cocosbuilder::CCBReader*)s.nativeThisObject();
+    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile : Invalid Native Object");
+    const auto& args = s.args();
+    size_t argc = args.size();
+    do {
+        if (argc == 2) {
+            const char* arg0 = nullptr;
+            std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
+            if (!ok) { ok = true; break; }
+            cocos2d::Ref* arg1 = nullptr;
+            ok &= seval_to_native_ptr(args[1], &arg1);
+            if (!ok) { ok = true; break; }
+            cocos2d::Scene* result = cobj->createSceneWithNodeGraphFromFile(arg0, arg1);
+            ok &= native_ptr_to_seval<cocos2d::Scene>((cocos2d::Scene*)result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    do {
+        if (argc == 1) {
+            const char* arg0 = nullptr;
+            std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
+            if (!ok) { ok = true; break; }
+            cocos2d::Scene* result = cobj->createSceneWithNodeGraphFromFile(arg0);
+            ok &= native_ptr_to_seval<cocos2d::Scene>((cocos2d::Scene*)result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    do {
+        if (argc == 3) {
+            const char* arg0 = nullptr;
+            std::string arg0_tmp; ok &= seval_to_std_string(args[0], &arg0_tmp); arg0 = arg0_tmp.c_str();
+            if (!ok) { ok = true; break; }
+            cocos2d::Ref* arg1 = nullptr;
+            ok &= seval_to_native_ptr(args[1], &arg1);
+            if (!ok) { ok = true; break; }
+            cocos2d::Size arg2;
+            ok &= seval_to_Size(args[2], &arg2);
+            if (!ok) { ok = true; break; }
+            cocos2d::Scene* result = cobj->createSceneWithNodeGraphFromFile(arg0, arg1, arg2);
+            ok &= native_ptr_to_seval<cocos2d::Scene>((cocos2d::Scene*)result, &s.rval());
+            JSB_PRECONDITION2(ok, false, "js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile : Error processing arguments");
+            return true;
+        }
+    } while(false);
+
+    SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
+    return false;
+}
+SE_BIND_FUNC(js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile)
 
 static bool js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents(se::State& s)
 {
@@ -1226,6 +1340,7 @@ bool js_register_cocos2dx_builder_CCBReader(se::Object* obj)
 {
     auto cls = se::Class::create("_Reader", obj, nullptr, _SE(js_cocos2dx_builder_CCBReader_constructor));
 
+    cls->defineFunction("load", _SE(js_cocos2dx_builder_CCBReader_readNodeGraphFromFile));
     cls->defineFunction("getAnimationManager", _SE(js_cocos2dx_builder_CCBReader_getAnimationManager));
     cls->defineFunction("setAnimationManager", _SE(js_cocos2dx_builder_CCBReader_setAnimationManager));
     cls->defineFunction("addOwnerOutletName", _SE(js_cocos2dx_builder_CCBReader_addOwnerOutletName));
@@ -1236,6 +1351,7 @@ bool js_register_cocos2dx_builder_CCBReader(se::Object* obj)
     cls->defineFunction("getOwnerCallbackNodes", _SE(js_cocos2dx_builder_CCBReader_getOwnerCallbackNodes));
     cls->defineFunction("readSoundKeyframesForSeq", _SE(js_cocos2dx_builder_CCBReader_readSoundKeyframesForSeq));
     cls->defineFunction("getCCBRootPath", _SE(js_cocos2dx_builder_CCBReader_getCCBRootPath));
+    cls->defineFunction("loadScene", _SE(js_cocos2dx_builder_CCBReader_createSceneWithNodeGraphFromFile));
     cls->defineFunction("getOwnerCallbackControlEvents", _SE(js_cocos2dx_builder_CCBReader_getOwnerCallbackControlEvents));
     cls->defineFunction("getOwnerOutletNodes", _SE(js_cocos2dx_builder_CCBReader_getOwnerOutletNodes));
     cls->defineFunction("readUTF8", _SE(js_cocos2dx_builder_CCBReader_readUTF8));

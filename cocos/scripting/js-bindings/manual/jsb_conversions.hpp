@@ -178,33 +178,6 @@ bool Data_to_seval(const cocos2d::Data& v, se::Value* ret);
 bool DownloadTask_to_seval(const cocos2d::network::DownloadTask& v, se::Value* ret);
 
 template<typename T>
-bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
-{
-    assert(ret != nullptr);
-    bool ok = true;
-    se::Object* obj = se::Object::createArrayObject(v.size(), false);
-
-    uint32_t i = 0;
-    for (const auto& e : v)
-    {
-        auto iter = se::__nativePtrToObjectMap.find(e);
-        if (iter == se::__nativePtrToObjectMap.end())
-        {
-            CCLOGWARN("WARNING: type: (%s) isn't catched!", typeid(*e).name());
-            continue;
-        }
-
-        obj->setArrayElement(i, se::Value(iter->second));
-        ++i;
-    }
-
-    ret->setObject(obj);
-    obj->release();
-
-    return ok;
-}
-
-template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Value* ret)
 {
     assert(ret != nullptr);
@@ -291,3 +264,25 @@ bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T
     return true;
 }
 
+template<typename T>
+bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+    bool ok = true;
+    se::Object* obj = se::Object::createArrayObject(v.size(), true);
+
+    uint32_t i = 0;
+    se::Value tmp;
+    for (const auto& e : v)
+    {
+        native_ptr_to_seval<cocos2d::Ref>(e, &tmp);
+        obj->setArrayElement(i, tmp);
+        ++i;
+    }
+
+    ret->setObject(obj);
+    obj->switchToUnrooted();
+    obj->release();
+
+    return ok;
+}

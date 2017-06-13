@@ -13,6 +13,7 @@
 #include "cocos/scripting/js-bindings/manual/jsb_node.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_conversions.hpp"
+#include "cocos/scripting/js-bindings/manual/jsb_builder_manual.hpp"
 
 #include <unistd.h>
 #include <iostream>
@@ -48,6 +49,7 @@ int main_register_class(int argc, char** argv)
     register_all_cocos2dx_ui(global);
     register_all_cocos2dx_network(global);
     register_all_cocos2dx_builder(global);
+    register_all_builder_manual(global);
 
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
 

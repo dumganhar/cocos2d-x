@@ -51,11 +51,11 @@ CCBAnimationManager::~CCBAnimationManager()
 //         Node *node = (Node*)pElement->getIntKey();
 //         node->release();
 //     }
-    if (_rootNode)
-    {
-        _rootNode->stopAllActions();
-    }
-    
+//    if (_rootNode)
+//    {
+//        _rootNode->stopAllActions();
+//    }
+
     setRootNode(nullptr);
     setDelegate(nullptr);
     
