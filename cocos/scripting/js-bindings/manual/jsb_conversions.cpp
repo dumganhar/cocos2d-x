@@ -674,6 +674,39 @@ bool seval_to_std_vector_Vec2(const se::Value& v, std::vector<cocos2d::Vec2>* re
     return false;
 }
 
+bool seval_to_std_map_string_string(const se::Value& v, std::map<std::string, std::string>* ret)
+{
+    assert(ret != nullptr);
+
+    if (v.isNullOrUndefined())
+    {
+        ret->clear();
+        return true;
+    }
+
+    assert(v.isObject());
+
+    JSB_PRECONDITION3(!v.isNullOrUndefined(), false, ret->clear());
+
+    se::Object* obj = v.toObject();
+
+    std::vector<std::string> allKeys;
+    JSB_PRECONDITION3(obj->getAllKeys(&allKeys), false, ret->clear());
+
+    bool ok = false;
+    se::Value value;
+    std::string strValue;
+    for (const auto& key : allKeys)
+    {
+        JSB_PRECONDITION3(obj->getProperty(key.c_str(), &value), false, ret->clear());
+        ok = seval_to_std_string(value, &strValue);
+        JSB_PRECONDITION3(ok, false, ret->clear());
+        ret->emplace(key, strValue);
+    }
+    
+    return true;
+}
+
 bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret)
 {
     assert(ret != nullptr);
@@ -1248,12 +1281,14 @@ bool ccvaluemap_to_seval(const cocos2d::ValueMap& v, se::Value* ret)
         if (!ccvalue_to_seval(value, &tmp))
         {
             ok = false;
+            ret->setUndefined();
             break;
         }
 
         obj->setProperty(key.c_str(), tmp);
     }
-    ret->setObject(obj);
+    if (ok)
+        ret->setObject(obj);
     obj->release();
 
     return ok;
@@ -1279,12 +1314,14 @@ bool ccvaluemapintkey_to_seval(const cocos2d::ValueMapIntKey& v, se::Value* ret)
         if (!ccvalue_to_seval(value, &tmp))
         {
             ok = false;
+            ret->setUndefined();
             break;
         }
 
         obj->setProperty(key.c_str(), tmp);
     }
-    ret->setObject(obj);
+    if (ok)
+        ret->setObject(obj);
     obj->release();
 
     return ok;
@@ -1303,13 +1340,15 @@ bool ccvaluevector_to_seval(const cocos2d::ValueVector& v, se::Value* ret)
         if (!ccvalue_to_seval(value, &tmp))
         {
             ok = false;
+            ret->setUndefined();
             break;
         }
 
         obj->setArrayElement(i, tmp);
         ++i;
     }
-    ret->setObject(obj);
+    if (ok)
+        ret->setObject(obj);
     obj->release();
     return ok;
 }
@@ -1341,12 +1380,14 @@ namespace {
             if (!obj->setArrayElement(i, se::Value(value)))
             {
                 ok = false;
+                ret->setUndefined();
                 break;
             }
             ++i;
         }
 
-        ret->setObject(obj);
+        if (ok)
+            ret->setObject(obj);
         obj->switchToUnrooted();
         obj->release();
         return ok;
@@ -1391,6 +1432,38 @@ bool std_vector_Touch_to_seval(const std::vector<cocos2d::Touch*>& v, se::Value*
     arr->switchToUnrooted();
     arr->release();
     return true;
+}
+
+bool std_map_string_string_to_seval(const std::map<std::string, std::string>& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+    bool ok = true;
+    for (const auto& e : v)
+    {
+        const std::string& key = e.first;
+        const std::string& value = e.second;
+
+        if (key.empty())
+            continue;
+
+        se::Value tmp;
+        if (!std_string_to_seval(value, &tmp))
+        {
+            ok = false;
+            ret->setUndefined();
+            break;
+        }
+
+        obj->setProperty(key.c_str(), tmp);
+    }
+
+    if (ok)
+        ret->setObject(obj);
+    obj->release();
+    
+    return ok;
 }
 
 //FIXME: why v has to be a pointer?
@@ -1547,7 +1620,248 @@ bool DownloadTask_to_seval(const cocos2d::network::DownloadTask& v, se::Value* r
     obj->setProperty("identifier", se::Value(v.identifier));
     obj->setProperty("requestURL", se::Value(v.requestURL));
     obj->setProperty("storagePath", se::Value(v.storagePath));
+    ret->setObject(obj);
     obj->release();
 
-    return false;
+    return true;
+}
+
+// Spine conversions
+bool speventdata_to_seval(const spEventData& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+    obj->setProperty("name", se::Value(v.name));
+    obj->setProperty("intValue", se::Value(v.intValue));
+    obj->setProperty("floatValue", se::Value(v.floatValue));
+    obj->setProperty("stringValue", se::Value(v.stringValue));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool spevent_to_seval(const spEvent& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    se::Value dataVal;
+    JSB_PRECONDITION3(speventdata_to_seval(*v.data, &dataVal), false, ret->setUndefined());
+    obj->setProperty("data", dataVal);
+    obj->setProperty("time", se::Value(v.time));
+    obj->setProperty("intValue", se::Value(v.intValue));
+    obj->setProperty("floatValue", se::Value(v.floatValue));
+    obj->setProperty("stringValue", se::Value(v.stringValue));
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool spbonedata_to_seval(const spBoneData& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    // root haven't parent
+    se::Value parentVal;
+    if (0 != strcmp(v.name, "root") && v.parent)
+    {
+        JSB_PRECONDITION3(spbonedata_to_seval(*v.parent, &parentVal), false, ret->setUndefined());
+    }
+
+    obj->setProperty("index", se::Value(v.index));
+    obj->setProperty("name", se::Value(v.name));
+    obj->setProperty("parent", parentVal);
+    obj->setProperty("length", se::Value(v.length));
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("rotation", se::Value(v.rotation));
+    obj->setProperty("scaleX", se::Value(v.scaleX));
+    obj->setProperty("scaleY", se::Value(v.scaleY));
+    obj->setProperty("shearX", se::Value(v.shearX));
+    obj->setProperty("shearY", se::Value(v.shearY));
+    obj->setProperty("transformMode", se::Value(v.transformMode));
+
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool spbone_to_seval(const spBone& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    // root haven't parent
+    se::Value parentVal;
+    if (0 != strcmp(v.data->name, "root") && v.parent)
+    {
+        JSB_PRECONDITION3(spbone_to_seval(*v.parent, &parentVal), false, ret->setUndefined());
+    }
+
+    se::Value data;
+    JSB_PRECONDITION3(spbonedata_to_seval(*v.data, &data), false, ret->setUndefined());
+
+    obj->setProperty("data", data);
+    obj->setProperty("parent", parentVal);
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("rotation", se::Value(v.rotation));
+    obj->setProperty("scaleX", se::Value(v.scaleX));
+    obj->setProperty("scaleY", se::Value(v.scaleY));
+    obj->setProperty("shearX", se::Value(v.shearX));
+    obj->setProperty("shearY", se::Value(v.shearY));
+    obj->setProperty("m00", se::Value(v.a));
+    obj->setProperty("m01", se::Value(v.b));
+    obj->setProperty("m10", se::Value(v.c));
+    obj->setProperty("m11", se::Value(v.d));
+    obj->setProperty("worldX", se::Value(v.worldX));
+    obj->setProperty("worldY", se::Value(v.worldY));
+
+    ret->setObject(obj);
+    obj->release();
+
+    return true;
+}
+
+bool spskeleton_to_seval(const spSkeleton& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    obj->setProperty("x", se::Value(v.x));
+    obj->setProperty("y", se::Value(v.y));
+    obj->setProperty("flipX", se::Value(v.flipX));
+    obj->setProperty("flipY", se::Value(v.flipY));
+    obj->setProperty("time", se::Value(v.time));
+    obj->setProperty("boneCount", se::Value(v.bonesCount));
+    obj->setProperty("slotCount", se::Value(v.slotsCount));
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool spattachment_to_seval(const spAttachment& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    obj->setProperty("name", se::Value(v.name));
+    obj->setProperty("type", se::Value((int32_t)v.type));
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool spslotdata_to_seval(const spSlotData& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    se::Value boneData;
+    JSB_PRECONDITION3(spbonedata_to_seval(*v.boneData, &boneData), false, ret->setUndefined());
+
+    obj->setProperty("name", se::Value(v.name));
+    obj->setProperty("attachmentName", se::Value(v.attachmentName));
+    obj->setProperty("r", se::Value(v.r));
+    obj->setProperty("g", se::Value(v.g));
+    obj->setProperty("b", se::Value(v.b));
+    obj->setProperty("a", se::Value(v.a));
+    obj->setProperty("blendMode", se::Value((int32_t)v.blendMode));
+    obj->setProperty("boneData", boneData);
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool spslot_to_seval(const spSlot& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    se::Value bone;
+    JSB_PRECONDITION3(spbone_to_seval(*v.bone, &bone), false, ret->setUndefined());
+
+    se::Value attachment;
+    JSB_PRECONDITION3(spattachment_to_seval(*v.attachment, &attachment), false, ret->setUndefined());
+
+    se::Value data;
+    JSB_PRECONDITION3(spslotdata_to_seval(*v.data, &data), false, ret->setUndefined());
+
+    obj->setProperty("r", se::Value(v.r));
+    obj->setProperty("g", se::Value(v.g));
+    obj->setProperty("b", se::Value(v.b));
+    obj->setProperty("a", se::Value(v.a));
+    obj->setProperty("bone", bone);
+    obj->setProperty("attachment", attachment);
+    obj->setProperty("data", data);
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool sptimeline_to_seval(const spTimeline& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    obj->setProperty("type", se::Value((int32_t)v.type));
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool spanimationstate_to_seval(const spAnimationState& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    obj->setProperty("timeScale", se::Value(v.timeScale));
+    obj->setProperty("trackCount", se::Value(v.tracksCount));
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool spanimation_to_seval(const spAnimation& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(false);
+
+    se::Value timelines;
+    JSB_PRECONDITION3(sptimeline_to_seval(**v.timelines, &timelines), false, ret->setUndefined());
+
+    obj->setProperty("name", se::Value(v.name));
+    obj->setProperty("duration", se::Value(v.duration));
+    obj->setProperty("timelineCount", se::Value(v.timelinesCount));
+    obj->setProperty("timelines", timelines);
+
+    ret->setObject(obj);
+    obj->release();
+    return true;
+}
+
+bool sptrackentry_to_seval(const spTrackEntry& v, se::Value* ret)
+{
+    return native_ptr_to_seval<spTrackEntry>((spTrackEntry*)&v, ret);
 }

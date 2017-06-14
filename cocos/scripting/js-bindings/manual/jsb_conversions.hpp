@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "extensions/cocos-ext.h"
+#include "cocos/editor-support/spine/spine.h"
 
 #define JSB_PRECONDITION2_VOID(condition, ...) \
     do { \
@@ -69,6 +70,7 @@ bool seval_to_std_vector_string(const se::Value& v, std::vector<std::string>* re
 bool seval_to_std_vector_int(const se::Value& v, std::vector<int>* ret);
 bool seval_to_std_vector_float(const se::Value& v, std::vector<float>* ret);
 bool seval_to_std_vector_Vec2(const se::Value& v, std::vector<cocos2d::Vec2>* ret);
+bool seval_to_std_map_string_string(const se::Value& v, std::map<std::string, std::string>* ret);
 bool seval_to_FontDefinition(const se::Value& v, cocos2d::FontDefinition* ret);
 bool seval_to_Acceleration(const se::Value& v, cocos2d::Acceleration* ret);
 bool seval_to_Quaternion(const se::Value& v, cocos2d::Quaternion* ret);
@@ -167,6 +169,7 @@ bool std_vector_string_to_seval(const std::vector<std::string>& v, se::Value* re
 bool std_vector_int_to_seval(const std::vector<int>& v, se::Value* ret);
 bool std_vector_float_to_seval(const std::vector<float>& v, se::Value* ret);
 bool std_vector_Touch_to_seval(const std::vector<cocos2d::Touch*>& v, se::Value* ret);
+bool std_map_string_string_to_seval(const std::map<std::string, std::string>& v, se::Value* ret);
 bool uniform_to_seval(const cocos2d::Uniform* v, se::Value* ret);
 bool FontDefinition_to_seval(const cocos2d::FontDefinition& v, se::Value* ret);
 bool Acceleration_to_seval(const cocos2d::Acceleration* v, se::Value* ret);
@@ -265,7 +268,7 @@ bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T
 }
 
 template<typename T>
-bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
+bool Vector_to_seval(const cocos2d::Vector<T*>& v, se::Value* ret)
 {
     assert(ret != nullptr);
     bool ok = true;
@@ -275,7 +278,7 @@ bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
     se::Value tmp;
     for (const auto& e : v)
     {
-        native_ptr_to_seval<cocos2d::Ref>(e, &tmp);
+        native_ptr_to_seval<T>(e, &tmp);
         obj->setArrayElement(i, tmp);
         ++i;
     }
@@ -286,3 +289,37 @@ bool Vector_to_seval(const cocos2d::Vector<T>& v, se::Value* ret)
 
     return ok;
 }
+
+template<typename T>
+bool Map_string_key_to_seval(const cocos2d::Map<std::string, T*>& v, se::Value* ret)
+{
+    assert(ret != nullptr);
+
+    se::Object* obj = se::Object::createPlainObject(true);
+
+    se::Value tmp;
+    for (const auto& e : v)
+    {
+        native_ptr_to_seval<T>(e.second, &tmp);
+        obj->setProperty(e.first.c_str(), tmp);
+    }
+
+    ret->setObject(obj);
+    obj->switchToUnrooted();
+    obj->release();
+    return false;
+}
+
+// Spine conversions
+bool speventdata_to_seval(const spEventData& v, se::Value* ret);
+bool spevent_to_seval(const spEvent& v, se::Value* ret);
+bool spbonedata_to_seval(const spBoneData& v, se::Value* ret);
+bool spbone_to_seval(const spBone& v, se::Value* ret);
+bool spskeleton_to_seval(const spSkeleton& v, se::Value* ret);
+bool spattachment_to_seval(const spAttachment& v, se::Value* ret);
+bool spslotdata_to_seval(const spSlotData& v, se::Value* ret);
+bool spslot_to_seval(const spSlot& v, se::Value* ret);
+bool sptimeline_to_seval(const spTimeline& v, se::Value* ret);
+bool spanimationstate_to_seval(const spAnimationState& v, se::Value* ret);
+bool spanimation_to_seval(const spAnimation& v, se::Value* ret);
+bool sptrackentry_to_seval(const spTrackEntry& v, se::Value* ret);

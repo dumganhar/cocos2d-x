@@ -285,8 +285,15 @@ namespace se {
 
     void Value::setString(const char* v)
     {
-        reset(Type::String);
-        *_u._string = v;
+        if (v != nullptr)
+        {
+            reset(Type::String);
+            *_u._string = v;
+        }
+        else
+        {
+            reset(Type::Null);
+        }
     }
 
    	void Value::setString(const std::string& v)

@@ -3897,7 +3897,7 @@ static bool js_cocos2dx_studio_ArmatureDataManager_getAnimationDatas(se::State& 
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Map<std::string, cocostudio::AnimationData *>& result = cobj->getAnimationDatas();
-        ok &= native_ptr_to_seval<cocos2d::Map<std::basic_string<char>, cocostudio::AnimationData >&>((cocos2d::Map<std::basic_string<char>, cocostudio::AnimationData *>&)result, &s.rval());
+        ok &= Map_string_key_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_studio_ArmatureDataManager_getAnimationDatas : Error processing arguments");
         return true;
     }
@@ -4155,7 +4155,7 @@ static bool js_cocos2dx_studio_ArmatureDataManager_getArmatureDatas(se::State& s
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Map<std::string, cocostudio::ArmatureData *>& result = cobj->getArmatureDatas();
-        ok &= native_ptr_to_seval<cocos2d::Map<std::basic_string<char>, cocostudio::ArmatureData >&>((cocos2d::Map<std::basic_string<char>, cocostudio::ArmatureData *>&)result, &s.rval());
+        ok &= Map_string_key_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_studio_ArmatureDataManager_getArmatureDatas : Error processing arguments");
         return true;
     }
@@ -4788,7 +4788,7 @@ static bool js_cocos2dx_studio_Armature_getBoneDic(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Map<std::string, cocostudio::Bone *>& result = cobj->getBoneDic();
-        ok &= native_ptr_to_seval<cocos2d::Map<std::basic_string<char>, cocostudio::Bone >&>((cocos2d::Map<std::basic_string<char>, cocostudio::Bone *>&)result, &s.rval());
+        ok &= Map_string_key_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_studio_Armature_getBoneDic : Error processing arguments");
         return true;
     }
@@ -6427,11 +6427,11 @@ static bool js_cocos2dx_studio_ComRender_create(se::State& s)
 }
 SE_BIND_FUNC(js_cocos2dx_studio_ComRender_create)
 
+SE_DECLARE_FINALIZE_FUNC(js_cocostudio_ComRender_finalize)
+
 static bool js_cocos2dx_studio_ComRender_constructor(se::State& s)
 {
     CC_UNUSED bool ok = true;
-    cocostudio::ComRender* cobj = (cocostudio::ComRender*)s.nativeThisObject();
-    JSB_PRECONDITION2( cobj, false, "js_cocos2dx_studio_ComRender_constructor : Invalid Native Object");
     const auto& args = s.args();
     size_t argc = args.size();
     do {
@@ -6442,22 +6442,24 @@ static bool js_cocos2dx_studio_ComRender_constructor(se::State& s)
             const char* arg1 = nullptr;
             std::string arg1_tmp; ok &= seval_to_std_string(args[1], &arg1_tmp); arg1 = arg1_tmp.c_str();
             if (!ok) { ok = true; break; }
-            cobj->ComRender(arg0, arg1);
+            cocostudio::ComRender* cobj = new (std::nothrow) cocostudio::ComRender(arg0, arg1);
+            s.thisObject()->setPrivateData(cobj);
+            s.thisObject()->addRef();
             return true;
         }
     } while(false);
-
     do {
         if (argc == 0) {
-            cobj->ComRender();
+            cocostudio::ComRender* cobj = new (std::nothrow) cocostudio::ComRender();
+            s.thisObject()->setPrivateData(cobj);
+            s.thisObject()->addRef();
             return true;
         }
     } while(false);
-
     SE_REPORT_ERROR("wrong number of arguments: %d", (int)argc);
     return false;
 }
-SE_BIND_FUNC(js_cocos2dx_studio_ComRender_constructor)
+SE_BIND_CTOR(js_cocos2dx_studio_ComRender_constructor, __jsb_cocostudio_ComRender_class, js_cocostudio_ComRender_finalize)
 
 
 
@@ -10400,7 +10402,7 @@ static bool js_cocos2dx_studio_SkeletonNode_changeSkins(se::State& s)
     do {
         if (argc == 1) {
             std::map<std::string, std::string> arg0;
-            ok &= seval_to_native_ptr(args[0], &arg0);
+            ok &= seval_to_std_map_string_string(args[0], &arg0);
             if (!ok) { ok = true; break; }
             cobj->changeSkins(arg0);
             return true;
@@ -10423,7 +10425,7 @@ static bool js_cocos2dx_studio_SkeletonNode_addSkinGroup(se::State& s)
         std::string arg0;
         std::map<std::string, std::string> arg1;
         ok &= seval_to_std_string(args[0], &arg0);
-        ok &= seval_to_native_ptr(args[1], &arg1);
+        ok &= seval_to_std_map_string_string(args[1], &arg1);
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_studio_SkeletonNode_addSkinGroup : Error processing arguments");
         cobj->addSkinGroup(arg0, arg1);
         return true;
@@ -10442,7 +10444,7 @@ static bool js_cocos2dx_studio_SkeletonNode_getAllSubBonesMap(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         const cocos2d::Map<std::string, cocostudio::timeline::BoneNode *>& result = cobj->getAllSubBonesMap();
-        ok &= native_ptr_to_seval<cocos2d::Map<std::basic_string<char>, cocostudio::timeline::BoneNode >&>((cocos2d::Map<std::basic_string<char>, cocostudio::timeline::BoneNode *>&)result, &s.rval());
+        ok &= Map_string_key_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_studio_SkeletonNode_getAllSubBonesMap : Error processing arguments");
         return true;
     }

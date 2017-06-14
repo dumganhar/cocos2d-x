@@ -6,6 +6,10 @@
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_extension_auto.hpp"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_network_auto.hpp"
 #include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_builder_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_experimental_webView_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_experimental_video_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_spine_auto.hpp"
+#include "cocos/scripting/js-bindings/auto/jsb_cocos2dx_studio_auto.hpp"
 
 #include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_extension_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_register_all.h"
@@ -14,6 +18,8 @@
 #include "cocos/scripting/js-bindings/manual/jsb_cocos2dx_manual.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_conversions.hpp"
 #include "cocos/scripting/js-bindings/manual/jsb_builder_manual.hpp"
+#include "cocos/scripting/js-bindings/manual/jsb_spine_manual.hpp"
+
 
 #include <unistd.h>
 #include <iostream>
@@ -50,6 +56,15 @@ int main_register_class(int argc, char** argv)
     register_all_cocos2dx_network(global);
     register_all_cocos2dx_builder(global);
     register_all_builder_manual(global);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS) && !defined(CC_TARGET_OS_TVOS)
+    register_all_cocos2dx_experimental_video(global);
+    register_all_cocos2dx_experimental_webView(global);
+#endif
+
+    register_all_cocos2dx_spine(global);
+    register_all_spine_manual(global);
+    register_all_cocos2dx_studio(global);
 
     se->executeScriptFile(FileUtils::getInstance()->fullPathForFilename("script/jsb_boot.js"));
 

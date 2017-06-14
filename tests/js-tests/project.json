@@ -43,7 +43,7 @@
         "src/ProgressActionsTest/ProgressActionsTest.js",
         "src/LayerTest/LayerTest.js",
         "src/SceneTest/SceneTest.js",
-
+        "src/SpineTest/SpineTest.js",
         "src/SpriteTest/SpriteTest.js",
         "src/Sprite3DTest/Sprite3DTest.js",
         "src/LightTest/LightTest.js",
