@@ -2153,7 +2153,7 @@ static bool js_cocos2dx_ui_Layout_getRenderFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getRenderFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Layout_getRenderFile : Error processing arguments");
         return true;
     }
@@ -2935,7 +2935,7 @@ static bool js_cocos2dx_ui_Button_getDisabledFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getDisabledFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Button_getDisabledFile : Error processing arguments");
         return true;
     }
@@ -3008,7 +3008,7 @@ static bool js_cocos2dx_ui_Button_getNormalFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getNormalFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Button_getNormalFile : Error processing arguments");
         return true;
     }
@@ -3451,7 +3451,7 @@ static bool js_cocos2dx_ui_Button_getPressedFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getPressedFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Button_getPressedFile : Error processing arguments");
         return true;
     }
@@ -3776,7 +3776,7 @@ static bool js_cocos2dx_ui_AbstractCheckButton_getCrossDisabledFile(se::State& s
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getCrossDisabledFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_AbstractCheckButton_getCrossDisabledFile : Error processing arguments");
         return true;
     }
@@ -3794,7 +3794,7 @@ static bool js_cocos2dx_ui_AbstractCheckButton_getBackDisabledFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBackDisabledFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_AbstractCheckButton_getBackDisabledFile : Error processing arguments");
         return true;
     }
@@ -3868,7 +3868,7 @@ static bool js_cocos2dx_ui_AbstractCheckButton_getCrossNormalFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getCrossNormalFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_AbstractCheckButton_getCrossNormalFile : Error processing arguments");
         return true;
     }
@@ -3905,7 +3905,7 @@ static bool js_cocos2dx_ui_AbstractCheckButton_getBackPressedFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBackPressedFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_AbstractCheckButton_getBackPressedFile : Error processing arguments");
         return true;
     }
@@ -4071,7 +4071,7 @@ static bool js_cocos2dx_ui_AbstractCheckButton_getBackNormalFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBackNormalFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_AbstractCheckButton_getBackNormalFile : Error processing arguments");
         return true;
     }
@@ -5186,7 +5186,7 @@ static bool js_cocos2dx_ui_ImageView_getRenderFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getRenderFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_ImageView_getRenderFile : Error processing arguments");
         return true;
     }
@@ -6174,7 +6174,7 @@ static bool js_cocos2dx_ui_TextAtlas_getRenderFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getRenderFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_TextAtlas_getRenderFile : Error processing arguments");
         return true;
     }
@@ -6407,7 +6407,7 @@ static bool js_cocos2dx_ui_LoadingBar_getRenderFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getRenderFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_LoadingBar_getRenderFile : Error processing arguments");
         return true;
     }
@@ -8724,7 +8724,7 @@ static bool js_cocos2dx_ui_Slider_getBallNormalFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBallNormalFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Slider_getBallNormalFile : Error processing arguments");
         return true;
     }
@@ -8779,7 +8779,7 @@ static bool js_cocos2dx_ui_Slider_getBallPressedFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBallPressedFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Slider_getBallPressedFile : Error processing arguments");
         return true;
     }
@@ -9000,7 +9000,7 @@ static bool js_cocos2dx_ui_Slider_getProgressBarFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getProgressBarFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Slider_getProgressBarFile : Error processing arguments");
         return true;
     }
@@ -9100,7 +9100,7 @@ static bool js_cocos2dx_ui_Slider_getBackFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBackFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Slider_getBackFile : Error processing arguments");
         return true;
     }
@@ -9136,7 +9136,7 @@ static bool js_cocos2dx_ui_Slider_getBallDisabledFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getBallDisabledFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_Slider_getBallDisabledFile : Error processing arguments");
         return true;
     }
@@ -11052,7 +11052,7 @@ static bool js_cocos2dx_ui_TextBMFont_getRenderFile(se::State& s)
     CC_UNUSED bool ok = true;
     if (argc == 0) {
         cocos2d::ResourceData result = cobj->getRenderFile();
-        #pragma warning NO CONVERSION FROM NATIVE FOR ResourceData;
+        ok &= ResourceData_to_seval(result, &s.rval());
         JSB_PRECONDITION2(ok, false, "js_cocos2dx_ui_TextBMFont_getRenderFile : Error processing arguments");
         return true;
     }

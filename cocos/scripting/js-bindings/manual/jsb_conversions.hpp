@@ -4,6 +4,7 @@
 #include "cocos/scripting/js-bindings/manual/jsb_classtype.hpp"
 
 #include "cocos2d.h"
+#include "cocos/ui/CocosGUI.h"
 #include "extensions/cocos-ext.h"
 #include "cocos/editor-support/spine/spine.h"
 
@@ -78,6 +79,7 @@ bool seval_to_AffineTransform(const se::Value& v, cocos2d::AffineTransform* ret)
 bool seval_to_Viewport(const se::Value& v, cocos2d::experimental::Viewport* ret);
 bool seval_to_Data(const se::Value& v, cocos2d::Data* ret);
 bool seval_to_DownloaderHints(const se::Value& v, cocos2d::network::DownloaderHints* ret);
+bool seval_to_ResourceData(const se::Value& v, cocos2d::ResourceData* ret);
 
 template<typename T>
 bool seval_to_native_ptr(const se::Value& v, T* ret)
@@ -179,6 +181,7 @@ bool AffineTransform_to_seval(const cocos2d::AffineTransform& v, se::Value* ret)
 bool Viewport_to_seval(const cocos2d::experimental::Viewport& v, se::Value* ret);
 bool Data_to_seval(const cocos2d::Data& v, se::Value* ret);
 bool DownloadTask_to_seval(const cocos2d::network::DownloadTask& v, se::Value* ret);
+bool ResourceData_to_seval(const cocos2d::ResourceData& v, se::Value* ret);
 
 template<typename T>
 bool native_ptr_to_seval(typename std::enable_if<!std::is_base_of<cocos2d::Ref,T>::value,T>::type* v, se::Value* ret)
