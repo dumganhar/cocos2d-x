@@ -29,18 +29,25 @@ namespace se {
         JsValueRef propertyDescriptor;
         _CHECK(JsCreateObject(&propertyDescriptor));
 
-        const char* tmp = "get";
+        const char* tmp = nullptr;
         JsValueRef jsValue = JS_INVALID_REFERENCE;
         JsPropertyIdRef id = JS_INVALID_REFERENCE;
 
-        _CHECK(JsCreateFunction(getter, nullptr, &jsValue));
-        _CHECK(JsCreatePropertyId(tmp, strlen(tmp), &id));
-        _CHECK(JsSetProperty(propertyDescriptor, id, jsValue, true));
+        if (getter != nullptr)
+        {
+            tmp = "get";
+            _CHECK(JsCreateFunction(getter, nullptr, &jsValue));
+            _CHECK(JsCreatePropertyId(tmp, strlen(tmp), &id));
+            _CHECK(JsSetProperty(propertyDescriptor, id, jsValue, true));
+        }
 
-        tmp = "set";
-        _CHECK(JsCreateFunction(setter, nullptr, &jsValue));
-        _CHECK(JsCreatePropertyId(tmp, strlen(tmp), &id));
-        _CHECK(JsSetProperty(propertyDescriptor, id, jsValue, true));
+        if (setter != nullptr)
+        {
+            tmp = "set";
+            _CHECK(JsCreateFunction(setter, nullptr, &jsValue));
+            _CHECK(JsCreatePropertyId(tmp, strlen(tmp), &id));
+            _CHECK(JsSetProperty(propertyDescriptor, id, jsValue, true));
+        }
 
         JsValueRef trueValue;
         _CHECK(JsGetTrueValue(&trueValue));

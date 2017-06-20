@@ -257,7 +257,6 @@ static bool js_register_spine_TrackEntry(se::Object* obj)
     cls->defineProperty("animationEnd", _SE(jsb_spine_TrackEntry_get_animationEnd), nullptr);
     cls->defineProperty("animationLast", _SE(jsb_spine_TrackEntry_get_animationLast), nullptr);
     cls->defineProperty("nextAnimationLast", _SE(jsb_spine_TrackEntry_get_nextAnimationLast), nullptr);
-    cls->defineProperty("delay", _SE(jsb_spine_TrackEntry_get_delay), nullptr);
     cls->defineProperty("trackTime", _SE(jsb_spine_TrackEntry_get_trackTime), nullptr);
     cls->defineProperty("trackLast", _SE(jsb_spine_TrackEntry_get_trackLast), nullptr);
     cls->defineProperty("nextTrackLast", _SE(jsb_spine_TrackEntry_get_nextTrackLast), nullptr);
