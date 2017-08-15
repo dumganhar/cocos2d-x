@@ -23,6 +23,7 @@ LOCAL_SRC_FILES := AudioEngine-inl.cpp \
                    PcmBufferProvider.cpp \
                    PcmAudioPlayer.cpp \
                    UrlAudioPlayer.cpp \
+                   BackgroundMusicJavaAudioPlayer.cpp \
                    PcmData.cpp \
                    AudioMixerController.cpp \
                    AudioMixer.cpp \

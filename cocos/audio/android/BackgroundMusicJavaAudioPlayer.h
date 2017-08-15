@@ -21,25 +21,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-
 #pragma once
 
 #include "audio/android/IAudioPlayer.h"
-#include "audio/android/OpenSLHelper.h"
-#include "audio/android/AssetFd.h"
-#include <mutex>
-#include <vector>
-#include <memory>
-#include <thread>
 
 namespace cocos2d { namespace experimental {
 
 class ICallerThreadUtils;
-class AssetFd;
 
-class UrlAudioPlayer : public IAudioPlayer
+class BackgroundMusicJavaAudioPlayer : public IAudioPlayer
 {
 public:
+    static void stopPreviousBackgroundMusic();
+    static void preloadBackgroundMusic(const std::string& filePath);
 
     // Override Functions Begin
     virtual int getId() const override
@@ -84,37 +78,19 @@ public:
 
     // Override Functions End
 
+    const PlayEventCallback& getPlayEventCallback() const;
 private:
-    UrlAudioPlayer(SLEngineItf engineItf, SLObjectItf outputMixObject, ICallerThreadUtils* callerThreadUtils);
-    virtual ~UrlAudioPlayer();
+    BackgroundMusicJavaAudioPlayer();
+    virtual ~BackgroundMusicJavaAudioPlayer();
 
-    bool prepare(const std::string &url, SLuint32 locatorType, std::shared_ptr<AssetFd> assetFd, int start, int length);
-
-    static void stopAll();
-
-    void destroy();
+    bool prepare(const std::string &url);
 
     inline void setState(State state)
     { _state = state; };
 
-    void playEventCallback(SLPlayItf caller, SLuint32 playEvent);
-
-    void setVolumeToSLPlayer(float volume);
-
 private:
-    SLEngineItf _engineItf;
-    SLObjectItf _outputMixObj;
-    ICallerThreadUtils* _callerThreadUtils;
-
     int _id;
     std::string _url;
-
-    std::shared_ptr<AssetFd> _assetFd;
-
-    SLObjectItf _playObj;
-    SLPlayItf _playItf;
-    SLSeekItf _seekItf;
-    SLVolumeItf _volumeItf;
 
     float _volume;
     float _duration;
@@ -123,11 +99,6 @@ private:
     State _state;
 
     PlayEventCallback _playEventCallback;
-
-    std::thread::id _callerThreadId;
-    std::shared_ptr<bool> _isDestroyed;
-
-    friend class SLUrlAudioPlayerCallbackProxy;
     friend class AudioPlayerProvider;
 };
 

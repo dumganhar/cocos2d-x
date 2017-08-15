@@ -46,16 +46,23 @@ class ThreadPool;
 class AudioPlayerProvider
 {
 public:
+    enum class PlayMode
+    {
+        UNKNOWN,
+        EFFECT,
+        BACKGROUND_MUSIC
+    };
+
     AudioPlayerProvider(SLEngineItf engineItf, SLObjectItf outputMixObject, int deviceSampleRate,
                         int bufferSizeInFrames, const FdGetterCallback &fdGetterCallback,
                         ICallerThreadUtils* callerThreadUtils);
 
     virtual ~AudioPlayerProvider();
 
-    IAudioPlayer *getAudioPlayer(const std::string &audioFilePath);
+    IAudioPlayer *getAudioPlayer(const std::string &audioFilePath, PlayMode mode);
 
     typedef std::function<void(bool/* succeed */, PcmData /* data */)> PreloadCallback;
-    void preloadEffect(const std::string &audioFilePath, const PreloadCallback& cb);
+    void preloadAudio(const std::string &audioFilePath, const PreloadCallback& cb, PlayMode mode);
 
     void clearPcmCache(const std::string &audioFilePath);
 
@@ -88,7 +95,7 @@ private:
 
     UrlAudioPlayer *createUrlAudioPlayer(const AudioFileInfo &info);
 
-    void preloadEffect(const AudioFileInfo &info, const PreloadCallback& cb, bool isPreloadInPlay2d);
+    void preloadAudio(const AudioFileInfo &info, const PreloadCallback& cb, bool isPreloadInPlay2d, PlayMode mode);
 
     AudioFileInfo getFileInfo(const std::string &audioFilePath);
 

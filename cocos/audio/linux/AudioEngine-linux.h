@@ -49,6 +49,9 @@ public:
     
     bool init();
     int play2d(const std::string &fileFullPath ,bool loop ,float volume);
+    int playEffect(const std::string& fileFullPath, bool loop, float volume) { return play2d(fileFullPath, loop, volume); }
+    int playBackgroundMusic(const std::string& fileFullPath, bool loop, float volume) { return play2d(fileFullPath, loop, volume); }
+
     void setVolume(int audioID,float volume);
     void setLoop(int audioID, bool loop);
     bool pause(int audioID);
@@ -65,6 +68,8 @@ public:
     
 
     int preload(const std::string& filePath, std::function<void(bool isSuccess)> callback);
+    int preloadEffect(const std::string& filePath, const std::function<void(bool)>& callback) { return preload(filePath, callback); }
+    int preloadBackgroundMusic(const std::string& filePath, const std::function<void(bool)>& callback) { return preload(filePath, callback); }
     
     void update(float dt);
     

@@ -43,6 +43,9 @@ NS_CC_BEGIN
 
      bool init();
      int play2d(const std::string &fileFullPath, bool loop, float volume);
+     int playEffect(const std::string& fileFullPath, bool loop, float volume) { return play2d(fileFullPath, loop, volume); }
+     int playBackgroundMusic(const std::string& fileFullPath, bool loop, float volume) { return play2d(fileFullPath, loop, volume); }
+
      void setVolume(int audioID, float volume);
      void setLoop(int audioID, bool loop);
      bool pause(int audioID);
@@ -56,6 +59,9 @@ NS_CC_BEGIN
      void uncache(const std::string& filePath);
      void uncacheAll();
      AudioCache* preload(const std::string& filePath, std::function<void(bool)> callback);
+     AudioCache* preloadEffect(const std::string& filePath, const std::function<void(bool)>& callback) { return preload(filePath, callback); }
+     AudioCache* preloadBackgroundMusic(const std::string& filePath, const std::function<void(bool)>& callback) { return preload(filePath, callback); }
+    
      void update(float dt);
 
  private:

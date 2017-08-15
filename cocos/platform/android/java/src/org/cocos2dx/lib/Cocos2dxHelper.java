@@ -401,6 +401,26 @@ public class Cocos2dxHelper {
         Cocos2dxHelper.sCocos2dMusic.setBackgroundVolume(volume);
     }
 
+    public static void setBackgroundMusicLoop(boolean loop) {
+        Cocos2dxHelper.sCocos2dMusic.setLoop(loop);
+    }
+
+    public static boolean isBackgroundMusicLoop() {
+        return Cocos2dxHelper.sCocos2dMusic.isLoop();
+    }
+
+    public static int getBackgroundMusicDuration() {
+        return Cocos2dxHelper.sCocos2dMusic.getDuration();
+    }
+
+    public static int getBackgroundMusicPosition() {
+        return Cocos2dxHelper.sCocos2dMusic.getPosition();
+    }
+
+    public static void setBackgroundMusicPosition(int pos) {
+        Cocos2dxHelper.sCocos2dMusic.setPosition(pos);
+    }
+
     public static void preloadEffect(final String path) {
         Cocos2dxHelper.sCocos2dSound.preloadEffect(path);
     }

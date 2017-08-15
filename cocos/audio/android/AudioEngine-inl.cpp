@@ -243,9 +243,9 @@ void AudioEngineImpl::setAudioFocusForAllPlayers(bool isFocus)
     }
 }
 
-int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume)
+int AudioEngineImpl::play2dInternal(const std::string& filePath, bool loop, float volume, AudioPlayerProvider::PlayMode mode)
 {
-    ALOGV("play2d, _audioPlayers.size=%d", (int)_audioPlayers.size());
+    ALOGV("play2dInternal, _audioPlayers.size=%d", (int)_audioPlayers.size());
     auto audioId = AudioEngine::INVALID_AUDIO_ID;
 
     do 
@@ -257,7 +257,7 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
 
         audioId = _audioIDIndex++;
 
-        auto player = _audioPlayerProvider->getAudioPlayer(fullPath);
+        auto player = _audioPlayerProvider->getAudioPlayer(fullPath, mode);
         if (player != nullptr)
         {
             player->setId(audioId);
@@ -308,6 +308,21 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
     } while (0);
 
     return audioId;
+}
+
+int AudioEngineImpl::play2d(const std::string& fileFullPath, bool loop, float volume)
+{
+    return play2dInternal(fileFullPath, loop, volume, AudioPlayerProvider::PlayMode::UNKNOWN);
+}
+
+int AudioEngineImpl::playEffect(const std::string& fileFullPath, bool loop, float volume)
+{
+    return play2dInternal(fileFullPath, loop, volume, AudioPlayerProvider::PlayMode::EFFECT);
+}
+
+int AudioEngineImpl::playBackgroundMusic(const std::string& fileFullPath, bool loop, float volume)
+{
+    return play2dInternal(fileFullPath, loop, volume, AudioPlayerProvider::PlayMode::BACKGROUND_MUSIC);
 }
 
 void AudioEngineImpl::setVolume(int audioID,float volume)
@@ -427,12 +442,54 @@ void AudioEngineImpl::preload(const std::string& filePath, const std::function<v
     if (_audioPlayerProvider != nullptr)
     {
         std::string fullPath = FileUtils::getInstance()->fullPathForFilename(filePath);
-        _audioPlayerProvider->preloadEffect(fullPath, [callback](bool succeed, PcmData data){
+        _audioPlayerProvider->preloadAudio(fullPath, [callback](bool succeed, PcmData data){
             if (callback != nullptr)
             {
                 callback(succeed);
             }
-        });
+        }, AudioPlayerProvider::PlayMode::UNKNOWN);
+    }
+    else
+    {
+        if (callback != nullptr)
+        {
+            callback(false);
+        }
+    }
+}
+
+void AudioEngineImpl::preloadEffect(const std::string& filePath, const std::function<void(bool)>& callback)
+{
+    if (_audioPlayerProvider != nullptr)
+    {
+        std::string fullPath = FileUtils::getInstance()->fullPathForFilename(filePath);
+        _audioPlayerProvider->preloadAudio(fullPath, [callback](bool succeed, PcmData data){
+            if (callback != nullptr)
+            {
+                callback(succeed);
+            }
+        }, AudioPlayerProvider::PlayMode::EFFECT);
+    }
+    else
+    {
+        if (callback != nullptr)
+        {
+            callback(false);
+        }
+    }
+}
+
+void AudioEngineImpl::preloadBackgroundMusic(const std::string& filePath, const std::function<void(bool)>& callback)
+{
+    if (_audioPlayerProvider != nullptr)
+    {
+        std::string fullPath = FileUtils::getInstance()->fullPathForFilename(filePath);
+        _audioPlayerProvider->preloadAudio(fullPath, [callback](bool succeed, PcmData data){
+            if (callback != nullptr)
+            {
+                callback(succeed);
+            }
+        }, AudioPlayerProvider::PlayMode::BACKGROUND_MUSIC);
     }
     else
     {

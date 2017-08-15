@@ -66,4 +66,19 @@ void AudioDecoderProvider::destroyAudioDecoder(AudioDecoder** decoder)
     }
 }
 
+/* static */
+bool AudioDecoderProvider::isSoftwareDecoderSupported(const std::string& url)
+{
+    std::string extension = FileUtils::getInstance()->getFileExtension(url);
+    // ALOGV("isSoftwareDecoderSupported: url:%s, extension:%s", url.c_str(), extension.c_str());
+    if (extension == ".ogg"
+        || extension == ".mp3"
+        || extension == ".wav")
+    {
+        return true;
+    }
+
+    return false;
+}
+
 }} // namespace cocos2d { namespace experimental {

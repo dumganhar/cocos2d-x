@@ -131,6 +131,8 @@ public:
      * @see `AudioProfile`
      */
     static int play2d(const std::string& filePath, bool loop = false, float volume = 1.0f, const AudioProfile *profile = nullptr);
+    static int playEffect(const std::string& filePath, bool loop = false, float volume = 1.0f, const AudioProfile *profile = nullptr);
+    static int playBackgroundMusic(const std::string& filePath, bool loop = false, float volume = 1.0f, const AudioProfile *profile = nullptr);
     
     /** 
      * Sets whether an audio instance loop or not.
@@ -291,6 +293,8 @@ public:
      * @param callback A callback which will be called after loading is finished.
      */
     static void preload(const std::string& filePath, std::function<void(bool isSuccess)> callback);
+    static void preloadEffect(const std::string& filePath, std::function<void(bool isSuccess)> callback);
+    static void preloadBackgroundMusic(const std::string& filePath, std::function<void(bool isSuccess)> callback);
 
     /**
      * Gets playing audio count.
@@ -308,6 +312,16 @@ public:
     static bool isEnabled();
     
 protected:
+
+    enum class PlayMode
+    {
+        UNKNOWN,
+        EFFECT,
+        BACKGROUND_MUSIC
+    };
+
+    static int play2dInternal(const std::string& filePath, bool loop, float volume, const AudioProfile* profile, PlayMode mode);
+
     static void addTask(const std::function<void()>& task);
     static void remove(int audioID);
     

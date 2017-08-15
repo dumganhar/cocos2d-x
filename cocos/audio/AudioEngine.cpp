@@ -186,7 +186,7 @@ bool AudioEngine::lazyInit()
     return true;
 }
 
-int AudioEngine::play2d(const std::string& filePath, bool loop, float volume, const AudioProfile *profile)
+int AudioEngine::play2dInternal(const std::string& filePath, bool loop, float volume, const AudioProfile *profile, PlayMode mode)
 {
     int ret = AudioEngine::INVALID_AUDIO_ID;
 
@@ -237,7 +237,19 @@ int AudioEngine::play2d(const std::string& filePath, bool loop, float volume, co
             volume = 1.0f;
         }
         
-        ret = _audioEngineImpl->play2d(filePath, loop, volume);
+        if (mode == PlayMode::BACKGROUND_MUSIC)
+        {
+            ret = _audioEngineImpl->playBackgroundMusic(filePath, loop, volume);
+        }
+        else if (mode == PlayMode::EFFECT)
+        {
+            ret = _audioEngineImpl->playEffect(filePath, loop, volume);
+        }
+        else
+        {
+            ret = _audioEngineImpl->play2d(filePath, loop, volume);
+        }
+
         if (ret != INVALID_AUDIO_ID)
         {
             _audioPathIDMap[filePath].push_back(ret);
@@ -257,6 +269,21 @@ int AudioEngine::play2d(const std::string& filePath, bool loop, float volume, co
     } while (0);
 
     return ret;
+}
+
+int AudioEngine::play2d(const std::string& filePath, bool loop, float volume, const AudioProfile *profile)
+{
+    return play2dInternal(filePath, loop, volume, profile, PlayMode::UNKNOWN);
+}
+
+int AudioEngine::playEffect(const std::string& filePath, bool loop, float volume, const AudioProfile *profile)
+{
+    return play2dInternal(filePath, loop, volume, profile, PlayMode::EFFECT);
+}
+
+int AudioEngine::playBackgroundMusic(const std::string& filePath, bool loop, float volume, const AudioProfile *profile)
+{
+    return play2dInternal(filePath, loop, volume, profile, PlayMode::BACKGROUND_MUSIC);
 }
 
 void AudioEngine::setLoop(int audioID, bool loop)
@@ -550,6 +577,54 @@ void AudioEngine::preload(const std::string& filePath, std::function<void(bool i
         }
 
         _audioEngineImpl->preload(filePath, callback);
+    }
+}
+
+void AudioEngine::preloadEffect(const std::string& filePath, std::function<void(bool isSuccess)> callback)
+{
+    if (!isEnabled())
+    {
+        callback(false);
+        return;
+    }
+    
+    lazyInit();
+
+    if (_audioEngineImpl)
+    {
+        if (!FileUtils::getInstance()->isFileExist(filePath)){
+            if (callback)
+            {
+                callback(false);
+            }
+            return;
+        }
+
+        _audioEngineImpl->preloadEffect(filePath, callback);
+    }
+}
+
+void AudioEngine::preloadBackgroundMusic(const std::string& filePath, std::function<void(bool isSuccess)> callback)
+{
+    if (!isEnabled())
+    {
+        callback(false);
+        return;
+    }
+    
+    lazyInit();
+
+    if (_audioEngineImpl)
+    {
+        if (!FileUtils::getInstance()->isFileExist(filePath)){
+            if (callback)
+            {
+                callback(false);
+            }
+            return;
+        }
+
+        _audioEngineImpl->preloadBackgroundMusic(filePath, callback);
     }
 }
 

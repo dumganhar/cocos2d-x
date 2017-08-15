@@ -32,6 +32,7 @@
 #include <unordered_map>
 #include "base/CCRef.h"
 #include "base/ccUtils.h"
+#include "audio/android/AudioPlayerProvider.h"
 
 #define MAX_AUDIOINSTANCES 24
 
@@ -45,7 +46,6 @@ class EventListener;
 namespace experimental {
 
 class IAudioPlayer;
-class AudioPlayerProvider;
 
 class AudioEngineImpl;
 
@@ -56,7 +56,11 @@ public:
     ~AudioEngineImpl();
 
     bool init();
-    int play2d(const std::string &fileFullPath ,bool loop ,float volume);
+    
+    int play2d(const std::string& fileFullPath, bool loop, float volume);
+    int playEffect(const std::string& fileFullPath, bool loop, float volume);
+    int playBackgroundMusic(const std::string& fileFullPath, bool loop, float volume);
+
     void setVolume(int audioID,float volume);
     void setLoop(int audioID, bool loop);
     void pause(int audioID);
@@ -71,9 +75,14 @@ public:
     void uncache(const std::string& filePath);
     void uncacheAll();
     void preload(const std::string& filePath, const std::function<void(bool)>& callback);
+    void preloadEffect(const std::string& filePath, const std::function<void(bool)>& callback);
+    void preloadBackgroundMusic(const std::string& filePath, const std::function<void(bool)>& callback);
 
     void setAudioFocusForAllPlayers(bool isFocus);
 private:
+
+
+    int play2dInternal(const std::string& fileFullPath, bool loop, float volume, AudioPlayerProvider::PlayMode mode);
 
     void onEnterBackground(EventCustom* event);
     void onEnterForeground(EventCustom* event);

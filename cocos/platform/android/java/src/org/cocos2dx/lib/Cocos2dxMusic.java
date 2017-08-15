@@ -288,6 +288,30 @@ public class Cocos2dxMusic {
                 }
             }
 
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    Log.d(TAG, "onCompletion: thread: " + Thread.currentThread().getName());
+                    Cocos2dxHelper.runOnGLThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            nativeOnBackgroundMusicCompletion();
+                        }
+                    });
+                }
+            });
+
+            mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    Log.e(TAG, "MediaPlayer error: what: " + what + ", extra: " + extra + ", thread: " + Thread.currentThread().getName());
+                    // True if the method handled the error, false if it didn't.
+                    // Returning false, or not having an OnErrorListener at all,
+                    // will cause the OnCompletionListener to be called.
+                    return false;
+                }
+            });
+
             mediaPlayer.prepare();
 
             mediaPlayer.setVolume(this.mLeftVolume, this.mRightVolume);
@@ -308,6 +332,46 @@ public class Cocos2dxMusic {
             mBackgroundMediaPlayer.setVolume(lVolume, rVolume);
         }
     }
+
+    public void setLoop(boolean loop) {
+        if (mBackgroundMediaPlayer != null) {
+            mBackgroundMediaPlayer.setLooping(loop);
+        }
+    }
+
+    public boolean isLoop() {
+        boolean ret = false;
+        if (mBackgroundMediaPlayer != null) {
+            ret = mBackgroundMediaPlayer.isLooping();
+        }
+        return ret;
+    }
+
+    public int getDuration() {
+        int duration = -1;
+        if (mBackgroundMediaPlayer != null) {
+            // the duration in milliseconds, if no duration is available (for example, if streaming live content), -1 is returned.
+            duration = mBackgroundMediaPlayer.getDuration();
+        }
+        return duration;
+    }
+
+    public int getPosition() {
+        int pos = -1;
+        if (mBackgroundMediaPlayer != null) {
+            // the current position in milliseconds
+            pos = mBackgroundMediaPlayer.getCurrentPosition();
+        }
+        return pos;
+    }
+
+    public void setPosition(int pos) {
+        if (mBackgroundMediaPlayer != null && pos >= 0) {
+            mBackgroundMediaPlayer.seekTo(pos);
+        }
+    }
+
+    private static native void nativeOnBackgroundMusicCompletion();
 
     // ===========================================================
     // Inner and Anonymous Classes
