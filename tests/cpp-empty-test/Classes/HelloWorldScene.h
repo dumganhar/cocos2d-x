@@ -1,44 +1,71 @@
-/****************************************************************************
- Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
- 
- http://www.cocos2d-x.org
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
-
 #ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include <vector>
 
-class HelloWorld : public cocos2d::Scene
+#include "ui/UIListView.h"
+#include "2d/CCParticleExamples.h"
+
+#include "Utils.h"
+
+class HelloWorld : public cocos2d::Layer
 {
 public:
-    virtual bool init() override;
-
     static cocos2d::Scene* scene();
-
-    // a selector callback
-    void menuCloseCallback(Ref* sender);
+    
+    HelloWorld() :_emitter(nullptr),
+                  _enableAutoTesting(true),
+                  _autoTestingLabel(nullptr),
+                  _currentResourceLevel(-1){}
+    
+    virtual bool init() override;
+    virtual void update(float dt) override;
+    void gameSettingMenuSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void secondMenuSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void resourceRequirementMenuSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void fpsSelectedMenuSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void autoTestingCallback(cocos2d::Ref* sender);
+    void actionCallback(int index);
+    void lastActionCallback();
+    
+    void SDKTestSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void SDKSecondMenuSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void SDKFPSSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void SDKEffectSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
+    void SDKAudioSelectedItemEvent(cocos2d::Ref* sender, cocos2d::ui::ListView::EventType type);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+    
+private:
+    
+    static void parseJson();
+    
+    cocos2d::ui::ListView* createListView(const std::vector<std::string>& itemTitles, const cocos2d::Vec2& position);
+    void addResources(int level);
+    void enableAllListViews();
+    void disableAllListViews();
+    void enableSDKAudio(bool enabled);
+    void enableSDKEffect(bool enabled);
+    void enableSDKFPS(bool enabled);
+    
+    static int getRandomIndex(std::vector<int>* array);
+    static std::vector<myutils::ResourceInfo> _resourceLevelVector;
+    static std::vector<int> __durations;
+    static std::vector<int> __runningOrder;
+    static int __repeatTime;
+    static bool __randomOrder;
+    
+    cocos2d::ParticleSun *_emitter;
+    bool _enableAutoTesting;
+    cocos2d::Label *_autoTestingLabel;
+    cocos2d::Label *_currentResourceLevelLabel;
+    int _currentResourceLevel;
+    std::vector<int> _audioIDVec;
+    
+    bool _isSDKTestExpanded;
+    bool _isGameSettingExpanded;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
