@@ -23,6 +23,12 @@
 -dontwarn com.chukong.**
 -keep public class com.huawei.android.** { *; }
 -dontwarn com.huawei.android.**
+-keep public class com.oppo.oiface.** { *; }
+-dontwarn com.oppo.oiface.**
+-keep public class com.oppo.oifaceservice.** { *; }
+-dontwarn com.oppo.oifaceservice.**
+-dontwarn android.os.**
+-dontwarn android.util.**
 
 # Proguard Apache HTTP for release
 -keep class org.apache.http.** { *; }

@@ -73,6 +73,15 @@ std::vector<myutils::ResourceInfo> HelloWorld::_resourceLevelVector = {
 
 Scene* HelloWorld::scene()
 {
+    for (auto& info : HelloWorld::_resourceLevelVector)
+    {
+        info.spriteNumber *= 3;
+        info.drawcallNumber *= 3;
+        info.actionNumber *= 3;
+        info.particleNumber *= 3;
+        info.audioNumber *= 3;
+    }
+
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
