@@ -953,6 +953,22 @@ void EngineDataManager::init()
     if (_isInitialized)
         return;
 
+    // Number hack for oppo
+    for (auto& level : _cpuLevelArr)
+    {
+        level.nodeCount *= 3;
+        level.particleCount *= 3;
+        level.actionCount *= 3;
+        level.audioCount *= 3;
+    }
+
+    for (auto& level : _gpuLevelArr)
+    {
+        level.vertexCount *= 3;
+        level.drawCount *= 3;
+    }
+    //
+
     resetLastTime();
 
     auto dispatcher = Director::getInstance()->getEventDispatcher();
